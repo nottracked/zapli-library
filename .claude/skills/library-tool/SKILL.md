@@ -1,6 +1,6 @@
 ---
 name: library-tool
-description: Write a new tool or improve an existing one in the Zapli library (this repository) - a declarative app (app.json, spec "anyapp/0.2") or a web app (index.html with an embedded manifest), its listing.json, fictional sample data and import samples, its own icon from icons/, a translation, and the version bump. Use for any change under apps/ or icons/, for fixing a tool's bug or wording, adding an import format, or translating a tool. Do not use for changing the Zapli app itself or the file format, and never for ads, tracking, accounts or network access without a maintainer's review.
+description: Write a new tool or improve an existing one in the Zapli library (this repository) - a declarative app (app.json, spec "zapli/0.2") or a web app (index.html with an embedded manifest), its listing.json, fictional sample data and import samples, its own icon from icons/, a translation, and the version bump. Use for any change under apps/ or icons/, for fixing a tool's bug or wording, adding an import format, or translating a tool. Do not use for changing the Zapli app itself or the file format, and never for ads, tracking, accounts or network access without a maintainer's review.
 ---
 
 # Writing a tool for the Zapli library
@@ -15,8 +15,8 @@ this repository. A tool is one of two kinds, never both:
 | Keeps records but needs one drawn screen (a heatmap, a board)          | Declarative app with one HTML screen  | `app.json`   |
 
 Declarative apps get native screens, automatic light and dark, accessibility and the most precise install review, so
-prefer them for data. The format names still say `anyapp` (`"spec": "anyapp/0.2"`, `window.anyapp`, `--anyapp-*`);
-keep them.
+prefer them for data. Use the Zapli format names (`"spec": "zapli/0.2"`, `window.zapli`, `--zapli-*`); files with the old anyApp
+names still work, but the library check flags them.
 
 ## 1. Where things go
 
@@ -39,7 +39,7 @@ screen by default.
 
 ```json
 {
-  "spec": "anyapp/0.2",
+  "spec": "zapli/0.2",
   "app": {
     "id": "library/books",
     "name": "Books",
@@ -113,9 +113,9 @@ One self-contained HTML file (at most 2 MB) with its manifest in `<head>` (Mines
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Mines</title>
-    <script type="application/anyapp+json" id="anyapp-manifest">
+    <script type="application/zapli+json" id="zapli-manifest">
       {
-        "spec": "anyapp/0.2",
+        "spec": "zapli/0.2",
         "app": {
           "id": "library/mines",
           "kind": "web",
@@ -137,24 +137,24 @@ One self-contained HTML file (at most 2 MB) with its manifest in `<head>` (Mines
 - The manifest is strict JSON, exactly once, with `app.kind: "web"` and a `permissions` entry (with a `purpose`) for
   every phone feature the code uses.
 - **Everything inline.** CSS and JavaScript in the file, images as inline SVG or `data:` URIs. No CDN, no Google
-  Fonts, no remote CSS; use `system-ui, sans-serif` or the `--anyapp-font-family` token.
+  Fonts, no remote CSS; use `system-ui, sans-serif` or the `--zapli-font-family` token.
 - **No code from strings or frames:** no `eval`, `new Function`, string `setTimeout`, handlers set as strings,
   `javascript:` URLs, `<iframe>`, `<object>` or `<embed>`. Inline `<script>` blocks and static `onclick="…"`
   attributes are fine.
 - **No network.** No `fetch`, `XMLHttpRequest`, `WebSocket` or links that load other sites, unless a maintainer has
   reviewed a declared host.
-- **It must run in a plain browser too.** `window.anyapp` exists only inside Zapli: feature-detect it, wait for
-  `await anyapp.ready` (it can reject: catch it) before `anyapp.supports("…")`, and keep a browser fallback for every
-  call (`localStorage` for `anyapp.data.kv`, the page's own dialog for `anyapp.ui.confirm`).
-- **Storage:** wrap `localStorage` and IndexedDB in `try`/`catch` with an in-memory fallback. `anyapp.data.kv` keeps
+- **It must run in a plain browser too.** `window.zapli` exists only inside Zapli: feature-detect it, wait for
+  `await zapli.ready` (it can reject: catch it) before `zapli.supports("…")`, and keep a browser fallback for every
+  call (`localStorage` for `zapli.data.kv`, the page's own dialog for `zapli.ui.confirm`).
+- **Storage:** wrap `localStorage` and IndexedDB in `try`/`catch` with an in-memory fallback. `zapli.data.kv` keeps
   data in the tool's own store, which travels with the user's export (Solitaire keeps both and lets the newer win).
-- **Save on `pause`:** `anyapp.app.on("pause", …)` (and `visibilitychange` in a browser); rotation and a dark-mode
+- **Save on `pause`:** `zapli.app.on("pause", …)` (and `visibilitychange` in a browser); rotation and a dark-mode
   switch reload the page, so restore state from storage at start.
 - **Hash routes** (`#/stats`) for panels and screens; Back closes the open panel first. Declare them in `web.routes`.
 - **Gestures:** the camera, the photo picker, saving and sharing must be called directly in a tap handler.
 - **Look:** mobile first at 360 px, `env(safe-area-inset-*)` padding, 48 px touch targets, `color-scheme: light dark`
   with your own `prefers-color-scheme` rules, `prefers-reduced-motion` respected, and the theme tokens with fallbacks
-  (`var(--anyapp-color-primary, #3F6B47)`).
+  (`var(--zapli-color-primary, #3F6B47)`).
 - **Accessibility:** real `<button>`, `<label>` and headings, `aria-label` on icon buttons, `aria-live` for status,
   visible focus, `lang` on `<html>`.
 - Never draw anything that looks like the phone's or Zapli's own dialogs or bars, and never use Zapli's own words in
@@ -202,7 +202,7 @@ SVG and ask a maintainer to render it.
 - **Web apps** keep their texts in a `STRINGS` table with one object per language (Solitaire and Pocket Scan have `en`
   and `sk`). Add a language as a complete object with every key of `en` and the plural forms the language needs (the
   `sk` object shows how), extend the code that picks the language (the user's choice where the tool offers one, then
-  `anyapp.app.locale()`, then `navigator.language`), and add it to any language setting the tool shows.
+  `zapli.app.locale()`, then `navigator.language`), and add it to any language setting the tool shows.
 - **Declarative apps** read translations from `i18n.strings` (`{ "key": { "en": "…", "sk": "…" } }`), but most of their
   texts are still plain strings. Ask in an issue before translating one, so the strings can be moved to keys first.
 - Translate for people, not word by word: natural wording a native speaker would use, the phone's own words for

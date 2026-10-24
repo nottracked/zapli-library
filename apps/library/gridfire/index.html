@@ -11,14 +11,14 @@
             content="Gridfire: a twin-stick vector arena shooter on a warping grid of light, with eight sectors and a soundtrack synthesised as you play."
         />
         <title>Gridfire</title>
-        <script type="application/anyapp+json" id="anyapp-manifest">
+        <script type="application/zapli+json" id="zapli-manifest">
             {
-                "spec": "anyapp/0.2",
+                "spec": "zapli/0.2",
                 "app": {
                     "id": "library/gridfire",
                     "kind": "web",
                     "name": "Gridfire",
-                    "version": "1.0.1",
+                    "version": "1.0.2",
                     "icon": "local_fire_department",
                     "category": "game_arcade",
                     "ageRating": "everyone",
@@ -47,7 +47,7 @@
             :root {
                 color-scheme: light dark;
                 --font: var(
-                    --anyapp-font-family,
+                    --zapli-font-family,
                     system-ui,
                     -apple-system,
                     "Segoe UI",
@@ -56,15 +56,15 @@
                     Arial,
                     sans-serif
                 );
-                --radius: var(--anyapp-radius-m, 12px);
+                --radius: var(--zapli-radius-m, 12px);
                 --cut: 0.85rem;
-                --surface: var(--anyapp-color-surface, #e6ecef);
-                --on-surface: var(--anyapp-color-on-surface, #10233a);
-                --surface-variant: var(--anyapp-color-surface-variant, #d3dde2);
-                --outline: var(--anyapp-color-outline, #6e8090);
-                --primary: var(--anyapp-color-primary, #00698a);
-                --on-primary: var(--anyapp-color-on-primary, #ffffff);
-                --error: var(--anyapp-color-error, #b3261e);
+                --surface: var(--zapli-color-surface, #e6ecef);
+                --on-surface: var(--zapli-color-on-surface, #10233a);
+                --surface-variant: var(--zapli-color-surface-variant, #d3dde2);
+                --outline: var(--zapli-color-outline, #6e8090);
+                --primary: var(--zapli-color-primary, #00698a);
+                --on-primary: var(--zapli-color-on-primary, #ffffff);
+                --error: var(--zapli-color-error, #b3261e);
                 --accent: #b8136f;
                 --panel: rgba(230, 236, 239, 0.9);
                 --panel-solid: #eef3f5;
@@ -76,13 +76,13 @@
             }
             @media (prefers-color-scheme: dark) {
                 :root:not([data-theme="light"]) {
-                    --surface: var(--anyapp-color-surface, #070a1c);
-                    --on-surface: var(--anyapp-color-on-surface, #e8eefb);
-                    --surface-variant: var(--anyapp-color-surface-variant, #151a33);
-                    --outline: var(--anyapp-color-outline, #56608a);
-                    --primary: var(--anyapp-color-primary, #48e2ff);
-                    --on-primary: var(--anyapp-color-on-primary, #00212b);
-                    --error: var(--anyapp-color-error, #ff6b81);
+                    --surface: var(--zapli-color-surface, #070a1c);
+                    --on-surface: var(--zapli-color-on-surface, #e8eefb);
+                    --surface-variant: var(--zapli-color-surface-variant, #151a33);
+                    --outline: var(--zapli-color-outline, #56608a);
+                    --primary: var(--zapli-color-primary, #48e2ff);
+                    --on-primary: var(--zapli-color-on-primary, #00212b);
+                    --error: var(--zapli-color-error, #ff6b81);
                     --accent: #ff5fd2;
                     --panel: rgba(9, 12, 32, 0.86);
                     --panel-solid: #0d1128;
@@ -1845,7 +1845,7 @@
                 /* =========================================================
    Platform and small helpers
    ========================================================= */
-                const anyapp = window.anyapp; // undefined in a plain browser
+                const anyapp = window.zapli; // undefined in a plain browser
                 const can = (f) => {
                     try {
                         return Boolean(anyapp && typeof anyapp.supports === "function" && anyapp.supports(f));

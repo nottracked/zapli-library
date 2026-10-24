@@ -1,9 +1,9 @@
 {
-  "spec": "anyapp/0.2",
+  "spec": "zapli/0.2",
   "app": {
     "id": "library/loyalty-cards",
     "name": "Loyalty cards",
-    "version": "2.5.1",
+    "version": "2.5.2",
     "icon": "wallet",
     "category": "shopping",
     "ageRating": "everyone",

@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="color-scheme" content="light dark" />
         <title>Cycle</title>
-        <script type="application/anyapp+json" id="anyapp-manifest">
+        <script type="application/zapli+json" id="zapli-manifest">
             {
-                "spec": "anyapp/0.2",
+                "spec": "zapli/0.2",
                 "app": {
                     "id": "samples/period-web",
                     "kind": "web",
@@ -105,28 +105,28 @@
         <style>
             :root {
                 color-scheme: light dark;
-                --primary: var(--anyapp-color-primary, #ad1457);
-                --on-primary: var(--anyapp-color-on-primary, #ffffff);
-                --container: var(--anyapp-color-primary-container, #ffd9e2);
-                --surface: var(--anyapp-color-surface, #fffbff);
-                --on-surface: var(--anyapp-color-on-surface, #201a1b);
-                --variant: var(--anyapp-color-surface-variant, #f3dde1);
-                --outline: var(--anyapp-color-outline, #847376);
-                --warning: var(--anyapp-color-warning, #8a5100);
-                --radius: var(--anyapp-radius-m, 12px);
-                --target: var(--anyapp-touch-target, 48px);
-                --gap: var(--anyapp-space-2, 0.75rem);
+                --primary: var(--zapli-color-primary, #ad1457);
+                --on-primary: var(--zapli-color-on-primary, #ffffff);
+                --container: var(--zapli-color-primary-container, #ffd9e2);
+                --surface: var(--zapli-color-surface, #fffbff);
+                --on-surface: var(--zapli-color-on-surface, #201a1b);
+                --variant: var(--zapli-color-surface-variant, #f3dde1);
+                --outline: var(--zapli-color-outline, #847376);
+                --warning: var(--zapli-color-warning, #8a5100);
+                --radius: var(--zapli-radius-m, 12px);
+                --target: var(--zapli-touch-target, 48px);
+                --gap: var(--zapli-space-2, 0.75rem);
             }
             @media (prefers-color-scheme: dark) {
                 :root {
-                    --primary: var(--anyapp-color-primary, #ffb1c8);
-                    --on-primary: var(--anyapp-color-on-primary, #5e1133);
-                    --container: var(--anyapp-color-primary-container, #7b2949);
-                    --surface: var(--anyapp-color-surface, #201a1b);
-                    --on-surface: var(--anyapp-color-on-surface, #ece0e1);
-                    --variant: var(--anyapp-color-surface-variant, #524346);
-                    --outline: var(--anyapp-color-outline, #9f8c8f);
-                    --warning: var(--anyapp-color-warning, #ffb870);
+                    --primary: var(--zapli-color-primary, #ffb1c8);
+                    --on-primary: var(--zapli-color-on-primary, #5e1133);
+                    --container: var(--zapli-color-primary-container, #7b2949);
+                    --surface: var(--zapli-color-surface, #201a1b);
+                    --on-surface: var(--zapli-color-on-surface, #ece0e1);
+                    --variant: var(--zapli-color-surface-variant, #524346);
+                    --outline: var(--zapli-color-outline, #9f8c8f);
+                    --warning: var(--zapli-color-warning, #ffb870);
                 }
             }
             * {
@@ -137,7 +137,7 @@
                 min-height: 100dvh;
                 background: var(--surface);
                 color: var(--on-surface);
-                font: 1rem/1.5 var(--anyapp-font-family, system-ui, sans-serif);
+                font: 1rem/1.5 var(--zapli-font-family, system-ui, sans-serif);
                 padding: env(safe-area-inset-top) env(safe-area-inset-right) calc(4.5rem + env(safe-area-inset-bottom))
                     env(safe-area-inset-left);
             }
@@ -417,8 +417,8 @@
         <script>
             "use strict";
 
-            // Present only inside the anyApp runtime; undefined in a plain browser or a chat preview.
-            const anyapp = window.anyapp;
+            // Present only inside the Zapli runtime; undefined in a plain browser or a chat preview.
+            const anyapp = window.zapli;
             const DAY_MS = 86400000;
             const FLOWS = ["none", "spotting", "light", "medium", "heavy"];
             const SYMPTOMS = ["cramps", "headache", "bloating", "backache", "acne", "nausea", "fatigue", "cravings"];
@@ -456,7 +456,7 @@
             const plural = (n, one, other) => `${n} ${n === 1 ? one : other}`;
             const label = (value) => value.charAt(0).toUpperCase() + value.slice(1);
 
-            // ---- Storage: declared entities inside anyApp (the user's AI and widgets can use them), web storage elsewhere.
+            // ---- Storage: declared entities inside Zapli (the user's AI and widgets can use them), web storage elsewhere.
             function entityStore() {
                 return {
                     async all(entity) {
@@ -595,7 +595,7 @@
                 syncReminderAndWidget();
             }
 
-            // ---- Phone features, only inside anyApp: a scheduled reminder and the home-screen widget.
+            // ---- Phone features, only inside Zapli: a scheduled reminder and the home-screen widget.
             async function syncReminderAndWidget() {
                 if (!anyapp) return;
                 const prediction = predict();

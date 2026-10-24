@@ -1,9 +1,9 @@
 {
-  "spec": "anyapp/0.2",
+  "spec": "zapli/0.2",
   "app": {
     "id": "library/blood-pressure",
     "name": "Blood pressure",
-    "version": "2.4.1",
+    "version": "2.4.2",
     "icon": "monitor_heart",
     "category": "medical",
     "ageRating": "everyone",

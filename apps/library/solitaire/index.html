@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="color-scheme" content="light dark" />
         <title>Solitaire</title>
-        <script type="application/anyapp+json" id="anyapp-manifest">
+        <script type="application/zapli+json" id="zapli-manifest">
             {
-                "spec": "anyapp/0.2",
+                "spec": "zapli/0.2",
                 "app": {
                     "id": "library/solitaire",
                     "kind": "web",
                     "name": "Solitaire",
-                    "version": "1.1.3",
+                    "version": "1.1.4",
                     "icon": "sports_esports",
                     "category": "game_card",
                     "ageRating": "everyone",
@@ -33,7 +33,7 @@
                 color-scheme: light;
                 --tz: 1;
                 --font-ui: var(
-                    --anyapp-font-family,
+                    --zapli-font-family,
                     system-ui,
                     -apple-system,
                     "Segoe UI",
@@ -3281,12 +3281,12 @@
                     });
                 }
 
-                // The language: the player's choice, else the phone's (anyApp tells the page; a browser has its own).
+                // The language: the player's choice, else the phone's (Zapli tells the page; a browser has its own).
                 function pickLang(choice) {
                     if (choice === "en" || choice === "sk") return choice;
                     let loc = "";
                     try {
-                        const app = window.anyapp && window.anyapp.app;
+                        const app = window.zapli && window.zapli.app;
                         if (app && typeof app.locale === "function") loc = String(app.locale() || "");
                     } catch (e) {
                         loc = "";
@@ -3301,7 +3301,7 @@
                     translatePage();
                 }
 
-                // ---- storage: the app's own key-value store inside anyApp (it travels with the app's export), with
+                // ---- storage: the app's own key-value store inside Zapli (it travels with the app's export), with
                 // a copy in localStorage that also serves browsers and previews. Every read and write may fail, so
                 // the game keeps its values in memory and carries on. Each value carries `at` (when it was saved),
                 // so the newer of the two copies wins when they differ.
@@ -3397,7 +3397,7 @@
                             });
                     }
 
-                    // Reads anyApp's copies (when the page runs inside anyApp) and keeps the newer of each pair.
+                    // Reads Zapli's copies (when the page runs inside Zapli) and keeps the newer of each pair.
                     // Resolves true when anything changed from the local copies.
                     async function loadKv(host) {
                         const api = host && host.data && host.data.kv;
@@ -3432,7 +3432,7 @@
                         return v && !v.none ? v : null;
                     }
 
-                    // Saves at once to localStorage and, a moment later (or at once with `now`), to anyApp.
+                    // Saves at once to localStorage and, a moment later (or at once with `now`), to Zapli.
                     function set(name, value, now) {
                         lastAt = Math.max(lastAt + 1, Date.now());
                         const v = Object.assign({}, value, { v: 2, at: lastAt });
@@ -3566,7 +3566,7 @@
                 const root = document.documentElement;
                 const $ = (id) => document.getElementById(id);
                 const table = $("table");
-                const host = window.anyapp; // undefined in a browser or a chat preview
+                const host = window.zapli; // undefined in a browser or a chat preview
                 const motionQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
                 const motionOK = () => !(motionQuery && motionQuery.matches);
 
@@ -4091,9 +4091,9 @@
                     const tb = TABLES[id] || TABLES.felt;
                     const dark = isDark();
                     let felt = dark ? tb.dark : tb.light;
-                    // The app colour follows anyApp's colour for this app, where the browser can mix colours.
+                    // The app colour follows Zapli's colour for this app, where the browser can mix colours.
                     if (tb.mix && colorMix)
-                        felt = `color-mix(in srgb, var(--anyapp-color-primary, ${tb.light}) ${tb.mix[dark ? 1 : 0]}%, #000)`;
+                        felt = `color-mix(in srgb, var(--zapli-color-primary, ${tb.light}) ${tb.mix[dark ? 1 : 0]}%, #000)`;
                     el.style.setProperty("--felt", felt);
                     el.style.setProperty(
                         "--felt-shade",
@@ -6082,7 +6082,7 @@
                     persist(true);
                     Store.flush();
                 });
-                // Inside anyApp the host also says when the app goes to the background (no permission needed).
+                // Inside Zapli the host also says when the app goes to the background (no permission needed).
                 if (host && host.app && typeof host.app.on === "function") {
                     try {
                         host.app.on("pause", () => {
@@ -6120,7 +6120,7 @@
                     else window.addEventListener("resize", relayout);
                 }
 
-                // The page draws at once from this device's copies; inside anyApp it first waits briefly for the
+                // The page draws at once from this device's copies; inside Zapli it first waits briefly for the
                 // app's own store, whose copies win when they are newer.
                 async function start() {
                     applyLook();

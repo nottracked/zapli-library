@@ -1,5 +1,5 @@
 {
-  "spec": "anyapp/0.2",
+  "spec": "zapli/0.2",
   "app": { "id": "samples/qr", "name": "QR Codes", "version": "1.0.0", "icon": "qr_code_2", "ageRating": "everyone" },
   "theme": { "seedColor": "#00695C" },
   "permissions": {

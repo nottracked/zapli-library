@@ -1,8 +1,8 @@
 # The Zapli library
 
 This repository holds the tools of Zapli (the app formerly called anyApp): original, offline, ad-free apps that Zapli
-ships and updates from here. The file formats still use the old name (`"spec": "anyapp/0.2"`, `window.anyapp`,
-`--anyapp-*`, `.anyapp`); keep them as they are. `README.md` has the rules for people; this file is the short version
+ships and updates from here. The file formats use the Zapli names (`"spec": "zapli/0.2"`, `window.zapli`,
+`--zapli-*`, `.zapli`); the old anyApp names still work, but the library check flags them, so never add them. `README.md` has the rules for people; this file is the short version
 for AI-assisted work.
 
 ## Layout
@@ -35,7 +35,7 @@ for AI-assisted work.
 
 ## Checks
 
-Maintainers run `anyapp library check` (Zapli's command-line tool) and the validator on every pull request: 0 errors
+Maintainers run `zapli library check` (Zapli's command-line tool) and the validator on every pull request: 0 errors
 and 0 warnings for every definition, every listing fits its schema, sample data fits the app, sample files and
 screenshots exist, and no forbidden content. Contributors cannot run them yet, so be exact: valid JSON, ids that match,
 and say in the pull request what you could and could not check.

@@ -1,9 +1,9 @@
 {
-  "spec": "anyapp/0.2",
+  "spec": "zapli/0.2",
   "app": {
     "id": "library/expenses",
     "name": "Expenses",
-    "version": "3.4.1",
+    "version": "3.4.2",
     "icon": "receipt_long",
     "category": "finance",
     "ageRating": "everyone",

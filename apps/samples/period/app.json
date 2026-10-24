@@ -1,5 +1,5 @@
 {
-  "spec": "anyapp/0.2",
+  "spec": "zapli/0.2",
   "app": { "id": "samples/period", "name": "Cycle", "version": "1.0.1", "icon": "water_drop", "ageRating": "teen" },
   "theme": { "seedColor": "#AD1457", "shape": "rounded" },
   "i18n": {

@@ -1,5 +1,5 @@
 {
-  "spec": "anyapp/0.2",
+  "spec": "zapli/0.2",
   "app": {
     "id": "samples/calories",
     "name": "FreeCalc Lite",
@@ -31,7 +31,7 @@
     "off": {
       "capability": "net.http",
       "baseUrl": "https://world.openfoodfacts.org/api/v2",
-      "headers": { "Accept": "application/json", "User-Agent": "FreeCalcLite/1.0.0 (anyApp sample)" },
+      "headers": { "Accept": "application/json", "User-Agent": "FreeCalcLite/1.0.0 (Zapli sample)" },
       "timeout": "PT15S",
       "rateLimit": { "max": 15, "per": "PT1M" },
       "endpoints": {

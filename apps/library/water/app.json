@@ -1,9 +1,9 @@
 {
-  "spec": "anyapp/0.2",
+  "spec": "zapli/0.2",
   "app": {
     "id": "library/water",
     "name": "Water",
-    "version": "2.4.2",
+    "version": "2.4.3",
     "icon": "local_drink",
     "category": "health_and_fitness",
     "ageRating": "everyone",

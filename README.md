@@ -8,8 +8,8 @@ phones without a new release of the app.
 Every tool is an **original**: written from scratch for this library, free of ads, tracking and accounts, and free to
 copy and remix under its licence. Each one works offline and keeps its data on the phone.
 
-The file formats still carry the old name (`"spec": "anyapp/0.2"`, `window.anyapp`, the `--anyapp-*` CSS properties,
-`.anyapp` packages). That is expected; they are renamed in a later step.
+The file formats use the Zapli names (`"spec": "zapli/0.2"`, `window.zapli`, the `--zapli-*` CSS properties, `.zapli`
+packages). Files with the old anyApp names keep working, but every tool here uses the new ones.
 
 ## Layout
 
@@ -38,7 +38,7 @@ There are two kinds of app, and a tool is one or the other:
 - A **declarative app** (`app.json`) is one JSON document: the data, screens, actions, reminders and the permissions
   it needs. Zapli draws native screens for it. Most data tools (Expenses, Water, To-do) are this kind.
 - A **web app** (`index.html`) is one HTML file with its manifest embedded in a
-  `<script type="application/anyapp+json">` block. Zapli runs it in a locked-down web view of its own; the same file
+  `<script type="application/zapli+json">` block. Zapli runs it in a locked-down web view of its own; the same file
   also opens in a plain browser. Games and tools that draw their own screens (Solitaire, Mines, Gridfire, Pocket Scan)
   are this kind.
 

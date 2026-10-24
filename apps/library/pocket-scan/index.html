@@ -4,14 +4,14 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <title>Pocket Scan</title>
-        <script type="application/anyapp+json" id="anyapp-manifest">
+        <script type="application/zapli+json" id="zapli-manifest">
             {
-                "spec": "anyapp/0.2",
+                "spec": "zapli/0.2",
                 "app": {
                     "id": "library/pocket-scan",
                     "kind": "web",
                     "name": "Pocket Scan",
-                    "version": "1.1.1",
+                    "version": "1.1.2",
                     "icon": "description",
                     "category": "productivity",
                     "license": "MIT",
@@ -45,14 +45,14 @@
                 --ink: #17202c;
                 --muted: #5a6577;
                 --line: #ccd4de;
-                --blue: var(--anyapp-color-primary, #2a57dd);
+                --blue: var(--zapli-color-primary, #2a57dd);
                 --on-blue: #fff;
                 --hi: #ffcf2a;
                 --hi-ink: #2a2200;
                 --danger: #b42323;
                 --il-desk: #d3dce7;
                 --shadow: 0 1px 2px rgba(23, 32, 44, 0.12), 0 8px 20px rgba(23, 32, 44, 0.1);
-                --font: var(--anyapp-font-family, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+                --font: var(--zapli-font-family, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
             }
             @media (prefers-color-scheme: dark) {
                 :root:not([data-theme="light"]) {
@@ -61,7 +61,7 @@
                     --ink: #e8edf4;
                     --muted: #9aa6b7;
                     --line: #2e3a4b;
-                    --blue: var(--anyapp-color-primary, #94acff);
+                    --blue: var(--zapli-color-primary, #94acff);
                     --on-blue: #0c1430;
                     --il-desk: #2a3546;
                     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.35);
@@ -725,7 +725,7 @@
                 --ink: #e8edf4;
                 --muted: #9aa6b7;
                 --line: #2e3a4b;
-                --blue: var(--anyapp-color-primary, #94acff);
+                --blue: var(--zapli-color-primary, #94acff);
                 --on-blue: #0c1430;
                 --il-desk: #2a3546;
                 --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.35);
@@ -769,13 +769,13 @@
             const app = $("#app"),
                 camIn = $("#camIn"),
                 picIn = $("#picIn");
-            const anyapp = window.anyapp; // undefined in a browser or a preview
+            const anyapp = window.zapli; // undefined in a browser or a preview
             let docs = [];
             const state = { doc: null, page: 0, crop: null, from: "/" };
             let camOK = true; // set at start; false when this phone can't open the camera from the app
             const camFor = () => (camOK ? "camIn" : "picIn");
-            // Inside anyApp file inputs and <a download> do nothing: its own calls take the photos and save or share the PDF,
-            // each only when this anyApp offers it (supports() takes method names).
+            // Inside Zapli file inputs and <a download> do nothing: its own calls take the photos and save or share the PDF,
+            // each only when this version of Zapli offers it (supports() takes method names).
             const inApp = { cam: false, pick: false, save: false, share: false };
 
             // Timings of the slow steps, in the console only: open the page with ?debug, or set localStorage "ps.debug" to "1".
@@ -825,7 +825,7 @@
                     sizeLetter: "Letter",
                     share: "Share",
                     savePdf: "Save PDF",
-                    saveNote: "Saving PDFs needs a newer version of anyApp. Your scans stay here until then.",
+                    saveNote: "Saving PDFs needs a newer version of Zapli. Your scans stay here until then.",
                     delPage: "Delete page",
                     look: "Look",
                     fOriginal: "Original",
@@ -878,21 +878,21 @@
                     pdfFailed: "The PDF couldn’t be made. Try again.",
                     pdfSaved: "PDF saved",
                     pdfDownloading: "Your PDF is downloading.",
-                    saveNewer: "Saving PDFs needs a newer version of anyApp.",
+                    saveNewer: "Saving PDFs needs a newer version of Zapli.",
                     saveFailed: "The PDF couldn’t be saved. Try again.",
-                    saveDenied: "Pocket Scan may not save files. Allow it in anyApp.",
+                    saveDenied: "Pocket Scan may not save files. Allow it in Zapli.",
                     shareFailed: "Sharing didn’t work. Use Save PDF instead.",
                     shareRetry: "Sharing didn’t work. Try again.",
                     shareNone: "Sharing isn’t available here, so the PDF is downloading instead.",
-                    shareDenied: "Pocket Scan may not share files. Allow it in anyApp.",
+                    shareDenied: "Pocket Scan may not share files. Allow it in Zapli.",
                     tapAgain: (a) => `Your PDF is ready. Tap ${a.button} again.`,
                     slowPdf: (a) =>
                         `This PDF is large and took too long. Tap ${a.button} again, or try a document with fewer pages.`,
                     tooBig: (a) =>
                         `This PDF is too big to ${a.share ? "share" : "save"}. Try a document with fewer pages.`,
-                    camDenied: "Pocket Scan may not use the camera. Allow it in anyApp.",
-                    camOff: "The camera is turned off for anyApp in your phone’s settings.",
-                    picDenied: "Pocket Scan may not use your photos. Allow it in anyApp.",
+                    camDenied: "Pocket Scan may not use the camera. Allow it in Zapli.",
+                    camOff: "The camera is turned off for Zapli in your phone’s settings.",
+                    picDenied: "Pocket Scan may not use your photos. Allow it in Zapli.",
                     camFailed: "The camera didn’t open. Try again.",
                     picFailed: "Your photos didn’t open. Try again.",
                     noPhoto: "No photo came back. Tap the yellow button again.",
@@ -941,7 +941,7 @@
                     sizeLetter: "Letter",
                     share: "Zdieľať",
                     savePdf: "Uložiť PDF",
-                    saveNote: "Na ukladanie PDF potrebujete novšiu verziu aplikácie anyApp. Dovtedy tu skeny zostanú.",
+                    saveNote: "Na ukladanie PDF potrebujete novšiu verziu aplikácie Zapli. Dovtedy tu skeny zostanú.",
                     delPage: "Odstrániť stranu",
                     look: "Vzhľad",
                     fOriginal: "Originál",
@@ -994,21 +994,21 @@
                     pdfFailed: "PDF sa nepodarilo vytvoriť. Skúste to znova.",
                     pdfSaved: "PDF je uložené",
                     pdfDownloading: "PDF sa sťahuje.",
-                    saveNewer: "Na ukladanie PDF potrebujete novšiu verziu aplikácie anyApp.",
+                    saveNewer: "Na ukladanie PDF potrebujete novšiu verziu aplikácie Zapli.",
                     saveFailed: "PDF sa nepodarilo uložiť. Skúste to znova.",
-                    saveDenied: "Pocket Scan nemá povolené ukladať súbory. Povoľte to v aplikácii anyApp.",
+                    saveDenied: "Pocket Scan nemá povolené ukladať súbory. Povoľte to v aplikácii Zapli.",
                     shareFailed: "Zdieľanie nefungovalo. Skúste radšej „Uložiť PDF“.",
                     shareRetry: "Zdieľanie nefungovalo. Skúste to znova.",
                     shareNone: "Zdieľanie tu nie je dostupné, PDF sa preto sťahuje.",
-                    shareDenied: "Pocket Scan nemá povolené zdieľať súbory. Povoľte to v aplikácii anyApp.",
+                    shareDenied: "Pocket Scan nemá povolené zdieľať súbory. Povoľte to v aplikácii Zapli.",
                     tapAgain: (a) => `PDF je pripravené. Znova ťuknite na „${a.button}“.`,
                     slowPdf: (a) =>
                         `Toto PDF je veľké a trvalo to príliš dlho. Znova ťuknite na „${a.button}“ alebo skúste dokument s menším počtom strán.`,
                     tooBig: (a) =>
                         `Toto PDF je príliš veľké na ${a.share ? "zdieľanie" : "uloženie"}. Skúste dokument s menším počtom strán.`,
-                    camDenied: "Pocket Scan nemá prístup k fotoaparátu. Povoľte ho v aplikácii anyApp.",
-                    camOff: "Prístup k fotoaparátu má anyApp vypnutý v nastaveniach telefónu.",
-                    picDenied: "Pocket Scan nemá prístup k fotkám. Povoľte ho v aplikácii anyApp.",
+                    camDenied: "Pocket Scan nemá prístup k fotoaparátu. Povoľte ho v aplikácii Zapli.",
+                    camOff: "Prístup k fotoaparátu má aplikácia Zapli vypnutý v nastaveniach telefónu.",
+                    picDenied: "Pocket Scan nemá prístup k fotkám. Povoľte ho v aplikácii Zapli.",
                     camFailed: "Fotoaparát sa neotvoril. Skúste to znova.",
                     picFailed: "Fotky sa neotvorili. Skúste to znova.",
                     noPhoto: "Z fotoaparátu neprišla žiadna fotka. Znova ťuknite na žlté tlačidlo.",
@@ -1024,7 +1024,7 @@
                     askDelPage: (a) => `Odstrániť stranu ${a.n}?`,
                 },
             };
-            // The phone's language: anyApp tells the page, a browser has its own. Slovak for Slovak, else English.
+            // The phone's language: Zapli tells the page, a browser has its own. Slovak for Slovak, else English.
             const locale = (() => {
                 let loc = "";
                 try {
@@ -1565,7 +1565,7 @@
             }
             let lastPdf = null; // the PDF made last, so a second tap saves or shares it at once
             async function exportPdf(share) {
-                // Inside anyApp a link download does nothing, so without files.save there is no way to save yet: say so plainly.
+                // Inside Zapli a link download does nothing, so without files.save there is no way to save yet: say so plainly.
                 if (anyapp && !share && !inApp.save) {
                     toast(t("saveNewer"));
                     return;
@@ -1591,7 +1591,7 @@
                     lastPdf = { key, blob };
                 }
                 const name = (d.name.replace(/[\\/:*?"<>|]+/g, " ").trim() || t("scanName")) + ".pdf";
-                // One File per PDF and name: anyApp keeps a file sent with a tap that came too late, so the second tap
+                // One File per PDF and name: Zapli keeps a file sent with a tap that came too late, so the second tap
                 // hands over the same File without sending its bytes again.
                 if (!lastPdf.file || lastPdf.file.name !== name)
                     lastPdf.file = new File([blob], name, { type: "application/pdf" });
@@ -1619,7 +1619,7 @@
                 toast(t(share ? "shareNone" : "pdfDownloading"));
             }
 
-            // anyApp asks for a tap at most 5 seconds old, and the PDF has to reach it within that time. A long PDF may need a
+            // Zapli asks for a tap at most 5 seconds old, and the PDF has to reach it within that time. A long PDF may need a
             // second tap, which hands over the PDF made already; if even that is too slow, the PDF is too large for one tap.
             async function exportInApp(file, share, ready) {
                 const t0 = performance.now(),
@@ -1656,7 +1656,7 @@
                 };
                 docs.unshift(state.doc);
             }
-            // anyApp's camera and picker answer with JPEGs of at most 2400 px, upright and without metadata: such a photo is
+            // Zapli's camera and picker answer with JPEGs of at most 2400 px, upright and without metadata: such a photo is
             // kept as it is, which saves a second JPEG encode. Larger photos and other formats are scaled and stored as a JPEG.
             async function prepare(file) {
                 let t0 = performance.now();
@@ -1678,8 +1678,8 @@
 
             // The camera and the photo picker are other apps, and their answer takes a moment to reach the page after them, so
             // from the call until it settles the overlay says "Getting your photo…" ("…photos" for the picker), also over the
-            // page while they are open. While the camera is open Android may close anyApp, and the page then starts again with
-            // no photo on its way: a note made before the call (in localStorage, and in anyApp's own store, which keeps it at
+            // page while they are open. While the camera is open Android may close Zapli, and the page then starts again with
+            // no photo on its way: a note made before the call (in localStorage, and in Zapli's own store, which keeps it at
             // once) lets the new page say so.
             const CAM_NOTE = "ps.camera",
                 wait = { call: 0, kind: "", back: 0, timer: 0 }; // kind: "camera", "photos" or "" when nothing is open
@@ -1759,7 +1759,7 @@
                 wait.kind = useCam ? "camera" : "photos";
                 wait.back = 0;
                 busy(waitWords());
-                // No pause within 20 s: the camera or picker never came over the page (anyApp may still be asking for
+                // No pause within 20 s: the camera or picker never came over the page (Zapli may still be asking for
                 // consent), so the overlay goes quietly; it comes back when the page returns from them.
                 waitTimer(20000, () => busy());
                 const asked = useCam
@@ -1892,7 +1892,7 @@
             function vDoc() {
                 const d = state.doc,
                     size = getPref("size") || "auto";
-                // Inside anyApp: Share only when this anyApp offers it, and a plain line when it cannot save yet.
+                // Inside Zapli: Share only when this version of Zapli offers it, and a plain line when it cannot save yet.
                 const canShare = !anyapp || inApp.share,
                     cannotSave = Boolean(anyapp) && !inApp.save;
                 return `<section class="scr">
@@ -2104,7 +2104,7 @@
             app.addEventListener("click", async (e) => {
                 const b = e.target.closest("[data-act]");
                 if (!b || b.disabled) return;
-                // In anyApp the tap itself opens the camera or the photo picker, in place of the file input.
+                // In Zapli the tap itself opens the camera or the photo picker, in place of the file input.
                 const via = b.matches("label[for]") ? b.htmlFor : "";
                 const viaApp = (via === "camIn" && inApp.cam) || (via === "picIn" && inApp.pick);
                 if (viaApp) e.preventDefault();
@@ -2139,7 +2139,7 @@
                         history.back();
                         break;
                     case "delDoc":
-                        // A generic question: anyApp withholds a dialog whose text uses its own words, so a scan named "Allow"
+                        // A generic question: Zapli withholds a dialog whose text uses its own words, so a scan named "Allow"
                         // could never be deleted.
                         if (confirm(t("askDelDoc"))) {
                             await removeDoc(d);
@@ -2254,7 +2254,7 @@
                         anyapp.app.on("resume", waitBack);
                         anyapp.app.on("pause", () => clearTimeout(wait.timer));
                     } catch {
-                        /* an older anyApp */
+                        /* an older Zapli */
                     }
                 }
                 // A camera call that never answered: the page started again while the camera was open. Back to its document, if any.

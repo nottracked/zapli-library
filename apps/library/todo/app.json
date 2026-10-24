@@ -1,9 +1,9 @@
 {
-  "spec": "anyapp/0.2",
+  "spec": "zapli/0.2",
   "app": {
     "id": "library/todo",
     "name": "To-do",
-    "version": "3.3.1",
+    "version": "3.3.2",
     "icon": "task_alt",
     "category": "productivity",
     "ageRating": "everyone",

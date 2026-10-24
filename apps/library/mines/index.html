@@ -4,14 +4,14 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <title>Mines</title>
-        <script type="application/anyapp+json" id="anyapp-manifest">
+        <script type="application/zapli+json" id="zapli-manifest">
             {
-                "spec": "anyapp/0.2",
+                "spec": "zapli/0.2",
                 "app": {
                     "id": "library/mines",
                     "kind": "web",
                     "name": "Mines",
-                    "version": "1.0.1",
+                    "version": "1.0.2",
                     "icon": "flag",
                     "category": "game_puzzle",
                     "ageRating": "everyone",
@@ -3161,8 +3161,8 @@
                     else if (PANELS[name]) openPanel(name, false);
                 }
 
-                // Inside anyApp: shortcut routes and the app's pause and resume (absent in a browser, so feature-detected).
-                const anyapp = window.anyapp;
+                // Inside Zapli: shortcut routes and the app's pause and resume (absent in a browser, so feature-detected).
+                const anyapp = window.zapli;
                 if (anyapp && anyapp.app) {
                     try {
                         if (typeof anyapp.app.on === "function") {

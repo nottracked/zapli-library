@@ -1,5 +1,5 @@
 {
-  "spec": "anyapp/0.2",
+  "spec": "zapli/0.2",
   "app": {
     "id": "samples/habits",
     "name": "Habits",
