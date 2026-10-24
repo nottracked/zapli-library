@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Loyalty cards: a store card with a bold barcode, a second card behind it. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7A55D4"/>
+      <stop offset="1" stop-color="#6040BA"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <g transform="rotate(-10 96 96)">
+    <rect x="44" y="40" width="120" height="78" rx="14" fill="#000" fill-opacity="0.2"/>
+    <rect x="44" y="32" width="120" height="78" rx="14" fill="#FFC531"/>
+    <rect x="24" y="70" width="140" height="90" rx="14" fill="#000" fill-opacity="0.2"/>
+    <rect x="24" y="62" width="140" height="90" rx="14" fill="#FFF"/>
+    <path fill="#5B3BB4" d="M38 62 H150 Q164 62 164 76 V86 H24 V76 Q24 62 38 62 Z"/>
+    <g fill="#2A2440">
+      <rect x="40" y="100" width="10" height="38" rx="2"/>
+      <rect x="58" y="100" width="14" height="38" rx="2"/>
+      <rect x="80" y="100" width="8" height="38" rx="2"/>
+      <rect x="96" y="100" width="14" height="38" rx="2"/>
+      <rect x="118" y="100" width="10" height="38" rx="2"/>
+      <rect x="136" y="100" width="12" height="38" rx="2"/>
+    </g>
+  </g>
+</svg>

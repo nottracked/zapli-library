@@ -1,0 +1,7 @@
+"Title","List","Due date","Time","Priority","Repeat","Notes","Done","Completed"
+"Send the quarterly budget draft","Work","2026-10-14","17:00","high","","Include the travel line, ask about the new laptop budget","false",""
+"Water the plants","Home","2026-10-15","","low","FREQ=WEEKLY;BYDAY=MO,TH","","false",""
+"Pay the electricity bill","Home","2026-10-28","","medium","FREQ=MONTHLY;BYMONTHDAY=28","","false",""
+"Buy oat milk, eggs and spinach","Groceries","2026-10-15","18:00","none","","","false",""
+"Call the plumber about the kitchen tap","Home","2026-10-15","","none","","","true","2026-10-15T08:10:00+02:00"
+"Try the lentil soup recipe","","","","none","","Page 42 of the green cookbook","false",""

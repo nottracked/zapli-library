@@ -1,0 +1,2097 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "library/blood-pressure",
+    "name": "Blood pressure",
+    "version": "2.4.1",
+    "icon": "monitor_heart",
+    "category": "medical",
+    "ageRating": "everyone",
+    "license": "MIT",
+    "iconData": "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"
+  },
+  "theme": {
+    "seedColor": "#C62828",
+    "shape": "rounded"
+  },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "readings": {
+        "en": "{n, plural, =0 {No readings} one {# reading} other {# readings}}"
+      },
+      "saved": {
+        "en": "{n, plural, =0 {Saved an empty file.} one {Saved # reading.} other {Saved # readings.}}"
+      },
+      "report": {
+        "en": "Blood pressure readings, {from} to {to}\n\nAverage: {n, plural, =0 {none} one {{s}/{d} mmHg} other {{s}/{d} mmHg}}, pulse {p, plural, =0 {not logged} one {# bpm} other {# bpm}} ({n, plural, one {# reading} other {# readings}})\nMorning average: {mn, plural, =0 {none} one {{ms}/{md} mmHg} other {{ms}/{md} mmHg}}\nEvening average: {en, plural, =0 {none} one {{es}/{ed} mmHg} other {{es}/{ed} mmHg}}\nCategories: {b, select, esc {ESC 2024} other {AHA/ACC}}\n\nReadings, newest first (time, mmHg, pulse):\n{lines}\n\nMeasured at home and logged by the patient."
+      },
+      "imported": {
+        "en": "{added, plural, =0 {No readings imported} one {Imported # reading} other {Imported # readings}}{duplicates, plural, =0 {} one {; # was already in the app} other {; # were already in the app}}{skipped, plural, =0 {.} one {; # row skipped.} other {; # rows skipped.}}"
+      },
+      "problemLine": {
+        "en": "Line {row}: {reason}"
+      },
+      "moreProblems": {
+        "en": "{n, plural, one {…and # more row} other {…and # more rows}}"
+      },
+      "vsAverage": {
+        "en": "{dir, select, same {Same as your 30-day average} lower {{s}/{d} below your 30-day average} higher {{s}/{d} above your 30-day average} other {{up, select, yes {Upper {s} above, lower {d} below your 30-day average} other {Upper {s} below, lower {d} above your 30-day average}}}}"
+      }
+    }
+  },
+  "permissions": {
+    "auth.lock": {
+      "purpose": "Keep your readings behind your fingerprint, face or screen lock",
+      "default": "on",
+      "relockAfter": "PT5M"
+    },
+    "notify.local": {
+      "purpose": "Remind you to measure at the times you set, such as morning and evening",
+      "maxPerDay": 6
+    },
+    "share": {
+      "purpose": "Send a readings report to your doctor through an app you pick"
+    },
+    "files.io": {
+      "purpose": "Save your readings as a CSV file for your doctor, and import readings from another app’s file",
+      "modes": ["import", "export"]
+    }
+  },
+  "dataFlows": [
+    {
+      "from": [
+        "reading.at",
+        "reading.systolic",
+        "reading.diastolic",
+        "reading.pulse",
+        "reading.arm",
+        "reading.position",
+        "reading.irregular",
+        "reading.tags",
+        "reading.note",
+        "reading.daypart",
+        "reading.aha",
+        "reading.esc",
+        "reading.date",
+        "exportCsv.days"
+      ],
+      "to": "files.io",
+      "purpose": "Your readings for the period you pick are saved as a CSV file where you choose"
+    },
+    {
+      "from": ["reading.*", "settings.guideline", "shareReport.days"],
+      "to": "share",
+      "purpose": "A text report of your readings goes to the app and person you pick"
+    }
+  ],
+  "settings": {
+    "guideline": {
+      "type": "choice",
+      "label": "Category bands",
+      "options": [
+        {
+          "value": "aha",
+          "label": "American (AHA/ACC)"
+        },
+        {
+          "value": "esc",
+          "label": "European (ESC 2024)"
+        }
+      ],
+      "default": "aha",
+      "help": "Which guideline names the categories. Ask your doctor which one they use."
+    },
+    "targetSys": {
+      "type": "integer",
+      "label": "My target, upper number",
+      "unit": "mmHg",
+      "default": 130,
+      "min": 90,
+      "max": 180,
+      "sensitivity": "health",
+      "help": "Your doctor can tell you your own target. Many guidelines aim for below 130/80."
+    },
+    "targetDia": {
+      "type": "integer",
+      "label": "My target, lower number",
+      "unit": "mmHg",
+      "default": 80,
+      "min": 50,
+      "max": 110,
+      "sensitivity": "health"
+    },
+    "usualArm": {
+      "type": "choice",
+      "label": "Arm I usually use",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left arm"
+        },
+        {
+          "value": "right",
+          "label": "Right arm"
+        }
+      ],
+      "default": "left"
+    },
+    "importDates": {
+      "type": "choice",
+      "label": "Dates in imported files",
+      "options": [
+        {
+          "value": "monthFirst",
+          "label": "Month first (10/15/2026)"
+        },
+        {
+          "value": "dayFirst",
+          "label": "Day first (15/10/2026)"
+        }
+      ],
+      "default": "monthFirst",
+      "help": "For dates such as 03/04/2026 when no date in the file shows the order. Dates with dots are always read day first."
+    }
+  },
+  "entities": {
+    "reading": {
+      "label": "Reading",
+      "labelPlural": "Readings",
+      "sensitivity": "health",
+      "sort": ["-at"],
+      "unique": [["at", "systolic", "diastolic"]],
+      "display": {
+        "title": "=string(item.systolic) + '/' + string(item.diastolic) + ' mmHg'",
+        "subtitle": "=(settings.guideline == 'esc' ? optionLabel(item.esc) : optionLabel(item.aha)) + (has(item.pulse) ? ' · pulse ' + string(item.pulse) : '') + (item.irregular ? ' · irregular heartbeat' : '')",
+        "trailing": "=formatDate(item.at, 'jm')",
+        "icon": "=coalesce(settings.guideline == 'esc' ? optionIcon(item.esc) : optionIcon(item.aha), 'monitor_heart')",
+        "tone": "=(settings.guideline == 'esc' ? item.esc : item.aha) == 'normal' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'nonElevated' ? 'success' : (settings.guideline == 'esc' ? item.esc : item.aha) == 'stage2' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'hypertension' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'severe' ? 'danger' : 'warning'"
+      },
+      "fields": {
+        "systolic": {
+          "type": "integer",
+          "label": "Upper (systolic)",
+          "unit": "mmHg",
+          "required": true,
+          "min": 50,
+          "max": 300,
+          "placeholder": "120"
+        },
+        "diastolic": {
+          "type": "integer",
+          "label": "Lower (diastolic)",
+          "unit": "mmHg",
+          "required": true,
+          "min": 30,
+          "max": 200,
+          "placeholder": "80",
+          "checks": [
+            {
+              "condition": "=item.diastolic < item.systolic",
+              "message": "The lower number must be below the upper number."
+            }
+          ]
+        },
+        "pulse": {
+          "type": "integer",
+          "label": "Pulse",
+          "unit": "bpm",
+          "min": 25,
+          "max": 250,
+          "placeholder": "70"
+        },
+        "at": {
+          "type": "datetime",
+          "label": "Date and time",
+          "required": true,
+          "default": "=now() - (time(now()) - time(padStart(string(hour(now())), 2, '0') + ':' + padStart(string(minute(now())), 2, '0')))"
+        },
+        "arm": {
+          "type": "choice",
+          "label": "Arm",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left arm"
+            },
+            {
+              "value": "right",
+              "label": "Right arm"
+            }
+          ],
+          "default": "=settings.usualArm"
+        },
+        "position": {
+          "type": "choice",
+          "label": "Position",
+          "options": [
+            {
+              "value": "sitting",
+              "label": "Sitting"
+            },
+            {
+              "value": "standing",
+              "label": "Standing"
+            },
+            {
+              "value": "lying",
+              "label": "Lying down"
+            }
+          ],
+          "default": "sitting"
+        },
+        "irregular": {
+          "type": "boolean",
+          "label": "Monitor showed an irregular heartbeat",
+          "default": false
+        },
+        "tags": {
+          "type": "multiChoice",
+          "label": "Context",
+          "options": [
+            {
+              "value": "beforeMeds",
+              "label": "Before medication"
+            },
+            {
+              "value": "afterMeds",
+              "label": "After medication"
+            },
+            {
+              "value": "exercise",
+              "label": "After exercise"
+            },
+            {
+              "value": "caffeine",
+              "label": "After coffee or tea"
+            },
+            {
+              "value": "stress",
+              "label": "Stressed or anxious"
+            },
+            {
+              "value": "unwell",
+              "label": "Feeling unwell"
+            },
+            {
+              "value": "pain",
+              "label": "In pain"
+            }
+          ]
+        },
+        "note": {
+          "type": "longText",
+          "label": "Note",
+          "maxLength": 1000
+        },
+        "date": {
+          "type": "date",
+          "label": "Day",
+          "compute": "=date(item.at)",
+          "stored": true,
+          "visible": false
+        },
+        "daypart": {
+          "type": "choice",
+          "label": "Time of day",
+          "options": [
+            {
+              "value": "morning",
+              "label": "Morning"
+            },
+            {
+              "value": "afternoon",
+              "label": "Afternoon"
+            },
+            {
+              "value": "evening",
+              "label": "Evening"
+            }
+          ],
+          "compute": "=time(item.at) < time('04:00') ? 'evening' : time(item.at) < time('12:00') ? 'morning' : time(item.at) < time('18:00') ? 'afternoon' : 'evening'",
+          "stored": true
+        },
+        "aha": {
+          "type": "choice",
+          "label": "Category (AHA/ACC)",
+          "options": [
+            {
+              "value": "low",
+              "label": "Low",
+              "icon": "trending_down",
+              "tone": "warning"
+            },
+            {
+              "value": "normal",
+              "label": "Normal",
+              "icon": "check_circle",
+              "tone": "success"
+            },
+            {
+              "value": "elevated",
+              "label": "Elevated",
+              "icon": "trending_up",
+              "tone": "warning"
+            },
+            {
+              "value": "stage1",
+              "label": "High, stage 1",
+              "icon": "trending_up",
+              "tone": "warning"
+            },
+            {
+              "value": "stage2",
+              "label": "High, stage 2",
+              "icon": "warning",
+              "tone": "danger"
+            },
+            {
+              "value": "severe",
+              "label": "Very high",
+              "icon": "error",
+              "tone": "danger"
+            }
+          ],
+          "compute": "=item.systolic > 180 || item.diastolic > 120 ? 'severe' : item.systolic >= 140 || item.diastolic >= 90 ? 'stage2' : item.systolic >= 130 || item.diastolic >= 80 ? 'stage1' : item.systolic >= 120 ? 'elevated' : item.systolic < 90 || item.diastolic < 60 ? 'low' : 'normal'",
+          "stored": true,
+          "visible": "=settings.guideline == 'aha'"
+        },
+        "esc": {
+          "type": "choice",
+          "label": "Category (ESC 2024)",
+          "options": [
+            {
+              "value": "low",
+              "label": "Low",
+              "icon": "trending_down",
+              "tone": "warning"
+            },
+            {
+              "value": "nonElevated",
+              "label": "Not elevated",
+              "icon": "check_circle",
+              "tone": "success"
+            },
+            {
+              "value": "elevated",
+              "label": "Elevated",
+              "icon": "trending_up",
+              "tone": "warning"
+            },
+            {
+              "value": "hypertension",
+              "label": "High",
+              "icon": "warning",
+              "tone": "danger"
+            },
+            {
+              "value": "severe",
+              "label": "Very high",
+              "icon": "error",
+              "tone": "danger"
+            }
+          ],
+          "compute": "=item.systolic >= 180 || item.diastolic >= 110 ? 'severe' : item.systolic >= 140 || item.diastolic >= 90 ? 'hypertension' : item.systolic >= 120 || item.diastolic >= 70 ? 'elevated' : item.systolic < 90 || item.diastolic < 60 ? 'low' : 'nonElevated'",
+          "stored": true,
+          "visible": "=settings.guideline == 'esc'"
+        },
+        "pulsePressure": {
+          "type": "integer",
+          "label": "Pulse pressure",
+          "unit": "mmHg",
+          "compute": "=item.systolic - item.diastolic",
+          "stored": true
+        },
+        "map": {
+          "type": "number",
+          "label": "Mean arterial pressure",
+          "unit": "mmHg",
+          "compute": "=round(double(item.diastolic) + double(item.systolic - item.diastolic) / 3.0)",
+          "stored": true
+        }
+      }
+    },
+    "reminder": {
+      "label": "Reminder",
+      "labelPlural": "Reminders",
+      "sort": ["at"],
+      "display": {
+        "title": "=item.label",
+        "subtitle": "=item.on ? formatRecurrence(item.days) + ' at ' + formatDate(item.at, 'jm') : 'Off'",
+        "icon": "=item.on ? 'alarm_on' : 'alarm'"
+      },
+      "fields": {
+        "label": {
+          "type": "text",
+          "label": "Name",
+          "required": true,
+          "maxLength": 40,
+          "default": "Blood pressure check"
+        },
+        "at": {
+          "type": "time",
+          "label": "Time",
+          "required": true,
+          "default": "08:00"
+        },
+        "days": {
+          "type": "recurrence",
+          "label": "Repeat",
+          "required": true,
+          "default": "FREQ=DAILY"
+        },
+        "on": {
+          "type": "boolean",
+          "label": "Remind me",
+          "default": true
+        }
+      }
+    }
+  },
+  "queries": {
+    "latest": {
+      "entity": "reading",
+      "sort": ["-at"],
+      "limit": 1
+    },
+    "lastChanged": {
+      "entity": "reading",
+      "sort": ["-updatedAt"],
+      "limit": 1
+    },
+    "allReadings": {
+      "entity": "reading",
+      "sort": ["-at"],
+      "limit": 2000
+    },
+    "thisWeek": { "entity": "reading", "where": "=item.date > addDays(today(), -7)", "sort": ["at"], "limit": 200 },
+    "avg7": {
+      "entity": "reading",
+      "where": "=item.date > addDays(today(), -7)",
+      "aggregate": {
+        "sys": {
+          "fn": "avg",
+          "field": "systolic"
+        },
+        "dia": {
+          "fn": "avg",
+          "field": "diastolic"
+        },
+        "pulse": {
+          "fn": "avg",
+          "field": "pulse"
+        },
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "avg30": {
+      "entity": "reading",
+      "where": "=item.date > addDays(today(), -30)",
+      "aggregate": {
+        "sys": {
+          "fn": "avg",
+          "field": "systolic"
+        },
+        "dia": {
+          "fn": "avg",
+          "field": "diastolic"
+        },
+        "pulse": {
+          "fn": "avg",
+          "field": "pulse"
+        },
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "morning30": {
+      "entity": "reading",
+      "where": "=item.date > addDays(today(), -30) && item.daypart == 'morning'",
+      "aggregate": {
+        "sys": {
+          "fn": "avg",
+          "field": "systolic"
+        },
+        "dia": {
+          "fn": "avg",
+          "field": "diastolic"
+        },
+        "pulse": {
+          "fn": "avg",
+          "field": "pulse"
+        },
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "evening30": {
+      "entity": "reading",
+      "where": "=item.date > addDays(today(), -30) && item.daypart == 'evening'",
+      "aggregate": {
+        "sys": {
+          "fn": "avg",
+          "field": "systolic"
+        },
+        "dia": {
+          "fn": "avg",
+          "field": "diastolic"
+        },
+        "pulse": {
+          "fn": "avg",
+          "field": "pulse"
+        },
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "inTarget30": {
+      "entity": "reading",
+      "where": "=item.date > addDays(today(), -30) && item.systolic < settings.targetSys && item.diastolic < settings.targetDia",
+      "aggregate": {
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "daily30": {
+      "entity": "reading",
+      "where": "=item.date > addDays(today(), -30)",
+      "groupBy": {
+        "field": "date",
+        "period": "day"
+      },
+      "aggregate": {
+        "systolic": {
+          "fn": "avg",
+          "field": "systolic"
+        },
+        "diastolic": {
+          "fn": "avg",
+          "field": "diastolic"
+        },
+        "pulse": {
+          "fn": "avg",
+          "field": "pulse"
+        }
+      }
+    },
+    "weekly26": {
+      "entity": "reading",
+      "where": "=item.date > addWeeks(today(), -26)",
+      "groupBy": {
+        "field": "date",
+        "period": "week"
+      },
+      "aggregate": {
+        "systolic": {
+          "fn": "avg",
+          "field": "systolic"
+        },
+        "diastolic": {
+          "fn": "avg",
+          "field": "diastolic"
+        },
+        "pulse": {
+          "fn": "avg",
+          "field": "pulse"
+        }
+      }
+    },
+    "aha30": {
+      "entity": "reading",
+      "where": "=item.date > addDays(today(), -30)",
+      "groupBy": {
+        "field": "aha"
+      },
+      "aggregate": {
+        "readings": {
+          "fn": "count"
+        }
+      }
+    },
+    "esc30": {
+      "entity": "reading",
+      "where": "=item.date > addDays(today(), -30)",
+      "groupBy": {
+        "field": "esc"
+      },
+      "aggregate": {
+        "readings": {
+          "fn": "count"
+        }
+      }
+    },
+    "reminders": {
+      "entity": "reminder",
+      "sort": ["at"]
+    },
+    "rangeRows": {
+      "entity": "reading",
+      "args": {
+        "from": {
+          "type": "date"
+        }
+      },
+      "where": "=item.date >= args.from",
+      "sort": ["at"],
+      "limit": 2000
+    },
+    "shareRows": {
+      "entity": "reading",
+      "args": {
+        "from": {
+          "type": "date"
+        }
+      },
+      "where": "=item.date >= args.from",
+      "sort": ["-at"],
+      "limit": 150
+    },
+    "rangeAgg": {
+      "entity": "reading",
+      "args": {
+        "from": {
+          "type": "date"
+        }
+      },
+      "where": "=item.date >= args.from",
+      "aggregate": {
+        "sys": {
+          "fn": "avg",
+          "field": "systolic"
+        },
+        "dia": {
+          "fn": "avg",
+          "field": "diastolic"
+        },
+        "pulse": {
+          "fn": "avg",
+          "field": "pulse"
+        },
+        "n": {
+          "fn": "count"
+        },
+        "maxSys": {
+          "fn": "max",
+          "field": "systolic"
+        },
+        "maxDia": {
+          "fn": "max",
+          "field": "diastolic"
+        },
+        "minSys": {
+          "fn": "min",
+          "field": "systolic"
+        },
+        "minDia": {
+          "fn": "min",
+          "field": "diastolic"
+        }
+      }
+    },
+    "rangeMorning": {
+      "entity": "reading",
+      "args": {
+        "from": {
+          "type": "date"
+        }
+      },
+      "where": "=item.date >= args.from && item.daypart == 'morning'",
+      "aggregate": {
+        "sys": {
+          "fn": "avg",
+          "field": "systolic"
+        },
+        "dia": {
+          "fn": "avg",
+          "field": "diastolic"
+        },
+        "pulse": {
+          "fn": "avg",
+          "field": "pulse"
+        },
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "rangeEvening": {
+      "entity": "reading",
+      "args": {
+        "from": {
+          "type": "date"
+        }
+      },
+      "where": "=item.date >= args.from && item.daypart == 'evening'",
+      "aggregate": {
+        "sys": {
+          "fn": "avg",
+          "field": "systolic"
+        },
+        "dia": {
+          "fn": "avg",
+          "field": "diastolic"
+        },
+        "pulse": {
+          "fn": "avg",
+          "field": "pulse"
+        },
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "rangeTarget": {
+      "entity": "reading",
+      "args": {
+        "from": {
+          "type": "date"
+        }
+      },
+      "where": "=item.date >= args.from && item.systolic < settings.targetSys && item.diastolic < settings.targetDia",
+      "aggregate": {
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "rangeDaily": {
+      "entity": "reading",
+      "args": {
+        "from": {
+          "type": "date"
+        }
+      },
+      "where": "=item.date >= args.from",
+      "groupBy": {
+        "field": "date",
+        "period": "day"
+      },
+      "aggregate": {
+        "systolic": {
+          "fn": "avg",
+          "field": "systolic"
+        },
+        "diastolic": {
+          "fn": "avg",
+          "field": "diastolic"
+        },
+        "pulse": {
+          "fn": "avg",
+          "field": "pulse"
+        }
+      }
+    }
+  },
+  "navigation": {
+    "start": "overview",
+    "tabs": [
+      {
+        "screen": "overview",
+        "label": "Overview",
+        "icon": "monitor_heart"
+      },
+      {
+        "screen": "readings",
+        "label": "Readings",
+        "icon": "list"
+      },
+      {
+        "screen": "trends",
+        "label": "Trends",
+        "icon": "show_chart"
+      },
+      {
+        "screen": "report",
+        "label": "Report",
+        "icon": "description"
+      }
+    ],
+    "menu": ["reminders", "prefs"]
+  },
+  "screens": {
+    "overview": {
+      "type": "dashboard",
+      "title": "Blood pressure",
+      "root": "overviewCol"
+    },
+    "readings": {
+      "type": "list",
+      "title": "Readings",
+      "query": "allReadings",
+      "sectionBy": "date",
+      "search": ["note"],
+      "toolbar": ["importBtn"],
+      "add": "readingForm",
+      "onTap": {
+        "event": {
+          "name": "navigate",
+          "context": {
+            "screen": "readingDetail",
+            "id": "=item.id"
+          }
+        }
+      },
+      "empty": {
+        "title": "No readings yet",
+        "body": "Tap + after you measure to log the upper and lower numbers.",
+        "icon": "monitor_heart"
+      }
+    },
+    "readingDetail": {
+      "type": "detail",
+      "title": "Reading",
+      "entity": "reading",
+      "header": "detailTop",
+      "show": ["pulsePressure", "map", "arm", "position", "tags", "note", "daypart"],
+      "edit": "readingForm"
+    },
+    "readingForm": {
+      "type": "form",
+      "title": "Reading",
+      "entity": "reading",
+      "fields": ["systolic", "diastolic", "pulse", "at", "arm", "position", "irregular", "tags", "note"],
+      "onSave": {
+        "event": {
+          "name": "afterSave"
+        }
+      }
+    },
+    "trends": {
+      "type": "dashboard",
+      "title": "Trends",
+      "root": "trendsCol"
+    },
+    "report": {
+      "type": "dashboard",
+      "title": "Report for your doctor",
+      "root": "reportCol",
+      "state": {
+        "days": {
+          "type": "choice",
+          "label": "Period",
+          "options": [
+            {
+              "value": "7",
+              "label": "7 days"
+            },
+            {
+              "value": "30",
+              "label": "30 days"
+            },
+            {
+              "value": "90",
+              "label": "90 days"
+            },
+            {
+              "value": "365",
+              "label": "1 year"
+            }
+          ],
+          "default": "30"
+        }
+      },
+      "queries": {
+        "rAgg": {
+          "query": "rangeAgg",
+          "args": {
+            "from": "=addDays(today(), 1 - int(state.days))"
+          }
+        },
+        "rMorning": {
+          "query": "rangeMorning",
+          "args": {
+            "from": "=addDays(today(), 1 - int(state.days))"
+          }
+        },
+        "rEvening": {
+          "query": "rangeEvening",
+          "args": {
+            "from": "=addDays(today(), 1 - int(state.days))"
+          }
+        },
+        "rTarget": {
+          "query": "rangeTarget",
+          "args": {
+            "from": "=addDays(today(), 1 - int(state.days))"
+          }
+        },
+        "rDaily": {
+          "query": "rangeDaily",
+          "args": {
+            "from": "=addDays(today(), 1 - int(state.days))"
+          }
+        }
+      }
+    },
+    "reminders": {
+      "type": "list",
+      "title": "Reminders",
+      "query": "reminders",
+      "toolbar": ["testBtn"],
+      "empty": {
+        "title": "No reminders",
+        "body": "Doctors often ask for readings each morning and evening. Tap + to add a reminder.",
+        "icon": "alarm"
+      }
+    },
+    "prefs": {
+      "type": "settings",
+      "title": "Settings"
+    },
+    "importReport": {
+      "type": "custom",
+      "title": "Import finished",
+      "present": "dialog",
+      "params": {
+        "summary": {
+          "type": "text",
+          "maxLength": 300
+        },
+        "lines": {
+          "type": "longText",
+          "maxLength": 5000
+        }
+      },
+      "root": "irCol"
+    }
+  },
+  "components": {
+    "overviewCol": {
+      "component": "Column",
+      "children": ["firstRun", "latestList", "logBtn", "avgSection", "trendChart", "routineSection", "disclaimer"]
+    },
+    "firstRun": {
+      "component": "EmptyState",
+      "icon": "monitor_heart",
+      "title": "Log your first reading",
+      "body": "Sit quietly for five minutes with your back supported and your arm resting at heart level. Then measure and log both numbers. Moving from another app? Import its CSV file.",
+      "action": {
+        "event": {
+          "name": "importReadings"
+        }
+      },
+      "actionLabel": "Import readings from a file",
+      "visible": "=size(q.latest) == 0",
+      "illustration": "welcome"
+    },
+    "latestList": {
+      "component": "List",
+      "children": {
+        "path": "/q/latest",
+        "componentId": "latestCard"
+      }
+    },
+    "latestCard": {
+      "component": "Card",
+      "variant": "hero",
+      "tone": "=(settings.guideline == 'esc' ? item.esc : item.aha) == 'normal' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'nonElevated' ? 'success' : (settings.guideline == 'esc' ? item.esc : item.aha) == 'stage2' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'hypertension' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'severe' ? 'danger' : 'warning'",
+      "child": "latestCol"
+    },
+    "latestCol": {
+      "component": "Column",
+      "children": ["latestValue", "latestOnly", "latestBadge", "latestMeta", "severeNote"]
+    },
+    "latestValue": {
+      "component": "Stat",
+      "variant": "hero",
+      "label": "Latest reading",
+      "value": "=string(item.systolic) + '/' + string(item.diastolic)",
+      "unit": "mmHg",
+      "delta": "=t('vsAverage', {'dir': ((item.systolic - int(round(coalesce(q.avg30.sys, 0.0)))) == 0 && (item.diastolic - int(round(coalesce(q.avg30.dia, 0.0)))) == 0 ? 'same' : (item.systolic - int(round(coalesce(q.avg30.sys, 0.0)))) <= 0 && (item.diastolic - int(round(coalesce(q.avg30.dia, 0.0)))) <= 0 ? 'lower' : (item.systolic - int(round(coalesce(q.avg30.sys, 0.0)))) >= 0 && (item.diastolic - int(round(coalesce(q.avg30.dia, 0.0)))) >= 0 ? 'higher' : 'mixed'), 's': abs((item.systolic - int(round(coalesce(q.avg30.sys, 0.0))))), 'd': abs((item.diastolic - int(round(coalesce(q.avg30.dia, 0.0))))), 'up': (item.systolic - int(round(coalesce(q.avg30.sys, 0.0)))) > 0 ? 'yes' : 'no'})",
+      "visible": "=coalesce(q.avg30.n, 0) > 1"
+    },
+    "latestOnly": {
+      "component": "Stat",
+      "variant": "hero",
+      "label": "Latest reading",
+      "value": "=string(item.systolic) + '/' + string(item.diastolic)",
+      "unit": "mmHg",
+      "visible": "=coalesce(q.avg30.n, 0) <= 1"
+    },
+    "latestBadge": {
+      "component": "Badge",
+      "icon": "=coalesce(settings.guideline == 'esc' ? optionIcon(item.esc) : optionIcon(item.aha), 'monitor_heart')",
+      "text": "=settings.guideline == 'esc' ? optionLabel(item.esc) : optionLabel(item.aha)",
+      "tone": "=(settings.guideline == 'esc' ? item.esc : item.aha) == 'normal' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'nonElevated' ? 'success' : (settings.guideline == 'esc' ? item.esc : item.aha) == 'stage2' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'hypertension' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'severe' ? 'danger' : 'warning'"
+    },
+    "latestMeta": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=formatRelative(item.at) + ', ' + formatDate(item.at, 'jm') + (has(item.pulse) ? ' · pulse ' + string(item.pulse) + ' bpm' : '') + (item.irregular ? ' · irregular heartbeat' : '')"
+    },
+    "severeNote": {
+      "component": "Text",
+      "tone": "danger",
+      "text": "This reading is very high. Rest quietly for five minutes and measure again. If it stays this high, contact your doctor straight away. If you also have chest pain, shortness of breath, back pain, numbness, weakness, a change in vision or trouble speaking, call your local emergency number now.",
+      "visible": "=(settings.guideline == 'esc' ? item.esc : item.aha) == 'severe' && now() - item.at < duration('PT24H')"
+    },
+    "logBtn": {
+      "component": "Button",
+      "variant": "primary",
+      "icon": "add",
+      "label": "Log a reading",
+      "action": {
+        "event": {
+          "name": "navigate",
+          "context": {
+            "screen": "readingForm"
+          }
+        }
+      }
+    },
+    "avgSection": {
+      "component": "Section",
+      "title": "Averages",
+      "children": ["avgRow1", "avgRow2", "targetStat"],
+      "visible": "=size(q.latest) > 0"
+    },
+    "avgRow1": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["avg7Stat", "avg30Stat"]
+    },
+    "avg7Stat": {
+      "component": "Stat",
+      "label": "Last 7 days",
+      "unit": "mmHg",
+      "value": "=coalesce(q.avg7.n, 0) > 0 ? string(int(round(coalesce(q.avg7.sys, 0.0)))) + '/' + string(int(round(coalesce(q.avg7.dia, 0.0)))) : '–'",
+      "caption": "=t('readings', {'n': coalesce(q.avg7.n, 0)}) + (has(q.avg7.pulse) ? ' · pulse ' + string(int(round(coalesce(q.avg7.pulse, 0.0)))) : '')"
+    },
+    "avg30Stat": {
+      "component": "Stat",
+      "label": "Last 30 days",
+      "unit": "mmHg",
+      "value": "=coalesce(q.avg30.n, 0) > 0 ? string(int(round(coalesce(q.avg30.sys, 0.0)))) + '/' + string(int(round(coalesce(q.avg30.dia, 0.0)))) : '–'",
+      "caption": "=t('readings', {'n': coalesce(q.avg30.n, 0)}) + (has(q.avg30.pulse) ? ' · pulse ' + string(int(round(coalesce(q.avg30.pulse, 0.0)))) : '')"
+    },
+    "avgRow2": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["morningStat", "eveningStat"]
+    },
+    "morningStat": {
+      "component": "Stat",
+      "label": "Mornings, 30 days",
+      "icon": "today",
+      "unit": "mmHg",
+      "value": "=coalesce(q.morning30.n, 0) > 0 ? string(int(round(coalesce(q.morning30.sys, 0.0)))) + '/' + string(int(round(coalesce(q.morning30.dia, 0.0)))) : '–'",
+      "caption": "=t('readings', {'n': coalesce(q.morning30.n, 0)}) + (has(q.morning30.pulse) ? ' · pulse ' + string(int(round(coalesce(q.morning30.pulse, 0.0)))) : '')"
+    },
+    "eveningStat": {
+      "component": "Stat",
+      "label": "Evenings, 30 days",
+      "icon": "bedtime",
+      "unit": "mmHg",
+      "value": "=coalesce(q.evening30.n, 0) > 0 ? string(int(round(coalesce(q.evening30.sys, 0.0)))) + '/' + string(int(round(coalesce(q.evening30.dia, 0.0)))) : '–'",
+      "caption": "=t('readings', {'n': coalesce(q.evening30.n, 0)}) + (has(q.evening30.pulse) ? ' · pulse ' + string(int(round(coalesce(q.evening30.pulse, 0.0)))) : '')"
+    },
+    "targetStat": {
+      "component": "Stat",
+      "label": "Below my target, 30 days",
+      "icon": "flag",
+      "value": "=coalesce(q.avg30.n, 0) > 0 ? string(int(round(double(coalesce(q.inTarget30.n, 0)) * 100.0 / double(coalesce(q.avg30.n, 1))))) + '%' : '–'",
+      "caption": "='Target: below ' + string(settings.targetSys) + '/' + string(settings.targetDia) + ' mmHg'"
+    },
+    "trendChart": {
+      "component": "Chart",
+      "kind": "line",
+      "title": "Daily averages, last 30 days",
+      "query": "daily30",
+      "x": "key",
+      "y": ["systolic", "diastolic"],
+      "visible": "=size(q.daily30) > 1",
+      "reference": [
+        {
+          "value": "=settings.targetSys",
+          "label": "Upper target"
+        },
+        {
+          "value": "=settings.targetDia",
+          "label": "Lower target"
+        }
+      ]
+    },
+    "routineSection": {
+      "component": "Section",
+      "title": "Routine",
+      "children": ["weekBox", "routineText", "remindersBtn"],
+      "collapsible": true
+    },
+    "weekBox": { "component": "Column", "children": ["weekCaption", "weekStrip"], "visible": "=size(q.latest) > 0" },
+    "weekCaption": { "component": "Text", "variant": "caption", "text": "Days with a reading this week" },
+    "weekStrip": { "component": "Calendar", "variant": "week", "query": "thisWeek", "date": "date" },
+    "routineText": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=size(q.reminders.filter(r, r.on)) > 0 ? 'Reminders: ' + join(q.reminders.filter(r, r.on).map(r, r.label + ' at ' + formatDate(r.at, 'jm')), ', ') : 'No reminders are on.'"
+    },
+    "remindersBtn": {
+      "component": "Button",
+      "variant": "borderless",
+      "icon": "alarm",
+      "label": "Edit reminders",
+      "action": {
+        "event": {
+          "name": "navigate",
+          "context": {
+            "screen": "reminders"
+          }
+        }
+      }
+    },
+    "disclaimer": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "Not medical advice. This app does not measure blood pressure; use a validated cuff. Categories describe single readings, using the AHA/ACC guideline (2017, kept in 2025) or the ESC 2024 guideline as you choose in Settings. Only your doctor can diagnose high or low blood pressure, from several readings."
+    },
+    "detailTop": {
+      "component": "Column",
+      "children": ["detailCard", "detailHeader"]
+    },
+    "detailCard": {
+      "component": "Card",
+      "variant": "hero",
+      "tone": "=(settings.guideline == 'esc' ? record.esc : record.aha) == 'normal' || (settings.guideline == 'esc' ? record.esc : record.aha) == 'nonElevated' ? 'success' : (settings.guideline == 'esc' ? record.esc : record.aha) == 'stage2' || (settings.guideline == 'esc' ? record.esc : record.aha) == 'hypertension' || (settings.guideline == 'esc' ? record.esc : record.aha) == 'severe' ? 'danger' : 'warning'",
+      "child": "detailValue"
+    },
+    "detailValue": {
+      "component": "Stat",
+      "variant": "hero",
+      "label": "=formatDate(record.at, 'yMMMEdjm')",
+      "value": "=string(record.systolic) + '/' + string(record.diastolic)",
+      "unit": "mmHg",
+      "icon": "=coalesce(settings.guideline == 'esc' ? optionIcon(record.esc) : optionIcon(record.aha), 'monitor_heart')"
+    },
+    "detailHeader": {
+      "component": "Text",
+      "tone": "danger",
+      "text": "This reading is very high. Rest quietly for five minutes and measure again. If it stays this high, contact your doctor straight away. If you also have chest pain, shortness of breath, back pain, numbness, weakness, a change in vision or trouble speaking, call your local emergency number now.",
+      "visible": "=(settings.guideline == 'esc' ? record.esc : record.aha) == 'severe'"
+    },
+    "trendsCol": {
+      "component": "Column",
+      "children": [
+        "noTrend",
+        "sysAha",
+        "sysEsc",
+        "diaAha",
+        "diaEsc",
+        "weeklyChart",
+        "pulseChart",
+        "ahaBars",
+        "escBars",
+        "howTo",
+        "aboutBands"
+      ]
+    },
+    "noTrend": {
+      "component": "EmptyState",
+      "icon": "show_chart",
+      "title": "Not enough readings yet",
+      "body": "Charts appear once you have readings on two different days.",
+      "visible": "=size(q.daily30) < 2",
+      "illustration": "no_data"
+    },
+    "sysAha": {
+      "component": "Chart",
+      "kind": "line",
+      "title": "Upper number, daily averages (mmHg)",
+      "query": "daily30",
+      "x": "key",
+      "y": ["systolic"],
+      "reference": [
+        {
+          "value": "=settings.targetSys",
+          "label": "Upper target"
+        }
+      ],
+      "bands": [
+        {
+          "from": 90,
+          "to": 120,
+          "label": "Normal",
+          "tone": "success"
+        },
+        {
+          "from": 120,
+          "to": 130,
+          "label": "Elevated",
+          "tone": "warning"
+        },
+        {
+          "from": 130,
+          "to": 140,
+          "label": "High, stage 1",
+          "tone": "warning"
+        },
+        {
+          "from": 140,
+          "to": "=max(160.0, coalesce(max(q.daily30.map(r, r.systolic)), 0.0))",
+          "label": "High, stage 2",
+          "tone": "danger"
+        }
+      ],
+      "visible": "=settings.guideline == 'aha' && size(q.daily30) > 1"
+    },
+    "sysEsc": {
+      "component": "Chart",
+      "kind": "line",
+      "title": "Upper number, daily averages (mmHg)",
+      "query": "daily30",
+      "x": "key",
+      "y": ["systolic"],
+      "reference": [
+        {
+          "value": "=settings.targetSys",
+          "label": "Upper target"
+        }
+      ],
+      "bands": [
+        {
+          "from": 90,
+          "to": 120,
+          "label": "Not elevated",
+          "tone": "success"
+        },
+        {
+          "from": 120,
+          "to": 140,
+          "label": "Elevated",
+          "tone": "warning"
+        },
+        {
+          "from": 140,
+          "to": "=max(160.0, coalesce(max(q.daily30.map(r, r.systolic)), 0.0))",
+          "label": "High",
+          "tone": "danger"
+        }
+      ],
+      "visible": "=settings.guideline == 'esc' && size(q.daily30) > 1"
+    },
+    "diaAha": {
+      "component": "Chart",
+      "kind": "line",
+      "title": "Lower number, daily averages (mmHg)",
+      "query": "daily30",
+      "x": "key",
+      "y": ["diastolic"],
+      "reference": [
+        {
+          "value": "=settings.targetDia",
+          "label": "Lower target"
+        }
+      ],
+      "bands": [
+        {
+          "from": 60,
+          "to": 80,
+          "label": "Not high",
+          "tone": "success"
+        },
+        {
+          "from": 80,
+          "to": 90,
+          "label": "High, stage 1",
+          "tone": "warning"
+        },
+        {
+          "from": 90,
+          "to": "=max(100.0, coalesce(max(q.daily30.map(r, r.diastolic)), 0.0))",
+          "label": "High, stage 2",
+          "tone": "danger"
+        }
+      ],
+      "visible": "=settings.guideline == 'aha' && size(q.daily30) > 1"
+    },
+    "diaEsc": {
+      "component": "Chart",
+      "kind": "line",
+      "title": "Lower number, daily averages (mmHg)",
+      "query": "daily30",
+      "x": "key",
+      "y": ["diastolic"],
+      "reference": [
+        {
+          "value": "=settings.targetDia",
+          "label": "Lower target"
+        }
+      ],
+      "bands": [
+        {
+          "from": 60,
+          "to": 70,
+          "label": "Not elevated",
+          "tone": "success"
+        },
+        {
+          "from": 70,
+          "to": 90,
+          "label": "Elevated",
+          "tone": "warning"
+        },
+        {
+          "from": 90,
+          "to": "=max(100.0, coalesce(max(q.daily30.map(r, r.diastolic)), 0.0))",
+          "label": "High",
+          "tone": "danger"
+        }
+      ],
+      "visible": "=settings.guideline == 'esc' && size(q.daily30) > 1"
+    },
+    "weeklyChart": {
+      "component": "Chart",
+      "kind": "line",
+      "title": "Weekly averages, last 6 months (mmHg)",
+      "query": "weekly26",
+      "x": "key",
+      "y": ["systolic", "diastolic"],
+      "visible": "=size(q.weekly26) > 1",
+      "reference": [
+        {
+          "value": "=settings.targetSys",
+          "label": "Upper target"
+        },
+        {
+          "value": "=settings.targetDia",
+          "label": "Lower target"
+        }
+      ]
+    },
+    "pulseChart": {
+      "component": "Chart",
+      "kind": "line",
+      "title": "Pulse, daily averages (bpm)",
+      "query": "daily30",
+      "x": "key",
+      "y": ["pulse"],
+      "visible": "=size(q.daily30) > 1"
+    },
+    "ahaBars": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Readings by category, last 30 days",
+      "query": "aha30",
+      "x": "key",
+      "y": ["readings"],
+      "visible": "=settings.guideline == 'aha' && size(q.aha30) > 0"
+    },
+    "escBars": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Readings by category, last 30 days",
+      "query": "esc30",
+      "x": "key",
+      "y": ["readings"],
+      "visible": "=settings.guideline == 'esc' && size(q.esc30) > 0"
+    },
+    "howTo": {
+      "component": "Section",
+      "title": "How to measure at home",
+      "collapsible": true,
+      "children": ["howToText"],
+      "collapsed": true
+    },
+    "howToText": {
+      "component": "Text",
+      "text": "- No coffee, exercise or smoking for 30 minutes before.\n- Empty your bladder, then sit with your back supported and feet flat for five minutes.\n- Rest your arm on a table at heart level, with the cuff on bare skin.\n- Don’t talk while measuring.\n- Take two readings a minute apart, in the morning before medication and in the evening, and log both.\n- For a check before a doctor’s visit, many doctors ask for this every day for a week."
+    },
+    "aboutBands": {
+      "component": "Section",
+      "title": "About the categories",
+      "collapsible": true,
+      "children": ["aboutAha", "aboutEsc"],
+      "collapsed": true
+    },
+    "aboutAha": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "AHA/ACC (American Heart Association and American College of Cardiology): normal below 120/80; elevated 120–129 and below 80; high stage 1 130–139 or 80–89; high stage 2 140 or more, or 90 or more; very high above 180 or above 120. Low means below 90/60 (a common threshold, used by the NHS)."
+    },
+    "aboutEsc": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "ESC 2024 (European Society of Cardiology): not elevated below 120/70; elevated 120–139 or 70–89; high (hypertension) 140/90 or more; very high 180 or more, or 110 or more. Low means below 90/60."
+    },
+    "reportCol": {
+      "component": "Column",
+      "children": [
+        "periodPicker",
+        "rangeText",
+        "rStatRow1",
+        "rStatRow2",
+        "rStatRow3",
+        "rChart",
+        "shareBtn",
+        "csvBtn",
+        "reportNote"
+      ]
+    },
+    "periodPicker": {
+      "component": "ChoicePicker",
+      "label": "Period",
+      "displayStyle": "chips",
+      "options": [
+        {
+          "value": "7",
+          "label": "7 days"
+        },
+        {
+          "value": "30",
+          "label": "30 days"
+        },
+        {
+          "value": "90",
+          "label": "90 days"
+        },
+        {
+          "value": "365",
+          "label": "1 year"
+        }
+      ],
+      "bind": "/state/days"
+    },
+    "rangeText": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=formatDate(addDays(today(), 1 - int(state.days)), 'yMMMd') + ' – ' + formatDate(today(), 'yMMMd') + ' · ' + t('readings', {'n': coalesce(q.rAgg.n, 0)})"
+    },
+    "rStatRow1": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["rAvgStat", "rTargetStat"]
+    },
+    "rAvgStat": {
+      "component": "Stat",
+      "label": "Average",
+      "unit": "mmHg",
+      "value": "=coalesce(q.rAgg.n, 0) > 0 ? string(int(round(coalesce(q.rAgg.sys, 0.0)))) + '/' + string(int(round(coalesce(q.rAgg.dia, 0.0)))) : '–'",
+      "caption": "=has(q.rAgg.pulse) ? 'Pulse ' + string(int(round(coalesce(q.rAgg.pulse, 0.0)))) + ' bpm' : 'No pulse logged'"
+    },
+    "rTargetStat": {
+      "component": "Stat",
+      "label": "Below my target",
+      "value": "=coalesce(q.rAgg.n, 0) > 0 ? string(int(round(double(coalesce(q.rTarget.n, 0)) * 100.0 / double(coalesce(q.rAgg.n, 1))))) + '%' : '–'",
+      "caption": "='Below ' + string(settings.targetSys) + '/' + string(settings.targetDia) + ' mmHg'"
+    },
+    "rStatRow2": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["rMorningStat", "rEveningStat"]
+    },
+    "rMorningStat": {
+      "component": "Stat",
+      "label": "Mornings",
+      "icon": "today",
+      "unit": "mmHg",
+      "value": "=coalesce(q.rMorning.n, 0) > 0 ? string(int(round(coalesce(q.rMorning.sys, 0.0)))) + '/' + string(int(round(coalesce(q.rMorning.dia, 0.0)))) : '–'",
+      "caption": "=t('readings', {'n': coalesce(q.rMorning.n, 0)}) + (has(q.rMorning.pulse) ? ' · pulse ' + string(int(round(coalesce(q.rMorning.pulse, 0.0)))) : '')"
+    },
+    "rEveningStat": {
+      "component": "Stat",
+      "label": "Evenings",
+      "icon": "bedtime",
+      "unit": "mmHg",
+      "value": "=coalesce(q.rEvening.n, 0) > 0 ? string(int(round(coalesce(q.rEvening.sys, 0.0)))) + '/' + string(int(round(coalesce(q.rEvening.dia, 0.0)))) : '–'",
+      "caption": "=t('readings', {'n': coalesce(q.rEvening.n, 0)}) + (has(q.rEvening.pulse) ? ' · pulse ' + string(int(round(coalesce(q.rEvening.pulse, 0.0)))) : '')"
+    },
+    "rStatRow3": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["rHighStat", "rLowStat"]
+    },
+    "rHighStat": {
+      "component": "Stat",
+      "label": "Highest",
+      "icon": "trending_up",
+      "unit": "mmHg",
+      "value": "=coalesce(q.rAgg.n, 0) > 0 ? string(coalesce(q.rAgg.maxSys, 0)) + '/' + string(coalesce(q.rAgg.maxDia, 0)) : '–'",
+      "caption": "Upper and lower, each at its highest"
+    },
+    "rLowStat": {
+      "component": "Stat",
+      "label": "Lowest",
+      "icon": "trending_down",
+      "unit": "mmHg",
+      "value": "=coalesce(q.rAgg.n, 0) > 0 ? string(coalesce(q.rAgg.minSys, 0)) + '/' + string(coalesce(q.rAgg.minDia, 0)) : '–'",
+      "caption": "Upper and lower, each at its lowest"
+    },
+    "rChart": {
+      "component": "Chart",
+      "kind": "line",
+      "title": "Daily averages (mmHg)",
+      "query": "rDaily",
+      "x": "key",
+      "y": ["systolic", "diastolic"],
+      "visible": "=size(q.rDaily) > 1",
+      "reference": [
+        {
+          "value": "=settings.targetSys",
+          "label": "Upper target"
+        },
+        {
+          "value": "=settings.targetDia",
+          "label": "Lower target"
+        }
+      ]
+    },
+    "shareBtn": {
+      "component": "Button",
+      "variant": "primary",
+      "icon": "share",
+      "label": "Share as text",
+      "visible": "=coalesce(q.rAgg.n, 0) > 0",
+      "action": {
+        "event": {
+          "name": "shareReport",
+          "context": {
+            "days": "=int(state.days)"
+          }
+        }
+      }
+    },
+    "csvBtn": {
+      "component": "Button",
+      "icon": "download",
+      "label": "Save as CSV file",
+      "visible": "=coalesce(q.rAgg.n, 0) > 0",
+      "action": {
+        "event": {
+          "name": "exportCsv",
+          "context": {
+            "days": "=int(state.days)"
+          }
+        }
+      }
+    },
+    "reportNote": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "The text report lists every reading in the period with its time, pulse, arm, position and notes. The CSV file opens in any spreadsheet. A PDF report is not available yet."
+    },
+    "importBtn": {
+      "component": "Button",
+      "icon": "upload",
+      "iconOnly": true,
+      "label": "Import readings from a file",
+      "action": {
+        "event": {
+          "name": "importReadings"
+        }
+      }
+    },
+    "testBtn": {
+      "component": "Button",
+      "icon": "notifications",
+      "iconOnly": true,
+      "label": "Send a test reminder",
+      "action": {
+        "event": {
+          "name": "testReminder"
+        }
+      }
+    },
+    "irCol": {
+      "component": "Column",
+      "children": ["irSummary", "irIntro", "irLines", "irOk"]
+    },
+    "irSummary": {
+      "component": "Text",
+      "variant": "h5",
+      "text": "=params.summary"
+    },
+    "irIntro": {
+      "component": "Text",
+      "text": "These rows were left out, with the reason for each:"
+    },
+    "irLines": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=params.lines"
+    },
+    "irOk": {
+      "component": "Button",
+      "label": "OK",
+      "variant": "primary",
+      "action": {
+        "event": {
+          "name": "closeReport"
+        }
+      }
+    }
+  },
+  "actions": {
+    "afterSave": {
+      "steps": [
+        {
+          "type": "query",
+          "query": "lastChanged",
+          "as": "saved"
+        },
+        {
+          "type": "back"
+        },
+        {
+          "type": "navigate",
+          "when": "=size(vars.saved) > 0 && (settings.guideline == 'esc' ? vars.saved[0].esc : vars.saved[0].aha) == 'severe' && vars.saved[0].createdAt == vars.saved[0].updatedAt",
+          "screen": "readingDetail",
+          "params": {
+            "id": "=vars.saved[0].id"
+          }
+        }
+      ]
+    },
+    "shareReport": {
+      "args": {
+        "days": {
+          "type": "integer",
+          "required": true,
+          "min": 1,
+          "max": 366
+        }
+      },
+      "steps": [
+        {
+          "type": "query",
+          "query": "rangeAgg",
+          "args": {
+            "from": "=addDays(today(), 1 - args.days)"
+          },
+          "as": "a"
+        },
+        {
+          "type": "query",
+          "query": "rangeMorning",
+          "args": {
+            "from": "=addDays(today(), 1 - args.days)"
+          },
+          "as": "m"
+        },
+        {
+          "type": "query",
+          "query": "rangeEvening",
+          "args": {
+            "from": "=addDays(today(), 1 - args.days)"
+          },
+          "as": "e"
+        },
+        {
+          "type": "query",
+          "query": "shareRows",
+          "args": {
+            "from": "=addDays(today(), 1 - args.days)"
+          },
+          "as": "r"
+        },
+        {
+          "type": "capability",
+          "capability": "share",
+          "action": "share",
+          "args": {
+            "title": "Blood pressure readings",
+            "text": "=t('report', {'from': formatDate(addDays(today(), 1 - args.days), 'yMMMd'), 'to': formatDate(today(), 'yMMMd'), 'n': coalesce(vars.a.n, 0), 's': int(round(coalesce(vars.a.sys, 0.0))), 'd': int(round(coalesce(vars.a.dia, 0.0))), 'p': int(round(coalesce(vars.a.pulse, 0.0))), 'mn': coalesce(vars.m.n, 0), 'ms': int(round(coalesce(vars.m.sys, 0.0))), 'md': int(round(coalesce(vars.m.dia, 0.0))), 'en': coalesce(vars.e.n, 0), 'es': int(round(coalesce(vars.e.sys, 0.0))), 'ed': int(round(coalesce(vars.e.dia, 0.0))), 'b': settings.guideline, 'lines': join(vars.r.map(r, formatDate(r.at, 'yMMMEdjm') + '  ' + string(r.systolic) + '/' + string(r.diastolic) + (has(r.pulse) ? '  pulse ' + string(r.pulse) : '') + (r.irregular ? '  irregular' : '') + (has(r.note) ? '  – ' + coalesce(r.note, '') : '')), '\\n')})"
+          }
+        }
+      ]
+    },
+    "exportCsv": {
+      "args": {
+        "days": {
+          "type": "integer",
+          "required": true,
+          "min": 1,
+          "max": 366
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "rangeRows",
+            "queryArgs": {
+              "from": "=addDays(today(), 1 - args.days)"
+            },
+            "columns": [
+              "at",
+              "systolic",
+              "diastolic",
+              "pulse",
+              "arm",
+              "position",
+              "irregular",
+              "tags",
+              "note",
+              "daypart",
+              "aha",
+              "esc"
+            ],
+            "fileName": "blood-pressure.csv"
+          },
+          "as": "saved"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.saved.saved",
+          "text": "=t('saved', {'n': coalesce(vars.saved.rows, 0)})"
+        }
+      ]
+    },
+    "remindMeasure": {
+      "args": {
+        "reminder": {
+          "type": "ref",
+          "to": "reminder"
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=coalesce(args.reminder.label, 'Blood pressure check')",
+            "body": "Sit quietly for five minutes, then take two readings a minute apart.",
+            "open": {
+              "screen": "readingForm"
+            },
+            "tag": "measure",
+            "channel": "reminders"
+          }
+        }
+      ]
+    },
+    "testReminder": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "Reminders are on",
+            "body": "You’ll get a reminder at the times you set. Tap one to log a reading.",
+            "open": {
+              "screen": "reminders"
+            },
+            "tag": "measure",
+            "channel": "reminders"
+          }
+        },
+        {
+          "type": "toast",
+          "text": "Test reminder sent."
+        }
+      ]
+    },
+    "importReadings": {
+      "steps": [
+        {
+          "type": "confirm",
+          "title": "Import readings from a file?",
+          "body": "Pick a CSV file saved by this app or by another blood-pressure app. Date, time, upper and lower numbers, pulse, arm, position, irregular heartbeat, context tags and notes are read, in mmHg or kPa; rows without both numbers or with an unreadable date are skipped. A reading already in the app, with the same time and both numbers, is left out, so a newer file from the same app adds only what is new. Check the date order in Settings first.",
+          "confirmLabel": "Pick a file"
+        },
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "importCsv",
+          "args": {
+            "entity": "reading",
+            "fields": {
+              "at": {
+                "from": [
+                  "Measured at",
+                  "Date and time",
+                  "Date/Time",
+                  "DateTimeLocal",
+                  "DateTime",
+                  "Timestamp",
+                  "Time stamp",
+                  "Measurement date",
+                  "Measured",
+                  "Recorded",
+                  "Logged at",
+                  "Date",
+                  "Datum",
+                  "Dátum"
+                ],
+                "timeFrom": ["Time", "Measurement time", "Uhrzeit", "Zeit", "Čas"]
+              },
+              "systolic": {
+                "from": [
+                  "Systolic",
+                  "SYS",
+                  "Upper",
+                  "Systolic pressure",
+                  "Systolic blood pressure",
+                  "Systolic BP",
+                  "BP Systolic",
+                  "Systole",
+                  "Systolisch"
+                ],
+                "units": {
+                  "kPa": 7.50062
+                }
+              },
+              "diastolic": {
+                "from": [
+                  "Diastolic",
+                  "DIA",
+                  "Lower",
+                  "Diastolic pressure",
+                  "Diastolic blood pressure",
+                  "Diastolic BP",
+                  "BP Diastolic",
+                  "Diastole",
+                  "Diastolisch"
+                ],
+                "units": {
+                  "kPa": 7.50062
+                }
+              },
+              "pulse": {
+                "from": ["Pulse", "Pulse rate", "Heart rate", "HR", "BPM", "Puls", "Pulz", "PUL"]
+              },
+              "arm": {
+                "from": ["Arm", "Side", "Measurement arm"],
+                "values": {
+                  "L": "left",
+                  "links": "left",
+                  "ľavá": "left",
+                  "R": "right",
+                  "rechts": "right",
+                  "pravá": "right"
+                }
+              },
+              "position": {
+                "from": ["Position", "Posture", "Body position", "Measurement position"],
+                "values": {
+                  "Lying": "lying",
+                  "Seated": "sitting",
+                  "Sitzend": "sitting",
+                  "Stehend": "standing",
+                  "Liegend": "lying"
+                }
+              },
+              "irregular": {
+                "from": [
+                  "Irregular heartbeat",
+                  "Irregular heartbeat detected",
+                  "IHB",
+                  "Irregular",
+                  "Irregular pulse",
+                  "Arrhythmia",
+                  "AFib"
+                ],
+                "values": {
+                  "Detected": "true",
+                  "Not detected": "false",
+                  "None": "false",
+                  "-": "false"
+                }
+              },
+              "tags": {
+                "from": ["Context", "Tags", "Tag", "Labels", "Label"],
+                "values": {
+                  "After coffee": "caffeine",
+                  "After tea": "caffeine",
+                  "Coffee": "caffeine",
+                  "Stressed": "stress",
+                  "Stress": "stress",
+                  "Exercise": "exercise",
+                  "Sport": "exercise",
+                  "Unwell": "unwell",
+                  "Pain": "pain",
+                  "*": ""
+                }
+              },
+              "note": {
+                "from": [
+                  "Note",
+                  "Notes",
+                  "Comments",
+                  "Comment",
+                  "Remarks",
+                  "Memo",
+                  "Notiz",
+                  "Bemerkung",
+                  "Kommentar",
+                  "Poznámka"
+                ]
+              }
+            },
+            "onDuplicate": "skip",
+            "key": ["at", "systolic", "diastolic"],
+            "dateOrder": "=settings.importDates == 'dayFirst' ? 'dmy' : 'mdy'",
+            "onError": "skip"
+          },
+          "as": "imported"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.imported.skipped == 0",
+          "text": "=t('imported', {'added': vars.imported.added, 'duplicates': vars.imported.duplicates, 'skipped': vars.imported.skipped})"
+        },
+        {
+          "type": "navigate",
+          "when": "=vars.imported.skipped > 0",
+          "screen": "importReport",
+          "params": {
+            "summary": "=t('imported', {'added': vars.imported.added, 'duplicates': vars.imported.duplicates, 'skipped': vars.imported.skipped})",
+            "lines": "=join(take(vars.imported.problems, 8).map(p, t('problemLine', {'row': p.row, 'reason': p.reason})), '\\n') + (vars.imported.skipped > 8 ? '\\n' + t('moreProblems', {'n': vars.imported.skipped - 8}) : '')"
+          }
+        }
+      ]
+    },
+    "seedReminders": {
+      "steps": [
+        {
+          "type": "query",
+          "query": "reminders",
+          "as": "r"
+        },
+        {
+          "type": "createRecord",
+          "entity": "reminder",
+          "when": "=size(vars.r) == 0",
+          "values": {
+            "label": "Morning reading",
+            "at": "07:30",
+            "days": "FREQ=DAILY",
+            "on": true
+          }
+        },
+        {
+          "type": "createRecord",
+          "entity": "reminder",
+          "when": "=size(vars.r) == 0",
+          "values": {
+            "label": "Evening reading",
+            "at": "20:00",
+            "days": "FREQ=DAILY",
+            "on": true
+          }
+        }
+      ]
+    },
+    "closeReport": {
+      "steps": [
+        {
+          "type": "back"
+        }
+      ]
+    }
+  },
+  "triggers": {
+    "setup": {
+      "type": "app",
+      "on": "firstRun",
+      "do": "seedReminders"
+    },
+    "measureReminder": {
+      "type": "recordSchedule",
+      "entity": "reminder",
+      "rrule": "=item.days",
+      "time": "=item.at",
+      "when": "=item.on && !q.latest.exists(r, now() - r.at < duration('PT2H'))",
+      "do": "remindMeasure",
+      "args": {
+        "reminder": "=item.id"
+      },
+      "maxPerDay": 6
+    }
+  },
+  "migrations": [
+    {
+      "from": "<2.0.0",
+      "steps": [
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcDate"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcTime"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcArm"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcPosition"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcIrregular"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcTags"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcDatePart"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcTimeLower"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcDateNorm"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcDateShape"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcDay"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcClock"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcAt"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcArmKey"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcPositionKey"
+        },
+        {
+          "op": "deleteField",
+          "entity": "reading",
+          "field": "srcIrregularKey"
+        }
+      ]
+    }
+  ]
+}

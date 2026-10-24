@@ -1,0 +1,483 @@
+{
+  "id": "library/expenses",
+  "category": "finance",
+  "replaces": "Expense tracker",
+  "title": "Expenses",
+  "summary": "Log spending in seconds, set budgets and see where your money goes.",
+  "description": "**Expenses** helps you see where your money goes, without an account, ads or a subscription.\n\n### What it does\n- **Log an expense in seconds:** amount, category, a short note, the date (today by default) and how you paid. \"Add again today\" repeats a regular purchase, and an optional home-screen button opens the form straight away.\n- **Categories with icons and colours**, ready to use from the first start (groceries, eating out, transport, rent, bills and more), and as many of your own as you like. Each icon brings its own colour; pick another one if you like.\n- **Budgets:** an optional monthly budget for each category and one for all your spending. Progress bars show how much is left, and a notification warns you when a budget is nearly used up (you choose the level, 80% by default) or goes over. A category that is almost used up or over budget says so on its row.\n- **This month at a glance:** what you spent, how that compares with the same days of last month, the daily average, what each category cost with a ring chart around the month’s total, and a bar chart of the last 7 days.\n- **Month by month:** step back through earlier months for totals per category, a ring chart, the last 12 months as bars (with your monthly budget as a line when you set one) and the full list.\n- **Recurring expenses** such as rent, phone bills and subscriptions: add them once with their schedule. They are added for you when due, or, if you prefer, you get a notification with Add and Skip buttons. Each one shows what it costs per year.\n- **Search and filter:** search notes, categories and amounts; find expenses by period, payment method and minimum amount; open a category to see all its expenses.\n- **Bring your history with you:** imports the CSV file most expense and budget apps export. Columns are recognised by their usual names, with commas or semicolons, day-first or month-first dates, decimal commas or points and currency signs. Income and transfers are left out when the file marks them (a type, income or transfer column, separate income amounts, To and From transfer rows, or positive amounts in a file of signed amounts with an account column), and missing categories are created for you.\n- **Your data, your files:** export everything, a month or any period to a CSV file for a spreadsheet.\n- **One currency for the whole app**, picked in Settings. Amounts are stored as exact decimals, never rounded floating-point numbers.\n- Optional receipt photos and an optional daily reminder, at a time you pick, to log the day’s spending.\n\n### What it never does\n- No ads, no tracking, no analytics, no account and no sign-in.\n- It cannot connect to the internet. Nothing leaves your phone unless you export a file yourself.\n- No bank connection: you stay in control of what is recorded.\n\n### Privacy\nExpenses are marked as financial data. Budget notifications don’t show amounts on a locked screen. An optional app lock keeps your expenses behind your fingerprint, face or screen lock; turn it on in the app’s Permissions. The app needs no permissions beyond notifications (for budget and recurring reminders), saving and opening the files you choose, the home-screen widget and that lock; the camera is only used for receipt photos when you ask for one.",
+  "license": "MIT",
+  "tags": ["expenses", "budget", "spending", "money", "recurring", "subscriptions", "csv", "offline"],
+  "screenshots": [
+    {
+      "file": "screenshots/01-this-month-light.png",
+      "caption": "This month at a glance: spent, per day and where the money went",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/02-expenses-light.png",
+      "caption": "Every expense by day, with search",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/03-add-expense-light.png",
+      "caption": "Add an expense in a few taps: amount, category, note, how you paid",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/04-month-stats-light.png",
+      "caption": "Any month: total, per day, spending by category and the last 12 months",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/05-this-month-dark.png",
+      "caption": "This month in the dark theme",
+      "theme": "dark"
+    }
+  ],
+  "sampleData": {
+    "category": [
+      {
+        "id": "cat-groceries",
+        "name": "Groceries",
+        "icon": "shopping_cart",
+        "budget": "400.00"
+      },
+      {
+        "id": "cat-eating-out",
+        "name": "Eating out",
+        "icon": "restaurant",
+        "budget": "120.00"
+      },
+      {
+        "id": "cat-transport",
+        "name": "Transport",
+        "icon": "directions_car",
+        "budget": "120.00"
+      },
+      {
+        "id": "cat-home-and-rent",
+        "name": "Home and rent",
+        "icon": "home"
+      },
+      {
+        "id": "cat-bills",
+        "name": "Bills",
+        "icon": "receipt_long",
+        "budget": "150.00"
+      },
+      {
+        "id": "cat-subscriptions",
+        "name": "Subscriptions",
+        "icon": "autorenew",
+        "budget": "40.00"
+      },
+      {
+        "id": "cat-health",
+        "name": "Health",
+        "icon": "medical_services"
+      },
+      {
+        "id": "cat-going-out",
+        "name": "Going out",
+        "icon": "movie",
+        "budget": "80.00"
+      },
+      {
+        "id": "cat-other",
+        "name": "Other",
+        "icon": "category"
+      }
+    ],
+    "expense": [
+      {
+        "date": "2026-09-01",
+        "amount": "850.00",
+        "category": "cat-home-and-rent",
+        "note": "Rent",
+        "payment": "transfer"
+      },
+      {
+        "date": "2026-09-01",
+        "amount": "12.99",
+        "category": "cat-subscriptions",
+        "note": "Streaming",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-02",
+        "amount": "68.40",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-03",
+        "amount": "24.60",
+        "category": "cat-health",
+        "note": "Pharmacy",
+        "payment": "cash"
+      },
+      {
+        "date": "2026-09-04",
+        "amount": "21.30",
+        "category": "cat-eating-out",
+        "note": "Lunch with the team",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-06",
+        "amount": "52.00",
+        "category": "cat-transport",
+        "note": "Fuel",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-07",
+        "amount": "28.00",
+        "category": "cat-other",
+        "note": "Haircut",
+        "payment": "cash"
+      },
+      {
+        "date": "2026-09-08",
+        "amount": "59.90",
+        "category": "cat-bills",
+        "note": "Phone and internet",
+        "payment": "transfer"
+      },
+      {
+        "date": "2026-09-09",
+        "amount": "74.85",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-11",
+        "amount": "58.00",
+        "category": "cat-going-out",
+        "note": "Concert tickets",
+        "payment": "mobile"
+      },
+      {
+        "date": "2026-09-13",
+        "amount": "46.20",
+        "category": "cat-eating-out",
+        "note": "Dinner with friends",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-15",
+        "amount": "2.99",
+        "category": "cat-subscriptions",
+        "note": "Cloud storage",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-16",
+        "amount": "69.10",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-20",
+        "amount": "29.00",
+        "category": "cat-health",
+        "note": "Gym membership",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-23",
+        "amount": "72.35",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-26",
+        "amount": "48.50",
+        "category": "cat-transport",
+        "note": "Fuel",
+        "payment": "card"
+      },
+      {
+        "date": "2026-09-28",
+        "amount": "27.60",
+        "category": "cat-eating-out",
+        "note": "Brunch",
+        "payment": "mobile"
+      },
+      {
+        "date": "2026-09-30",
+        "amount": "63.80",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payment": "card"
+      },
+      {
+        "date": "2026-10-01",
+        "amount": "850.00",
+        "category": "cat-home-and-rent",
+        "note": "Rent",
+        "payment": "transfer"
+      },
+      {
+        "date": "2026-10-01",
+        "amount": "12.99",
+        "category": "cat-subscriptions",
+        "note": "Streaming",
+        "payment": "card"
+      },
+      {
+        "date": "2026-10-02",
+        "amount": "64.30",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payment": "card"
+      },
+      {
+        "date": "2026-10-03",
+        "amount": "18.50",
+        "category": "cat-eating-out",
+        "note": "Lunch with the team",
+        "payment": "card"
+      },
+      {
+        "date": "2026-10-04",
+        "amount": "45.00",
+        "category": "cat-transport",
+        "note": "Fuel",
+        "payment": "card"
+      },
+      {
+        "date": "2026-10-05",
+        "amount": "9.80",
+        "category": "cat-groceries",
+        "note": "Bakery and fruit",
+        "payment": "cash"
+      },
+      {
+        "date": "2026-10-07",
+        "amount": "32.40",
+        "category": "cat-eating-out",
+        "note": "Pizza night",
+        "payment": "mobile"
+      },
+      {
+        "date": "2026-10-08",
+        "amount": "59.90",
+        "category": "cat-bills",
+        "note": "Phone and internet",
+        "payment": "transfer"
+      },
+      {
+        "date": "2026-10-09",
+        "amount": "71.15",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payment": "card"
+      },
+      {
+        "date": "2026-10-10",
+        "amount": "24.00",
+        "category": "cat-going-out",
+        "note": "Cinema tickets",
+        "payment": "mobile"
+      },
+      {
+        "date": "2026-10-11",
+        "amount": "38.60",
+        "category": "cat-eating-out",
+        "note": "Birthday dinner",
+        "payment": "card"
+      },
+      {
+        "date": "2026-10-12",
+        "amount": "15.20",
+        "category": "cat-health",
+        "note": "Pharmacy",
+        "payment": "cash"
+      },
+      {
+        "date": "2026-10-13",
+        "amount": "3.40",
+        "category": "cat-eating-out",
+        "note": "Coffee",
+        "payment": "mobile"
+      },
+      {
+        "date": "2026-10-14",
+        "amount": "58.75",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payment": "card"
+      },
+      {
+        "date": "2026-10-15",
+        "amount": "14.50",
+        "category": "cat-eating-out",
+        "note": "Sushi takeaway",
+        "payment": "card"
+      }
+    ],
+    "recurring": [
+      {
+        "name": "Rent",
+        "amount": "850.00",
+        "category": "cat-home-and-rent",
+        "schedule": "FREQ=MONTHLY;BYMONTHDAY=1",
+        "nextDue": "2026-11-01",
+        "mode": "auto",
+        "payment": "transfer",
+        "active": true
+      },
+      {
+        "name": "Streaming",
+        "amount": "12.99",
+        "category": "cat-subscriptions",
+        "schedule": "FREQ=MONTHLY;BYMONTHDAY=1",
+        "nextDue": "2026-11-01",
+        "mode": "auto",
+        "payment": "card",
+        "active": true
+      },
+      {
+        "name": "Phone and internet",
+        "amount": "59.90",
+        "category": "cat-bills",
+        "schedule": "FREQ=MONTHLY;BYMONTHDAY=8",
+        "nextDue": "2026-11-08",
+        "mode": "ask",
+        "payment": "transfer",
+        "active": true
+      },
+      {
+        "name": "Gym membership",
+        "amount": "29.00",
+        "category": "cat-health",
+        "schedule": "FREQ=MONTHLY;BYMONTHDAY=20",
+        "nextDue": "2026-10-20",
+        "mode": "auto",
+        "payment": "card",
+        "active": true
+      },
+      {
+        "name": "Cloud storage",
+        "amount": "2.99",
+        "category": "cat-subscriptions",
+        "schedule": "FREQ=MONTHLY;BYMONTHDAY=15",
+        "nextDue": "2026-10-15",
+        "mode": "ask",
+        "payment": "card",
+        "active": true
+      },
+      {
+        "name": "Car insurance",
+        "amount": "384.00",
+        "category": "cat-transport",
+        "schedule": "FREQ=YEARLY;BYMONTH=3;BYMONTHDAY=1",
+        "nextDue": "2027-03-01",
+        "mode": "ask",
+        "payment": "transfer",
+        "active": true
+      }
+    ]
+  },
+  "research": [
+    {
+      "source": "https://ozbargain.com.au/node/875428",
+      "used_for": "What people ask of a spending tracker: simple categories, comparison over time, recurring expenses, CSV export, attractive graphs, no bank link; dislike of subscriptions and apps without CSV export."
+    },
+    {
+      "source": "https://github.com/jameskokoska/Cashew",
+      "used_for": "Feature set of an open-source budget app: per-category spending limits, repeating and subscription transactions, upcoming payments marked paid when ready, search by date, category and amount, CSV import, charts, biometric lock, widgets."
+    },
+    {
+      "source": "https://maketecheasier.com/6-expense-tracking-apps-for-android/",
+      "used_for": "Common functions across expense apps: category ring chart with drill-down, home-screen widget for fast entry, receipt photos, budget pots, export in several formats; offline apps without ads valued."
+    },
+    {
+      "source": "https://apps.apple.com/us/app/-/id601885495",
+      "used_for": "Repeat cycles users expect for recurring entries (daily, weekly, every two weeks, monthly and more), CSV export and an optional passcode lock."
+    },
+    {
+      "source": "https://techtutorialsx.com/monefy-pc/",
+      "used_for": "Complaint pattern: data deleted without a backup file cannot be recovered, so export and import must be easy and local."
+    },
+    {
+      "source": "https://justuseapp.com/en/app/1212024409/monefy-money-tracker/reviews",
+      "used_for": "Review themes for a popular manual tracker: frustration with paid upgrades for multi-currency, sync and removing ads."
+    },
+    {
+      "source": "https://github.com/jameskokoska/Cashew/blob/main/budget/lib/widgets/exportCSV.dart",
+      "used_for": "CSV export of an open-source budget app (Cashew), read in its source: lower-case headers account, amount (negative for spending), currency, title, note, date (YYYY-MM-DD HH:MM:SS.mmm), income (true/false), type, category name, subcategory name, color, icon, emoji, budget, objective. Mapped: category name to category, title and note to the note, income true skipped."
+    },
+    {
+      "source": "https://github.com/btittelbach/pyhledger/blob/master/convert-monefy-records.py",
+      "used_for": "Monefy CSV as a converter reads it: date, account, category, amount, currency, converted amount, currency, description; dates dd/mm/yyyy; signed amounts with comma thousands separators; transfers as category To 'X' / From 'X'. Mapped: with the account column and no type column, only negative amounts are imported (an onlyRows sign test; 2.0.0 decided the same through a staging entity), so income and the From transfer row stay out; the To transfer row is removed right after the import."
+    },
+    {
+      "source": "https://github.com/JibbyJames/monefy-backup/blob/main/monefy_helper.py",
+      "used_for": "Confirms the same Monefy columns (date, amount, note) and the dd/mm/yyyy date format with comma thousands separators in amounts."
+    },
+    {
+      "source": "https://github.com/letehaha/moneymatter/blob/dev/packages/backend/src/services/import-export/budget-bakers-wallet-import/parse-budget-bakers-wallet.service.ts",
+      "used_for": "Wallet by BudgetBakers CSV as an importer reads it: semicolon separated; account, category, currency, amount (always positive), ref_currency_amount, type (Expense/Income), payment_type, note, date (ISO 8601 or DD/MM/YYYY HH:MM), transfer (true/false), payee, labels; transfers carry the category 'Transfer, withdraw'."
+    },
+    {
+      "source": "https://support.budgetbakers.com/hc/en-us/articles/7151606064018",
+      "used_for": "Wallet exports records from its web app as CSV or XLS, filtered by date, account and category."
+    },
+    {
+      "source": "https://github.com/kjugi/vibe-cashapp/blob/main/src/lib/spendee.ts",
+      "used_for": "Spendee CSV as an importer reads it: Date, Wallet, Type, Category name, Amount, Currency, Note; ISO dates; signed amounts. Mapped: Wallet to account, Category name to category, Type Transfer and Income skipped."
+    },
+    {
+      "source": "https://github.com/Wsewlad/spendee_sync/blob/main/spendee_sync/services/spendee.py",
+      "used_for": "Confirms the Spendee export headers Date, Wallet, Type, Category name, Amount, Currency, Note, Labels, Author, with ISO dates carrying an offset."
+    },
+    {
+      "source": "https://github.com/Jumpi96/piggy/blob/main/scripts/toshl_import.py",
+      "used_for": "Toshl CSV as an importer reads it: Date (MM/DD/YY), Account, Category, Tags, Expense amount, Income amount, Currency, In main currency, Main currency, Description; amounts with comma thousands separators. Mapped: Expense amount as the amount, rows with only an income amount skipped; month-first dates chosen on the import screen."
+    },
+    {
+      "source": "https://note.moneylover.me/how-to-export-transaction-list-in-money-lover-to-csv-or-excel/",
+      "used_for": "Money Lover exports transactions as CSV with a chosen separator (comma, semicolon or tab), which is why the import detects the separator."
+    }
+  ],
+  "migration": {
+    "formats": ["csv"],
+    "summary": "Imports the CSV file most expense and budget apps export: comma, semicolon or tab separated, any common date style, decimal commas or points; income and transfers the file marks are left out.",
+    "samples": [
+      {
+        "file": "import-samples/this-app-export.csv",
+        "about": "This app’s own export: adds 3 expenses"
+      },
+      {
+        "file": "import-samples/signed-amounts-day-first.csv",
+        "about": "Signed amounts, an account but no type column, day-first dates, To/From transfers: adds 4, leaves out 3"
+      },
+      {
+        "file": "import-samples/type-column-semicolon.csv",
+        "about": "Semicolons, a Type column, payment types, ISO and day-first dates: adds 3, leaves out 2"
+      },
+      {
+        "file": "import-samples/wallets-iso-dates.csv",
+        "about": "Wallet and Type columns, ISO dates with offsets, signed amounts: adds 3, leaves out 2"
+      },
+      {
+        "file": "import-samples/income-flag.csv",
+        "about": "Lower-case headers, title and note, an income true/false column: adds 3, leaves out 1"
+      },
+      {
+        "file": "import-samples/separate-expense-income-month-first.csv",
+        "about": "Separate expense and income amounts, month-first dates read as such from the file: adds 3, leaves out 1"
+      },
+      {
+        "file": "import-samples/decimal-comma-semicolon.csv",
+        "about": "Spreadsheet style: semicolons, decimal commas, currency signs, dotted dates: adds 5 expenses"
+      }
+    ]
+  }
+}

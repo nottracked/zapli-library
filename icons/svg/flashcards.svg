@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Flashcards: a stack of index cards, a graduation cap on the front one. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#087E85"/>
+      <stop offset="1" stop-color="#035F66"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <rect x="50" y="40" width="116" height="88" rx="14" fill="#000" fill-opacity="0.2"/>
+  <rect x="50" y="32" width="116" height="88" rx="14" fill="#FFC531"/>
+  <rect x="24" y="66" width="128" height="96" rx="14" fill="#000" fill-opacity="0.2"/>
+  <rect x="24" y="58" width="128" height="96" rx="14" fill="#FFF"/>
+  <path fill="#054F55" d="M60 104 L88 117 L116 104 V126 C116 136 104 142 88 142 C72 142 60 136 60 126 Z"/>
+  <path fill="#0A8188" stroke="#0A8188" stroke-width="4" stroke-linejoin="round" d="M88 72 L136 94 L88 116 L40 94 Z"/>
+  <path fill="none" stroke="#054F55" stroke-width="8" stroke-linecap="round" d="M128 98 V124"/>
+  <circle cx="128" cy="128" r="7" fill="#054F55"/>
+</svg>

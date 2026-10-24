@@ -1,0 +1,8 @@
+TYPE,CONTENT,DESCRIPTION,PRIORITY,INDENT,AUTHOR,RESPONSIBLE,DATE,DATE_LANG,TIMEZONE,DURATION,DURATION_UNIT,DEADLINE,DEADLINE_LANG
+section,This week,,,,,,,,,,,,
+task,Book the dentist check-up,Ask for an early morning slot,2,1,,,2026-10-16,en,Europe/Lisbon,,None,,
+task,Stretch for ten minutes,,4,1,,,every day,en,Europe/Lisbon,,None,,
+note,The video from the physio is saved in my notes,,,,,,,,,,,,
+task,Take out the recycling,,3,1,,,every monday,en,Europe/Lisbon,,None,,
+task,Renew the library card,,1,1,,,,,,,None,2026-10-30,en
+task,Plan the weekend hike,Check the weather first,4,1,,,next Saturday,en,Europe/Lisbon,,None,,

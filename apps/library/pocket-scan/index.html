@@ -1,0 +1,2273 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>Pocket Scan</title>
+        <script type="application/anyapp+json" id="anyapp-manifest">
+            {
+                "spec": "anyapp/0.2",
+                "app": {
+                    "id": "library/pocket-scan",
+                    "kind": "web",
+                    "name": "Pocket Scan",
+                    "version": "1.1.1",
+                    "icon": "description",
+                    "category": "productivity",
+                    "license": "MIT",
+                    "iconData": "iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAAAXNSR0IArs4c6QAAJ1FJREFUeJztfWuwZUd13uo7Zx4S0kiAgYAFcpWEbMcSKZKQEMcmCTgxjmNANoIq+wd2qEqlyqn8SKhK8jf/Uknlhysp/8vTKQIYBJIxpCzhmJAHohyoOJKFJCrIkhGCBElImhmNpLuyd69eq7/Vj3P2edx7z71zvjnTt7v3eny99tq9ez/uueFtH/4WCZgphLEcIJWhPFwwcwiBIwephOkcdvzXxgr890Rx/IyisRSdtiabfHTDAoq1JKHNor8LERhKoRtL4Q3ss19o+v4df9l2uPxnnLNs6A1pW7vqsnKoSgelTaQV8K2ckkTzqApQYgWAByeOwR8lO/5JxspD4D8LuSso26GIlUjO2R8JkViKEqwD4+iDC2exwhofJqdrQckyUpGDBscbw8EWFBgN7/jTkfKfEamz+DNQaiR/BaHcTZLajUwnpVYAIgHxyVu8CI6X1GIK6DjOSmbH/0j4z0ZTiQMHW0DxYHz4P26IydeSGbvVUKywTms2zeLgyed9ClccDFMajDit7SBcQOEo2fE/Ev7xFCaNmP2BghJKhpJHlYnZp+TGpvWrbhTQQWZ5gtLZd1GMsnleD0ohyzubTDv+2n80/MdFdLKMiKmYqIdoq5ZJvUxujEm7JQ2kQYb3RwJjSZHwvvlqOxbCrJFrc9vxb0gfCP89E7D8DPFHyI1sRNQ4wpqlrpwgh03j5lSyzrGVSadsrgPJkZR8WXMOtx3/I+E/I52+OFaMU85hmOJCnNLq83Fau+v5spH/0+w7Gb20SMLBDhnm1iJiiv0d/43zn5GmIEveVUZTpSYqV42VjNM1AQ+30JNmLYRA+9KMCEqbdvyPiP+MWhnXJVQYQvQ6W47TcWPNQgUrlS7y6R0xO/6584D5zxYr9NA7fLqOQR6Buj3MCeKOPx0l/73mit3BCI0Zmxdl9g+qLNayzaBlAKJgqToUknppp8cBZXrY8T9I/jOlOXbDtX5yp/5TC9bpVFfq/ujYsjWk5gp2JmDH/0j452dhUVpvUnUG0+3HWQ02iHCyCVcNbkZUjVK+uJmmQlE3X3Ds+NOR8p/ZFk5XZ1wLwSCtSdoUo3HwQYcZjFLWJVfJcIErB6kcxKAS0p+EI9vxPxL+M0qcXVZ6oQyX6QC9gGCV4ZaMz/qgoxl7iSrS3hdb6eyArx3/I+Gf3weqFCyLM/oP6lAml5jRajBIzcq2p74dMaZB7/HZ8Y9WDp5/PIWxiubMCpFccsbmjON50UZpbjlKRXl3nnYDxsFkBPeAEO3DgEdFagQuOtnxP0L+s0wjD8kbxcVUbCbHfXJZOOXs3MG4CGnTqJBYICtdBcod/yPh336UIQxgtc8NGSBnDSqIovz+/rBtLKOQNEs7UOmOC9CT2fE/NP57sll5G6wjJ18lA7ATpuR1LAtmKJObfWQGBAHyx4KT2fE/Cv7wKANSTjnEbqXUFCIVSs056MgzTKeY9c6mdAWzk8eQseN/FPxneQPFU21sRLohkRYjqZpWa2qfM2etsPIY+yKvUA8SBhONm50QFgcIPPgR7/h764fBP74TzeY6lVEk5RjqxmVdWtwRp0uFQvdtP3ruPT95zU03nD53Jrj4ANwgQabXb7h0mR9+/MXf+tJz9z1wiSitLTfLXzaliiOXjzzWfVOJsOzX1M8Mu5Ua3ID/23707M/95DU3x7j149CLVkZTd4jbI4+/ePeXnvtKjNsG+Yc/86FvzuXTR2ssv/Tu87/wl69ZoLg86qB86j8/9x8+//0J8eyjpzvF5pIy/jSRHxeYzC/99IHErcYnp8dtGv892RxPsyTlWCGWEi8HrCL9UYeTbjQyzD1FFFhLhmaBKTJBS6sMjgZ35noj/Gu/KI92kLT9myMTIpu4fB1HkKKvTv/sj5z9+Rg3Y9CLCfbjB2UQtR2J2wb572VnsDMCpenLdhhBJaRP0DIZHWZg75esuQIW2hF3WX5t/rUda66AbvJVqONmB/9c/vmDMsvGrYeJ/OVRRmMDEMoLtzgsNYUn8DjcYd2Dgy9gmwqgPMr0+g2DuyCJsiH+0u8Xp5kF4w29jjz6wql+vu6bbzhTjwATohm3HhbGf9xNMlVvgj+8DwSLbmThdqSuQlO/Hbbxx1VnsBXlYfDOzpJBmYL1+Rtvy0gf0NQs7KCiB0OJlTZ6MenFDftrFerLj7tpc/zHX+uJa4F8tRKvnVjKtENsGremTPCxzAsKKj9GOkCzyWu6vOGRxy9zFNoY/wrRRjoVWjNqEqtNa1bylCmIUiKq2yTdAz382OVi7NTbpwCMW+8zL54b4r83Ek2NtA6NlXT3yirJgd4mD3HlIKVV6sHjIK1ZwFQag2zJ2Oe3/stzpOuXzfCXfqKgU9Ak/qpixpVDolTYDyJMiflQDlfXc3xhv4WoiDPGB/sPgf8eM2uaEWlWuh1mOoUDLa0yPVGsSdMGiTLy+eTvPnvfAxeRQ5RYj79UKB2U2WDcGuIUl2KozVIXgk6cD2GUQUjnVx64+KnffRbH6/jDx3JoTpJhP8LFf3P88xoIwS6ORnskwPC7r0uhOeYCFiPyXg3jDbHHLt/9pWflhlgPB8Lf55ZVEH3+jgNIJfzG55/5+h9d/rmfuObmN56RG4nUCVGzcwrK+G+IfzuBPAKUzd1KnU6Hn/8Hj83Vre03Ar0SpvOfz2Gxbtwr+R6vNFXGSqxkDPPQ8Kn7PRZzkMqn/skNlQwCLazFv/dKqzMa7C5k5xJ32p6esiMzxBH4NW4okzZVMqvxNz5NYsedf4HN8N8jtvUBSQlT9fA/niyJWzJksyBPIBwtsoBkycQyBCb1Za7NUVpzUFrrEemoo248kW+Mv/YHKWEPJebHiv9cbI7/TLI8SlAkGrfikRF/BpOxI8AulbWf5kK0VFdUKhkoKd2nkDGRHoTF0cAb5K+6xZHHyPy48F+ITfGP3w8UVcSgKadbaFRtUbBuGCW4JlOC3VScLoiK/hwu7xXLUb71LHl9/vpUvxFZOv78HdKBsQH++ZVWCqSvo5DeXqkciBarOOu93ADsO7Dpmoqd4e3Y7eHeDsPIudCuz18jlA//dCM60LHjPxcb5C9XYUzil1LcEJUDajiYOAPlzCWuPc2RgcC5CmxYnz8cwctwmyKzBfwLbIq/JFDQ7pRaeGToZMqFoZD8Zc2FsDSLB4wGRZ8sZalKRiqmDunqma7HnxsWQfdY8Z+PDfKfGbmgXIm60xcSxRIr86Czq3jUoMChJ05rGaj0gnsg/BlXs+H48e9gg/xnwGDsT3IhVuxU2jqnekPUkPAY5UNDLOW/bbAK7LwiiKdP0S+88/zP/Pi1N/3gmavP5VeajiMuXNr/xh9f/tx/e/Y3v/DMSy+vFf+UUsxNeQRuXiH+5ovwOxJ7EEL5vGj97pABBh0wToPIArK+e8QDh9e88tSv/f03/PCNZzt+jhmGA+C2m84Nn/e+4/zf/edPfPeplwqBJeKv8Vy4BuI06yT5peJPwGHohMOXteRoKJU6vwXNzWaiLEp5QV6UAcxqZR4ISeoHms3oJGUPYhjUr/2918/21oj/UIaYF9N2h2Cp+NdCMYGmE0XUCTcfNuuYovyMWcURFPTgCF5eP+//K9edyOwRDEN7/7uuWz3+sh+lshArxb/YdzS+Ex2sDoa0KRtSaZUaC0c7Ok3/itWZk+lxUAzrnlrrJOFn/sK1q8d/wcGPGbdi/Ed4XzOTitnWWEt5UpaWUCNc2nSha7VkJzTtzLu8HHHTDWfoROMmfT96hfgHTbCQJAvYrEIrx59IO3R/zxgX+1nG33tQOwGfDTmVEIAcNR3HYyfk/nnZVoB1bXfcr7kWQga4TvxDviddAPa8qyyGxb9AGP/YSsuXIwcNVqbasIGlOU8NNMjNIWFJLNERWy5YUF4JWC3+MXXIKnOAe2HN+MvfCxN7QUnVRlvPRKqBzQeSgLHLNl9Rv5QvHTO3Ew870paN/xJzS3FyWib+BTf8ijt4aOcUctkdDJ4IOyhWZMDeMUrNwn6UoysFvGL8oX+OdZFfOf4Fh1n7lrlLpowgm8yQMgk6783BFPsI2brQ7MmDBWrZ+MOMRQuxcvyL/TgziUKhbT0fGHCcEE3ZywznV6oc1f3LJtyJwbwjZ278TWNKnFaOfyGfL2qClgGaBUy5sDIh4+XoWWAfgb7wyDvxWDn+GttJgVoo04x/zW2P8qKepbSbmpQ+ZDJyhyDeMA+U7xOkA4Dmwtln1nuK/tjJ7pxf1zjpWDn+pfQcrBp/kE6t3m0VzGmmTDSVeuOKUebSC13mukkF5CwdQq7MRznOE49V4q87daws2Bcrx7/aEfAsjEIq0ztpoZ4qXSricKLQI4+9QAVU/uG4CfxmQ9E4N3yhs0BaXglYMf5oIu0LlNdm3LRq/C2xkwj+ZirwiPKtxxqFPiLQXV985tabz+WDQRArd3/xmb5eLp0M2rFjbBq++73vP/bE/7tw6fIiwQ3j6nNn3vj6V7/mVecXCc6FRH75+Ccwp31x07nYLAXvivui0Fs5/vF34+vMsqY+nuUKpCsZq3z5/ud/896nR0UjHe188gtP3/fAhUwoL4HKrLemOU3ciqSciyF7vv5/njj87KHx7bDLg+uBwCLBRVgp/hjP++6/MIQd7UgMP3nv08OmWl7cWpN78S98pe8HkqmH8h+dT7uKk3fuXAFBvgUpf+O3n3ro0Uvvecf1N79xfOo5nLmGuefL91+QrdFOZQmyWx7jpBvxeiAmsWnZM2CYexaJHCwGAutMQnH/pBotGX9Rk8X1v//t7z346KX3vuO6m984vgDzyGOXP/PFp79yf/Xb06vEP3d23onuHPC+H0YJGNJFMoYct2S84QtviEGwehwW4uILRzD3INYkEPpjnxJ/7PzK/ReG+aaO5zrxL/bpnnQFMGSV4AfD0JzzIS0nwlQKDqSjoiXNXnX2iF/5WJPANse/sB/i30y181mQsri06zlwkE5JWHWez5axEQffCEpW19udISJSSBzUZPNoKzEsYxeJHCzWJbDF8S98sfzV5sbtalGjEr3b28ZJhKx0NuP6ioPI4+8cJfXSF5Q9mSZk/XGsr8K2Ov7CTvzGvxdGaV0SotH62ROwG3uaz7Mk9cUFerOVvO938iDj7INf5DYFwy5cdy8eHSxLtjP+fqJhdxXWNOoIUa6E9lsATiZVeJF8E8zCQw0sED8xyHtxW+NviUscn4XpskdeA2CXS8Y+SDLqTclkZCytknRNTMavs4YpxEoqS1/WJBlrY012BWDL489ajgkz/slLzSepVGlv8lEmJWYhg/MdZK6XxxJ1O3B+Oa0CrwgEF5+ti3/2Ndjey5kIH5/di+a6KKKlcztFxh8ZMD1eudjq+Bcz2V7zzGCTVjF79Z1ZdqdpjOuplag5sJ6vHLzJUTwx2Ob4F/J7RgLlhWFNFJVZF2IVUfyQkZ5i3wUIn8WQllcAtjz+Tga/5teJjdQSX3b3G/L9g3GjrupJbk6ITKzYJTdcezPpeRfvZ3iZNpDDiUcK7hbHH3fELOh1Pxr1pGNTNItfeLOSNMOVo46rY0fvqJJHTwb7Tz7CdscfHHC8E52UuTWbFQqQxK4bUZCrWZJqVSb76Dnr4KjeB+phqTvUxY7Yuvh7Bfi9MOh38iMhnb7sNgHFmwBRubJqr1rO8duWl4o4cbfb47l44hlM3gdaJHWokPeESB+zLMRWx5+jsJ618rdzpO0cF1eUSrAYok0thbedRBPdYBWlKeNlq1CFoGWAJungGCoTceTvA/UwldiWx98r5GdhY1ZR4/Z5cLfAe89ooro6AWed++dBs1rCtWgdthTWfB3n4DCVmAV2O+OPusSzoFMWkvbksgOySzuzJT/xYVuc9zTZ7dY7pWYNyPx5vibjqrNntmf1g5j6nhBvdfxH48Ge5PMeywSk7howBzYqkWfWklnLApRmYh+Uvh2y7C5l9DMB676Oc2BYkdhWxZ/zP/kBX7LJMMXJrtJq0I7g3muGcpQIWg1WEuf7E/BKE/ArHCDQCXJbhCN8H6iHpa7CZC/JT9rC+AM3kveBrBFtlckUkF2qVN6AHE6hfsCZqeV6KcNRpk4UPJdPwLF+HygPdjvj75MJXiiLP4LpqhWGm1eQw9qqyIkTlZEKF/KaqmyGamSLlK5iQz2wE4m0b7Y4/sBtT+QCKLDqC4KWlYzNaPF0S3rejTWqYJuydMNOErRDJACBKwRbHn+jJ2RmtgHl2F0u5ukr5zAMJorE3yiqLv/wslDmvzQLYv4jCrJacXxOOsJ2xx9tktyJztIMOmrfd8NMwHAunLBG6ZEokiOPCm1iedIhkd/a+HPsNPmZbR25BaUKmdg7+qN9Ns5N8mxz4hzScL8huNvn3aw/2QgUtjn+rDktTuWP7opz9mUSi6v0fbtGtMMBD4BCV2iTV8DBoExF2mTKSh3EE4k4zG2Of9YdxPNfLMyUyfok48YtaUbFewlk7AttGGU25WT80SBNNckQOBuYu7t6JWDL489mepbJ6YU8qdVE0J1ffZo5tDo7dmIO6xSq5/woIyrYrSO7grJny+OfE3RMrNs+8DVaAMxoHECnvyeyyOZs76U73nrvz/7Yl25+zeNXn6m+q+qKx4XLZx/57g2fvf8nPvHVd720P9t4/EsRZ6ebxOHWO766YHHquMFdznIabB0wPVSDfO213/sXH/inP/K6R+eq7TDiwSdv/NWPfeS7z796g/FfZn5wObBnjmyhNFaYpMyaYfyMdGMpvC3z5Oe4MeRmciwlQ7PCMPfssmc6hkD9yw/+syFom4r/YgQtZU0UpDoif0diiKkryTFmWSzLE6FLslQSNIv+mHzpdibHSpJRU1K540/fu8uepTCE64633rOp+JPtU7ukN8XaPuhS/HthIi5LqiBCUZFTlslVPpdJRm4GSs2in8STDMaasablaG1Y99AOS+Jnf+y/bir+UgZdk9SJ4uxrKZnT+Xth0UyaCjmfYC23lIY60OwTUo3bXuTPzVJJg+Jh1VyJ77AAQ9B4Q/G3fWoTR7KjiYb5F3STyMyw0VRwyp07kogApbcJJbU0d1gSBxp/bycvnOG8OP5f/KcOcPryayPWZbajZrNfcSpkvQtWnFSHzuHqlHZYEkPQNhX/tkyqSBbKQ64Aa+iEPfUFduF+p1lPIsrPrIhRy1COCSplrKSyJKH/hMln7/9x2mFJfPb+v0gbij/kA8DOPDErSHMDJw4eF9Gsi6NYkU32j3XKqWVEjlQhlRx5sRJlltInvfFJvj7+++968Mk3tQaxQxsPfvtNn/if79xU/G1f2z/SHZ32u56ISByq2yC/F6aJQlLK8iotstRTcgyXecyk3HLTBGp596Gc9cPPl/Znf+djH9nl0EQMgfrVj3/kxZdnm4o/NbpzVhaJRUHLmDCnXvsn/xYtgGkUTmApjzLZyRL9z18+d+fX/tJTF85fd9Xz1567cPrUy7SDx4XLZ//w2z/0r/773/jHn/vwsy+8YrPx135AnkhUI8HJh1vf//umAUYRHQcOWZfxVrezOIH0ogH/wSfeWqmcNNx2x1d9xxbFv9bd42yEtcxrJZvHwIGUAZpOF5oFwH60mqZfIuPgpk3nd47Zk4dtjn+pO+HPfkOl4tcg2tcFmZBLV4ESK6x3SOnKwDbHH+8FktwHSgsuzS6rzO9HoAyiZ2dZmfJC4KSjFxPsR1AnblNiO0UG7wUS7AjGvxeG+kGSzvSzoVySOy86ozhbNAlNAfez/mSD4eaeYJvjL98PJBpKadQge79eBIBHUSn5ucFHTRlxMbCmvMVOVRO3isNJRjzGj0f8Q4DvSMT8QW7RIrVyDPMfGss+qPO6eUMRnysieUYwHaf4x19tbhDNl4I9D4waHPstQ/Wn3WWvbbLajMPTqTJWWvJXTv5IfLc5/pkP6x+co2Qo/65QYJv6orQY8oSkaUSpdszedzMJnC5Os8ABQzgF2/AdiUt+I0dG3hHbG/9U5fg6h5oV7yFVE80sXWUlp4euRPD0NfUXiV4PHgYZqbFGgm0aTGQagZiPLfmOxGW/FzEjHKf47zW7JQe5gm0aYeMK0Cz6WUvO//TgaDiW4YUx7YM1iZbLoKlfRXgoWI3M9sa/+OAXjXdhPAgIzZPhtPgf+/NVgNeFhr9SIFvt49FQxGgupn4V4aFgA2S2Lf6eA9xI1JIY1mdWkX7hR95oAKOsPmqgPGmK91MDj8LMbQKmfhXhoWAVMtscf8+Bx/eBSF+oJpKSQTvlppTxxSCyNxKZdUbMTRMQ+awOPKLtVJJYaNmxc3Y5nS7Cil9FeDBYgczWx9+SdMwc+Yo7JknC1n0CfGEbZQjyFtOYO/ceilRvpoOXEUWmxIebx1WNLfmOxJWvwnBCoe2Lv9GLGzl+P1CQDXmVnjN33ADnUYAlaanrh2/uevLsLx3NFxItBr8Qx/s7Emmr4+/laXyrzWanXBETQR2HfOlo3IrnI27FrjL9vxQMg9FXZkl9JzNA9Ip6FkZbHn/IphB/Lyw5cIkL6Cl7B8VBkqwEyGL2z1PYPIFQkd02O44SIZs92bAQCbYu/qOw5nPgzvcDeaMUylFRIm0P29ozLvZLE3RzrgeXHM3BOzsnH9sd/2xnyt8Lk1Ss00zXasqivXcxLTMlEc4HA8gwN2WuoOzRzNjS+PsE5T2QEFosJtRQPh1bpdWf509vh+pDx4RrXQ/WMh0iHbGThm2Ov2XPUIrhmWWlz0Qwk8cjTcJKZ4ZIjd7CrdI1ZYYyGLeCwxWFLYw/+Ar5V5sh4eIPzg0jtCzUClulJRW0DNCkgtDKHI4fjlX897KQpGmAzKt1ezaxHz8g051a7XAojgvEnE0nD9sc/1LGvxPdvu4nSMoiR3v9CG+jVsUNXQ5zz9U1DuJ9oJXvLC8LC8L2xh92RPtRBlGbzCgZ0vWcHSSkFVH5c7edv/2dr73lxquG+kOPXrzzC9+57w++H4Xa15fODpKWyvKzzgG9D7T6+z1LYk4yTIk/9r/9tvPvs33xRxc/fe93vvy/n51nZ0r8/X6ML9VXjnuzWZAk1bqVFJdnQ/mh97z+A3/tdSb/lluuGT4f/09P/pu7ngi6EjNDjRG3p2YvsgirvYIzEYPxg06guFdXjP9Y5dQc98VPw7548zXDZ9gX//auJ9aKP3ALk74fCPrNUPywlunfn7/1PGaPYRjGcCg43ZhMcj62oFilPk8XlOZjA6/g9HGgxgUrxz/1xn/DeQCzxzB0DptWjn+9I/L7QExaUrRCC40GKTX7wzBbUgfDJk8inVTn5Ia5Q261WI1VXsGZjAM1Llg5/pJY0QLd/s7X9OzfPu6mFeNfXM0xvg9ETFJCQsdk0odtckYMeBfJ5thYkXNtE8OmzEOzn6j6GD0lE5LjVPbsI1Z4BWc6DtR4wqrxl/4xSsy33Hh1z3zcTSvGP+4CubHEkjnyWxmjXpRvPFtxSSfPPYL2B+gnPnf2VJPxgGGTJGdt3y3K8rHk7bPO3RNwQO8DHdpVmMVj2fin/igwf1/QGvGP4ponJO8DRc9iTfdRmjgLB5Z+VCbB4r1byKvbobJP4+J/XzYw7csGHBdr5k/EsX4fKIZopfhPjs868Y8Jmp/TxT+5IMkHHETRUl1mJ0rHgT7LFyswMAVOF2AVSDsREuNGIujAgCj4OvEIYcX4a2jtFEPdzFor/lDK3wtTcrnEiktFVIZDQIUb2hmSPlzJulTHw4pK4ZbVkwd2IV0i/jn63IwUZg2vEX8mmx1ZLuNDSPrNQ1ysMJcfAgddmGc/RnNn7Bs2LVjBjrznL7xIJxqNAW5T/N2CLFrIfysDldNBkK6YyDK6Q2cq8pEBQWEtC1/oTY6OoXz4m0/TiYYM8IDin7Fq/HEaFAvwNB4V4ik4XcGNeZZUck4WhiaipWAuCl/NIH76nm80TJwgfPqeR9aMP2TAJCwV/xp7sKFNDw0hpE8STivzke8fmHpBDn0FfS4T4gQr5Uc/8+ADDx/gk4qjxTC0j9710Mrxx7j1nZhNs7NE/GWbsSF8lIHKiKjIcrrEj+WupO+U+YgXDcyncJo5x08gKV98ef9v/sPfOZE5NAzqw//onssvvrxy/HUWgcf4S2Jh/OupT74faNyvRjT2pHVVAd/PUC4G6gZppv50q54mcBiaT/7fC+/723f/4nt++L1/9aZbfuiVr7j6NB1nDKvmh7751Gd+5xsfvfvrl1/cD35dW2By/BcfqKvFn5KKVTh+SyuboXyDKFaCSTd2PJGqdj155Ms/BktBTVGfg8nIEfbSS/v/7s4/HD5IQu5/6AUCWs1wvir+deC8fNv+sjI9Eqprby0sHX/kPx9qsuK/KP5UKtBMpaXJtQzCB4hM02WPG1k2JIpylwrtsDOVrhgLQyYTTp3Zf+kSKuTK2vzhwDL5XG6Ef2kUK9Hs3qmztCZ/pNUztDn+s6YDNc1JFBKC7RAA4KjSVpPRCtoMKRbS38w312+NU7PzKYHmwvFvbSrQS45acUX+k3Hq9PgEZrX4J/4hVqr4e/kl+fcGE2iv6aAQSmUAQ/7DOtgRrCVD0/ePUYilzH82C1qz6DcOp85dv3fqHG0atsPmZN4U+WXtFBiGdurs9WXv5Pgnv7Y7DiD+5Qf/6G403XTMWSZQKitDyyViCFrGXjtpu2CpO8ctnH7FD0IOQVRys8AUmWWBRK1ZYIrfLDMM6vTVbxjnha2OfxQAbrMoF6SRV4+y2mW1ztSQgZUbp/sE6p6VCmtTZKgh0l/BQn9Skh+nzlz7ppcvPfXyi8/u718mfrnhzHnAsi3DcNrC0wHK96x3B1xI5UohE/Zm54Yz16kz142/ZbVG/GXCSJWaDiKKrhb/QmbWVnDJRLmUTVgR0q6/kE8/QxxJ0IGF5sAQYN8hEjt17lXDpztg7F8S3RTo5smSfqfssJXin6hJpYp/mfXrxd94wp1oU7AzZGyMfS1XNq5igD2A+dyMFZZy3nmX8si78hvi33F7zPg34BU2xX+v6U8m8HiGDNYkHYkMLGYw14Huobdj+jusPbCePGId/ihjTQKxY8F/ITbFP89ASC4qcUs5D4x13TDnKEFMse8DlFyUQewMbIr9SfxZS4bmNPtbxH8uNsh/llMOEHDdRvFxTMXLHCSZpiEPMxL0RXHpDnZCHr2qlPQJB3xGGOIYiiPIYzX+IoPcpGK6x4h/ZdLrbo5/fKmexbHIicKUtR1bmYzORSC0k54R6katiHGVyWaB9GhHsxXtbIB/QDJlQL2d7ec/DxvkP8s2OJdYcQi5hATNh8tEiHAjWIVNHVmvn7CyNn82xbDAzvbzn48N8sf7QHlLdbTlV0xg5EG8Swsm5TY+9+tvmy8wBRdfePmhR5+/855v/4//FV9NdETX56/h0p3QO/qL8LLKS0VnlPx75j0O6ODtt11/+0+97pYbX3FV/zdyNgUlvAH+M+hg0lt91dGQVQAMJSblAWII7p+65fzw+djnv/WvP/24o7AB/uUxVtmp1bsQpznoTQ5K4Vfed8MH3/36hsABYjP84fuBUmU1TFE0F2v6GvHBd7/h7W+5fnM2J9ixbCrSapJuT2Ssvf0t1x1K9ngSG+LffiPRmoeOCYNR3P5TfwKb28C/yyFoGaCp0IEsMfYDwgr84fuB4pLA1sLtRTHnhQDjWdS9h4tbEO3TxMoyw3IB+azPvz7fIxu3ICKpsDfp7FB6PljxrxZW40CmJs0G4pZkNsR/hgoQ3HSjs6WbdlKIZIKKhLjCjQvAoB3kB4PlxAHTAjt+wGvyV5lgpU8mjhol/9gTtD/bSSGu7BCUcOCZwTpWBZqdiAVxu/jC/gb578n2GH1KJdx6LD4mxXHnpFI8ED30zecpddjHeBewTYUM9i+wM7pj3iB/2cBast4sCSEfdUkXpEwbzOTNIh2P9mQnkJZRNOS4NcY4GcvFbYP84/cDpZhQKllsJX9yHItMiJW0P8zWaGks77z323SIGNwht/X5NwD7JQaRGkGEo9aa5mgKt0/du/kv5JuDIW4b5H/q1bd8SGMiNxiZ0tHLcCSTyDDeMq9upT/25MXTs71b33wtHTz+4+e+dffvPWkcNsK/6A++v4cJdkJIBCi0ZP74yRcOOW7Ysyb/Uz9wyy8XQS8C3XTW2xlfe/D7Dz/2/KvOn7nu2tOnZ5bZG8Nw/n7gG8/9+scf/ezvfccIb5D/fF3SRLQm9mNzDtCX8f/ag8888tjFV54/fVhx2xz/W/76FxoqTLpftBKKqhPpwcnjndyeIeerfWT05B12/EvVg+Lf+ZJNTcvcK75wkaXNUhcWtiY0OtXlfrnmcMptXyFWKhGHHf8j4Z//VgbHFDVObCIhX/fH1wCovsTNlyuFLmCKfSoOE1ZuToXlWirJ7PgfKf/en/3OA0tWhKgYSCKBm467hChXnIw0SWW0AhS6drrY8T8k/vlONFaY9uM5bz/aCdIkNShC6RlubVQqacDpjy6qnXROrWRwMbtfy7gKoiOz439o/HEGyvSiCXWWmlLJJVYQuOAKqTlPXk/3pS9vBwbfxY7/iEPmD48yOvTwXIvozZTueYojnQPUk0df3o6wn6e7438k/Nt/rQcRpW195rcE4ZSGoTLitXbWs5NR2SGxI82mimHH/0j4H9D3A6XO0DtKpCminK4SaRoH2aQVpmV0d/w3zn+m6UZ4BIS4RJNznnhKjoEQzIhaWeC4rRBiVUnjUZiWiVT47WDH/0j4z6JwqRDtB6ta6R2oHkVhsuVaymnSYevg8VwrTdLNacQucLCIQzsuWj4oO/4mdWj8Z8a0r4CAQcLg0SQO2dvMpSeaQ4iG0tfccGmHoMSrgx3/I+E/k83UH4wHmsiVRLEhP6/TNuUKDFI2CLqBhnLH/0j45+8HGrtiWbKxw6GayKQM0JyDZeXR7xRuU2Ryc3k+y8ovy22KTG4uz2dZ+YncOt8PhKsmLEGGg1uyc1MXwLHTslspePkeB6Jc6cns+B8F/1kpURtCTHG2ZCAmYcrAptifwnPHv0aff/6ju06eKF/MSbOS8QqcS6wUMkhaK0JAvAVtzkEp3+K249+WOQD+8P1AQUtZLIXG+VLUOMKaha4YZqIswfHsGSiV3iioYrf3FYhVt8dtx/9I+M/YVtfxui5zytzyChx9MKzG5XFuYNiS9KUy1b6zaZrjhvHYiWZJHKkM6E6wv+O/cf7t94FQWemowyzTc9y9HLUKylCqmH2r+MHbAtCOhj52/A+N/0a/HygggyRk/J0dDArIkBhXGWefkv1AMPR08bHjf2T890QxNlJplQaCliFSiaVwCsHssJRWmWsmN8t+TqVVpJ+1hDjFyo5/snOo/Nf5fqBGMyKncbQT6qPHOaN8e14qekTis5s2h+Kw2vGPOFT+M6KUdwznS5FU+fbzF62EoopM+3YyfLDyIL1urjhddLvjfxT88/tAWJkGziVUY6VppxRSWbayHyxUzPC6O/625fD4/39r5ZSPCKqoxQAAAABJRU5ErkJggg=="
+                },
+                "permissions": {
+                    "camera.photo": { "purpose": "Take photos of documents and receipts to turn them into PDF pages" },
+                    "media.pick": { "purpose": "Add pages from photos you already took" },
+                    "files.io": { "purpose": "Save finished scans as PDF files", "modes": ["export"] },
+                    "share": { "purpose": "Send a finished PDF to email, chat or another app when you tap Share" }
+                },
+                "dataFlows": [
+                    {
+                        "from": ["*"],
+                        "to": "files.io",
+                        "purpose": "Saves the PDF you made to your phone when you tap Save PDF"
+                    },
+                    {
+                        "from": ["*"],
+                        "to": "share",
+                        "purpose": "Sends the PDF you made to the app you pick when you tap Share"
+                    }
+                ]
+            }
+        </script>
+        <style>
+            :root {
+                color-scheme: light dark;
+                --desk: #e4eaf1;
+                --surface: #fff;
+                --ink: #17202c;
+                --muted: #5a6577;
+                --line: #ccd4de;
+                --blue: var(--anyapp-color-primary, #2a57dd);
+                --on-blue: #fff;
+                --hi: #ffcf2a;
+                --hi-ink: #2a2200;
+                --danger: #b42323;
+                --il-desk: #d3dce7;
+                --shadow: 0 1px 2px rgba(23, 32, 44, 0.12), 0 8px 20px rgba(23, 32, 44, 0.1);
+                --font: var(--anyapp-font-family, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+            }
+            @media (prefers-color-scheme: dark) {
+                :root:not([data-theme="light"]) {
+                    --desk: #111720;
+                    --surface: #1b2330;
+                    --ink: #e8edf4;
+                    --muted: #9aa6b7;
+                    --line: #2e3a4b;
+                    --blue: var(--anyapp-color-primary, #94acff);
+                    --on-blue: #0c1430;
+                    --il-desk: #2a3546;
+                    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.35);
+                }
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                margin: 0;
+                background: var(--desk);
+                color: var(--ink);
+                font: 1rem/1.45 var(--font);
+                -webkit-tap-highlight-color: transparent;
+            }
+            h1,
+            h2 {
+                font-family: ui-rounded, var(--font);
+                letter-spacing: -0.015em;
+                margin: 0;
+            }
+            p {
+                margin: 0;
+            }
+            button {
+                font: inherit;
+                color: inherit;
+                cursor: pointer;
+            }
+            button:disabled {
+                opacity: 0.35;
+                cursor: default;
+            }
+            :focus-visible {
+                outline: 3px solid var(--blue);
+                outline-offset: 2px;
+            }
+            svg.i {
+                width: 22px;
+                height: 22px;
+                fill: currentColor;
+                flex: none;
+            }
+            .scr {
+                min-height: 100dvh;
+                display: flex;
+                flex-direction: column;
+                padding: env(safe-area-inset-top) max(16px, env(safe-area-inset-right)) 0
+                    max(16px, env(safe-area-inset-left));
+            }
+            .btn {
+                min-height: 48px;
+                padding: 0 18px;
+                border-radius: 12px;
+                border: 1px solid var(--line);
+                background: var(--surface);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                font-weight: 600;
+            }
+            .btn.primary {
+                background: var(--blue);
+                color: var(--on-blue);
+                border-color: transparent;
+            }
+            .btn.wide {
+                width: 100%;
+            }
+            .icon-btn {
+                width: 48px;
+                height: 48px;
+                border: 0;
+                background: none;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+            }
+            .row {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+            .note {
+                background: var(--surface);
+                border-radius: 12px;
+                padding: 12px 14px;
+                margin-bottom: 14px;
+                color: var(--muted);
+                font-size: 0.93rem;
+            }
+            label[for] {
+                cursor: pointer;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            .spacer {
+                width: 48px;
+            }
+            /* home */
+            .top {
+                padding: 28px 4px 18px;
+            }
+            .top h1 {
+                font-size: 2.3rem;
+                font-weight: 800;
+                line-height: 1.05;
+            }
+            .top p {
+                color: var(--muted);
+                margin-top: 6px;
+            }
+            .tipcard {
+                background: var(--surface);
+                border-radius: 18px;
+                padding: 14px;
+                display: grid;
+                gap: 14px;
+                box-shadow: var(--shadow);
+                margin-bottom: 18px;
+            }
+            .tipcard-ill {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .tipcard h2 {
+                font-size: 1.15rem;
+                margin-bottom: 4px;
+            }
+            .tipcard p {
+                color: var(--muted);
+                margin-bottom: 12px;
+            }
+            .docs {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: grid;
+                gap: 10px;
+            }
+            .doc {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                padding: 12px;
+                border: 0;
+                border-radius: 16px;
+                background: var(--surface);
+                text-align: left;
+            }
+            .stack {
+                position: relative;
+                width: 54px;
+                height: 70px;
+                flex: none;
+            }
+            .stack img {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                background: #fff;
+                border-radius: 3px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+            }
+            .stack.multi::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: #fff;
+                border-radius: 3px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+                transform: rotate(7deg) translate(4px, 1px);
+            }
+            .doc strong {
+                display: block;
+                font-size: 1.05rem;
+            }
+            .doc small {
+                color: var(--muted);
+                font-size: 0.9rem;
+            }
+            .empty {
+                text-align: center;
+                padding: 24px 20px;
+                display: grid;
+                justify-items: center;
+                gap: 8px;
+            }
+            .empty svg {
+                width: 170px;
+            }
+            .empty p {
+                color: var(--muted);
+                max-width: 30ch;
+            }
+            .dock {
+                position: sticky;
+                bottom: 0;
+                margin: auto calc(-1 * max(16px, env(safe-area-inset-left))) 0;
+                display: grid;
+                grid-template-columns: 1fr auto 1fr;
+                align-items: center;
+                padding: 20px 24px calc(14px + env(safe-area-inset-bottom));
+                background: linear-gradient(to bottom, transparent, var(--desk) 35%);
+            }
+            .dock-side {
+                border: 0;
+                background: none;
+                display: grid;
+                justify-items: center;
+                gap: 2px;
+                min-height: 56px;
+                font-size: 0.85rem;
+                color: var(--muted);
+                font-weight: 600;
+            }
+            .dock-side svg.i {
+                width: 26px;
+                height: 26px;
+                color: var(--ink);
+            }
+            .shutter {
+                width: 78px;
+                height: 78px;
+                border-radius: 50%;
+                border: 0;
+                background: var(--hi);
+                color: var(--hi-ink);
+                display: grid;
+                place-items: center;
+                box-shadow:
+                    0 0 0 5px var(--desk),
+                    0 0 0 8px var(--hi),
+                    0 10px 24px rgba(0, 0, 0, 0.25);
+            }
+            .shutter svg.i {
+                width: 36px;
+                height: 36px;
+            }
+            /* bars */
+            .bar {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                padding: 8px 0;
+                position: sticky;
+                top: env(safe-area-inset-top, 0px);
+                background: var(--desk);
+                z-index: 2;
+            }
+            .bar-title {
+                flex: 1;
+                text-align: center;
+                font-size: 1.1rem;
+            }
+            .title-in {
+                flex: 1;
+                min-width: 0;
+                height: 44px;
+                border: 1px solid transparent;
+                border-radius: 10px;
+                background: none;
+                color: inherit;
+                font:
+                    700 1.15rem ui-rounded,
+                    var(--font);
+                padding: 0 10px;
+            }
+            .title-in:focus {
+                border-color: var(--line);
+                background: var(--surface);
+                outline: none;
+            }
+            .hint {
+                color: var(--muted);
+                font-size: 0.92rem;
+                padding: 0 4px 12px;
+            }
+            /* page grid */
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 16px;
+                padding-bottom: 16px;
+            }
+            .sheet {
+                position: relative;
+                aspect-ratio: 3/4;
+                border: 0;
+                padding: 0;
+                border-radius: 4px;
+                background: #fff;
+                box-shadow: var(--shadow);
+                overflow: hidden;
+            }
+            .sheet img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+            }
+            .num {
+                position: absolute;
+                left: 8px;
+                bottom: 8px;
+                min-width: 28px;
+                height: 28px;
+                border-radius: 14px;
+                background: var(--ink);
+                color: var(--surface);
+                font-weight: 700;
+                font-size: 0.85rem;
+                display: grid;
+                place-items: center;
+                padding: 0 6px;
+            }
+            .sheet.add {
+                background: transparent;
+                border: 2px dashed var(--line);
+                box-shadow: none;
+                display: grid;
+                place-content: center;
+                justify-items: center;
+                gap: 6px;
+                color: var(--muted);
+                font-weight: 600;
+            }
+            .sheet.add svg.i {
+                width: 30px;
+                height: 30px;
+                color: var(--ink);
+            }
+            .actions {
+                position: sticky;
+                bottom: 0;
+                margin-top: auto;
+                display: grid;
+                gap: 10px;
+                padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
+                background: var(--desk);
+                border-top: 1px solid var(--line);
+            }
+            .actions .row .btn {
+                flex: 1;
+            }
+            .actions .note {
+                margin: 0;
+            }
+            .size {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: var(--muted);
+                font-size: 0.95rem;
+            }
+            .size select {
+                min-height: 44px;
+                border-radius: 10px;
+                border: 1px solid var(--line);
+                background: var(--surface);
+                color: var(--ink);
+                font: inherit;
+                padding: 0 10px;
+            }
+            /* page view */
+            .view {
+                flex: 1;
+                display: grid;
+                place-items: center;
+                padding: 8px 0 16px;
+                min-height: 0;
+            }
+            .view img {
+                max-width: 100%;
+                max-height: 56dvh;
+                background: #fff;
+                box-shadow: var(--shadow);
+                border-radius: 3px;
+            }
+            .chips {
+                display: flex;
+                gap: 8px;
+                overflow-x: auto;
+                padding: 4px 0 12px;
+                scrollbar-width: none;
+            }
+            .chip {
+                flex: none;
+                min-height: 44px;
+                padding: 0 16px;
+                border-radius: 22px;
+                border: 1px solid var(--line);
+                background: var(--surface);
+                font-weight: 600;
+            }
+            .chip[aria-checked="true"] {
+                background: var(--ink);
+                color: var(--surface);
+                border-color: var(--ink);
+            }
+            .tools {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(4.25rem, 1fr));
+                gap: 4px;
+                padding: 4px 0 calc(14px + env(safe-area-inset-bottom));
+            }
+            .tools button,
+            .crop-tools button {
+                border: 0;
+                background: none;
+                display: grid;
+                justify-items: center;
+                gap: 4px;
+                min-height: 60px;
+                font-size: 0.82rem;
+                font-weight: 600;
+            }
+            /* crop */
+            .crop {
+                background: #0e1218;
+                color: #f2f5f9;
+                height: 100dvh;
+                min-height: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .crop .bar {
+                background: #0e1218;
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+            .crop-hint {
+                text-align: center;
+                color: #b6c0ce;
+                font-size: 0.95rem;
+                padding: 0 16px 8px;
+            }
+            .stage {
+                flex: 1;
+                min-height: 0;
+                position: relative;
+                display: grid;
+                place-items: center;
+                overflow: hidden;
+            }
+            .frame {
+                position: relative;
+                touch-action: none;
+            }
+            .frame img {
+                width: 100%;
+                height: 100%;
+                display: block;
+                user-select: none;
+                -webkit-user-drag: none;
+            }
+            .frame svg {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                overflow: visible;
+            }
+            .ov-mask {
+                fill: rgba(0, 0, 0, 0.5);
+            }
+            .ov-edge {
+                fill: none;
+                stroke: #ffcf2a;
+                stroke-width: 2.5;
+            }
+            .ov-h {
+                fill: rgba(255, 207, 42, 0.25);
+                stroke: #ffcf2a;
+                stroke-width: 3;
+            }
+            #loupe {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                width: 112px;
+                height: 112px;
+                border-radius: 50%;
+                border: 3px solid #ffcf2a;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+            }
+            #loupe.right {
+                left: auto;
+                right: 10px;
+            }
+            .crop-tools {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 4px 28px;
+                padding: 8px;
+            }
+            .crop-foot {
+                display: grid;
+                grid-template-columns: 1fr 1.4fr;
+                gap: 10px;
+                padding: 8px 16px calc(14px + env(safe-area-inset-bottom));
+            }
+            .crop-foot .btn.ghost {
+                background: #222b37;
+                color: #f2f5f9;
+                border-color: #36414f;
+            }
+            /* tips */
+            .tips {
+                display: grid;
+                gap: 12px;
+            }
+            .tip {
+                display: grid;
+                grid-template-columns: 120px 1fr;
+                gap: 14px;
+                align-items: center;
+                background: var(--surface);
+                border-radius: 16px;
+                padding: 12px;
+            }
+            .tip h2 {
+                font-size: 1.02rem;
+                margin-bottom: 2px;
+            }
+            .tip p,
+            .steps li {
+                color: var(--muted);
+                font-size: 0.93rem;
+            }
+            .sub {
+                font-size: 1.2rem;
+                margin: 24px 4px 8px;
+            }
+            .steps {
+                margin: 0;
+                padding: 0 0 0 22px;
+                display: grid;
+                gap: 10px;
+            }
+            .steps strong {
+                display: block;
+                color: var(--ink);
+            }
+            .pad {
+                padding: 22px 0 calc(16px + env(safe-area-inset-bottom));
+            }
+            /* illustrations */
+            .il {
+                width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 12px;
+            }
+            .il .d {
+                fill: var(--il-desk);
+            }
+            .il .k {
+                fill: #2b3442;
+            }
+            .il .p {
+                fill: #fff;
+                stroke: #b9c3cf;
+                stroke-width: 0.8;
+            }
+            .il .l {
+                fill: #c3ccd8;
+            }
+            .il .a {
+                fill: #ffcf2a;
+            }
+            .il .s {
+                fill: none;
+                stroke: #e0a400;
+                stroke-width: 3;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+            .il .ph {
+                fill: var(--ink);
+            }
+            .il .dash {
+                fill: none;
+                stroke: var(--muted);
+                stroke-width: 1.5;
+                stroke-dasharray: 3 3;
+            }
+            /* overlays */
+            #busy {
+                position: fixed;
+                inset: 0;
+                background: rgba(10, 14, 20, 0.55);
+                display: grid;
+                place-items: center;
+                z-index: 20;
+            }
+            #busy[hidden] {
+                display: none;
+            }
+            #busy div {
+                background: var(--surface);
+                color: var(--ink);
+                border-radius: 16px;
+                padding: 18px 22px;
+                display: flex;
+                gap: 14px;
+                align-items: center;
+                font-weight: 600;
+                max-width: 80vw;
+            }
+            .spin {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                border: 3px solid var(--line);
+                border-top-color: var(--blue);
+                animation: sp 0.8s linear infinite;
+                flex: none;
+            }
+            @keyframes sp {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            #toast {
+                position: fixed;
+                left: 50%;
+                bottom: calc(120px + env(safe-area-inset-bottom));
+                transform: translateX(-50%);
+                background: var(--ink);
+                color: var(--surface);
+                padding: 12px 18px;
+                border-radius: 12px;
+                max-width: min(90vw, 420px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s;
+                z-index: 30;
+                text-align: center;
+            }
+            #toast.on {
+                opacity: 1;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .spin {
+                    animation-duration: 3s;
+                }
+                #toast {
+                    transition: none;
+                }
+            }
+            :root[data-theme="dark"] {
+                --desk: #111720;
+                --surface: #1b2330;
+                --ink: #e8edf4;
+                --muted: #9aa6b7;
+                --line: #2e3a4b;
+                --blue: var(--anyapp-color-primary, #94acff);
+                --on-blue: #0c1430;
+                --il-desk: #2a3546;
+                --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.35);
+            }
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0 0 auto;
+                height: env(safe-area-inset-top, 0px);
+                z-index: 10;
+                background: var(--desk);
+            }
+            .vh {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+            }
+        </style>
+    </head>
+    <body>
+        <main id="app"></main>
+        <input
+            id="camIn"
+            class="vh"
+            type="file"
+            accept="image/*"
+            capture="environment"
+            tabindex="-1"
+            aria-hidden="true"
+        />
+        <input id="picIn" class="vh" type="file" accept="image/*" multiple tabindex="-1" aria-hidden="true" />
+        <div id="busy" hidden role="status">
+            <div><span class="spin"></span><span id="busyTxt"></span></div>
+        </div>
+        <div id="toast" aria-live="polite"></div>
+        <script>
+            "use strict";
+            const $ = (s) => document.querySelector(s);
+            const app = $("#app"),
+                camIn = $("#camIn"),
+                picIn = $("#picIn");
+            const anyapp = window.anyapp; // undefined in a browser or a preview
+            let docs = [];
+            const state = { doc: null, page: 0, crop: null, from: "/" };
+            let camOK = true; // set at start; false when this phone can't open the camera from the app
+            const camFor = () => (camOK ? "camIn" : "picIn");
+            // Inside anyApp file inputs and <a download> do nothing: its own calls take the photos and save or share the PDF,
+            // each only when this anyApp offers it (supports() takes method names).
+            const inApp = { cam: false, pick: false, save: false, share: false };
+
+            // Timings of the slow steps, in the console only: open the page with ?debug, or set localStorage "ps.debug" to "1".
+            const DEBUG = (() => {
+                try {
+                    return /[?&]debug(=|&|$)/.test(location.search) || localStorage.getItem("ps.debug") === "1";
+                } catch {
+                    return false;
+                }
+            })();
+            const lap = (what, t0) => {
+                if (DEBUG) console.info(`[Pocket Scan] ${what}: ${Math.round(performance.now() - t0)} ms`);
+            };
+
+            /* ---------- words: English and Slovak, after the phone's language ---------- */
+            const STRINGS = {
+                en: {
+                    tagline: "Paper in, PDF out.",
+                    camNote:
+                        "The camera can’t open from here on this phone yet. Take photos of your pages with the Camera app, then tap the yellow button to pick them.",
+                    tipTitle: "Get a clean scan",
+                    tipBody: "Lay the page on a dark surface, use good light and keep all four corners in view.",
+                    gotIt: "Got it",
+                    seeTips: "See all tips",
+                    noScans: "No scans yet",
+                    emptyCam: "Tap the yellow button to photograph a page.",
+                    emptyPick: "Tap the yellow button to pick photos of your pages.",
+                    emptyMore: "Add more pages, then save them as one PDF.",
+                    startScan: "Start a scan",
+                    photos: "Photos",
+                    scanCam: "Scan with camera",
+                    scanPick: "Pick photos to scan",
+                    tips: "Tips",
+                    back: "Back",
+                    cancel: "Cancel",
+                    docName: "Document name",
+                    delDoc: "Delete document",
+                    docHint: "Tap a page to change its look, turn it or fix the corners.",
+                    pageN: (a) => `Page ${a.n}`,
+                    pageOf: (a) => `Page ${a.n} of ${a.of}`,
+                    nPages: { one: "# page", other: "# pages" },
+                    scanPage: "Scan page",
+                    fromPhotos: "From photos",
+                    pageSize: "Page size",
+                    sizeAuto: "Fit to scan",
+                    sizeA4: "A4",
+                    sizeLetter: "Letter",
+                    share: "Share",
+                    savePdf: "Save PDF",
+                    saveNote: "Saving PDFs needs a newer version of anyApp. Your scans stay here until then.",
+                    delPage: "Delete page",
+                    look: "Look",
+                    fOriginal: "Original",
+                    fEnhance: "Enhance",
+                    fGray: "Grayscale",
+                    fBw: "Black & white",
+                    corners: "Corners",
+                    turn: "Turn",
+                    earlier: "Earlier",
+                    later: "Later",
+                    fitCorners: "Fit the corners",
+                    cropHint: "Drag each circle onto a corner of the page.",
+                    cropAlt: "Photo of the page",
+                    findPage: "Find page",
+                    wholePhoto: "Whole photo",
+                    retake: "Retake",
+                    savePage: "Save page",
+                    tipsTitle: "Scan tips",
+                    lightH: "Use bright, even light",
+                    lightP: "Daylight or a lamp works best. Keep your own shadow off the page.",
+                    contrastH: "Use a dark background",
+                    contrastP: "A white page on a dark table lets the app find the edges by itself.",
+                    flatH: "Hold the phone flat above",
+                    flatP: "Keep the phone level with the page so lines stay straight and text stays sharp.",
+                    cornersH: "Show all four corners",
+                    cornersP: "Leave a little space around the page. You can fix the corners after.",
+                    howItWorks: "How it works",
+                    step1H: "Scan",
+                    step1P: "Take a photo, or pick photos you already have.",
+                    step2H: "Fit the corners",
+                    step2P: "The page is found for you. Drag a corner if it’s off.",
+                    step3H: "Pick a look",
+                    step3P: "Enhance removes shadows. Black & white suits plain text.",
+                    step4H: "Save PDF",
+                    step4P: "All pages become one file you can save or share.",
+                    startScanning: "Start scanning",
+                    ilLight: "A page lit evenly by a lamp",
+                    ilContrast: "A white page on a dark table",
+                    ilFlat: "A phone held flat above a page",
+                    ilCorners: "All four page corners inside the camera frame",
+                    scanName: "Scan",
+                    making: "Making your PDF…",
+                    finding: "Finding the page…",
+                    gettingPhoto: "Getting your photo…",
+                    gettingPhotos: "Getting your photos…",
+                    straightening: "Straightening the page…",
+                    updating: "Updating page…",
+                    adding: "Adding page…",
+                    addingN: (a) => `Adding page ${a.i} of ${a.n}…`,
+                    pdfFailed: "The PDF couldn’t be made. Try again.",
+                    pdfSaved: "PDF saved",
+                    pdfDownloading: "Your PDF is downloading.",
+                    saveNewer: "Saving PDFs needs a newer version of anyApp.",
+                    saveFailed: "The PDF couldn’t be saved. Try again.",
+                    saveDenied: "Pocket Scan may not save files. Allow it in anyApp.",
+                    shareFailed: "Sharing didn’t work. Use Save PDF instead.",
+                    shareRetry: "Sharing didn’t work. Try again.",
+                    shareNone: "Sharing isn’t available here, so the PDF is downloading instead.",
+                    shareDenied: "Pocket Scan may not share files. Allow it in anyApp.",
+                    tapAgain: (a) => `Your PDF is ready. Tap ${a.button} again.`,
+                    slowPdf: (a) =>
+                        `This PDF is large and took too long. Tap ${a.button} again, or try a document with fewer pages.`,
+                    tooBig: (a) =>
+                        `This PDF is too big to ${a.share ? "share" : "save"}. Try a document with fewer pages.`,
+                    camDenied: "Pocket Scan may not use the camera. Allow it in anyApp.",
+                    camOff: "The camera is turned off for anyApp in your phone’s settings.",
+                    picDenied: "Pocket Scan may not use your photos. Allow it in anyApp.",
+                    camFailed: "The camera didn’t open. Try again.",
+                    picFailed: "Your photos didn’t open. Try again.",
+                    noPhoto: "No photo came back. Tap the yellow button again.",
+                    noPhotoDoc: "No photo came back. Tap Scan page again.",
+                    photoFailed: "That photo couldn’t be opened. Try again.",
+                    notPhotos: "Those files couldn’t be opened as photos.",
+                    someAdded: (a) => `${a.added} of ${a.n} added. Some files weren’t photos.`,
+                    added: "Added. Tap a page to fix its corners or look.",
+                    crossed: "The corners cross over. Drag each one to its own page corner.",
+                    processFailed: "This photo couldn’t be processed. Try another one.",
+                    changeFailed: "That change didn’t work. Try again.",
+                    askDelDoc: "Delete this scan and all its pages?",
+                    askDelPage: (a) => `Delete page ${a.n}?`,
+                },
+                sk: {
+                    tagline: "Z papiera rovno do PDF.",
+                    camNote:
+                        "Fotoaparát sa v tomto telefóne odtiaľto zatiaľ nedá otvoriť. Odfoťte strany aplikáciou Fotoaparát a potom ich vyberte žltým tlačidlom.",
+                    tipTitle: "Ako na čistý sken",
+                    tipBody:
+                        "Položte papier na tmavý podklad, zabezpečte dobré svetlo a majte v zábere všetky štyri rohy.",
+                    gotIt: "Rozumiem",
+                    seeTips: "Všetky tipy",
+                    noScans: "Zatiaľ žiadne skeny",
+                    emptyCam: "Ťuknite na žlté tlačidlo a odfoťte stranu.",
+                    emptyPick: "Ťuknite na žlté tlačidlo a vyberte fotky strán.",
+                    emptyMore: "Pridajte ďalšie strany a uložte ich ako jedno PDF.",
+                    startScan: "Začať skenovanie",
+                    photos: "Fotky",
+                    scanCam: "Skenovať fotoaparátom",
+                    scanPick: "Vybrať fotky na skenovanie",
+                    tips: "Tipy",
+                    back: "Späť",
+                    cancel: "Zrušiť",
+                    docName: "Názov dokumentu",
+                    delDoc: "Odstrániť dokument",
+                    docHint: "Ťuknutím na stranu zmeníte jej vzhľad, otočíte ju alebo upravíte rohy.",
+                    pageN: (a) => `Strana ${a.n}`,
+                    pageOf: (a) => `Strana ${a.n} z ${a.of}`,
+                    nPages: { one: "# strana", few: "# strany", other: "# strán" },
+                    scanPage: "Skenovať stranu",
+                    fromPhotos: "Z fotiek",
+                    pageSize: "Veľkosť strany",
+                    sizeAuto: "Podľa skenu",
+                    sizeA4: "A4",
+                    sizeLetter: "Letter",
+                    share: "Zdieľať",
+                    savePdf: "Uložiť PDF",
+                    saveNote: "Na ukladanie PDF potrebujete novšiu verziu aplikácie anyApp. Dovtedy tu skeny zostanú.",
+                    delPage: "Odstrániť stranu",
+                    look: "Vzhľad",
+                    fOriginal: "Originál",
+                    fEnhance: "Vylepšená",
+                    fGray: "Odtiene sivej",
+                    fBw: "Čiernobiela",
+                    corners: "Rohy",
+                    turn: "Otočiť",
+                    earlier: "Doľava",
+                    later: "Doprava",
+                    fitCorners: "Nastavte rohy",
+                    cropHint: "Potiahnite každý krúžok na roh strany.",
+                    cropAlt: "Fotka strany",
+                    findPage: "Nájsť stranu",
+                    wholePhoto: "Celá fotka",
+                    retake: "Odfotiť znova",
+                    savePage: "Uložiť stranu",
+                    tipsTitle: "Tipy na skenovanie",
+                    lightH: "Zabezpečte dobré svetlo",
+                    lightP: "Najlepšie je denné svetlo alebo lampa. Dajte pozor, aby na papier nepadal váš tieň.",
+                    contrastH: "Použite tmavý podklad",
+                    contrastP: "Na tmavom stole nájde aplikácia okraje bieleho papiera sama.",
+                    flatH: "Držte telefón rovno nad papierom",
+                    flatP: "Telefón majte rovnobežne s papierom, aby boli riadky rovné a text ostrý.",
+                    cornersH: "Majte v zábere všetky rohy",
+                    cornersP: "Okolo papiera nechajte trochu miesta. Rohy môžete upraviť aj neskôr.",
+                    howItWorks: "Ako to funguje",
+                    step1H: "Naskenujte",
+                    step1P: "Odfoťte stranu alebo vyberte fotky, ktoré už máte.",
+                    step2H: "Nastavte rohy",
+                    step2P: "Aplikácia stranu nájde sama. Ak roh nesedí, potiahnite ho.",
+                    step3H: "Vyberte vzhľad",
+                    step3P: "Vylepšená strana je bez tieňov, čiernobiela sa hodí na bežný text.",
+                    step4H: "Uložte PDF",
+                    step4P: "Všetky strany sa spoja do jedného súboru, ktorý môžete uložiť alebo zdieľať.",
+                    startScanning: "Začať skenovať",
+                    ilLight: "Papier rovnomerne osvetlený lampou",
+                    ilContrast: "Biely papier na tmavom stole",
+                    ilFlat: "Telefón držaný rovno nad papierom",
+                    ilCorners: "Všetky štyri rohy papiera v zábere fotoaparátu",
+                    scanName: "Sken",
+                    making: "Vytvára sa PDF…",
+                    finding: "Hľadá sa strana…",
+                    gettingPhoto: "Načítava sa fotka…",
+                    gettingPhotos: "Načítavajú sa fotky…",
+                    straightening: "Strana sa vyrovnáva…",
+                    updating: "Strana sa upravuje…",
+                    adding: "Pridáva sa strana…",
+                    addingN: (a) => `Pridáva sa strana ${a.i} z ${a.n}…`,
+                    pdfFailed: "PDF sa nepodarilo vytvoriť. Skúste to znova.",
+                    pdfSaved: "PDF je uložené",
+                    pdfDownloading: "PDF sa sťahuje.",
+                    saveNewer: "Na ukladanie PDF potrebujete novšiu verziu aplikácie anyApp.",
+                    saveFailed: "PDF sa nepodarilo uložiť. Skúste to znova.",
+                    saveDenied: "Pocket Scan nemá povolené ukladať súbory. Povoľte to v aplikácii anyApp.",
+                    shareFailed: "Zdieľanie nefungovalo. Skúste radšej „Uložiť PDF“.",
+                    shareRetry: "Zdieľanie nefungovalo. Skúste to znova.",
+                    shareNone: "Zdieľanie tu nie je dostupné, PDF sa preto sťahuje.",
+                    shareDenied: "Pocket Scan nemá povolené zdieľať súbory. Povoľte to v aplikácii anyApp.",
+                    tapAgain: (a) => `PDF je pripravené. Znova ťuknite na „${a.button}“.`,
+                    slowPdf: (a) =>
+                        `Toto PDF je veľké a trvalo to príliš dlho. Znova ťuknite na „${a.button}“ alebo skúste dokument s menším počtom strán.`,
+                    tooBig: (a) =>
+                        `Toto PDF je príliš veľké na ${a.share ? "zdieľanie" : "uloženie"}. Skúste dokument s menším počtom strán.`,
+                    camDenied: "Pocket Scan nemá prístup k fotoaparátu. Povoľte ho v aplikácii anyApp.",
+                    camOff: "Prístup k fotoaparátu má anyApp vypnutý v nastaveniach telefónu.",
+                    picDenied: "Pocket Scan nemá prístup k fotkám. Povoľte ho v aplikácii anyApp.",
+                    camFailed: "Fotoaparát sa neotvoril. Skúste to znova.",
+                    picFailed: "Fotky sa neotvorili. Skúste to znova.",
+                    noPhoto: "Z fotoaparátu neprišla žiadna fotka. Znova ťuknite na žlté tlačidlo.",
+                    noPhotoDoc: "Z fotoaparátu neprišla žiadna fotka. Znova ťuknite na „Skenovať stranu“.",
+                    photoFailed: "Túto fotku sa nepodarilo otvoriť. Skúste to znova.",
+                    notPhotos: "Tieto súbory sa nedajú otvoriť ako fotky.",
+                    someAdded: (a) => `Pridané: ${a.added} z ${a.n}. Niektoré súbory neboli fotky.`,
+                    added: "Pridané. Ťuknutím na stranu upravíte jej rohy alebo vzhľad.",
+                    crossed: "Okraje sa krížia. Potiahnite každý krúžok na iný roh strany.",
+                    processFailed: "Túto fotku sa nepodarilo spracovať. Skúste inú.",
+                    changeFailed: "Zmena sa nepodarila. Skúste to znova.",
+                    askDelDoc: "Odstrániť tento sken aj so všetkými stranami?",
+                    askDelPage: (a) => `Odstrániť stranu ${a.n}?`,
+                },
+            };
+            // The phone's language: anyApp tells the page, a browser has its own. Slovak for Slovak, else English.
+            const locale = (() => {
+                let loc = "";
+                try {
+                    if (anyapp && typeof anyapp.app.locale === "function") loc = String(anyapp.app.locale() || "");
+                } catch {
+                    loc = "";
+                }
+                return (loc || navigator.language || "en").replace(/_/g, "-");
+            })();
+            const lang = /^sk(-|$)/i.test(locale) ? "sk" : "en";
+            const words = STRINGS[lang];
+            // Dates as the phone writes them (en-GB, en-US) when it speaks the page's language, else in the language's own way.
+            const dateLoc = locale.toLowerCase().startsWith(lang) ? locale : lang;
+            function t(key, args) {
+                const v = key in words ? words[key] : STRINGS.en[key];
+                return typeof v === "function" ? v(args || {}) : v;
+            }
+            function tn(key, n) {
+                // a count with its noun; Slovak has one, few and other
+                let cat = "other";
+                try {
+                    cat = new Intl.PluralRules(lang).select(n);
+                } catch {
+                    cat = n === 1 ? "one" : "other";
+                }
+                const f = t(key);
+                return (f[cat] || f.other).replace("#", String(n));
+            }
+            function fmt(time, o) {
+                const d = new Date(time);
+                try {
+                    return d.toLocaleString(dateLoc, o);
+                } catch {
+                    return d.toLocaleString(lang, o);
+                }
+            }
+            document.documentElement.lang = lang;
+
+            /* ---------- icons + illustrations ---------- */
+            const P = {
+                back: "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+                trash: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z",
+                share: "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z",
+                download: "M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z",
+                rotate: "M15.55 5.55L11 1v3.07C7.06 4.56 4 7.92 4 12s3.05 7.44 7 7.93v-2.02c-2.84-.48-5-2.94-5-5.91s2.16-5.43 5-5.91V10l4.55-4.45zM19.93 11c-.17-1.39-.72-2.73-1.62-3.89l-1.42 1.42c.54.75.88 1.6 1.02 2.47h2.02zM13 17.9v2.02c1.39-.17 2.74-.71 3.9-1.61l-1.44-1.44c-.75.54-1.59.89-2.46 1.03zm3.89-2.42l1.42 1.41c.9-1.16 1.45-2.5 1.62-3.89h-2.02c-.14.87-.48 1.72-1.02 2.48z",
+                crop: "M17 15h2V7c0-1.1-.9-2-2-2H9v2h8v8zM7 17V1H5v4H1v2h4v10c0 1.1.9 2 2 2h10v4h2v-4h4v-2H7z",
+                left: "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z",
+                right: "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z",
+                photo: "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z",
+                bulb: "M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z",
+                auto: "M7.5 5.6 10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29a.996.996 0 0 0-1.41 0L1.29 18.96a.996.996 0 0 0 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.7 11.05a.996.996 0 0 0 0-1.41l-2.33-2.35zm-1.03 5.49-2.12-2.12 2.44-2.44 2.12 2.12-2.44 2.44z",
+                full: "M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z",
+                check: "M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z",
+                camera: "M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zM9 2 7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z",
+                scan: "M7 3H4v3H2V1h5v2zm15 3V1h-5v2h3v3h2zM7 21H4v-3H2v5h5v-2zm13-3v3h-3v2h5v-5h-2zM17 6H7v12h10V6zm2 12c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v12zM15 8H9v2h6V8zm0 3H9v2h6v-2zm0 3H9v2h6v-2z",
+            };
+            const ic = (n) => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="${P[n]}"/></svg>`;
+            const lines = (x, y) =>
+                [0, 7, 14, 21]
+                    .map(
+                        (d, i) =>
+                            `<rect class="l" x="${x}" y="${y + d}" width="${[30, 26, 28, 18][i]}" height="3" rx="1"/>`,
+                    )
+                    .join("");
+            const ILL = {
+                light: `<svg class="il" viewBox="0 0 120 80" role="img" aria-label="${t("ilLight")}"><rect class="d" width="120" height="80"/><circle class="a" cx="97" cy="18" r="8"/><path class="s" d="M97 3v3M97 30v3M82 18h3M109 18h3M86 7l2 2M106 27l2 2M108 7l-2 2"/><rect class="p" x="26" y="24" width="46" height="48" rx="2"/>${lines(33, 32)}</svg>`,
+                contrast: `<svg class="il" viewBox="0 0 120 80" role="img" aria-label="${t("ilContrast")}"><rect class="k" width="120" height="80"/><g transform="rotate(-6 58 41)"><rect class="p" x="34" y="12" width="48" height="58" rx="2"/>${lines(41, 22)}</g><circle class="a" cx="100" cy="64" r="9"/><path d="M95.5 64l3 3 6-6" fill="none" stroke="#2A2200" stroke-width="2.5"/></svg>`,
+                flat: `<svg class="il" viewBox="0 0 120 80" role="img" aria-label="${t("ilFlat")}"><rect class="d" width="120" height="80"/><rect class="k" y="64" width="120" height="16"/><rect class="p" x="26" y="60" width="68" height="4"/><path class="dash" d="M44 27 28 59M76 27l16 32"/><rect class="ph" x="38" y="19" width="44" height="8" rx="3"/><path class="s" d="M28 12h64M86 8l6 4-6 4"/></svg>`,
+                corners: `<svg class="il" viewBox="0 0 120 80" role="img" aria-label="${t("ilCorners")}"><rect class="d" width="120" height="80"/><rect class="p" x="38" y="16" width="44" height="50" rx="2"/>${lines(44, 24)}<path class="s" d="M28 20V8h12M80 8h12v12M92 60v12H80M40 72H28V60"/></svg>`,
+                empty: `<svg class="il" viewBox="0 0 120 92" aria-hidden="true"><g transform="rotate(8 64 44)"><rect class="p" x="40" y="12" width="48" height="62" rx="3"/></g><rect class="p" x="32" y="16" width="48" height="62" rx="3"/>${lines(39, 26)}<rect class="a" x="24" y="46" width="64" height="5" rx="2.5"/></svg>`,
+            };
+
+            /* ---------- storage (IndexedDB with in-memory fallback) ---------- */
+            const memPref = {};
+            const getPref = (k) => {
+                try {
+                    return localStorage.getItem("ps." + k);
+                } catch {
+                    return memPref[k] ?? null;
+                }
+            };
+            const setPref = (k, v) => {
+                try {
+                    localStorage.setItem("ps." + k, String(v));
+                } catch {
+                    memPref[k] = String(v);
+                }
+            };
+            let dbp = null;
+            function db() {
+                if (!dbp)
+                    dbp = new Promise((res) => {
+                        try {
+                            const r = indexedDB.open("pocketscan", 1);
+                            r.onupgradeneeded = () => r.result.createObjectStore("docs", { keyPath: "id" });
+                            r.onsuccess = () => res(r.result);
+                            r.onerror = () => res(null);
+                        } catch {
+                            res(null);
+                        }
+                    });
+                return dbp;
+            }
+            async function store(mode, fn) {
+                const d = await db();
+                if (!d) return null;
+                return new Promise((res) => {
+                    try {
+                        const t = d.transaction("docs", mode),
+                            rq = fn(t.objectStore("docs"));
+                        t.oncomplete = () => res(rq ? rq.result : true);
+                        t.onerror = t.onabort = () => res(null);
+                    } catch {
+                        res(null);
+                    }
+                });
+            }
+            const saveDoc = (d) => {
+                d.updated = Date.now();
+                return store("readwrite", (s) => s.put(d));
+            };
+            async function removeDoc(d) {
+                docs = docs.filter((x) => x !== d);
+                d.pages.forEach((p) => forget(p.out));
+                state.doc = null;
+                await store("readwrite", (s) => s.delete(d.id));
+            }
+
+            /* ---------- helpers ---------- */
+            const urls = new Map();
+            const urlOf = (b) => {
+                if (!b) return "";
+                if (!urls.has(b)) urls.set(b, URL.createObjectURL(b));
+                return urls.get(b);
+            };
+            const forget = (b) => {
+                if (b && urls.has(b)) {
+                    URL.revokeObjectURL(urls.get(b));
+                    urls.delete(b);
+                }
+            };
+            const esc = (s) =>
+                String(s).replace(
+                    /[&<>"']/g,
+                    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+                );
+            const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+            const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+            const canvas = (w, h) => {
+                const c = document.createElement("canvas");
+                c.width = w;
+                c.height = h;
+                return c;
+            };
+            const toBlob = (c, q) => new Promise((r) => c.toBlob(r, "image/jpeg", q));
+            const route = () => location.hash.replace(/^#/, "") || "/";
+            const go = (h) => {
+                location.hash = h;
+            };
+            let toastT;
+            // Longer lines stay longer: about 60 ms a character, from 3.2 to 7 seconds.
+            function toast(msg) {
+                const el = $("#toast");
+                el.textContent = msg;
+                el.classList.add("on");
+                clearTimeout(toastT);
+                toastT = setTimeout(() => el.classList.remove("on"), clamp(msg.length * 60, 3200, 7000));
+            }
+            function busy(msg) {
+                $("#busy").hidden = !msg;
+                $("#busyTxt").textContent = msg || "";
+            }
+            // The canvas says whether the photo was larger than max and so scaled down (`scaled`).
+            function blobToCanvas(blob, max) {
+                return new Promise((res, rej) => {
+                    const u = URL.createObjectURL(blob),
+                        img = new Image();
+                    img.onload = () => {
+                        const s = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+                        const c = canvas(Math.round(img.naturalWidth * s), Math.round(img.naturalHeight * s));
+                        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+                        URL.revokeObjectURL(u);
+                        c.scaled = s < 1;
+                        res(c);
+                    };
+                    img.onerror = () => {
+                        URL.revokeObjectURL(u);
+                        rej(new Error("decode"));
+                    };
+                    img.src = u;
+                });
+            }
+
+            /* ---------- page detection ---------- */
+            function okQuad(q) {
+                let area = 0;
+                for (let i = 0; i < 4; i++) {
+                    const a = q[i],
+                        b = q[(i + 1) % 4],
+                        c = q[(i + 2) % 4];
+                    if ((b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0]) <= 0) return false;
+                    area += a[0] * b[1] - b[0] * a[1];
+                }
+                return area / 2 > 800;
+            }
+            function detect(c) {
+                const W = c.width,
+                    H = c.height,
+                    def = [
+                        [W * 0.06, H * 0.06],
+                        [W * 0.94, H * 0.06],
+                        [W * 0.94, H * 0.94],
+                        [W * 0.06, H * 0.94],
+                    ];
+                const s = Math.min(1, 200 / Math.max(W, H)),
+                    w = Math.max(2, Math.round(W * s)),
+                    h = Math.max(2, Math.round(H * s)),
+                    N = w * h;
+                const t = canvas(w, h),
+                    x = t.getContext("2d", { willReadFrequently: true });
+                x.drawImage(c, 0, 0, w, h);
+                const d = x.getImageData(0, 0, w, h).data,
+                    g = new Uint8Array(N),
+                    hist = new Array(256).fill(0);
+                for (let i = 0; i < N; i++) {
+                    const v = (d[i * 4] * 77 + d[i * 4 + 1] * 150 + d[i * 4 + 2] * 29) >> 8;
+                    g[i] = v;
+                    hist[v]++;
+                }
+                let sum = 0;
+                for (let i = 0; i < 256; i++) sum += i * hist[i];
+                let sB = 0,
+                    wB = 0,
+                    best = 0,
+                    th = 128;
+                for (let i = 0; i < 256; i++) {
+                    wB += hist[i];
+                    if (!wB) continue;
+                    const wF = N - wB;
+                    if (!wF) break;
+                    sB += i * hist[i];
+                    const v = wB * wF * (sB / wB - (sum - sB) / wF) ** 2;
+                    if (v > best) {
+                        best = v;
+                        th = i;
+                    }
+                }
+                const lab = new Int32Array(N),
+                    st = [];
+                let L = 0,
+                    bestN = 0,
+                    bestL = 0;
+                for (let i = 0; i < N; i++) {
+                    if (g[i] <= th || lab[i]) continue;
+                    L++;
+                    let n = 0;
+                    lab[i] = L;
+                    st.push(i);
+                    while (st.length) {
+                        const p = st.pop(),
+                            px = p % w,
+                            py = (p - px) / w;
+                        n++;
+                        if (px > 0 && !lab[p - 1] && g[p - 1] > th) {
+                            lab[p - 1] = L;
+                            st.push(p - 1);
+                        }
+                        if (px < w - 1 && !lab[p + 1] && g[p + 1] > th) {
+                            lab[p + 1] = L;
+                            st.push(p + 1);
+                        }
+                        if (py > 0 && !lab[p - w] && g[p - w] > th) {
+                            lab[p - w] = L;
+                            st.push(p - w);
+                        }
+                        if (py < h - 1 && !lab[p + w] && g[p + w] > th) {
+                            lab[p + w] = L;
+                            st.push(p + w);
+                        }
+                    }
+                    if (n > bestN) {
+                        bestN = n;
+                        bestL = L;
+                    }
+                }
+                if (bestN < N * 0.08 || bestN > N * 0.97) return def;
+                let tl = [0, 0, 1e9],
+                    tr = [0, 0, -1e9],
+                    br = [0, 0, -1e9],
+                    bl = [0, 0, 1e9];
+                for (let i = 0; i < N; i++) {
+                    if (lab[i] !== bestL) continue;
+                    const px = i % w,
+                        py = (i - px) / w,
+                        a = px + py,
+                        b = px - py;
+                    if (a < tl[2]) tl = [px, py, a];
+                    if (a > br[2]) br = [px, py, a];
+                    if (b > tr[2]) tr = [px, py, b];
+                    if (b < bl[2]) bl = [px, py, b];
+                }
+                const q = [tl, tr, br, bl].map((p) => [
+                    clamp(((p[0] + 0.5) * W) / w, 0, W),
+                    clamp(((p[1] + 0.5) * H) / h, 0, H),
+                ]);
+                return okQuad(q) ? q : def;
+            }
+
+            /* ---------- straighten, filter, turn ---------- */
+            function solveH(f, t) {
+                const A = [],
+                    B = [];
+                for (let i = 0; i < 4; i++) {
+                    const [x, y] = f[i],
+                        [X, Y] = t[i];
+                    A.push([x, y, 1, 0, 0, 0, -x * X, -y * X]);
+                    B.push(X);
+                    A.push([0, 0, 0, x, y, 1, -x * Y, -y * Y]);
+                    B.push(Y);
+                }
+                for (let i = 0; i < 8; i++) {
+                    let m = i;
+                    for (let r = i + 1; r < 8; r++) if (Math.abs(A[r][i]) > Math.abs(A[m][i])) m = r;
+                    [A[i], A[m]] = [A[m], A[i]];
+                    [B[i], B[m]] = [B[m], B[i]];
+                    for (let r = 0; r < 8; r++) {
+                        if (r === i) continue;
+                        const k = A[r][i] / A[i][i];
+                        for (let c = i; c < 8; c++) A[r][c] -= k * A[i][c];
+                        B[r] -= k * B[i];
+                    }
+                }
+                return B.map((v, i) => v / A[i][i]);
+            }
+            function warp(src, q) {
+                const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+                let W = Math.max(dist(q[0], q[1]), dist(q[3], q[2])),
+                    H = Math.max(dist(q[0], q[3]), dist(q[1], q[2]));
+                const s = Math.min(1, 2000 / Math.max(W, H));
+                W = Math.max(1, Math.round(W * s));
+                H = Math.max(1, Math.round(H * s));
+                const [a, b, c, d, e, f, g, h] = solveH(
+                    [
+                        [0, 0],
+                        [W, 0],
+                        [W, H],
+                        [0, H],
+                    ],
+                    q,
+                );
+                const sw = src.width,
+                    sh = src.height,
+                    sd = src.getContext("2d").getImageData(0, 0, sw, sh).data;
+                const out = canvas(W, H),
+                    ox = out.getContext("2d"),
+                    od = ox.createImageData(W, H),
+                    o = od.data;
+                for (let y = 0; y < H; y++) {
+                    const yy = y + 0.5;
+                    for (let x = 0; x < W; x++) {
+                        const xx = x + 0.5,
+                            den = g * xx + h * yy + 1;
+                        const X = clamp((a * xx + b * yy + c) / den - 0.5, 0, sw - 1.001),
+                            Y = clamp((d * xx + e * yy + f) / den - 0.5, 0, sh - 1.001);
+                        const x0 = X | 0,
+                            y0 = Y | 0,
+                            fx = X - x0,
+                            fy = Y - y0,
+                            i0 = (y0 * sw + x0) * 4,
+                            i2 = i0 + sw * 4,
+                            k = (y * W + x) * 4;
+                        for (let ch = 0; ch < 3; ch++)
+                            o[k + ch] =
+                                (sd[i0 + ch] * (1 - fx) + sd[i0 + 4 + ch] * fx) * (1 - fy) +
+                                (sd[i2 + ch] * (1 - fx) + sd[i2 + 4 + ch] * fx) * fy;
+                        o[k + 3] = 255;
+                    }
+                }
+                ox.putImageData(od, 0, 0);
+                return out;
+            }
+            function applyFilter(c, mode) {
+                if (mode === "original") return c;
+                const W = c.width,
+                    H = c.height,
+                    x = c.getContext("2d"),
+                    im = x.getImageData(0, 0, W, H),
+                    p = im.data;
+                // estimate the paper colour block by block, so shadows and colour casts can be divided out
+                const B = Math.max(8, Math.round(Math.max(W, H) / 36)),
+                    gw = Math.ceil(W / B),
+                    gh = Math.ceil(H / B),
+                    g = new Float32Array(gw * gh * 3);
+                for (let y = 0; y < H; y += 2) {
+                    const gy = ((y / B) | 0) * gw;
+                    for (let xx = 0; xx < W; xx += 2) {
+                        const i = (y * W + xx) * 4,
+                            j = (gy + ((xx / B) | 0)) * 3;
+                        if (p[i] > g[j]) g[j] = p[i];
+                        if (p[i + 1] > g[j + 1]) g[j + 1] = p[i + 1];
+                        if (p[i + 2] > g[j + 2]) g[j + 2] = p[i + 2];
+                    }
+                }
+                for (let pass = 0; pass < 2; pass++) {
+                    const t = g.slice();
+                    for (let yy = 0; yy < gh; yy++)
+                        for (let xx = 0; xx < gw; xx++)
+                            for (let ch = 0; ch < 3; ch++) {
+                                let s = 0,
+                                    n = 0;
+                                for (let dy = -1; dy <= 1; dy++)
+                                    for (let dx = -1; dx <= 1; dx++) {
+                                        const X = xx + dx,
+                                            Y = yy + dy;
+                                        if (X >= 0 && Y >= 0 && X < gw && Y < gh) {
+                                            s += t[(Y * gw + X) * 3 + ch];
+                                            n++;
+                                        }
+                                    }
+                                g[(yy * gw + xx) * 3 + ch] = s / n;
+                            }
+                }
+                const peak = [0, 0, 0];
+                for (let i = 0; i < g.length; i++) peak[i % 3] = Math.max(peak[i % 3], g[i]);
+                const small = canvas(gw, gh),
+                    sx = small.getContext("2d"),
+                    sid = sx.createImageData(gw, gh);
+                for (let i = 0, j = 0; i < g.length; i += 3, j += 4) {
+                    for (let ch = 0; ch < 3; ch++) sid.data[j + ch] = Math.max(g[i + ch], peak[ch] * 0.45);
+                    sid.data[j + 3] = 255;
+                }
+                sx.putImageData(sid, 0, 0);
+                const big = canvas(W, H),
+                    bx = big.getContext("2d");
+                bx.imageSmoothingQuality = "high";
+                bx.drawImage(small, 0, 0, gw * B, gh * B);
+                const bg = bx.getImageData(0, 0, W, H).data,
+                    lut = new Uint8Array(256);
+                for (let v = 0; v < 256; v++) lut[v] = 255 * Math.pow(Math.min(1, v / 232), 1.7);
+                for (let i = 0; i < p.length; i += 4) {
+                    const r = Math.min(255, (p[i] * 255) / (bg[i] || 1)),
+                        gg = Math.min(255, (p[i + 1] * 255) / (bg[i + 1] || 1)),
+                        b = Math.min(255, (p[i + 2] * 255) / (bg[i + 2] || 1));
+                    if (mode === "enhance") {
+                        p[i] = lut[r | 0];
+                        p[i + 1] = lut[gg | 0];
+                        p[i + 2] = lut[b | 0];
+                    } else {
+                        const l = (r * 77 + gg * 150 + b * 29) >> 8;
+                        const v = mode === "bw" ? (l < 145 ? 0 : l > 185 ? 255 : ((l - 145) * 255) / 40) : lut[l];
+                        p[i] = p[i + 1] = p[i + 2] = v;
+                    }
+                }
+                x.putImageData(im, 0, 0);
+                return c;
+            }
+            function turn(c, r) {
+                if (!r) return c;
+                const o = canvas(r % 2 ? c.height : c.width, r % 2 ? c.width : c.height),
+                    x = o.getContext("2d");
+                x.translate(o.width / 2, o.height / 2);
+                x.rotate((r * Math.PI) / 2);
+                x.drawImage(c, -c.width / 2, -c.height / 2);
+                return o;
+            }
+            async function renderPage(p, src) {
+                const t0 = performance.now();
+                const c = turn(applyFilter(warp(src || (await blobToCanvas(p.src, 2400)), p.quad), p.filter), p.rot);
+                forget(p.out);
+                p.out = await toBlob(c, 0.85);
+                p.w = c.width;
+                p.h = c.height;
+                lap("page straightened, cleaned and encoded", t0);
+            }
+
+            /* ---------- PDF (JPEG pages, no library) ---------- */
+            async function makePdf(d, size) {
+                const enc = new TextEncoder(),
+                    parts = [],
+                    offs = [];
+                let len = 0;
+                const push = (v) => {
+                    const b = typeof v === "string" ? enc.encode(v) : v;
+                    parts.push(b);
+                    len += b.length;
+                };
+                const obj = (n, body) => {
+                    offs[n] = len;
+                    push(n + " 0 obj\n");
+                    body();
+                    push("\nendobj\n");
+                };
+                const n = d.pages.length,
+                    f = (v) => v.toFixed(2);
+                push("%PDF-1.4\n%\u00e2\u00e3\u00cf\u00d3\n");
+                obj(1, () => push("<< /Type /Catalog /Pages 2 0 R >>"));
+                obj(2, () =>
+                    push(
+                        `<< /Type /Pages /Kids [${d.pages.map((_, i) => `${3 + 3 * i} 0 R`).join(" ")}] /Count ${n} >>`,
+                    ),
+                );
+                for (let i = 0; i < n; i++) {
+                    const p = d.pages[i],
+                        jpg = new Uint8Array(await p.out.arrayBuffer());
+                    let PW, PH;
+                    if (size === "auto") {
+                        const k = 842 / Math.max(p.w, p.h);
+                        PW = p.w * k;
+                        PH = p.h * k;
+                    } else {
+                        const [a, b] = size === "letter" ? [612, 792] : [595.28, 841.89];
+                        [PW, PH] = p.w > p.h ? [b, a] : [a, b];
+                    }
+                    const k = Math.min(PW / p.w, PH / p.h),
+                        iw = p.w * k,
+                        ih = p.h * k;
+                    const cs = `q ${f(iw)} 0 0 ${f(ih)} ${f((PW - iw) / 2)} ${f((PH - ih) / 2)} cm /Im${i} Do Q`;
+                    obj(3 + 3 * i, () =>
+                        push(
+                            `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${f(PW)} ${f(PH)}] /Resources << /XObject << /Im${i} ${4 + 3 * i} 0 R >> >> /Contents ${5 + 3 * i} 0 R >>`,
+                        ),
+                    );
+                    obj(4 + 3 * i, () => {
+                        push(
+                            `<< /Type /XObject /Subtype /Image /Width ${p.w} /Height ${p.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpg.length} >>\nstream\n`,
+                        );
+                        push(jpg);
+                        push("\nendstream");
+                    });
+                    obj(5 + 3 * i, () => push(`<< /Length ${cs.length} >>\nstream\n${cs}\nendstream`));
+                }
+                const total = 3 + 3 * n,
+                    xref = len;
+                push(`xref\n0 ${total}\n0000000000 65535 f \n`);
+                for (let k = 1; k < total; k++) push(String(offs[k]).padStart(10, "0") + " 00000 n \n");
+                push(`trailer\n<< /Size ${total} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`);
+                return new Blob(parts, { type: "application/pdf" });
+            }
+            let lastPdf = null; // the PDF made last, so a second tap saves or shares it at once
+            async function exportPdf(share) {
+                // Inside anyApp a link download does nothing, so without files.save there is no way to save yet: say so plainly.
+                if (anyapp && !share && !inApp.save) {
+                    toast(t("saveNewer"));
+                    return;
+                }
+                if (anyapp && share && !inApp.share) return; // Share is not shown then
+                const d = state.doc,
+                    size = getPref("size") || "auto",
+                    key = [d.id, d.updated, d.pages.length, size].join(":");
+                let blob = lastPdf && lastPdf.key === key ? lastPdf.blob : null;
+                const ready = Boolean(blob); // made before this tap
+                if (!blob) {
+                    busy(t("making"));
+                    const t0 = performance.now();
+                    try {
+                        blob = await makePdf(d, size);
+                    } catch {
+                        busy();
+                        toast(t("pdfFailed"));
+                        return;
+                    }
+                    lap(`PDF of ${d.pages.length} pages (${Math.round(blob.size / 1024)} KB) made`, t0);
+                    busy();
+                    lastPdf = { key, blob };
+                }
+                const name = (d.name.replace(/[\\/:*?"<>|]+/g, " ").trim() || t("scanName")) + ".pdf";
+                // One File per PDF and name: anyApp keeps a file sent with a tap that came too late, so the second tap
+                // hands over the same File without sending its bytes again.
+                if (!lastPdf.file || lastPdf.file.name !== name)
+                    lastPdf.file = new File([blob], name, { type: "application/pdf" });
+                if (anyapp) return exportInApp(lastPdf.file, share, ready);
+                // A browser: its own share sheet, else a download (whose end the page cannot see).
+                if (share) {
+                    const file = lastPdf.file;
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        try {
+                            await navigator.share({ files: [file], title: d.name });
+                        } catch (e) {
+                            if (e && e.name !== "AbortError") toast(t("shareFailed"));
+                        }
+                        return;
+                    }
+                }
+                const u = URL.createObjectURL(blob),
+                    a = document.createElement("a");
+                a.href = u;
+                a.download = name;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                setTimeout(() => URL.revokeObjectURL(u), 30000);
+                toast(t(share ? "shareNone" : "pdfDownloading"));
+            }
+
+            // anyApp asks for a tap at most 5 seconds old, and the PDF has to reach it within that time. A long PDF may need a
+            // second tap, which hands over the PDF made already; if even that is too slow, the PDF is too large for one tap.
+            async function exportInApp(file, share, ready) {
+                const t0 = performance.now(),
+                    button = t(share ? "share" : "savePdf");
+                try {
+                    if (share) await anyapp.share({ title: state.doc.name, files: [file] });
+                    else if (await anyapp.files.save({ name: file.name, type: "application/pdf", data: file }))
+                        toast(t("pdfSaved"));
+                    // false: the save dialog was closed, so nothing was saved and nothing needs saying
+                } catch (e) {
+                    const code = e && e.code;
+                    if (code === "NEEDS_GESTURE") toast(t(ready ? "slowPdf" : "tapAgain", { button }));
+                    else if (code === "QUOTA_EXCEEDED") toast(t("tooBig", { share }));
+                    else if (code === "PERMISSION_DENIED") toast(t(share ? "shareDenied" : "saveDenied"));
+                    else if (code === "UNSUPPORTED" && !share) toast(t("saveNewer"));
+                    else if (code !== "CANCELLED")
+                        toast(t(!share ? "saveFailed" : inApp.save ? "shareFailed" : "shareRetry"));
+                }
+                lap(share ? "share" : "save", t0);
+            }
+
+            /* ---------- adding pages ---------- */
+            function ensureDoc() {
+                if (state.doc) return;
+                state.doc = {
+                    id: uid(),
+                    name:
+                        t("scanName") +
+                        " " +
+                        fmt(Date.now(), { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }),
+                    created: Date.now(),
+                    updated: Date.now(),
+                    pages: [],
+                };
+                docs.unshift(state.doc);
+            }
+            // anyApp's camera and picker answer with JPEGs of at most 2400 px, upright and without metadata: such a photo is
+            // kept as it is, which saves a second JPEG encode. Larger photos and other formats are scaled and stored as a JPEG.
+            async function prepare(file) {
+                let t0 = performance.now();
+                const c = await blobToCanvas(file, 2400);
+                lap(`photo decoded (${c.width} × ${c.height})`, t0);
+                t0 = performance.now();
+                const quad = detect(c);
+                lap("page found", t0);
+                t0 = performance.now();
+                const keep = file.type === "image/jpeg" && !c.scaled;
+                const src = keep ? file : await toBlob(c, 0.9);
+                if (!keep) lap("photo encoded again", t0);
+                return { src, w: c.width, h: c.height, quad, canvas: c };
+            }
+            camIn.addEventListener("change", () => {
+                if (camIn.files[0]) gotPhoto(camIn.files[0]);
+            });
+            picIn.addEventListener("change", () => gotPhotos([...picIn.files]));
+
+            // The camera and the photo picker are other apps, and their answer takes a moment to reach the page after them, so
+            // from the call until it settles the overlay says "Getting your photo…" ("…photos" for the picker), also over the
+            // page while they are open. While the camera is open Android may close anyApp, and the page then starts again with
+            // no photo on its way: a note made before the call (in localStorage, and in anyApp's own store, which keeps it at
+            // once) lets the new page say so.
+            const CAM_NOTE = "ps.camera",
+                wait = { call: 0, kind: "", back: 0, timer: 0 }; // kind: "camera", "photos" or "" when nothing is open
+            function noteCamera(note) {
+                try {
+                    if (note) localStorage.setItem(CAM_NOTE, JSON.stringify(note));
+                    else localStorage.removeItem(CAM_NOTE);
+                } catch {
+                    /* storage may be off */
+                }
+                try {
+                    (note ? anyapp.data.kv.set("camera", note) : anyapp.data.kv.delete("camera")).catch(() => {});
+                } catch {
+                    /* no store here */
+                }
+            }
+            const waitWords = () => t(wait.kind === "camera" ? "gettingPhoto" : "gettingPhotos");
+            function waitTimer(ms, ran) {
+                clearTimeout(wait.timer);
+                wait.timer = setTimeout(ran, ms);
+            }
+            function waitOver() {
+                if (wait.kind === "camera") noteCamera(null);
+                wait.kind = "";
+                clearTimeout(wait.timer);
+            }
+            function waitBack() {
+                // the page is in front again: the answer should follow within seconds
+                if (!wait.kind) return;
+                wait.back = performance.now();
+                busy(waitWords());
+                waitTimer(30000, () => {
+                    const cam = wait.kind === "camera";
+                    waitOver();
+                    busy();
+                    if (cam) toast(t(route() === "/doc" ? "noPhotoDoc" : "noPhoto"));
+                });
+            }
+            // The note of a camera call that never answered, read and cleared at start; null unless it is under 10 minutes old.
+            async function lostCamera() {
+                let note = null;
+                const take = (v) => {
+                    try {
+                        const n = typeof v === "string" ? JSON.parse(v) : v;
+                        if (n && typeof n.at === "number" && (!note || n.at > note.at)) note = n;
+                    } catch {
+                        /* not a note */
+                    }
+                };
+                try {
+                    take(localStorage.getItem(CAM_NOTE));
+                } catch {
+                    /* storage may be off */
+                }
+                if (anyapp) {
+                    try {
+                        take(await anyapp.data.kv.get("camera"));
+                    } catch {
+                        /* no store here */
+                    }
+                }
+                if (!note) return null;
+                noteCamera(null);
+                const age = Date.now() - note.at;
+                return age >= 0 && age < 600000 ? note : null;
+            }
+            function fromApp(useCam) {
+                const t0 = performance.now(),
+                    call = ++wait.call;
+                // An older call answering late leaves the newer one's overlay and note.
+                const settled = () => {
+                    if (call !== wait.call) return false;
+                    waitOver();
+                    return true;
+                };
+                if (useCam) noteCamera({ at: Date.now(), doc: state.doc ? state.doc.id : null });
+                wait.kind = useCam ? "camera" : "photos";
+                wait.back = 0;
+                busy(waitWords());
+                // No pause within 20 s: the camera or picker never came over the page (anyApp may still be asking for
+                // consent), so the overlay goes quietly; it comes back when the page returns from them.
+                waitTimer(20000, () => busy());
+                const asked = useCam
+                    ? anyapp.camera.photo({ maxWidth: 2400, quality: 0.92 })
+                    : anyapp.media.pick({ multiple: true, max: 20 });
+                asked.then(
+                    (r) => {
+                        if (settled()) {
+                            lap(`${useCam ? "camera" : "picker"}, from the tap`, t0);
+                            if (wait.back) lap(`${useCam ? "camera" : "picker"}, from the page's return`, wait.back);
+                        }
+                        return useCam ? gotPhoto(r) : gotPhotos(r);
+                    },
+                    (e) => {
+                        if (!settled()) return;
+                        busy();
+                        const code = e && e.code;
+                        if (code === "PERMISSION_DENIED") toast(t(useCam ? "camDenied" : "picDenied"));
+                        else if (code === "OS_DENIED" && useCam) toast(t("camOff"));
+                        else if (code !== "CANCELLED") toast(t(useCam ? "camFailed" : "picFailed"));
+                    },
+                );
+            }
+            async function gotPhoto(f) {
+                busy(t("finding"));
+                try {
+                    const r = await prepare(f);
+                    state.crop = { ...r, idx: -1, from: state.from };
+                    busy();
+                    go("#/crop");
+                } catch {
+                    busy();
+                    toast(t("photoFailed"));
+                }
+            }
+            async function gotPhotos(files) {
+                if (!files.length) {
+                    busy(); // nothing picked: the picker's overlay goes, nothing is said
+                    return;
+                }
+                let added = 0;
+                for (let i = 0; i < files.length; i++) {
+                    busy(files.length > 1 ? t("addingN", { i: i + 1, n: files.length }) : t("adding"));
+                    try {
+                        const r = await prepare(files[i]);
+                        const p = { id: uid(), src: r.src, w0: r.w, h0: r.h, quad: r.quad, filter: "enhance", rot: 0 };
+                        await renderPage(p, r.canvas);
+                        ensureDoc();
+                        state.doc.pages.push(p);
+                        added++;
+                    } catch {
+                        /* skip files that aren't photos */
+                    }
+                }
+                busy();
+                if (!added) {
+                    toast(t("notPhotos"));
+                    return;
+                }
+                await saveDoc(state.doc);
+                if (route() === "/doc") render();
+                else go("#/doc");
+                toast(added < files.length ? t("someAdded", { added, n: files.length }) : t("added"));
+            }
+            async function cropDone() {
+                const c = state.crop;
+                if (!okQuad(c.quad)) {
+                    toast(t("crossed"));
+                    return;
+                }
+                busy(t("straightening"));
+                try {
+                    if (c.idx >= 0) {
+                        const p = state.doc.pages[c.idx];
+                        p.quad = c.quad;
+                        await renderPage(p);
+                    } else {
+                        const p = { id: uid(), src: c.src, w0: c.w, h0: c.h, quad: c.quad, filter: "enhance", rot: 0 };
+                        await renderPage(p, c.canvas);
+                        ensureDoc();
+                        state.doc.pages.push(p);
+                    }
+                    await saveDoc(state.doc);
+                } catch {
+                    busy();
+                    toast(t("processFailed"));
+                    return;
+                }
+                busy();
+                state.crop = null;
+                if (c.from === "/doc" || c.from === "page") history.back();
+                else {
+                    history.replaceState(null, "", "#/doc");
+                    render();
+                }
+            }
+
+            /* ---------- screens ---------- */
+            const day = (time) => fmt(time, { month: "short", day: "numeric" });
+            function vHome() {
+                docs.sort((a, b) => b.updated - a.updated);
+                const tips = !getPref("tipsDone");
+                return `<section class="scr">
+  <header class="top"><h1>Pocket Scan</h1><p>${t("tagline")}</p></header>
+  ${camOK ? "" : `<p class="note">${t("camNote")}</p>`}
+  ${
+      tips
+          ? `<div class="tipcard"><div class="tipcard-ill">${ILL.contrast}${ILL.corners}</div><div>
+    <h2>${t("tipTitle")}</h2><p>${t("tipBody")}</p>
+    <div class="row"><button class="btn primary" data-act="tipsDone">${t("gotIt")}</button><button class="btn" data-act="tips">${t("seeTips")}</button></div></div></div>`
+          : ""
+  }
+  ${
+      docs.length
+          ? `<ul class="docs">${docs
+                .map(
+                    (d) => `<li><button class="doc" data-act="open" data-id="${d.id}">
+    <span class="stack ${d.pages.length > 1 ? "multi" : ""}"><img src="${urlOf(d.pages[0] && d.pages[0].out)}" alt=""></span>
+    <span><strong>${esc(d.name)}</strong><small>${tn("nPages", d.pages.length)}, ${day(d.updated)}</small></span></button></li>`,
+                )
+                .join("")}</ul>`
+          : `<div class="empty">${ILL.empty}<h2>${t("noScans")}</h2><p>${t(camOK ? "emptyCam" : "emptyPick")} ${t("emptyMore")}</p></div>`
+  }
+  <nav class="dock" aria-label="${t("startScan")}">
+    <label class="dock-side" for="picIn" data-act="import" role="button" tabindex="0">${ic("photo")}<span>${t("photos")}</span></label>
+    <label class="shutter" for="${camFor()}" data-act="scan" role="button" tabindex="0" aria-label="${t(camOK ? "scanCam" : "scanPick")}">${ic("scan")}</label>
+    <button class="dock-side" data-act="tips">${ic("bulb")}<span>${t("tips")}</span></button>
+  </nav></section>`;
+            }
+            function vDoc() {
+                const d = state.doc,
+                    size = getPref("size") || "auto";
+                // Inside anyApp: Share only when this anyApp offers it, and a plain line when it cannot save yet.
+                const canShare = !anyapp || inApp.share,
+                    cannotSave = Boolean(anyapp) && !inApp.save;
+                return `<section class="scr">
+  <header class="bar"><button class="icon-btn" data-act="back" aria-label="${t("back")}">${ic("back")}</button>
+    <input class="title-in" id="docName" value="${esc(d.name)}" aria-label="${t("docName")}" maxlength="80">
+    <button class="icon-btn" data-act="delDoc" aria-label="${t("delDoc")}">${ic("trash")}</button></header>
+  <p class="hint">${t("docHint")}</p>
+  <div class="grid">${d.pages.map((p, i) => `<button class="sheet" data-act="page" data-i="${i}" aria-label="${t("pageN", { n: i + 1 })}"><img src="${urlOf(p.out)}" alt=""><span class="num">${i + 1}</span></button>`).join("")}
+    ${camOK ? `<label class="sheet add" for="camIn" data-act="scan" role="button" tabindex="0">${ic("camera")}<span>${t("scanPage")}</span></label>` : ""}
+    <label class="sheet add" for="picIn" data-act="import" role="button" tabindex="0">${ic("photo")}<span>${t("fromPhotos")}</span></label></div>
+  <footer class="actions">
+    ${cannotSave ? `<p class="note">${t("saveNote")}</p>` : ""}
+    <label class="size">${t("pageSize")} <select id="pageSize">${[
+        ["auto", "sizeAuto"],
+        ["a4", "sizeA4"],
+        ["letter", "sizeLetter"],
+    ]
+        .map(([v, l]) => `<option value="${v}" ${v === size ? "selected" : ""}>${t(l)}</option>`)
+        .join("")}</select></label>
+    <div class="row">${canShare ? `<button class="btn" data-act="share">${ic("share")}${t("share")}</button>` : ""}<button class="btn primary" data-act="save">${ic("download")}${t("savePdf")}</button></div>
+  </footer></section>`;
+            }
+            function vPage() {
+                const d = state.doc,
+                    i = state.page,
+                    p = d.pages[i];
+                const F = [
+                    ["original", "fOriginal"],
+                    ["enhance", "fEnhance"],
+                    ["gray", "fGray"],
+                    ["bw", "fBw"],
+                ];
+                return `<section class="scr">
+  <header class="bar"><button class="icon-btn" data-act="back" aria-label="${t("back")}">${ic("back")}</button>
+    <h1 class="bar-title">${t("pageOf", { n: i + 1, of: d.pages.length })}</h1>
+    <button class="icon-btn" data-act="delPage" aria-label="${t("delPage")}">${ic("trash")}</button></header>
+  <div class="view"><img src="${urlOf(p.out)}" alt="${t("pageN", { n: i + 1 })}"></div>
+  <div class="chips" role="radiogroup" aria-label="${t("look")}">${F.map(([k, l]) => `<button class="chip" role="radio" aria-checked="${p.filter === k}" data-act="filter" data-f="${k}">${t(l)}</button>`).join("")}</div>
+  <div class="tools">
+    <button data-act="recrop">${ic("crop")}<span>${t("corners")}</span></button>
+    <button data-act="rotate">${ic("rotate")}<span>${t("turn")}</span></button>
+    <button data-act="move" data-dir="-1" ${i === 0 ? "disabled" : ""}>${ic("left")}<span>${t("earlier")}</span></button>
+    <button data-act="move" data-dir="1" ${i === d.pages.length - 1 ? "disabled" : ""}>${ic("right")}<span>${t("later")}</span></button>
+  </div></section>`;
+            }
+            function vCrop() {
+                const isNew = state.crop.idx < 0;
+                return `<section class="scr crop">
+  <header class="bar"><button class="icon-btn" data-act="back" aria-label="${t("cancel")}">${ic("back")}</button><h1 class="bar-title">${t("fitCorners")}</h1><span class="spacer"></span></header>
+  <p class="crop-hint">${t("cropHint")}</p>
+  <div class="stage" id="stage"><div class="frame" id="frame"><img id="cropImg" alt="${t("cropAlt")}" draggable="false"><svg id="ov" aria-hidden="true"></svg></div><canvas id="loupe" width="112" height="112" hidden></canvas></div>
+  <div class="crop-tools"><button data-act="autoQ">${ic("auto")}<span>${t("findPage")}</span></button><button data-act="fullQ">${ic("full")}<span>${t("wholePhoto")}</span></button></div>
+  <footer class="crop-foot">${isNew ? `<label class="btn ghost" for="${camFor()}" data-act="retake" role="button" tabindex="0">${t("retake")}</label>` : `<button class="btn ghost" data-act="back">${t("cancel")}</button>`}<button class="btn primary" data-act="cropDone">${ic("check")}${t("savePage")}</button></footer>
+  </section>`;
+            }
+            function vTips() {
+                const T = ["light", "contrast", "flat", "corners"];
+                return `<section class="scr">
+  <header class="bar"><button class="icon-btn" data-act="back" aria-label="${t("back")}">${ic("back")}</button><h1 class="bar-title">${t("tipsTitle")}</h1><span class="spacer"></span></header>
+  <div class="tips">${T.map((k) => `<article class="tip">${ILL[k]}<div><h2>${t(k + "H")}</h2><p>${t(k + "P")}</p></div></article>`).join("")}</div>
+  <h2 class="sub">${t("howItWorks")}</h2>
+  <ol class="steps">${[1, 2, 3, 4].map((n) => `<li><strong>${t(`step${n}H`)}</strong>${t(`step${n}P`)}</li>`).join("")}</ol>
+  <div class="pad"><label class="btn primary wide" for="${camFor()}" data-act="tipsScan" role="button" tabindex="0">${ic("camera")}${t("startScanning")}</label></div></section>`;
+            }
+
+            /* ---------- corner editor ---------- */
+            function setupCrop() {
+                const c = state.crop,
+                    stage = $("#stage"),
+                    frame = $("#frame"),
+                    img = $("#cropImg");
+                img.src = urlOf(c.src);
+                c.lay = () => {
+                    const k = Math.min((stage.clientWidth - 28) / c.w, (stage.clientHeight - 28) / c.h);
+                    c.k = k;
+                    frame.style.width = c.w * k + "px";
+                    frame.style.height = c.h * k + "px";
+                    drawOv();
+                };
+                requestAnimationFrame(c.lay);
+                const at = (e) => {
+                    const r = frame.getBoundingClientRect();
+                    return [(e.clientX - r.left) / c.k, (e.clientY - r.top) / c.k];
+                };
+                frame.addEventListener("pointerdown", (e) => {
+                    const [x, y] = at(e);
+                    let best = -1,
+                        bd = 48 / c.k;
+                    c.quad.forEach((p, i) => {
+                        const dd = Math.hypot(p[0] - x, p[1] - y);
+                        if (dd < bd) {
+                            bd = dd;
+                            best = i;
+                        }
+                    });
+                    if (best < 0) return;
+                    c.drag = best;
+                    c.off = [c.quad[best][0] - x, c.quad[best][1] - y];
+                    frame.setPointerCapture(e.pointerId);
+                    e.preventDefault();
+                    drawOv();
+                    loupe();
+                });
+                frame.addEventListener("pointermove", (e) => {
+                    if (c.drag == null) return;
+                    const [x, y] = at(e);
+                    c.quad[c.drag] = [clamp(x + c.off[0], 0, c.w), clamp(y + c.off[1], 0, c.h)];
+                    drawOv();
+                    loupe();
+                });
+                const end = () => {
+                    c.drag = null;
+                    $("#loupe").hidden = true;
+                    drawOv();
+                };
+                frame.addEventListener("pointerup", end);
+                frame.addEventListener("pointercancel", end);
+            }
+            function drawOv() {
+                const c = state.crop,
+                    ov = $("#ov");
+                if (!c || !ov || !c.k) return;
+                const W = c.w * c.k,
+                    H = c.h * c.k,
+                    Q = c.quad.map(([x, y]) => [x * c.k, y * c.k]);
+                ov.setAttribute("viewBox", `0 0 ${W} ${H}`);
+                ov.innerHTML = `<path class="ov-mask" fill-rule="evenodd" d="M0 0H${W}V${H}H0Z M${Q.map((p) => p.join(" ")).join("L")}Z"/>
+    <polygon class="ov-edge" points="${Q.map((p) => p.join(",")).join(" ")}"/>
+    ${Q.map((p, i) => `<circle class="ov-h" cx="${p[0]}" cy="${p[1]}" r="${c.drag === i ? 17 : 13}"/>`).join("")}`;
+            }
+            function loupe() {
+                const c = state.crop,
+                    L = $("#loupe"),
+                    img = $("#cropImg"),
+                    p = c.quad[c.drag],
+                    S = 112,
+                    z = 2.5,
+                    s = S / (c.k * z),
+                    g = L.getContext("2d");
+                g.fillStyle = "#000";
+                g.fillRect(0, 0, S, S);
+                try {
+                    g.drawImage(img, p[0] - s / 2, p[1] - s / 2, s, s, 0, 0, S, S);
+                } catch {
+                    /* image not ready */
+                }
+                g.strokeStyle = "#FFCF2A";
+                g.lineWidth = 2;
+                g.beginPath();
+                g.moveTo(S / 2, S / 2 - 14);
+                g.lineTo(S / 2, S / 2 + 14);
+                g.moveTo(S / 2 - 14, S / 2);
+                g.lineTo(S / 2 + 14, S / 2);
+                g.stroke();
+                L.classList.toggle("right", p[0] < c.w / 2 && p[1] < c.h / 2);
+                L.hidden = false;
+            }
+            window.addEventListener("resize", () => {
+                if (route() === "/crop" && state.crop && state.crop.lay) state.crop.lay();
+            });
+
+            /* ---------- routing + actions ---------- */
+            function render() {
+                const r = route();
+                if (
+                    (r === "/doc" && !state.doc) ||
+                    (r === "/page" && !(state.doc && state.doc.pages[state.page])) ||
+                    (r === "/crop" && !state.crop)
+                ) {
+                    history.replaceState(null, "", "#/");
+                    return render();
+                }
+                app.innerHTML =
+                    r === "/doc"
+                        ? vDoc()
+                        : r === "/page"
+                          ? vPage()
+                          : r === "/crop"
+                            ? vCrop()
+                            : r === "/tips"
+                              ? vTips()
+                              : vHome();
+                window.scrollTo(0, 0);
+                if (r === "/crop") setupCrop();
+                if (r === "/doc") {
+                    $("#docName").addEventListener("change", (e) => {
+                        const v = e.target.value.trim();
+                        if (v) {
+                            state.doc.name = v;
+                            saveDoc(state.doc);
+                        } else e.target.value = state.doc.name;
+                    });
+                    $("#pageSize").addEventListener("change", (e) => setPref("size", e.target.value));
+                }
+            }
+            window.addEventListener("hashchange", render);
+            app.addEventListener("keydown", (e) => {
+                if (e.target.matches("label[for]") && (e.key === "Enter" || e.key === " ")) {
+                    e.preventDefault();
+                    e.target.click();
+                }
+            });
+            // The <label for> opens the picker natively from the tap; here we only note where the tap came from.
+            function openPicker(input) {
+                state.from = route();
+                if (state.from === "/" || state.from === "/tips") state.doc = null;
+                input.value = "";
+            }
+            app.addEventListener("click", async (e) => {
+                const b = e.target.closest("[data-act]");
+                if (!b || b.disabled) return;
+                // In anyApp the tap itself opens the camera or the photo picker, in place of the file input.
+                const via = b.matches("label[for]") ? b.htmlFor : "";
+                const viaApp = (via === "camIn" && inApp.cam) || (via === "picIn" && inApp.pick);
+                if (viaApp) e.preventDefault();
+                const d = state.doc,
+                    p = d && d.pages[state.page],
+                    c = state.crop;
+                switch (b.dataset.act) {
+                    case "scan":
+                        openPicker(camOK ? camIn : picIn);
+                        break;
+                    case "import":
+                        openPicker(picIn);
+                        break;
+                    case "tips":
+                        go("#/tips");
+                        break;
+                    case "tipsDone":
+                        setPref("tipsDone", 1);
+                        render();
+                        break;
+                    case "tipsScan":
+                        state.from = "/";
+                        state.doc = null;
+                        (camOK ? camIn : picIn).value = "";
+                        history.back();
+                        break;
+                    case "open":
+                        state.doc = docs.find((x) => x.id === b.dataset.id);
+                        go("#/doc");
+                        break;
+                    case "back":
+                        history.back();
+                        break;
+                    case "delDoc":
+                        // A generic question: anyApp withholds a dialog whose text uses its own words, so a scan named "Allow"
+                        // could never be deleted.
+                        if (confirm(t("askDelDoc"))) {
+                            await removeDoc(d);
+                            history.back();
+                        }
+                        break;
+                    case "page":
+                        state.page = +b.dataset.i;
+                        go("#/page");
+                        break;
+                    case "filter":
+                    case "rotate":
+                        if (b.dataset.act === "filter") {
+                            if (p.filter === b.dataset.f) break;
+                            p.filter = b.dataset.f;
+                        } else p.rot = (p.rot + 1) % 4;
+                        busy(t("updating"));
+                        try {
+                            await renderPage(p);
+                            await saveDoc(d);
+                        } catch {
+                            toast(t("changeFailed"));
+                        }
+                        busy();
+                        render();
+                        break;
+                    case "move": {
+                        const j = state.page + +b.dataset.dir;
+                        [d.pages[state.page], d.pages[j]] = [d.pages[j], d.pages[state.page]];
+                        state.page = j;
+                        await saveDoc(d);
+                        render();
+                        break;
+                    }
+                    case "delPage":
+                        if (!confirm(t("askDelPage", { n: state.page + 1 }))) break;
+                        forget(p.out);
+                        d.pages.splice(state.page, 1);
+                        if (!d.pages.length) {
+                            await removeDoc(d);
+                            history.go(-2);
+                        } else {
+                            state.page = Math.min(state.page, d.pages.length - 1);
+                            await saveDoc(d);
+                            history.back();
+                        }
+                        break;
+                    case "recrop":
+                        state.crop = {
+                            src: p.src,
+                            w: p.w0,
+                            h: p.h0,
+                            quad: p.quad.map((q) => [...q]),
+                            idx: state.page,
+                            from: "page",
+                        };
+                        go("#/crop");
+                        break;
+                    case "autoQ":
+                        busy(t("finding"));
+                        try {
+                            c.canvas = c.canvas || (await blobToCanvas(c.src, 2400));
+                            c.quad = detect(c.canvas);
+                        } catch {}
+                        busy();
+                        drawOv();
+                        break;
+                    case "fullQ":
+                        c.quad = [
+                            [0, 0],
+                            [c.w, 0],
+                            [c.w, c.h],
+                            [0, c.h],
+                        ];
+                        drawOv();
+                        break;
+                    case "retake":
+                        (camOK ? camIn : picIn).value = "";
+                        history.back();
+                        break;
+                    case "cropDone":
+                        cropDone();
+                        break;
+                    case "save":
+                        exportPdf(false);
+                        break;
+                    case "share":
+                        exportPdf(true);
+                        break;
+                }
+                // After the switch (whose label cases never wait), so the camera's note names the document the page goes to.
+                if (viaApp) fromApp(via === "camIn");
+            });
+            (async () => {
+                const all = await store("readonly", (s) => s.getAll());
+                docs = Array.isArray(all) ? all : [];
+                if (anyapp) {
+                    await anyapp.ready.catch(() => null);
+                    const has = (f) => {
+                        try {
+                            return !!anyapp.supports(f);
+                        } catch {
+                            return false;
+                        }
+                    };
+                    inApp.cam = has("camera.photo");
+                    inApp.pick = has("media.pick");
+                    inApp.save = has("files.save");
+                    inApp.share = has("share");
+                    camOK = inApp.cam;
+                    try {
+                        anyapp.app.on("resume", waitBack);
+                        anyapp.app.on("pause", () => clearTimeout(wait.timer));
+                    } catch {
+                        /* an older anyApp */
+                    }
+                }
+                // A camera call that never answered: the page started again while the camera was open. Back to its document, if any.
+                const lost = await lostCamera();
+                const doc = lost && lost.doc ? docs.find((x) => x.id === lost.doc) : null;
+                if (doc) {
+                    state.doc = doc;
+                    history.replaceState(null, "", "#/");
+                    history.pushState(null, "", "#/doc");
+                }
+                render();
+                if (lost) toast(t(doc ? "noPhotoDoc" : "noPhoto"));
+            })();
+        </script>
+    </body>
+</html>

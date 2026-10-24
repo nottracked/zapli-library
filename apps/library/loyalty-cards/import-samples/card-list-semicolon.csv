@@ -1,0 +1,7 @@
+Shop;Card number;Barcode format;Notes;Expiry date;Points
+Green Basket Market;GB-4471-0093;Code 128;;;
+Pillbox Pharmacy;2000451183022;EAN-13;Show before paying;;85
+Shoe Barn;SB-GIFT-25-90311;Data Matrix;Gift voucher;30.09.2026;25
+Fuel Stop;FS 008812;Code 39;;;1 250
+Petal Pets;036000291452;UPC-A;;31/12/2027;
+Corner Grocer;2900123456;EAN-13;Old card, too short for EAN-13;;

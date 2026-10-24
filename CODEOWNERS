@@ -1,0 +1,13 @@
+# Who reviews which folder. The last matching line wins.
+#
+# The maintainers review everything not listed below. An outside author's app folder is reviewed by that author, and
+# branch protection requires that review, so no pull request changes an app without its author. A maintainer merges.
+
+*                                   @mckay22
+
+# The library's own tools and samples
+/apps/library/                      @mckay22
+/apps/samples/                      @mckay22
+
+# An outside author's app, one line per folder:
+# /apps/<publisher>/<name>/         @<author-handle>

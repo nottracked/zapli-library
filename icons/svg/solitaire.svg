@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Solitaire: two playing cards fanned out, a big red heart on the front one and a spade behind it. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#467762"/>
+      <stop offset="1" stop-color="#2E5747"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <g transform="rotate(-16 96 180)">
+    <rect x="54" y="42" width="84" height="116" rx="14" fill="#000" fill-opacity="0.2"/>
+    <rect x="54" y="34" width="84" height="116" rx="14" fill="#FFF"/>
+    <path fill="#1E2433" d="M84 48 C92 60 107 67 107 81 C107 90 99 96 91 92 L95 104 H73 L77 92 C69 96 61 90 61 81 C61 67 76 60 84 48 Z"/>
+  </g>
+  <g transform="rotate(12 96 180)">
+    <rect x="54" y="42" width="84" height="116" rx="14" fill="#000" fill-opacity="0.2"/>
+    <rect x="54" y="34" width="84" height="116" rx="14" fill="#FFF"/>
+    <path fill="#E2333B" transform="translate(96 94) scale(1.14) translate(-96 -98)" d="M96 126 C84 117 66 105 66 88 C66 77 74 70 83 70 C89 70 94 73 96 79 C98 73 103 70 109 70 C118 70 126 77 126 88 C126 105 108 117 96 126 Z"/>
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+"Folder Name","List Name","Title","Kind","Tags","Content","Is Check list","Start Date","Due Date","Reminder","Repeat","Priority","Status","Created Time","Completed Time","Order","Timezone","Is All Day","Is Floating","Column Name","Column Order","View Mode","taskId","parentId"
+"","Errands","Pick up the dry cleaning","TEXT","","Ticket number 4417","N","","2026-10-16T15:00:00+0000","","","3","0","2026-10-12T09:00:00+0000","","-1099511627776","Europe/Bratislava","false","false","","","list","101",""
+"","Errands","Return the borrowed drill","TEXT","","","N","","2026-10-18T22:00:00+0000","","","1","0","2026-10-12T09:05:00+0000","","-1099511627775","Europe/Bratislava","true","false","","","list","102",""
+"Personal","Fitness","Swim 1 km","TEXT","sport","","N","","2026-10-19T05:30:00+0000","","RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=MO,WE","5","0","2026-10-01T18:00:00+0000","","-1099511627774","Europe/Bratislava","false","false","","","list","103",""
+"Personal","Fitness","Book a running shoe fitting","TEXT","","","N","","2026-10-10T22:00:00+0000","","","0","2","2026-10-02T10:00:00+0000","2026-10-11T16:20:00+0000","-1099511627773","Europe/Bratislava","true","false","","","list","104",""
+"","Inbox","Back up the photo library","TEXT","","","N","","","","","0","0","2026-10-13T20:00:00+0000","","-1099511627772","Europe/Bratislava","false","false","","","list","105",""

@@ -1,0 +1,11 @@
+{
+  "id": "samples/mp-approvals",
+  "category": "business",
+  "replaces": "identity approval client",
+  "title": "Approvals for midPoint",
+  "summary": "Review and decide access requests from your organisation's identity server.",
+  "description": "Connect to your organisation's midPoint identity server and decide the access requests waiting for you: who asks, for what, and by when. Approve or reject with a comment, from anywhere.\n\n- **Your server only:** you enter its address; the app talks to no other host.\n- **Locked:** the app opens only after you unlock it with your screen lock.\n\n**What it never does:** no ads, no tracking and no account. Your password is kept as a credential and sent only to your server.",
+  "license": "MIT",
+  "tags": ["approvals", "identity", "access requests"],
+  "screenshots": []
+}

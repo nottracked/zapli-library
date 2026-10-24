@@ -1,0 +1,5 @@
+Front	Back	Tags
+<b>der Bahnhof</b>	the train station<br>(masculine)	nouns travel
+die Fahrkarte	the ticket&nbsp;(for a train or bus)	nouns travel
+<div>umsteigen</div>	<div>to change trains</div><div>Ich muss in Köln umsteigen.</div>	verbs
+Gleis 3	platform&nbsp;3	phrases

@@ -1,0 +1,47 @@
+{
+  "id": "samples/qr",
+  "category": "tools",
+  "replaces": "QR/barcode scanner + generator",
+  "title": "QR Codes",
+  "summary": "Scan and create QR codes and barcodes, with a warning before risky links.",
+  "description": "Scan any QR code or barcode and see what it holds before anything happens: a link shows its real website first, a Wi-Fi code shows the network, a contact card shows the name. Every scan is kept in your history, and you can create your own codes to show or share.\n\n- **Safe links:** the website is shown first, and an odd-looking address is flagged.\n- **History and favourites,** with notes.\n- **Create codes:** QR, EAN-13 and Code 128.\n\n**What it never does:** no ads, no tracking and no account. Scans stay on this phone; a link opens only when you choose to open it.",
+  "license": "MIT",
+  "tags": ["qr code", "barcode", "scanner", "generator"],
+  "screenshots": [],
+  "sampleData": {
+    "scan": [
+      {
+        "content": "https://example.com/menu",
+        "format": "qr",
+        "note": "Menu at the corner cafe",
+        "favorite": true
+      },
+      {
+        "content": "WIFI:T:WPA;S:Library Guest;P:quiet-reading-room;;",
+        "format": "qr",
+        "favorite": false
+      },
+      {
+        "content": "BEGIN:VCARD\nVERSION:3.0\nFN:Alex Sample\nTEL:+1 212 555 0142\nEMAIL:alex@example.com\nEND:VCARD",
+        "format": "qr",
+        "favorite": false
+      },
+      {
+        "content": "2002000000019",
+        "format": "ean13",
+        "note": "Printer paper",
+        "favorite": false
+      },
+      {
+        "content": "http://example.net/offer",
+        "format": "qr",
+        "favorite": false
+      },
+      {
+        "content": "Gate code for the bike shed: 4417",
+        "format": "qr",
+        "favorite": false
+      }
+    ]
+  }
+}

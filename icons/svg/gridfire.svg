@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Gridfire: a ship with its flame over a grid of light that bends around it. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0A6F86"/>
+      <stop offset="1" stop-color="#053849"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <g fill="none" stroke="#48DDF2" stroke-opacity="0.5" stroke-width="9" stroke-linecap="round">
+    <path d="M50 -8 C50 56 32 80 32 96 C32 112 50 136 50 200"/>
+    <path d="M142 -8 C142 56 160 80 160 96 C160 112 142 136 142 200"/>
+    <path d="M-8 50 C56 50 80 32 96 32 C112 32 136 50 200 50"/>
+    <path d="M-8 142 C56 142 80 160 96 160 C112 160 136 142 200 142"/>
+  </g>
+  <path fill="#FF8A1E" d="M76 120 H116 C116 144 106 162 96 184 C86 162 76 144 76 120 Z"/>
+  <path fill="#FFD34D" d="M85 120 H107 C107 140 102 152 96 168 C90 152 85 140 85 120 Z"/>
+  <g fill="#000" fill-opacity="0.22" transform="translate(0 8)">
+    <path d="M96 24 C110 40 116 66 116 94 V128 H76 V94 C76 66 82 40 96 24 Z"/>
+    <path d="M78 82 L40 122 V140 L78 128 Z"/>
+    <path d="M114 82 L152 122 V140 L114 128 Z"/>
+  </g>
+  <path fill="#DCEFF5" d="M78 82 L40 122 V140 L78 128 Z"/>
+  <path fill="#DCEFF5" d="M114 82 L152 122 V140 L114 128 Z"/>
+  <path fill="#FFF" d="M96 24 C110 40 116 66 116 94 V128 H76 V94 C76 66 82 40 96 24 Z"/>
+  <ellipse cx="96" cy="76" rx="10" ry="15" fill="#0A6F86"/>
+</svg>

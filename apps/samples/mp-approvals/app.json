@@ -1,0 +1,188 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "samples/mp-approvals",
+    "name": "Approvals for midPoint",
+    "version": "1.0.0",
+    "icon": "approval",
+    "ageRating": "everyone"
+  },
+  "theme": { "seedColor": "#37474F" },
+  "permissions": {
+    "net.http": {
+      "purpose": "Load and decide approval requests on your midPoint server",
+      "hosts": [{ "slot": "server", "userConfigured": true, "purpose": "Your midPoint server" }]
+    },
+    "auth.lock": { "purpose": "Require fingerprint or PIN to open the app", "relockAfter": "PT5M" }
+  },
+  "credentials": { "mpLogin": { "type": "usernamePassword", "label": "midPoint account", "host": "server" } },
+  "dataFlows": [
+    {
+      "from": ["decide.outcome", "decide.comment"],
+      "to": "net.http:server",
+      "purpose": "Your decision and comment are sent to midPoint"
+    }
+  ],
+  "connectors": {
+    "mp": {
+      "capability": "net.http",
+      "baseUrl": "https://{server}/midpoint/ws/rest",
+      "auth": { "type": "basic", "credential": "mpLogin" },
+      "headers": { "Accept": "application/json" },
+      "timeout": "PT20S",
+      "rateLimit": { "max": 30, "per": "PT1M" },
+      "endpoints": {
+        "openCases": {
+          "method": "POST",
+          "path": "/cases/search",
+          "query": { "options": "resolveNames" },
+          "body": { "query": { "filter": { "text": "state = \"open\"" } } }
+        },
+        "complete": {
+          "method": "POST",
+          "path": "/cases/{caseOid}/workItems/{itemId}/complete",
+          "expect": [204],
+          "args": {
+            "caseOid": { "type": "text", "required": true },
+            "itemId": { "type": "integer", "required": true },
+            "outcome": { "type": "text", "required": true },
+            "comment": { "type": "text" }
+          },
+          "body": {
+            "output": {
+              "@type": "c:AbstractWorkItemOutputType",
+              "comment": "=args.comment",
+              "outcome": "='http://midpoint.evolveum.com/xml/ns/public/model/approval/outcome#' + args.outcome"
+            }
+          }
+        }
+      },
+      "errors": [
+        { "when": "=status == 401", "message": "Sign-in failed. Check your midPoint account.", "reauth": true },
+        { "when": "=status == 403", "message": "You are not allowed to decide this request." },
+        { "when": "=status >= 500", "message": "midPoint is unavailable. Try again later.", "retry": true }
+      ]
+    }
+  },
+  "entities": {
+    "workItem": {
+      "label": "Approval request",
+      "source": {
+        "connector": "mp",
+        "list": "openCases",
+        "cacheFor": "PT10M",
+        "items": "=get(body, '/object/object', []).map(c, get(c, '/workItem', []).filter(w, !has(w.closeTimestamp)).map(w, {'c': c, 'w': w})).flatten()",
+        "fields": {
+          "id": "=string(item.c.oid) + ':' + string(item.w.id)",
+          "caseOid": "=string(item.c.oid)",
+          "itemId": "=int(item.w.id)",
+          "title": "=string(get(item.c, '/name', 'Request'))",
+          "requester": "=string(get(item.c, '/requestorRef/targetName', ''))",
+          "target": "=string(get(item.c, '/objectRef/targetName', ''))",
+          "created": "=timestamp(item.w.createTimestamp)",
+          "deadline": "=has(item.w.deadline) ? timestamp(item.w.deadline) : null"
+        }
+      },
+      "display": { "title": "=item.title", "subtitle": "=item.requester", "trailing": "=formatRelative(item.created)" },
+      "fields": {
+        "caseOid": { "type": "text" },
+        "itemId": { "type": "integer" },
+        "title": { "type": "text" },
+        "requester": { "type": "text", "label": "Requested by" },
+        "target": { "type": "text", "label": "For" },
+        "created": { "type": "datetime", "label": "Requested" },
+        "deadline": { "type": "datetime" }
+      }
+    }
+  },
+  "queries": { "pending": { "entity": "workItem", "sort": ["created"] } },
+  "navigation": { "start": "inbox", "menu": ["account"] },
+  "screens": {
+    "inbox": {
+      "type": "list",
+      "title": "Approvals",
+      "query": "pending",
+      "add": false,
+      "empty": { "title": "No pending approvals", "icon": "done_all" }
+    },
+    "request": {
+      "type": "detail",
+      "entity": "workItem",
+      "show": ["target", "requester", "created", "deadline"],
+      "state": { "comment": { "type": "longText", "default": "" } },
+      "footer": "decision"
+    },
+    "account": { "type": "settings", "title": "Account" }
+  },
+  "components": {
+    "decision": { "component": "Column", "children": ["comment", "decideRow"] },
+    "comment": {
+      "component": "TextField",
+      "label": "Comment",
+      "variant": "longText",
+      "bind": "/state/comment",
+      "checks": [{ "condition": "=size(state.comment) <= 1000", "message": "Max 1000 characters" }]
+    },
+    "decideRow": { "component": "Row", "justify": "spaceBetween", "children": ["rejectBtn", "approveBtn"] },
+    "rejectBtn": {
+      "component": "Button",
+      "label": "Reject",
+      "icon": "close",
+      "tone": "danger",
+      "checks": [{ "condition": "=size(state.comment) > 0", "message": "Add a reason to reject" }],
+      "action": {
+        "event": {
+          "name": "decide",
+          "context": { "item": "=record.id", "outcome": "reject", "comment": "=state.comment" }
+        }
+      }
+    },
+    "approveBtn": {
+      "component": "Button",
+      "label": "Approve",
+      "icon": "check",
+      "variant": "primary",
+      "action": {
+        "event": {
+          "name": "decide",
+          "context": { "item": "=record.id", "outcome": "approve", "comment": "=state.comment" }
+        }
+      }
+    }
+  },
+  "actions": {
+    "decide": {
+      "args": {
+        "item": { "type": "ref", "to": "workItem" },
+        "outcome": { "type": "choice", "options": ["approve", "reject"] },
+        "comment": { "type": "longText", "maxLength": 1000 }
+      },
+      "steps": [
+        {
+          "type": "confirm",
+          "when": "=args.outcome == 'reject'",
+          "title": "Reject this request?",
+          "body": "=args.item.title"
+        },
+        {
+          "type": "capability",
+          "capability": "net.http",
+          "action": "request",
+          "args": {
+            "connector": "mp",
+            "endpoint": "complete",
+            "args": {
+              "caseOid": "=args.item.caseOid",
+              "itemId": "=args.item.itemId",
+              "outcome": "=args.outcome",
+              "comment": "=args.comment"
+            }
+          }
+        },
+        { "type": "refresh", "entity": "workItem" },
+        { "type": "toast", "text": "=args.outcome == 'approve' ? 'Approved' : 'Rejected'" },
+        { "type": "back" }
+      ]
+    }
+  }
+}

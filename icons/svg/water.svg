@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Water: a glass of water with a wave on top. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0475B8"/>
+      <stop offset="1" stop-color="#005590"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <path fill="#000" fill-opacity="0.2" d="M50 44 H142 L132 156 Q131 166 121 166 H71 Q61 166 60 156 Z"/>
+  <path fill="#FFF" d="M50 36 H142 L132 148 Q131 158 121 158 H71 Q61 158 60 148 Z"/>
+  <path fill="#1A93D8" d="M61 82 C76 72 90 92 106 82 C118 75 126 76 132 80 L124 144 Q123 150 117 150 H75 Q69 150 68 144 Z"/>
+  <path fill="none" stroke="#FFF" stroke-opacity="0.75" stroke-width="8" stroke-linecap="round" d="M80 98 L84 134"/>
+</svg>

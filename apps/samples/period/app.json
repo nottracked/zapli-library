@@ -1,0 +1,249 @@
+{
+  "spec": "anyapp/0.2",
+  "app": { "id": "samples/period", "name": "Cycle", "version": "1.0.1", "icon": "water_drop", "ageRating": "teen" },
+  "theme": { "seedColor": "#AD1457", "shape": "rounded" },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "days": { "en": "{n, plural, one {# day} other {# days}}" },
+      "daysLeft": { "en": "{n, plural, one {# day left} other {# days left}}" },
+      "soon": { "en": "{n, plural, one {Your period may start tomorrow.} other {Your period may start in # days.}}" }
+    }
+  },
+  "permissions": {
+    "notify.local": { "purpose": "Remind you a few days before your next period is due", "maxPerDay": 1 },
+    "auth.lock": { "purpose": "Keep your cycle data behind your fingerprint or PIN", "relockAfter": "PT1M" },
+    "widget.home": { "purpose": "Show the days until your next period on the home screen" }
+  },
+  "dataFlows": [{ "from": ["period.start"], "to": "notify.local", "purpose": "Reminder before a predicted period" }],
+  "settings": {
+    "cycleLength": {
+      "type": "integer",
+      "label": "Usual cycle",
+      "unit": "days",
+      "default": 28,
+      "min": 20,
+      "max": 45,
+      "sensitivity": "health"
+    },
+    "remind": { "type": "boolean", "label": "Remind me before my period", "default": true },
+    "remindDays": { "type": "integer", "label": "Days before", "default": 2, "min": 1, "max": 7 }
+  },
+  "entities": {
+    "period": {
+      "label": "Period",
+      "sensitivity": "health",
+      "sort": ["-start"],
+      "display": {
+        "title": "=formatDate(item.start, 'yMMMd')",
+        "subtitle": "=has(item.end) ? t('days', {'n': item.days}) : 'Ongoing'",
+        "icon": "water_drop"
+      },
+      "fields": {
+        "start": { "type": "date", "required": true, "unique": true, "default": "=today()" },
+        "end": {
+          "type": "date",
+          "checks": [{ "condition": "=!has(item.end) || item.end >= item.start", "message": "Ends before it starts" }]
+        },
+        "flow": { "type": "choice", "options": ["light", "medium", "heavy"] },
+        "days": {
+          "type": "integer",
+          "label": "Length",
+          "unit": "days",
+          "compute": "=daysBetween(item.start, addDays(item.end, 1))",
+          "stored": true
+        }
+      }
+    },
+    "dayLog": {
+      "label": "Day log",
+      "sensitivity": "health",
+      "sort": ["-date"],
+      "display": { "title": "=formatDate(item.date, 'yMMMEd')", "subtitle": "=join(item.symptoms, ', ')" },
+      "fields": {
+        "date": { "type": "date", "required": true, "unique": true, "default": "=today()" },
+        "flow": { "type": "choice", "options": ["none", "spotting", "light", "medium", "heavy"], "default": "none" },
+        "symptoms": {
+          "type": "multiChoice",
+          "options": ["cramps", "headache", "bloating", "backache", "acne", "nausea", "fatigue", "cravings"]
+        },
+        "mood": { "type": "choice", "options": ["great", "good", "okay", "low", "irritable", "anxious"] },
+        "note": { "type": "longText", "maxLength": 1000 }
+      }
+    }
+  },
+  "queries": {
+    "cycle": {
+      "entity": "period",
+      "where": "=item.start >= addMonths(today(), -12)",
+      "aggregate": {
+        "first": { "fn": "min", "field": "start" },
+        "last": { "fn": "max", "field": "start" },
+        "n": { "fn": "count" },
+        "avgDays": { "fn": "avg", "field": "days" }
+      }
+    },
+    "open": { "entity": "period", "where": "=!has(item.end)", "sort": ["-start"], "limit": 1 },
+    "todayLog": { "entity": "dayLog", "where": "=item.date == today()", "limit": 1 },
+    "logs": { "entity": "dayLog", "where": "=item.date >= addMonths(today(), -12)", "sort": ["date"], "limit": 400 },
+    "lengths": { "entity": "period", "where": "=has(item.end)", "sort": ["-start"], "limit": 12 },
+    "moods": {
+      "entity": "dayLog",
+      "where": "=item.date > addDays(today(), -90) && has(item.mood)",
+      "groupBy": { "field": "mood" },
+      "aggregate": { "days": { "fn": "count" } }
+    }
+  },
+  "navigation": {
+    "start": "today",
+    "tabs": [
+      { "screen": "today", "label": "Today", "icon": "today" },
+      { "screen": "calendar", "label": "Calendar", "icon": "calendar_month" },
+      { "screen": "history", "label": "Periods", "icon": "water_drop" },
+      { "screen": "insights", "label": "Insights", "icon": "insights" }
+    ]
+  },
+  "screens": {
+    "today": { "type": "dashboard", "title": "Cycle", "root": "todayCol" },
+    "calendar": { "type": "calendar", "title": "Calendar", "query": "logs", "date": "date", "item": "calMark" },
+    "history": { "type": "list", "title": "Periods", "entity": "period" },
+    "insights": { "type": "dashboard", "title": "Insights", "root": "insightCol" }
+  },
+  "components": {
+    "todayCol": { "component": "Column", "children": ["nextCard", "lateBadge", "periodRow", "logBtn", "disclaimer"] },
+    "nextCard": { "component": "Card", "child": "nextRow" },
+    "nextRow": { "component": "Row", "children": ["nextStat", "dayNo"], "justify": "spaceBetween" },
+    "nextStat": {
+      "component": "Stat",
+      "label": "Next period",
+      "value": "=formatDate(addDays(q.cycle.last, q.cycle.n >= 2 ? int(round(double(coalesce(daysBetween(q.cycle.first, q.cycle.last), 0)) / (q.cycle.n - 1))) : settings.cycleLength), 'MMMd')",
+      "caption": "=t('daysLeft', {'n': max(daysBetween(today(), addDays(q.cycle.last, q.cycle.n >= 2 ? int(round(double(coalesce(daysBetween(q.cycle.first, q.cycle.last), 0)) / (q.cycle.n - 1))) : settings.cycleLength)), 0)})"
+    },
+    "dayNo": { "component": "Stat", "label": "Cycle day", "value": "=daysBetween(addDays(q.cycle.last, -1), today())" },
+    "lateBadge": {
+      "component": "Badge",
+      "icon": "schedule",
+      "tone": "warning",
+      "text": "Your period is later than predicted",
+      "visible": "=daysBetween(today(), addDays(q.cycle.last, q.cycle.n >= 2 ? int(round(double(coalesce(daysBetween(q.cycle.first, q.cycle.last), 0)) / (q.cycle.n - 1))) : settings.cycleLength)) < 0"
+    },
+    "periodRow": { "component": "Row", "justify": "spaceBetween", "children": ["startBtn", "endBtn"] },
+    "startBtn": {
+      "component": "Button",
+      "icon": "water_drop",
+      "label": "Period started",
+      "variant": "primary",
+      "visible": "=size(q.open) == 0",
+      "action": { "event": { "name": "startPeriod" } }
+    },
+    "endBtn": {
+      "component": "Button",
+      "icon": "check",
+      "label": "Period ended",
+      "visible": "=size(q.open) > 0",
+      "action": { "event": { "name": "endPeriod", "context": { "period": "=first(q.open).id" } } }
+    },
+    "logBtn": { "component": "Button", "label": "Log today", "action": { "event": { "name": "logToday" } } },
+    "disclaimer": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "Predictions use the average time between your period starts over the last 12 months. They are estimates, not medical advice or birth control."
+    },
+    "calMark": {
+      "component": "Badge",
+      "icon": "=item.flow == 'none' ? 'edit_note' : 'water_drop'",
+      "text": "=item.flow == 'none' ? 'Logged' : item.flow",
+      "tone": "=item.flow == 'none' ? 'neutral' : 'danger'"
+    },
+    "insightCol": { "component": "Column", "children": ["statRow", "lenChart", "moodChart", "disclaimer"] },
+    "statRow": { "component": "Row", "justify": "spaceBetween", "children": ["avgCycle", "avgLen", "count"] },
+    "avgCycle": {
+      "component": "Stat",
+      "label": "Average cycle",
+      "unit": "days",
+      "value": "=q.cycle.n >= 2 ? round(double(coalesce(daysBetween(q.cycle.first, q.cycle.last), 0)) / (q.cycle.n - 1)) : null"
+    },
+    "avgLen": { "component": "Stat", "label": "Average period", "unit": "days", "value": "=round(q.cycle.avgDays, 1)" },
+    "count": { "component": "Stat", "label": "Periods logged", "value": "=q.cycle.n", "caption": "Last 12 months" },
+    "lenChart": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Period days",
+      "query": "lengths",
+      "x": "start",
+      "y": ["days"]
+    },
+    "moodChart": {
+      "component": "Chart",
+      "kind": "pie",
+      "title": "Mood, 90 days",
+      "query": "moods",
+      "x": "key",
+      "y": ["days"]
+    }
+  },
+  "actions": {
+    "startPeriod": {
+      "steps": [
+        { "type": "createRecord", "entity": "period", "values": { "start": "=today()" } },
+        { "type": "query", "query": "todayLog", "as": "log" },
+        {
+          "type": "updateRecord",
+          "when": "=size(vars.log) > 0",
+          "record": "=vars.log[0].id",
+          "set": { "flow": "medium" }
+        },
+        { "type": "createRecord", "when": "=size(vars.log) == 0", "entity": "dayLog", "values": { "flow": "medium" } }
+      ]
+    },
+    "endPeriod": {
+      "args": { "period": { "type": "ref", "to": "period" } },
+      "steps": [{ "type": "updateRecord", "record": "=args.period", "set": { "end": "=today()" } }]
+    },
+    "logToday": {
+      "steps": [
+        { "type": "query", "query": "todayLog", "as": "log" },
+        {
+          "type": "navigate",
+          "when": "=size(vars.log) > 0",
+          "screen": "dayLog.form",
+          "params": { "id": "=vars.log[0].id" }
+        },
+        { "type": "navigate", "when": "=size(vars.log) == 0", "screen": "dayLog.form" }
+      ]
+    },
+    "remindSoon": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "Cycle reminder",
+            "body": "=t('soon', {'n': settings.remindDays})",
+            "open": { "screen": "today" }
+          }
+        }
+      ]
+    }
+  },
+  "triggers": {
+    "beforePeriod": {
+      "type": "schedule",
+      "rrule": "FREQ=DAILY",
+      "times": ["09:00"],
+      "when": "=settings.remind && daysBetween(today(), addDays(q.cycle.last, q.cycle.n >= 2 ? int(round(double(coalesce(daysBetween(q.cycle.first, q.cycle.last), 0)) / (q.cycle.n - 1))) : settings.cycleLength)) == settings.remindDays",
+      "do": "remindSoon",
+      "maxPerDay": 1
+    }
+  },
+  "widgets": {
+    "nextWidget": {
+      "template": "stat",
+      "title": "Next period",
+      "sizes": ["small"],
+      "value": "=t('daysLeft', {'n': max(daysBetween(today(), addDays(q.cycle.last, q.cycle.n >= 2 ? int(round(double(coalesce(daysBetween(q.cycle.first, q.cycle.last), 0)) / (q.cycle.n - 1))) : settings.cycleLength)), 0)})",
+      "open": "today"
+    }
+  }
+}

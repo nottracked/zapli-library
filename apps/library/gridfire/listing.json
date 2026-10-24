@@ -1,0 +1,21 @@
+{
+  "id": "library/gridfire",
+  "category": "game_arcade",
+  "replaces": "Twin-stick arena shooter",
+  "title": "Gridfire",
+  "summary": "Two-thumb arena shooter: eight sectors, power-ups, upgrades and an endless mode",
+  "description": "**Gridfire** is a fast arena shooter for two thumbs. You fly a small ship around a square arena on a grid of light that ripples and bends under every shot and blast. No ads, no account, no tracking.\n\n**Playing**\n\n- **Two thumbs, anywhere.** Put a thumb down on the left half of the screen and drag to fly. Drag on the right half to aim: your ship fires for as long as that thumb stays down. The sticks appear wherever you touch.\n- **One-thumb mode** lets the ship aim and fire at the nearest enemy by itself, so you only steer.\n- **Eight sectors of six waves.** Each sector ends in a surge, and clearing it opens the next. The first five each bring in a new kind of enemy, from seekers that chase you to dodgers that slip aside from your bullets and gravity wells that pull your shots and your ship toward them.\n- **Endless mode** opens once you have cleared Sector 2: the waves keep coming and keep getting faster.\n- **Score and multiplier.** Destroyed enemies drop shards. Fly through them to raise your multiplier up to ×10, which also widens your fire from two streams to a five-way spread. Losing a ship resets it.\n- **Bombs** clear every enemy on the field. You start with three ships and three bombs, and earn more as your score grows.\n- **Power-ups and upgrades.** Gold-ringed elites drop capsules with six power-ups: ricochet, piercing and homing shots, drones, time warp and a shield. After waves 1, 3 and 5 (every second wave in Endless) you pick one of three upgrades, such as side cannons, chain lightning or bombs that recharge, and they stack for the rest of the run.\n- **A guide built in.** How to play explains the controls, the scoring, every power-up and upgrade, and each enemy.\n\n**Your game and your scores**\n\n- The run in progress is saved as you play, so you can close the app and continue where you left off. The game pauses itself when you leave it.\n- After every run: your score, kills, top multiplier and time, and the best score for each sector and for Endless.\n- Progress and settings stay on your phone. Erase progress starts the sectors over and keeps your settings.\n\n**Sound and looks**\n\n- Every sound is synthesised as you play, and the music is a live sequencer that builds up with each wave. Sound effects, music and volume each have their own setting.\n- Glowing vector graphics. Where a phone can't use the faster graphics, the game draws in a plainer style, and Auto quality lowers the resolution if the frame rate drops.\n- The home screen is a live arena: tap the empty grid to make it ring.\n- Light and dark designs, or follow the phone. Reduce motion calms the grid and removes screen shake, flashes and blinking; it follows your phone's setting unless you choose otherwise.\n- With a keyboard and mouse: WASD to move, the arrow keys or the mouse to aim and fire, Space for a bomb, P to pause. Waves, lost ships, bombs and power-ups are announced to screen readers.\n\n**What it never does**\n\n- No ads, no in-app purchases, no locked features.\n- No account and no sign-in.\n- No internet access: the game works offline and cannot connect anywhere.\n- No analytics or tracking of any kind.",
+  "license": "MIT",
+  "tags": ["arcade", "shooter", "twin-stick", "arena", "action", "single player", "offline", "no ads"],
+  "screenshots": [],
+  "research": [
+    {
+      "source": "https://en.wikipedia.org/wiki/Twin-stick_shooter",
+      "used_for": "The type and its expected controls: one control moves on a flat plane, the other aims and fires in the direction it is pushed, and touch or keyboard and mouse can stand in for the sticks. Used to name the type and to check that the game offers touch, keyboard and mouse play."
+    },
+    {
+      "source": "https://www.pocketgamer.com/bobs-space-adventure/review/",
+      "used_for": "Read through a search summary: a phone game of the type where power-ups take a long grind or an in-app purchase to unlock. Here every power-up and upgrade is earned in play and nothing is sold."
+    }
+  ]
+}

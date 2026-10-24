@@ -1,0 +1,7 @@
+_id,store,note,validfrom,expiry,balance,balancetype,cardid,barcodeid,barcodetype,barcodeencoding,headercolor,starstatus,lastused,archive
+1,Corner Grocer,Double points on Tuesdays,,,1240,,2900123456785,,EAN_13,,-14575885,1,1760000000,0
+2,City Library,,,1798675200000,0,,LIB0004417,,CODE_39,,-12627531,0,1759000000,0
+3,Bean There Café,Tenth coffee is free,,,7,,BTC-STAMPS-7781,,QR_CODE,,-6543440,0,0,0
+4,Old Video Club,,,,,,48213377,,ITF,,-16777216,0,0,1
+5,Riverside Gym,,,,,,RG|2026|00071,,PDF_417,,-3355444,0,0,0
+6,Hammer and Hinge,Member since 2024,,,,,7700-1234,2991700266149,EAN_13,,-1,0,0,0

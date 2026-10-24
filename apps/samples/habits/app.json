@@ -1,0 +1,187 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "samples/habits",
+    "name": "Habits",
+    "version": "1.0.1",
+    "icon": "task_alt",
+    "ageRating": "everyone",
+    "aiExposure": "on"
+  },
+  "theme": { "seedColor": "#2E7D32", "shape": "rounded" },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "streak": {
+        "en": "{n, plural, one {# day} other {# days}}",
+        "sk": "{n, plural, one {# deň} few {# dni} many {# dňa} other {# dní}}"
+      },
+      "streakLine": {
+        "en": "{n, plural, =0 {No streak yet} one {#-day streak} other {#-day streak}}",
+        "sk": "{n, plural, =0 {Zatiaľ bez série} one {Séria # deň} few {Séria # dni} many {Séria # dňa} other {Séria # dní}}"
+      }
+    }
+  },
+  "permissions": {
+    "notify.local": { "purpose": "Remind you when a habit is due", "maxPerDay": 8 },
+    "widget.home": { "purpose": "Tick off today's habits from your home screen" }
+  },
+  "entities": {
+    "habit": {
+      "label": "Habit",
+      "aiExposure": "write",
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=t('streakLine', {'n': coalesce(item.streak, 0)})",
+        "icon": "repeat"
+      },
+      "fields": {
+        "name": { "type": "text", "required": true, "maxLength": 60 },
+        "schedule": { "type": "recurrence", "label": "Repeat", "default": "FREQ=DAILY" },
+        "remind": { "type": "boolean", "label": "Remind me", "default": true },
+        "remindAt": { "type": "time", "label": "Reminder time", "default": "20:00", "visible": "=item.remind" },
+        "archived": { "type": "boolean", "default": false, "visible": "=has(item.id)" },
+        "checkins": { "type": "inverse", "of": "checkin.habit" },
+        "doneToday": { "type": "boolean", "compute": "=item.checkins.exists(c, c.date == today())" },
+        "streak": {
+          "type": "integer",
+          "label": "Current streak",
+          "compute": "=streak(item.checkins.map(c, c.date), item.schedule, today())"
+        }
+      }
+    },
+    "checkin": {
+      "label": "Check-in",
+      "aiExposure": "read",
+      "unique": [["habit", "date"]],
+      "display": { "title": "=formatDate(item.date, 'yMMMEd')" },
+      "fields": {
+        "habit": { "type": "ref", "to": "habit", "required": true, "onDelete": "cascade" },
+        "date": { "type": "date", "required": true, "default": "=today()" }
+      }
+    }
+  },
+  "queries": {
+    "active": { "entity": "habit", "where": "=!item.archived", "sort": ["name"] },
+    "dueToday": { "entity": "habit", "where": "=!item.archived && occursOn(item.schedule, today())", "sort": ["name"] },
+    "last30": {
+      "entity": "checkin",
+      "where": "=item.date > addDays(today(), -30)",
+      "fill": true,
+      "groupBy": { "field": "date", "period": "day" },
+      "aggregate": { "done": { "fn": "count" } }
+    }
+  },
+  "navigation": {
+    "start": "today",
+    "tabs": [
+      { "screen": "today", "label": "Today", "icon": "today" },
+      { "screen": "habits", "label": "Habits", "icon": "list" },
+      { "screen": "stats", "label": "Stats", "icon": "insights" }
+    ]
+  },
+  "screens": {
+    "today": {
+      "type": "list",
+      "title": "Today",
+      "query": "dueToday",
+      "item": "todayRow",
+      "empty": { "title": "Nothing due today", "icon": "celebration" }
+    },
+    "habits": { "type": "list", "title": "Habits", "query": "active" },
+    "stats": { "type": "custom", "title": "Stats", "root": "statsCol" }
+  },
+  "components": {
+    "todayRow": { "component": "Row", "align": "center", "children": ["todayCheck", "todayStreak"] },
+    "todayCheck": {
+      "component": "CheckBox",
+      "label": "=item.name",
+      "value": "=item.doneToday",
+      "weight": 1,
+      "action": { "event": { "name": "setDone", "context": { "habit": "=item.id", "done": "=!item.doneToday" } } }
+    },
+    "todayStreak": {
+      "component": "Badge",
+      "icon": "local_fire_department",
+      "text": "=t('streak', {'n': coalesce(item.streak, 0)})"
+    },
+    "statsCol": { "component": "Column", "children": ["bestStat", "chart30"] },
+    "bestStat": {
+      "component": "Stat",
+      "label": "Best current streak",
+      "value": "=t('streak', {'n': coalesce(max(q.active.map(h, coalesce(h.streak, 0))), 0)})"
+    },
+    "chart30": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Check-ins, last 30 days",
+      "query": "last30",
+      "x": "key",
+      "y": ["done"]
+    }
+  },
+  "actions": {
+    "setDone": {
+      "args": { "habit": { "type": "ref", "to": "habit" }, "done": { "type": "boolean" } },
+      "aiExposure": true,
+      "agentDescription": "Mark a habit done (done=true) or not done (done=false) for today.",
+      "steps": [
+        { "type": "deleteRecords", "entity": "checkin", "where": "=item.habit == args.habit && item.date == today()" },
+        {
+          "type": "createRecord",
+          "entity": "checkin",
+          "when": "=args.done",
+          "values": { "habit": "=args.habit", "date": "=today()" }
+        }
+      ]
+    },
+    "remind": {
+      "args": { "habit": { "type": "ref", "to": "habit" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=args.habit.name",
+            "body": "Time for your habit",
+            "open": { "screen": "today" },
+            "buttons": [{ "id": "done", "label": "Done" }],
+            "data": { "habit": "=args.habit.id" }
+          }
+        }
+      ]
+    }
+  },
+  "triggers": {
+    "reminder": {
+      "type": "recordSchedule",
+      "entity": "habit",
+      "rrule": "=item.schedule",
+      "time": "=item.remindAt",
+      "when": "=item.remind && !item.archived && !item.doneToday",
+      "do": "remind",
+      "args": { "habit": "=item.id" }
+    },
+    "doneFromNotification": {
+      "type": "capability",
+      "capability": "notify.local",
+      "event": "buttonTapped",
+      "when": "=event.button == 'done'",
+      "do": "setDone",
+      "args": { "habit": "=event.data.habit", "done": true }
+    }
+  },
+  "widgets": {
+    "todayWidget": {
+      "template": "checklist",
+      "title": "Today",
+      "sizes": ["small", "medium"],
+      "query": "dueToday",
+      "label": "=item.name",
+      "checked": "=item.doneToday",
+      "open": "today",
+      "toggle": { "event": { "name": "setDone", "context": { "habit": "=item.id", "done": "=!item.doneToday" } } }
+    }
+  }
+}

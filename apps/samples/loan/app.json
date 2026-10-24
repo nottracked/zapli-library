@@ -1,0 +1,104 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "samples/loan",
+    "name": "Loan Planner",
+    "version": "1.0.0",
+    "icon": "account_balance",
+    "ageRating": "everyone"
+  },
+  "theme": { "seedColor": "#283593" },
+  "entities": {
+    "loan": {
+      "label": "Loan",
+      "sensitivity": "financial",
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=formatNumber(item.principal) + ' at ' + formatNumber(item.rate) + '% for ' + string(item.months) + ' months'",
+        "trailing": "=formatNumber(decimal(first(fn.amortize(item.principal, item.rate, item.months, item.firstDue)).payment))"
+      },
+      "fields": {
+        "name": { "type": "text", "required": true, "maxLength": 60 },
+        "principal": { "type": "decimal", "label": "Amount", "scale": 2, "required": true, "min": 1 },
+        "rate": {
+          "type": "decimal",
+          "label": "Interest rate",
+          "unit": "% a year",
+          "scale": 3,
+          "required": true,
+          "min": 0,
+          "max": 100
+        },
+        "months": {
+          "type": "integer",
+          "label": "Term",
+          "unit": "months",
+          "required": true,
+          "default": 60,
+          "min": 1,
+          "max": 600
+        },
+        "firstDue": { "type": "date", "label": "First payment", "required": true, "default": "=addMonths(today(), 1)" }
+      }
+    }
+  },
+  "functions": {
+    "amortize": {
+      "lang": "js",
+      "params": [
+        { "name": "principal", "type": "decimal" },
+        { "name": "ratePct", "type": "decimal" },
+        { "name": "months", "type": "int" },
+        { "name": "firstDue", "type": "date" }
+      ],
+      "returns": "list<map<string>>",
+      "code": "function amortize(principal, ratePct, months, firstDue) {\n  const cents = (text) => {\n    const [whole, frac = ''] = text.split('.');\n    const sign = whole.startsWith('-') ? -1 : 1;\n    return sign * (Math.abs(Number(whole)) * 100 + Number((frac + '00').slice(0, 2)));\n  };\n  const money = (c) => (c < 0 ? '-' : '') + Math.floor(Math.abs(c) / 100) + '.' + String(Math.abs(c) % 100).padStart(2, '0');\n  const round = (x) => Math.sign(x) * Math.round(Math.abs(x));\n  const r = Number(ratePct) / 1200;\n  let growth = 1;\n  for (let i = 0; i < months; i++) growth *= 1 + r;\n  let balance = cents(principal);\n  const payment = r === 0 ? Math.ceil(balance / months) : round((balance * r * growth) / (growth - 1));\n  const [y0, m0, d0] = firstDue.split('-').map(Number);\n  const rows = [];\n  for (let n = 1; n <= months; n++) {\n    const m = m0 - 1 + (n - 1);\n    const y = y0 + Math.floor(m / 12);\n    const month = (m % 12) + 1;\n    const leap = (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;\n    const last = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1];\n    const due = String(y).padStart(4, '0') + '-' + String(month).padStart(2, '0') + '-' + String(Math.min(d0, last)).padStart(2, '0');\n    const interest = round(balance * r);\n    const toPrincipal = n === months ? balance : Math.min(payment - interest, balance);\n    balance -= toPrincipal;\n    rows.push({ due, payment: money(toPrincipal + interest), interest: money(interest), principal: money(toPrincipal), balance: money(balance) });\n  }\n  return rows;\n}",
+      "examples": [
+        {
+          "in": ["90.00", "12.000", 3, "2026-11-30"],
+          "out": [
+            { "due": "2026-11-30", "payment": "30.60", "interest": "0.90", "principal": "29.70", "balance": "60.30" },
+            { "due": "2026-12-30", "payment": "30.60", "interest": "0.60", "principal": "30.00", "balance": "30.30" },
+            { "due": "2027-01-30", "payment": "30.60", "interest": "0.30", "principal": "30.30", "balance": "0.00" }
+          ]
+        },
+        {
+          "in": ["100.00", "0.000", 3, "2028-01-31"],
+          "out": [
+            { "due": "2028-01-31", "payment": "33.34", "interest": "0.00", "principal": "33.34", "balance": "66.66" },
+            { "due": "2028-02-29", "payment": "33.34", "interest": "0.00", "principal": "33.34", "balance": "33.32" },
+            { "due": "2028-03-31", "payment": "33.32", "interest": "0.00", "principal": "33.32", "balance": "0.00" }
+          ]
+        }
+      ]
+    }
+  },
+  "navigation": { "start": "loan.list" },
+  "screens": { "loanDetail": { "type": "detail", "entity": "loan", "header": "summary", "footer": "schedule" } },
+  "components": {
+    "summary": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["paymentStat", "interestStat", "totalStat"]
+    },
+    "paymentStat": {
+      "component": "Stat",
+      "label": "Monthly payment",
+      "value": "=formatNumber(decimal(first(fn.amortize(record.principal, record.rate, record.months, record.firstDue)).payment))"
+    },
+    "interestStat": {
+      "component": "Stat",
+      "label": "Total interest",
+      "value": "=formatNumber(sum(fn.amortize(record.principal, record.rate, record.months, record.firstDue).map(r, decimal(r.interest))))"
+    },
+    "totalStat": {
+      "component": "Stat",
+      "label": "Total paid",
+      "value": "=formatNumber(sum(fn.amortize(record.principal, record.rate, record.months, record.firstDue).map(r, decimal(r.payment))))"
+    },
+    "schedule": {
+      "component": "Text",
+      "text": "=join(fn.amortize(record.principal, record.rate, record.months, record.firstDue).map(r, join([formatDate(date(r.due), 'yMMMd'), ': pay ', formatNumber(decimal(r.payment)), ' (interest ', formatNumber(decimal(r.interest)), '), balance ', formatNumber(decimal(r.balance))], '')), '\\n')"
+    }
+  }
+}

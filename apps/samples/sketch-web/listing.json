@@ -1,0 +1,11 @@
+{
+  "id": "samples/sketch-web",
+  "category": "art_and_design",
+  "replaces": "drawing pad",
+  "title": "Sketch",
+  "summary": "Draw with a finger or a pen, undo and redo, then save or share a PNG.",
+  "description": "A plain sketch pad for quick drawings, notes and doodles. Lines follow your finger, mouse or pen, and get thicker as you press harder with a pen. Your drawing is kept until you clear it.\n\n- **Colours and brush sizes,** undo, redo and clear.\n- **Save** the drawing as a PNG file, or **share** it.\n\n**What it never does:** no ads, no tracking and no account. Drawings stay on this phone until you save or share them.",
+  "license": "MIT",
+  "tags": ["drawing", "sketch", "doodle"],
+  "screenshots": []
+}

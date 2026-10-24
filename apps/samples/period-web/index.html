@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="color-scheme" content="light dark" />
+        <title>Cycle</title>
+        <script type="application/anyapp+json" id="anyapp-manifest">
+            {
+                "spec": "anyapp/0.2",
+                "app": {
+                    "id": "samples/period-web",
+                    "kind": "web",
+                    "name": "Cycle",
+                    "version": "1.0.0",
+                    "icon": "water_drop",
+                    "ageRating": "teen"
+                },
+                "theme": { "seedColor": "#AD1457" },
+                "web": {
+                    "routes": {
+                        "today": "#/today",
+                        "log": "#/log",
+                        "calendar": "#/calendar",
+                        "insights": "#/insights"
+                    },
+                    "orientation": "portrait"
+                },
+                "permissions": {
+                    "notify.local": {
+                        "purpose": "Remind you a few days before your next period is due",
+                        "maxPerDay": 1
+                    },
+                    "auth.lock": {
+                        "purpose": "Keep your cycle data behind your fingerprint or PIN",
+                        "relockAfter": "PT1M"
+                    },
+                    "widget.home": { "purpose": "Show the days until your next period on the home screen" }
+                },
+                "dataFlows": [
+                    { "from": ["period.start"], "to": "notify.local", "purpose": "Reminder before a predicted period" }
+                ],
+                "entities": {
+                    "period": {
+                        "label": "Period",
+                        "sensitivity": "health",
+                        "sort": ["-start"],
+                        "display": { "title": "=formatDate(item.start, 'yMMMd')" },
+                        "fields": {
+                            "start": { "type": "date", "required": true, "unique": true, "default": "=today()" },
+                            "end": { "type": "date" },
+                            "flow": { "type": "choice", "options": ["light", "medium", "heavy"] },
+                            "days": {
+                                "type": "integer",
+                                "unit": "days",
+                                "compute": "=daysBetween(item.start, addDays(item.end, 1))",
+                                "stored": true
+                            }
+                        }
+                    },
+                    "dayLog": {
+                        "label": "Day log",
+                        "sensitivity": "health",
+                        "sort": ["-date"],
+                        "display": { "title": "=formatDate(item.date, 'yMMMEd')" },
+                        "fields": {
+                            "date": { "type": "date", "required": true, "unique": true, "default": "=today()" },
+                            "flow": {
+                                "type": "choice",
+                                "options": ["none", "spotting", "light", "medium", "heavy"],
+                                "default": "none"
+                            },
+                            "symptoms": {
+                                "type": "multiChoice",
+                                "options": [
+                                    "cramps",
+                                    "headache",
+                                    "bloating",
+                                    "backache",
+                                    "acne",
+                                    "nausea",
+                                    "fatigue",
+                                    "cravings"
+                                ]
+                            },
+                            "mood": {
+                                "type": "choice",
+                                "options": ["great", "good", "okay", "low", "irritable", "anxious"]
+                            },
+                            "note": { "type": "longText", "maxLength": 1000 }
+                        }
+                    }
+                },
+                "widgets": {
+                    "next": {
+                        "template": "stat",
+                        "title": "Next period",
+                        "source": "web",
+                        "open": "today",
+                        "sizes": ["small"]
+                    }
+                }
+            }
+        </script>
+        <style>
+            :root {
+                color-scheme: light dark;
+                --primary: var(--anyapp-color-primary, #ad1457);
+                --on-primary: var(--anyapp-color-on-primary, #ffffff);
+                --container: var(--anyapp-color-primary-container, #ffd9e2);
+                --surface: var(--anyapp-color-surface, #fffbff);
+                --on-surface: var(--anyapp-color-on-surface, #201a1b);
+                --variant: var(--anyapp-color-surface-variant, #f3dde1);
+                --outline: var(--anyapp-color-outline, #847376);
+                --warning: var(--anyapp-color-warning, #8a5100);
+                --radius: var(--anyapp-radius-m, 12px);
+                --target: var(--anyapp-touch-target, 48px);
+                --gap: var(--anyapp-space-2, 0.75rem);
+            }
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --primary: var(--anyapp-color-primary, #ffb1c8);
+                    --on-primary: var(--anyapp-color-on-primary, #5e1133);
+                    --container: var(--anyapp-color-primary-container, #7b2949);
+                    --surface: var(--anyapp-color-surface, #201a1b);
+                    --on-surface: var(--anyapp-color-on-surface, #ece0e1);
+                    --variant: var(--anyapp-color-surface-variant, #524346);
+                    --outline: var(--anyapp-color-outline, #9f8c8f);
+                    --warning: var(--anyapp-color-warning, #ffb870);
+                }
+            }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                min-height: 100dvh;
+                background: var(--surface);
+                color: var(--on-surface);
+                font: 1rem/1.5 var(--anyapp-font-family, system-ui, sans-serif);
+                padding: env(safe-area-inset-top) env(safe-area-inset-right) calc(4.5rem + env(safe-area-inset-bottom))
+                    env(safe-area-inset-left);
+            }
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.5rem 1rem;
+            }
+            header strong {
+                font-size: 1.25rem;
+            }
+            main {
+                max-width: 40rem;
+                margin: 0 auto;
+                padding: 0 1rem 1rem;
+            }
+            main:focus,
+            h1[tabindex="-1"]:focus {
+                outline: none;
+            }
+            h1 {
+                font-size: 1.5rem;
+                margin: 0.5rem 0 1rem;
+            }
+            h2 {
+                font-size: 1.1rem;
+                margin: 1.5rem 0 0.5rem;
+            }
+            .card {
+                background: var(--variant);
+                border-radius: var(--radius);
+                padding: 1rem;
+                margin-bottom: var(--gap);
+            }
+            .hero .big {
+                font-size: 2rem;
+                font-weight: 700;
+                margin: 0;
+            }
+            .label,
+            .muted,
+            .note {
+                margin: 0.25rem 0;
+                opacity: 0.85;
+            }
+            .note {
+                font-size: 0.875rem;
+            }
+            .warn {
+                color: var(--warning);
+                font-weight: 600;
+            }
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: var(--gap);
+                margin: var(--gap) 0;
+            }
+            button,
+            .button,
+            input,
+            select,
+            textarea {
+                font: inherit;
+                color: inherit;
+            }
+            button,
+            .button {
+                min-height: var(--target);
+                min-width: var(--target);
+                padding: 0 1.25rem;
+                border-radius: 999px;
+                border: 1px solid var(--outline);
+                background: transparent;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            button.primary {
+                background: var(--primary);
+                color: var(--on-primary);
+                border-color: var(--primary);
+            }
+            :focus-visible {
+                outline: 3px solid var(--primary);
+                outline-offset: 2px;
+            }
+            label,
+            fieldset {
+                display: block;
+                margin: 0 0 1rem;
+            }
+            fieldset {
+                border: 1px solid var(--outline);
+                border-radius: var(--radius);
+                padding: 0.5rem 0.75rem;
+            }
+            .choice {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.25rem;
+                min-height: var(--target);
+                margin-right: 1rem;
+            }
+            input[type="date"],
+            input[type="number"],
+            select,
+            textarea {
+                display: block;
+                width: 100%;
+                min-height: var(--target);
+                margin-top: 0.25rem;
+                padding: 0.5rem;
+                border: 1px solid var(--outline);
+                border-radius: 8px;
+                background: var(--surface);
+            }
+            input[type="checkbox"],
+            input[type="radio"] {
+                width: 1.25rem;
+                height: 1.25rem;
+                accent-color: var(--primary);
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 2px;
+                padding: 0.5rem 0.25rem;
+                text-align: center;
+            }
+            .grid .dow {
+                font-size: 0.75rem;
+                opacity: 0.8;
+            }
+            .day {
+                min-height: var(--target);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: var(--radius);
+                color: inherit;
+                text-decoration: none;
+            }
+            .day.period {
+                background: var(--primary);
+                color: var(--on-primary);
+            }
+            .day.predicted {
+                border: 2px dashed var(--primary);
+            }
+            .day.logged {
+                text-decoration: underline;
+            }
+            .day.today {
+                font-weight: 800;
+                outline: 2px solid var(--on-surface);
+            }
+            .day.future {
+                opacity: 0.6;
+            }
+            .legend span {
+                margin-right: 1rem;
+                font-size: 0.875rem;
+            }
+            .bars {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .bars li {
+                display: grid;
+                grid-template-columns: 6rem 1fr 3rem;
+                align-items: center;
+                gap: 0.5rem;
+                margin: 0.25rem 0;
+            }
+            .bar {
+                height: 0.75rem;
+                border-radius: 999px;
+                background: var(--primary);
+            }
+            .stats {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+                gap: var(--gap);
+            }
+            .stats .card {
+                margin: 0;
+            }
+            .stats strong {
+                display: block;
+                font-size: 1.5rem;
+            }
+            nav {
+                position: fixed;
+                inset: auto 0 0 0;
+                display: flex;
+                background: var(--container);
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+            nav a {
+                flex: 1;
+                min-height: 4rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: inherit;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+            nav a[aria-current="page"] {
+                font-weight: 700;
+            }
+            nav svg {
+                width: 1.5rem;
+                height: 1.5rem;
+                fill: currentColor;
+            }
+            #status {
+                position: fixed;
+                left: 1rem;
+                right: 1rem;
+                bottom: calc(5rem + env(safe-area-inset-bottom));
+                margin: 0;
+                text-align: center;
+                pointer-events: none;
+            }
+            #status:not(:empty) {
+                background: var(--on-surface);
+                color: var(--surface);
+                border-radius: var(--radius);
+                padding: 0.75rem;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    animation: none !important;
+                    transition: none !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <strong>Cycle</strong>
+            <a class="button" href="#/settings">Settings</a>
+        </header>
+        <main id="view" tabindex="-1"></main>
+        <p id="status" role="status" aria-live="polite"></p>
+        <nav aria-label="Sections">
+            <a href="#/today" data-route="today">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 3c-3 4-6 7.2-6 11a6 6 0 0 0 12 0c0-3.8-3-7-6-11z" />
+                </svg>
+                Today
+            </a>
+            <a href="#/calendar" data-route="calendar">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 5v8h12v-8H6zM7 3h2v3H7zm8 0h2v3h-2z"
+                    />
+                </svg>
+                Calendar
+            </a>
+            <a href="#/periods" data-route="periods">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" /></svg>
+                Periods
+            </a>
+            <a href="#/insights" data-route="insights">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h3v8H5zm5.5-6h3v14h-3zM16 9h3v11h-3z" /></svg>
+                Insights
+            </a>
+        </nav>
+        <script>
+            "use strict";
+
+            // Present only inside the anyApp runtime; undefined in a plain browser or a chat preview.
+            const anyapp = window.anyapp;
+            const DAY_MS = 86400000;
+            const FLOWS = ["none", "spotting", "light", "medium", "heavy"];
+            const SYMPTOMS = ["cramps", "headache", "bloating", "backache", "acne", "nausea", "fatigue", "cravings"];
+            const MOODS = ["great", "good", "okay", "low", "irritable", "anxious"];
+            const DEFAULT_PREFS = { cycleLength: 28, remind: true, remindDays: 2 };
+
+            // ---- Dates: ISO "YYYY-MM-DD" strings, calendar arithmetic in UTC so time zones never shift a day.
+            const pad = (n) => String(n).padStart(2, "0");
+            const toIso = (y, m, d) => `${y}-${pad(m)}-${pad(d)}`;
+            const toUtc = (iso) => {
+                const [y, m, d] = iso.split("-").map(Number);
+                return Date.UTC(y, m - 1, d);
+            };
+            const fromUtc = (ms) => {
+                const d = new Date(ms);
+                return toIso(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate());
+            };
+            const todayIso = () => {
+                const d = new Date();
+                return toIso(d.getFullYear(), d.getMonth() + 1, d.getDate());
+            };
+            const addDays = (iso, n) => fromUtc(toUtc(iso) + n * DAY_MS);
+            const daysBetween = (a, b) => Math.round((toUtc(b) - toUtc(a)) / DAY_MS);
+            const addMonths = (iso, n) => {
+                const [y, m, d] = iso.split("-").map(Number);
+                const total = y * 12 + (m - 1) + n;
+                const year = Math.floor(total / 12);
+                const month = (total % 12) + 1;
+                const last = new Date(Date.UTC(year, month, 0)).getUTCDate();
+                return toIso(year, month, Math.min(d, last));
+            };
+            const locale = () => (anyapp ? anyapp.app.locale() : navigator.language) || "en";
+            const formatDate = (iso, options = { month: "short", day: "numeric" }) =>
+                new Date(toUtc(iso)).toLocaleDateString(locale(), { ...options, timeZone: "UTC" });
+            const plural = (n, one, other) => `${n} ${n === 1 ? one : other}`;
+            const label = (value) => value.charAt(0).toUpperCase() + value.slice(1);
+
+            // ---- Storage: declared entities inside anyApp (the user's AI and widgets can use them), web storage elsewhere.
+            function entityStore() {
+                return {
+                    async all(entity) {
+                        const items = [];
+                        let cursor;
+                        do {
+                            const page = await anyapp.data.query(entity, { limit: 200, cursor });
+                            items.push(...page.items);
+                            cursor = page.cursor;
+                        } while (cursor);
+                        return items;
+                    },
+                    add: (entity, values) => anyapp.data.add(entity, values),
+                    update: (entity, id, patch) => anyapp.data.update(entity, id, patch),
+                    remove: (entity, id) => anyapp.data.remove(entity, id),
+                    getPrefs: () => anyapp.data.kv.get("prefs"),
+                    setPrefs: (value) => anyapp.data.kv.set("prefs", value),
+                };
+            }
+
+            function localStore() {
+                const KEY = "cycle.v1";
+                let db = { period: [], dayLog: [], prefs: null };
+                try {
+                    const saved = JSON.parse(localStorage.getItem(KEY) || "null");
+                    if (saved) db = { ...db, ...saved };
+                } catch (error) {
+                    console.warn("Web storage is unavailable here; data lasts until the page closes.", error);
+                }
+                const save = () => {
+                    try {
+                        localStorage.setItem(KEY, JSON.stringify(db));
+                    } catch (error) {
+                        console.warn("Could not save to web storage.", error);
+                    }
+                };
+                const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+                return {
+                    all: async (entity) => db[entity].map((record) => ({ ...record })),
+                    async add(entity, values) {
+                        const record = { id: newId(), createdAt: new Date().toISOString(), ...values };
+                        db[entity].push(record);
+                        save();
+                        return record;
+                    },
+                    async update(entity, id, patch) {
+                        const record = db[entity].find((r) => r.id === id);
+                        if (!record) throw new Error("Record not found");
+                        Object.assign(record, patch, { updatedAt: new Date().toISOString() });
+                        save();
+                        return record;
+                    },
+                    async remove(entity, id) {
+                        db[entity] = db[entity].filter((r) => r.id !== id);
+                        save();
+                    },
+                    getPrefs: async () => db.prefs,
+                    async setPrefs(value) {
+                        db.prefs = value;
+                        save();
+                    },
+                };
+            }
+
+            const store = anyapp && anyapp.supports("data.entities") ? entityStore() : localStore();
+            let periods = [];
+            let logs = [];
+            let prefs = { ...DEFAULT_PREFS };
+
+            async function reload() {
+                [periods, logs] = await Promise.all([store.all("period"), store.all("dayLog")]);
+                periods.sort((a, b) => (a.start < b.start ? 1 : -1));
+                logs.sort((a, b) => (a.date < b.date ? 1 : -1));
+                prefs = { ...DEFAULT_PREFS, ...((await store.getPrefs()) || {}) };
+            }
+
+            // ---- Prediction: the same rule as the declarative sample (apps/samples/period). The average cycle is
+            // (latest start - earliest start) / (starts - 1) over the last 12 months, which equals the mean gap.
+            function predict() {
+                const today = todayIso();
+                const starts = periods
+                    .map((p) => p.start)
+                    .filter((s) => s >= addMonths(today, -12))
+                    .sort();
+                if (starts.length === 0) return null;
+                const first = starts[0];
+                const last = starts[starts.length - 1];
+                const average = starts.length >= 2 ? Math.round(daysBetween(first, last) / (starts.length - 1)) : null;
+                const cycle = average ?? prefs.cycleLength;
+                return { last, average, count: starts.length, next: addDays(last, cycle) };
+            }
+            const lengthOf = (p) => (p.end ? daysBetween(p.start, p.end) + 1 : null);
+            function averageLength() {
+                const yearAgo = addMonths(todayIso(), -12);
+                const lengths = periods.filter((p) => p.end && p.start >= yearAgo).map(lengthOf);
+                return lengths.length ? lengths.reduce((a, b) => a + b, 0) / lengths.length : null;
+            }
+
+            // ---- DOM helper: text goes in as text nodes, events through addEventListener.
+            function h(tag, props, ...children) {
+                const el = document.createElement(tag);
+                for (const [key, value] of Object.entries(props || {})) {
+                    if (value === undefined || value === null || value === false) continue;
+                    if (key.startsWith("on")) el.addEventListener(key.slice(2), value);
+                    else if (key === "class") el.className = value;
+                    else el.setAttribute(key, value === true ? "" : String(value));
+                }
+                for (const child of children.flat())
+                    if (child !== null && child !== undefined && child !== false) el.append(child);
+                return el;
+            }
+
+            let statusTimer;
+            function say(text) {
+                const status = document.getElementById("status");
+                status.textContent = text;
+                clearTimeout(statusTimer);
+                statusTimer = setTimeout(() => (status.textContent = ""), 4000);
+            }
+            function report(error) {
+                console.warn(error);
+                const code = error && error.code;
+                if (code === "PERMISSION_DENIED" || code === "OS_DENIED")
+                    say("That permission is off. You can turn it on in the app's settings.");
+                else if (code === "CANCELLED") say("Cancelled.");
+                else say("Something went wrong. Please try again.");
+            }
+            async function act(work) {
+                try {
+                    await work();
+                } catch (error) {
+                    report(error);
+                }
+                await reload();
+                render();
+                syncReminderAndWidget();
+            }
+
+            // ---- Phone features, only inside anyApp: a scheduled reminder and the home-screen widget.
+            async function syncReminderAndWidget() {
+                if (!anyapp) return;
+                const prediction = predict();
+                const today = todayIso();
+                if (anyapp.supports("notify.schedule")) {
+                    try {
+                        await anyapp.notify.cancel("before-period");
+                        const day = prediction && addDays(prediction.next, -prefs.remindDays);
+                        if (prefs.remind && day && day > today) {
+                            await anyapp.notify.schedule({
+                                id: "before-period",
+                                title: "Cycle reminder",
+                                body:
+                                    prefs.remindDays === 1
+                                        ? "Your period may start tomorrow."
+                                        : `Your period may start in ${prefs.remindDays} days.`,
+                                at: `${day}T09:00`,
+                                route: "today",
+                            });
+                        }
+                    } catch (error) {
+                        report(error);
+                    }
+                }
+                if (anyapp.supports("widgets")) {
+                    const left = prediction ? Math.max(daysBetween(today, prediction.next), 0) : null;
+                    try {
+                        await anyapp.widgets.update("next", {
+                            value: left === null ? "–" : plural(left, "day left", "days left"),
+                            label: "Next period",
+                        });
+                    } catch (error) {
+                        report(error);
+                    }
+                }
+            }
+
+            // ---- Actions
+            function startPeriod() {
+                return act(async () => {
+                    const today = todayIso();
+                    if (periods.some((p) => p.start === today)) return;
+                    await store.add("period", { start: today });
+                    const log = logs.find((l) => l.date === today);
+                    if (!log) await store.add("dayLog", { date: today, flow: "medium", symptoms: [] });
+                    else if (log.flow === "none") await store.update("dayLog", log.id, { flow: "medium" });
+                    say("Logged. Take care of yourself.");
+                });
+            }
+            function endPeriod(period, end = todayIso()) {
+                return act(async () => {
+                    if (end < period.start) throw new Error("The end can't be before the start");
+                    await store.update("period", period.id, { end });
+                    say("Period end saved.");
+                });
+            }
+            function removePeriod(period) {
+                if (!window.confirm(`Delete the period that started ${formatDate(period.start)}?`)) return;
+                return act(() => store.remove("period", period.id));
+            }
+
+            // ---- Views
+            const disclaimer = () =>
+                h(
+                    "p",
+                    { class: "note" },
+                    "Predictions use the average time between your period starts over the last 12 months. They are estimates, not medical advice or birth control.",
+                );
+
+            function viewToday() {
+                const today = todayIso();
+                const prediction = predict();
+                const open = periods.find((p) => !p.end);
+                const left = prediction ? daysBetween(today, prediction.next) : null;
+                return [
+                    h("h1", { tabindex: "-1" }, "Today"),
+                    h(
+                        "section",
+                        { class: "card hero", "aria-label": "Next period" },
+                        h("p", { class: "label" }, "Next period"),
+                        h("p", { class: "big" }, prediction ? formatDate(prediction.next) : "Not known yet"),
+                        prediction
+                            ? h(
+                                  "p",
+                                  { class: left < 0 ? "warn" : "" },
+                                  left < 0 ? "Later than predicted" : plural(left, "day left", "days left"),
+                              )
+                            : h("p", {}, "Log the day your period starts to get a prediction."),
+                        prediction &&
+                            h("p", { class: "muted" }, `Cycle day ${daysBetween(prediction.last, today) + 1}`),
+                    ),
+                    h(
+                        "div",
+                        { class: "row" },
+                        open
+                            ? h(
+                                  "button",
+                                  { class: "primary", type: "button", onclick: () => endPeriod(open) },
+                                  "Period ended",
+                              )
+                            : h("button", { class: "primary", type: "button", onclick: startPeriod }, "Period started"),
+                        h("a", { class: "button", href: `#/log/${today}` }, "Log today"),
+                    ),
+                    !anyapp &&
+                        h("p", { class: "note" }, "Reminders and the home-screen widget need the installed app."),
+                    disclaimer(),
+                ];
+            }
+
+            function viewLog(date) {
+                const today = todayIso();
+                const day = date && date <= today ? date : today;
+                const log = logs.find((l) => l.date === day);
+                const flow = (log && log.flow) || "none";
+                const symptoms = (log && log.symptoms) || [];
+                const form = h(
+                    "form",
+                    { class: "card" },
+                    h(
+                        "label",
+                        {},
+                        "Date",
+                        h("input", {
+                            type: "date",
+                            name: "date",
+                            value: day,
+                            max: today,
+                            required: true,
+                            onchange: (e) => (location.hash = `#/log/${e.target.value}`),
+                        }),
+                    ),
+                    h(
+                        "fieldset",
+                        {},
+                        h("legend", {}, "Bleeding"),
+                        FLOWS.map((value) =>
+                            h(
+                                "label",
+                                { class: "choice" },
+                                h("input", { type: "radio", name: "flow", value, checked: value === flow }),
+                                label(value),
+                            ),
+                        ),
+                    ),
+                    h(
+                        "fieldset",
+                        {},
+                        h("legend", {}, "Symptoms"),
+                        SYMPTOMS.map((value) =>
+                            h(
+                                "label",
+                                { class: "choice" },
+                                h("input", {
+                                    type: "checkbox",
+                                    name: "symptoms",
+                                    value,
+                                    checked: symptoms.includes(value),
+                                }),
+                                label(value),
+                            ),
+                        ),
+                    ),
+                    h(
+                        "label",
+                        {},
+                        "Mood",
+                        h(
+                            "select",
+                            { name: "mood" },
+                            h("option", { value: "" }, "Not set"),
+                            MOODS.map((value) =>
+                                h("option", { value, selected: log && log.mood === value }, label(value)),
+                            ),
+                        ),
+                    ),
+                    h(
+                        "label",
+                        {},
+                        "Note",
+                        h("textarea", { name: "note", maxlength: 1000, rows: 3 }, (log && log.note) || ""),
+                    ),
+                    h(
+                        "div",
+                        { class: "row" },
+                        h("button", { class: "primary", type: "submit" }, "Save"),
+                        log &&
+                            h(
+                                "button",
+                                { type: "button", onclick: () => act(() => store.remove("dayLog", log.id)) },
+                                "Delete",
+                            ),
+                    ),
+                );
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault();
+                    const data = new FormData(form);
+                    const values = {
+                        date: day,
+                        flow: data.get("flow") || "none",
+                        symptoms: data.getAll("symptoms"),
+                        mood: data.get("mood") || null,
+                        note: data.get("note") || "",
+                    };
+                    act(async () => {
+                        if (log) await store.update("dayLog", log.id, values);
+                        else await store.add("dayLog", values);
+                        say("Saved.");
+                    });
+                });
+                return [
+                    h(
+                        "h1",
+                        { tabindex: "-1" },
+                        `Log for ${formatDate(day, { weekday: "short", month: "short", day: "numeric" })}`,
+                    ),
+                    form,
+                ];
+            }
+
+            function viewCalendar(month) {
+                const today = todayIso();
+                const first = /^\d{4}-\d{2}$/.test(month || "") ? `${month}-01` : `${today.slice(0, 7)}-01`;
+                const prediction = predict();
+                const length = Math.round(averageLength() || 5);
+                const periodDays = new Set();
+                for (const p of periods)
+                    for (let d = p.start; d <= (p.end || today); d = addDays(d, 1)) periodDays.add(d);
+                for (const l of logs) if (l.flow && l.flow !== "none") periodDays.add(l.date);
+                const loggedDays = new Set(logs.map((l) => l.date));
+                const predictedDays = new Set();
+                if (prediction) for (let i = 0; i < length; i++) predictedDays.add(addDays(prediction.next, i));
+
+                const offset = (new Date(toUtc(first)).getUTCDay() + 6) % 7; // weeks start on Monday
+                const daysInMonth = daysBetween(first, addMonths(first, 1));
+                const cells = [];
+                for (let i = 0; i < 7; i++) {
+                    const weekday = formatDate(addDays("2026-10-12", i), { weekday: "narrow" }); // 2026-10-12 is a Monday
+                    cells.push(h("span", { class: "dow", "aria-hidden": "true" }, weekday));
+                }
+                for (let i = 0; i < offset; i++) cells.push(h("span", {}));
+                for (let i = 0; i < daysInMonth; i++) {
+                    const day = addDays(first, i);
+                    const states = [
+                        periodDays.has(day) && "period",
+                        predictedDays.has(day) && day > today && "predicted",
+                        loggedDays.has(day) && "logged",
+                        day === today && "today",
+                        day > today && "future",
+                    ].filter(Boolean);
+                    const words = {
+                        period: "period day",
+                        predicted: "predicted period",
+                        logged: "logged",
+                        today: "today",
+                    };
+                    const name = [
+                        formatDate(day, { month: "long", day: "numeric" }),
+                        ...states.map((s) => words[s]).filter(Boolean),
+                    ].join(", ");
+                    const props = { class: ["day", ...states].join(" "), "aria-label": name };
+                    cells.push(
+                        day > today
+                            ? h("span", props, String(i + 1))
+                            : h("a", { ...props, href: `#/log/${day}` }, String(i + 1)),
+                    );
+                }
+                return [
+                    h("h1", { tabindex: "-1" }, formatDate(first, { month: "long", year: "numeric" })),
+                    h(
+                        "div",
+                        { class: "row" },
+                        h(
+                            "a",
+                            {
+                                class: "button",
+                                href: `#/calendar/${addMonths(first, -1).slice(0, 7)}`,
+                                "aria-label": "Previous month",
+                            },
+                            "‹ Previous",
+                        ),
+                        h(
+                            "a",
+                            {
+                                class: "button",
+                                href: `#/calendar/${addMonths(first, 1).slice(0, 7)}`,
+                                "aria-label": "Next month",
+                            },
+                            "Next ›",
+                        ),
+                    ),
+                    h("div", { class: "grid card" }, cells),
+                    h(
+                        "p",
+                        { class: "legend" },
+                        h("span", {}, "● Period day"),
+                        h("span", {}, "◌ Predicted"),
+                        h("span", {}, "Underlined: logged"),
+                    ),
+                    h("p", { class: "note" }, "Tap a day to log how it went."),
+                ];
+            }
+
+            function viewPeriods() {
+                const today = todayIso();
+                const form = h(
+                    "form",
+                    { class: "card" },
+                    h("h2", {}, "Add a past period"),
+                    h("label", {}, "Started", h("input", { type: "date", name: "start", max: today, required: true })),
+                    h("label", {}, "Ended (optional)", h("input", { type: "date", name: "end", max: today })),
+                    h("button", { class: "primary", type: "submit" }, "Add period"),
+                );
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault();
+                    const data = new FormData(form);
+                    const start = data.get("start");
+                    const end = data.get("end") || null;
+                    act(async () => {
+                        if (periods.some((p) => p.start === start))
+                            throw new Error("A period with that start already exists");
+                        if (end && end < start) throw new Error("The end can't be before the start");
+                        await store.add("period", end ? { start, end } : { start });
+                        say("Period added.");
+                    });
+                });
+                const items = periods.map((p) =>
+                    h(
+                        "li",
+                        { class: "card" },
+                        h(
+                            "p",
+                            { class: "label" },
+                            h("strong", {}, formatDate(p.start, { month: "short", day: "numeric", year: "numeric" })),
+                            p.end ? ` to ${formatDate(p.end)}, ${plural(lengthOf(p), "day", "days")}` : " – ongoing",
+                        ),
+                        h(
+                            "label",
+                            {},
+                            "End date",
+                            h("input", {
+                                type: "date",
+                                value: p.end || "",
+                                min: p.start,
+                                max: today,
+                                onchange: (e) => e.target.value && endPeriod(p, e.target.value),
+                            }),
+                        ),
+                        h("button", { type: "button", onclick: () => removePeriod(p) }, "Delete"),
+                    ),
+                );
+                return [
+                    h("h1", { tabindex: "-1" }, "Periods"),
+                    items.length ? h("ul", { class: "bars" }, items) : h("p", {}, "No periods logged yet."),
+                    form,
+                ];
+            }
+
+            function bars(entries, unit) {
+                const max = Math.max(1, ...entries.map(([, n]) => n));
+                return h(
+                    "ul",
+                    { class: "bars" },
+                    entries.map(([name, n]) =>
+                        h(
+                            "li",
+                            {},
+                            h("span", {}, name),
+                            h("span", {
+                                class: "bar",
+                                style: `width: ${Math.round((n / max) * 100)}%`,
+                                "aria-hidden": "true",
+                            }),
+                            h("span", {}, plural(n, unit[0], unit[1])),
+                        ),
+                    ),
+                );
+            }
+
+            function viewInsights() {
+                const today = todayIso();
+                const prediction = predict();
+                const average = averageLength();
+                const recent = periods
+                    .filter((p) => p.end)
+                    .slice(0, 12)
+                    .reverse();
+                const moods = MOODS.map((m) => [
+                    label(m),
+                    logs.filter((l) => l.mood === m && l.date > addDays(today, -90)).length,
+                ]).filter(([, n]) => n > 0);
+                const stat = (name, value) => h("div", { class: "card" }, h("span", {}, name), h("strong", {}, value));
+                return [
+                    h("h1", { tabindex: "-1" }, "Insights"),
+                    h(
+                        "div",
+                        { class: "stats" },
+                        stat(
+                            "Average cycle",
+                            prediction && prediction.average ? plural(prediction.average, "day", "days") : "–",
+                        ),
+                        stat("Average period", average ? `${average.toFixed(1)} days` : "–"),
+                        stat("Periods logged", prediction ? `${prediction.count} in 12 months` : "0"),
+                    ),
+                    h("h2", {}, "Period length"),
+                    recent.length
+                        ? bars(
+                              recent.map((p) => [formatDate(p.start), lengthOf(p)]),
+                              ["day", "days"],
+                          )
+                        : h("p", {}, "No finished periods yet."),
+                    h("h2", {}, "Mood, last 90 days"),
+                    moods.length ? bars(moods, ["day", "days"]) : h("p", {}, "No moods logged yet."),
+                    disclaimer(),
+                ];
+            }
+
+            function viewSettings() {
+                const form = h(
+                    "form",
+                    { class: "card" },
+                    h(
+                        "label",
+                        {},
+                        "Usual cycle length (days)",
+                        h("input", {
+                            type: "number",
+                            name: "cycleLength",
+                            min: 20,
+                            max: 45,
+                            value: prefs.cycleLength,
+                            required: true,
+                        }),
+                    ),
+                    h(
+                        "label",
+                        { class: "choice" },
+                        h("input", { type: "checkbox", name: "remind", checked: prefs.remind }),
+                        "Remind me before my period",
+                    ),
+                    h(
+                        "label",
+                        {},
+                        "Days before",
+                        h("input", {
+                            type: "number",
+                            name: "remindDays",
+                            min: 1,
+                            max: 7,
+                            value: prefs.remindDays,
+                            required: true,
+                        }),
+                    ),
+                    h("button", { class: "primary", type: "submit" }, "Save"),
+                );
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault();
+                    const data = new FormData(form);
+                    const next = {
+                        cycleLength: Number(data.get("cycleLength")),
+                        remind: data.get("remind") === "on",
+                        remindDays: Number(data.get("remindDays")),
+                    };
+                    act(async () => {
+                        await store.setPrefs(next);
+                        say("Settings saved.");
+                    });
+                });
+                return [
+                    h("h1", { tabindex: "-1" }, "Settings"),
+                    form,
+                    h(
+                        "p",
+                        { class: "note" },
+                        "The usual cycle length is used until you have logged two period starts. Your data stays on this device.",
+                    ),
+                ];
+            }
+
+            // ---- Hash routing: #/today, #/log/2026-10-13, #/calendar/2026-10, #/periods, #/insights, #/settings
+            const views = {
+                today: viewToday,
+                log: viewLog,
+                calendar: viewCalendar,
+                periods: viewPeriods,
+                insights: viewInsights,
+                settings: viewSettings,
+            };
+            function render() {
+                const match = /^#\/(\w+)(?:\/([\w-]+))?$/.exec(location.hash);
+                const name = match && views[match[1]] ? match[1] : "today";
+                const main = document.getElementById("view");
+                main.replaceChildren(...views[name](match ? match[2] : undefined).filter(Boolean));
+                for (const link of document.querySelectorAll("nav a")) {
+                    if (link.dataset.route === name) link.setAttribute("aria-current", "page");
+                    else link.removeAttribute("aria-current");
+                }
+                document.title = `Cycle – ${main.querySelector("h1").textContent}`;
+                main.querySelector("h1").focus();
+            }
+
+            async function start() {
+                if (anyapp) {
+                    try {
+                        await anyapp.ready;
+                    } catch (error) {
+                        console.warn(error);
+                    }
+                }
+                try {
+                    await reload();
+                } catch (error) {
+                    report(error);
+                }
+                window.addEventListener("hashchange", render);
+                render();
+                syncReminderAndWidget();
+            }
+            start();
+        </script>
+    </body>
+</html>

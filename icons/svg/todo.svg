@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- To-do: a list with two items ticked off and one to go. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5065CA"/>
+      <stop offset="1" stop-color="#3B4EB2"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <rect x="36" y="36" width="120" height="132" rx="16" fill="#000" fill-opacity="0.2"/>
+  <rect x="36" y="28" width="120" height="132" rx="16" fill="#FFF"/>
+  <rect x="50" y="42" width="32" height="32" rx="9" fill="#3F52BB"/>
+  <path fill="none" stroke="#FFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M58 58 L64 64 L75 51"/>
+  <rect x="92" y="51" width="50" height="14" rx="7" fill="#7A89DC"/>
+  <rect x="50" y="78" width="32" height="32" rx="9" fill="#3F52BB"/>
+  <path fill="none" stroke="#FFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M58 94 L64 100 L75 87"/>
+  <rect x="92" y="87" width="50" height="14" rx="7" fill="#7A89DC"/>
+  <rect x="53.5" y="117.5" width="25" height="25" rx="7" fill="none" stroke="#3F52BB" stroke-width="7"/>
+  <rect x="92" y="123" width="36" height="14" rx="7" fill="#7A89DC"/>
+</svg>

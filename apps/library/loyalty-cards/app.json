@@ -1,0 +1,795 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "library/loyalty-cards",
+    "name": "Loyalty cards",
+    "version": "2.5.1",
+    "icon": "wallet",
+    "category": "shopping",
+    "ageRating": "everyone",
+    "license": "MIT",
+    "iconData": "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"
+  },
+  "theme": { "seedColor": "#5E35B1", "shape": "extraRounded" },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "endsIn": { "en": "Number ending {digits}" },
+      "expiredLine": { "en": "Expired {date}" },
+      "imported": {
+        "en": "{n, plural, =0 {No new cards} one {Added # card} other {Added # cards}}{dup, plural, =0 {} one {; # was already in your cards} other {; # were already in your cards}}{skipped, plural, =0 {.} one {; # row skipped.} other {; # rows skipped.}}"
+      },
+      "exported": { "en": "{n, plural, =0 {Saved an empty file.} one {Saved # card.} other {Saved # cards.}}" },
+      "expiryTitle": { "en": "{store} card expires soon" },
+      "expiryBody": { "en": "It is valid until {date}." },
+      "already": { "en": "{store} is already in your cards." },
+      "timesShown": { "en": "{n, plural, =0 {Not yet} one {# time} other {# times}}" },
+      "problemLine": { "en": "Line {row}: {reason}" },
+      "moreProblems": { "en": "{n, plural, one {…and # more row} other {…and # more rows}}" },
+      "codeLabel": { "en": "{store} barcode, number {number}" },
+      "points": { "en": "{n, plural, one {# point} other {# points}}" },
+      "balance": { "en": "Balance {n}" }
+    }
+  },
+  "permissions": {
+    "scan.barcode": {
+      "purpose": "Add a card by scanning its barcode with the camera",
+      "formats": [
+        "qr",
+        "ean13",
+        "ean8",
+        "upcA",
+        "upcE",
+        "code128",
+        "code39",
+        "dataMatrix",
+        "pdf417",
+        "aztec",
+        "codabar",
+        "code93",
+        "itf"
+      ]
+    },
+    "barcode.render": { "purpose": "Show a card’s barcode full screen and bright, so the cashier can scan it" },
+    "notify.local": { "purpose": "Remind you a week before a card or voucher expires", "maxPerDay": 3 },
+    "files.io": { "purpose": "Back up your cards to a file, or add cards from one", "modes": ["import", "export"] },
+    "share": { "purpose": "Send a card’s store and number to someone you choose" },
+    "widget.home": { "purpose": "Show your most-used cards on your home screen" },
+    "media.pick": { "purpose": "Pick a screenshot or photo of a card to read its barcode", "optional": true }
+  },
+  "dataFlows": [
+    { "from": ["card.*"], "to": "files.io", "purpose": "Your cards, saved as a backup file in a place you choose" },
+    { "from": ["card.store", "card.number"], "to": "share", "purpose": "A card’s store and number, when you tap Share" }
+  ],
+  "settings": {
+    "fullScreen": {
+      "type": "boolean",
+      "label": "Open cards full screen",
+      "help": "The code shows bright and large, so it scans easily. Close it to see the card’s details.",
+      "default": true
+    },
+    "expiryReminders": { "type": "boolean", "label": "Remind me before a card expires", "default": true }
+  },
+  "entities": {
+    "card": {
+      "label": "Card",
+      "labelPlural": "Cards",
+      "unique": [["store", "number"]],
+      "sort": ["-pinned", "-uses", "store"],
+      "display": {
+        "title": "=item.store",
+        "subtitle": "=item.expired ? t('expiredLine', {'date': formatDate(item.expires, 'yMMMd')}) : coalesce(item.holder, '') != '' ? coalesce(item.holder, '') : t('endsIn', {'digits': substring(item.number, max(size(item.number) - 4, 0))})",
+        "trailing": "=has(item.points) ? formatNumber(item.points) : ''",
+        "icon": "=coalesce(optionIcon(item.group), 'storefront')",
+        "hue": "=item.hueName",
+        "tone": "=item.expired ? 'warning' : null"
+      },
+      "fields": {
+        "store": {
+          "type": "text",
+          "label": "Store",
+          "required": true,
+          "maxLength": 60,
+          "kind": "name",
+          "placeholder": "Corner Grocer"
+        },
+        "number": {
+          "type": "barcode",
+          "label": "Card number",
+          "help": "Scan the barcode, or type the number printed under it. The barcode type is worked out from the number.",
+          "required": true,
+          "kind": "loyaltyCard",
+          "sensitivity": "personal",
+          "checks": [
+            { "condition": "=size(item.number) <= 300", "message": "That is too long for a card number." },
+            {
+              "condition": "=item.format != 'ean13' || item.number.matches(r'^[0-9]{12,13}$')",
+              "message": "EAN-13 needs 12 or 13 digits."
+            },
+            {
+              "condition": "=item.format != 'ean13' || !item.number.matches(r'^[0-9]{13}$') || checkDigitValid(item.number, 'ean13')",
+              "message": "The last digit of this EAN-13 doesn’t match the rest of the number. Check the number."
+            },
+            {
+              "condition": "=item.format != 'ean8' || item.number.matches(r'^[0-9]{7,8}$')",
+              "message": "EAN-8 needs 7 or 8 digits."
+            },
+            {
+              "condition": "=item.format != 'ean8' || !item.number.matches(r'^[0-9]{8}$') || checkDigitValid(item.number, 'ean8')",
+              "message": "The last digit of this EAN-8 doesn’t match the rest of the number. Check the number."
+            },
+            {
+              "condition": "=item.format != 'upcA' || item.number.matches(r'^[0-9]{11,12}$')",
+              "message": "UPC-A needs 11 or 12 digits."
+            },
+            {
+              "condition": "=item.format != 'upcA' || !item.number.matches(r'^[0-9]{12}$') || checkDigitValid(item.number, 'upcA')",
+              "message": "The last digit of this UPC-A doesn’t match the rest of the number. Check the number."
+            },
+            {
+              "condition": "=item.format != 'upcE' || item.number.matches(r'^([0-9]{6}|[01][0-9]{6,7})$')",
+              "message": "UPC-E needs 6 digits, or 7 or 8 starting with 0 or 1."
+            },
+            {
+              "condition": "=item.format != 'upcE' || !item.number.matches(r'^[01][0-9]{7}$') || checkDigitValid(item.number, 'upcE')",
+              "message": "The last digit of this UPC-E doesn’t match the rest of the number. Check the number."
+            },
+            {
+              "condition": "=item.format != 'code39' || item.number.matches(r'^[0-9A-Z .$/+%-]+$')",
+              "message": "Code 39 takes capital letters, digits, spaces and - . $ / + %."
+            },
+            {
+              "condition": "=item.format != 'code128' || item.number.matches(r'^[ -~]+$')",
+              "message": "Code 128 takes plain letters, digits and symbols."
+            },
+            {
+              "condition": "=item.format != 'code93' || item.number.matches(r'^[ -~]+$')",
+              "message": "Code 93 takes plain letters, digits and symbols."
+            },
+            {
+              "condition": "=item.format != 'codabar' || item.number.matches(r'^([A-D][0-9$:/.+-]{2,}[A-D]|[0-9$:/.+-]{2,})$')",
+              "message": "Codabar takes digits and - $ : / . +, with A, B, C or D at both ends or at neither."
+            },
+            {
+              "condition": "=item.format != 'itf' || item.number.matches(r'^([0-9][0-9]){3,}$')",
+              "message": "ITF needs an even number of digits, at least 6."
+            }
+          ]
+        },
+        "format": {
+          "type": "choice",
+          "label": "Barcode type",
+          "help": "Automatic draws EAN-13, EAN-8 or UPC-A when the number is one with a matching last digit, and Code 128 otherwise. Scanning a card sets its type for you. Pick another type only if the shop’s scanner can’t read the code.",
+          "required": true,
+          "default": "auto",
+          "visible": "=has(item.id)",
+          "options": [
+            { "value": "auto", "label": "Automatic", "icon": "barcode" },
+            { "value": "code128", "label": "Code 128", "icon": "barcode" },
+            { "value": "ean13", "label": "EAN-13", "icon": "barcode" },
+            { "value": "ean8", "label": "EAN-8", "icon": "barcode" },
+            { "value": "upcA", "label": "UPC-A", "icon": "barcode" },
+            { "value": "upcE", "label": "UPC-E", "icon": "barcode" },
+            { "value": "code39", "label": "Code 39", "icon": "barcode" },
+            { "value": "qr", "label": "QR code", "icon": "qr_code_2" },
+            { "value": "dataMatrix", "label": "Data Matrix", "icon": "qr_code" },
+            { "value": "pdf417", "label": "PDF417", "icon": "barcode" },
+            { "value": "aztec", "label": "Aztec", "icon": "qr_code" },
+            { "value": "codabar", "label": "Codabar", "icon": "barcode" },
+            { "value": "code93", "label": "Code 93", "icon": "barcode" },
+            { "value": "itf", "label": "ITF (Interleaved 2 of 5)", "icon": "barcode" }
+          ]
+        },
+        "drawnFormat": {
+          "type": "choice",
+          "label": "Barcode type",
+          "compute": "=item.format != 'auto' ? item.format : checkDigitValid(item.number, 'ean13') ? 'ean13' : checkDigitValid(item.number, 'ean8') ? 'ean8' : checkDigitValid(item.number, 'upcA') ? 'upcA' : item.number.matches(r'^[ -~]+$') ? 'code128' : 'qr'",
+          "options": [
+            { "value": "code128", "label": "Code 128", "icon": "barcode" },
+            { "value": "ean13", "label": "EAN-13", "icon": "barcode" },
+            { "value": "ean8", "label": "EAN-8", "icon": "barcode" },
+            { "value": "upcA", "label": "UPC-A", "icon": "barcode" },
+            { "value": "upcE", "label": "UPC-E", "icon": "barcode" },
+            { "value": "code39", "label": "Code 39", "icon": "barcode" },
+            { "value": "qr", "label": "QR code", "icon": "qr_code_2" },
+            { "value": "dataMatrix", "label": "Data Matrix", "icon": "qr_code" },
+            { "value": "pdf417", "label": "PDF417", "icon": "barcode" },
+            { "value": "aztec", "label": "Aztec", "icon": "qr_code" },
+            { "value": "codabar", "label": "Codabar", "icon": "barcode" },
+            { "value": "code93", "label": "Code 93", "icon": "barcode" },
+            { "value": "itf", "label": "ITF (Interleaved 2 of 5)", "icon": "barcode" }
+          ]
+        },
+        "holder": {
+          "type": "text",
+          "label": "Name on the card",
+          "maxLength": 60,
+          "kind": "name",
+          "sensitivity": "personal",
+          "help": "Handy when the family shares cards."
+        },
+        "group": {
+          "type": "choice",
+          "label": "Kind of shop",
+          "options": [
+            { "value": "shopping_cart", "label": "Groceries", "icon": "shopping_cart", "hue": "green" },
+            { "value": "storefront", "label": "Shop", "icon": "storefront", "hue": "indigo" },
+            { "value": "shopping_bag", "label": "Clothes and shoes", "icon": "shopping_bag", "hue": "violet" },
+            { "value": "medication", "label": "Pharmacy", "icon": "medication", "hue": "red" },
+            { "value": "spa", "label": "Beauty", "icon": "spa", "hue": "pink" },
+            { "value": "directions_car", "label": "Fuel and car", "icon": "directions_car", "hue": "blue" },
+            { "value": "handyman", "label": "Home and DIY", "icon": "handyman", "hue": "orange" },
+            { "value": "keyboard", "label": "Electronics", "icon": "keyboard", "hue": "grey" },
+            { "value": "menu_book", "label": "Books", "icon": "menu_book", "hue": "amber" },
+            { "value": "restaurant", "label": "Food and drink", "icon": "restaurant", "hue": "orange" },
+            { "value": "local_cafe", "label": "Coffee", "icon": "local_cafe", "hue": "brown" },
+            { "value": "flight", "label": "Travel", "icon": "flight", "hue": "cyan" },
+            { "value": "fitness_center", "label": "Sport and gym", "icon": "fitness_center", "hue": "lime" },
+            { "value": "pets", "label": "Pets", "icon": "pets", "hue": "cyan" },
+            { "value": "child_care", "label": "Kids", "icon": "child_care", "hue": "pink" },
+            { "value": "book", "label": "Library", "icon": "book", "hue": "teal" },
+            { "value": "badge", "label": "Membership", "icon": "badge", "hue": "indigo" },
+            { "value": "sell", "label": "Voucher or gift card", "icon": "sell", "hue": "violet" }
+          ]
+        },
+        "points": { "type": "number", "label": "Points or balance", "min": 0 },
+        "expires": { "type": "date", "label": "Valid until" },
+        "note": {
+          "type": "longText",
+          "label": "Note",
+          "maxLength": 500,
+          "placeholder": "Discount day, where to show it…"
+        },
+        "color": {
+          "type": "color",
+          "label": "Colour",
+          "help": "The colour of the card in your list. Leave it empty to use the colour of the kind of shop."
+        },
+        "hueName": {
+          "type": "text",
+          "label": "Colour name",
+          "visible": false,
+          "compute": "=upper(coalesce(item.color, '')) == '#D32F2F' ? 'red' : upper(coalesce(item.color, '')) == '#C2185B' ? 'pink' : upper(coalesce(item.color, '')) == '#7B1FA2' ? 'violet' : upper(coalesce(item.color, '')) == '#512DA8' ? 'indigo' : upper(coalesce(item.color, '')) == '#1976D2' ? 'blue' : upper(coalesce(item.color, '')) == '#0288D1' ? 'cyan' : upper(coalesce(item.color, '')) == '#00897B' ? 'teal' : upper(coalesce(item.color, '')) == '#388E3C' ? 'green' : upper(coalesce(item.color, '')) == '#F9A825' ? 'amber' : upper(coalesce(item.color, '')) == '#EF6C00' ? 'orange' : upper(coalesce(item.color, '')) == '#6D4C41' ? 'brown' : upper(coalesce(item.color, '')) == '#546E7A' ? 'grey' : optionHue(item.group)"
+        },
+        "picture": { "type": "image", "label": "Picture of the card", "visible": "=available('media.pick')" },
+        "pinned": { "type": "boolean", "label": "Pin to the top", "default": false },
+        "archived": { "type": "boolean", "label": "Archived", "default": false, "visible": "=has(item.id)" },
+        "uses": {
+          "type": "integer",
+          "label": "Times shown",
+          "default": 0,
+          "min": 0,
+          "merge": "counter",
+          "editable": false
+        },
+        "lastUsed": { "type": "datetime", "label": "Last shown", "editable": false },
+        "expired": { "type": "boolean", "label": "Expired", "compute": "=has(item.expires) && item.expires < today()" },
+        "timesShown": {
+          "type": "text",
+          "label": "Shown",
+          "compute": "=t('timesShown', {'n': coalesce(item.uses, 0)})"
+        },
+        "checkDigitOk": {
+          "type": "boolean",
+          "label": "Last digit matches",
+          "help": "For EAN and UPC codes, the last digit is worked out from the others; a card whose last digit doesn’t match can’t be drawn.",
+          "compute": "=(item.format != 'ean13' || !item.number.matches(r'^[0-9]{13}$') || checkDigitValid(item.number, 'ean13')) && (item.format != 'ean8' || !item.number.matches(r'^[0-9]{8}$') || checkDigitValid(item.number, 'ean8')) && (item.format != 'upcA' || !item.number.matches(r'^[0-9]{12}$') || checkDigitValid(item.number, 'upcA')) && (item.format != 'upcE' || !item.number.matches(r'^[01][0-9]{7}$') || checkDigitValid(item.number, 'upcE'))"
+        }
+      }
+    }
+  },
+  "queries": {
+    "wallet": { "entity": "card", "where": "=!item.archived", "sort": ["-pinned", "-uses", "-lastUsed", "store"] },
+    "top": {
+      "entity": "card",
+      "where": "=!item.archived",
+      "sort": ["-pinned", "-uses", "-lastUsed", "store"],
+      "limit": 5
+    },
+    "archivedCards": { "entity": "card", "where": "=item.archived", "sort": ["store"] },
+    "byNumber": {
+      "entity": "card",
+      "args": { "code": { "type": "barcode" } },
+      "where": "=item.number == args.code",
+      "limit": 1
+    },
+    "allCards": { "entity": "card", "sort": ["store"], "limit": 2000 }
+  },
+  "navigation": { "start": "wallet", "menu": ["archived"] },
+  "screens": {
+    "wallet": {
+      "type": "list",
+      "title": "Cards",
+      "query": "wallet",
+      "item": "walletTile",
+      "columns": 2,
+      "search": ["store", "number", "holder", "note"],
+      "toolbar": ["scanBtn", "pictureBtn", "exportBtn", "importBtn"],
+      "onTap": { "event": { "name": "openCard", "context": { "card": "=item.id" } } },
+      "empty": {
+        "title": "No cards yet",
+        "body": "Scan the barcode on a loyalty card, or tap Add and type its number. Your cards stay on this phone.",
+        "icon": "wallet"
+      }
+    },
+    "cardDetail": {
+      "type": "detail",
+      "title": "Card",
+      "entity": "card",
+      "header": "cardTop",
+      "footer": "cardActions",
+      "show": ["expired", "archived", "holder", "points", "expires", "note", "picture"]
+    },
+    "archived": {
+      "type": "list",
+      "title": "Archived cards",
+      "query": "archivedCards",
+      "add": false,
+      "empty": {
+        "title": "No archived cards",
+        "body": "Archive a card you no longer use to hide it from the list.",
+        "icon": "archive"
+      }
+    },
+    "importReport": {
+      "type": "custom",
+      "title": "Import finished",
+      "present": "dialog",
+      "params": { "summary": { "type": "text", "maxLength": 300 }, "lines": { "type": "longText", "maxLength": 5000 } },
+      "root": "irCol"
+    }
+  },
+  "components": {
+    "scanBtn": {
+      "component": "Button",
+      "icon": "barcode_scanner",
+      "label": "Scan a card",
+      "iconOnly": true,
+      "action": { "event": { "name": "scanCard" } }
+    },
+    "pictureBtn": {
+      "component": "Button",
+      "icon": "photo_library",
+      "label": "Add from a picture",
+      "iconOnly": true,
+      "visible": "=available('media.pick')",
+      "action": { "event": { "name": "addFromPicture" } }
+    },
+    "exportBtn": {
+      "component": "Button",
+      "icon": "download",
+      "label": "Back up cards",
+      "iconOnly": true,
+      "action": { "event": { "name": "exportCards" } }
+    },
+    "importBtn": {
+      "component": "Button",
+      "icon": "upload",
+      "label": "Add cards from a file",
+      "iconOnly": true,
+      "action": { "event": { "name": "importCards" } }
+    },
+    "walletTile": {
+      "component": "Card",
+      "aspect": "card",
+      "hue": "=item.hueName",
+      "tone": "=item.expired ? 'warning' : null",
+      "child": "tileCol"
+    },
+    "tileCol": {
+      "component": "Column",
+      "justify": "spaceBetween",
+      "children": ["tileTop", "tileStore", "tileSub", "tilePoints"]
+    },
+    "tileTop": { "component": "Row", "justify": "spaceBetween", "children": ["tileIcon", "tilePin"] },
+    "tileIcon": { "component": "Icon", "name": "=coalesce(optionIcon(item.group), 'storefront')" },
+    "tilePin": {
+      "component": "Icon",
+      "name": "push_pin",
+      "visible": "=item.pinned",
+      "accessibility": { "label": "Pinned" }
+    },
+    "tileStore": { "component": "Text", "variant": "h4", "text": "=item.store" },
+    "tileSub": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=item.expired ? t('expiredLine', {'date': formatDate(item.expires, 'yMMMd')}) : coalesce(item.holder, '') != '' ? coalesce(item.holder, '') : t('endsIn', {'digits': substring(item.number, max(size(item.number) - 4, 0))})"
+    },
+    "tilePoints": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=item.group == 'sell' ? t('balance', {'n': formatNumber(coalesce(item.points, 0.0))}) : t('points', {'n': coalesce(item.points, 0.0)})",
+      "visible": "=has(item.points)"
+    },
+    "cardTop": { "component": "Column", "children": ["cardFace", "fullBtn"] },
+    "cardFace": {
+      "component": "Card",
+      "variant": "hero",
+      "child": "cardTopCol",
+      "hue": "=record.hueName",
+      "aspect": "card"
+    },
+    "cardTopCol": {
+      "component": "Column",
+      "align": "center",
+      "children": ["storeName", "codeView", "numberText", "digitHint"]
+    },
+    "storeName": { "component": "Text", "variant": "h3", "text": "=record.store" },
+    "codeView": {
+      "component": "BarcodeView",
+      "value": "=record.number",
+      "format": "=record.drawnFormat",
+      "label": "=t('codeLabel', {'store': record.store, 'number': record.number})",
+      "visible": "=record.checkDigitOk"
+    },
+    "numberText": {
+      "component": "Text",
+      "variant": "h2",
+      "text": "=record.number",
+      "visible": "=!record.checkDigitOk"
+    },
+    "digitHint": {
+      "component": "Text",
+      "tone": "warning",
+      "visible": "=!record.checkDigitOk",
+      "text": "The last digit of this number doesn’t match its barcode type, so the code can’t be drawn. Edit the card to check the number and the barcode type."
+    },
+    "cardActions": { "component": "Column", "children": ["moreRow", "detailsSection"] },
+    "detailsSection": {
+      "component": "Section",
+      "title": "Details",
+      "collapsible": true,
+      "children": ["groupField", "formatField", "autoNote", "shownField", "lastShownField"],
+      "collapsed": true
+    },
+    "groupField": { "component": "Field", "field": "group", "mode": "display" },
+    "formatField": { "component": "Field", "field": "drawnFormat", "mode": "display" },
+    "autoNote": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "Worked out from the number. If the shop’s scanner can’t read the code, edit the card and pick its barcode type.",
+      "visible": "=record.format == 'auto'"
+    },
+    "shownField": { "component": "Field", "field": "timesShown", "mode": "display" },
+    "lastShownField": { "component": "Field", "field": "lastUsed", "mode": "display" },
+    "fullBtn": {
+      "component": "Button",
+      "icon": "fullscreen",
+      "label": "Show full screen",
+      "variant": "primary",
+      "visible": "=record.checkDigitOk",
+      "action": { "event": { "name": "showFull", "context": { "card": "=record.id" } } }
+    },
+    "moreRow": { "component": "Row", "justify": "spaceBetween", "children": ["pinBtn", "readBtn", "shareBtn"] },
+    "pinBtn": {
+      "component": "Button",
+      "icon": "push_pin",
+      "label": "=record.pinned ? 'Unpin' : 'Pin to top'",
+      "variant": "borderless",
+      "action": { "event": { "name": "togglePin", "context": { "card": "=record.id" } } }
+    },
+    "readBtn": {
+      "component": "Button",
+      "icon": "qr_code_scanner",
+      "label": "Read code from picture",
+      "variant": "borderless",
+      "visible": "=has(record.picture)",
+      "action": { "event": { "name": "readPicture", "context": { "card": "=record.id" } } }
+    },
+    "shareBtn": {
+      "component": "Button",
+      "icon": "share",
+      "label": "Share",
+      "variant": "borderless",
+      "action": { "event": { "name": "shareCard", "context": { "card": "=record.id" } } }
+    },
+    "irCol": { "component": "Column", "children": ["irSummary", "irIntro", "irLines", "irOk"] },
+    "irSummary": { "component": "Text", "variant": "h5", "text": "=params.summary" },
+    "irIntro": {
+      "component": "Text",
+      "text": "These rows were left out, with the reason for each:"
+    },
+    "irLines": { "component": "Text", "variant": "caption", "text": "=params.lines" },
+    "irOk": {
+      "component": "Button",
+      "label": "OK",
+      "variant": "primary",
+      "action": { "event": { "name": "closeReport" } }
+    }
+  },
+  "actions": {
+    "openCard": {
+      "args": { "card": { "type": "ref", "to": "card" } },
+      "steps": [
+        {
+          "type": "capability",
+          "when": "=settings.fullScreen && args.card.checkDigitOk",
+          "capability": "barcode.render",
+          "action": "show",
+          "args": { "value": "=args.card.number", "format": "=args.card.drawnFormat", "title": "=args.card.store" },
+          "onError": "continue",
+          "errorAs": "showError"
+        },
+        {
+          "type": "updateRecord",
+          "when": "=args.card.checkDigitOk",
+          "record": "=args.card",
+          "increment": { "uses": 1 },
+          "set": { "lastUsed": "=now()" }
+        },
+        { "type": "navigate", "screen": "cardDetail", "params": { "id": "=args.card" } },
+        {
+          "type": "toast",
+          "when": "=vars.showError != null && vars.showError.code != 'CANCELLED'",
+          "text": "=coalesce(vars.showError.message, '')"
+        }
+      ]
+    },
+    "showFull": {
+      "args": { "card": { "type": "ref", "to": "card" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "barcode.render",
+          "action": "show",
+          "args": { "value": "=args.card.number", "format": "=args.card.drawnFormat", "title": "=args.card.store" },
+          "onError": "continue",
+          "errorAs": "showError"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.showError != null && vars.showError.code != 'CANCELLED'",
+          "text": "=coalesce(vars.showError.message, '')"
+        },
+        {
+          "type": "updateRecord",
+          "when": "=vars.showError == null",
+          "record": "=args.card",
+          "increment": { "uses": 1 },
+          "set": { "lastUsed": "=now()" }
+        }
+      ]
+    },
+    "scanCard": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "scan.barcode",
+          "action": "scan",
+          "args": { "prompt": "Point the camera at the barcode on your card" },
+          "as": "scan"
+        },
+        { "type": "query", "query": "byNumber", "args": { "code": "=vars.scan.value" }, "as": "found" },
+        { "type": "toast", "when": "=size(vars.found) > 0", "text": "=t('already', {'store': vars.found[0].store})" },
+        {
+          "type": "navigate",
+          "when": "=size(vars.found) > 0",
+          "screen": "cardDetail",
+          "params": { "id": "=vars.found[0].id" }
+        },
+        {
+          "type": "navigate",
+          "when": "=size(vars.found) == 0",
+          "screen": "card.form",
+          "params": { "number": "=vars.scan.value", "format": "=vars.scan.format" }
+        }
+      ]
+    },
+    "addFromPicture": {
+      "steps": [
+        {
+          "type": "capability",
+          "when": "=available('media.pick')",
+          "capability": "media.pick",
+          "action": "pick",
+          "args": { "multiple": false },
+          "as": "picked",
+          "onError": "continue",
+          "errorAs": "pickError"
+        },
+        {
+          "type": "toast",
+          "when": "=!available('media.pick') || (vars.pickError != null && vars.pickError.code != 'CANCELLED')",
+          "text": "Picking pictures doesn’t work on this phone yet. Scan the card or type its number."
+        },
+        {
+          "type": "capability",
+          "when": "=vars.picked != null && size(vars.picked.files) > 0",
+          "capability": "scan.barcode",
+          "action": "decode",
+          "args": { "image": "=vars.picked.files[0]" },
+          "as": "decoded",
+          "onError": "continue",
+          "errorAs": "decodeError"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.picked != null && size(vars.picked.files) > 0 && (vars.decoded == null || size(vars.decoded.codes) == 0)",
+          "text": "No barcode found in that picture. Type the number instead."
+        },
+        {
+          "type": "navigate",
+          "when": "=vars.picked != null && size(vars.picked.files) > 0",
+          "screen": "card.form",
+          "params": {
+            "number": "=vars.decoded != null && size(vars.decoded.codes) > 0 ? vars.decoded.codes[0].value : ''",
+            "format": "=vars.decoded != null && size(vars.decoded.codes) > 0 ? vars.decoded.codes[0].format : 'auto'",
+            "picture": "=vars.picked.files[0]"
+          }
+        }
+      ]
+    },
+    "readPicture": {
+      "args": { "card": { "type": "ref", "to": "card" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "scan.barcode",
+          "action": "decode",
+          "args": { "image": "=args.card.picture" },
+          "as": "decoded",
+          "onError": "continue",
+          "errorAs": "decodeError"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.decoded == null || size(vars.decoded.codes) == 0",
+          "text": "No barcode found in the picture."
+        },
+        {
+          "type": "updateRecord",
+          "when": "=vars.decoded != null && size(vars.decoded.codes) > 0",
+          "record": "=args.card",
+          "set": { "number": "=vars.decoded.codes[0].value", "format": "=vars.decoded.codes[0].format" }
+        },
+        {
+          "type": "toast",
+          "when": "=vars.decoded != null && size(vars.decoded.codes) > 0",
+          "text": "Card number and barcode type updated from the picture."
+        }
+      ]
+    },
+    "togglePin": {
+      "args": { "card": { "type": "ref", "to": "card" } },
+      "steps": [{ "type": "updateRecord", "record": "=args.card", "set": { "pinned": "=!args.card.pinned" } }]
+    },
+    "shareCard": {
+      "args": { "card": { "type": "ref", "to": "card" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "share",
+          "action": "share",
+          "args": {
+            "title": "=args.card.store",
+            "text": "=coalesce(args.card.store, '') + ': ' + coalesce(args.card.number, '')"
+          }
+        }
+      ]
+    },
+    "exportCards": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "allCards",
+            "fileName": "='cards-' + string(today()) + '.csv'",
+            "columns": [
+              "store",
+              "number",
+              "format",
+              "holder",
+              "group",
+              "points",
+              "expires",
+              "note",
+              "pinned",
+              "archived"
+            ]
+          },
+          "as": "saved"
+        },
+        { "type": "toast", "when": "=vars.saved.saved", "text": "=t('exported', {'n': coalesce(vars.saved.rows, 0)})" }
+      ]
+    },
+    "importCards": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "importCsv",
+          "args": {
+            "entity": "card",
+            "fields": {
+              "store": { "from": ["Store", "Shop", "Merchant", "Store name", "Retailer"] },
+              "number": {
+                "from": [
+                  "barcodeid",
+                  "cardid",
+                  "Card number",
+                  "Card ID",
+                  "Number",
+                  "Member number",
+                  "Membership number",
+                  "Code",
+                  "Barcode"
+                ]
+              },
+              "format": { "from": ["Barcode type", "Barcode format", "Format"], "values": { "*": "auto" } },
+              "holder": { "from": ["Name on the card", "Card holder", "Holder"] },
+              "group": { "from": ["Kind of shop", "Group", "Category"] },
+              "points": { "from": ["Points or balance", "Points", "Balance"] },
+              "expires": { "from": ["Valid until", "Expiry date", "Expiry", "Expires"] },
+              "note": { "from": ["Note", "Notes", "Comment"] },
+              "pinned": { "from": ["Pin to the top", "starstatus", "Favourite", "Favorite", "Starred"] },
+              "archived": { "from": ["Archived", "archive"] },
+              "lastUsed": { "from": ["Last shown", "lastused", "Last used"], "values": { "0": "" } }
+            },
+            "onDuplicate": "skip",
+            "key": ["store", "number"],
+            "onError": "skip"
+          },
+          "as": "imported"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.imported.skipped == 0",
+          "text": "=t('imported', {'n': vars.imported.added, 'dup': vars.imported.duplicates, 'skipped': vars.imported.skipped})"
+        },
+        {
+          "type": "navigate",
+          "when": "=vars.imported.skipped > 0",
+          "screen": "importReport",
+          "params": {
+            "summary": "=t('imported', {'n': vars.imported.added, 'dup': vars.imported.duplicates, 'skipped': vars.imported.skipped})",
+            "lines": "=join(take(vars.imported.problems, 8).map(p, t('problemLine', {'row': p.row, 'reason': p.reason})), '\\n') + (vars.imported.skipped > 8 ? '\\n' + t('moreProblems', {'n': vars.imported.skipped - 8}) : '')"
+          }
+        }
+      ]
+    },
+    "remindExpiry": {
+      "args": { "card": { "type": "ref", "to": "card" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=t('expiryTitle', {'store': args.card.store})",
+            "body": "=t('expiryBody', {'date': formatDate(args.card.expires, 'yMMMd')})",
+            "open": { "screen": "cardDetail", "params": { "id": "=args.card.id" } },
+            "tag": "='expiry-' + string(args.card.id)",
+            "channel": "expiry"
+          }
+        }
+      ]
+    },
+    "closeReport": { "steps": [{ "type": "back" }] }
+  },
+  "triggers": {
+    "expirySoon": {
+      "type": "recordTime",
+      "entity": "card",
+      "at": "=has(item.expires) ? timestamp(string(addDays(item.expires, -7)) + 'T09:00') : null",
+      "ifPast": "now",
+      "when": "=settings.expiryReminders && has(item.expires) && item.expires >= today() && !item.archived",
+      "do": "remindExpiry",
+      "args": { "card": "=item.id" },
+      "maxPerDay": 3
+    }
+  },
+  "widgets": {
+    "topCards": {
+      "template": "list",
+      "title": "Cards",
+      "sizes": ["medium", "large"],
+      "query": "top",
+      "label": "=item.store",
+      "caption": "=coalesce(item.holder, '') != '' ? coalesce(item.holder, '') : t('endsIn', {'digits': substring(item.number, max(size(item.number) - 4, 0))})",
+      "icon": "=coalesce(optionIcon(item.group), 'storefront')",
+      "open": "wallet"
+    }
+  }
+}

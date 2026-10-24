@@ -1,0 +1,37 @@
+{
+  "id": "library/mines",
+  "category": "game_puzzle",
+  "replaces": "Mine-finding puzzle",
+  "title": "Mines",
+  "summary": "The mine-finding logic puzzle: safe first tap, logic-only fields, best times",
+  "description": "**Mines** is the classic logic puzzle of finding hidden mines on a field of squares, without ads, accounts or tracking.\n\n**What it does**\n\n- **Ready when you open it.** A fresh field waits on the first screen. Your first tap is always safe and always opens an area.\n- **Three levels and your own.** Easy (9 × 9, 10 mines), Medium (16 × 16, 40 mines), Hard (16 × 30, 99 mines, turned upright on a phone) and custom fields from 5 × 5 to 50 × 50.\n- **Logic-only fields** when you want them: every field can be cleared by reasoning alone, so no game ends on a coin toss.\n- **Made for one hand.** Tap to open, long-press to flag, or switch the Reveal / Flag toggle so a tap places a flag. On a computer, right-click flags. Tap a number whose flags are all placed to open the rest around it. Question marks are there if you want them.\n- **A hint that teaches.** Hint points to a square that is certain from what is open, or tells you plainly when only a guess is left. Fields where you used a hint don't set best times.\n- **Best times and win rate** for every level, with your current and best streak.\n- **Easy to read.** Numbers with distinct shapes and colours, squares at least 32 pixels wide, a field that scrolls in its own frame with grid numbers along its edges, light and dark designs, and calmer motion when your device asks for it.\n- **Keyboard and screen reader.** Arrow keys move, Space opens, F flags. Every square is announced, for example \"row 3, column 5, 2 mines around\".\n- **Try a field again** after a mine, and pick up a field where you left it.\n\n**What it never does**\n\n- No ads, no pop-ups between games, no paid unlocks.\n- No account and no sign-in.\n- No internet access at all: the app cannot connect to the internet.\n- No analytics or tracking of any kind. Your times and statistics stay on your phone.",
+  "license": "MIT",
+  "tags": ["puzzle", "logic", "mines", "board", "brain teaser", "single player", "offline", "no ads"],
+  "screenshots": [],
+  "research": [
+    {
+      "source": "https://minesweeper.now/help/gameplay",
+      "used_for": "The expected controls and rules of the type: tap or left-click to open, long-press or right-click to flag, opening the neighbours of a satisfied number, a first square that is never a mine, the three usual level sizes (9 × 9 with 10, 16 × 16 with 40, 16 × 30 with 99) plus custom sizes, a timer that starts with the first move, and fields solvable without guessing as a mode."
+    },
+    {
+      "source": "https://minesweeper.now/blog/minesweeper-for-mobile-differences-between-android-and-ios-versions",
+      "used_for": "Complaints about phone versions of the type: banner and full-screen ads after each game in the free apps (from a site that promotes its own browser version, so read as anecdotal)."
+    },
+    {
+      "source": "https://apps.apple.com/us/app/minesweeper-portal/id1541036838",
+      "used_for": "Store reviews: players dislike fields that end in a 50/50 guess and want every field solvable by logic, which led to the logic-only option and to a hint that says when only a guess is left."
+    },
+    {
+      "source": "https://www.appbrain.com/app/classic-minesweeper/com.junfengtech.games.minesweeper",
+      "used_for": "Store listing (read from a search result summary; the page itself refused the request): no-guess fields and opening around numbers are selling points, and some apps lock no-guess mode and automatic flagging behind unlocks. Here every feature is free."
+    },
+    {
+      "source": "https://mines.app.ufrj.br/en",
+      "used_for": "An ad-free version of the type; a review notes the missing desktop shortcut of opening around a satisfied number, which confirmed that tap-to-open-around-a-number belongs in the core flows."
+    },
+    {
+      "source": "https://worldsapps.com/reviews-mineswifter-minesweeper",
+      "used_for": "Review complaint that a long-press was taken as a short tap and opened a mine: led to the visible Reveal / Flag toggle, an adjustable long-press time, a visible press ring, and ignoring a press that moves."
+    }
+  ]
+}

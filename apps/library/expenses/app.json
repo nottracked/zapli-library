@@ -1,0 +1,1585 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "library/expenses",
+    "name": "Expenses",
+    "version": "3.4.1",
+    "icon": "receipt_long",
+    "category": "finance",
+    "ageRating": "everyone",
+    "license": "MIT",
+    "iconData": "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"
+  },
+  "theme": { "seedColor": "#00796B", "shape": "rounded" },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "ofBudget": { "en": "{spent} of {budget} this month" },
+      "spentThisMonth": { "en": "{spent} this month" },
+      "nextOn": { "en": "{rule} · next {date}" },
+      "dueSince": { "en": "{rule} · due {date}" },
+      "paused": { "en": "{rule} · paused" },
+      "nExpenses": { "en": "{n, plural, =0 {No expenses} one {# expense} other {# expenses}}" },
+      "perDay": { "en": "{amount} a day · {n, plural, one {# expense} other {# expenses}}" },
+      "vsLastMonth": {
+        "en": "{dir, select, less {{pct}% less than this time last month} more {{pct}% more than this time last month} other {About the same as this time last month}}"
+      },
+      "seeAll": { "en": "{n, plural, =0 {No expenses this month} one {See the expense} other {See all # expenses}}" },
+      "leftOf": { "en": "{left} left of {budget}" },
+      "overBy": { "en": "{over} over your {budget} budget" },
+      "nearTitle": { "en": "{name}: budget almost used" },
+      "overTitle": { "en": "{name}: over budget" },
+      "budgetBody": { "en": "{spent} of {budget} spent this month." },
+      "totalNearTitle": { "en": "Monthly budget almost used" },
+      "totalOverTitle": { "en": "Over your monthly budget" },
+      "dueTitle": { "en": "{name} is due" },
+      "dueBody": { "en": "{amount} on {date}. Add it to your expenses?" },
+      "addedTitle": { "en": "Added {name}" },
+      "addedBody": { "en": "{amount}, as planned. Tap to check it." },
+      "exported": { "en": "{n, plural, =0 {Saved an empty file.} one {Saved # expense.} other {Saved # expenses.}}" },
+      "importDone": {
+        "en": "{added, plural, =0 {No expenses added} one {Added # expense} other {Added # expenses}}{created, plural, =0 {} one {, # new category} other {, # new categories}}{skipped, plural, =0 {.} one {; # row could not be read.} other {; # rows could not be read.}}"
+      },
+      "problemLine": { "en": "Line {row}: {reason}" },
+      "moreProblems": { "en": "{n, plural, one {…and # more row} other {…and # more rows}}" }
+    }
+  },
+  "permissions": {
+    "auth.lock": {
+      "purpose": "Keep your spending behind your fingerprint, face or screen lock if you turn the lock on",
+      "default": "off"
+    },
+    "notify.local": {
+      "purpose": "Warn you when a budget is nearly used up and remind you about recurring payments",
+      "maxPerDay": 15
+    },
+    "files.io": {
+      "purpose": "Save your expenses as a CSV file, or add expenses from one",
+      "modes": ["import", "export"]
+    },
+    "widget.home": { "purpose": "Show this month’s spending and an Add button on your home screen" },
+    "camera.photo": { "purpose": "Take a photo of a receipt to keep with the expense", "optional": true }
+  },
+  "dataFlows": [
+    {
+      "from": [
+        "expense.date",
+        "expense.amount",
+        "expense.category",
+        "expense.note",
+        "expense.payment",
+        "category.name",
+        "exportRange.from",
+        "exportRange.to"
+      ],
+      "to": "files.io",
+      "purpose": "Your expenses, saved as a CSV file in a place you choose"
+    }
+  ],
+  "settings": {
+    "currency": {
+      "type": "choice",
+      "label": "Currency",
+      "help": "Amounts are shown in this currency. Changing it does not convert amounts you already entered.",
+      "default": "EUR",
+      "options": [
+        { "value": "EUR", "label": "Euro (EUR)" },
+        { "value": "USD", "label": "US dollar (USD)" },
+        { "value": "GBP", "label": "British pound (GBP)" },
+        { "value": "CHF", "label": "Swiss franc (CHF)" },
+        { "value": "CZK", "label": "Czech koruna (CZK)" },
+        { "value": "PLN", "label": "Polish złoty (PLN)" },
+        { "value": "HUF", "label": "Hungarian forint (HUF)" },
+        { "value": "RON", "label": "Romanian leu (RON)" },
+        { "value": "SEK", "label": "Swedish krona (SEK)" },
+        { "value": "NOK", "label": "Norwegian krone (NOK)" },
+        { "value": "DKK", "label": "Danish krone (DKK)" },
+        { "value": "UAH", "label": "Ukrainian hryvnia (UAH)" },
+        { "value": "TRY", "label": "Turkish lira (TRY)" },
+        { "value": "CAD", "label": "Canadian dollar (CAD)" },
+        { "value": "AUD", "label": "Australian dollar (AUD)" },
+        { "value": "NZD", "label": "New Zealand dollar (NZD)" },
+        { "value": "JPY", "label": "Japanese yen (JPY)" },
+        { "value": "CNY", "label": "Chinese yuan (CNY)" },
+        { "value": "INR", "label": "Indian rupee (INR)" },
+        { "value": "BRL", "label": "Brazilian real (BRL)" },
+        { "value": "MXN", "label": "Mexican peso (MXN)" },
+        { "value": "ZAR", "label": "South African rand (ZAR)" }
+      ]
+    },
+    "monthlyBudget": {
+      "type": "decimal",
+      "label": "Monthly budget",
+      "help": "For all your spending together. Leave it empty for none.",
+      "scale": 2,
+      "min": 0,
+      "sensitivity": "financial"
+    },
+    "budgetAlerts": { "type": "boolean", "label": "Budget warnings", "default": true },
+    "warnAt": {
+      "type": "integer",
+      "label": "Warn me at",
+      "unit": "% of a budget",
+      "default": 80,
+      "min": 50,
+      "max": 100
+    },
+    "addedNotice": { "type": "boolean", "label": "Tell me when a recurring expense is added", "default": true },
+    "remindDaily": {
+      "type": "boolean",
+      "label": "Daily reminder to log spending",
+      "help": "Only on days with nothing logged yet.",
+      "default": false
+    },
+    "remindAt": {
+      "type": "time",
+      "label": "Reminder time",
+      "default": "20:00",
+      "visible": "=settings.remindDaily"
+    },
+    "defaultPayment": {
+      "type": "choice",
+      "label": "Usual way to pay",
+      "default": "card",
+      "options": [
+        { "value": "cash", "label": "Cash", "icon": "payments" },
+        { "value": "card", "label": "Card", "icon": "credit_card" },
+        { "value": "transfer", "label": "Bank transfer", "icon": "account_balance" },
+        { "value": "mobile", "label": "Phone or watch", "icon": "wallet" },
+        { "value": "other", "label": "Other", "icon": "more_horiz" }
+      ]
+    }
+  },
+  "entities": {
+    "category": {
+      "label": "Category",
+      "labelPlural": "Categories",
+      "sort": ["name"],
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=has(item.budget) ? t('ofBudget', {'spent': formatCurrency(item.spentMonth, settings.currency), 'budget': formatCurrency(item.budget, settings.currency)}) : t('spentThisMonth', {'spent': formatCurrency(item.spentMonth, settings.currency)})",
+        "trailing": "=item.budgetState == 'over' ? 'Over budget' : item.budgetState == 'near' ? 'Almost used' : null",
+        "icon": "=item.icon",
+        "hue": "=item.hueName",
+        "trailingTone": "=item.budgetState == 'over' ? 'danger' : item.budgetState == 'near' ? 'warning' : null"
+      },
+      "fields": {
+        "name": { "type": "text", "required": true, "unique": true, "maxLength": 60, "placeholder": "Groceries" },
+        "icon": {
+          "type": "choice",
+          "default": "category",
+          "options": [
+            { "value": "shopping_cart", "label": "Groceries", "icon": "shopping_cart", "hue": "green" },
+            { "value": "restaurant", "label": "Eating out", "icon": "restaurant", "hue": "orange" },
+            { "value": "local_cafe", "label": "Coffee", "icon": "local_cafe", "hue": "brown" },
+            { "value": "local_drink", "label": "Drinks", "icon": "local_drink", "hue": "amber" },
+            { "value": "directions_car", "label": "Car and fuel", "icon": "directions_car", "hue": "blue" },
+            { "value": "directions_bike", "label": "Bike", "icon": "directions_bike", "hue": "lime" },
+            { "value": "directions_walk", "label": "Getting around", "icon": "directions_walk", "hue": "teal" },
+            { "value": "flight", "label": "Travel", "icon": "flight", "hue": "cyan" },
+            { "value": "home", "label": "Home and rent", "icon": "home", "hue": "brown" },
+            { "value": "bolt", "label": "Energy", "icon": "bolt", "hue": "amber" },
+            { "value": "water_drop", "label": "Water", "icon": "water_drop", "hue": "cyan" },
+            { "value": "wifi", "label": "Internet", "icon": "wifi", "hue": "indigo" },
+            { "value": "call", "label": "Phone", "icon": "call", "hue": "indigo" },
+            { "value": "receipt_long", "label": "Bills", "icon": "receipt_long", "hue": "indigo" },
+            { "value": "autorenew", "label": "Subscriptions", "icon": "autorenew", "hue": "violet" },
+            { "value": "medical_services", "label": "Health", "icon": "medical_services", "hue": "red" },
+            { "value": "medication", "label": "Pharmacy", "icon": "medication", "hue": "red" },
+            { "value": "fitness_center", "label": "Sport", "icon": "fitness_center", "hue": "lime" },
+            { "value": "spa", "label": "Personal care", "icon": "spa", "hue": "pink" },
+            { "value": "shopping_bag", "label": "Shopping", "icon": "shopping_bag", "hue": "violet" },
+            { "value": "movie", "label": "Going out", "icon": "movie", "hue": "pink" },
+            { "value": "sports_esports", "label": "Games", "icon": "sports_esports", "hue": "violet" },
+            { "value": "music_note", "label": "Music", "icon": "music_note", "hue": "pink" },
+            { "value": "menu_book", "label": "Books", "icon": "menu_book", "hue": "brown" },
+            { "value": "school", "label": "Education", "icon": "school", "hue": "blue" },
+            { "value": "child_care", "label": "Kids", "icon": "child_care", "hue": "amber" },
+            { "value": "family_restroom", "label": "Family", "icon": "family_restroom", "hue": "orange" },
+            { "value": "pets", "label": "Pets", "icon": "pets", "hue": "brown" },
+            { "value": "cake", "label": "Gifts", "icon": "cake", "hue": "pink" },
+            { "value": "local_florist", "label": "Garden", "icon": "local_florist", "hue": "green" },
+            { "value": "cleaning_services", "label": "Cleaning", "icon": "cleaning_services", "hue": "cyan" },
+            { "value": "handyman", "label": "Repairs", "icon": "handyman", "hue": "orange" },
+            { "value": "work", "label": "Work", "icon": "work", "hue": "blue" },
+            { "value": "savings", "label": "Savings", "icon": "savings", "hue": "green" },
+            { "value": "volunteer_activism", "label": "Giving", "icon": "volunteer_activism", "hue": "red" },
+            { "value": "account_balance", "label": "Bank and fees", "icon": "account_balance", "hue": "grey" },
+            { "value": "category", "label": "Other", "icon": "category", "hue": "grey" }
+          ]
+        },
+        "color": {
+          "type": "color",
+          "label": "Colour",
+          "help": "Leave it empty to use the colour of the category's icon."
+        },
+        "hueName": {
+          "type": "text",
+          "label": "Colour name",
+          "visible": false,
+          "compute": "=upper(coalesce(item.color, '')) == '#D32F2F' ? 'red' : upper(coalesce(item.color, '')) == '#C2185B' ? 'pink' : upper(coalesce(item.color, '')) == '#7B1FA2' ? 'violet' : upper(coalesce(item.color, '')) == '#512DA8' ? 'indigo' : upper(coalesce(item.color, '')) == '#1976D2' ? 'blue' : upper(coalesce(item.color, '')) == '#0288D1' ? 'cyan' : upper(coalesce(item.color, '')) == '#00897B' ? 'teal' : upper(coalesce(item.color, '')) == '#388E3C' ? 'green' : upper(coalesce(item.color, '')) == '#F9A825' ? 'amber' : upper(coalesce(item.color, '')) == '#EF6C00' ? 'orange' : upper(coalesce(item.color, '')) == '#6D4C41' ? 'brown' : upper(coalesce(item.color, '')) == '#546E7A' ? 'grey' : optionHue(item.icon)"
+        },
+        "budget": {
+          "type": "decimal",
+          "label": "Monthly budget",
+          "help": "Leave it empty for no budget.",
+          "scale": 2,
+          "min": 0,
+          "currency": "=settings.currency",
+          "sensitivity": "financial"
+        },
+        "expenses": { "type": "inverse", "of": "expense.category", "label": "Expenses" },
+        "recurring": { "type": "inverse", "of": "recurring.category", "label": "Recurring expenses" },
+        "spentMonth": {
+          "type": "decimal",
+          "label": "Spent this month",
+          "scale": 2,
+          "currency": "=settings.currency",
+          "sensitivity": "financial",
+          "compute": "=coalesce(sum(item.expenses.filter(e, e.date >= startOf(today(), 'month') && e.date <= endOf(today(), 'month')).map(e, e.amount)), decimal('0'))"
+        },
+        "left": {
+          "type": "decimal",
+          "label": "Left this month",
+          "scale": 2,
+          "currency": "=settings.currency",
+          "sensitivity": "financial",
+          "visible": "=has(item.budget)",
+          "compute": "=coalesce(item.budget, decimal('0')) - item.spentMonth"
+        },
+        "budgetState": {
+          "type": "choice",
+          "label": "Budget",
+          "sensitivity": "financial",
+          "visible": false,
+          "options": ["none", "ok", "near", "over"],
+          "compute": "=!has(item.budget) ? 'none' : item.spentMonth > coalesce(item.budget, decimal('0')) ? 'over' : item.spentMonth * 100 >= coalesce(item.budget, decimal('0')) * settings.warnAt ? 'near' : 'ok'"
+        }
+      }
+    },
+    "expense": {
+      "label": "Expense",
+      "labelPlural": "Expenses",
+      "sensitivity": "financial",
+      "sort": ["-date", "-createdAt"],
+      "display": {
+        "title": "=has(item.note) && item.note != '' ? item.note : coalesce(item.category.name, 'Expense')",
+        "subtitle": "=(has(item.note) && item.note != '' ? coalesce(item.category.name, 'No category') + ' · ' : '') + coalesce(optionLabel(item.payment), '') + ' · ' + formatDate(item.date, 'MMMEd')",
+        "trailing": "=formatCurrency(item.amount, settings.currency)",
+        "icon": "=coalesce(item.category.icon, 'category')",
+        "hue": "=item.category.hueName"
+      },
+      "fields": {
+        "amount": {
+          "type": "decimal",
+          "required": true,
+          "scale": 2,
+          "min": 0.01,
+          "currency": "=settings.currency",
+          "placeholder": "0.00"
+        },
+        "category": { "type": "ref", "to": "category", "required": true },
+        "note": { "type": "text", "maxLength": 500, "placeholder": "What was it for?" },
+        "date": { "type": "date", "required": true, "default": "=today()" },
+        "payment": {
+          "type": "choice",
+          "label": "Paid with",
+          "default": "=settings.defaultPayment",
+          "options": [
+            { "value": "cash", "label": "Cash", "icon": "payments" },
+            { "value": "card", "label": "Card", "icon": "credit_card" },
+            { "value": "transfer", "label": "Bank transfer", "icon": "account_balance" },
+            { "value": "mobile", "label": "Phone or watch", "icon": "wallet" },
+            { "value": "other", "label": "Other", "icon": "more_horiz" }
+          ]
+        },
+        "receipt": { "type": "image", "label": "Receipt", "visible": "=available('camera.photo')" },
+        "recurring": {
+          "type": "ref",
+          "to": "recurring",
+          "label": "Added from",
+          "onDelete": "setNull",
+          "editable": false
+        }
+      }
+    },
+    "recurring": {
+      "label": "Recurring expense",
+      "labelPlural": "Recurring",
+      "sensitivity": "financial",
+      "sort": ["nextDue"],
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=item.active ? (item.dueNow ? t('dueSince', {'rule': formatRecurrence(item.schedule), 'date': formatDate(item.nextDue, 'MMMd')}) : t('nextOn', {'rule': formatRecurrence(item.schedule), 'date': formatDate(item.nextDue, 'MMMd')})) : t('paused', {'rule': formatRecurrence(item.schedule)})",
+        "trailing": "=formatCurrency(item.amount, settings.currency)",
+        "icon": "=coalesce(item.category.icon, optionIcon(item.payment), 'autorenew')",
+        "hue": "=item.category.hueName",
+        "tone": "=item.dueNow ? 'warning' : null"
+      },
+      "fields": {
+        "name": { "type": "text", "required": true, "maxLength": 60, "placeholder": "Rent, phone, streaming…" },
+        "amount": { "type": "decimal", "required": true, "scale": 2, "min": 0.01, "currency": "=settings.currency" },
+        "category": { "type": "ref", "to": "category", "required": true },
+        "schedule": {
+          "type": "recurrence",
+          "label": "Repeats",
+          "required": true,
+          "default": "FREQ=MONTHLY;BYMONTHDAY=1"
+        },
+        "nextDue": {
+          "type": "date",
+          "label": "Next payment",
+          "help": "The next date it is added. After that, it follows the schedule.",
+          "required": true,
+          "default": "=today()"
+        },
+        "mode": {
+          "type": "choice",
+          "label": "When it is due",
+          "default": "auto",
+          "options": [
+            { "value": "auto", "label": "Add it for me", "icon": "autorenew" },
+            { "value": "ask", "label": "Ask me first", "icon": "notifications" }
+          ]
+        },
+        "payment": {
+          "type": "choice",
+          "label": "Paid with",
+          "default": "=settings.defaultPayment",
+          "options": [
+            { "value": "cash", "label": "Cash", "icon": "payments" },
+            { "value": "card", "label": "Card", "icon": "credit_card" },
+            { "value": "transfer", "label": "Bank transfer", "icon": "account_balance" },
+            { "value": "mobile", "label": "Phone or watch", "icon": "wallet" },
+            { "value": "other", "label": "Other", "icon": "more_horiz" }
+          ]
+        },
+        "active": { "type": "boolean", "label": "Active", "default": true },
+        "note": { "type": "text", "maxLength": 120 },
+        "dueNow": { "type": "boolean", "label": "Due now", "compute": "=item.active && item.nextDue <= today()" },
+        "perYear": {
+          "type": "decimal",
+          "label": "Per year",
+          "scale": 2,
+          "currency": "=settings.currency",
+          "compute": "=item.active ? item.amount * size(occurrences(item.schedule, today(), addDays(addMonths(today(), 12), -1))) : decimal('0')"
+        },
+        "expenses": { "type": "inverse", "of": "expense.recurring", "label": "Added so far" }
+      }
+    }
+  },
+  "queries": {
+    "recent": { "entity": "expense", "sort": ["-date", "-createdAt"], "limit": 5 },
+    "history": { "entity": "expense", "sort": ["-date", "-createdAt"], "limit": 2000 },
+    "monthTotal": {
+      "entity": "expense",
+      "where": "=item.date >= startOf(today(), 'month') && item.date <= endOf(today(), 'month')",
+      "aggregate": { "total": { "fn": "sum", "field": "amount" }, "n": { "fn": "count" } }
+    },
+    "lastMonthSoFar": {
+      "entity": "expense",
+      "where": "=item.date >= addMonths(startOf(today(), 'month'), -1) && item.date <= addMonths(today(), -1)",
+      "aggregate": { "total": { "fn": "sum", "field": "amount" } }
+    },
+    "todayCount": { "entity": "expense", "where": "=item.date == today()", "aggregate": { "n": { "fn": "count" } } },
+    "months12": {
+      "entity": "expense",
+      "where": "=item.date >= addMonths(startOf(today(), 'month'), -11) && item.date <= endOf(today(), 'month')",
+      "groupBy": { "field": "date", "period": "month" },
+      "aggregate": { "total": { "fn": "sum", "field": "amount" } },
+      "fill": true
+    },
+    "categories": { "entity": "category", "sort": ["name"] },
+    "budgeted": { "entity": "category", "where": "=has(item.budget)", "sort": ["name"] },
+    "dueAuto": {
+      "entity": "recurring",
+      "where": "=item.active && item.mode == 'auto' && item.nextDue <= today()",
+      "sort": ["nextDue"],
+      "limit": 100
+    },
+    "dueAsk": {
+      "entity": "recurring",
+      "where": "=item.active && item.mode == 'ask' && item.nextDue <= today()",
+      "sort": ["nextDue"],
+      "limit": 20
+    },
+    "allRecurring": { "entity": "recurring", "sort": ["-active", "nextDue"] },
+    "inRange": {
+      "entity": "expense",
+      "args": { "from": { "type": "date" }, "to": { "type": "date" } },
+      "where": "=item.date >= args.from && item.date <= args.to",
+      "sort": ["-date", "-createdAt"],
+      "limit": 2000
+    },
+    "rangeTotal": {
+      "entity": "expense",
+      "args": { "from": { "type": "date" }, "to": { "type": "date" } },
+      "where": "=item.date >= args.from && item.date <= args.to",
+      "aggregate": { "total": { "fn": "sum", "field": "amount" }, "n": { "fn": "count" } }
+    },
+    "rangeByCategory": {
+      "entity": "expense",
+      "args": { "from": { "type": "date" }, "to": { "type": "date" } },
+      "where": "=item.date >= args.from && item.date <= args.to",
+      "groupBy": { "field": "category" },
+      "aggregate": { "total": { "fn": "sum", "field": "amount" }, "n": { "fn": "count" } },
+      "sort": ["-total"]
+    },
+    "monthByCategory": {
+      "entity": "expense",
+      "where": "=item.date >= startOf(today(), 'month') && item.date <= endOf(today(), 'month')",
+      "groupBy": { "field": "category" },
+      "aggregate": { "total": { "fn": "sum", "field": "amount" }, "n": { "fn": "count" } },
+      "sort": ["-total"]
+    },
+    "last7": {
+      "entity": "expense",
+      "where": "=item.date > addDays(today(), -7)",
+      "groupBy": { "field": "date", "period": "day" },
+      "aggregate": { "total": { "fn": "sum", "field": "amount" } },
+      "fill": true
+    },
+    "filtered": {
+      "entity": "expense",
+      "args": {
+        "from": { "type": "date" },
+        "to": { "type": "date" },
+        "payment": { "type": "text" },
+        "minAmount": { "type": "decimal" }
+      },
+      "where": "=item.date >= args.from && item.date <= args.to && (args.payment == 'any' || item.payment == args.payment) && item.amount >= args.minAmount",
+      "sort": ["-date", "-createdAt"],
+      "limit": 2000
+    },
+    "expenseCount": { "entity": "expense", "aggregate": { "n": { "fn": "count" } } },
+    "categoryCount": { "entity": "category", "aggregate": { "n": { "fn": "count" } } },
+    "transferCategories": {
+      "entity": "category",
+      "where": "=startsWith(item.name, \"To '\") || startsWith(item.name, \"From '\")",
+      "limit": 100
+    }
+  },
+  "navigation": {
+    "start": "overview",
+    "tabs": [
+      { "screen": "overview", "label": "This month", "icon": "dashboard" },
+      { "screen": "expenses", "label": "Expenses", "icon": "receipt_long" },
+      { "screen": "months", "label": "Months", "icon": "calendar_month" },
+      { "screen": "categories", "label": "Budgets", "icon": "pie_chart" },
+      {
+        "screen": "recurringList",
+        "label": "Recurring",
+        "icon": "autorenew",
+        "badge": "=size(q.dueAsk) > 0 ? string(size(q.dueAsk)) : ''"
+      }
+    ],
+    "menu": ["filter"]
+  },
+  "screens": {
+    "overview": { "type": "dashboard", "title": "=formatDate(today(), 'yMMMM')", "root": "ovCol" },
+    "expenses": {
+      "type": "list",
+      "title": "Expenses",
+      "query": "history",
+      "search": ["note", "category", "amount"],
+      "sectionBy": "date",
+      "add": "addExpense",
+      "toolbar": ["filterBtn", "exportBtn", "importBtn"],
+      "empty": {
+        "title": "No expenses yet",
+        "body": "Add what you spend in a few taps. Everything stays on this phone.",
+        "icon": "receipt_long"
+      }
+    },
+    "addExpense": {
+      "type": "form",
+      "title": "Add expense",
+      "entity": "expense",
+      "fields": ["amount", "category", "note", "date", "payment", "receipt"]
+    },
+    "expenseDetail": {
+      "type": "detail",
+      "title": "Expense",
+      "entity": "expense",
+      "header": "expAmount",
+      "show": ["payment", "recurring", "receipt"],
+      "footer": "expFooter"
+    },
+    "months": {
+      "type": "custom",
+      "title": "Months",
+      "state": { "month": { "type": "date", "default": "=startOf(today(), 'month')" } },
+      "queries": {
+        "mTotal": { "query": "rangeTotal", "args": { "from": "=state.month", "to": "=endOf(state.month, 'month')" } },
+        "mCats": {
+          "query": "rangeByCategory",
+          "args": { "from": "=state.month", "to": "=endOf(state.month, 'month')" }
+        }
+      },
+      "root": "mCol"
+    },
+    "monthList": {
+      "type": "list",
+      "title": "=formatDate(params.from, 'yMMMM')",
+      "params": { "from": { "type": "date", "required": true }, "to": { "type": "date", "required": true } },
+      "queries": { "inRange": { "query": "inRange", "args": { "from": "=params.from", "to": "=params.to" } } },
+      "query": "inRange",
+      "search": ["note", "category", "amount"],
+      "sectionBy": "date",
+      "add": false,
+      "empty": { "title": "Nothing spent this month", "icon": "savings" }
+    },
+    "filter": {
+      "type": "custom",
+      "title": "Find expenses",
+      "state": {
+        "from": { "type": "date", "default": "=addMonths(startOf(today(), 'month'), -2)" },
+        "to": { "type": "date", "default": "=today()" },
+        "payment": { "type": "text", "default": "any" },
+        "minAmount": { "type": "decimal", "default": 0 }
+      },
+      "queries": { "fTotal": { "query": "rangeTotal", "args": { "from": "=state.from", "to": "=state.to" } } },
+      "root": "fCol"
+    },
+    "results": {
+      "type": "list",
+      "title": "Found expenses",
+      "params": {
+        "from": { "type": "date", "required": true },
+        "to": { "type": "date", "required": true },
+        "payment": { "type": "text", "required": true },
+        "minAmount": { "type": "decimal", "required": true }
+      },
+      "queries": {
+        "filtered": {
+          "query": "filtered",
+          "args": {
+            "from": "=params.from",
+            "to": "=params.to",
+            "payment": "=params.payment",
+            "minAmount": "=params.minAmount"
+          }
+        }
+      },
+      "query": "filtered",
+      "search": ["note", "category"],
+      "sectionBy": "date",
+      "add": false,
+      "empty": { "title": "No expenses match", "body": "Try a longer period or a lower amount.", "icon": "search" }
+    },
+    "categories": {
+      "type": "list",
+      "title": "Budgets",
+      "query": "categories",
+      "search": ["name"],
+      "empty": {
+        "title": "No categories yet",
+        "body": "Add categories such as Groceries or Rent, and give them a monthly budget if you like.",
+        "icon": "pie_chart"
+      }
+    },
+    "catDetail": {
+      "type": "detail",
+      "entity": "category",
+      "related": ["recurring", "expenses"],
+      "footer": "catFooter",
+      "show": ["budget", "spentMonth", "left"]
+    },
+    "recurringList": {
+      "type": "list",
+      "title": "Recurring",
+      "query": "allRecurring",
+      "empty": {
+        "title": "No recurring expenses",
+        "body": "Add rent, bills and subscriptions once. They are added to your expenses when they are due.",
+        "icon": "autorenew"
+      }
+    },
+    "recDetail": { "type": "detail", "entity": "recurring", "related": ["expenses"], "footer": "recFooter" },
+    "prefs": { "type": "settings", "title": "Settings" },
+    "importScreen": {
+      "type": "custom",
+      "title": "Import expenses",
+      "state": { "order": { "type": "text", "default": "dmy" } },
+      "root": "imCol"
+    },
+    "importReport": {
+      "type": "custom",
+      "title": "Import finished",
+      "present": "dialog",
+      "params": { "summary": { "type": "text", "maxLength": 300 }, "lines": { "type": "longText", "maxLength": 5000 } },
+      "root": "irCol"
+    }
+  },
+  "components": {
+    "ovCol": {
+      "component": "Column",
+      "children": [
+        "setupEmpty",
+        "sumCard",
+        "addBtn",
+        "dueCard",
+        "catSection",
+        "pieChart",
+        "budgetSection",
+        "weekChart",
+        "recentSection"
+      ]
+    },
+    "setupEmpty": {
+      "component": "EmptyState",
+      "illustration": "welcome",
+      "icon": "receipt_long",
+      "title": "Welcome",
+      "body": "Choose your currency and, if you like, a monthly budget. Then add your first expense. Your data stays on this phone: no account, no ads.",
+      "action": { "event": { "name": "openPrefs" } },
+      "actionLabel": "Choose currency and budget",
+      "visible": "=coalesce(q.monthTotal.n, 0) == 0 && size(q.recent) == 0"
+    },
+    "addBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Add expense",
+      "variant": "primary",
+      "action": { "event": { "name": "openAdd" } }
+    },
+    "sumCard": { "component": "Card", "variant": "hero", "child": "sumCol" },
+    "sumCol": {
+      "component": "Column",
+      "children": ["spentStat", "spentOnly", "dayLine", "budgetBar", "budgetLine"]
+    },
+    "spentStat": {
+      "component": "Stat",
+      "variant": "hero",
+      "label": "Spent this month",
+      "value": "=formatCurrency(coalesce(q.monthTotal.total, decimal('0')), settings.currency)",
+      "delta": "=t('vsLastMonth', {'dir': int(round(double(abs(coalesce(q.monthTotal.total, decimal('0')) - coalesce(q.lastMonthSoFar.total, decimal('0')))) * 100.0 / max(double(coalesce(q.lastMonthSoFar.total, decimal('0'))), 0.01))) == 0 ? 'same' : coalesce(q.monthTotal.total, decimal('0')) < coalesce(q.lastMonthSoFar.total, decimal('0')) ? 'less' : 'more', 'pct': int(round(double(abs(coalesce(q.monthTotal.total, decimal('0')) - coalesce(q.lastMonthSoFar.total, decimal('0')))) * 100.0 / max(double(coalesce(q.lastMonthSoFar.total, decimal('0'))), 0.01)))})",
+      "deltaTone": "=int(round(double(abs(coalesce(q.monthTotal.total, decimal('0')) - coalesce(q.lastMonthSoFar.total, decimal('0')))) * 100.0 / max(double(coalesce(q.lastMonthSoFar.total, decimal('0'))), 0.01))) == 0 ? 'neutral' : coalesce(q.monthTotal.total, decimal('0')) < coalesce(q.lastMonthSoFar.total, decimal('0')) ? 'success' : 'warning'",
+      "deltaIcon": "=int(round(double(abs(coalesce(q.monthTotal.total, decimal('0')) - coalesce(q.lastMonthSoFar.total, decimal('0')))) * 100.0 / max(double(coalesce(q.lastMonthSoFar.total, decimal('0'))), 0.01))) == 0 ? null : coalesce(q.monthTotal.total, decimal('0')) < coalesce(q.lastMonthSoFar.total, decimal('0')) ? 'trending_down' : 'trending_up'",
+      "visible": "=coalesce(q.lastMonthSoFar.total, decimal('0')) > decimal('0')"
+    },
+    "spentOnly": {
+      "component": "Stat",
+      "variant": "hero",
+      "label": "Spent this month",
+      "value": "=formatCurrency(coalesce(q.monthTotal.total, decimal('0')), settings.currency)",
+      "visible": "=coalesce(q.lastMonthSoFar.total, decimal('0')) <= decimal('0')"
+    },
+    "dayLine": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=t('perDay', {'amount': formatCurrency(coalesce(q.monthTotal.total, decimal('0')) / (daysBetween(startOf(today(), 'month'), today()) + 1), settings.currency), 'n': coalesce(q.monthTotal.n, 0)})"
+    },
+    "budgetBar": {
+      "component": "Progress",
+      "label": "Monthly budget used",
+      "value": "=coalesce(q.monthTotal.total, decimal('0'))",
+      "max": "=coalesce(settings.monthlyBudget, decimal('1'))",
+      "visible": "=has(settings.monthlyBudget) && settings.monthlyBudget > 0",
+      "tone": "=coalesce(q.monthTotal.total, decimal('0')) > coalesce(settings.monthlyBudget, decimal('0')) ? 'danger' : coalesce(q.monthTotal.total, decimal('0')) * 100 >= coalesce(settings.monthlyBudget, decimal('0')) * settings.warnAt ? 'warning' : 'primary'"
+    },
+    "budgetLine": {
+      "component": "Text",
+      "variant": "caption",
+      "visible": "=has(settings.monthlyBudget) && settings.monthlyBudget > 0",
+      "text": "=coalesce(q.monthTotal.total, decimal('0')) > coalesce(settings.monthlyBudget, decimal('0')) ? t('overBy', {'over': formatCurrency(coalesce(q.monthTotal.total, decimal('0')) - coalesce(settings.monthlyBudget, decimal('0')), settings.currency), 'budget': formatCurrency(coalesce(settings.monthlyBudget, decimal('0')), settings.currency)}) : t('leftOf', {'left': formatCurrency(coalesce(settings.monthlyBudget, decimal('0')) - coalesce(q.monthTotal.total, decimal('0')), settings.currency), 'budget': formatCurrency(coalesce(settings.monthlyBudget, decimal('0')), settings.currency)})"
+    },
+    "dueCard": { "component": "Card", "child": "dueCol", "visible": "=size(q.dueAsk) > 0" },
+    "dueCol": { "component": "Column", "children": ["dueTitle", "dueList"] },
+    "dueTitle": { "component": "Text", "variant": "h4", "text": "Due now" },
+    "dueList": { "component": "List", "children": { "path": "/q/dueAsk", "componentId": "dueRow" } },
+    "dueRow": { "component": "Row", "align": "center", "children": ["dueInfo", "dueSkipBtn", "dueAddBtn"] },
+    "dueInfo": { "component": "Column", "weight": 1, "children": ["dueName", "dueAmount"] },
+    "dueName": { "component": "Text", "text": "=item.name" },
+    "dueAmount": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=formatCurrency(item.amount, settings.currency) + ' · ' + formatDate(item.nextDue, 'MMMd')"
+    },
+    "dueSkipBtn": {
+      "component": "Button",
+      "label": "Skip",
+      "variant": "borderless",
+      "action": {
+        "event": { "name": "skipRecurring", "context": { "rule": "=item.id", "due": "=string(item.nextDue)" } }
+      }
+    },
+    "dueAddBtn": {
+      "component": "Button",
+      "label": "Add",
+      "icon": "add",
+      "action": {
+        "event": { "name": "postRecurring", "context": { "rule": "=item.id", "due": "=string(item.nextDue)" } }
+      }
+    },
+    "budgetSection": {
+      "component": "Section",
+      "title": "Budgets",
+      "visible": "=size(q.budgeted) > 0",
+      "children": ["budgetList"]
+    },
+    "budgetList": { "component": "List", "children": { "path": "/q/budgeted", "componentId": "budgetRow" } },
+    "budgetRow": { "component": "Column", "children": ["budgetName", "budgetProgress"] },
+    "budgetName": {
+      "component": "Text",
+      "text": "=item.name + ': ' + t('ofBudget', {'spent': formatCurrency(item.spentMonth, settings.currency), 'budget': formatCurrency(coalesce(item.budget, decimal('0')), settings.currency)})"
+    },
+    "budgetProgress": {
+      "component": "Progress",
+      "value": "=item.spentMonth",
+      "max": "=coalesce(item.budget, decimal('1'))",
+      "tone": "=item.budgetState == 'over' ? 'danger' : item.budgetState == 'near' ? 'warning' : 'success'",
+      "accessibility": { "label": "=item.name" }
+    },
+    "catSection": {
+      "component": "Section",
+      "title": "By category",
+      "visible": "=coalesce(q.monthTotal.n, 0) > 0",
+      "children": ["catList"]
+    },
+    "catList": {
+      "component": "List",
+      "children": { "path": "/q/monthByCategory", "componentId": "catRow" },
+      "onTap": { "event": { "name": "navigate", "context": { "screen": "catDetail", "id": "=item.key" } } }
+    },
+    "catRow": { "component": "Row", "align": "center", "children": ["catIcon", "catName", "catTotal"] },
+    "catIcon": { "component": "Icon", "name": "=coalesce(item.key.icon, 'category')", "hue": "=item.key.hueName" },
+    "catName": {
+      "component": "Text",
+      "weight": 1,
+      "text": "=coalesce(item.key.name, 'No category') + ' (' + string(item.n) + ')'"
+    },
+    "catTotal": {
+      "component": "Text",
+      "text": "=formatCurrency(coalesce(item.total, decimal('0')), settings.currency)"
+    },
+    "pieChart": {
+      "component": "Chart",
+      "kind": "donut",
+      "title": "Where it went this month",
+      "query": "monthByCategory",
+      "x": "key",
+      "y": ["total"],
+      "centerText": "=formatCurrency(coalesce(q.monthTotal.total, decimal('0')), settings.currency)",
+      "visible": "=coalesce(q.monthTotal.n, 0) > 0"
+    },
+    "weekChart": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Last 7 days",
+      "query": "last7",
+      "x": "key",
+      "y": ["total"],
+      "visible": "=coalesce(q.monthTotal.n, 0) > 0"
+    },
+    "trendChart": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Spending, last 12 months",
+      "query": "months12",
+      "x": "key",
+      "y": ["total"],
+      "visible": "=size(q.recent) > 0 && !(has(settings.monthlyBudget) && settings.monthlyBudget > 0)"
+    },
+    "trendBudget": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Spending, last 12 months",
+      "query": "months12",
+      "x": "key",
+      "y": ["total"],
+      "reference": [
+        { "value": "=coalesce(settings.monthlyBudget, decimal('0'))", "label": "Monthly budget", "tone": "warning" }
+      ],
+      "visible": "=size(q.recent) > 0 && has(settings.monthlyBudget) && settings.monthlyBudget > 0"
+    },
+    "recentSection": {
+      "component": "Section",
+      "title": "Recent",
+      "visible": "=size(q.recent) > 0",
+      "children": ["recentList"]
+    },
+    "recentList": {
+      "component": "List",
+      "children": { "path": "/q/recent", "componentId": "recentRow" },
+      "onTap": { "event": { "name": "navigate", "context": { "screen": "expenseDetail", "id": "=item.id" } } }
+    },
+    "recentRow": {
+      "component": "Row",
+      "align": "center",
+      "children": ["recentIcon", "recentText", "recentAmount"]
+    },
+    "recentIcon": {
+      "component": "Icon",
+      "name": "=coalesce(item.category.icon, 'category')",
+      "hue": "=item.category.hueName"
+    },
+    "recentText": {
+      "component": "Text",
+      "weight": 1,
+      "text": "=(coalesce(item.note, '') != '' ? coalesce(item.note, '') : coalesce(item.category.name, '')) + ' · ' + formatDate(item.date, 'MMMd')"
+    },
+    "recentAmount": { "component": "Text", "text": "=formatCurrency(item.amount, settings.currency)" },
+    "filterBtn": {
+      "component": "Button",
+      "icon": "filter_list",
+      "label": "Find expenses",
+      "iconOnly": true,
+      "action": { "event": { "name": "openFilter" } }
+    },
+    "exportBtn": {
+      "component": "Button",
+      "icon": "download",
+      "label": "Export to CSV",
+      "iconOnly": true,
+      "action": { "event": { "name": "exportAll" } }
+    },
+    "importBtn": {
+      "component": "Button",
+      "icon": "upload",
+      "label": "Import from CSV",
+      "iconOnly": true,
+      "action": { "event": { "name": "openImport" } }
+    },
+    "expAmount": {
+      "component": "Stat",
+      "variant": "hero",
+      "label": "=has(record.note) && record.note != '' ? record.note : coalesce(record.category.name, 'Expense')",
+      "value": "=formatCurrency(record.amount, settings.currency)",
+      "icon": "=coalesce(record.category.icon, 'category')"
+    },
+    "expFooter": { "component": "Row", "justify": "spaceBetween", "children": ["againBtn", "receiptBtn"] },
+    "againBtn": {
+      "component": "Button",
+      "icon": "content_copy",
+      "label": "Add again today",
+      "action": { "event": { "name": "addAgain", "context": { "expense": "=record.id" } } }
+    },
+    "receiptBtn": {
+      "component": "Button",
+      "icon": "photo_camera",
+      "label": "=has(record.receipt) ? 'Retake receipt photo' : 'Photo of receipt'",
+      "visible": "=available('camera.photo')",
+      "action": { "event": { "name": "attachReceipt", "context": { "expense": "=record.id" } } }
+    },
+    "catFooter": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Add expense here",
+      "variant": "primary",
+      "action": { "event": { "name": "addInCategory", "context": { "category": "=record.id" } } }
+    },
+    "recFooter": { "component": "Row", "justify": "spaceBetween", "children": ["recSkipBtn", "recAddBtn"] },
+    "recSkipBtn": {
+      "component": "Button",
+      "label": "Skip next",
+      "variant": "borderless",
+      "visible": "=record.active",
+      "action": {
+        "event": { "name": "skipRecurring", "context": { "rule": "=record.id", "due": "=string(record.nextDue)" } }
+      }
+    },
+    "recAddBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Add next one now",
+      "visible": "=record.active",
+      "action": {
+        "event": { "name": "postRecurring", "context": { "rule": "=record.id", "due": "=string(record.nextDue)" } }
+      }
+    },
+    "mCol": {
+      "component": "Column",
+      "children": ["mNav", "mCard", "mEmpty", "mCatSection", "mPie", "trendChart", "trendBudget", "mButtons"]
+    },
+    "mNav": {
+      "component": "Row",
+      "align": "center",
+      "justify": "spaceBetween",
+      "children": ["mPrev", "mTitle", "mNext"]
+    },
+    "mPrev": {
+      "component": "Button",
+      "icon": "chevron_left",
+      "label": "Previous month",
+      "iconOnly": true,
+      "action": { "event": { "name": "showMonth", "context": { "month": "=addMonths(state.month, -1)" } } }
+    },
+    "mTitle": { "component": "Text", "variant": "h3", "text": "=formatDate(state.month, 'yMMMM')" },
+    "mNext": {
+      "component": "Button",
+      "icon": "chevron_right",
+      "label": "Next month",
+      "iconOnly": true,
+      "visible": "=state.month < startOf(today(), 'month')",
+      "action": { "event": { "name": "showMonth", "context": { "month": "=addMonths(state.month, 1)" } } }
+    },
+    "mCard": { "component": "Card", "tone": "primary", "child": "mStats" },
+    "mEmpty": {
+      "component": "EmptyState",
+      "illustration": "no_data",
+      "icon": "savings",
+      "title": "='Nothing spent in ' + formatDate(state.month, 'yMMMM')",
+      "body": "Expenses you add for this month show up here. The arrows above go to other months.",
+      "visible": "=coalesce(q.mTotal.n, 0) == 0"
+    },
+    "mStats": { "component": "Row", "justify": "spaceBetween", "children": ["mSpent", "mCount", "mAvg"] },
+    "mSpent": {
+      "component": "Stat",
+      "label": "Spent",
+      "value": "=formatCurrency(coalesce(q.mTotal.total, decimal('0')), settings.currency)"
+    },
+    "mCount": { "component": "Stat", "label": "Expenses", "value": "=coalesce(q.mTotal.n, 0)" },
+    "mAvg": {
+      "component": "Stat",
+      "label": "Per day",
+      "value": "=formatCurrency(coalesce(q.mTotal.total, decimal('0')) / (daysBetween(state.month, min(endOf(state.month, 'month'), today())) + 1), settings.currency)"
+    },
+    "mPie": {
+      "component": "Chart",
+      "kind": "donut",
+      "title": "Where it went",
+      "query": "mCats",
+      "x": "key",
+      "y": ["total"],
+      "centerText": "=formatCurrency(coalesce(q.mTotal.total, decimal('0')), settings.currency)",
+      "visible": "=coalesce(q.mTotal.n, 0) > 0"
+    },
+    "mCatSection": {
+      "component": "Section",
+      "title": "By category",
+      "visible": "=coalesce(q.mTotal.n, 0) > 0",
+      "children": ["mCatList"]
+    },
+    "mCatList": {
+      "component": "List",
+      "children": { "path": "/q/mCats", "componentId": "mCatRow" },
+      "onTap": { "event": { "name": "navigate", "context": { "screen": "catDetail", "id": "=item.key" } } }
+    },
+    "mCatRow": { "component": "Row", "align": "center", "children": ["mCatIcon", "mCatName", "mCatTotal"] },
+    "mCatIcon": { "component": "Icon", "name": "=coalesce(item.key.icon, 'category')", "hue": "=item.key.hueName" },
+    "mCatName": {
+      "component": "Text",
+      "weight": 1,
+      "text": "=coalesce(item.key.name, 'No category') + ' (' + string(item.n) + ')'"
+    },
+    "mCatTotal": {
+      "component": "Text",
+      "text": "=formatCurrency(coalesce(item.total, decimal('0')), settings.currency)"
+    },
+    "mButtons": { "component": "Row", "justify": "spaceBetween", "children": ["mListBtn", "mExportBtn"] },
+    "mListBtn": {
+      "component": "Button",
+      "icon": "list",
+      "label": "=t('seeAll', {'n': coalesce(q.mTotal.n, 0)})",
+      "action": {
+        "event": {
+          "name": "openMonthList",
+          "context": { "from": "=state.month", "to": "=endOf(state.month, 'month')" }
+        }
+      }
+    },
+    "mExportBtn": {
+      "component": "Button",
+      "icon": "download",
+      "label": "Export month",
+      "visible": "=coalesce(q.mTotal.n, 0) > 0",
+      "action": {
+        "event": { "name": "exportRange", "context": { "from": "=state.month", "to": "=endOf(state.month, 'month')" } }
+      }
+    },
+    "fCol": {
+      "component": "Column",
+      "children": ["fIntro", "fFrom", "fTo", "fPayment", "fMin", "fSummary", "fButtons"]
+    },
+    "fIntro": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "Pick a period and narrow it down. To see one category, open it under Budgets."
+    },
+    "fFrom": { "component": "DateTimeInput", "label": "From", "enableDate": true, "bind": "/state/from" },
+    "fTo": { "component": "DateTimeInput", "label": "To", "enableDate": true, "bind": "/state/to" },
+    "fPayment": {
+      "component": "ChoicePicker",
+      "label": "Paid with",
+      "displayStyle": "chips",
+      "bind": "/state/payment",
+      "options": [
+        { "value": "any", "label": "Any" },
+        { "value": "cash", "label": "Cash" },
+        { "value": "card", "label": "Card" },
+        { "value": "transfer", "label": "Bank transfer" },
+        { "value": "mobile", "label": "Phone or watch" },
+        { "value": "other", "label": "Other" }
+      ]
+    },
+    "fMin": {
+      "component": "TextField",
+      "label": "At least this amount",
+      "variant": "number",
+      "bind": "/state/minAmount"
+    },
+    "fSummary": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=t('nExpenses', {'n': coalesce(q.fTotal.n, 0)}) + ' in this period, ' + formatCurrency(coalesce(q.fTotal.total, decimal('0')), settings.currency) + ' in total'"
+    },
+    "fButtons": { "component": "Row", "justify": "spaceBetween", "children": ["fExportBtn", "fShowBtn"] },
+    "fShowBtn": {
+      "component": "Button",
+      "icon": "search",
+      "label": "Show expenses",
+      "variant": "primary",
+      "checks": [{ "condition": "=state.from <= state.to", "message": "The start is after the end." }],
+      "action": {
+        "event": {
+          "name": "openResults",
+          "context": {
+            "from": "=state.from",
+            "to": "=state.to",
+            "payment": "=state.payment",
+            "minAmount": "=state.minAmount"
+          }
+        }
+      }
+    },
+    "fExportBtn": {
+      "component": "Button",
+      "icon": "download",
+      "label": "Export period",
+      "checks": [{ "condition": "=state.from <= state.to", "message": "The start is after the end." }],
+      "action": { "event": { "name": "exportRange", "context": { "from": "=state.from", "to": "=state.to" } } }
+    },
+    "imCol": {
+      "component": "Column",
+      "children": ["imIntro", "imList", "imOrder", "imBtn", "imSkip"]
+    },
+    "imIntro": {
+      "component": "Text",
+      "text": "Bring your history with you. Pick a CSV file exported from this app, from most expense and budget apps, or from a spreadsheet."
+    },
+    "imList": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "Columns are matched by name, in any case: a date; an amount (or separate expense and income amounts); a category; a note, description, title or payee; a type, income or transfer column; a payment method. Amounts may use a decimal comma or point, a currency sign or brackets for spending. They are added as they are, in your app’s currency."
+    },
+    "imOrder": {
+      "component": "ChoicePicker",
+      "label": "Dates such as 03/04/2026 mean",
+      "displayStyle": "chips",
+      "bind": "/state/order",
+      "options": [
+        { "value": "dmy", "label": "3 April (day first)" },
+        { "value": "mdy", "label": "March 4 (month first)" }
+      ]
+    },
+    "imBtn": {
+      "component": "Button",
+      "icon": "upload",
+      "label": "Choose a CSV file",
+      "variant": "primary",
+      "action": { "event": { "name": "importCsv", "context": { "order": "=state.order" } } }
+    },
+    "imSkip": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "Income and transfers are left out when the file marks them with a type, income or transfer column, separate income amounts, or To and From transfer rows. A file with an account or wallet column and none of those has signed amounts: only its negative amounts are added, as spending. Other files are read as spending. Missing categories are created for you. Rows without a readable date or amount are skipped, and you see which ones and why."
+    },
+    "irCol": { "component": "Column", "children": ["irSummary", "irIntro", "irLines", "irOk"] },
+    "irSummary": { "component": "Text", "variant": "h5", "text": "=params.summary" },
+    "irIntro": { "component": "Text", "text": "These rows could not be read, with the reason for each:" },
+    "irLines": { "component": "Text", "variant": "caption", "text": "=params.lines" },
+    "irOk": {
+      "component": "Button",
+      "label": "OK",
+      "variant": "primary",
+      "action": { "event": { "name": "closeReport" } }
+    }
+  },
+  "actions": {
+    "openAdd": { "steps": [{ "type": "navigate", "screen": "addExpense" }] },
+    "openFilter": { "steps": [{ "type": "navigate", "screen": "filter" }] },
+    "openPrefs": { "steps": [{ "type": "navigate", "screen": "prefs" }] },
+    "openImport": { "steps": [{ "type": "navigate", "screen": "importScreen" }] },
+    "addAgain": {
+      "args": { "expense": { "type": "ref", "to": "expense" } },
+      "steps": [
+        {
+          "type": "navigate",
+          "screen": "addExpense",
+          "params": {
+            "amount": "=args.expense.amount",
+            "category": "=args.expense.category",
+            "note": "=args.expense.note",
+            "payment": "=args.expense.payment"
+          }
+        }
+      ]
+    },
+    "addInCategory": {
+      "args": { "category": { "type": "ref", "to": "category" } },
+      "steps": [{ "type": "navigate", "screen": "addExpense", "params": { "category": "=args.category" } }]
+    },
+    "attachReceipt": {
+      "args": { "expense": { "type": "ref", "to": "expense" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "camera.photo",
+          "action": "capture",
+          "args": { "maxWidth": 1600 },
+          "as": "photo",
+          "onError": "continue",
+          "errorAs": "photoError"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.photoError != null && vars.photoError.code == 'UNSUPPORTED'",
+          "text": "This phone can’t take photos here yet."
+        },
+        {
+          "type": "updateRecord",
+          "when": "=vars.photo != null",
+          "record": "=args.expense",
+          "set": { "receipt": "=vars.photo.file" }
+        }
+      ]
+    },
+    "showMonth": {
+      "args": { "month": { "type": "date" } },
+      "steps": [{ "type": "setState", "set": { "month": "=startOf(args.month, 'month')" } }]
+    },
+    "openMonthList": {
+      "args": { "from": { "type": "date" }, "to": { "type": "date" } },
+      "steps": [{ "type": "navigate", "screen": "monthList", "params": { "from": "=args.from", "to": "=args.to" } }]
+    },
+    "openResults": {
+      "args": {
+        "from": { "type": "date" },
+        "to": { "type": "date" },
+        "payment": { "type": "text" },
+        "minAmount": { "type": "decimal" }
+      },
+      "steps": [
+        {
+          "type": "navigate",
+          "screen": "results",
+          "params": {
+            "from": "=args.from",
+            "to": "=args.to",
+            "payment": "=coalesce(args.payment, 'any')",
+            "minAmount": "=coalesce(args.minAmount, decimal('0'))"
+          }
+        }
+      ]
+    },
+    "seedCategories": {
+      "steps": [
+        { "type": "query", "query": "categories", "as": "existing" },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.existing) == 0",
+          "entity": "category",
+          "values": { "name": "Groceries", "icon": "shopping_cart" }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.existing) == 0",
+          "entity": "category",
+          "values": { "name": "Eating out", "icon": "restaurant" }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.existing) == 0",
+          "entity": "category",
+          "values": { "name": "Transport", "icon": "directions_car" }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.existing) == 0",
+          "entity": "category",
+          "values": { "name": "Home and rent", "icon": "home" }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.existing) == 0",
+          "entity": "category",
+          "values": { "name": "Bills", "icon": "receipt_long" }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.existing) == 0",
+          "entity": "category",
+          "values": { "name": "Subscriptions", "icon": "autorenew" }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.existing) == 0",
+          "entity": "category",
+          "values": { "name": "Health", "icon": "medical_services" }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.existing) == 0",
+          "entity": "category",
+          "values": { "name": "Shopping", "icon": "shopping_bag" }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.existing) == 0",
+          "entity": "category",
+          "values": { "name": "Going out", "icon": "movie" }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.existing) == 0",
+          "entity": "category",
+          "values": { "name": "Other", "icon": "category" }
+        }
+      ]
+    },
+    "postDue": {
+      "steps": [
+        { "type": "forEach", "query": "dueAuto", "do": "postRecurring", "args": { "rule": "=item.id" }, "max": 100 }
+      ]
+    },
+    "postRecurring": {
+      "args": { "rule": { "type": "ref", "to": "recurring" }, "due": { "type": "text" } },
+      "steps": [
+        {
+          "type": "createRecord",
+          "when": "=args.rule.active && (args.due == null || args.due == string(args.rule.nextDue))",
+          "entity": "expense",
+          "values": {
+            "amount": "=args.rule.amount",
+            "category": "=args.rule.category",
+            "note": "=args.rule.name",
+            "date": "=args.rule.nextDue",
+            "payment": "=args.rule.payment",
+            "recurring": "=args.rule"
+          },
+          "as": "added"
+        },
+        {
+          "type": "updateRecord",
+          "when": "=vars.added != null",
+          "record": "=args.rule",
+          "set": {
+            "nextDue": "=coalesce(nextOccurrence(args.rule.schedule, args.rule.nextDue), args.rule.nextDue)",
+            "active": "=nextOccurrence(args.rule.schedule, args.rule.nextDue) != null"
+          }
+        }
+      ]
+    },
+    "skipRecurring": {
+      "args": { "rule": { "type": "ref", "to": "recurring" }, "due": { "type": "text" } },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "when": "=args.rule.active && (args.due == null || args.due == string(args.rule.nextDue))",
+          "record": "=args.rule",
+          "set": {
+            "nextDue": "=coalesce(nextOccurrence(args.rule.schedule, args.rule.nextDue), args.rule.nextDue)",
+            "active": "=nextOccurrence(args.rule.schedule, args.rule.nextDue) != null"
+          }
+        },
+        { "type": "toast", "text": "Skipped this one." }
+      ]
+    },
+    "askDue": {
+      "steps": [
+        { "type": "forEach", "query": "dueAsk", "do": "askRecurring", "args": { "rule": "=item.id" }, "max": 5 }
+      ]
+    },
+    "askRecurring": {
+      "args": { "rule": { "type": "ref", "to": "recurring" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=t('dueTitle', {'name': args.rule.name})",
+            "body": "=t('dueBody', {'amount': formatCurrency(args.rule.amount, settings.currency), 'date': formatDate(args.rule.nextDue, 'MMMd')})",
+            "open": { "screen": "recDetail", "params": { "id": "=args.rule.id" } },
+            "buttons": [
+              { "id": "add", "label": "Add", "action": "postRecurring" },
+              { "id": "skip", "label": "Skip", "action": "skipRecurring" }
+            ],
+            "data": { "rule": "=string(args.rule.id)", "due": "=string(args.rule.nextDue)" },
+            "tag": "='due-' + string(args.rule.id)",
+            "channel": "recurring"
+          }
+        }
+      ]
+    },
+    "noticeAdded": {
+      "args": { "expense": { "type": "ref", "to": "expense" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=t('addedTitle', {'name': coalesce(args.expense.recurring.name, 'a recurring expense')})",
+            "body": "=t('addedBody', {'amount': formatCurrency(args.expense.amount, settings.currency)})",
+            "open": { "screen": "expenseDetail", "params": { "id": "=args.expense.id" } },
+            "channel": "recurring"
+          }
+        }
+      ]
+    },
+    "warnBudget": {
+      "args": { "category": { "type": "ref", "to": "category" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=args.category.budgetState == 'over' ? t('overTitle', {'name': args.category.name}) : t('nearTitle', {'name': args.category.name})",
+            "body": "=t('budgetBody', {'spent': formatCurrency(args.category.spentMonth, settings.currency), 'budget': formatCurrency(coalesce(args.category.budget, decimal('0')), settings.currency)})",
+            "open": { "screen": "catDetail", "params": { "id": "=args.category.id" } },
+            "tag": "='budget-' + string(args.category.id)",
+            "channel": "budgets"
+          }
+        }
+      ]
+    },
+    "warnTotal": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=coalesce(q.monthTotal.total, decimal('0')) > coalesce(settings.monthlyBudget, decimal('0')) ? t('totalOverTitle') : t('totalNearTitle')",
+            "body": "=t('budgetBody', {'spent': formatCurrency(coalesce(q.monthTotal.total, decimal('0')), settings.currency), 'budget': formatCurrency(coalesce(settings.monthlyBudget, decimal('0')), settings.currency)})",
+            "open": { "screen": "overview" },
+            "tag": "budget-total",
+            "channel": "budgets"
+          }
+        }
+      ]
+    },
+    "remindLog": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "Spent anything today?",
+            "body": "Add it now, it takes a few seconds.",
+            "open": { "screen": "addExpense" },
+            "tag": "evening",
+            "channel": "reminders"
+          }
+        }
+      ]
+    },
+    "exportAll": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "history",
+            "sort": ["date"],
+            "fileName": "='expenses-' + string(today()) + '.csv'",
+            "columns": ["date", "amount", "category", "note", "payment"]
+          },
+          "as": "saved"
+        },
+        { "type": "toast", "when": "=vars.saved.saved", "text": "=t('exported', {'n': coalesce(vars.saved.rows, 0)})" }
+      ]
+    },
+    "exportRange": {
+      "args": { "from": { "type": "date" }, "to": { "type": "date" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "inRange",
+            "queryArgs": { "from": "=args.from", "to": "=args.to" },
+            "sort": ["date"],
+            "fileName": "='expenses-' + string(args.from) + '-to-' + string(args.to) + '.csv'",
+            "columns": ["date", "amount", "category", "note", "payment"]
+          },
+          "as": "saved"
+        },
+        { "type": "toast", "when": "=vars.saved.saved", "text": "=t('exported', {'n': coalesce(vars.saved.rows, 0)})" }
+      ]
+    },
+    "importCsv": {
+      "args": { "order": { "type": "text" } },
+      "steps": [
+        { "type": "query", "query": "expenseCount", "as": "before" },
+        { "type": "query", "query": "categoryCount", "as": "catsBefore" },
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "importCsv",
+          "args": {
+            "entity": "expense",
+            "createMissing": ["category"],
+            "onlyRows": [
+              { "from": ["Type", "Transaction type", "Income/Expense"], "except": ["income", "transfer", "deposit"] },
+              { "from": ["income"], "except": ["true", "yes", "1"] },
+              { "from": ["transfer"], "except": ["true", "yes", "1"] },
+              { "from": ["Income amount"], "values": ["0", "0.00", "0,00", ""] },
+              {
+                "from": ["Amount", "Sum", "Value", "Betrag", "Suma"],
+                "sign": "negative",
+                "ifColumn": ["Account", "Wallet"],
+                "ifNoColumn": [
+                  "Type",
+                  "Transaction type",
+                  "Income/Expense",
+                  "income",
+                  "transfer",
+                  "Expense amount",
+                  "Income amount"
+                ]
+              }
+            ],
+            "fields": {
+              "date": { "from": ["Date", "Transaction date", "Booking date"] },
+              "amount": {
+                "from": ["Amount", "Expense amount", "Sum", "Value", "Betrag", "Suma"],
+                "absolute": true
+              },
+              "category": { "from": ["Category", "Category name"] },
+              "note": { "from": ["Note", "Notes", "Description", "Title", "Memo", "Comment", "Payee"] },
+              "payment": {
+                "from": ["Paid with", "Payment method", "Payment type", "Payment"],
+                "values": {
+                  "Debit card": "card",
+                  "Credit card": "card",
+                  "Phone": "mobile",
+                  "Mobile": "mobile",
+                  "*": "other"
+                }
+              }
+            },
+            "dateOrder": "=args.order == 'mdy' ? 'mdy' : 'dmy'",
+            "onError": "skip"
+          },
+          "as": "imported"
+        },
+        {
+          "type": "forEach",
+          "when": "=vars.imported.created > 0",
+          "query": "transferCategories",
+          "do": "dropImportedTransfers",
+          "args": { "category": "=item.id" },
+          "max": 100
+        },
+        { "type": "query", "query": "expenseCount", "as": "after" },
+        { "type": "query", "query": "categoryCount", "as": "catsAfter" },
+        {
+          "type": "toast",
+          "when": "=vars.imported.skipped == 0",
+          "text": "=t('importDone', {'added': coalesce(vars.after.n, 0) - coalesce(vars.before.n, 0), 'created': coalesce(vars.catsAfter.n, 0) - coalesce(vars.catsBefore.n, 0), 'skipped': 0})"
+        },
+        {
+          "type": "navigate",
+          "when": "=vars.imported.skipped > 0",
+          "screen": "importReport",
+          "params": {
+            "summary": "=t('importDone', {'added': coalesce(vars.after.n, 0) - coalesce(vars.before.n, 0), 'created': coalesce(vars.catsAfter.n, 0) - coalesce(vars.catsBefore.n, 0), 'skipped': vars.imported.skipped})",
+            "lines": "=join(take(vars.imported.problems, 8).map(p, t('problemLine', {'row': p.row, 'reason': p.reason})), '\\n') + (vars.imported.skipped > 8 ? '\\n' + t('moreProblems', {'n': vars.imported.skipped - 8}) : '')"
+          }
+        }
+      ]
+    },
+    "dropImportedTransfers": {
+      "args": { "category": { "type": "ref", "to": "category" } },
+      "steps": [
+        {
+          "type": "deleteRecords",
+          "when": "=args.category.createdAt >= now() - duration('PT10M')",
+          "entity": "expense",
+          "where": "=item.category == args.category"
+        },
+        {
+          "type": "deleteRecords",
+          "when": "=args.category.createdAt >= now() - duration('PT10M')",
+          "entity": "category",
+          "where": "=item.id == args.category"
+        }
+      ]
+    },
+    "closeReport": { "steps": [{ "type": "back" }] }
+  },
+  "triggers": {
+    "firstRun": { "type": "app", "on": "firstRun", "do": "seedCategories" },
+    "postOnOpen": { "type": "app", "on": "open", "do": "postDue" },
+    "postDaily": { "type": "schedule", "rrule": "FREQ=DAILY", "times": ["06:00"], "do": "postDue" },
+    "askDaily": {
+      "type": "schedule",
+      "rrule": "FREQ=DAILY",
+      "times": ["09:00"],
+      "when": "=size(q.dueAsk) > 0",
+      "do": "askDue",
+      "maxPerDay": 1
+    },
+    "recurringAdded": {
+      "type": "record",
+      "entity": "expense",
+      "on": ["create"],
+      "when": "=settings.addedNotice && has(item.recurring) && item.recurring.mode == 'auto'",
+      "do": "noticeAdded",
+      "args": { "expense": "=item.id" },
+      "maxPerDay": 3
+    },
+    "budgetCrossed": {
+      "type": "record",
+      "entity": "expense",
+      "on": ["create"],
+      "when": "=settings.budgetAlerts && has(item.category.budget) && item.date >= startOf(today(), 'month') && item.date <= endOf(today(), 'month') && ((coalesce(item.category.spentMonth, decimal('0')) * 100 >= coalesce(item.category.budget, decimal('0')) * settings.warnAt && (coalesce(item.category.spentMonth, decimal('0')) - item.amount) * 100 < coalesce(item.category.budget, decimal('0')) * settings.warnAt) || (coalesce(item.category.spentMonth, decimal('0')) > coalesce(item.category.budget, decimal('0')) && coalesce(item.category.spentMonth, decimal('0')) - item.amount <= coalesce(item.category.budget, decimal('0'))))",
+      "do": "warnBudget",
+      "args": { "category": "=item.category" },
+      "maxPerDay": 4
+    },
+    "totalCrossed": {
+      "type": "record",
+      "entity": "expense",
+      "on": ["create"],
+      "when": "=settings.budgetAlerts && coalesce(settings.monthlyBudget, decimal('0')) > 0 && item.date >= startOf(today(), 'month') && item.date <= endOf(today(), 'month') && ((coalesce(q.monthTotal.total, decimal('0')) * 100 >= coalesce(settings.monthlyBudget, decimal('0')) * settings.warnAt && (coalesce(q.monthTotal.total, decimal('0')) - item.amount) * 100 < coalesce(settings.monthlyBudget, decimal('0')) * settings.warnAt) || (coalesce(q.monthTotal.total, decimal('0')) > coalesce(settings.monthlyBudget, decimal('0')) && coalesce(q.monthTotal.total, decimal('0')) - item.amount <= coalesce(settings.monthlyBudget, decimal('0'))))",
+      "do": "warnTotal",
+      "maxPerDay": 2
+    },
+    "evening": {
+      "type": "schedule",
+      "rrule": "FREQ=DAILY",
+      "times": "=settings.remindDaily ? [settings.remindAt] : []",
+      "when": "=coalesce(q.todayCount.n, 0) == 0",
+      "do": "remindLog",
+      "maxPerDay": 1
+    }
+  },
+  "widgets": {
+    "monthWidget": {
+      "template": "stat",
+      "title": "Spent this month",
+      "sizes": ["small", "medium"],
+      "value": "=formatCurrency(coalesce(q.monthTotal.total, decimal('0')), settings.currency)",
+      "caption": "=t('nExpenses', {'n': coalesce(q.monthTotal.n, 0)})",
+      "icon": "receipt_long",
+      "open": "overview"
+    },
+    "addWidget": {
+      "template": "button",
+      "title": "Add expense",
+      "sizes": ["small"],
+      "label": "Add expense",
+      "icon": "add",
+      "action": { "event": { "name": "openAdd" } }
+    }
+  },
+  "migrations": [{ "from": "<3.0.0", "steps": [{ "op": "deleteField", "entity": "expense", "field": "chartAmount" }] }]
+}

@@ -1,0 +1,5 @@
+account,amount,currency,title,note,date,income,type,category name,subcategory name,color,icon,emoji,budget,objective
+Bank,-64.3,EUR,Weekly shop,,2026-09-03 18:22:10.000,false,null,Groceries,,,,,,
+Bank,-12.99,EUR,Streaming,Monthly plan,2026-09-01 00:00:00.000,false,TransactionSpecialType.subscription,Subscriptions,,,,,,
+Bank,2450.0,EUR,Salary,,2026-09-10 09:00:00.000,true,null,Income,,,,,,
+Cash,-8.5,EUR,Lunch,,2026-09-11 12:30:00.000,false,null,Dining,Takeaway,,,,,

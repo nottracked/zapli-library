@@ -1,0 +1,6 @@
+Term	Definition
+Mitochondria	Make most of the cell's energy as ATP
+Ribosome	Builds proteins from amino acids
+Cell membrane	Controls what enters and leaves the cell
+Nucleus	Holds the cell's DNA
+Chloroplast	Turns light into chemical energy in plant cells

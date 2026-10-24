@@ -1,0 +1,3215 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>Mines</title>
+        <script type="application/anyapp+json" id="anyapp-manifest">
+            {
+                "spec": "anyapp/0.2",
+                "app": {
+                    "id": "library/mines",
+                    "kind": "web",
+                    "name": "Mines",
+                    "version": "1.0.1",
+                    "icon": "flag",
+                    "category": "game_puzzle",
+                    "ageRating": "everyone",
+                    "license": "MIT",
+                    "iconData": "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"
+                },
+                "theme": { "seedColor": "#3F6B47" },
+                "web": {
+                    "routes": {
+                        "play": "#/",
+                        "newField": "#/new",
+                        "stats": "#/stats",
+                        "help": "#/help",
+                        "sample": "#/sample"
+                    },
+                    "orientation": "any"
+                }
+            }
+        </script>
+        <!-- ==artifact:style== -->
+        <style>
+            /* Layout: one screen laid out like a survey sheet. The level and the panels on top, a readout strip
+         (mines left, new field, time), the field as a map with grid numbers in its margin that scrolls in its
+         own frame, and the tools under the thumb. Covered ground is terrain with contour lines; cleared ground
+         is plain map paper. */
+            :root {
+                --bg: #e4e9df;
+                --sheet: #d8dfd1;
+                --panel: #f2f5ee;
+                --paper: #f8faf5;
+                --rule: #d3dbcb;
+                --rule-major: #a9b79f;
+                --ink: #17211b;
+                --ink-soft: #46554b;
+                --terrain: #4c7150;
+                --terrain-line: #3a5a3e;
+                --terrain-hi: #ffffff24;
+                --terrain-hover: #ffffff30;
+                --contour: #628a63;
+                --contour-index: #7aa27a;
+                --on-terrain: #f1f5ee;
+                --stake: #f3f6ef;
+                --tape: #ffb020;
+                --tape-edge: #6e3a00;
+                --accent: #24533a;
+                --on-accent: #f3f7f1;
+                --focus: #0a5fd6;
+                --focus-halo: #ffffff;
+                --alarm: #b8341a;
+                --on-alarm: #fff3ee;
+                --scrim: #0d1a1266;
+                --shadow: #10201529;
+                --n1: #1d5ca8;
+                --n2: #2b7536;
+                --n3: #94450f;
+                --n4: #bd222b;
+                --n5: #7a2b8c;
+                --n6: #0d6f6c;
+                --n7: #17211b;
+                --n8: #5a646c;
+                --font-display:
+                    "DIN Alternate", "Bahnschrift", "Roboto Condensed", "sans-serif-condensed", "Arial Narrow",
+                    system-ui, sans-serif;
+                --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+                --font-data: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+                --r-s: 6px;
+                --r-m: 10px;
+                --target: 48px;
+                color-scheme: light;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root:not([data-theme="light"]) {
+                    --bg: #0d130f;
+                    --sheet: #090e0b;
+                    --panel: #161f19;
+                    --paper: #1a231d;
+                    --rule: #29342c;
+                    --rule-major: #405044;
+                    --ink: #e2eae0;
+                    --ink-soft: #a5b3a8;
+                    --terrain: #2d4a33;
+                    --terrain-line: #1d3324;
+                    --terrain-hi: #ffffff14;
+                    --terrain-hover: #ffffff1f;
+                    --contour: #3a5b41;
+                    --contour-index: #4b7052;
+                    --on-terrain: #e8f0e5;
+                    --stake: #e6ece2;
+                    --tape: #ffb547;
+                    --tape-edge: #5c3100;
+                    --accent: #a6d4a6;
+                    --on-accent: #0f200f;
+                    --focus: #8cc0ff;
+                    --focus-halo: #0d130f;
+                    --alarm: #ec6a4c;
+                    --on-alarm: #1b0904;
+                    --scrim: #000000a6;
+                    --shadow: #00000080;
+                    --n1: #84b8ff;
+                    --n2: #82d48d;
+                    --n3: #eeac6c;
+                    --n4: #ff8d84;
+                    --n5: #d6a3f1;
+                    --n6: #62d2c9;
+                    --n7: #e2eae0;
+                    --n8: #a8b2b9;
+                    color-scheme: dark;
+                }
+            }
+            :root[data-theme="dark"] {
+                --bg: #0d130f;
+                --sheet: #090e0b;
+                --panel: #161f19;
+                --paper: #1a231d;
+                --rule: #29342c;
+                --rule-major: #405044;
+                --ink: #e2eae0;
+                --ink-soft: #a5b3a8;
+                --terrain: #2d4a33;
+                --terrain-line: #1d3324;
+                --terrain-hi: #ffffff14;
+                --terrain-hover: #ffffff1f;
+                --contour: #3a5b41;
+                --contour-index: #4b7052;
+                --on-terrain: #e8f0e5;
+                --stake: #e6ece2;
+                --tape: #ffb547;
+                --tape-edge: #5c3100;
+                --accent: #a6d4a6;
+                --on-accent: #0f200f;
+                --focus: #8cc0ff;
+                --focus-halo: #0d130f;
+                --alarm: #ec6a4c;
+                --on-alarm: #1b0904;
+                --scrim: #000000a6;
+                --shadow: #00000080;
+                --n1: #84b8ff;
+                --n2: #82d48d;
+                --n3: #eeac6c;
+                --n4: #ff8d84;
+                --n5: #d6a3f1;
+                --n6: #62d2c9;
+                --n7: #e2eae0;
+                --n8: #a8b2b9;
+                color-scheme: dark;
+            }
+
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            html {
+                height: 100%;
+                padding-top: env(safe-area-inset-top, 0px);
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+                -webkit-text-size-adjust: 100%;
+                text-size-adjust: 100%;
+            }
+            body {
+                height: 100%;
+                margin: 0;
+                background: var(--bg);
+                color: var(--ink);
+                font: 1rem/1.45 var(--font-body);
+                padding-left: max(16px, env(safe-area-inset-left, 0px));
+                padding-right: max(16px, env(safe-area-inset-right, 0px));
+                overflow-x: hidden;
+            }
+            button,
+            input,
+            select {
+                font: inherit;
+                color: inherit;
+            }
+            button {
+                cursor: pointer;
+            }
+            button:disabled {
+                cursor: default;
+                opacity: 0.45;
+            }
+            :focus-visible {
+                outline: 3px solid var(--focus);
+                outline-offset: 2px;
+            }
+            svg {
+                flex: none;
+            }
+            [hidden] {
+                display: none !important;
+            }
+            .vh {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                margin: -1px;
+                padding: 0;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+                white-space: nowrap;
+                border: 0;
+            }
+
+            .app {
+                height: 100%;
+                max-width: 80rem;
+                margin-inline: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding-block: 0.5rem;
+            }
+
+            /* Top: level and panels */
+            .top {
+                display: flex;
+                align-items: center;
+                gap: 0.25rem;
+            }
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+                margin: 0 0.5rem 0 0;
+                font: 700 1.375rem/1 var(--font-display);
+                letter-spacing: 0.03em;
+            }
+            .brand svg {
+                width: 1.5rem;
+                height: 1.5rem;
+                --flag-post: var(--ink);
+            }
+            @media (max-width: 559px) {
+                .brand {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    overflow: hidden;
+                    clip: rect(0 0 0 0);
+                    white-space: nowrap;
+                }
+            }
+            .level-btn {
+                flex: 0 1 24rem;
+                min-width: 0;
+                min-height: var(--target);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.3rem 0.5rem 0.3rem 0.75rem;
+                margin-right: 0.25rem;
+                border: 1px solid var(--rule-major);
+                border-radius: var(--r-m);
+                background: var(--panel);
+                text-align: left;
+            }
+            .level-text {
+                flex: 1;
+                min-width: 0;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: baseline;
+                column-gap: 0.5rem;
+            }
+            .level-name {
+                font: 700 1.0625rem/1.15 var(--font-display);
+                letter-spacing: 0.03em;
+            }
+            .level-meta {
+                color: var(--ink-soft);
+                font-size: 0.8125rem;
+            }
+            .level-btn svg {
+                width: 1.25rem;
+                height: 1.25rem;
+                color: var(--ink-soft);
+            }
+            .icon-btn {
+                flex: none;
+                width: var(--target);
+                height: var(--target);
+                display: grid;
+                place-items: center;
+                padding: 0;
+                border: 0;
+                border-radius: var(--r-m);
+                background: transparent;
+            }
+            .icon-btn svg {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+            .push {
+                margin-left: auto;
+            }
+            @media (hover: hover) {
+                .icon-btn:hover:not(:disabled),
+                .level-btn:hover {
+                    background: var(--paper);
+                }
+            }
+
+            /* Readout strip */
+            .readout {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .gauge {
+                flex: 1 1 0;
+                min-width: max-content;
+                display: flex;
+                flex-direction: column;
+                gap: 0.15rem;
+            }
+            .gauge-end {
+                align-items: flex-end;
+                text-align: right;
+            }
+            .gauge-label {
+                font-size: 0.6875rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.09em;
+                color: var(--ink-soft);
+            }
+            .gauge-value {
+                font: 700 1.75rem/1 var(--font-display);
+                font-variant-numeric: tabular-nums;
+                letter-spacing: 0.02em;
+            }
+            .gauge-value.is-low {
+                color: var(--alarm);
+            }
+            .new-btn {
+                flex: none;
+                min-height: var(--target);
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                padding: 0 1rem;
+                border: 1.5px solid var(--ink);
+                border-radius: 999px;
+                background: transparent;
+                font-weight: 600;
+                font-size: 0.9375rem;
+            }
+            .new-btn svg {
+                width: 1.25rem;
+                height: 1.25rem;
+            }
+            .new-btn.is-armed {
+                background: var(--alarm);
+                border-color: var(--alarm);
+                color: var(--on-alarm);
+            }
+
+            /* The field */
+            .sheet {
+                flex: 1 1 auto;
+                min-height: 10rem;
+                min-width: 0;
+                display: flex;
+                overflow: auto;
+                overscroll-behavior: contain;
+                padding: 0;
+                border-radius: var(--r-m);
+                background: var(--sheet);
+            }
+            .board {
+                --cell: 36px;
+                --ruler: 20px;
+                --step: 22px;
+                flex: none;
+                width: max-content;
+                margin: auto;
+                display: flex;
+                flex-direction: column;
+                background-color: var(--terrain);
+                background-image:
+                    repeating-radial-gradient(
+                        ellipse 130% 100% at 30% 35%,
+                        transparent 0 calc(var(--step) * 5 - 2.5px),
+                        var(--contour-index) calc(var(--step) * 5 - 2.5px) calc(var(--step) * 5)
+                    ),
+                    repeating-radial-gradient(
+                        ellipse 130% 100% at 30% 35%,
+                        transparent 0 calc(var(--step) - 1.25px),
+                        var(--contour) calc(var(--step) - 1.25px) var(--step)
+                    );
+                box-shadow:
+                    0 0 0 1px var(--rule-major),
+                    0 2px 10px var(--shadow);
+                user-select: none;
+                -webkit-user-select: none;
+                -webkit-touch-callout: none;
+                touch-action: manipulation;
+            }
+            .board[aria-busy="true"] .c {
+                cursor: progress;
+            }
+            .board.is-over .c {
+                cursor: default;
+            }
+            .ruler-row,
+            .row {
+                display: flex;
+            }
+            .ruler-row {
+                position: sticky;
+                top: 0;
+                z-index: 3;
+            }
+            .ruler {
+                flex: none;
+                display: grid;
+                place-items: center;
+                background: var(--paper);
+                color: var(--ink-soft);
+                font: 500 0.625rem/1 var(--font-data);
+                font-variant-numeric: tabular-nums;
+            }
+            .ruler.major {
+                color: var(--ink);
+                font-weight: 700;
+            }
+            .ruler.col {
+                width: var(--cell);
+                height: var(--ruler);
+                box-shadow:
+                    inset -1px 0 0 var(--rule),
+                    inset 0 -1px 0 var(--rule-major);
+            }
+            .ruler.rowh {
+                position: sticky;
+                left: 0;
+                z-index: 2;
+                width: var(--ruler);
+                height: var(--cell);
+                box-shadow:
+                    inset 0 -1px 0 var(--rule),
+                    inset -1px 0 0 var(--rule-major);
+            }
+            .ruler.corner {
+                position: sticky;
+                left: 0;
+                z-index: 4;
+                width: var(--ruler);
+                height: var(--ruler);
+                box-shadow:
+                    inset -1px 0 0 var(--rule-major),
+                    inset 0 -1px 0 var(--rule-major);
+            }
+
+            .c {
+                flex: none;
+                position: relative;
+                width: var(--cell);
+                height: var(--cell);
+                display: grid;
+                place-items: center;
+                cursor: pointer;
+                scroll-margin: var(--ruler) 0 0 var(--ruler);
+                outline: none;
+                font: 700 calc(var(--cell) * 0.58) / 1 var(--font-display);
+                font-variant-numeric: tabular-nums;
+                box-shadow:
+                    inset -1px 0 0 var(--terrain-line),
+                    inset 0 -1px 0 var(--terrain-line),
+                    inset 1px 1px 0 var(--terrain-hi);
+                --flag-post: var(--stake);
+            }
+            .c svg {
+                width: 64%;
+                height: 64%;
+                pointer-events: none;
+            }
+            @media (hover: hover) {
+                .is-cov:hover,
+                .is-mark:hover,
+                .is-flag:hover {
+                    background-color: var(--terrain-hover);
+                }
+            }
+            .is-mark .q {
+                color: var(--on-terrain);
+            }
+            .is-open,
+            .is-mine,
+            .is-wrong {
+                --line-v: var(--rule);
+                --line-h: var(--rule);
+                background-color: var(--paper);
+                cursor: default;
+                box-shadow:
+                    inset -1px 0 0 var(--line-v),
+                    inset 0 -1px 0 var(--line-h);
+            }
+            .vx {
+                --line-v: var(--rule-major);
+            }
+            .hx {
+                --line-h: var(--rule-major);
+            }
+            .is-open.num {
+                cursor: pointer;
+            }
+            .n1 {
+                color: var(--n1);
+            }
+            .n2 {
+                color: var(--n2);
+            }
+            .n3 {
+                color: var(--n3);
+            }
+            .n4 {
+                color: var(--n4);
+            }
+            .n5 {
+                color: var(--n5);
+            }
+            .n6 {
+                color: var(--n6);
+            }
+            .n7 {
+                color: var(--n7);
+            }
+            .n8 {
+                color: var(--n8);
+            }
+            .is-mine {
+                color: var(--ink);
+            }
+            .is-hit {
+                background-color: var(--alarm);
+                color: var(--on-alarm);
+                cursor: default;
+            }
+            .is-wrong .x {
+                fill: none;
+                stroke: var(--alarm);
+                stroke-width: 2.6;
+                stroke-linecap: round;
+            }
+            .is-wrong svg + svg {
+                position: absolute;
+            }
+            .g-post {
+                fill: none;
+                stroke: var(--flag-post, currentColor);
+                stroke-width: 2.2;
+                stroke-linecap: round;
+            }
+            .g-tape {
+                fill: var(--tape);
+                stroke: var(--tape-edge);
+                stroke-width: 1.2;
+                stroke-linejoin: round;
+            }
+            .g-core {
+                fill: currentColor;
+            }
+            .g-ring {
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 1.8;
+                stroke-dasharray: 3 2.4;
+            }
+            .c:focus-visible {
+                z-index: 1;
+                box-shadow:
+                    inset 0 0 0 3px var(--focus),
+                    inset 0 0 0 5px var(--focus-halo);
+            }
+            .is-hint::before {
+                content: "";
+                position: absolute;
+                inset: 3px;
+                border: 3px dashed var(--tape);
+                border-radius: 4px;
+                animation: hint-pulse 1.1s ease-in-out 3;
+            }
+            .c[data-press]::after {
+                content: "";
+                position: absolute;
+                inset: 14%;
+                border: 3px solid var(--tape);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: press var(--press, 400ms) linear 90ms forwards;
+            }
+            .c[data-anim="open"] {
+                animation: open-in 220ms ease-out var(--d, 0ms) both;
+            }
+            .c[data-anim="flag"] svg {
+                animation: plant 200ms ease-out both;
+            }
+            @keyframes open-in {
+                from {
+                    background-color: var(--terrain);
+                    color: transparent;
+                }
+            }
+            @keyframes plant {
+                from {
+                    transform: translateY(-30%) scale(0.85);
+                    opacity: 0;
+                }
+            }
+            @keyframes press {
+                to {
+                    transform: scale(1);
+                }
+            }
+            @keyframes hint-pulse {
+                50% {
+                    transform: scale(0.88);
+                }
+            }
+            @keyframes rise {
+                from {
+                    transform: translateY(10px);
+                    opacity: 0;
+                }
+            }
+
+            /* Status, tools, result */
+            .status {
+                min-height: 1.45em;
+                margin: 0;
+                font-size: 0.875rem;
+                color: var(--ink-soft);
+            }
+            .tools {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                gap: 0.375rem;
+            }
+            .mode {
+                flex: 1 1 auto;
+                max-width: 26rem;
+                display: flex;
+                border-radius: var(--r-m);
+                background: var(--panel);
+                box-shadow: inset 0 0 0 1px var(--rule-major);
+                overflow: hidden;
+            }
+            .mode button {
+                flex: 1 1 0;
+                min-height: var(--target);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.4rem;
+                padding: 0 0.75rem;
+                border: 0;
+                background: transparent;
+                font-weight: 600;
+                font-size: 0.9375rem;
+            }
+            .mode button + button {
+                box-shadow: inset 1px 0 0 var(--rule-major);
+            }
+            .mode button[aria-pressed="true"] {
+                background: var(--accent);
+                color: var(--on-accent);
+                box-shadow: none;
+            }
+            .mode svg,
+            .tool-btn svg {
+                width: 1.25rem;
+                height: 1.25rem;
+                --flag-post: currentColor;
+            }
+            .tool-btn {
+                min-height: var(--target);
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                padding: 0 0.875rem;
+                border: 1px solid var(--rule-major);
+                border-radius: var(--r-m);
+                background: var(--panel);
+                font-weight: 600;
+                font-size: 0.9375rem;
+            }
+            .zoom {
+                display: flex;
+                border-radius: var(--r-m);
+                background: var(--panel);
+                box-shadow: inset 0 0 0 1px var(--rule-major);
+            }
+            .zoom .icon-btn {
+                width: 44px;
+            }
+            .zoom .icon-btn + .icon-btn {
+                box-shadow: inset 1px 0 0 var(--rule-major);
+                border-radius: 0 var(--r-m) var(--r-m) 0;
+            }
+            @media (max-width: 439px) {
+                .mode .ico {
+                    display: none;
+                }
+            }
+            @media (max-width: 379px) {
+                .tool-btn svg {
+                    display: none;
+                }
+            }
+            .result {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.875rem 1rem 1rem;
+                border-radius: var(--r-m);
+                background: var(--panel);
+                box-shadow: inset 0 0 0 1px var(--rule-major);
+                animation: rise 220ms ease-out both;
+            }
+            .result h2 {
+                margin: 0;
+                font: 700 1.5rem/1.1 var(--font-display);
+                letter-spacing: 0.03em;
+            }
+            .result.is-won h2 {
+                color: var(--accent);
+            }
+            .result.is-lost h2 {
+                color: var(--alarm);
+            }
+            .result p {
+                margin: 0;
+            }
+            .actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .btn {
+                min-height: var(--target);
+                padding: 0.5rem 1.125rem;
+                border: 1px solid var(--rule-major);
+                border-radius: var(--r-m);
+                background: transparent;
+                font-weight: 600;
+                font-size: 0.9375rem;
+            }
+            .btn.primary {
+                background: var(--accent);
+                border-color: var(--accent);
+                color: var(--on-accent);
+            }
+            .btn.danger {
+                background: var(--alarm);
+                border-color: var(--alarm);
+                color: var(--on-alarm);
+            }
+
+            /* Panels */
+            dialog {
+                width: 100%;
+                max-width: 34rem;
+                max-height: 88vh;
+                max-height: 88dvh;
+                margin: auto auto 0;
+                padding: 0;
+                border: 0;
+                border-radius: 16px 16px 0 0;
+                background: var(--panel);
+                color: var(--ink);
+                box-shadow: 0 -4px 28px var(--shadow);
+                overflow: auto;
+                overscroll-behavior: contain;
+            }
+            dialog[open] {
+                animation: rise 200ms ease-out both;
+            }
+            dialog::backdrop {
+                background: var(--scrim, rgb(10 18 13 / 0.45));
+            }
+            @media (min-width: 640px) {
+                dialog {
+                    margin: auto;
+                    border-radius: 16px;
+                }
+            }
+            .panel-head {
+                position: sticky;
+                top: 0;
+                z-index: 1;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
+                padding: 0.5rem 0.5rem 0.25rem max(1.25rem, env(safe-area-inset-left, 0px));
+                background: var(--panel);
+            }
+            .panel-head h2 {
+                margin: 0;
+                font: 700 1.375rem/1.2 var(--font-display);
+                letter-spacing: 0.03em;
+            }
+            .panel-body {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0.25rem max(1.25rem, env(safe-area-inset-right, 0px))
+                    calc(1.25rem + env(safe-area-inset-bottom, 0px)) max(1.25rem, env(safe-area-inset-left, 0px));
+            }
+            .panel-body p,
+            .panel-body ul {
+                margin: 0;
+            }
+            .panel-body h3 {
+                margin: 0;
+                font: 700 1.0625rem/1.3 var(--font-display);
+                letter-spacing: 0.03em;
+            }
+            .hint-text {
+                color: var(--ink-soft);
+                font-size: 0.875rem;
+            }
+            .levels {
+                display: grid;
+                gap: 0.5rem;
+                margin: 0;
+                padding: 0;
+                border: 0;
+            }
+            .levels legend {
+                padding: 0;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+            }
+            .level-opt {
+                min-height: var(--target);
+                display: grid;
+                grid-template-columns: auto 1fr;
+                align-items: center;
+                column-gap: 0.75rem;
+                padding: 0.625rem 0.875rem;
+                border-radius: var(--r-m);
+                box-shadow: inset 0 0 0 1px var(--rule-major);
+                cursor: pointer;
+            }
+            .level-opt:has(input:checked) {
+                background: var(--paper);
+                box-shadow: inset 0 0 0 2px var(--accent);
+            }
+            .level-opt input,
+            .check input {
+                width: 1.375rem;
+                height: 1.375rem;
+                margin: 0;
+                accent-color: var(--accent);
+            }
+            .opt-name {
+                font-weight: 700;
+            }
+            .opt-meta {
+                grid-column: 2;
+                color: var(--ink-soft);
+                font-size: 0.875rem;
+            }
+            .custom {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 0.5rem 0.625rem;
+            }
+            .field {
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+                min-width: 0;
+            }
+            .field label {
+                font-size: 0.875rem;
+                font-weight: 600;
+            }
+            .field input,
+            .field select {
+                width: 100%;
+                min-height: var(--target);
+                padding: 0 0.75rem;
+                border: 1px solid var(--rule-major);
+                border-radius: var(--r-s);
+                background: var(--paper);
+            }
+            .field input[aria-invalid="true"] {
+                border-color: var(--alarm);
+                box-shadow: inset 0 0 0 1px var(--alarm);
+            }
+            .custom .hint-text,
+            .custom .error {
+                grid-column: 1 / -1;
+            }
+            .error {
+                margin: 0;
+                color: var(--alarm);
+                font-size: 0.875rem;
+                font-weight: 600;
+            }
+            .check {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                column-gap: 0.75rem;
+                align-items: start;
+                cursor: pointer;
+            }
+            .check input {
+                margin-top: 0.1rem;
+            }
+            .check .hint-text {
+                grid-column: 2;
+            }
+            .check-name {
+                font-weight: 600;
+            }
+            .note {
+                padding: 0.625rem 0.75rem;
+                border-radius: var(--r-s);
+                background: var(--paper);
+                font-size: 0.875rem;
+            }
+            .stats-total {
+                font: 700 1.125rem/1.3 var(--font-display);
+                letter-spacing: 0.02em;
+            }
+            .stat-list {
+                display: grid;
+                gap: 0.75rem;
+            }
+            .stat {
+                display: grid;
+                gap: 0.375rem;
+                padding: 0.75rem 0.875rem;
+                border-radius: var(--r-m);
+                background: var(--paper);
+            }
+            .stat dl {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+                gap: 0.375rem 0.75rem;
+                margin: 0;
+            }
+            .stat dt {
+                font-size: 0.6875rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                color: var(--ink-soft);
+            }
+            .stat dd {
+                margin: 0;
+                font: 700 1.125rem/1.2 var(--font-display);
+                font-variant-numeric: tabular-nums;
+            }
+            .help-list {
+                display: grid;
+                gap: 0.5rem;
+                padding-left: 1.25rem;
+            }
+            kbd {
+                display: inline-block;
+                min-width: 1.6em;
+                padding: 0 0.35em;
+                border: 1px solid var(--rule-major);
+                border-bottom-width: 2px;
+                border-radius: 4px;
+                background: var(--paper);
+                font: 600 0.8125rem/1.5 var(--font-data);
+                text-align: center;
+            }
+            .legend {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.375rem;
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+            .legend li {
+                width: 2.25rem;
+                height: 2.25rem;
+                display: grid;
+                place-items: center;
+                border-radius: var(--r-s);
+                background: var(--paper);
+                box-shadow: inset 0 0 0 1px var(--rule);
+                font: 700 1.3rem/1 var(--font-display);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                *,
+                *::before,
+                *::after {
+                    animation: none !important;
+                    transition: none !important;
+                }
+                .c[data-press]::after {
+                    transform: none;
+                }
+            }
+        </style>
+        <!-- ==artifact:style-end== -->
+    </head>
+    <body>
+        <div class="app" id="app">
+            <header class="top">
+                <h1 class="brand">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path class="g-post" d="M7 3.5v17" />
+                        <path class="g-tape" d="M8 4.2h11.2l-3.4 3.9 3.4 3.9H8z" />
+                        <path class="g-post" d="M4 20.5h7" />
+                    </svg>
+                    Mines
+                </h1>
+                <button class="level-btn" id="levelBtn" type="button" aria-haspopup="dialog">
+                    <span class="level-text">
+                        <span class="level-name" id="levelName">Easy</span>
+                        <span class="level-meta" id="levelMeta">10 mines</span>
+                    </span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                            d="M6 9l6 6 6-6"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                    <span class="vh">, choose a level</span>
+                </button>
+                <button
+                    class="icon-btn push"
+                    id="statsBtn"
+                    type="button"
+                    aria-label="Statistics"
+                    aria-haspopup="dialog"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                            d="M4 20h16M7 17v-5M12 17V6M17 17v-8"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </button>
+                <button class="icon-btn" id="helpBtn" type="button" aria-label="How to play" aria-haspopup="dialog">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+                        <path
+                            d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.6"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        />
+                        <circle cx="12" cy="17" r="1.2" fill="currentColor" />
+                    </svg>
+                </button>
+                <button class="icon-btn" id="settingsBtn" type="button" aria-label="Settings" aria-haspopup="dialog">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                            d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        />
+                        <circle cx="15" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="2" />
+                        <circle cx="9" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="2" />
+                        <circle cx="17" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                </button>
+            </header>
+
+            <section class="readout" aria-label="Game">
+                <div class="gauge">
+                    <span class="gauge-label">Mines left</span>
+                    <span class="gauge-value" id="minesLeft">10</span>
+                </div>
+                <button class="new-btn" id="newBtn" type="button">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                            d="M19 12a7 7 0 1 1-2.05-4.95M19 4.5V8h-3.5"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                    <span id="newLabel">New field</span>
+                </button>
+                <div class="gauge gauge-end">
+                    <span class="gauge-label" id="clockLabel">Time</span>
+                    <span class="gauge-value" id="clock" role="timer" aria-labelledby="clockLabel clock">0:00</span>
+                </div>
+            </section>
+
+            <div class="sheet" id="sheet">
+                <div class="board" id="board" role="grid" aria-label="Minefield" aria-describedby="boardKeys"></div>
+            </div>
+            <p class="vh" id="boardKeys">
+                Arrow keys move between squares. Space or Enter opens a square, F places or removes a flag, H gives a
+                hint.
+            </p>
+
+            <p class="status" id="status" role="status"></p>
+
+            <div class="tools" id="tools">
+                <div class="mode" role="group" aria-label="What a tap does">
+                    <button type="button" id="modeReveal" aria-pressed="true">
+                        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <rect
+                                x="4"
+                                y="4"
+                                width="16"
+                                height="16"
+                                rx="1.5"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            />
+                            <path d="M8.5 12.5l2.4 2.4 4.6-5.2" fill="none" stroke="currentColor" stroke-width="2.2" />
+                        </svg>
+                        Reveal
+                    </button>
+                    <button type="button" id="modeFlag" aria-pressed="false">
+                        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path class="g-post" d="M7 3.5v17" />
+                            <path class="g-tape" d="M8 4.2h11.2l-3.4 3.9 3.4 3.9H8z" />
+                            <path class="g-post" d="M4 20.5h7" />
+                        </svg>
+                        Flag
+                    </button>
+                </div>
+                <button class="tool-btn" id="hintBtn" type="button">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+                        <path d="M12 5.5l2.2 6.5-2.2 6.5-2.2-6.5z" fill="currentColor" />
+                    </svg>
+                    Hint
+                </button>
+                <div class="zoom" role="group" aria-label="Square size">
+                    <button class="icon-btn" id="zoomOut" type="button" aria-label="Smaller squares">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path
+                                d="M6 12h12"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.4"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </button>
+                    <button class="icon-btn" id="zoomIn" type="button" aria-label="Larger squares">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path
+                                d="M6 12h12M12 6v12"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.4"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <section class="result" id="result" aria-labelledby="resultTitle" hidden>
+                <h2 id="resultTitle">Field cleared</h2>
+                <p id="resultText"></p>
+                <div class="actions">
+                    <button class="btn primary" id="playAgain" type="button">Play again</button>
+                    <button class="btn" id="retry" type="button">Try this field again</button>
+                    <button class="btn" id="changeLevel" type="button">Change level</button>
+                </div>
+            </section>
+
+            <p class="vh" id="say" aria-live="polite"></p>
+        </div>
+
+        <dialog id="newPanel" aria-labelledby="newTitle">
+            <form id="newForm" novalidate>
+                <div class="panel-head">
+                    <h2 id="newTitle">New field</h2>
+                    <button class="icon-btn" type="button" data-close aria-label="Close">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path
+                                d="M6 6l12 12M18 6L6 18"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <fieldset class="levels">
+                        <legend>Level</legend>
+                        <label class="level-opt">
+                            <input type="radio" name="level" value="easy" id="levelEasy" />
+                            <span class="opt-name">Easy</span>
+                            <span class="opt-meta">9 × 9 squares, 10 mines</span>
+                        </label>
+                        <label class="level-opt">
+                            <input type="radio" name="level" value="medium" id="levelMedium" />
+                            <span class="opt-name">Medium</span>
+                            <span class="opt-meta">16 × 16 squares, 40 mines</span>
+                        </label>
+                        <label class="level-opt">
+                            <input type="radio" name="level" value="hard" id="levelHard" />
+                            <span class="opt-name">Hard</span>
+                            <span class="opt-meta">16 × 30 squares, 99 mines. Stands upright on narrow screens.</span>
+                        </label>
+                        <label class="level-opt">
+                            <input type="radio" name="level" value="custom" id="levelCustom" />
+                            <span class="opt-name">Custom</span>
+                            <span class="opt-meta" id="customSummary">Your own size and number of mines</span>
+                        </label>
+                    </fieldset>
+                    <div class="custom" id="customFields" hidden>
+                        <div class="field">
+                            <label for="customRows">Rows</label>
+                            <input
+                                id="customRows"
+                                type="number"
+                                inputmode="numeric"
+                                min="5"
+                                max="50"
+                                step="1"
+                                aria-describedby="customHelp customError"
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="customCols">Columns</label>
+                            <input
+                                id="customCols"
+                                type="number"
+                                inputmode="numeric"
+                                min="5"
+                                max="50"
+                                step="1"
+                                aria-describedby="customHelp customError"
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="customMines">Mines</label>
+                            <input
+                                id="customMines"
+                                type="number"
+                                inputmode="numeric"
+                                min="1"
+                                step="1"
+                                aria-describedby="customHelp customError"
+                            />
+                        </div>
+                        <p class="hint-text" id="customHelp">Rows and columns from 5 to 50.</p>
+                        <p class="error" id="customError" hidden></p>
+                    </div>
+                    <label class="check">
+                        <input type="checkbox" id="logicOnly" />
+                        <span class="check-name">Logic-only field</span>
+                        <span class="hint-text"
+                            >Every field can be cleared by reasoning alone. You never have to guess.</span
+                        >
+                    </label>
+                    <p class="note" id="leaveNote" hidden>
+                        Starting a new field leaves this one unfinished. It counts as played.
+                    </p>
+                    <div class="actions">
+                        <button class="btn primary" type="submit">Start</button>
+                        <button class="btn" type="button" data-close>Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </dialog>
+
+        <dialog id="statsPanel" aria-labelledby="statsTitle">
+            <div class="panel-head">
+                <h2 id="statsTitle">Statistics</h2>
+                <button class="icon-btn" type="button" data-close aria-label="Close">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                            d="M6 6l12 12M18 6L6 18"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div class="panel-body">
+                <p class="stats-total" id="statsTotal"></p>
+                <div class="stat-list" id="statList"></div>
+                <p class="hint-text">
+                    A field you leave unfinished counts as played. Fields where you used a hint don't set best times,
+                    and replays aren't counted. Everything stays on this device.
+                </p>
+                <div class="actions" id="resetRow">
+                    <button class="btn" type="button" id="resetStats">Reset statistics</button>
+                </div>
+                <div id="resetConfirm" hidden>
+                    <p>Delete all best times, wins and streaks? This can't be undone.</p>
+                    <div class="actions">
+                        <button class="btn danger" type="button" id="resetYes">Delete statistics</button>
+                        <button class="btn" type="button" id="resetNo">Keep them</button>
+                    </div>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog id="settingsPanel" aria-labelledby="settingsTitle">
+            <div class="panel-head">
+                <h2 id="settingsTitle">Settings</h2>
+                <button class="icon-btn" type="button" data-close aria-label="Close">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                            d="M6 6l12 12M18 6L6 18"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div class="panel-body">
+                <label class="check">
+                    <input type="checkbox" id="setMarks" />
+                    <span class="check-name">Question marks</span>
+                    <span class="hint-text">Flag a flagged square again to mark it “?” while you're not sure.</span>
+                </label>
+                <label class="check">
+                    <input type="checkbox" id="setChord" />
+                    <span class="check-name">Tap a number to open around it</span>
+                    <span class="hint-text">Works once the number has that many flags around it.</span>
+                </label>
+                <div class="field">
+                    <label for="setPress">Long-press time</label>
+                    <select id="setPress">
+                        <option value="short">Short (a quarter second)</option>
+                        <option value="normal">Normal (under half a second)</option>
+                        <option value="long">Long (over half a second)</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="setTheme">Appearance</label>
+                    <select id="setTheme">
+                        <option value="system">Same as the device</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog id="helpPanel" aria-labelledby="helpTitle">
+            <div class="panel-head">
+                <h2 id="helpTitle">How to play</h2>
+                <button class="icon-btn" type="button" data-close aria-label="Close">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                            d="M6 6l12 12M18 6L6 18"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div class="panel-body">
+                <p>Some squares of the field hide mines. Open every square that doesn't.</p>
+                <ul class="help-list">
+                    <li>Tap a square to open it. Your first tap is always safe and always opens an area.</li>
+                    <li>
+                        A number tells how many of the eight squares around it hide a mine. A square with none around
+                        opens its neighbours by itself.
+                    </li>
+                    <li>
+                        Long-press a square (or right-click it) to place a flag where you're sure a mine is. Prefer
+                        tapping? Switch the tools below the field from Reveal to Flag.
+                    </li>
+                    <li>
+                        Tap a number that already has all its flags around it to open the rest of its neighbours at
+                        once.
+                    </li>
+                    <li>You win when every safe square is open. Opening a mine ends the field.</li>
+                    <li>
+                        Stuck? Hint shows a square that is certain from what's open, or tells you when only a guess is
+                        left.
+                    </li>
+                </ul>
+                <h3>Numbers</h3>
+                <ul class="legend" aria-label="The numbers 1 to 8 as they appear on the field">
+                    <li class="n1">1</li>
+                    <li class="n2">2</li>
+                    <li class="n3">3</li>
+                    <li class="n4">4</li>
+                    <li class="n5">5</li>
+                    <li class="n6">6</li>
+                    <li class="n7">7</li>
+                    <li class="n8">8</li>
+                </ul>
+                <h3>Keyboard</h3>
+                <ul class="help-list">
+                    <li><kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> move between squares</li>
+                    <li><kbd>Space</kbd> or <kbd>Enter</kbd> opens a square</li>
+                    <li><kbd>F</kbd> places or removes a flag, <kbd>H</kbd> gives a hint</li>
+                    <li><kbd>N</kbd> starts a new field once one is over</li>
+                </ul>
+                <h3>Logic-only fields</h3>
+                <p>
+                    Turn on Logic-only field under New field to play fields that can always be cleared by reasoning.
+                    Classic fields sometimes end in a pure guess.
+                </p>
+            </div>
+        </dialog>
+
+        <script>
+            (() => {
+                "use strict";
+
+                // ==core:start== The rules of the game: no DOM, no clock, no storage (tested on its own in Node).
+                const Core = (() => {
+                    "use strict";
+                    const COVERED = 0;
+                    const OPEN = 1;
+                    const FLAG = 2;
+                    const MARK = 3;
+                    const nearCache = new Map();
+
+                    /** The neighbours of every square of a rows × cols field, cached per size. */
+                    function nearOf(rows, cols) {
+                        const key = rows + "x" + cols;
+                        let near = nearCache.get(key);
+                        if (near) return near;
+                        near = new Array(rows * cols);
+                        for (let r = 0; r < rows; r++) {
+                            for (let c = 0; c < cols; c++) {
+                                const list = [];
+                                for (let dr = -1; dr <= 1; dr++) {
+                                    for (let dc = -1; dc <= 1; dc++) {
+                                        const rr = r + dr;
+                                        const cc = c + dc;
+                                        if ((dr || dc) && rr >= 0 && rr < rows && cc >= 0 && cc < cols)
+                                            list.push(rr * cols + cc);
+                                    }
+                                }
+                                near[r * cols + c] = list;
+                            }
+                        }
+                        nearCache.set(key, near);
+                        return near;
+                    }
+
+                    /** A small seeded generator (mulberry32), so a field can be laid out again from its seed in tests. */
+                    function seeded(seed) {
+                        let a = seed >>> 0;
+                        return () => {
+                            a = (a + 0x6d2b79f5) >>> 0;
+                            let t = a;
+                            t = Math.imul(t ^ (t >>> 15), t | 1);
+                            t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+                            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+                        };
+                    }
+
+                    function create(rows, cols, mines, extra) {
+                        const n = rows * cols;
+                        return Object.assign(
+                            {
+                                rows,
+                                cols,
+                                mines,
+                                level: "custom",
+                                logic: false,
+                                cells: new Uint8Array(n),
+                                bombs: null,
+                                nums: null,
+                                status: "ready",
+                                opened: 0,
+                                flags: 0,
+                                exploded: -1,
+                                start: -1,
+                                hints: 0,
+                                replay: false,
+                                sample: false,
+                                elapsed: 0,
+                            },
+                            extra || {},
+                        );
+                    }
+
+                    /** Mines anywhere except the first square and its neighbours, so the first tap opens an area. */
+                    function layout(g, safe, rand) {
+                        const n = g.rows * g.cols;
+                        const near = nearOf(g.rows, g.cols);
+                        const banned = new Uint8Array(n);
+                        banned[safe] = 1;
+                        if (n - 1 - near[safe].length >= g.mines) near[safe].forEach((j) => (banned[j] = 1));
+                        const pool = [];
+                        for (let i = 0; i < n; i++) if (!banned[i]) pool.push(i);
+                        const count = Math.min(g.mines, pool.length);
+                        for (let k = 0; k < count; k++) {
+                            const j = k + Math.floor(rand() * (pool.length - k));
+                            const t = pool[k];
+                            pool[k] = pool[j];
+                            pool[j] = t;
+                        }
+                        const bombs = new Uint8Array(n);
+                        for (let k = 0; k < count; k++) bombs[pool[k]] = 1;
+                        return bombs;
+                    }
+
+                    function numbers(g, bombs) {
+                        const near = nearOf(g.rows, g.cols);
+                        const nums = new Int8Array(bombs.length);
+                        for (let i = 0; i < bombs.length; i++) {
+                            if (bombs[i]) {
+                                nums[i] = -1;
+                                continue;
+                            }
+                            let k = 0;
+                            for (const j of near[i]) k += bombs[j];
+                            nums[i] = k;
+                        }
+                        return nums;
+                    }
+
+                    /** Opens square i and, from every square with no mines around, its neighbours. Returns the opened squares. */
+                    function flood(g, i, open, nums, skipFlags) {
+                        const near = nearOf(g.rows, g.cols);
+                        const done = [];
+                        const stack = [i];
+                        while (stack.length) {
+                            const k = stack.pop();
+                            if (open[k] === OPEN || (skipFlags && open[k] === FLAG)) continue;
+                            open[k] = OPEN;
+                            done.push(k);
+                            if (nums[k] === 0) for (const j of near[k]) if (open[j] !== OPEN) stack.push(j);
+                        }
+                        return done;
+                    }
+
+                    // ---- Deduction: what follows for sure from the open numbers and the mine count ----
+                    // known: 0 unknown, 1 surely a mine, 2 surely safe. open[i] === OPEN means its number is visible.
+
+                    function constraintsOf(g, open, nums, known) {
+                        const near = nearOf(g.rows, g.cols);
+                        const list = [];
+                        for (let i = 0; i < open.length; i++) {
+                            if (open[i] !== OPEN || nums[i] <= 0) continue;
+                            let need = nums[i];
+                            const cells = [];
+                            for (const j of near[i]) {
+                                if (open[j] === OPEN || known[j] === 2) continue;
+                                if (known[j] === 1) need--;
+                                else cells.push(j);
+                            }
+                            if (cells.length) list.push({ cells, need });
+                        }
+                        return list;
+                    }
+
+                    /** One round of deduction; true when something new became certain. */
+                    function deduce(g, open, nums, known) {
+                        let changed = false;
+                        const mark = (j, v) => {
+                            if (!known[j]) {
+                                known[j] = v;
+                                changed = true;
+                            }
+                        };
+                        const list = constraintsOf(g, open, nums, known);
+                        for (const c of list) {
+                            if (c.need === 0) c.cells.forEach((j) => mark(j, 2));
+                            else if (c.need === c.cells.length) c.cells.forEach((j) => mark(j, 1));
+                        }
+                        if (changed) return true;
+                        // Two numbers that share squares: if A needs as many more mines than B as A has squares of its own,
+                        // those squares are all mines and B's own squares are all safe (covers subsets and 1-2 patterns).
+                        const byCell = new Map();
+                        list.forEach((c, k) =>
+                            c.cells.forEach((j) => {
+                                let at = byCell.get(j);
+                                if (!at) byCell.set(j, (at = []));
+                                at.push(k);
+                            }),
+                        );
+                        for (let a = 0; a < list.length; a++) {
+                            const A = list[a];
+                            const inA = new Set(A.cells);
+                            const partners = new Set();
+                            A.cells.forEach((j) => byCell.get(j).forEach((k) => k !== a && partners.add(k)));
+                            for (const b of partners) {
+                                const B = list[b];
+                                const inB = new Set(B.cells);
+                                const onlyA = A.cells.filter((j) => !inB.has(j));
+                                const onlyB = B.cells.filter((j) => !inA.has(j));
+                                if (A.need - B.need === onlyA.length) {
+                                    onlyA.forEach((j) => mark(j, 1));
+                                    onlyB.forEach((j) => mark(j, 2));
+                                }
+                            }
+                        }
+                        if (changed) return true;
+                        // The mine count: no mines left means every unknown square is safe, and the other way round.
+                        let unknown = 0;
+                        let found = 0;
+                        for (let i = 0; i < open.length; i++) {
+                            if (open[i] === OPEN) continue;
+                            if (known[i] === 1) found++;
+                            else if (!known[i]) unknown++;
+                        }
+                        const left = g.mines - found;
+                        if (unknown && (left === 0 || left === unknown)) {
+                            for (let i = 0; i < open.length; i++)
+                                if (open[i] !== OPEN && !known[i]) mark(i, left === 0 ? 2 : 1);
+                        }
+                        return changed;
+                    }
+
+                    /** True when a player who opens `start` can clear the whole field by deduction alone. */
+                    function solvable(g, bombs, start) {
+                        const nums = numbers(g, bombs);
+                        const n = bombs.length;
+                        const open = new Uint8Array(n);
+                        const known = new Int8Array(n);
+                        let opened = flood(g, start, open, nums, false).length;
+                        const target = n - g.mines;
+                        while (opened < target) {
+                            if (!deduce(g, open, nums, known)) return false;
+                            for (let i = 0; i < n; i++) {
+                                if (known[i] === 2 && open[i] !== OPEN) {
+                                    if (bombs[i]) throw new Error("deduction marked a mine as safe");
+                                    opened += flood(g, i, open, nums, false).length;
+                                }
+                                if (known[i] === 1 && !bombs[i])
+                                    throw new Error("deduction marked a safe square as a mine");
+                            }
+                        }
+                        return true;
+                    }
+
+                    /** Tries up to `tries` layouts; returns one that needs no guessing, or null. */
+                    function logicLayout(g, safe, rand, tries) {
+                        for (let t = 0; t < tries; t++) {
+                            const bombs = layout(g, safe, rand);
+                            if (solvable(g, bombs, safe)) return bombs;
+                        }
+                        return null;
+                    }
+
+                    /** Starts the game at the first square: lays the given or a random field and opens the square. */
+                    function begin(g, safe, rand, bombs) {
+                        g.bombs = bombs || layout(g, safe, rand);
+                        g.nums = numbers(g, g.bombs);
+                        g.status = "playing";
+                        g.start = safe;
+                    }
+
+                    function finishWin(g) {
+                        g.status = "won";
+                        for (let i = 0; i < g.cells.length; i++) if (g.bombs[i]) g.cells[i] = FLAG;
+                        g.flags = g.mines;
+                    }
+
+                    function openSquares(g, list) {
+                        const opened = [];
+                        for (const i of list) {
+                            if (g.cells[i] === OPEN || g.cells[i] === FLAG) continue;
+                            if (g.bombs[i]) {
+                                g.status = "lost";
+                                g.exploded = i;
+                                return { changed: true, opened, lost: true, won: false };
+                            }
+                        }
+                        for (const i of list) {
+                            const before = g.cells[i];
+                            if (before === OPEN || before === FLAG) continue;
+                            if (before === MARK) g.cells[i] = COVERED;
+                            opened.push(...flood(g, i, g.cells, g.nums, true));
+                        }
+                        g.opened += opened.length;
+                        const won = g.opened === g.cells.length - g.mines;
+                        if (won) finishWin(g);
+                        return { changed: opened.length > 0, opened, lost: false, won };
+                    }
+
+                    /** A tap that opens: a covered square, or (with chording) an open number with all its flags placed. */
+                    function reveal(g, i, chording) {
+                        const none = { changed: false, opened: [], lost: false, won: false };
+                        if (g.status !== "playing") return none;
+                        const s = g.cells[i];
+                        if (s === FLAG) return none;
+                        if (s === OPEN) return chording ? chord(g, i) : none;
+                        return openSquares(g, [i]);
+                    }
+
+                    /** Opens the other neighbours of an open number once as many flags as its value surround it. */
+                    function chord(g, i) {
+                        const none = { changed: false, opened: [], lost: false, won: false };
+                        if (g.status !== "playing" || g.cells[i] !== OPEN || g.nums[i] <= 0) return none;
+                        const near = nearOf(g.rows, g.cols)[i];
+                        let flags = 0;
+                        const rest = [];
+                        for (const j of near) {
+                            if (g.cells[j] === FLAG) flags++;
+                            else if (g.cells[j] !== OPEN) rest.push(j);
+                        }
+                        if (flags !== g.nums[i] || !rest.length) return none;
+                        return openSquares(g, rest);
+                    }
+
+                    /** Covered → flag → ("?" when marks are on) → covered. Returns the new state, or -1 when nothing changed. */
+                    function toggleFlag(g, i, marks) {
+                        if (g.status === "won" || g.status === "lost") return -1;
+                        const s = g.cells[i];
+                        if (s === OPEN) return -1;
+                        if (s === COVERED) {
+                            g.cells[i] = FLAG;
+                            g.flags++;
+                        } else if (s === FLAG) {
+                            g.cells[i] = marks ? MARK : COVERED;
+                            g.flags--;
+                        } else {
+                            g.cells[i] = COVERED;
+                        }
+                        return g.cells[i];
+                    }
+
+                    /** A square that is certain from what is open: {safe} first (nearest to `near`), else {mine}, else null. */
+                    function hint(g, nearIndex) {
+                        if (g.status !== "playing") return null;
+                        const n = g.cells.length;
+                        const known = new Int8Array(n);
+                        while (deduce(g, g.cells, g.nums, known)) {
+                            /* repeat until nothing new follows */
+                        }
+                        const r0 = Math.floor(nearIndex / g.cols);
+                        const c0 = nearIndex % g.cols;
+                        const dist = (i) =>
+                            Math.max(Math.abs(Math.floor(i / g.cols) - r0), Math.abs((i % g.cols) - c0));
+                        let safe = -1;
+                        let mine = -1;
+                        for (let i = 0; i < n; i++) {
+                            if (g.cells[i] === OPEN) continue;
+                            if (known[i] === 2 && (safe < 0 || dist(i) < dist(safe))) safe = i;
+                            if (known[i] === 1 && g.cells[i] !== FLAG && (mine < 0 || dist(i) < dist(mine))) mine = i;
+                        }
+                        if (safe >= 0) return { safe };
+                        if (mine >= 0) return { mine };
+                        return null;
+                    }
+
+                    function save(g) {
+                        return {
+                            v: 1,
+                            rows: g.rows,
+                            cols: g.cols,
+                            mines: g.mines,
+                            level: g.level,
+                            logic: g.logic,
+                            cells: Array.from(g.cells).join(""),
+                            bombs: g.bombs ? Array.from(g.bombs).join("") : null,
+                            status: g.status,
+                            exploded: g.exploded,
+                            start: g.start,
+                            hints: g.hints,
+                            replay: g.replay,
+                            elapsed: g.elapsed,
+                        };
+                    }
+
+                    /** Rebuilds a saved game; null when the saved data does not describe a consistent game. */
+                    function restore(o) {
+                        if (!o || o.v !== 1) return null;
+                        const rows = o.rows;
+                        const cols = o.cols;
+                        const ok = (x, lo, hi) => Number.isInteger(x) && x >= lo && x <= hi;
+                        if (!ok(rows, 2, 99) || !ok(cols, 2, 99) || !ok(o.mines, 1, rows * cols - 1)) return null;
+                        const n = rows * cols;
+                        if (typeof o.cells !== "string" || o.cells.length !== n || !/^[0-3]*$/.test(o.cells))
+                            return null;
+                        if (!["ready", "playing", "won", "lost"].includes(o.status)) return null;
+                        const g = create(rows, cols, o.mines, {
+                            level: typeof o.level === "string" ? o.level : "custom",
+                            logic: o.logic === true,
+                            status: o.status,
+                            exploded: Number.isInteger(o.exploded) ? o.exploded : -1,
+                            start: Number.isInteger(o.start) ? o.start : -1,
+                            hints: Number.isInteger(o.hints) ? o.hints : 0,
+                            replay: o.replay === true,
+                            elapsed: typeof o.elapsed === "number" && o.elapsed >= 0 ? o.elapsed : 0,
+                        });
+                        for (let i = 0; i < n; i++) g.cells[i] = o.cells.charCodeAt(i) - 48;
+                        if (o.bombs != null) {
+                            if (typeof o.bombs !== "string" || o.bombs.length !== n || !/^[01]*$/.test(o.bombs))
+                                return null;
+                            g.bombs = new Uint8Array(n);
+                            let count = 0;
+                            for (let i = 0; i < n; i++) count += g.bombs[i] = o.bombs.charCodeAt(i) - 48;
+                            if (count !== o.mines) return null;
+                            g.nums = numbers(g, g.bombs);
+                        } else if (g.status !== "ready") {
+                            return null;
+                        }
+                        for (let i = 0; i < n; i++) {
+                            if (g.cells[i] === OPEN) {
+                                if (g.bombs && g.bombs[i] && g.exploded !== i) return null;
+                                g.opened++;
+                            } else if (g.cells[i] === FLAG) {
+                                g.flags++;
+                            }
+                        }
+                        return g;
+                    }
+
+                    return {
+                        COVERED,
+                        OPEN,
+                        FLAG,
+                        MARK,
+                        nearOf,
+                        seeded,
+                        create,
+                        layout,
+                        numbers,
+                        logicLayout,
+                        solvable,
+                        begin,
+                        reveal,
+                        chord,
+                        toggleFlag,
+                        hint,
+                        deduce,
+                        save,
+                        restore,
+                    };
+                })();
+                // ==core:end==
+
+                // ---- The page ----
+                const $ = (id) => document.getElementById(id);
+                const els = {
+                    board: $("board"),
+                    sheet: $("sheet"),
+                    minesLeft: $("minesLeft"),
+                    clock: $("clock"),
+                    newBtn: $("newBtn"),
+                    newLabel: $("newLabel"),
+                    levelBtn: $("levelBtn"),
+                    levelName: $("levelName"),
+                    levelMeta: $("levelMeta"),
+                    status: $("status"),
+                    say: $("say"),
+                    tools: $("tools"),
+                    modeReveal: $("modeReveal"),
+                    modeFlag: $("modeFlag"),
+                    hintBtn: $("hintBtn"),
+                    zoomIn: $("zoomIn"),
+                    zoomOut: $("zoomOut"),
+                    result: $("result"),
+                    resultTitle: $("resultTitle"),
+                    resultText: $("resultText"),
+                    playAgain: $("playAgain"),
+                    retry: $("retry"),
+                    changeLevel: $("changeLevel"),
+                    newForm: $("newForm"),
+                    customFields: $("customFields"),
+                    customRows: $("customRows"),
+                    customCols: $("customCols"),
+                    customMines: $("customMines"),
+                    customHelp: $("customHelp"),
+                    customError: $("customError"),
+                    customSummary: $("customSummary"),
+                    logicOnly: $("logicOnly"),
+                    leaveNote: $("leaveNote"),
+                    statsTotal: $("statsTotal"),
+                    statList: $("statList"),
+                    resetRow: $("resetRow"),
+                    resetConfirm: $("resetConfirm"),
+                    setMarks: $("setMarks"),
+                    setChord: $("setChord"),
+                    setPress: $("setPress"),
+                    setTheme: $("setTheme"),
+                };
+                const PANELS = {
+                    new: $("newPanel"),
+                    stats: $("statsPanel"),
+                    settings: $("settingsPanel"),
+                    help: $("helpPanel"),
+                };
+
+                const LEVELS = {
+                    easy: { name: "Easy", rows: 9, cols: 9, mines: 10 },
+                    medium: { name: "Medium", rows: 16, cols: 16, mines: 40 },
+                    hard: { name: "Hard", rows: 16, cols: 30, mines: 99 },
+                };
+                const SIDE = { min: 5, max: 50 };
+                const PRESS = { short: 250, normal: 400, long: 600 };
+                const DEFAULTS = { marks: false, chord: true, press: "normal", theme: "system", logic: false };
+                const motion = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+                const calm = () => Boolean(motion && motion.matches);
+
+                // Storage: localStorage when the page may use it, memory otherwise (private windows, previews).
+                const store = (() => {
+                    const memory = new Map();
+                    let local = null;
+                    try {
+                        local = window.localStorage;
+                        local.setItem("mines.probe", "1");
+                        local.removeItem("mines.probe");
+                    } catch (e) {
+                        local = null;
+                    }
+                    return {
+                        get(key, fallback) {
+                            let raw = memory.has(key) ? memory.get(key) : null;
+                            if (raw == null && local) {
+                                try {
+                                    raw = local.getItem("mines." + key);
+                                } catch (e) {
+                                    raw = null;
+                                }
+                            }
+                            if (raw == null) return fallback;
+                            try {
+                                return JSON.parse(raw);
+                            } catch (e) {
+                                return fallback;
+                            }
+                        },
+                        set(key, value) {
+                            const raw = JSON.stringify(value);
+                            memory.set(key, raw);
+                            if (!local) return;
+                            try {
+                                local.setItem("mines." + key, raw);
+                            } catch (e) {
+                                // Full or blocked: the value stays in memory for this visit.
+                            }
+                        },
+                    };
+                })();
+
+                function readSettings() {
+                    const saved = store.get("settings", {});
+                    const out = Object.assign({}, DEFAULTS);
+                    if (saved && typeof saved === "object") {
+                        for (const key of Object.keys(DEFAULTS)) {
+                            if (typeof saved[key] === typeof DEFAULTS[key]) out[key] = saved[key];
+                        }
+                    }
+                    if (!(out.press in PRESS)) out.press = DEFAULTS.press;
+                    if (!["system", "light", "dark"].includes(out.theme)) out.theme = DEFAULTS.theme;
+                    return out;
+                }
+
+                function readCustom() {
+                    const c = store.get("custom", null);
+                    const ok = c && Number.isInteger(c.rows) && Number.isInteger(c.cols) && Number.isInteger(c.mines);
+                    if (ok && c.rows >= SIDE.min && c.rows <= SIDE.max && c.cols >= SIDE.min && c.cols <= SIDE.max) {
+                        if (c.mines >= 1 && c.mines <= c.rows * c.cols - 9) return c;
+                    }
+                    return { rows: 12, cols: 12, mines: 24 };
+                }
+
+                const savedLevel = store.get("level", "easy");
+                const S = {
+                    settings: readSettings(),
+                    level: savedLevel === "custom" || savedLevel in LEVELS ? savedLevel : "easy",
+                    custom: readCustom(),
+                    zoom: store.get("zoom", {}) || {},
+                    stats: store.get("stats", {}) || {},
+                    mode: "reveal",
+                    game: null,
+                    focus: 0,
+                    hint: -1,
+                    hintKind: "",
+                    base: 0,
+                    since: 0,
+                    running: false,
+                    wasRunning: false,
+                    gen: 0,
+                    generating: false,
+                    armed: 0,
+                    press: null,
+                    suppress: -1,
+                    suppressAt: 0,
+                    lastPointer: "mouse",
+                    note: "",
+                };
+                let cells = [];
+                let keys = [];
+                let lines = [];
+                let tick = 0;
+
+                const GLYPH = {
+                    flag:
+                        '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="g-post" d="M7 3.5v17"/>' +
+                        '<path class="g-tape" d="M8 4.2h11.2l-3.4 3.9 3.4 3.9H8z"/><path class="g-post" d="M4 20.5h7"/></svg>',
+                    mine:
+                        '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="g-core" cx="12" cy="12" r="5.2"/>' +
+                        '<circle class="g-ring" cx="12" cy="12" r="8.6"/></svg>',
+                    cross: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="x" d="M5 5l14 14M19 5L5 19"/></svg>',
+                    mark: '<span class="q" aria-hidden="true">?</span>',
+                };
+
+                function newRandom() {
+                    let seed = Math.floor(Math.random() * 4294967296);
+                    try {
+                        const a = new Uint32Array(1);
+                        window.crypto.getRandomValues(a);
+                        seed = a[0];
+                    } catch (e) {
+                        // Math.random is good enough for laying out a field.
+                    }
+                    return Core.seeded(seed);
+                }
+
+                const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
+                const rowOf = (i) => Math.floor(i / S.game.cols);
+                const colOf = (i) => i % S.game.cols;
+                const where = (i) => "row " + (rowOf(i) + 1) + ", column " + (colOf(i) + 1);
+                const minesWord = (n) => (n === 1 ? "1 mine" : n + " mines");
+                const levelName = (g) => (g.level in LEVELS ? LEVELS[g.level].name : "Custom");
+                const bucketOf = (g) => g.level + (g.logic ? ":logic" : "");
+
+                function fmtClock(ms) {
+                    const s = Math.floor(ms / 1000);
+                    const h = Math.floor(s / 3600);
+                    const m = Math.floor((s % 3600) / 60);
+                    const sec = String(s % 60).padStart(2, "0");
+                    return h ? h + ":" + String(m).padStart(2, "0") + ":" + sec : m + ":" + sec;
+                }
+                function fmtBest(ms) {
+                    const tenths = Math.floor((ms % 1000) / 100);
+                    return fmtClock(ms) + "." + tenths;
+                }
+
+                // ---- Announcements ----
+                function say(text) {
+                    els.say.textContent = "";
+                    if (text) setTimeout(() => (els.say.textContent = text), 40);
+                }
+                function note(text) {
+                    S.note = text;
+                    showStatus();
+                }
+                function showStatus() {
+                    const g = S.game;
+                    let text = S.note;
+                    if (!text && g) {
+                        if (g.status === "ready") {
+                            text = "Tap any square to start. Your first tap is always safe.";
+                        } else if (g.status === "playing" && S.mode === "flag") {
+                            text = "Flag mode: a tap places a flag, a long-press opens a square.";
+                        }
+                    }
+                    if (els.status.textContent !== text) els.status.textContent = text;
+                }
+
+                // ---- Clock ----
+                function elapsed() {
+                    return S.base + (S.running ? performance.now() - S.since : 0);
+                }
+                function drawClock() {
+                    const text = fmtClock(elapsed());
+                    if (els.clock.textContent !== text) els.clock.textContent = text;
+                    if (!S.running && tick) {
+                        clearInterval(tick);
+                        tick = 0;
+                    }
+                }
+                function runClock() {
+                    S.since = performance.now();
+                    S.running = true;
+                    if (!tick) tick = setInterval(drawClock, 250);
+                }
+                function startClock() {
+                    S.base = 0;
+                    runClock();
+                }
+                function resumeClock() {
+                    if (!S.running && S.game.status === "playing") runClock();
+                }
+                function pauseClock() {
+                    if (S.running) {
+                        S.base = elapsed();
+                        S.running = false;
+                    }
+                    drawClock();
+                }
+
+                // ---- Saving ----
+                function saveGame() {
+                    const g = S.game;
+                    if (!g || g.sample) return;
+                    g.elapsed = Math.round(elapsed());
+                    store.set("game", Core.save(g));
+                }
+                function saveSettings() {
+                    store.set("settings", S.settings);
+                }
+
+                function record(key, won, ms, rankable) {
+                    const st =
+                        S.stats[key] || (S.stats[key] = { played: 0, won: 0, best: null, streak: 0, bestStreak: 0 });
+                    st.played++;
+                    let newBest = false;
+                    if (won) {
+                        st.won++;
+                        st.streak++;
+                        st.bestStreak = Math.max(st.bestStreak, st.streak);
+                        if (rankable && (st.best == null || ms < st.best)) {
+                            st.best = Math.round(ms);
+                            newBest = true;
+                        }
+                    } else {
+                        st.streak = 0;
+                    }
+                    store.set("stats", S.stats);
+                    return { best: st.best, newBest };
+                }
+
+                // ---- Building and drawing the field ----
+                function el(tag, cls) {
+                    const node = document.createElement(tag);
+                    if (cls) node.className = cls;
+                    return node;
+                }
+
+                function buildBoard() {
+                    const g = S.game;
+                    const board = els.board;
+                    board.textContent = "";
+                    board.setAttribute(
+                        "aria-label",
+                        "Minefield, " + g.rows + " rows by " + g.cols + " columns, " + minesWord(g.mines),
+                    );
+                    const frag = document.createDocumentFragment();
+                    const head = el("div", "ruler-row");
+                    head.setAttribute("aria-hidden", "true");
+                    head.appendChild(el("div", "ruler corner"));
+                    for (let c = 0; c < g.cols; c++) {
+                        const t = el("div", "ruler col" + ((c + 1) % 5 === 0 ? " major" : ""));
+                        t.textContent = String(c + 1);
+                        head.appendChild(t);
+                    }
+                    frag.appendChild(head);
+                    const n = g.rows * g.cols;
+                    cells = new Array(n);
+                    keys = new Array(n).fill("");
+                    lines = new Array(n);
+                    for (let r = 0; r < g.rows; r++) {
+                        const row = el("div", "row");
+                        row.setAttribute("role", "row");
+                        const rh = el("div", "ruler rowh" + ((r + 1) % 5 === 0 ? " major" : ""));
+                        rh.setAttribute("aria-hidden", "true");
+                        rh.textContent = String(r + 1);
+                        row.appendChild(rh);
+                        for (let c = 0; c < g.cols; c++) {
+                            const i = r * g.cols + c;
+                            const cell = el("div", "c");
+                            cell.setAttribute("role", "gridcell");
+                            cell.dataset.i = String(i);
+                            cell.tabIndex = -1;
+                            lines[i] = "c" + ((c + 1) % 5 === 0 ? " vx" : "") + ((r + 1) % 5 === 0 ? " hx" : "");
+                            cells[i] = cell;
+                            row.appendChild(cell);
+                        }
+                        frag.appendChild(row);
+                    }
+                    board.appendChild(frag);
+                    S.focus = clamp(S.focus, 0, n - 1);
+                    cells[S.focus].tabIndex = 0;
+                    sizeBoard();
+                    render();
+                }
+
+                function kindOf(g, i) {
+                    const s = g.cells[i];
+                    if (s === Core.OPEN) return "open";
+                    if (g.status === "lost") {
+                        if (i === g.exploded) return "hit";
+                        if (s === Core.FLAG) return g.bombs[i] ? "flag" : "wrong";
+                        if (g.bombs[i]) return "mine";
+                    }
+                    if (s === Core.FLAG) return "flag";
+                    if (s === Core.MARK) return "mark";
+                    return "cov";
+                }
+
+                const STATE_WORDS = {
+                    cov: "covered",
+                    flag: "flagged",
+                    mark: "question mark",
+                    mine: "mine",
+                    hit: "mine, opened",
+                    wrong: "flagged, but no mine here",
+                };
+
+                function labelOf(i, kind, n, hinted) {
+                    let what = STATE_WORDS[kind];
+                    if (kind === "open") what = n === 0 ? "open, no mines around" : minesWord(n) + " around";
+                    let text = "Row " + (rowOf(i) + 1) + ", column " + (colOf(i) + 1) + ", " + what;
+                    if (hinted) text += S.hintKind === "mine" ? ", hint: certainly a mine" : ", hint: safe to open";
+                    return text;
+                }
+
+                function paint(i, kind, n, hinted) {
+                    const cell = cells[i];
+                    let cls = lines[i] + " is-" + kind;
+                    if (kind === "open" && n > 0) cls += " num n" + n;
+                    if (hinted) cls += " is-hint";
+                    cell.className = cls;
+                    if (kind === "open") cell.textContent = n > 0 ? String(n) : "";
+                    else if (kind === "flag") cell.innerHTML = GLYPH.flag;
+                    else if (kind === "wrong") cell.innerHTML = GLYPH.flag + GLYPH.cross;
+                    else if (kind === "mine" || kind === "hit") cell.innerHTML = GLYPH.mine;
+                    else if (kind === "mark") cell.innerHTML = GLYPH.mark;
+                    else cell.textContent = "";
+                    cell.setAttribute("aria-label", labelOf(i, kind, n, hinted));
+                }
+
+                function render() {
+                    const g = S.game;
+                    const over = g.status === "won" || g.status === "lost";
+                    for (let i = 0; i < cells.length; i++) {
+                        const kind = kindOf(g, i);
+                        const n = kind === "open" ? g.nums[i] : 0;
+                        const hinted = i === S.hint && !over;
+                        const key = kind + n + (hinted ? "h" + S.hintKind : "");
+                        if (keys[i] !== key) {
+                            keys[i] = key;
+                            paint(i, kind, n, hinted);
+                        }
+                    }
+                    const left = g.mines - g.flags;
+                    els.minesLeft.textContent = left < 0 ? "−" + -left : String(left);
+                    els.minesLeft.classList.toggle("is-low", left < 0);
+                    els.levelName.textContent = levelName(g);
+                    els.levelMeta.textContent =
+                        (g.level === "custom" ? g.rows + " × " + g.cols + ", " : "") +
+                        minesWord(g.mines) +
+                        (g.logic ? ", logic-only" : "");
+                    els.modeReveal.setAttribute("aria-pressed", String(S.mode === "reveal"));
+                    els.modeFlag.setAttribute("aria-pressed", String(S.mode === "flag"));
+                    els.hintBtn.disabled = over || S.generating;
+                    els.board.classList.toggle("is-over", over);
+                    showStatus();
+                }
+
+                function rootPx() {
+                    return parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+                }
+                const zoomKey = () => S.game.rows + "x" + S.game.cols;
+
+                function sizeBoard() {
+                    const g = S.game;
+                    const base = rootPx();
+                    const ruler = Math.round(base * 1.25);
+                    const least = Math.max(32, Math.round(base * 2));
+                    const roomy = Math.max(46, Math.round(base * 2.9));
+                    const most = Math.max(72, Math.round(base * 4.5));
+                    const w = els.sheet.clientWidth - 12 - ruler;
+                    const h = els.sheet.clientHeight - 12 - ruler;
+                    const fit = Math.floor(Math.min(w / g.cols, h / g.rows));
+                    const auto = clamp(fit, least, roomy);
+                    const size = clamp(auto + (S.zoom[zoomKey()] || 0) * 6, least, most);
+                    els.board.style.setProperty("--cell", size + "px");
+                    els.board.style.setProperty("--ruler", ruler + "px");
+                    els.zoomOut.disabled = size <= least;
+                    els.zoomIn.disabled = size >= most;
+                    return { size, least, most };
+                }
+
+                function zoomBy(step) {
+                    const sheet = els.sheet;
+                    const cx = (sheet.scrollLeft + sheet.clientWidth / 2) / sheet.scrollWidth;
+                    const cy = (sheet.scrollTop + sheet.clientHeight / 2) / sheet.scrollHeight;
+                    const before = sizeBoard();
+                    if ((step < 0 && before.size <= before.least) || (step > 0 && before.size >= before.most)) return;
+                    const key = zoomKey();
+                    S.zoom[key] = (S.zoom[key] || 0) + step;
+                    const after = sizeBoard();
+                    if (after.size === before.size) S.zoom[key] -= step;
+                    store.set("zoom", S.zoom);
+                    sheet.scrollLeft = cx * sheet.scrollWidth - sheet.clientWidth / 2;
+                    sheet.scrollTop = cy * sheet.scrollHeight - sheet.clientHeight / 2;
+                    say("Squares " + after.size + " pixels wide.");
+                }
+
+                function centreBoard() {
+                    const sheet = els.sheet;
+                    sheet.scrollLeft = (sheet.scrollWidth - sheet.clientWidth) / 2;
+                    sheet.scrollTop = (sheet.scrollHeight - sheet.clientHeight) / 2;
+                }
+
+                function setFocus(i, move) {
+                    if (i < 0 || i >= cells.length) return;
+                    if (cells[S.focus]) cells[S.focus].tabIndex = -1;
+                    S.focus = i;
+                    cells[i].tabIndex = 0;
+                    if (move) {
+                        cells[i].focus({ preventScroll: true });
+                        cells[i].scrollIntoView({ block: "nearest", inline: "nearest" });
+                    }
+                }
+                const boardHasFocus = () => els.board.contains(document.activeElement);
+
+                // ---- Motion ----
+                function animateOpen(list, origin) {
+                    if (calm() || list.length > 900) return;
+                    const r0 = rowOf(origin);
+                    const c0 = colOf(origin);
+                    for (const i of list) {
+                        const d = Math.max(Math.abs(rowOf(i) - r0), Math.abs(colOf(i) - c0));
+                        cells[i].style.setProperty("--d", Math.min(d, 16) * 16 + "ms");
+                        cells[i].dataset.anim = "open";
+                    }
+                }
+                function animateFlag(i) {
+                    if (!calm()) cells[i].dataset.anim = "flag";
+                }
+                els.board.addEventListener("animationend", (e) => {
+                    const cell = e.target.closest ? e.target.closest(".c") : null;
+                    if (cell && cell.dataset.anim) delete cell.dataset.anim;
+                });
+
+                // ---- Moves ----
+                function clearHint() {
+                    S.hint = -1;
+                    S.hintKind = "";
+                }
+
+                function openAt(i) {
+                    const g = S.game;
+                    if (S.generating || g.status === "won" || g.status === "lost") return;
+                    setFocus(i, false);
+                    if (g.status === "ready") {
+                        if (g.cells[i] === Core.FLAG) {
+                            note("That square has a flag on it. Remove the flag first, or open another square.");
+                            return;
+                        }
+                        if (g.logic) {
+                            layLogicField(i);
+                            return;
+                        }
+                        Core.begin(g, i, newRandom());
+                        startClock();
+                    } else {
+                        resumeClock();
+                    }
+                    applyMove(Core.reveal(g, i, S.settings.chord), i);
+                }
+
+                function applyMove(res, origin) {
+                    const g = S.game;
+                    if (!res.changed) {
+                        if (g.cells[origin] === Core.OPEN && g.nums[origin] > 0) explainNumber(origin);
+                        return;
+                    }
+                    clearHint();
+                    S.note = "";
+                    if (res.won || res.lost) {
+                        render();
+                        animateOpen(res.opened, origin);
+                        finish(res.won);
+                        return;
+                    }
+                    saveGame();
+                    render();
+                    animateOpen(res.opened, origin);
+                    say(
+                        res.opened.length === 1
+                            ? "Opened, " +
+                                  (g.nums[origin] === 0 ? "no mines around." : minesWord(g.nums[origin]) + " around.")
+                            : res.opened.length + " squares opened.",
+                    );
+                }
+
+                function explainNumber(i) {
+                    const g = S.game;
+                    if (!S.settings.chord) return;
+                    let flags = 0;
+                    let covered = 0;
+                    for (const j of Core.nearOf(g.rows, g.cols)[i]) {
+                        if (g.cells[j] === Core.FLAG) flags++;
+                        else if (g.cells[j] !== Core.OPEN) covered++;
+                    }
+                    const n = g.nums[i];
+                    if (!covered) return;
+                    if (flags < n) {
+                        note(
+                            "This " +
+                                n +
+                                " has " +
+                                (flags === 1 ? "1 flag" : flags + " flags") +
+                                " around it. " +
+                                "Place " +
+                                (n - flags) +
+                                " more to open the rest with a tap.",
+                        );
+                    } else if (flags > n) {
+                        note(
+                            "This " +
+                                n +
+                                " has " +
+                                flags +
+                                " flags around it, more than its number. One of them is wrong.",
+                        );
+                    }
+                }
+
+                function flagAt(i) {
+                    const g = S.game;
+                    if (S.generating) return;
+                    setFocus(i, false);
+                    const s = Core.toggleFlag(g, i, S.settings.marks);
+                    if (s < 0) return;
+                    if (i === S.hint) clearHint();
+                    S.note = "";
+                    if (g.status === "playing") resumeClock();
+                    saveGame();
+                    render();
+                    const left = g.mines - g.flags;
+                    if (s === Core.FLAG) {
+                        animateFlag(i);
+                        say("Flag placed. " + minesWord(left) + " left.");
+                    } else if (s === Core.MARK) {
+                        say("Question mark. " + minesWord(left) + " left.");
+                    } else {
+                        say("Flag removed. " + minesWord(left) + " left.");
+                    }
+                }
+
+                function tap(i) {
+                    const g = S.game;
+                    if (S.mode === "flag" && g.cells[i] !== Core.OPEN) flagAt(i);
+                    else openAt(i);
+                }
+                function longTap(i) {
+                    const g = S.game;
+                    if (S.mode === "flag" || g.cells[i] === Core.OPEN) openAt(i);
+                    else flagAt(i);
+                }
+
+                function layLogicField(i) {
+                    const g = S.game;
+                    const token = ++S.gen;
+                    const rand = newRandom();
+                    const started = performance.now();
+                    S.generating = true;
+                    els.board.setAttribute("aria-busy", "true");
+                    note("Laying out a field you can clear by logic alone…");
+                    render();
+                    const step = () => {
+                        if (token !== S.gen) return;
+                        const bombs = Core.logicLayout(g, i, rand, 20);
+                        if (!bombs && performance.now() - started < 3000) {
+                            setTimeout(step, 0);
+                            return;
+                        }
+                        S.generating = false;
+                        els.board.removeAttribute("aria-busy");
+                        S.note = "";
+                        if (!bombs) {
+                            g.logic = false;
+                            S.note =
+                                "No logic-only field turned up in time, so this is a classic field. It may need a guess.";
+                        }
+                        Core.begin(g, i, rand, bombs || null);
+                        startClock();
+                        const keep = S.note;
+                        applyMove(Core.reveal(g, i, S.settings.chord), i);
+                        if (keep) note(keep);
+                    };
+                    setTimeout(step, 20);
+                }
+
+                function giveHint() {
+                    const g = S.game;
+                    if (g.status === "ready") {
+                        note("Any square will do for your first tap. It is always safe.");
+                        return;
+                    }
+                    if (g.status !== "playing" || S.generating) return;
+                    const h = Core.hint(g, S.focus);
+                    if (!h) {
+                        clearHint();
+                        note("Nothing is certain from what's open now. Your next move is a guess.");
+                        render();
+                        return;
+                    }
+                    g.hints++;
+                    resumeClock();
+                    if (h.safe != null) {
+                        S.hint = h.safe;
+                        S.hintKind = "safe";
+                        note(
+                            g.cells[h.safe] === Core.FLAG
+                                ? "The flag at " + where(h.safe) + " is wrong: that square is safe."
+                                : "The square at " + where(h.safe) + " is safe to open.",
+                        );
+                    } else {
+                        S.hint = h.mine;
+                        S.hintKind = "mine";
+                        note("The square at " + where(h.mine) + " is certainly a mine. Flag it.");
+                    }
+                    saveGame();
+                    render();
+                    setFocus(S.hint, boardHasFocus());
+                    if (!boardHasFocus()) cells[S.hint].scrollIntoView({ block: "nearest", inline: "nearest" });
+                }
+
+                function finish(won) {
+                    const g = S.game;
+                    disarmNew();
+                    pauseClock();
+                    g.elapsed = Math.round(S.base);
+                    const counted = !g.replay && !g.sample;
+                    const rankable = g.hints === 0 && g.level !== "custom";
+                    const info = counted
+                        ? record(bucketOf(g), won, g.elapsed, rankable)
+                        : { best: null, newBest: false };
+                    saveGame();
+                    let text;
+                    if (won) {
+                        text = levelName(g) + " cleared in " + fmtClock(g.elapsed) + ".";
+                        if (!counted) text += g.sample ? " Sample fields aren't counted." : " Replays aren't counted.";
+                        else if (g.hints) text += " You used a hint, so the time isn't ranked.";
+                        else if (info.newBest) text += " New best time: " + fmtBest(info.best) + ".";
+                        else if (info.best != null) text += " Best time: " + fmtBest(info.best) + ".";
+                    } else {
+                        const safe = g.rows * g.cols - g.mines;
+                        text =
+                            "You opened " + g.opened + " of " + safe + " safe squares in " + fmtClock(g.elapsed) + ".";
+                        if (!counted) text += g.sample ? " Sample fields aren't counted." : " Replays aren't counted.";
+                    }
+                    els.resultTitle.textContent = won ? "Field cleared" : "Mine hit";
+                    els.resultText.textContent = text;
+                    els.result.classList.toggle("is-won", won);
+                    els.result.classList.toggle("is-lost", !won);
+                    els.retry.hidden = won || !g.bombs;
+                    const hadFocus = boardHasFocus();
+                    els.tools.hidden = true;
+                    els.result.hidden = false;
+                    S.note = "";
+                    render();
+                    say((won ? "Field cleared. " : "Mine hit. ") + text);
+                    if (hadFocus) els.playAgain.focus({ preventScroll: true });
+                }
+
+                function hideResult() {
+                    els.result.hidden = true;
+                    els.tools.hidden = false;
+                }
+
+                function upright() {
+                    return window.innerWidth < 720 || window.innerWidth < window.innerHeight;
+                }
+
+                function leaving() {
+                    const g = S.game;
+                    return Boolean(g && g.status === "playing" && !g.replay && !g.sample);
+                }
+
+                function newGame(level) {
+                    if (leaving()) record(bucketOf(S.game), false, elapsed(), false);
+                    S.gen++;
+                    S.generating = false;
+                    els.board.removeAttribute("aria-busy");
+                    disarmNew();
+                    S.running = false;
+                    S.base = 0;
+                    let rows;
+                    let cols;
+                    let mines;
+                    if (level === "custom") {
+                        rows = S.custom.rows;
+                        cols = S.custom.cols;
+                        mines = S.custom.mines;
+                    } else {
+                        rows = LEVELS[level].rows;
+                        cols = LEVELS[level].cols;
+                        mines = LEVELS[level].mines;
+                        if (level === "hard" && upright()) [rows, cols] = [cols, rows];
+                    }
+                    S.level = level;
+                    store.set("level", level);
+                    S.game = Core.create(rows, cols, mines, { level, logic: S.settings.logic });
+                    clearHint();
+                    S.note = "";
+                    S.focus = Math.floor(rows / 2) * cols + Math.floor(cols / 2);
+                    hideResult();
+                    buildBoard();
+                    centreBoard();
+                    drawClock();
+                    saveGame();
+                }
+
+                function replayField() {
+                    const old = S.game;
+                    if (!old || !old.bombs || old.start < 0) return;
+                    const g = Core.create(old.rows, old.cols, old.mines, {
+                        level: old.level,
+                        logic: old.logic,
+                        replay: true,
+                    });
+                    Core.begin(g, old.start, null, old.bombs);
+                    Core.reveal(g, old.start, true);
+                    S.game = g;
+                    S.running = false;
+                    S.base = 0;
+                    clearHint();
+                    S.focus = old.start;
+                    hideResult();
+                    buildBoard();
+                    drawClock();
+                    note(
+                        "The same field again, opened at the same first square. The clock starts with your next move.",
+                    );
+                    saveGame();
+                }
+
+                function loadSample() {
+                    const rand = Core.seeded(20261015);
+                    const g = Core.create(16, 16, 40, { level: "medium", logic: true, sample: true });
+                    const first = 6 * 16 + 5;
+                    const bombs = Core.logicLayout(g, first, rand, 400) || Core.layout(g, first, rand);
+                    Core.begin(g, first, null, bombs);
+                    Core.reveal(g, first, true);
+                    for (let k = 0; k < 60 && g.status === "playing" && g.opened < 110; k++) {
+                        const h = Core.hint(g, first);
+                        if (!h) break;
+                        if (h.safe != null) Core.reveal(g, h.safe, true);
+                        else Core.toggleFlag(g, h.mine, false);
+                    }
+                    // Flag the mines that are certain by now, as a player would.
+                    const known = new Int8Array(g.cells.length);
+                    while (Core.deduce(g, g.cells, g.nums, known)) {
+                        /* repeat until nothing new follows */
+                    }
+                    known.forEach((v, i) => v === 1 && g.cells[i] === Core.COVERED && Core.toggleFlag(g, i, false));
+                    S.game = g;
+                    S.level = "medium";
+                    S.running = false;
+                    S.base = 83400;
+                    clearHint();
+                    S.focus = first;
+                    hideResult();
+                    buildBoard();
+                    drawClock();
+                    note("Sample field. Tap New field to play your own.");
+                }
+
+                // ---- New field button: a second tap confirms leaving a field in progress ----
+                function disarmNew() {
+                    if (S.armed) clearTimeout(S.armed);
+                    S.armed = 0;
+                    els.newBtn.classList.remove("is-armed");
+                    els.newLabel.textContent = "New field";
+                }
+                els.newBtn.addEventListener("click", () => {
+                    if (leaving() && S.game.opened > 0 && !S.armed) {
+                        S.armed = setTimeout(disarmNew, 4000);
+                        els.newBtn.classList.add("is-armed");
+                        els.newLabel.textContent = "Tap again";
+                        note(
+                            "This field isn't finished. Tap again within a few seconds to leave it; it counts as played.",
+                        );
+                        return;
+                    }
+                    newGame(S.level);
+                });
+
+                // ---- Pointer and keyboard on the field ----
+                function cellIndex(target) {
+                    const cell = target && target.closest ? target.closest(".c") : null;
+                    return cell ? Number(cell.dataset.i) : -1;
+                }
+                function endPress() {
+                    const p = S.press;
+                    if (!p) return;
+                    clearTimeout(p.timer);
+                    if (cells[p.i]) delete cells[p.i].dataset.press;
+                }
+
+                function suppressClick(i) {
+                    S.suppress = i;
+                    S.suppressAt = performance.now();
+                }
+                els.board.addEventListener("pointerdown", (e) => {
+                    S.lastPointer = e.pointerType || "mouse";
+                    endPress();
+                    S.press = null;
+                    S.suppress = -1;
+                    const i = cellIndex(e.target);
+                    if (i < 0 || S.lastPointer === "mouse" || !e.isPrimary) return;
+                    const press = { i, x: e.clientX, y: e.clientY, id: e.pointerId, timer: 0 };
+                    const ms = PRESS[S.settings.press];
+                    cells[i].style.setProperty("--press", ms - 90 + "ms");
+                    cells[i].dataset.press = "";
+                    press.timer = setTimeout(() => {
+                        if (cells[i]) delete cells[i].dataset.press;
+                        S.press = null;
+                        suppressClick(i);
+                        longTap(i);
+                    }, ms);
+                    S.press = press;
+                });
+                els.board.addEventListener("pointermove", (e) => {
+                    const p = S.press;
+                    if (p && e.pointerId === p.id && Math.hypot(e.clientX - p.x, e.clientY - p.y) > 10) {
+                        endPress();
+                        S.press = null;
+                        suppressClick(p.i);
+                    }
+                });
+                for (const type of ["pointerup", "pointercancel", "pointerleave"]) {
+                    els.board.addEventListener(type, (e) => {
+                        const p = S.press;
+                        if (!p || e.pointerId !== p.id) return;
+                        endPress();
+                        S.press = null;
+                    });
+                }
+                els.board.addEventListener("click", (e) => {
+                    const i = cellIndex(e.target);
+                    if (i < 0) return;
+                    if (i === S.suppress && performance.now() - S.suppressAt < 1500) {
+                        S.suppress = -1;
+                        return;
+                    }
+                    tap(i);
+                });
+                els.board.addEventListener("contextmenu", (e) => {
+                    const i = cellIndex(e.target);
+                    if (i < 0) return;
+                    e.preventDefault();
+                    if (S.lastPointer === "mouse") longTap(i);
+                });
+
+                els.board.addEventListener("keydown", (e) => {
+                    const i = cellIndex(e.target);
+                    if (i < 0 || e.altKey || e.metaKey) return;
+                    if (e.ctrlKey && e.key !== "Home" && e.key !== "End") return;
+                    const g = S.game;
+                    const r = rowOf(i);
+                    const c = colOf(i);
+                    let to = -1;
+                    switch (e.key) {
+                        case "ArrowUp":
+                            to = r > 0 ? i - g.cols : i;
+                            break;
+                        case "ArrowDown":
+                            to = r < g.rows - 1 ? i + g.cols : i;
+                            break;
+                        case "ArrowLeft":
+                            to = c > 0 ? i - 1 : i;
+                            break;
+                        case "ArrowRight":
+                            to = c < g.cols - 1 ? i + 1 : i;
+                            break;
+                        case "Home":
+                            to = e.ctrlKey ? 0 : i - c;
+                            break;
+                        case "End":
+                            to = e.ctrlKey ? g.rows * g.cols - 1 : i - c + g.cols - 1;
+                            break;
+                        case "PageUp":
+                            to = Math.max(r - 5, 0) * g.cols + c;
+                            break;
+                        case "PageDown":
+                            to = Math.min(r + 5, g.rows - 1) * g.cols + c;
+                            break;
+                        case " ":
+                        case "Enter":
+                            e.preventDefault();
+                            openAt(i);
+                            return;
+                        case "f":
+                        case "F":
+                            e.preventDefault();
+                            flagAt(i);
+                            return;
+                        case "h":
+                        case "H":
+                            e.preventDefault();
+                            giveHint();
+                            return;
+                        case "n":
+                        case "N":
+                            if (g.status === "won" || g.status === "lost") {
+                                e.preventDefault();
+                                newGame(S.level);
+                                setFocus(S.focus, true);
+                            }
+                            return;
+                        default:
+                            return;
+                    }
+                    e.preventDefault();
+                    setFocus(to, true);
+                });
+
+                // ---- Tools ----
+                function setMode(mode) {
+                    S.mode = mode;
+                    S.note = "";
+                    render();
+                    say(mode === "flag" ? "Flag mode. A tap places a flag." : "Reveal mode. A tap opens a square.");
+                }
+                els.modeReveal.addEventListener("click", () => setMode("reveal"));
+                els.modeFlag.addEventListener("click", () => setMode("flag"));
+                els.hintBtn.addEventListener("click", giveHint);
+                els.zoomIn.addEventListener("click", () => zoomBy(1));
+                els.zoomOut.addEventListener("click", () => zoomBy(-1));
+                els.playAgain.addEventListener("click", () => {
+                    const hadFocus = document.activeElement === els.playAgain;
+                    newGame(S.level);
+                    if (hadFocus) setFocus(S.focus, true);
+                });
+                els.retry.addEventListener("click", replayField);
+                els.changeLevel.addEventListener("click", () => openPanel("new", true));
+                els.levelBtn.addEventListener("click", () => openPanel("new", true));
+                $("statsBtn").addEventListener("click", () => openPanel("stats", true));
+                $("helpBtn").addEventListener("click", () => openPanel("help", true));
+                $("settingsBtn").addEventListener("click", () => openPanel("settings", true));
+
+                // ---- Panels and routes (#/new, #/stats, #/settings, #/help; Back closes a panel) ----
+                let current = null;
+                let skipPop = false;
+                let returnFocus = null;
+                const routeName = () => (location.hash || "").replace(/^#\/?/, "").toLowerCase();
+
+                function openPanel(name, push) {
+                    const d = PANELS[name];
+                    if (!d || d.open) return;
+                    if (current) closePanel(true);
+                    returnFocus = document.activeElement;
+                    PREPARE[name]();
+                    if (typeof d.showModal === "function") d.showModal();
+                    else d.setAttribute("open", "");
+                    current = name;
+                    if (push) {
+                        try {
+                            history.pushState({ panel: name }, "", "#/" + name);
+                        } catch (e) {
+                            // Some previews refuse history entries; the panel still works with its Close button.
+                        }
+                    }
+                }
+                function closePanel(quiet) {
+                    if (!current) return;
+                    const d = PANELS[current];
+                    if (quiet) d.dataset.quiet = "1";
+                    if (typeof d.close === "function") d.close();
+                    else {
+                        d.removeAttribute("open");
+                        d.dispatchEvent(new Event("close"));
+                    }
+                }
+                for (const [name, d] of Object.entries(PANELS)) {
+                    d.addEventListener("close", () => {
+                        const quiet = d.dataset.quiet === "1";
+                        delete d.dataset.quiet;
+                        if (current !== name) return;
+                        current = null;
+                        if (!quiet) {
+                            if (history.state && history.state.panel === name) {
+                                skipPop = true;
+                                history.back();
+                            } else if (routeName() === name) {
+                                try {
+                                    history.replaceState(null, "", location.pathname + location.search);
+                                } catch (e) {
+                                    // Keep the address as it is.
+                                }
+                            }
+                        }
+                        if (returnFocus && document.contains(returnFocus) && returnFocus.getClientRects().length) {
+                            returnFocus.focus({ preventScroll: true });
+                        } else if (returnFocus && returnFocus !== document.body && cells[S.focus]) {
+                            setFocus(S.focus, true);
+                        }
+                    });
+                    d.addEventListener("click", (e) => {
+                        if (e.target === d) d.close();
+                        else if (e.target.closest && e.target.closest("[data-close]")) d.close();
+                    });
+                }
+                window.addEventListener("popstate", () => {
+                    if (skipPop) {
+                        skipPop = false;
+                        return;
+                    }
+                    const name = routeName();
+                    if (PANELS[name]) openPanel(name, false);
+                    else closePanel(true);
+                });
+
+                // New field panel
+                function selectedLevel() {
+                    const checked = els.newForm.querySelector('input[name="level"]:checked');
+                    return checked ? checked.value : "easy";
+                }
+                function showCustom() {
+                    els.customFields.hidden = selectedLevel() !== "custom";
+                }
+                function checkCustom(report) {
+                    const rows = Number(els.customRows.value);
+                    const cols = Number(els.customCols.value);
+                    const mines = Number(els.customMines.value);
+                    const sideOk = (x) => Number.isInteger(x) && x >= SIDE.min && x <= SIDE.max;
+                    let error = "";
+                    let bad = null;
+                    const most = sideOk(rows) && sideOk(cols) ? rows * cols - 9 : 0;
+                    if (!sideOk(rows)) {
+                        error = "Rows must be a whole number from 5 to 50.";
+                        bad = els.customRows;
+                    } else if (!sideOk(cols)) {
+                        error = "Columns must be a whole number from 5 to 50.";
+                        bad = els.customCols;
+                    } else if (!Number.isInteger(mines) || mines < 1 || mines > most) {
+                        error = "Mines must be from 1 to " + most + " on a field of " + rows + " × " + cols + ".";
+                        bad = els.customMines;
+                    }
+                    els.customMines.max = String(most || SIDE.max * SIDE.max - 9);
+                    els.customHelp.textContent = most
+                        ? "Up to " + most + " mines fit on " + rows + " × " + cols + " squares."
+                        : "Rows and columns from 5 to 50.";
+                    for (const input of [els.customRows, els.customCols, els.customMines]) {
+                        if (report && input === bad) input.setAttribute("aria-invalid", "true");
+                        else input.removeAttribute("aria-invalid");
+                    }
+                    els.customError.hidden = !(report && error);
+                    els.customError.textContent = report ? error : "";
+                    return error ? { ok: false, bad } : { ok: true, value: { rows, cols, mines } };
+                }
+
+                const PREPARE = {
+                    new() {
+                        const radio = els.newForm.querySelector('input[name="level"][value="' + S.level + '"]');
+                        if (radio) radio.checked = true;
+                        els.customRows.value = String(S.custom.rows);
+                        els.customCols.value = String(S.custom.cols);
+                        els.customMines.value = String(S.custom.mines);
+                        els.customSummary.textContent =
+                            "Last used: " +
+                            S.custom.rows +
+                            " × " +
+                            S.custom.cols +
+                            " squares, " +
+                            minesWord(S.custom.mines);
+                        els.logicOnly.checked = S.settings.logic;
+                        els.leaveNote.hidden = !(leaving() && S.game.opened > 0);
+                        checkCustom(false);
+                        showCustom();
+                    },
+                    stats: renderStats,
+                    settings() {
+                        els.setMarks.checked = S.settings.marks;
+                        els.setChord.checked = S.settings.chord;
+                        els.setPress.value = S.settings.press;
+                        els.setTheme.value = S.settings.theme;
+                    },
+                    help() {},
+                };
+
+                els.newForm.addEventListener("change", (e) => {
+                    if (e.target.name === "level") showCustom();
+                });
+                for (const input of [els.customRows, els.customCols, els.customMines]) {
+                    input.addEventListener("input", () => checkCustom(input.getAttribute("aria-invalid") === "true"));
+                }
+                els.newForm.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const level = selectedLevel();
+                    if (level === "custom") {
+                        const res = checkCustom(true);
+                        if (!res.ok) {
+                            res.bad.focus();
+                            return;
+                        }
+                        S.custom = res.value;
+                        store.set("custom", S.custom);
+                    }
+                    S.settings.logic = els.logicOnly.checked;
+                    saveSettings();
+                    PANELS.new.close();
+                    newGame(level);
+                    say(levelName(S.game) + ", " + minesWord(S.game.mines) + ". Tap any square to start.");
+                });
+
+                // Statistics panel
+                const BUCKET_ORDER = ["easy", "medium", "hard", "custom"];
+                function renderStats() {
+                    els.resetRow.hidden = false;
+                    els.resetConfirm.hidden = true;
+                    const list = els.statList;
+                    list.textContent = "";
+                    let played = 0;
+                    let won = 0;
+                    const keysShown = [];
+                    for (const level of BUCKET_ORDER) {
+                        for (const key of [level, level + ":logic"]) {
+                            const st = S.stats[key];
+                            if (st && st.played) keysShown.push(key);
+                        }
+                    }
+                    for (const key of keysShown) {
+                        const st = S.stats[key];
+                        played += st.played;
+                        won += st.won;
+                        const [level, logic] = key.split(":");
+                        const box = el("section", "stat");
+                        const h = el("h3");
+                        h.textContent = (LEVELS[level] ? LEVELS[level].name : "Custom") + (logic ? ", logic-only" : "");
+                        box.appendChild(h);
+                        const dl = el("dl");
+                        const rows = [
+                            ["Best time", st.best != null && level !== "custom" ? fmtBest(st.best) : "–"],
+                            ["Won", st.won + " of " + st.played],
+                            ["Win rate", Math.round((100 * st.won) / st.played) + "%"],
+                            ["Streak", st.streak + " (best " + st.bestStreak + ")"],
+                        ];
+                        for (const [term, value] of rows) {
+                            const pair = el("div");
+                            const dt = el("dt");
+                            dt.textContent = term;
+                            const dd = el("dd");
+                            dd.textContent = value;
+                            pair.appendChild(dt);
+                            pair.appendChild(dd);
+                            dl.appendChild(pair);
+                        }
+                        box.appendChild(dl);
+                        list.appendChild(box);
+                    }
+                    if (!played) {
+                        els.statsTotal.textContent = "No fields played yet";
+                        const p = el("p", "hint-text");
+                        p.textContent =
+                            "Your best times, wins and streaks for each level appear here after your first finished field.";
+                        list.appendChild(p);
+                        els.resetRow.hidden = true;
+                    } else {
+                        els.statsTotal.textContent =
+                            "Won " + won + " of " + played + " fields (" + Math.round((100 * won) / played) + "%)";
+                    }
+                }
+                $("resetStats").addEventListener("click", () => {
+                    els.resetRow.hidden = true;
+                    els.resetConfirm.hidden = false;
+                    $("resetNo").focus();
+                });
+                $("resetNo").addEventListener("click", () => {
+                    els.resetConfirm.hidden = true;
+                    els.resetRow.hidden = false;
+                    $("resetStats").focus();
+                });
+                $("resetYes").addEventListener("click", () => {
+                    S.stats = {};
+                    store.set("stats", S.stats);
+                    renderStats();
+                    say("Statistics deleted.");
+                    $("statsPanel").querySelector("[data-close]").focus();
+                });
+
+                // Settings panel
+                const themeAtStart = document.documentElement.getAttribute("data-theme");
+                function applyTheme() {
+                    const root = document.documentElement;
+                    const t = S.settings.theme;
+                    if (t === "light" || t === "dark") root.setAttribute("data-theme", t);
+                    else if (themeAtStart) root.setAttribute("data-theme", themeAtStart);
+                    else root.removeAttribute("data-theme");
+                }
+                els.setMarks.addEventListener("change", () => {
+                    S.settings.marks = els.setMarks.checked;
+                    saveSettings();
+                });
+                els.setChord.addEventListener("change", () => {
+                    S.settings.chord = els.setChord.checked;
+                    saveSettings();
+                });
+                els.setPress.addEventListener("change", () => {
+                    if (els.setPress.value in PRESS) S.settings.press = els.setPress.value;
+                    saveSettings();
+                });
+                els.setTheme.addEventListener("change", () => {
+                    S.settings.theme = els.setTheme.value;
+                    saveSettings();
+                    applyTheme();
+                });
+
+                // ---- Page life ----
+                let sizing = 0;
+                const resize = () => {
+                    if (sizing) return;
+                    sizing = requestAnimationFrame(() => {
+                        sizing = 0;
+                        if (S.game) sizeBoard();
+                    });
+                };
+                if (typeof ResizeObserver === "function") new ResizeObserver(resize).observe(els.sheet);
+                else window.addEventListener("resize", resize);
+
+                function onHide() {
+                    if (!S.game) return;
+                    if (S.running) S.wasRunning = true;
+                    pauseClock();
+                    saveGame();
+                }
+                function onShow() {
+                    if (S.game && S.wasRunning) {
+                        S.wasRunning = false;
+                        resumeClock();
+                    }
+                }
+                document.addEventListener("visibilitychange", () =>
+                    document.visibilityState === "hidden" ? onHide() : onShow(),
+                );
+                window.addEventListener("pagehide", saveGame);
+
+                function openRoute(route) {
+                    const name = String(route || "")
+                        .replace(/^#\/?/, "")
+                        .toLowerCase();
+                    if (name === "sample") loadSample();
+                    else if (PANELS[name]) openPanel(name, false);
+                }
+
+                // Inside anyApp: shortcut routes and the app's pause and resume (absent in a browser, so feature-detected).
+                const anyapp = window.anyapp;
+                if (anyapp && anyapp.app) {
+                    try {
+                        if (typeof anyapp.app.on === "function") {
+                            anyapp.app.on("pause", onHide);
+                            anyapp.app.on("resume", onShow);
+                            anyapp.app.on("route", (e) => openRoute(typeof e === "string" ? e : e && e.route));
+                        }
+                        Promise.resolve(anyapp.ready)
+                            .then(() => {
+                                const launch = anyapp.app.launch;
+                                if (launch && launch.route && !routeName()) openRoute(launch.route);
+                            })
+                            .catch(() => {
+                                // Without a launch route the app opens on the field.
+                            });
+                    } catch (e) {
+                        // An older host without these events: the page events above still pause the clock.
+                    }
+                }
+
+                function boot(carried) {
+                    if (S.settings.theme !== "system") applyTheme();
+                    const route = routeName();
+                    if (route === "sample") {
+                        loadSample();
+                        return;
+                    }
+                    const restored = Core.restore(carried || store.get("game", null));
+                    if (restored && restored.status === "playing") {
+                        S.game = restored;
+                        S.level = restored.level === "custom" || restored.level in LEVELS ? restored.level : "easy";
+                        S.base = restored.elapsed;
+                        S.focus = restored.start >= 0 ? restored.start : 0;
+                        buildBoard();
+                        centreBoard();
+                        drawClock();
+                        if (restored.elapsed > 0) note("Welcome back. The clock goes on with your next move.");
+                    } else {
+                        newGame(S.level);
+                    }
+                    if (PANELS[route]) openPanel(route, false);
+                }
+
+                /* ==boot:start== */
+                boot(null);
+                /* ==boot:end== */
+            })();
+        </script>
+    </body>
+</html>

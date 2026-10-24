@@ -1,0 +1,36 @@
+{
+  "id": "samples/loan",
+  "category": "finance",
+  "replaces": "loan/EMI/mortgage calculator",
+  "title": "Loan Planner",
+  "summary": "Plan loan repayments with an exact repayment schedule, month by month.",
+  "description": "Enter the amount, the yearly interest rate, the term and the first payment date. The app works out the monthly payment, the total interest and every payment of the schedule to the cent, so you can compare offers before you sign.\n\n- **Several loans side by side:** a mortgage, a car loan, a renovation.\n- **The full schedule:** interest and principal of each payment, and the balance left.\n\n**What it never does:** no ads, no tracking and no account. Your loans stay on this phone.",
+  "license": "MIT",
+  "tags": ["loan", "mortgage", "repayment", "calculator"],
+  "screenshots": [],
+  "sampleData": {
+    "loan": [
+      {
+        "name": "Home mortgage",
+        "principal": "240000.00",
+        "rate": "3.850",
+        "months": 300,
+        "firstDue": "2026-11-01"
+      },
+      {
+        "name": "Car loan",
+        "principal": "18500.00",
+        "rate": "5.900",
+        "months": 60,
+        "firstDue": "2026-11-15"
+      },
+      {
+        "name": "Kitchen renovation",
+        "principal": "9000.00",
+        "rate": "7.250",
+        "months": 36,
+        "firstDue": "2026-12-01"
+      }
+    ]
+  }
+}

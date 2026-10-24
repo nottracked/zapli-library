@@ -1,0 +1,2214 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "library/todo",
+    "name": "To-do",
+    "version": "3.3.1",
+    "icon": "task_alt",
+    "category": "productivity",
+    "ageRating": "everyone",
+    "license": "MIT",
+    "iconData": "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"
+  },
+  "theme": {
+    "seedColor": "#3949AB",
+    "shape": "rounded"
+  },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "openTasks": {
+        "en": "{n, plural, =0 {Nothing open} one {# open task} other {# open tasks}}"
+      },
+      "overdueTasks": {
+        "en": "{n, plural, one {# overdue} other {# overdue}}"
+      },
+      "stepsDone": {
+        "en": "{done} of {total} steps"
+      },
+      "days": {
+        "en": "{n, plural, one {# day} other {# days}}"
+      },
+      "moveOverdue": {
+        "en": "{n, plural, one {Move # overdue task to today?} other {Move # overdue tasks to today?}}"
+      },
+      "clearDone": {
+        "en": "{n, plural, one {Delete # completed task for good?} other {Delete # completed tasks for good?}}"
+      },
+      "imported": {
+        "en": "{added, plural, =0 {No tasks added} one {# task added} other {# tasks added}}{lists, plural, =0 {} one {, # new list} other {, # new lists}}{skipped, plural, =0 {.} one {, # row skipped.} other {, # rows skipped.}}"
+      },
+      "exported": {
+        "en": "{n, plural, =0 {Saved an empty file.} one {# task exported.} other {# tasks exported.}}"
+      },
+      "problemLine": {
+        "en": "Line {row}: {reason}"
+      },
+      "moreProblems": {
+        "en": "{n, plural, one {…and # more row} other {…and # more rows}}"
+      },
+      "digestBody": {
+        "en": "{due, plural, =0 {Nothing due today} one {# task due today} other {# tasks due today}}{overdue, plural, =0 {} one {, # overdue} other {, # overdue}}"
+      },
+      "doneOf": {
+        "en": "{done} of {total}"
+      },
+      "leftToday": {
+        "en": "{n, plural, =0 {All done for today} one {# task still to do today} other {# tasks still to do today}}"
+      }
+    }
+  },
+  "permissions": {
+    "notify.local": {
+      "purpose": "Remind you when a task is due, with Done and Snooze buttons",
+      "maxPerDay": 20
+    },
+    "widget.home": {
+      "purpose": "Show today’s tasks on your home screen so you can tick them off there"
+    },
+    "files.io": {
+      "purpose": "Import tasks from a CSV file and export your tasks to a file you choose",
+      "modes": ["import", "export"]
+    }
+  },
+  "dataFlows": [
+    {
+      "from": [
+        "task.title",
+        "taskList.name",
+        "task.due",
+        "task.dueTime",
+        "task.priority",
+        "task.repeat",
+        "task.notes",
+        "task.done",
+        "task.doneAt"
+      ],
+      "to": "files.io",
+      "purpose": "Your tasks and lists, saved as a CSV file where you choose, as a backup or to move them"
+    }
+  ],
+  "settings": {
+    "dayReminder": {
+      "type": "boolean",
+      "label": "Remind me of tasks without a time",
+      "default": true
+    },
+    "dayReminderAt": {
+      "type": "time",
+      "label": "Time for those reminders",
+      "default": "09:00",
+      "visible": "=settings.dayReminder"
+    },
+    "digest": {
+      "type": "boolean",
+      "label": "Morning summary of today’s tasks",
+      "help": "One notification with what is due today and what is overdue, sent only when there is something.",
+      "default": false
+    },
+    "digestAt": {
+      "type": "time",
+      "label": "Summary at",
+      "default": "08:00",
+      "visible": "=settings.digest"
+    },
+    "snooze": {
+      "type": "choice",
+      "label": "Snooze for",
+      "default": "PT1H",
+      "options": [
+        {
+          "value": "PT15M",
+          "label": "15 minutes"
+        },
+        {
+          "value": "PT30M",
+          "label": "30 minutes"
+        },
+        {
+          "value": "PT1H",
+          "label": "1 hour"
+        },
+        {
+          "value": "PT3H",
+          "label": "3 hours"
+        }
+      ]
+    }
+  },
+  "entities": {
+    "taskList": {
+      "label": "List",
+      "labelPlural": "Lists",
+      "sort": ["name"],
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=t('openTasks', {'n': item.openCount})",
+        "trailing": "=item.overdueCount > 0 ? t('overdueTasks', {'n': item.overdueCount}) : ''",
+        "icon": "=item.icon",
+        "hue": "=optionHue(item.icon)",
+        "trailingTone": "=item.overdueCount > 0 ? 'danger' : null"
+      },
+      "fields": {
+        "name": {
+          "type": "text",
+          "required": true,
+          "unique": true,
+          "maxLength": 60,
+          "placeholder": "Work, Groceries, Trip"
+        },
+        "icon": {
+          "type": "choice",
+          "label": "Icon and colour",
+          "default": "list",
+          "options": [
+            {
+              "value": "list",
+              "label": "List",
+              "icon": "list",
+              "hue": "blue"
+            },
+            {
+              "value": "work",
+              "label": "Work",
+              "icon": "work",
+              "hue": "indigo"
+            },
+            {
+              "value": "home",
+              "label": "Home",
+              "icon": "home",
+              "hue": "orange"
+            },
+            {
+              "value": "shopping_cart",
+              "label": "Shopping",
+              "icon": "shopping_cart",
+              "hue": "green"
+            },
+            {
+              "value": "school",
+              "label": "School",
+              "icon": "school",
+              "hue": "teal"
+            },
+            {
+              "value": "fitness_center",
+              "label": "Fitness",
+              "icon": "fitness_center",
+              "hue": "lime"
+            },
+            {
+              "value": "family_restroom",
+              "label": "Family",
+              "icon": "family_restroom",
+              "hue": "pink"
+            },
+            {
+              "value": "flight",
+              "label": "Travel",
+              "icon": "flight",
+              "hue": "cyan"
+            },
+            {
+              "value": "lightbulb",
+              "label": "Ideas",
+              "icon": "lightbulb",
+              "hue": "amber"
+            },
+            {
+              "value": "star",
+              "label": "Important",
+              "icon": "star",
+              "hue": "red"
+            }
+          ]
+        },
+        "tasks": {
+          "type": "inverse",
+          "of": "task.list",
+          "label": "Tasks",
+          "sort": ["done", "due"]
+        },
+        "openCount": {
+          "type": "integer",
+          "label": "Open tasks",
+          "compute": "=size(item.tasks.filter(t, !t.done))"
+        },
+        "overdueCount": {
+          "type": "integer",
+          "label": "Overdue",
+          "compute": "=size(item.tasks.filter(t, !t.done && t.due < today()))"
+        }
+      }
+    },
+    "task": {
+      "label": "Task",
+      "labelPlural": "Tasks",
+      "sort": ["done", "due", "dueTime", "-rank"],
+      "display": {
+        "title": "=item.title",
+        "subtitle": "=item.summary",
+        "icon": "=item.done ? 'task_alt' : item.rank > 0 ? 'flag' : 'checklist'",
+        "tone": "=item.done ? 'success' : item.rank == 3 ? 'danger' : item.rank == 2 ? 'warning' : item.rank == 1 ? 'primary' : 'neutral'",
+        "done": "=item.done"
+      },
+      "fields": {
+        "title": {
+          "type": "text",
+          "required": true,
+          "maxLength": 200,
+          "placeholder": "What needs doing?"
+        },
+        "list": {
+          "type": "ref",
+          "to": "taskList",
+          "onDelete": "cascade",
+          "help": "Leave it empty to keep the task in your Inbox"
+        },
+        "due": {
+          "type": "date",
+          "label": "Due date"
+        },
+        "dueTime": {
+          "type": "time",
+          "label": "Time",
+          "visible": "=has(item.due)",
+          "help": "Without a time the task is due any time that day"
+        },
+        "repeat": {
+          "type": "recurrence",
+          "label": "Repeat",
+          "visible": "=has(item.due)",
+          "checks": [
+            {
+              "condition": "=!has(item.repeat) || has(item.due)",
+              "message": "Pick a due date for a repeating task."
+            }
+          ]
+        },
+        "priority": {
+          "type": "choice",
+          "default": "none",
+          "options": [
+            {
+              "value": "high",
+              "label": "High",
+              "icon": "flag",
+              "tone": "danger"
+            },
+            {
+              "value": "medium",
+              "label": "Medium",
+              "icon": "flag",
+              "tone": "warning"
+            },
+            {
+              "value": "low",
+              "label": "Low",
+              "icon": "flag",
+              "tone": "primary"
+            },
+            {
+              "value": "none",
+              "label": "None",
+              "icon": "flag",
+              "tone": "neutral"
+            }
+          ]
+        },
+        "remind": {
+          "type": "boolean",
+          "label": "Remind me",
+          "default": true,
+          "visible": "=has(item.due)",
+          "help": "At the due time, or at your daily reminder time when the task has no time"
+        },
+        "notes": {
+          "type": "longText",
+          "maxLength": 5000,
+          "placeholder": "Details, addresses, what to bring"
+        },
+        "done": {
+          "type": "boolean",
+          "label": "Done",
+          "default": false,
+          "visible": "=item.done"
+        },
+        "doneAt": {
+          "type": "datetime",
+          "label": "Completed",
+          "editable": false,
+          "visible": "=item.done"
+        },
+        "lastDone": {
+          "type": "date",
+          "label": "Last completed",
+          "editable": false,
+          "visible": "=has(item.repeat) && has(item.lastDone)"
+        },
+        "snoozedUntil": {
+          "type": "datetime",
+          "label": "Snoozed until",
+          "editable": false,
+          "visible": "=!item.done && item.snoozedUntil > now()"
+        },
+        "steps": {
+          "type": "inverse",
+          "of": "step.task",
+          "label": "Steps",
+          "sort": ["createdAt"]
+        },
+        "stepsDone": {
+          "type": "integer",
+          "label": "Steps done",
+          "visible": false,
+          "compute": "=size(item.steps.filter(s, s.done))"
+        },
+        "rank": {
+          "type": "integer",
+          "visible": false,
+          "stored": true,
+          "compute": "=item.priority == 'high' ? 3 : item.priority == 'medium' ? 2 : item.priority == 'low' ? 1 : 0"
+        },
+        "bucket": {
+          "type": "choice",
+          "label": "When",
+          "visible": false,
+          "options": [
+            {
+              "value": "overdue",
+              "label": "Overdue",
+              "tone": "danger"
+            },
+            {
+              "value": "today",
+              "label": "Today",
+              "tone": "primary"
+            },
+            {
+              "value": "later",
+              "label": "Later"
+            },
+            {
+              "value": "someday",
+              "label": "No date"
+            },
+            {
+              "value": "doneToday",
+              "label": "Done today",
+              "tone": "success"
+            },
+            {
+              "value": "done",
+              "label": "Done",
+              "tone": "success"
+            }
+          ],
+          "compute": "=item.done ? (date(item.doneAt) == today() ? 'doneToday' : 'done') : !has(item.due) ? 'someday' : item.due < today() ? 'overdue' : item.due == today() ? 'today' : 'later'"
+        },
+        "dueLabel": {
+          "type": "text",
+          "label": "Due",
+          "visible": false,
+          "compute": "=!has(item.due) ? '' : coalesce(item.due == today() ? 'Today' : item.due == addDays(today(), 1) ? 'Tomorrow' : item.due == addDays(today(), -1) ? 'Yesterday' : formatDate(item.due, 'MMMEd'), '') + (has(item.dueTime) ? ', ' + coalesce(formatDate(item.dueTime, 'jm'), '') : '')"
+        },
+        "summary": {
+          "type": "text",
+          "label": "Summary",
+          "visible": false,
+          "compute": "=join([item.dueLabel, has(item.repeat) ? formatRecurrence(item.repeat) : '', coalesce(item.list.name, 'Inbox'), size(item.steps) > 0 ? t('stepsDone', {'done': item.stepsDone, 'total': size(item.steps)}) : ''].filter(s, s != ''), ' · ')"
+        },
+        "importAllDay": {
+          "type": "text",
+          "label": "Imported all-day flag",
+          "maxLength": 500,
+          "editable": false,
+          "visible": false
+        },
+        "importRepeat": {
+          "type": "text",
+          "label": "Imported repeat rule",
+          "maxLength": 500,
+          "editable": false,
+          "visible": false
+        },
+        "importDueAt": {
+          "type": "datetime",
+          "label": "Imported due date and time",
+          "editable": false,
+          "visible": false
+        },
+        "impDay": {
+          "type": "date",
+          "label": "Imported due date (local)",
+          "visible": false,
+          "compute": "=has(item.importDueAt) ? date(item.importDueAt) : null"
+        },
+        "impClock": {
+          "type": "time",
+          "label": "Imported time",
+          "visible": false,
+          "compute": "=has(item.importDueAt) && !(lower(trim(coalesce(item.importAllDay, ''))) in ['true', 'yes', 'y', '1']) && time(item.importDueAt) != time('00:00') ? time(item.importDueAt) : null"
+        },
+        "impRuleText": {
+          "type": "text",
+          "label": "Imported repeat rule (raw)",
+          "visible": false,
+          "compute": "=upper(trim(replace(upper(coalesce(item.importRepeat, '')), 'RRULE:', '')))"
+        },
+        "impRule": {
+          "type": "text",
+          "label": "Imported repeat rule",
+          "visible": false,
+          "compute": "=!(item.impRuleText.matches(r'^FREQ=(DAILY|WEEKLY|MONTHLY|YEARLY)(;(INTERVAL|COUNT|UNTIL|BYDAY|BYMONTHDAY|BYMONTH|WKST|DTSTART)=[A-Z0-9,+-]+)*$') && !item.impRuleText.matches(r'INTERVAL=0+(;|$)') && !(contains(item.impRuleText, 'COUNT=') && contains(item.impRuleText, 'UNTIL=')) && !(!contains(item.impRuleText, 'FREQ=MONTHLY') && !contains(item.impRuleText, 'FREQ=YEARLY') && item.impRuleText.matches(r'BYDAY=[^;]*[0-9]')) && !(contains(item.impRuleText, 'FREQ=WEEKLY') && contains(item.impRuleText, 'BYMONTHDAY'))) ? '' : contains(item.impRuleText, 'DTSTART=') ? item.impRuleText : item.impRuleText + ';DTSTART=' + replace(string(coalesce(item.impDay, today())), '-', '')"
+        },
+        "impDue": {
+          "type": "date",
+          "label": "Imported due date (final)",
+          "visible": false,
+          "compute": "=has(item.impDay) ? item.impDay : item.impRule != '' ? (occursOn(item.impRule, today()) ? today() : nextOccurrence(item.impRule, today())) : null"
+        },
+        "impLeftover": {
+          "type": "text",
+          "label": "Imported date that could not be read",
+          "visible": false,
+          "compute": "=item.impRule == '' && !has(item.impDay) && trim(coalesce(item.importRepeat, '')) != '' ? trim(coalesce(item.importRepeat, '')) : ''"
+        }
+      }
+    },
+    "step": {
+      "label": "Step",
+      "labelPlural": "Steps",
+      "display": {
+        "title": "=item.title",
+        "icon": "=item.done ? 'check_circle' : 'checklist'"
+      },
+      "fields": {
+        "task": {
+          "type": "ref",
+          "to": "task",
+          "required": true,
+          "onDelete": "cascade"
+        },
+        "title": {
+          "type": "text",
+          "required": true,
+          "maxLength": 200
+        },
+        "done": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "completion": {
+      "label": "Completed task",
+      "labelPlural": "Completed tasks",
+      "sort": ["-at"],
+      "display": {
+        "title": "=item.title",
+        "subtitle": "=formatDate(item.at, 'yMMMEdjm')",
+        "icon": "task_alt"
+      },
+      "fields": {
+        "task": {
+          "type": "ref",
+          "to": "task",
+          "onDelete": "setNull",
+          "editable": false
+        },
+        "title": {
+          "type": "text",
+          "required": true,
+          "maxLength": 200,
+          "editable": false
+        },
+        "date": {
+          "type": "date",
+          "required": true,
+          "default": "=today()",
+          "editable": false
+        },
+        "at": {
+          "type": "datetime",
+          "required": true,
+          "default": "=now()",
+          "editable": false
+        }
+      }
+    }
+  },
+  "queries": {
+    "today": {
+      "entity": "task",
+      "where": "=(!item.done && item.due <= today()) || (item.done && date(item.doneAt) == today())",
+      "sort": ["done", "due", "dueTime", "-rank"],
+      "limit": 500
+    },
+    "overdue": {
+      "entity": "task",
+      "where": "=!item.done && item.due < today()",
+      "sort": ["due"],
+      "limit": 1000
+    },
+    "dueToday": {
+      "entity": "task",
+      "where": "=!item.done && item.due == today()",
+      "limit": 1000
+    },
+    "upcoming": {
+      "entity": "task",
+      "where": "=!item.done && item.due > today()",
+      "sort": ["due", "dueTime", "-rank"],
+      "limit": 500
+    },
+    "inbox": {
+      "entity": "task",
+      "where": "=!item.done && !has(item.list)",
+      "sort": ["due", "dueTime", "-rank", "createdAt"],
+      "limit": 500
+    },
+    "byList": {
+      "entity": "task",
+      "args": {
+        "list": {
+          "type": "ref",
+          "to": "taskList"
+        }
+      },
+      "where": "=!item.done && item.list == args.list",
+      "sort": ["due", "dueTime", "-rank", "createdAt"],
+      "limit": 500
+    },
+    "openTasks": {
+      "entity": "task",
+      "where": "=!item.done",
+      "sort": ["due", "dueTime", "-rank", "createdAt"],
+      "limit": 1000
+    },
+    "lists": {
+      "entity": "taskList",
+      "sort": ["name"]
+    },
+    "completed": {
+      "entity": "task",
+      "where": "=item.done",
+      "sort": ["-doneAt"],
+      "limit": 500
+    },
+    "stepsOf": {
+      "entity": "step",
+      "args": {
+        "task": {
+          "type": "ref",
+          "to": "task"
+        }
+      },
+      "where": "=item.task == args.task",
+      "limit": 200
+    },
+    "allTasks": {
+      "entity": "task",
+      "sort": ["done", "due", "title"],
+      "limit": 2000
+    },
+    "doneTodayCount": {
+      "entity": "completion",
+      "where": "=item.date == today()",
+      "aggregate": {
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "doneWeekCount": {
+      "entity": "completion",
+      "where": "=item.date >= startOf(today(), 'week')",
+      "aggregate": {
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "doneThisWeek": {
+      "entity": "completion",
+      "where": "=item.date > addDays(today(), -7)",
+      "sort": ["at"],
+      "limit": 500
+    },
+    "last14": {
+      "entity": "completion",
+      "where": "=item.date > addDays(today(), -14)",
+      "fill": true,
+      "groupBy": {
+        "field": "date",
+        "period": "day"
+      },
+      "aggregate": {
+        "done": {
+          "fn": "count"
+        }
+      }
+    },
+    "doneDays": {
+      "entity": "completion",
+      "where": "=item.date > addDays(today(), -400)",
+      "groupBy": {
+        "field": "date",
+        "period": "day"
+      },
+      "aggregate": {
+        "done": {
+          "fn": "count"
+        }
+      },
+      "limit": 400
+    },
+    "importPending": {
+      "entity": "task",
+      "where": "=has(item.importRepeat) || has(item.importDueAt) || has(item.importAllDay)",
+      "sort": ["createdAt"],
+      "limit": 1000
+    }
+  },
+  "navigation": {
+    "start": "today",
+    "tabs": [
+      {
+        "screen": "today",
+        "label": "Today",
+        "icon": "today",
+        "badge": "=size(q.overdue) + size(q.dueToday)"
+      },
+      {
+        "screen": "upcoming",
+        "label": "Upcoming",
+        "icon": "calendar_month"
+      },
+      {
+        "screen": "inbox",
+        "label": "Inbox",
+        "icon": "inbox"
+      },
+      {
+        "screen": "lists",
+        "label": "Lists",
+        "icon": "list"
+      }
+    ],
+    "menu": ["calendar", "allTasks", "completed", "progress"]
+  },
+  "screens": {
+    "today": {
+      "type": "list",
+      "title": "Today",
+      "query": "today",
+      "item": "todayRow",
+      "sectionBy": "bucket",
+      "add": false,
+      "toolbar": ["addTodayBtn", "rescheduleBtn"],
+      "empty": {
+        "title": "All done for today",
+        "body": "Nothing is due or overdue. Tap + to add a task for today, or plan ahead under Upcoming.",
+        "icon": "celebration"
+      }
+    },
+    "upcoming": {
+      "type": "list",
+      "title": "Upcoming",
+      "query": "upcoming",
+      "item": "upcomingRow",
+      "sectionBy": "due",
+      "add": "quickAdd",
+      "empty": {
+        "title": "Nothing planned",
+        "body": "Give a task a due date and it shows up here, grouped by day.",
+        "icon": "event_available"
+      }
+    },
+    "inbox": {
+      "type": "list",
+      "title": "Inbox",
+      "query": "inbox",
+      "item": "inboxRow",
+      "search": ["title", "notes"],
+      "add": "quickAdd",
+      "empty": {
+        "title": "Inbox is empty",
+        "body": "Jot down anything here, then give it a date or move it to a list.",
+        "icon": "inbox"
+      }
+    },
+    "lists": {
+      "type": "list",
+      "title": "Lists",
+      "query": "lists",
+      "onTap": {
+        "event": {
+          "name": "openList",
+          "context": {
+            "list": "=item.id"
+          }
+        }
+      },
+      "toolbar": ["importBtn", "exportBtn", "finishImportBtn"],
+      "empty": {
+        "title": "No lists yet",
+        "body": "Make a list for work, home, shopping or a trip.",
+        "icon": "list"
+      }
+    },
+    "listTasks": {
+      "type": "list",
+      "title": "=coalesce(params.list.name, 'List')",
+      "params": {
+        "list": {
+          "type": "ref",
+          "to": "taskList",
+          "required": true
+        }
+      },
+      "queries": {
+        "tasks": {
+          "query": "byList",
+          "args": {
+            "list": "=params.list"
+          }
+        }
+      },
+      "query": "tasks",
+      "item": "listRow",
+      "add": false,
+      "toolbar": ["addInListBtn", "listInfoBtn"],
+      "empty": {
+        "title": "Nothing open in this list",
+        "body": "Add a task, or give one a due date to see it under Today and Upcoming too.",
+        "icon": "task_alt"
+      }
+    },
+    "quickAdd": {
+      "type": "form",
+      "title": "New task",
+      "entity": "task",
+      "present": "sheet",
+      "fields": ["title", "due", "dueTime", "priority", "list", "repeat"]
+    },
+    "taskDetail": {
+      "type": "detail",
+      "title": "Task",
+      "entity": "task",
+      "state": {
+        "newStep": {
+          "type": "text",
+          "default": ""
+        }
+      },
+      "header": "taskTitle",
+      "show": [
+        "list",
+        "due",
+        "dueTime",
+        "repeat",
+        "priority",
+        "remind",
+        "notes",
+        "done",
+        "doneAt",
+        "lastDone",
+        "snoozedUntil"
+      ],
+      "footer": "detailFooter"
+    },
+    "calendar": {
+      "type": "calendar",
+      "title": "Calendar",
+      "query": "openTasks",
+      "date": "due",
+      "item": "calMark"
+    },
+    "allTasks": {
+      "type": "list",
+      "title": "All open tasks",
+      "query": "openTasks",
+      "search": ["title", "notes"],
+      "sectionBy": "list",
+      "add": "quickAdd",
+      "empty": {
+        "title": "Nothing open",
+        "body": "Every task you add, in any list, shows up here until it is done.",
+        "icon": "task_alt"
+      }
+    },
+    "completed": {
+      "type": "list",
+      "title": "Completed",
+      "query": "completed",
+      "item": "doneRow",
+      "search": ["title", "notes"],
+      "add": false,
+      "toolbar": ["clearDoneBtn"],
+      "empty": {
+        "title": "No completed tasks",
+        "body": "Ticked-off tasks rest here, so you can bring one back if you need it.",
+        "icon": "task_alt"
+      }
+    },
+    "progress": {
+      "type": "dashboard",
+      "title": "Progress",
+      "root": "progressCol"
+    },
+    "importReport": {
+      "type": "custom",
+      "title": "Import finished",
+      "present": "dialog",
+      "params": {
+        "summary": {
+          "type": "text",
+          "maxLength": 300
+        },
+        "lines": {
+          "type": "longText",
+          "maxLength": 5000
+        }
+      },
+      "root": "irCol"
+    }
+  },
+  "components": {
+    "addTodayBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Add a task for today",
+      "iconOnly": true,
+      "action": {
+        "event": {
+          "name": "addToday"
+        }
+      }
+    },
+    "rescheduleBtn": {
+      "component": "Button",
+      "icon": "edit_calendar",
+      "label": "Move overdue tasks to today",
+      "iconOnly": true,
+      "visible": "=size(q.overdue) > 0",
+      "action": {
+        "event": {
+          "name": "rescheduleOverdue"
+        }
+      }
+    },
+    "importBtn": {
+      "component": "Button",
+      "icon": "upload",
+      "label": "Import tasks from CSV",
+      "iconOnly": true,
+      "action": {
+        "event": {
+          "name": "importTasks"
+        }
+      }
+    },
+    "exportBtn": {
+      "component": "Button",
+      "icon": "download",
+      "label": "Export tasks as CSV",
+      "iconOnly": true,
+      "action": {
+        "event": {
+          "name": "exportTasks"
+        }
+      }
+    },
+    "addInListBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Add task",
+      "action": {
+        "event": {
+          "name": "addToList",
+          "context": {
+            "list": "=params.list"
+          }
+        }
+      },
+      "variant": "primary"
+    },
+    "listInfoBtn": {
+      "component": "Button",
+      "icon": "edit",
+      "label": "Edit list",
+      "action": {
+        "event": {
+          "name": "openListInfo",
+          "context": {
+            "list": "=params.list"
+          }
+        }
+      }
+    },
+    "clearDoneBtn": {
+      "component": "Button",
+      "icon": "delete_sweep",
+      "label": "Delete all completed tasks",
+      "iconOnly": true,
+      "visible": "=size(q.completed) > 0",
+      "action": {
+        "event": {
+          "name": "clearCompleted"
+        }
+      }
+    },
+    "todayRow": {
+      "component": "Column",
+      "children": ["todayLine", "todayRule"]
+    },
+    "todayLine": {
+      "component": "Row",
+      "align": "center",
+      "children": ["todayCheck", "todayMain", "todayFlag"]
+    },
+    "todayRule": {
+      "component": "Divider"
+    },
+    "todayMain": {
+      "component": "Column",
+      "justify": "spaceBetween",
+      "weight": 1,
+      "children": ["todayTitle", "todaySub"]
+    },
+    "todayTitle": {
+      "component": "Text",
+      "text": "=item.title",
+      "strike": "=item.done"
+    },
+    "todayCheck": {
+      "component": "CheckBox",
+      "label": "=item.title",
+      "labelHidden": true,
+      "value": "=item.done",
+      "action": {
+        "event": {
+          "name": "setDone",
+          "context": {
+            "task": "=item.id",
+            "done": "=!item.done"
+          }
+        }
+      }
+    },
+    "todaySub": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=item.summary",
+      "visible": "=item.summary != ''",
+      "tone": "=!item.done && has(item.due) && item.due < today() ? 'danger' : 'neutral'"
+    },
+    "todayFlag": {
+      "component": "Icon",
+      "name": "flag",
+      "tone": "=item.rank == 3 ? 'danger' : item.rank == 2 ? 'warning' : 'primary'",
+      "visible": "=item.rank > 0 && !item.done",
+      "accessibility": {
+        "label": "=item.rank == 3 ? 'High priority' : item.rank == 2 ? 'Medium priority' : 'Low priority'"
+      }
+    },
+    "upcomingRow": {
+      "component": "Column",
+      "children": ["upLine", "upRule"]
+    },
+    "upLine": {
+      "component": "Row",
+      "align": "center",
+      "children": ["upCheck", "upMain", "upFlag"]
+    },
+    "upRule": {
+      "component": "Divider"
+    },
+    "upMain": {
+      "component": "Column",
+      "justify": "spaceBetween",
+      "weight": 1,
+      "children": ["upTitle", "upSub"]
+    },
+    "upTitle": {
+      "component": "Text",
+      "text": "=item.title"
+    },
+    "upCheck": {
+      "component": "CheckBox",
+      "label": "=item.title",
+      "labelHidden": true,
+      "value": "=item.done",
+      "action": {
+        "event": {
+          "name": "setDone",
+          "context": {
+            "task": "=item.id",
+            "done": "=!item.done"
+          }
+        }
+      }
+    },
+    "upSub": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=item.summary",
+      "visible": "=item.summary != ''"
+    },
+    "upFlag": {
+      "component": "Icon",
+      "name": "flag",
+      "tone": "=item.rank == 3 ? 'danger' : item.rank == 2 ? 'warning' : 'primary'",
+      "visible": "=item.rank > 0",
+      "accessibility": {
+        "label": "=item.rank == 3 ? 'High priority' : item.rank == 2 ? 'Medium priority' : 'Low priority'"
+      }
+    },
+    "inboxRow": {
+      "component": "Column",
+      "children": ["inLine", "inRule"]
+    },
+    "inLine": {
+      "component": "Row",
+      "align": "center",
+      "children": ["inCheck", "inMain", "inFlag"]
+    },
+    "inRule": {
+      "component": "Divider"
+    },
+    "inMain": {
+      "component": "Column",
+      "justify": "spaceBetween",
+      "weight": 1,
+      "children": ["inTitle", "inSub"]
+    },
+    "inTitle": {
+      "component": "Text",
+      "text": "=item.title"
+    },
+    "inCheck": {
+      "component": "CheckBox",
+      "label": "=item.title",
+      "labelHidden": true,
+      "value": "=item.done",
+      "action": {
+        "event": {
+          "name": "setDone",
+          "context": {
+            "task": "=item.id",
+            "done": "=!item.done"
+          }
+        }
+      }
+    },
+    "inSub": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=join([item.dueLabel, has(item.repeat) ? formatRecurrence(item.repeat) : ''].filter(s, s != ''), ' · ')",
+      "visible": "=has(item.due)",
+      "tone": "=!item.done && has(item.due) && item.due < today() ? 'danger' : 'neutral'"
+    },
+    "inFlag": {
+      "component": "Icon",
+      "name": "flag",
+      "tone": "=item.rank == 3 ? 'danger' : item.rank == 2 ? 'warning' : 'primary'",
+      "visible": "=item.rank > 0",
+      "accessibility": {
+        "label": "=item.rank == 3 ? 'High priority' : item.rank == 2 ? 'Medium priority' : 'Low priority'"
+      }
+    },
+    "listRow": {
+      "component": "Column",
+      "children": ["lsLine", "lsRule"]
+    },
+    "lsLine": {
+      "component": "Row",
+      "align": "center",
+      "children": ["lsCheck", "lsMain", "lsFlag"]
+    },
+    "lsRule": {
+      "component": "Divider"
+    },
+    "lsMain": {
+      "component": "Column",
+      "justify": "spaceBetween",
+      "weight": 1,
+      "children": ["lsTitle", "lsSub"]
+    },
+    "lsTitle": {
+      "component": "Text",
+      "text": "=item.title"
+    },
+    "lsCheck": {
+      "component": "CheckBox",
+      "label": "=item.title",
+      "labelHidden": true,
+      "value": "=item.done",
+      "action": {
+        "event": {
+          "name": "setDone",
+          "context": {
+            "task": "=item.id",
+            "done": "=!item.done"
+          }
+        }
+      }
+    },
+    "lsSub": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=join([item.dueLabel, has(item.repeat) ? formatRecurrence(item.repeat) : ''].filter(s, s != ''), ' · ')",
+      "visible": "=has(item.due)",
+      "tone": "=item.due < today() ? 'danger' : 'neutral'"
+    },
+    "lsFlag": {
+      "component": "Icon",
+      "name": "flag",
+      "tone": "=item.rank == 3 ? 'danger' : item.rank == 2 ? 'warning' : 'primary'",
+      "visible": "=item.rank > 0",
+      "accessibility": {
+        "label": "=item.rank == 3 ? 'High priority' : item.rank == 2 ? 'Medium priority' : 'Low priority'"
+      }
+    },
+    "doneRow": {
+      "component": "Column",
+      "children": ["doneLine", "doneRule"]
+    },
+    "doneLine": {
+      "component": "Row",
+      "align": "center",
+      "children": ["doneCheck", "doneMain"]
+    },
+    "doneRule": {
+      "component": "Divider"
+    },
+    "doneMain": {
+      "component": "Column",
+      "justify": "spaceBetween",
+      "weight": 1,
+      "children": ["doneTitle", "doneSub"]
+    },
+    "doneTitle": {
+      "component": "Text",
+      "text": "=item.title",
+      "strike": "=item.done"
+    },
+    "doneCheck": {
+      "component": "CheckBox",
+      "label": "=item.title",
+      "labelHidden": true,
+      "value": "=item.done",
+      "action": {
+        "event": {
+          "name": "setDone",
+          "context": {
+            "task": "=item.id",
+            "done": "=!item.done"
+          }
+        }
+      }
+    },
+    "doneSub": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "='Done ' + coalesce(formatDate(item.doneAt, 'MMMEd'), '') + ' · ' + coalesce(item.list.name, 'Inbox')"
+    },
+    "calMark": {
+      "component": "Badge",
+      "text": "=item.title",
+      "icon": "=has(item.repeat) ? 'repeat' : 'checklist'",
+      "tone": "=item.due < today() ? 'danger' : item.rank == 3 ? 'warning' : 'neutral'"
+    },
+    "taskTitle": {
+      "component": "Text",
+      "variant": "h3",
+      "text": "=record.title",
+      "strike": "=record.done"
+    },
+    "detailFooter": {
+      "component": "Column",
+      "children": ["stepsSection", "detailActions"]
+    },
+    "stepsSection": {
+      "component": "Section",
+      "title": "=size(record.steps) > 0 ? t('stepsDone', {'done': record.stepsDone, 'total': size(record.steps)}) : 'Steps'",
+      "children": ["stepList", "addStepRow"]
+    },
+    "stepList": {
+      "component": "List",
+      "children": {
+        "path": "/record/steps",
+        "componentId": "stepRow"
+      }
+    },
+    "stepRow": {
+      "component": "Row",
+      "align": "center",
+      "children": ["stepCheck", "stepRemove"]
+    },
+    "stepCheck": {
+      "component": "CheckBox",
+      "label": "=item.title",
+      "value": "=item.done",
+      "weight": 1,
+      "action": {
+        "event": {
+          "name": "setStepDone",
+          "context": {
+            "step": "=item.id",
+            "done": "=!item.done"
+          }
+        }
+      }
+    },
+    "stepRemove": {
+      "component": "Button",
+      "icon": "close",
+      "label": "Remove step",
+      "iconOnly": true,
+      "variant": "borderless",
+      "action": {
+        "event": {
+          "name": "removeStep",
+          "context": {
+            "step": "=item.id"
+          }
+        }
+      }
+    },
+    "addStepRow": {
+      "component": "Row",
+      "align": "center",
+      "children": ["newStepField", "addStepBtn"]
+    },
+    "newStepField": {
+      "component": "TextField",
+      "label": "Add a step",
+      "bind": "/state/newStep",
+      "weight": 1
+    },
+    "addStepBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Add step",
+      "iconOnly": true,
+      "checks": [
+        {
+          "condition": "=trim(state.newStep) != ''",
+          "message": "Type the step first."
+        }
+      ],
+      "action": {
+        "event": {
+          "name": "addStep",
+          "context": {
+            "task": "=record.id",
+            "title": "=state.newStep"
+          }
+        }
+      }
+    },
+    "detailActions": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["markDoneBtn", "restoreBtn", "skipBtn", "tomorrowBtn"]
+    },
+    "markDoneBtn": {
+      "component": "Button",
+      "icon": "check",
+      "label": "=has(record.repeat) ? 'Done for now' : 'Mark as done'",
+      "variant": "primary",
+      "visible": "=!record.done",
+      "action": {
+        "event": {
+          "name": "setDone",
+          "context": {
+            "task": "=record.id",
+            "done": true
+          }
+        }
+      }
+    },
+    "restoreBtn": {
+      "component": "Button",
+      "icon": "refresh",
+      "label": "Restore",
+      "visible": "=record.done",
+      "action": {
+        "event": {
+          "name": "setDone",
+          "context": {
+            "task": "=record.id",
+            "done": false
+          }
+        }
+      }
+    },
+    "skipBtn": {
+      "component": "Button",
+      "icon": "update",
+      "label": "Skip this time",
+      "visible": "=!record.done && has(record.repeat)",
+      "action": {
+        "event": {
+          "name": "skipOccurrence",
+          "context": {
+            "task": "=record.id"
+          }
+        }
+      }
+    },
+    "tomorrowBtn": {
+      "component": "Button",
+      "icon": "event",
+      "label": "Tomorrow",
+      "visible": "=!record.done && !has(record.repeat)",
+      "action": {
+        "event": {
+          "name": "moveToTomorrow",
+          "context": {
+            "task": "=record.id"
+          }
+        }
+      }
+    },
+    "progressCol": {
+      "component": "Column",
+      "children": ["todayCard", "weekSection", "openStats", "progressChart", "progressNote"]
+    },
+    "todayCard": {
+      "component": "Card",
+      "variant": "hero",
+      "child": "todayCardCol"
+    },
+    "todayCardCol": {
+      "component": "Column",
+      "align": "center",
+      "children": ["todayRing", "todayLeft"]
+    },
+    "todayRing": {
+      "component": "Progress",
+      "variant": "ring",
+      "size": "large",
+      "value": "=(coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday))) == 0 ? 1 : coalesce(q.doneTodayCount.n, 0)",
+      "max": "=(coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday))) == 0 ? 1 : (coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday)))",
+      "text": "=(coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday))) == 0 ? '0' : t('doneOf', {'done': coalesce(q.doneTodayCount.n, 0), 'total': (coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday)))})",
+      "caption": "done today",
+      "tone": "=(size(q.overdue) + size(q.dueToday)) == 0 ? 'success' : 'primary'",
+      "accessibility": {
+        "label": "Today’s tasks done"
+      }
+    },
+    "todayLeft": {
+      "component": "Text",
+      "text": "=(coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday))) == 0 ? 'Nothing due today' : t('leftToday', {'n': (size(q.overdue) + size(q.dueToday))})"
+    },
+    "weekSection": { "component": "Section", "title": "This week", "children": ["weekStrip", "progressStats"] },
+    "weekStrip": { "component": "Calendar", "variant": "week", "query": "doneThisWeek", "date": "date" },
+    "progressStats": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["doneWeekStat", "streakStat"]
+    },
+    "doneWeekStat": {
+      "component": "Stat",
+      "label": "Tasks done",
+      "value": "=q.doneWeekCount.n"
+    },
+    "streakStat": {
+      "component": "Stat",
+      "label": "Streak",
+      "icon": "local_fire_department",
+      "value": "=t('days', {'n': streak(q.doneDays.map(d, d.key), 'FREQ=DAILY', today())})",
+      "caption": "Days in a row with a task done"
+    },
+    "openStats": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["overdueStat", "upcomingStat"]
+    },
+    "overdueStat": {
+      "component": "Stat",
+      "label": "Overdue",
+      "value": "=size(q.overdue)",
+      "tone": "=size(q.overdue) > 0 ? 'danger' : 'neutral'"
+    },
+    "upcomingStat": {
+      "component": "Stat",
+      "label": "Planned",
+      "value": "=size(q.upcoming)"
+    },
+    "progressChart": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Tasks done, last 14 days",
+      "query": "last14",
+      "x": "key",
+      "y": ["done"]
+    },
+    "progressNote": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "Every completion counts, including each round of a repeating task. Deleting completed tasks keeps these numbers."
+    },
+    "finishImportBtn": {
+      "component": "Button",
+      "icon": "playlist_add",
+      "label": "Finish importing tasks",
+      "iconOnly": true,
+      "visible": "=size(q.importPending) > 0",
+      "action": {
+        "event": {
+          "name": "finishImport"
+        }
+      }
+    },
+    "irCol": {
+      "component": "Column",
+      "children": ["irSummary", "irIntro", "irLines", "irOk"]
+    },
+    "irSummary": {
+      "component": "Text",
+      "variant": "h5",
+      "text": "=params.summary"
+    },
+    "irIntro": {
+      "component": "Text",
+      "text": "These rows were left out, with the reason for each:"
+    },
+    "irLines": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=params.lines"
+    },
+    "irOk": {
+      "component": "Button",
+      "label": "OK",
+      "variant": "primary",
+      "action": {
+        "event": {
+          "name": "closeReport"
+        }
+      }
+    }
+  },
+  "actions": {
+    "setDone": {
+      "args": {
+        "task": {
+          "type": "ref",
+          "to": "task"
+        },
+        "done": {
+          "type": "boolean"
+        }
+      },
+      "steps": [
+        {
+          "type": "createRecord",
+          "entity": "completion",
+          "when": "=args.done && !args.task.done",
+          "values": {
+            "task": "=args.task",
+            "title": "=args.task.title"
+          }
+        },
+        {
+          "type": "deleteRecords",
+          "entity": "completion",
+          "when": "=!args.done",
+          "where": "=item.task == args.task && item.date == today()"
+        },
+        {
+          "type": "updateRecord",
+          "record": "=args.task",
+          "when": "=!args.done || !has(args.task.repeat) || nextOccurrence(args.task.repeat, max(args.task.due, today())) == null",
+          "set": {
+            "done": "=args.done",
+            "doneAt": "=args.done ? now() : null",
+            "snoozedUntil": null
+          }
+        },
+        {
+          "type": "updateRecord",
+          "record": "=args.task",
+          "when": "=args.done && !args.task.done && has(args.task.repeat) && nextOccurrence(args.task.repeat, max(args.task.due, today())) != null",
+          "set": {
+            "due": "=nextOccurrence(args.task.repeat, max(args.task.due, today()))",
+            "lastDone": "=today()",
+            "snoozedUntil": null
+          }
+        },
+        {
+          "type": "forEach",
+          "when": "=args.done && has(args.task.repeat) && !args.task.done",
+          "query": "stepsOf",
+          "queryArgs": {
+            "task": "=args.task"
+          },
+          "do": "setStepDone",
+          "args": {
+            "step": "=item.id",
+            "done": false
+          }
+        }
+      ]
+    },
+    "completeFromReminder": {
+      "args": {
+        "task": {
+          "type": "ref",
+          "to": "task"
+        }
+      },
+      "steps": [
+        {
+          "type": "runAction",
+          "action": "setDone",
+          "args": {
+            "task": "=args.task",
+            "done": true
+          }
+        }
+      ]
+    },
+    "skipOccurrence": {
+      "args": {
+        "task": {
+          "type": "ref",
+          "to": "task"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.task",
+          "when": "=has(args.task.repeat) && nextOccurrence(args.task.repeat, max(args.task.due, today())) != null",
+          "set": {
+            "due": "=nextOccurrence(args.task.repeat, max(args.task.due, today()))",
+            "snoozedUntil": null
+          }
+        },
+        {
+          "type": "toast",
+          "text": "Skipped. See you next time."
+        }
+      ]
+    },
+    "snoozeTask": {
+      "args": {
+        "task": {
+          "type": "ref",
+          "to": "task"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.task",
+          "set": {
+            "snoozedUntil": "=now() + duration(settings.snooze)"
+          }
+        }
+      ]
+    },
+    "moveToTomorrow": {
+      "args": {
+        "task": {
+          "type": "ref",
+          "to": "task"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.task",
+          "set": {
+            "due": "=addDays(today(), 1)",
+            "snoozedUntil": null
+          }
+        }
+      ]
+    },
+    "moveToToday": {
+      "args": {
+        "task": {
+          "type": "ref",
+          "to": "task"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.task",
+          "set": {
+            "due": "=today()",
+            "snoozedUntil": null
+          }
+        }
+      ]
+    },
+    "rescheduleOverdue": {
+      "steps": [
+        {
+          "type": "confirm",
+          "title": "=t('moveOverdue', {'n': size(q.overdue)})",
+          "body": "Their time of day stays as it is.",
+          "confirmLabel": "Move to today"
+        },
+        {
+          "type": "forEach",
+          "query": "overdue",
+          "do": "moveToToday",
+          "args": {
+            "task": "=item.id"
+          }
+        },
+        {
+          "type": "toast",
+          "text": "Moved to today."
+        }
+      ]
+    },
+    "setStepDone": {
+      "args": {
+        "step": {
+          "type": "ref",
+          "to": "step"
+        },
+        "done": {
+          "type": "boolean"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.step",
+          "set": {
+            "done": "=args.done"
+          }
+        }
+      ]
+    },
+    "addStep": {
+      "args": {
+        "task": {
+          "type": "ref",
+          "to": "task"
+        },
+        "title": {
+          "type": "text"
+        }
+      },
+      "steps": [
+        {
+          "type": "createRecord",
+          "entity": "step",
+          "when": "=trim(args.title) != ''",
+          "values": {
+            "task": "=args.task",
+            "title": "=trim(args.title)"
+          }
+        },
+        {
+          "type": "setState",
+          "set": {
+            "newStep": ""
+          }
+        }
+      ]
+    },
+    "removeStep": {
+      "args": {
+        "step": {
+          "type": "ref",
+          "to": "step"
+        }
+      },
+      "steps": [
+        {
+          "type": "deleteRecords",
+          "entity": "step",
+          "where": "=item.id == args.step"
+        }
+      ]
+    },
+    "openList": {
+      "args": {
+        "list": {
+          "type": "ref",
+          "to": "taskList"
+        }
+      },
+      "steps": [
+        {
+          "type": "navigate",
+          "screen": "listTasks",
+          "params": {
+            "list": "=args.list"
+          }
+        }
+      ]
+    },
+    "openListInfo": {
+      "args": {
+        "list": {
+          "type": "ref",
+          "to": "taskList"
+        }
+      },
+      "steps": [
+        {
+          "type": "navigate",
+          "screen": "taskList.detail",
+          "params": {
+            "id": "=args.list"
+          }
+        }
+      ]
+    },
+    "addToday": {
+      "steps": [
+        {
+          "type": "navigate",
+          "screen": "quickAdd",
+          "params": {
+            "due": "=today()"
+          }
+        }
+      ]
+    },
+    "addToList": {
+      "args": {
+        "list": {
+          "type": "ref",
+          "to": "taskList"
+        }
+      },
+      "steps": [
+        {
+          "type": "navigate",
+          "screen": "quickAdd",
+          "params": {
+            "list": "=args.list"
+          }
+        }
+      ]
+    },
+    "clearCompleted": {
+      "steps": [
+        {
+          "type": "confirm",
+          "title": "=t('clearDone', {'n': size(q.completed)})",
+          "body": "They can’t be restored afterwards. Your progress numbers stay.",
+          "confirmLabel": "Delete"
+        },
+        {
+          "type": "deleteRecords",
+          "entity": "task",
+          "where": "=item.done"
+        },
+        {
+          "type": "toast",
+          "text": "Completed tasks deleted."
+        }
+      ]
+    },
+    "remindTask": {
+      "args": {
+        "task": {
+          "type": "ref",
+          "to": "task"
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=args.task.title",
+            "body": "=join([has(args.task.dueTime) ? 'Due ' + coalesce(formatDate(args.task.dueTime, 'jm'), '') : 'Due today', coalesce(args.task.list.name, 'Inbox'), size(args.task.steps) > 0 ? t('stepsDone', {'done': args.task.stepsDone, 'total': size(args.task.steps)}) : ''].filter(s, s != ''), ' · ')",
+            "open": {
+              "screen": "taskDetail",
+              "params": {
+                "id": "=args.task"
+              }
+            },
+            "buttons": [
+              {
+                "id": "done",
+                "label": "Done",
+                "action": "completeFromReminder"
+              },
+              {
+                "id": "snooze",
+                "label": "Snooze",
+                "action": "snoozeTask"
+              },
+              {
+                "id": "tomorrow",
+                "label": "Tomorrow",
+                "action": "moveToTomorrow"
+              }
+            ],
+            "data": {
+              "task": "=string(args.task)"
+            },
+            "tag": "=string(args.task)",
+            "channel": "reminders"
+          }
+        }
+      ]
+    },
+    "sendDigest": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "Today",
+            "body": "=t('digestBody', {'due': size(q.dueToday), 'overdue': size(q.overdue)})",
+            "open": {
+              "screen": "today"
+            },
+            "tag": "digest",
+            "channel": "reminders"
+          }
+        }
+      ]
+    },
+    "exportTasks": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "allTasks",
+            "fileName": "='tasks-' + string(today()) + '.csv'",
+            "destination": "saveAs",
+            "columns": ["title", "list", "due", "dueTime", "priority", "repeat", "notes", "done", "doneAt"]
+          },
+          "as": "saved"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.saved.saved",
+          "text": "=t('exported', {'n': coalesce(vars.saved.rows, 0)})"
+        }
+      ]
+    },
+    "importTasks": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "importCsv",
+          "args": {
+            "entity": "task",
+            "onlyRows": [
+              {
+                "from": ["TYPE"],
+                "values": ["task"]
+              },
+              {
+                "from": ["Kind"],
+                "except": ["note"]
+              }
+            ],
+            "fields": {
+              "title": {
+                "from": ["Title", "Task", "Task name", "Name", "Subject", "CONTENT"]
+              },
+              "notes": {
+                "from": ["Notes", "Note", "Content", "Description", "Details"]
+              },
+              "list": {
+                "from": ["List", "List name", "Project"],
+                "values": {
+                  "Inbox": ""
+                }
+              },
+              "importDueAt": {
+                "from": ["Due date", "Due", "Due date and time", "Date", "DATE", "Deadline"],
+                "values": {
+                  "*": ""
+                }
+              },
+              "importAllDay": {
+                "from": ["Is All Day", "All day"]
+              },
+              "dueTime": {
+                "from": ["Time", "Due time"]
+              },
+              "importRepeat": {
+                "from": ["Repeat", "Recurrence", "RRULE", "Repeats", "DATE"],
+                "values": {
+                  "every day": "FREQ=DAILY",
+                  "daily": "FREQ=DAILY",
+                  "every weekday": "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR",
+                  "every week": "FREQ=WEEKLY",
+                  "weekly": "FREQ=WEEKLY",
+                  "every other week": "FREQ=WEEKLY;INTERVAL=2",
+                  "every month": "FREQ=MONTHLY",
+                  "monthly": "FREQ=MONTHLY",
+                  "every year": "FREQ=YEARLY",
+                  "yearly": "FREQ=YEARLY",
+                  "every monday": "FREQ=WEEKLY;BYDAY=MO",
+                  "every tuesday": "FREQ=WEEKLY;BYDAY=TU",
+                  "every wednesday": "FREQ=WEEKLY;BYDAY=WE",
+                  "every thursday": "FREQ=WEEKLY;BYDAY=TH",
+                  "every friday": "FREQ=WEEKLY;BYDAY=FR",
+                  "every saturday": "FREQ=WEEKLY;BYDAY=SA",
+                  "every sunday": "FREQ=WEEKLY;BYDAY=SU"
+                }
+              },
+              "priority": {
+                "from": ["Priority", "PRIORITY"],
+                "values": {
+                  "urgent": "high",
+                  "important": "high",
+                  "p1": "high",
+                  "!!!": "high",
+                  "med": "medium",
+                  "p2": "medium",
+                  "!!": "medium",
+                  "p3": "low",
+                  "!": "low",
+                  "normal": "none",
+                  "p4": "none"
+                },
+                "columnValues": {
+                  "PRIORITY": {
+                    "1": "high",
+                    "2": "medium",
+                    "3": "low",
+                    "4": "none"
+                  },
+                  "Priority": {
+                    "5": "high",
+                    "3": "medium",
+                    "1": "low",
+                    "0": "none"
+                  }
+                }
+              },
+              "done": {
+                "from": ["Done", "Status", "Is completed", "Completed?"],
+                "values": {
+                  "completed": "true",
+                  "complete": "true",
+                  "done": "true",
+                  "x": "true",
+                  "checked": "true",
+                  "not started": "false",
+                  "in progress": "false",
+                  "waiting on someone else": "false",
+                  "deferred": "false",
+                  "open": "false"
+                },
+                "columnValues": {
+                  "Status": {
+                    "0": "false",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "doneAt": {
+                "from": ["Completed", "Completed time", "Date completed", "Completed at", "Done at"]
+              }
+            },
+            "createMissing": ["list"],
+            "dateOrder": "mdy",
+            "onError": "skip"
+          },
+          "as": "imported"
+        },
+        {
+          "type": "forEach",
+          "query": "importPending",
+          "do": "finishImportedTask",
+          "args": {
+            "task": "=item.id"
+          }
+        },
+        {
+          "type": "toast",
+          "when": "=vars.imported.skipped == 0",
+          "text": "=t('imported', {'added': vars.imported.added, 'lists': vars.imported.created, 'skipped': vars.imported.skipped})"
+        },
+        {
+          "type": "navigate",
+          "when": "=vars.imported.skipped > 0",
+          "screen": "importReport",
+          "params": {
+            "summary": "=t('imported', {'added': vars.imported.added, 'lists': vars.imported.created, 'skipped': vars.imported.skipped})",
+            "lines": "=join(take(vars.imported.problems, 8).map(p, t('problemLine', {'row': p.row, 'reason': p.reason})), '\\n') + (vars.imported.skipped > 8 ? '\\n' + t('moreProblems', {'n': vars.imported.skipped - 8}) : '')"
+          }
+        }
+      ]
+    },
+    "finishImport": {
+      "steps": [
+        {
+          "type": "forEach",
+          "query": "importPending",
+          "do": "finishImportedTask",
+          "args": {
+            "task": "=item.id"
+          }
+        },
+        {
+          "type": "toast",
+          "text": "Imported tasks are ready."
+        }
+      ]
+    },
+    "finishImportedTask": {
+      "args": {
+        "task": {
+          "type": "ref",
+          "to": "task"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.task",
+          "set": {
+            "due": "=coalesce(args.task.impDue, args.task.due)",
+            "dueTime": "=has(args.task.dueTime) ? args.task.dueTime : args.task.impDue != null ? args.task.impClock : null",
+            "repeat": "=args.task.impRule != '' && args.task.impDue != null ? rrule(args.task.impRule) : args.task.repeat",
+            "notes": "=args.task.impLeftover != '' ? substring(coalesce(args.task.notes, '') + (has(args.task.notes) ? '\\n\\n' : '') + 'Date or repeat from the imported file: ' + coalesce(args.task.impLeftover, ''), 0, 5000) : args.task.notes",
+            "importRepeat": null,
+            "importAllDay": null,
+            "importDueAt": null
+          }
+        }
+      ]
+    },
+    "closeReport": {
+      "steps": [
+        {
+          "type": "back"
+        }
+      ]
+    }
+  },
+  "triggers": {
+    "dueReminder": {
+      "type": "recordTime",
+      "entity": "task",
+      "at": "=!has(item.due) ? null : item.snoozedUntil > datetime(item.due, coalesce(item.dueTime, settings.dayReminderAt)) ? item.snoozedUntil : datetime(item.due, coalesce(item.dueTime, settings.dayReminderAt))",
+      "when": "=item.remind && !item.done && (has(item.dueTime) || settings.dayReminder || item.snoozedUntil > now() - duration('PT5M'))",
+      "do": "remindTask",
+      "args": {
+        "task": "=item.id"
+      },
+      "maxPerDay": 19
+    },
+    "morningDigest": {
+      "type": "schedule",
+      "rrule": "FREQ=DAILY",
+      "times": "=settings.digest ? [settings.digestAt] : []",
+      "when": "=size(q.dueToday) + size(q.overdue) > 0",
+      "do": "sendDigest",
+      "maxPerDay": 1
+    }
+  },
+  "widgets": {
+    "todayWidget": {
+      "template": "checklist",
+      "title": "Today",
+      "sizes": ["small", "medium", "large"],
+      "query": "today",
+      "label": "=item.title",
+      "checked": "=item.done",
+      "open": "today",
+      "toggle": {
+        "event": {
+          "name": "setDone",
+          "context": {
+            "task": "=item.id",
+            "done": "=!item.done"
+          }
+        }
+      }
+    },
+    "addWidget": {
+      "template": "button",
+      "title": "To-do",
+      "sizes": ["small"],
+      "label": "Add a task",
+      "icon": "add",
+      "action": {
+        "event": {
+          "name": "addToday"
+        }
+      }
+    }
+  },
+  "migrations": [
+    {
+      "from": "<3.0.0",
+      "steps": [
+        {
+          "op": "deleteField",
+          "entity": "task",
+          "field": "importList"
+        }
+      ]
+    },
+    {
+      "from": "<2.0.0",
+      "steps": [
+        {
+          "op": "deleteField",
+          "entity": "task",
+          "field": "importType"
+        },
+        {
+          "op": "deleteField",
+          "entity": "task",
+          "field": "importDate"
+        },
+        {
+          "op": "deleteField",
+          "entity": "task",
+          "field": "importDeadline"
+        },
+        {
+          "op": "deleteField",
+          "entity": "task",
+          "field": "importTime"
+        },
+        {
+          "op": "deleteField",
+          "entity": "task",
+          "field": "importPriority"
+        },
+        {
+          "op": "deleteField",
+          "entity": "task",
+          "field": "importLevel"
+        },
+        {
+          "op": "deleteField",
+          "entity": "task",
+          "field": "importStatus"
+        },
+        {
+          "op": "deleteField",
+          "entity": "task",
+          "field": "importCompleted"
+        }
+      ]
+    }
+  ]
+}

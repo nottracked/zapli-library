@@ -1,0 +1,21 @@
+{
+  "id": "library/pocket-scan",
+  "category": "productivity",
+  "replaces": "Document scanner",
+  "title": "Pocket Scan",
+  "summary": "Paper pages to one PDF: straightened, cleaned up, saved on your phone",
+  "description": "**Pocket Scan** turns paper into a PDF: letters, receipts, forms and notes, without ads, accounts or tracking.\n\n**What it does**\n\n- **Scan with the camera.** Take a photo of a page and the app finds its edges for you. Drag a corner if it's off.\n- **Or start from photos** you already took, up to 20 at once.\n- **Straight and clean.** Each page is straightened and the shadows are taken out. Pick Enhance, Grayscale, Black & white or the original photo for every page.\n- **Put pages in order.** Turn a page, move it earlier or later, delete it or fix its corners again.\n- **One PDF.** All pages become one file, fitted to the scan or on A4 or Letter. Save it on your phone or share it to the app you pick.\n- **Your scans stay.** Documents are kept on your phone until you delete them, so you can add a page later.\n- **Tips** for a clean scan: light, a dark background, the phone held flat, all four corners in view.\n- **In English or Slovak**, following your phone's language.\n\n**What it never does**\n\n- No ads, no watermark, no page limit, no paid unlocks.\n- No account and no sign-in.\n- No internet access at all: your pages never leave the phone unless you save or share them.\n- No analytics or tracking of any kind.",
+  "license": "MIT",
+  "tags": ["scanner", "pdf", "document", "receipt", "paper", "camera", "slovak", "offline", "no ads"],
+  "screenshots": [],
+  "research": [
+    {
+      "source": "https://support.google.com/android/answer/9431959?hl=sk",
+      "used_for": "Slovak words of Android's own help for the page's Slovak text: Google writes \"klepnite\" for tap, \"Fotky\" for photos, \"Súbory\" for files; read for wording only"
+    },
+    {
+      "source": "https://helpguide.sony.net/mobile/xperia-1m7/v1/sk/contents/changes_update_software_android_16.html",
+      "used_for": "Slovak words of a phone maker's help: \"ťuknite\" and \"ťuknutím\" for tap (with \"klepnite\" once), the word the page uses; read for wording only"
+    }
+  ]
+}

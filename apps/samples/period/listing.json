@@ -1,0 +1,79 @@
+{
+  "id": "samples/period",
+  "category": "health_and_fitness",
+  "replaces": "period/cycle tracker",
+  "title": "Cycle",
+  "summary": "Track periods and symptoms privately and see when the next one is likely.",
+  "description": "Log when your period starts and ends, how heavy it is, and how you feel on any day. The app predicts the next period from your recent cycles and can remind you a few days before.\n\n- **Calendar** of past periods and the predicted next one.\n- **Insights:** your period lengths and moods over time.\n- **Locked** behind your screen lock, with a home-screen widget that counts the days to the next period.\n\n**What it never does:** no ads, no tracking and no account. Your health data stays on this phone and is never sent anywhere.",
+  "license": "MIT",
+  "tags": ["period", "cycle", "health", "private"],
+  "screenshots": [],
+  "sampleData": {
+    "period": [
+      {
+        "start": "2026-06-24",
+        "end": "2026-06-28",
+        "flow": "medium"
+      },
+      {
+        "start": "2026-07-22",
+        "end": "2026-07-27",
+        "flow": "heavy"
+      },
+      {
+        "start": "2026-08-19",
+        "end": "2026-08-23",
+        "flow": "medium"
+      },
+      {
+        "start": "2026-09-16",
+        "end": "2026-09-20",
+        "flow": "light"
+      },
+      {
+        "start": "2026-10-14",
+        "flow": "medium"
+      }
+    ],
+    "dayLog": [
+      {
+        "date": "2026-10-15",
+        "flow": "medium",
+        "symptoms": ["cramps", "fatigue"],
+        "mood": "okay",
+        "note": "Took it easy and went to bed early."
+      },
+      {
+        "date": "2026-10-14",
+        "flow": "light",
+        "symptoms": ["cramps"],
+        "mood": "low"
+      },
+      {
+        "date": "2026-10-12",
+        "flow": "none",
+        "symptoms": ["bloating", "cravings"],
+        "mood": "irritable"
+      },
+      {
+        "date": "2026-10-08",
+        "flow": "none",
+        "symptoms": [],
+        "mood": "great",
+        "note": "Long run in the park."
+      },
+      {
+        "date": "2026-09-17",
+        "flow": "medium",
+        "symptoms": ["headache"],
+        "mood": "okay"
+      },
+      {
+        "date": "2026-09-16",
+        "flow": "light",
+        "symptoms": ["cramps", "backache"],
+        "mood": "low"
+      }
+    ]
+  }
+}

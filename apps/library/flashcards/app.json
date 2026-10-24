@@ -1,0 +1,1275 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "library/flashcards",
+    "name": "Flashcards",
+    "version": "2.3.1",
+    "icon": "school",
+    "category": "education",
+    "ageRating": "everyone",
+    "license": "MIT",
+    "iconData": "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"
+  },
+  "theme": { "seedColor": "#00897B", "shape": "rounded" },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "ivl": { "en": "{n, plural, =0 {again today} one {# day} other {# days}}" },
+      "ivlMonths": { "en": "{n, plural, one {# month} other {# months}}" },
+      "ivlYears": { "en": "{n, plural, one {# year} other {# years}}" },
+      "days": { "en": "{n, plural, one {# day} other {# days}}" },
+      "deckDue": { "en": "{due} to review · {fresh} new" },
+      "deckDone": {
+        "en": "{n, plural, =0 {No cards yet} one {All done for today · # card} other {All done for today · # cards}}"
+      },
+      "left": { "en": "{due} to review · {fresh} new" },
+      "dueNow": {
+        "en": "{n, plural, one {# card is ready for you. A few minutes keeps it fresh.} other {# cards are ready for you. A few minutes keeps them fresh.}}"
+      },
+      "imported": {
+        "en": "{added, plural, =0 {No cards added} one {# card added} other {# cards added}}{decks, plural, =0 {} one {, # new deck} other {, # new decks}}{skipped, plural, =0 {.} one {, # row skipped.} other {, # rows skipped.}}"
+      },
+      "exported": { "en": "{n, plural, one {# card exported} other {# cards exported}}" },
+      "moved": { "en": "{n, plural, one {# card moved to this deck} other {# cards moved to this deck}}" },
+      "unsorted": {
+        "en": "{n, plural, one {Move # card without a deck here} other {Move # cards without a deck here}}"
+      },
+      "problemLine": { "en": "Line {row}: {reason}" },
+      "moreProblems": { "en": "{n, plural, one {…and # more row} other {…and # more rows}}" },
+      "answers": { "en": "{n, plural, one {# answer} other {# answers}}" },
+      "studiedOf": { "en": "{done} of {total}" },
+      "toStudy": { "en": "{n, plural, one {# to study} other {# to study}}" }
+    }
+  },
+  "permissions": {
+    "notify.local": {
+      "purpose": "Remind you to study, per deck or once a day for all decks, only when cards are due",
+      "maxPerDay": 11
+    },
+    "files.io": {
+      "purpose": "Import cards from a CSV file and export a deck or all your cards as CSV",
+      "modes": ["import", "export"]
+    },
+    "widget.home": { "purpose": "Show how many cards are waiting for you on your home screen" }
+  },
+  "dataFlows": [
+    {
+      "from": ["deck.id", "deck.name", "card.front", "card.back", "card.hint", "card.deck"],
+      "to": "files.io",
+      "purpose": "Your cards (front, back, hint and deck) saved as a CSV file where you choose"
+    }
+  ],
+  "settings": {
+    "dailyReminder": {
+      "type": "boolean",
+      "label": "One daily reminder for all decks",
+      "help": "Replaces the reminders you set on each deck.",
+      "default": false
+    },
+    "dailyReminderAt": {
+      "type": "time",
+      "label": "Reminder time",
+      "default": "19:00",
+      "visible": "=settings.dailyReminder"
+    }
+  },
+  "entities": {
+    "deck": {
+      "label": "Deck",
+      "labelPlural": "Decks",
+      "sort": ["name"],
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=item.toStudy > 0 ? t('deckDue', {'due': item.dueCount, 'fresh': item.newAvailable}) : t('deckDone', {'n': item.cardCount})",
+        "trailing": "=item.toStudy > 0 ? string(item.toStudy) : ''",
+        "icon": "=coalesce(optionIcon(item.icon), 'school')",
+        "hue": "=optionHue(item.icon)",
+        "trailingTone": "=item.toStudy > 0 ? 'primary' : null"
+      },
+      "fields": {
+        "name": { "type": "text", "required": true, "unique": true, "maxLength": 60, "placeholder": "Spanish verbs" },
+        "description": { "type": "text", "maxLength": 200, "placeholder": "What this deck is for" },
+        "icon": {
+          "type": "choice",
+          "label": "Icon and colour",
+          "default": "school",
+          "options": [
+            { "value": "school", "label": "Study", "icon": "school", "hue": "blue" },
+            { "value": "language", "label": "Languages", "icon": "language", "hue": "indigo" },
+            { "value": "menu_book", "label": "Reading", "icon": "menu_book", "hue": "brown" },
+            { "value": "map", "label": "Geography", "icon": "map", "hue": "teal" },
+            { "value": "history", "label": "History", "icon": "history", "hue": "amber" },
+            { "value": "psychology", "label": "Mind and memory", "icon": "psychology", "hue": "violet" },
+            { "value": "medical_services", "label": "Medicine", "icon": "medical_services", "hue": "red" },
+            { "value": "eco", "label": "Nature", "icon": "eco", "hue": "green" },
+            { "value": "pets", "label": "Animals", "icon": "pets", "hue": "orange" },
+            { "value": "lightbulb", "label": "Ideas", "icon": "lightbulb", "hue": "lime" },
+            { "value": "music_note", "label": "Music", "icon": "music_note", "hue": "pink" },
+            { "value": "palette", "label": "Art", "icon": "palette", "hue": "pink" },
+            { "value": "keyboard", "label": "Computers", "icon": "keyboard", "hue": "grey" },
+            { "value": "savings", "label": "Money", "icon": "savings", "hue": "green" },
+            { "value": "restaurant", "label": "Food", "icon": "restaurant", "hue": "orange" },
+            { "value": "flight", "label": "Travel", "icon": "flight", "hue": "cyan" },
+            { "value": "fitness_center", "label": "Sport", "icon": "fitness_center", "hue": "lime" },
+            { "value": "work", "label": "Work", "icon": "work", "hue": "indigo" },
+            { "value": "star", "label": "Favourites", "icon": "star", "hue": "amber" }
+          ]
+        },
+        "newPerDay": {
+          "type": "integer",
+          "label": "New cards per day",
+          "default": 20,
+          "min": 0,
+          "max": 200,
+          "help": "How many cards you have never seen come into your study each day. Due reviews always come first."
+        },
+        "remind": { "type": "boolean", "label": "Study reminder", "default": true },
+        "remindAt": { "type": "time", "label": "Reminder time", "default": "19:00", "visible": "=item.remind" },
+        "remindDays": {
+          "type": "recurrence",
+          "label": "Remind me",
+          "default": "FREQ=DAILY",
+          "visible": "=item.remind"
+        },
+        "cards": { "type": "inverse", "of": "card.deck", "label": "Cards", "sort": ["-createdAt"] },
+        "reviews": { "type": "inverse", "of": "review.deck", "label": "Answers", "visible": false },
+        "cardCount": { "type": "integer", "label": "Cards", "visible": false, "compute": "=size(item.cards)" },
+        "dueCount": {
+          "type": "integer",
+          "label": "To review",
+          "visible": false,
+          "compute": "=size(item.cards.filter(c, !c.paused && !c.isNew && c.due <= today()))"
+        },
+        "newCount": {
+          "type": "integer",
+          "label": "New",
+          "visible": false,
+          "compute": "=size(item.cards.filter(c, !c.paused && c.isNew))"
+        },
+        "newToday": {
+          "type": "integer",
+          "label": "New today",
+          "visible": false,
+          "compute": "=size(item.reviews.filter(r, r.date == today() && r.wasNew))"
+        },
+        "newAvailable": {
+          "type": "integer",
+          "label": "New left today",
+          "visible": false,
+          "compute": "=max(0, min(item.newCount, item.newPerDay - item.newToday))"
+        },
+        "toStudy": {
+          "type": "integer",
+          "label": "To study",
+          "visible": false,
+          "compute": "=item.dueCount + item.newAvailable"
+        },
+        "learnedCount": {
+          "type": "integer",
+          "label": "Learned",
+          "visible": false,
+          "compute": "=size(item.cards.filter(c, !c.isNew))"
+        },
+        "nextDue": {
+          "type": "date",
+          "label": "Next review",
+          "visible": false,
+          "compute": "=min(item.cards.filter(c, !c.paused && !c.isNew && c.due > today()).map(c, c.due))"
+        }
+      }
+    },
+    "card": {
+      "label": "Card",
+      "labelPlural": "Cards",
+      "sort": ["-createdAt"],
+      "display": {
+        "title": "=item.front",
+        "subtitle": "=item.back",
+        "trailing": "=item.paused ? 'Paused' : item.isNew ? 'New' : item.due <= today() ? 'Due' : coalesce(formatRelative(item.due), '')",
+        "icon": "=item.lapses >= 8 ? 'warning' : item.isNew ? 'note_add' : 'note'",
+        "tone": "=item.lapses >= 8 ? 'warning' : 'neutral'"
+      },
+      "fields": {
+        "deck": {
+          "type": "ref",
+          "to": "deck",
+          "onDelete": "cascade",
+          "help": "Cards without a deck are kept but not studied"
+        },
+        "front": { "type": "longText", "required": true, "maxLength": 1000, "placeholder": "Question, word or prompt" },
+        "back": { "type": "longText", "required": true, "maxLength": 2000, "placeholder": "Answer" },
+        "hint": {
+          "type": "text",
+          "maxLength": 200,
+          "placeholder": "Optional nudge",
+          "help": "Shown only when you ask for it while studying"
+        },
+        "paused": {
+          "type": "boolean",
+          "label": "Paused",
+          "default": false,
+          "help": "A paused card stays in the deck but is left out of study"
+        },
+        "ease": {
+          "type": "number",
+          "label": "Ease",
+          "stored": true,
+          "visible": "=!item.isNew",
+          "help": "How fast the gap grows after a Good answer. It drops when a card is hard or forgotten and rises when it is easy.",
+          "compute": "=round(clamp(2.5 - 0.2 * item.lapses - 0.15 * item.hardCount + 0.15 * item.easyCount, 1.3, 5.0), 2)"
+        },
+        "interval": {
+          "type": "integer",
+          "label": "Current gap",
+          "unit": "days",
+          "default": 0,
+          "min": 0,
+          "editable": false,
+          "visible": "=!item.isNew"
+        },
+        "reps": {
+          "type": "integer",
+          "label": "Answers",
+          "default": 0,
+          "min": 0,
+          "editable": false,
+          "visible": "=!item.isNew"
+        },
+        "lapses": {
+          "type": "integer",
+          "label": "Forgotten",
+          "default": 0,
+          "min": 0,
+          "editable": false,
+          "visible": "=!item.isNew"
+        },
+        "hardCount": {
+          "type": "integer",
+          "label": "Hard answers",
+          "default": 0,
+          "min": 0,
+          "editable": false,
+          "visible": false
+        },
+        "easyCount": {
+          "type": "integer",
+          "label": "Easy answers",
+          "default": 0,
+          "min": 0,
+          "editable": false,
+          "visible": false
+        },
+        "lastReviewed": { "type": "date", "label": "Last studied", "editable": false, "visible": "=!item.isNew" },
+        "answeredAt": { "type": "datetime", "label": "Answered at", "editable": false, "visible": false },
+        "due": {
+          "type": "date",
+          "label": "Next review",
+          "stored": true,
+          "visible": "=!item.isNew",
+          "compute": "=addDays(item.lastReviewed, item.interval)"
+        },
+        "isNew": {
+          "type": "boolean",
+          "label": "New",
+          "stored": true,
+          "visible": false,
+          "compute": "=!has(item.lastReviewed)"
+        },
+        "ivHard": {
+          "type": "integer",
+          "label": "Gap after Hard",
+          "stored": true,
+          "visible": false,
+          "compute": "=item.interval == 0 ? 0 : int(min(3650.0, max(item.interval + 1.0, round(item.interval * 1.2))))"
+        },
+        "ivGood": {
+          "type": "integer",
+          "label": "Gap after Good",
+          "stored": true,
+          "visible": false,
+          "compute": "=item.interval == 0 ? 1 : int(min(3650.0, max(item.ivHard + 1.0, round(item.interval * item.ease))))"
+        },
+        "ivEasy": {
+          "type": "integer",
+          "label": "Gap after Easy",
+          "stored": true,
+          "visible": false,
+          "compute": "=item.interval == 0 ? 4 : int(min(3650.0, max(item.ivGood + 1.0, round(item.interval * item.ease * 1.3))))"
+        },
+        "hardText": {
+          "type": "text",
+          "visible": false,
+          "compute": "=item.ivHard >= 730 ? t('ivlYears', {'n': item.ivHard / 365}) : item.ivHard >= 60 ? t('ivlMonths', {'n': item.ivHard / 30}) : t('ivl', {'n': item.ivHard})"
+        },
+        "goodText": {
+          "type": "text",
+          "visible": false,
+          "compute": "=item.ivGood >= 730 ? t('ivlYears', {'n': item.ivGood / 365}) : item.ivGood >= 60 ? t('ivlMonths', {'n': item.ivGood / 30}) : t('ivl', {'n': item.ivGood})"
+        },
+        "easyText": {
+          "type": "text",
+          "visible": false,
+          "compute": "=item.ivEasy >= 730 ? t('ivlYears', {'n': item.ivEasy / 365}) : item.ivEasy >= 60 ? t('ivlMonths', {'n': item.ivEasy / 30}) : t('ivl', {'n': item.ivEasy})"
+        },
+        "stage": {
+          "type": "choice",
+          "label": "Stage",
+          "visible": "=!item.isNew",
+          "options": [
+            { "value": "new", "label": "New", "tone": "primary" },
+            { "value": "learning", "label": "Learning", "tone": "warning" },
+            { "value": "young", "label": "Young" },
+            { "value": "mature", "label": "Mature", "tone": "success" }
+          ],
+          "compute": "=item.isNew ? 'new' : item.interval == 0 ? 'learning' : item.interval < 21 ? 'young' : 'mature'"
+        },
+        "reviews": { "type": "inverse", "of": "review.card", "label": "Answers", "sort": ["-at"] },
+        "frontClean": {
+          "type": "text",
+          "label": "Front without markup",
+          "visible": false,
+          "compute": "=trim(replace(replace(replace(replace(replace(replace(replaceAll(replace(replace(replace(replace(replace(replace(item.front, '<br>', '\\n'), '<br/>', '\\n'), '<br />', '\\n'), '<BR>', '\\n'), '<div>', '\\n'), '</p>', '\\n'), r'<[^<>]*>|\\[sound:[^\\[\\]]*\\]', ''), '&nbsp;', ' '), '&lt;', '<'), '&gt;', '>'), '&quot;', '\"'), '&#39;', '\\''), '&amp;', '&'))"
+        },
+        "backClean": {
+          "type": "text",
+          "label": "Back without markup",
+          "visible": false,
+          "compute": "=trim(replace(replace(replace(replace(replace(replace(replaceAll(replace(replace(replace(replace(replace(replace(item.back, '<br>', '\\n'), '<br/>', '\\n'), '<br />', '\\n'), '<BR>', '\\n'), '<div>', '\\n'), '</p>', '\\n'), r'<[^<>]*>|\\[sound:[^\\[\\]]*\\]', ''), '&nbsp;', ' '), '&lt;', '<'), '&gt;', '>'), '&quot;', '\"'), '&#39;', '\\''), '&amp;', '&'))"
+        }
+      }
+    },
+    "review": {
+      "label": "Answer",
+      "labelPlural": "Answers",
+      "sort": ["-at"],
+      "display": {
+        "title": "=coalesce(item.card.front, 'Deleted card')",
+        "subtitle": "=formatDate(item.at, 'yMMMdjm')",
+        "trailing": "=item.grade == 'again' ? 'Again' : item.grade == 'hard' ? 'Hard' : item.grade == 'good' ? 'Good' : 'Easy'",
+        "trailingTone": "=item.grade == 'again' ? 'danger' : item.grade == 'hard' ? 'warning' : item.grade == 'good' ? 'primary' : 'success'"
+      },
+      "fields": {
+        "card": { "type": "ref", "to": "card", "onDelete": "setNull", "editable": false },
+        "deck": { "type": "ref", "to": "deck", "onDelete": "setNull", "editable": false },
+        "grade": {
+          "type": "choice",
+          "required": true,
+          "editable": false,
+          "options": [
+            { "value": "again", "label": "Again", "tone": "danger" },
+            { "value": "hard", "label": "Hard", "tone": "warning" },
+            { "value": "good", "label": "Good", "tone": "primary" },
+            { "value": "easy", "label": "Easy", "tone": "success" }
+          ]
+        },
+        "date": { "type": "date", "required": true, "default": "=today()", "editable": false },
+        "at": { "type": "datetime", "required": true, "default": "=now()", "editable": false },
+        "wasNew": { "type": "boolean", "label": "First time", "default": false, "editable": false },
+        "newInterval": { "type": "integer", "label": "Next gap", "unit": "days", "default": 0, "editable": false },
+        "prevInterval": { "type": "integer", "default": 0, "editable": false, "visible": false },
+        "prevLastReviewed": { "type": "date", "editable": false, "visible": false },
+        "prevAnsweredAt": { "type": "datetime", "editable": false, "visible": false },
+        "correct": {
+          "type": "integer",
+          "label": "Remembered",
+          "stored": true,
+          "visible": false,
+          "compute": "=item.grade == 'again' ? 0 : 1"
+        },
+        "forgot": {
+          "type": "integer",
+          "label": "Forgot",
+          "stored": true,
+          "visible": false,
+          "compute": "=item.grade == 'again' ? 1 : 0"
+        }
+      }
+    }
+  },
+  "queries": {
+    "decks": { "entity": "deck", "sort": ["name"] },
+    "queue": {
+      "entity": "card",
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "where": "=item.deck == args.deck && !item.paused && (item.isNew || item.due <= today())",
+      "sort": ["isNew", "due", "answeredAt", "createdAt"],
+      "limit": 1000
+    },
+    "lastAnswer": {
+      "entity": "review",
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "where": "=item.deck == args.deck && item.date == today()",
+      "sort": ["-at"],
+      "limit": 1
+    },
+    "deckCards": {
+      "entity": "card",
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "where": "=item.deck == args.deck",
+      "sort": ["createdAt"],
+      "limit": 2000
+    },
+    "unsortedCards": { "entity": "card", "where": "=!has(item.deck)", "sort": ["createdAt"], "limit": 1000 },
+    "allCards": { "entity": "card", "sort": ["deck", "createdAt"], "limit": 2000 },
+    "dueAll": {
+      "entity": "card",
+      "where": "=!item.paused && !item.isNew && item.due <= today()",
+      "aggregate": { "n": { "fn": "count" } }
+    },
+    "cardsAll": { "entity": "card", "aggregate": { "n": { "fn": "count" } } },
+    "cardsLearned": { "entity": "card", "where": "=!item.isNew", "aggregate": { "n": { "fn": "count" } } },
+    "cardsMature": { "entity": "card", "where": "=item.interval >= 21", "aggregate": { "n": { "fn": "count" } } },
+    "todayAnswers": {
+      "entity": "review",
+      "where": "=item.date == today()",
+      "aggregate": { "n": { "fn": "count" }, "correct": { "fn": "sum", "field": "correct" } }
+    },
+    "monthAnswers": {
+      "entity": "review",
+      "where": "=item.date > addDays(today(), -30)",
+      "aggregate": { "n": { "fn": "count" }, "correct": { "fn": "sum", "field": "correct" } }
+    },
+    "last30": {
+      "entity": "review",
+      "where": "=item.date > addDays(today(), -30)",
+      "fill": true,
+      "groupBy": { "field": "date", "period": "day" },
+      "aggregate": { "correct": { "fn": "sum", "field": "correct" }, "forgot": { "fn": "sum", "field": "forgot" } }
+    },
+    "studyDays": {
+      "entity": "review",
+      "where": "=item.date > addDays(today(), -400)",
+      "groupBy": { "field": "date", "period": "day" },
+      "aggregate": { "n": { "fn": "count" } },
+      "limit": 400
+    },
+    "studyWeek": { "entity": "review", "where": "=item.date > addDays(today(), -7)", "sort": ["at"], "limit": 2000 },
+    "heat": {
+      "entity": "review",
+      "where": "=item.date > addDays(today(), -91)",
+      "fill": true,
+      "groupBy": { "field": "date", "period": "day" },
+      "aggregate": { "n": { "fn": "count" } }
+    },
+    "grades30": {
+      "entity": "review",
+      "where": "=item.date > addDays(today(), -30)",
+      "groupBy": { "field": "grade" },
+      "aggregate": { "n": { "fn": "count" } }
+    },
+    "forecast": {
+      "entity": "card",
+      "where": "=!item.paused && !item.isNew && item.due > today() && item.due <= addDays(today(), 14)",
+      "fill": true,
+      "groupBy": { "field": "due", "period": "day" },
+      "aggregate": { "n": { "fn": "count" } }
+    },
+    "needsTidy": {
+      "entity": "card",
+      "where": "=item.isNew && (contains(item.front, '<') || contains(item.front, '&') || contains(item.back, '<') || contains(item.back, '&'))",
+      "limit": 1000
+    }
+  },
+  "navigation": {
+    "start": "decks",
+    "tabs": [
+      { "screen": "decks", "label": "Decks", "icon": "school" },
+      { "screen": "cards", "label": "Cards", "icon": "menu_book" },
+      { "screen": "stats", "label": "Stats", "icon": "insights" }
+    ]
+  },
+  "screens": {
+    "decks": {
+      "type": "list",
+      "title": "Decks",
+      "query": "decks",
+      "item": "deckTile",
+      "columns": 2,
+      "toolbar": ["importAllBtn", "exportAllBtn"],
+      "empty": {
+        "title": "No decks yet",
+        "body": "Make a deck and add cards, or import a CSV or text file with front and back columns. A deck column sorts cards into decks.",
+        "icon": "school"
+      }
+    },
+    "deckDetail": {
+      "type": "detail",
+      "title": "Deck",
+      "entity": "deck",
+      "header": "deckTop",
+      "show": ["description", "newPerDay", "remind", "remindAt", "remindDays"],
+      "related": ["cards"],
+      "footer": "deckFooter"
+    },
+    "study": {
+      "type": "custom",
+      "title": "=coalesce(params.deck.name, 'Study')",
+      "params": { "deck": { "type": "ref", "to": "deck", "required": true } },
+      "state": {
+        "revealed": { "type": "boolean", "default": false },
+        "hintShown": { "type": "boolean", "default": false }
+      },
+      "queries": {
+        "queue": { "query": "queue", "args": { "deck": "=params.deck" } },
+        "last": { "query": "lastAnswer", "args": { "deck": "=params.deck" } }
+      },
+      "root": "studyCol"
+    },
+    "addCard": {
+      "type": "form",
+      "title": "New card",
+      "entity": "card",
+      "fields": ["front", "back", "hint", "deck"],
+      "onSave": { "event": { "name": "cardAdded", "context": { "deck": "=record.deck" } } }
+    },
+    "cardEdit": {
+      "type": "form",
+      "title": "Edit card",
+      "entity": "card",
+      "fields": ["front", "back", "hint", "deck", "paused"]
+    },
+    "cards": {
+      "type": "list",
+      "title": "All cards",
+      "query": "allCards",
+      "search": ["front", "back", "hint"],
+      "sectionBy": "deck",
+      "add": "addCard",
+      "empty": {
+        "title": "No cards yet",
+        "body": "Open a deck to add cards one by one, or import a CSV file there.",
+        "icon": "menu_book"
+      }
+    },
+    "cardDetail": {
+      "type": "detail",
+      "title": "Card",
+      "entity": "card",
+      "show": ["deck", "hint", "paused", "stage", "due", "interval", "ease", "reps", "lapses", "lastReviewed"],
+      "related": ["reviews"],
+      "footer": "cardFooter",
+      "edit": "cardEdit",
+      "header": "cardTop"
+    },
+    "stats": { "type": "dashboard", "title": "Stats", "root": "statsCol" },
+    "importReport": {
+      "type": "custom",
+      "title": "Import finished",
+      "present": "dialog",
+      "params": { "summary": { "type": "text", "maxLength": 300 }, "lines": { "type": "longText", "maxLength": 5000 } },
+      "root": "irCol"
+    }
+  },
+  "components": {
+    "exportAllBtn": {
+      "component": "Button",
+      "icon": "download",
+      "label": "Export all cards as CSV",
+      "iconOnly": true,
+      "action": { "event": { "name": "exportAll" } }
+    },
+    "deckTile": { "component": "Card", "hue": "=optionHue(item.icon)", "child": "deckTileCol" },
+    "deckTileCol": {
+      "component": "Column",
+      "children": ["deckTileIcon", "deckTileName", "deckTileBar", "deckTileDue", "deckTileDone"]
+    },
+    "deckTileIcon": { "component": "Icon", "name": "=coalesce(optionIcon(item.icon), 'school')" },
+    "deckTileName": { "component": "Text", "variant": "h5", "text": "=item.name" },
+    "deckTileBar": {
+      "component": "Progress",
+      "size": "small",
+      "value": "=item.learnedCount",
+      "max": "=max(item.cardCount, 1)",
+      "visible": "=item.cardCount > 0",
+      "accessibility": { "label": "Cards studied" }
+    },
+    "deckTileDue": {
+      "component": "Badge",
+      "tone": "primary",
+      "text": "=t('toStudy', {'n': item.toStudy})",
+      "visible": "=item.toStudy > 0"
+    },
+    "deckTileDone": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=t('deckDone', {'n': item.cardCount})",
+      "visible": "=item.toStudy == 0"
+    },
+    "deckTop": { "component": "Column", "children": ["deckHeader", "deckEmpty"] },
+    "deckHeader": {
+      "component": "Card",
+      "variant": "hero",
+      "child": "deckHeaderCol",
+      "hue": "=optionHue(record.icon)"
+    },
+    "deckHeaderCol": {
+      "component": "Column",
+      "align": "center",
+      "children": ["deckName", "deckRing", "studyBtn", "deckDoneText"]
+    },
+    "deckName": { "component": "Text", "variant": "h3", "text": "=record.name" },
+    "deckRing": {
+      "component": "Progress",
+      "variant": "ring",
+      "size": "large",
+      "value": "=record.learnedCount",
+      "max": "=max(record.cardCount, 1)",
+      "text": "=t('studiedOf', {'done': record.learnedCount, 'total': record.cardCount})",
+      "caption": "studied",
+      "visible": "=record.cardCount > 0",
+      "accessibility": { "label": "Cards you have studied" }
+    },
+    "studyBtn": {
+      "component": "Button",
+      "icon": "school",
+      "label": "Study now",
+      "variant": "primary",
+      "visible": "=record.toStudy > 0",
+      "action": { "event": { "name": "startStudy", "context": { "deck": "=record.id" } } }
+    },
+    "deckDoneText": {
+      "component": "Text",
+      "text": "=has(record.nextDue) ? 'All done for today. Next review ' + coalesce(formatRelative(record.nextDue), '') + '.' : 'All done for today.'",
+      "visible": "=record.toStudy == 0 && record.cardCount > 0",
+      "tone": "success"
+    },
+    "deckEmpty": {
+      "component": "EmptyState",
+      "illustration": "empty_box",
+      "icon": "note_add",
+      "title": "No cards yet",
+      "body": "Add cards below, or import a CSV file whose first row is front,back.",
+      "visible": "=record.cardCount == 0"
+    },
+    "deckFooter": { "component": "Column", "children": ["addCardBtn", "deckFileRow", "adoptBtn", "csvNote"] },
+    "addCardBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Add cards",
+      "action": { "event": { "name": "addCardTo", "context": { "deck": "=record.id" } } },
+      "variant": "=record.cardCount == 0 ? 'primary' : 'default'"
+    },
+    "deckFileRow": { "component": "Row", "justify": "spaceBetween", "children": ["importBtn", "exportBtn"] },
+    "importBtn": {
+      "component": "Button",
+      "icon": "upload",
+      "label": "Import CSV",
+      "action": { "event": { "name": "importCards", "context": { "deck": "=record.id" } } }
+    },
+    "exportBtn": {
+      "component": "Button",
+      "icon": "download",
+      "label": "Export CSV",
+      "visible": "=record.cardCount > 0",
+      "action": { "event": { "name": "exportDeck", "context": { "deck": "=record.id" } } }
+    },
+    "adoptBtn": {
+      "component": "Button",
+      "icon": "playlist_add",
+      "label": "=t('unsorted', {'n': size(q.unsortedCards)})",
+      "visible": "=size(q.unsortedCards) > 0",
+      "action": { "event": { "name": "adoptUnsorted", "context": { "deck": "=record.id" } } }
+    },
+    "csvNote": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "Import a CSV or text file with the front and the back in two columns, separated by commas, semicolons or tabs. A first line naming the columns (front and back, question and answer, or term and definition) is used when there is one; without it the first column is the front and the second the back. Lines starting with # are skipped. A Deck column sends each card to the deck it names, made for you if it is new."
+    },
+    "studyCol": {
+      "component": "Column",
+      "children": [
+        "studyCounter",
+        "studyCard",
+        "hintBtn",
+        "showBtn",
+        "gradeTop",
+        "gradeBottom",
+        "studyTools",
+        "studyDone"
+      ]
+    },
+    "studyCounter": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=t('left', {'due': size(q.queue.filter(c, !c.isNew)), 'fresh': min(size(q.queue.filter(c, c.isNew)), coalesce(params.deck.newAvailable, 0))})",
+      "visible": "=size(q.queue) > 0 && (!first(q.queue).isNew || params.deck.newAvailable > 0)"
+    },
+    "studyCard": {
+      "component": "Card",
+      "variant": "hero",
+      "child": "studyCardCol",
+      "visible": "=size(q.queue) > 0 && (!first(q.queue).isNew || params.deck.newAvailable > 0)"
+    },
+    "studyCardCol": {
+      "component": "Column",
+      "children": ["stageBadge", "frontText", "hintText", "answerDivider", "backText"]
+    },
+    "stageBadge": {
+      "component": "Badge",
+      "text": "=first(q.queue).isNew ? 'New card' : first(q.queue).interval == 0 ? 'Learning' : 'Review'",
+      "icon": "=first(q.queue).isNew ? 'note_add' : 'history'",
+      "tone": "=first(q.queue).isNew ? 'primary' : first(q.queue).interval == 0 ? 'warning' : 'neutral'"
+    },
+    "frontText": { "component": "Text", "variant": "h2", "text": "=coalesce(first(q.queue).front, '')" },
+    "hintText": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "='Hint: ' + coalesce(first(q.queue).hint, '')",
+      "visible": "=state.hintShown && has(first(q.queue).hint)"
+    },
+    "answerDivider": { "component": "Divider", "visible": "=state.revealed" },
+    "backText": {
+      "component": "Text",
+      "variant": "h2",
+      "text": "=coalesce(first(q.queue).back, '')",
+      "visible": "=state.revealed"
+    },
+    "hintBtn": {
+      "component": "Button",
+      "icon": "lightbulb",
+      "label": "Show hint",
+      "variant": "borderless",
+      "visible": "=!state.revealed && !state.hintShown && has(first(q.queue).hint) && (!first(q.queue).isNew || params.deck.newAvailable > 0)",
+      "action": { "event": { "name": "showHint" } }
+    },
+    "showBtn": {
+      "component": "Button",
+      "icon": "visibility",
+      "label": "Show answer",
+      "variant": "primary",
+      "visible": "=!state.revealed && size(q.queue) > 0 && (!first(q.queue).isNew || params.deck.newAvailable > 0)",
+      "action": { "event": { "name": "reveal" } }
+    },
+    "gradeTop": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["againBtn", "hardBtn"],
+      "visible": "=state.revealed && size(q.queue) > 0"
+    },
+    "gradeBottom": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["goodBtn", "easyBtn"],
+      "visible": "=state.revealed && size(q.queue) > 0"
+    },
+    "againBtn": {
+      "component": "Button",
+      "label": "Again · today",
+      "weight": 1,
+      "tone": "danger",
+      "action": { "event": { "name": "answer", "context": { "card": "=first(q.queue).id", "grade": "again" } } }
+    },
+    "hardBtn": {
+      "component": "Button",
+      "label": "='Hard · ' + coalesce(first(q.queue).hardText, '')",
+      "weight": 1,
+      "tone": "warning",
+      "action": { "event": { "name": "answer", "context": { "card": "=first(q.queue).id", "grade": "hard" } } }
+    },
+    "goodBtn": {
+      "component": "Button",
+      "label": "='Good · ' + coalesce(first(q.queue).goodText, '')",
+      "weight": 1,
+      "action": { "event": { "name": "answer", "context": { "card": "=first(q.queue).id", "grade": "good" } } },
+      "tone": "primary"
+    },
+    "easyBtn": {
+      "component": "Button",
+      "label": "='Easy · ' + coalesce(first(q.queue).easyText, '')",
+      "weight": 1,
+      "tone": "success",
+      "action": { "event": { "name": "answer", "context": { "card": "=first(q.queue).id", "grade": "easy" } } }
+    },
+    "studyTools": { "component": "Row", "justify": "spaceBetween", "children": ["undoBtn", "editCardBtn"] },
+    "undoBtn": {
+      "component": "Button",
+      "icon": "history",
+      "label": "Undo last answer",
+      "variant": "borderless",
+      "visible": "=size(q.last) > 0",
+      "action": { "event": { "name": "undoLast", "context": { "deck": "=params.deck" } } }
+    },
+    "editCardBtn": {
+      "component": "Button",
+      "icon": "edit",
+      "label": "Edit card",
+      "variant": "borderless",
+      "visible": "=size(q.queue) > 0 && (!first(q.queue).isNew || params.deck.newAvailable > 0)",
+      "action": { "event": { "name": "editCard", "context": { "card": "=first(q.queue).id" } } }
+    },
+    "studyDone": {
+      "component": "EmptyState",
+      "title": "All done for now",
+      "body": "=coalesce(params.deck.newCount, 0) > 0 ? 'You have reached today’s new-card limit. Come back tomorrow, or raise New cards per day in the deck.' : 'Nothing else is due in this deck today. Well done.'",
+      "icon": "celebration",
+      "visible": "=size(q.queue) == 0 || (first(q.queue).isNew && coalesce(params.deck.newAvailable, 0) <= 0)",
+      "action": { "event": { "name": "back" } },
+      "actionLabel": "Back to the deck",
+      "illustration": "all_done"
+    },
+    "cardTop": { "component": "Column", "children": ["cardFront", "leechNote"] },
+    "cardFront": { "component": "Text", "variant": "h3", "text": "=record.front" },
+    "leechNote": {
+      "component": "Text",
+      "tone": "warning",
+      "text": "You have forgotten this card many times. Try splitting it into smaller cards, rewording it or adding a hint.",
+      "visible": "=record.lapses >= 8"
+    },
+    "cardFooter": { "component": "Row", "justify": "spaceBetween", "children": ["pauseBtn", "resumeBtn", "forgetBtn"] },
+    "pauseBtn": {
+      "component": "Button",
+      "icon": "block",
+      "label": "Pause card",
+      "visible": "=!record.paused",
+      "action": { "event": { "name": "setPaused", "context": { "card": "=record.id", "paused": true } } }
+    },
+    "resumeBtn": {
+      "component": "Button",
+      "icon": "refresh",
+      "label": "Study it again",
+      "visible": "=record.paused",
+      "action": { "event": { "name": "setPaused", "context": { "card": "=record.id", "paused": false } } }
+    },
+    "forgetBtn": {
+      "component": "Button",
+      "icon": "delete_sweep",
+      "label": "Reset progress",
+      "visible": "=!record.isNew",
+      "action": { "event": { "name": "forgetCard", "context": { "card": "=record.id" } } }
+    },
+    "statsCol": {
+      "component": "Column",
+      "children": ["habitCard", "cardRow", "answersChart", "heatChart", "forecastChart", "gradesChart", "methodNote"]
+    },
+    "habitCard": { "component": "Card", "variant": "hero", "child": "habitCol" },
+    "habitCol": { "component": "Column", "children": ["streakStat", "weekStrip", "habitRow"] },
+    "weekStrip": { "component": "Calendar", "variant": "week", "query": "studyWeek", "date": "date" },
+    "habitRow": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["todayStat", "retentionStat"]
+    },
+    "streakStat": {
+      "component": "Stat",
+      "variant": "hero",
+      "label": "Streak",
+      "icon": "local_fire_department",
+      "value": "=t('days', {'n': streak(q.studyDays.map(d, d.key), 'FREQ=DAILY', today())})",
+      "caption": "='Best: ' + t('days', {'n': longestStreak(q.studyDays.map(d, d.key), 'FREQ=DAILY')})"
+    },
+    "todayStat": {
+      "component": "Stat",
+      "label": "Today",
+      "value": "=coalesce(q.todayAnswers.n, 0)",
+      "caption": "Cards answered"
+    },
+    "retentionStat": {
+      "component": "Stat",
+      "label": "Remembered",
+      "value": "=coalesce(q.monthAnswers.n, 0) > 0 ? string(int(round(100.0 * coalesce(q.monthAnswers.correct, 0) / coalesce(q.monthAnswers.n, 1)))) + '%' : '–'",
+      "caption": "Last 30 days"
+    },
+    "cardRow": { "component": "Row", "justify": "spaceBetween", "children": ["learnedStat", "matureStat", "dueStat"] },
+    "learnedStat": {
+      "component": "Stat",
+      "label": "Learned",
+      "value": "=coalesce(q.cardsLearned.n, 0)",
+      "caption": "=string(coalesce(q.cardsAll.n, 0)) + ' cards in all'"
+    },
+    "matureStat": {
+      "component": "Stat",
+      "label": "Well known",
+      "value": "=coalesce(q.cardsMature.n, 0)",
+      "caption": "Gap of 3 weeks or more"
+    },
+    "dueStat": {
+      "component": "Stat",
+      "label": "Due now",
+      "value": "=coalesce(q.dueAll.n, 0)",
+      "caption": "Reviews waiting"
+    },
+    "answersChart": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Answers, last 30 days",
+      "query": "last30",
+      "x": "key",
+      "y": ["correct", "forgot"]
+    },
+    "heatChart": {
+      "component": "Chart",
+      "kind": "heatmap",
+      "title": "Study days, last 13 weeks",
+      "query": "heat",
+      "x": "key",
+      "y": ["n"]
+    },
+    "forecastChart": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Reviews coming up, next 14 days",
+      "query": "forecast",
+      "x": "key",
+      "y": ["n"]
+    },
+    "gradesChart": {
+      "component": "Chart",
+      "kind": "donut",
+      "title": "Your answers, last 30 days",
+      "query": "grades30",
+      "x": "key",
+      "y": ["n"],
+      "centerText": "=t('answers', {'n': coalesce(q.monthAnswers.n, 0)})"
+    },
+    "methodNote": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "Spaced repetition: each answer sets when you see a card next. Again brings it back today. Hard, Good and Easy push it further out, and the gap grows each time you remember it."
+    },
+    "importAllBtn": {
+      "component": "Button",
+      "icon": "upload",
+      "label": "Import cards from a CSV or text file",
+      "iconOnly": true,
+      "action": { "event": { "name": "importCards" } }
+    },
+    "irCol": { "component": "Column", "children": ["irSummary", "irIntro", "irLines", "irOk"] },
+    "irSummary": { "component": "Text", "variant": "h5", "text": "=params.summary" },
+    "irIntro": { "component": "Text", "text": "These rows were left out, with the reason for each:" },
+    "irLines": { "component": "Text", "variant": "caption", "text": "=params.lines" },
+    "irOk": {
+      "component": "Button",
+      "label": "OK",
+      "variant": "primary",
+      "action": { "event": { "name": "closeReport" } }
+    }
+  },
+  "actions": {
+    "startStudy": {
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "steps": [{ "type": "navigate", "screen": "study", "params": { "deck": "=args.deck" } }]
+    },
+    "reveal": { "steps": [{ "type": "setState", "set": { "revealed": true } }] },
+    "showHint": { "steps": [{ "type": "setState", "set": { "hintShown": true } }] },
+    "answer": {
+      "args": {
+        "card": { "type": "ref", "to": "card" },
+        "grade": { "type": "choice", "options": ["again", "hard", "good", "easy"] }
+      },
+      "steps": [
+        {
+          "type": "createRecord",
+          "entity": "review",
+          "values": {
+            "card": "=args.card",
+            "deck": "=args.card.deck",
+            "grade": "=args.grade",
+            "wasNew": "=args.card.isNew",
+            "newInterval": "=args.grade == 'again' ? 0 : args.grade == 'hard' ? args.card.ivHard : args.grade == 'good' ? args.card.ivGood : args.card.ivEasy",
+            "prevInterval": "=args.card.interval",
+            "prevLastReviewed": "=args.card.lastReviewed",
+            "prevAnsweredAt": "=args.card.answeredAt"
+          }
+        },
+        {
+          "type": "updateRecord",
+          "record": "=args.card",
+          "set": {
+            "interval": "=args.grade == 'again' ? 0 : args.grade == 'hard' ? args.card.ivHard : args.grade == 'good' ? args.card.ivGood : args.card.ivEasy",
+            "lastReviewed": "=today()",
+            "answeredAt": "=now()"
+          },
+          "increment": {
+            "reps": 1,
+            "lapses": "=args.grade == 'again' && args.card.interval > 0 ? 1 : 0",
+            "hardCount": "=args.grade == 'hard' && args.card.interval > 0 ? 1 : 0",
+            "easyCount": "=args.grade == 'easy' && args.card.interval > 0 ? 1 : 0"
+          }
+        },
+        { "type": "setState", "set": { "revealed": false, "hintShown": false } }
+      ]
+    },
+    "undoLast": {
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "steps": [
+        { "type": "query", "query": "lastAnswer", "args": { "deck": "=args.deck" }, "as": "last" },
+        {
+          "type": "updateRecord",
+          "when": "=size(vars.last) > 0 && has(vars.last[0].card)",
+          "record": "=vars.last[0].card",
+          "set": {
+            "interval": "=vars.last[0].prevInterval",
+            "lastReviewed": "=vars.last[0].prevLastReviewed",
+            "answeredAt": "=vars.last[0].prevAnsweredAt"
+          },
+          "increment": {
+            "reps": -1,
+            "lapses": "=vars.last[0].grade == 'again' && vars.last[0].prevInterval > 0 ? -1 : 0",
+            "hardCount": "=vars.last[0].grade == 'hard' && vars.last[0].prevInterval > 0 ? -1 : 0",
+            "easyCount": "=vars.last[0].grade == 'easy' && vars.last[0].prevInterval > 0 ? -1 : 0"
+          }
+        },
+        {
+          "type": "deleteRecords",
+          "when": "=size(vars.last) > 0",
+          "entity": "review",
+          "where": "=item.id == vars.last[0].id"
+        },
+        { "type": "setState", "set": { "revealed": false, "hintShown": false } },
+        { "type": "toast", "when": "=size(vars.last) > 0", "text": "Last answer undone" }
+      ]
+    },
+    "editCard": {
+      "args": { "card": { "type": "ref", "to": "card" } },
+      "steps": [{ "type": "navigate", "screen": "cardEdit", "params": { "id": "=args.card" } }]
+    },
+    "addCardTo": {
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "steps": [{ "type": "navigate", "screen": "addCard", "params": { "deck": "=args.deck" } }]
+    },
+    "cardAdded": {
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "steps": [
+        { "type": "toast", "text": "Card added. Here is a fresh one for the next." },
+        { "type": "navigate", "screen": "addCard", "params": { "deck": "=args.deck" } }
+      ]
+    },
+    "setPaused": {
+      "args": { "card": { "type": "ref", "to": "card" }, "paused": { "type": "boolean" } },
+      "steps": [{ "type": "updateRecord", "record": "=args.card", "set": { "paused": "=args.paused" } }]
+    },
+    "forgetCard": {
+      "args": { "card": { "type": "ref", "to": "card" } },
+      "steps": [
+        {
+          "type": "confirm",
+          "title": "Reset this card's progress?",
+          "body": "It becomes a new card again. Its past answers stay in your stats.",
+          "confirmLabel": "Reset"
+        },
+        {
+          "type": "updateRecord",
+          "record": "=args.card",
+          "set": {
+            "interval": 0,
+            "reps": 0,
+            "lapses": 0,
+            "lastReviewed": null,
+            "answeredAt": null,
+            "hardCount": 0,
+            "easyCount": 0
+          }
+        },
+        { "type": "toast", "text": "Progress reset" }
+      ]
+    },
+    "adoptUnsorted": {
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "steps": [
+        { "type": "query", "query": "unsortedCards", "as": "loose" },
+        {
+          "type": "forEach",
+          "query": "unsortedCards",
+          "do": "placeCard",
+          "args": { "card": "=item.id", "deck": "=args.deck" }
+        },
+        { "type": "toast", "text": "=t('moved', {'n': size(vars.loose)})" }
+      ]
+    },
+    "importCards": {
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "importCsv",
+          "args": {
+            "entity": "card",
+            "comment": "#",
+            "fields": {
+              "front": {
+                "from": [
+                  "Front",
+                  "Question",
+                  "Term",
+                  "Word",
+                  "Prompt",
+                  "Side 1",
+                  "Side A",
+                  "Expression",
+                  "Card front",
+                  1
+                ]
+              },
+              "back": {
+                "from": [
+                  "Back",
+                  "Answer",
+                  "Definition",
+                  "Meaning",
+                  "Translation",
+                  "Response",
+                  "Side 2",
+                  "Side B",
+                  "Card back",
+                  2
+                ]
+              },
+              "hint": { "from": ["Hint", "Clue", "Extra", "Note", "Notes"] },
+              "deck": { "from": ["Deck", "Deck name", "Set", "Set name"] }
+            },
+            "createMissing": ["deck"],
+            "onError": "skip"
+          },
+          "as": "imported"
+        },
+        {
+          "type": "forEach",
+          "when": "=args.deck != null",
+          "query": "unsortedCards",
+          "do": "placeCard",
+          "args": { "card": "=item.id", "deck": "=args.deck" }
+        },
+        { "type": "forEach", "query": "needsTidy", "do": "tidyCard", "args": { "card": "=item.id" } },
+        {
+          "type": "toast",
+          "when": "=vars.imported.skipped == 0",
+          "text": "=t('imported', {'added': vars.imported.added, 'decks': vars.imported.created, 'skipped': vars.imported.skipped})"
+        },
+        {
+          "type": "navigate",
+          "when": "=vars.imported.skipped > 0",
+          "screen": "importReport",
+          "params": {
+            "summary": "=t('imported', {'added': vars.imported.added, 'decks': vars.imported.created, 'skipped': vars.imported.skipped})",
+            "lines": "=join(take(vars.imported.problems, 8).map(p, t('problemLine', {'row': p.row, 'reason': p.reason})), '\\n') + (vars.imported.skipped > 8 ? '\\n' + t('moreProblems', {'n': vars.imported.skipped - 8}) : '')"
+          }
+        }
+      ]
+    },
+    "exportDeck": {
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "deckCards",
+            "queryArgs": { "deck": "=args.deck" },
+            "columns": ["front", "back", "hint"],
+            "fileName": "=coalesce(args.deck.name, 'deck') + '.csv'",
+            "destination": "saveAs"
+          },
+          "as": "saved"
+        },
+        { "type": "toast", "when": "=vars.saved.saved", "text": "=t('exported', {'n': coalesce(vars.saved.rows, 0)})" }
+      ]
+    },
+    "exportAll": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "allCards",
+            "columns": ["deck", "front", "back", "hint"],
+            "fileName": "='flashcards-' + string(today()) + '.csv'",
+            "destination": "saveAs"
+          },
+          "as": "saved"
+        },
+        { "type": "toast", "when": "=vars.saved.saved", "text": "=t('exported', {'n': coalesce(vars.saved.rows, 0)})" }
+      ]
+    },
+    "remindDeck": {
+      "args": { "deck": { "type": "ref", "to": "deck" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=coalesce(args.deck.name, 'Flashcards')",
+            "body": "=t('dueNow', {'n': coalesce(args.deck.toStudy, 0)})",
+            "open": { "screen": "study", "params": { "deck": "=args.deck" } },
+            "tag": "=string(args.deck)",
+            "channel": "study"
+          }
+        }
+      ]
+    },
+    "placeCard": {
+      "args": { "card": { "type": "ref", "to": "card" }, "deck": { "type": "ref", "to": "deck" } },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.card",
+          "when": "=args.deck != null && !has(args.card.deck)",
+          "set": { "deck": "=args.deck" }
+        }
+      ]
+    },
+    "remindAll": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "Flashcards",
+            "body": "=t('dueNow', {'n': coalesce(sum(q.decks.map(d, d.toStudy)), 0)})",
+            "open": { "screen": "decks" },
+            "tag": "all-decks",
+            "channel": "study"
+          }
+        }
+      ]
+    },
+    "tidyCard": {
+      "args": { "card": { "type": "ref", "to": "card" } },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.card",
+          "when": "=coalesce(args.card.frontClean, '') != '' && coalesce(args.card.backClean, '') != ''",
+          "set": { "front": "=args.card.frontClean", "back": "=args.card.backClean" }
+        }
+      ]
+    },
+    "closeReport": { "steps": [{ "type": "back" }] }
+  },
+  "triggers": {
+    "studyReminder": {
+      "type": "recordSchedule",
+      "entity": "deck",
+      "rrule": "=item.remindDays",
+      "time": "=item.remindAt",
+      "when": "=item.remind && item.toStudy > 0 && !settings.dailyReminder",
+      "do": "remindDeck",
+      "args": { "deck": "=item.id" },
+      "maxPerDay": 10
+    },
+    "studyAll": {
+      "type": "schedule",
+      "rrule": "FREQ=DAILY",
+      "times": "=settings.dailyReminder ? [settings.dailyReminderAt] : []",
+      "when": "=coalesce(sum(q.decks.map(d, d.toStudy)), 0) > 0",
+      "do": "remindAll",
+      "maxPerDay": 1
+    }
+  },
+  "widgets": {
+    "dueWidget": {
+      "template": "stat",
+      "title": "Flashcards",
+      "sizes": ["small"],
+      "value": "=string(coalesce(q.dueAll.n, 0) + coalesce(sum(q.decks.map(d, d.newAvailable)), 0))",
+      "caption": "cards to study today",
+      "icon": "school",
+      "open": "decks"
+    }
+  },
+  "migrations": [{ "from": "<2.0.0", "steps": [{ "op": "deleteField", "entity": "card", "field": "importDeck" }] }]
+}

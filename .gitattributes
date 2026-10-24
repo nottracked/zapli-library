@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.zip binary
+# Import samples are test data: keep their bytes exactly (some CSV exports use CRLF line endings on purpose).
+apps/**/import-samples/** -text

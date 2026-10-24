@@ -1,0 +1,6 @@
+front,back,hint
+"Una mesa para dos, por favor.","A table for two, please.",mesa = table
+"¿Dónde está la estación de tren?","Where is the train station?",
+"La cuenta, por favor.","The bill, please.",
+"¿A qué hora sale el autobús?","What time does the bus leave?",salir = to leave
+"Estoy perdido.","I'm lost.",

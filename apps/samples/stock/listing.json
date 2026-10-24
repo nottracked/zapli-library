@@ -1,0 +1,115 @@
+{
+  "id": "samples/stock",
+  "category": "business",
+  "replaces": "barcode inventory",
+  "title": "Shop Stock",
+  "summary": "Count stock by scanning barcodes, see what to reorder, export to CSV.",
+  "description": "Keep track of what is on the shelves of a small shop, workshop or storeroom. Scan a barcode to find an item or add a new one, then record what comes in and goes out. Items at or below their reorder level are flagged, and you get a notification when one runs low.\n\n- **Scan to count:** find an item by its barcode in a second.\n- **Stock value** per item and in total.\n- **Export** the stock list as a CSV file.\n\n**What it never does:** no ads, no tracking and no account. Your stock list stays on this phone until you export it.",
+  "license": "MIT",
+  "tags": ["inventory", "stock", "barcode", "small business"],
+  "screenshots": [],
+  "sampleData": {
+    "category": [
+      {
+        "id": "drinks",
+        "name": "Drinks"
+      },
+      {
+        "id": "snacks",
+        "name": "Snacks"
+      },
+      {
+        "id": "office",
+        "name": "Office supplies"
+      }
+    ],
+    "item": [
+      {
+        "id": "water",
+        "name": "Still water 0.5 l",
+        "barcode": "2003000000016",
+        "category": "drinks",
+        "unit": "pcs",
+        "stock": 48,
+        "minStock": 24,
+        "price": "0.60"
+      },
+      {
+        "id": "juice",
+        "name": "Apple juice 1 l",
+        "barcode": "2003000000023",
+        "category": "drinks",
+        "unit": "pcs",
+        "stock": 6,
+        "minStock": 8,
+        "price": "1.90"
+      },
+      {
+        "id": "nuts",
+        "name": "Salted peanuts 200 g",
+        "barcode": "2003000000030",
+        "category": "snacks",
+        "unit": "pcs",
+        "stock": 15,
+        "minStock": 10,
+        "price": "1.40"
+      },
+      {
+        "id": "crackers",
+        "name": "Rye crackers",
+        "barcode": "2003000000047",
+        "category": "snacks",
+        "unit": "box",
+        "stock": 3,
+        "minStock": 4,
+        "price": "12.50"
+      },
+      {
+        "id": "paper",
+        "name": "Printer paper A4",
+        "barcode": "2003000000054",
+        "category": "office",
+        "unit": "box",
+        "stock": 9,
+        "minStock": 2,
+        "price": "21.00"
+      },
+      {
+        "id": "pens",
+        "name": "Blue pens",
+        "barcode": "2003000000061",
+        "category": "office",
+        "unit": "pcs",
+        "stock": 40,
+        "minStock": 20,
+        "price": "0.35"
+      }
+    ],
+    "movement": [
+      {
+        "item": "water",
+        "delta": 24,
+        "note": "Delivery"
+      },
+      {
+        "item": "juice",
+        "delta": -4,
+        "note": "Sold"
+      },
+      {
+        "item": "crackers",
+        "delta": -2
+      },
+      {
+        "item": "paper",
+        "delta": 5,
+        "note": "Delivery"
+      },
+      {
+        "item": "pens",
+        "delta": -10,
+        "note": "Office use"
+      }
+    ]
+  }
+}

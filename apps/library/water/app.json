@@ -1,0 +1,1540 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "library/water",
+    "name": "Water",
+    "version": "2.4.2",
+    "icon": "local_drink",
+    "category": "health_and_fitness",
+    "ageRating": "everyone",
+    "license": "MIT",
+    "iconData": "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"
+  },
+  "theme": {
+    "seedColor": "#0277BD",
+    "shape": "rounded"
+  },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "drinksToday": {
+        "en": "{n, plural, one {# drink today} other {# drinks today}}"
+      },
+      "days": {
+        "en": "{n, plural, one {# day} other {# days}}"
+      },
+      "exported": {
+        "en": "{n, plural, =0 {Saved an empty file.} one {Saved # drink.} other {Saved # drinks.}}"
+      },
+      "goalDays": {
+        "en": "{n, plural, one {# of {d} days} other {# of {d} days}}"
+      },
+      "remindBody": {
+        "en": "{left} to go today. A drink now keeps you on track."
+      },
+      "remindLine": {
+        "en": "{every, plural, one {Every hour} other {Every # hours}} from {from} to {until}, until you reach your goal."
+      },
+      "testBody": {
+        "en": "Reminders will come {every, plural, one {every hour} other {every # hours}} from {from} to {until}, and stop once you reach your goal."
+      },
+      "imported": {
+        "en": "{added, plural, =0 {No drinks added} one {Added # drink} other {Added # drinks}}{skipped, plural, =0 {.} one {; # row skipped.} other {; # rows skipped.}}"
+      },
+      "problemLine": {
+        "en": "Line {row}: {reason}"
+      },
+      "moreCups": {
+        "en": "{n, plural, one {# more quick add is in Edit quick adds. Today shows the first six.} other {# more quick adds are in Edit quick adds. Today shows the first six.}}"
+      },
+      "moreProblems": {
+        "en": "{n, plural, one {…and # more row} other {…and # more rows}}"
+      },
+      "toGo": {
+        "en": "{left} {unit} to go"
+      },
+      "metPct": {
+        "en": "{pct}% of your daily goal"
+      },
+      "ofGoalUnit": {
+        "en": "of {goal} {unit}"
+      }
+    }
+  },
+  "permissions": {
+    "notify.local": {
+      "purpose": "Remind you to drink during the hours you choose, until you reach your daily goal",
+      "maxPerDay": 20
+    },
+    "widget.home": {
+      "purpose": "Show today’s progress and a one-tap add button on your home screen"
+    },
+    "files.io": {
+      "purpose": "Save your drink log as a CSV file, and bring a saved log back in",
+      "modes": ["import", "export"]
+    }
+  },
+  "dataFlows": [
+    {
+      "from": ["drink.at", "drink.type", "drink.amount", "drink.unit"],
+      "to": "files.io",
+      "purpose": "Your drink log is saved as a CSV file in the place you pick"
+    }
+  ],
+  "settings": {
+    "unit": {
+      "type": "choice",
+      "label": "Units",
+      "options": [
+        {
+          "value": "ml",
+          "label": "Millilitres (ml)"
+        },
+        {
+          "value": "oz",
+          "label": "US fluid ounces (oz)"
+        }
+      ],
+      "default": "ml"
+    },
+    "goalFrom": {
+      "type": "choice",
+      "label": "Daily goal",
+      "options": [
+        {
+          "value": "fixed",
+          "label": "I set it myself"
+        },
+        {
+          "value": "weight",
+          "label": "Suggest it from my body weight"
+        }
+      ],
+      "default": "fixed"
+    },
+    "goalMl": {
+      "type": "number",
+      "label": "Goal per day",
+      "unit": "ml",
+      "default": 2000,
+      "min": 500,
+      "max": 6000,
+      "visible": "=settings.unit == 'ml' && settings.goalFrom == 'fixed'"
+    },
+    "goalOz": {
+      "type": "number",
+      "label": "Goal per day",
+      "unit": "oz",
+      "default": 64,
+      "min": 16,
+      "max": 200,
+      "visible": "=settings.unit == 'oz' && settings.goalFrom == 'fixed'"
+    },
+    "weightKg": {
+      "type": "number",
+      "label": "Body weight",
+      "unit": "kg",
+      "default": 70,
+      "min": 20,
+      "max": 300,
+      "sensitivity": "health",
+      "help": "Suggested goal: about 33 ml per kg, rounded to 50 ml. A rule of thumb, not medical advice.",
+      "visible": "=settings.unit == 'ml' && settings.goalFrom == 'weight'"
+    },
+    "weightLb": {
+      "type": "number",
+      "label": "Body weight",
+      "unit": "lb",
+      "default": 155,
+      "min": 45,
+      "max": 660,
+      "sensitivity": "health",
+      "help": "Suggested goal: half an ounce per pound, rounded to a whole ounce. A rule of thumb, not medical advice.",
+      "visible": "=settings.unit == 'oz' && settings.goalFrom == 'weight'"
+    },
+    "remind": {
+      "type": "boolean",
+      "label": "Remind me to drink",
+      "default": true
+    },
+    "remindFrom": {
+      "type": "time",
+      "label": "Reminders from",
+      "default": "08:00",
+      "help": "The first reminder of the day comes at this time.",
+      "visible": "=settings.remind"
+    },
+    "remindUntil": {
+      "type": "time",
+      "label": "Reminders until",
+      "default": "21:00",
+      "checks": [
+        {
+          "condition": "=settings.remindUntil > settings.remindFrom",
+          "message": "End reminders after they start."
+        }
+      ],
+      "help": "The last reminder comes at this time or a little before it.",
+      "visible": "=settings.remind"
+    },
+    "remindEvery": {
+      "type": "choice",
+      "label": "Remind me",
+      "options": [
+        {
+          "value": "1",
+          "label": "Every hour"
+        },
+        {
+          "value": "2",
+          "label": "Every 2 hours"
+        },
+        {
+          "value": "3",
+          "label": "Every 3 hours"
+        },
+        {
+          "value": "4",
+          "label": "Every 4 hours"
+        }
+      ],
+      "default": "2",
+      "visible": "=settings.remind"
+    },
+    "remindDays": {
+      "type": "multiChoice",
+      "label": "On these days",
+      "options": [
+        {
+          "value": "1",
+          "label": "Monday"
+        },
+        {
+          "value": "2",
+          "label": "Tuesday"
+        },
+        {
+          "value": "3",
+          "label": "Wednesday"
+        },
+        {
+          "value": "4",
+          "label": "Thursday"
+        },
+        {
+          "value": "5",
+          "label": "Friday"
+        },
+        {
+          "value": "6",
+          "label": "Saturday"
+        },
+        {
+          "value": "7",
+          "label": "Sunday"
+        }
+      ],
+      "default": ["1", "2", "3", "4", "5", "6", "7"],
+      "visible": "=settings.remind"
+    },
+    "importDates": {
+      "type": "choice",
+      "label": "Dates in imported files",
+      "options": [
+        {
+          "value": "monthFirst",
+          "label": "Month first (10/15/2026)"
+        },
+        {
+          "value": "dayFirst",
+          "label": "Day first (15/10/2026)"
+        }
+      ],
+      "default": "monthFirst",
+      "help": "For dates such as 03/04/2026 when no date in the file shows the order. Dates with dots are always read day first."
+    }
+  },
+  "entities": {
+    "drink": {
+      "label": "Drink",
+      "labelPlural": "Drinks",
+      "sensitivity": "personal",
+      "sort": ["-at"],
+      "display": {
+        "title": "=formatNumber(round((item.ml) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit",
+        "subtitle": "=coalesce(optionLabel(item.type), 'Drink') + ' · ' + formatDate(item.at, 'jm')",
+        "icon": "=coalesce(optionIcon(item.type), 'local_drink')",
+        "hue": "=optionHue(item.type)"
+      },
+      "fields": {
+        "amount": {
+          "type": "number",
+          "label": "Amount",
+          "required": true,
+          "min": 1,
+          "max": 5000,
+          "default": "=settings.unit == 'oz' ? 8.0 : 250.0"
+        },
+        "unit": {
+          "type": "choice",
+          "label": "Unit",
+          "options": [
+            {
+              "value": "ml",
+              "label": "Millilitres (ml)"
+            },
+            {
+              "value": "oz",
+              "label": "US fluid ounces (oz)"
+            }
+          ],
+          "default": "=settings.unit"
+        },
+        "type": {
+          "type": "choice",
+          "label": "Drink",
+          "options": [
+            {
+              "value": "water",
+              "label": "Water",
+              "icon": "water_drop",
+              "hue": "blue"
+            },
+            {
+              "value": "sparkling",
+              "label": "Sparkling water",
+              "icon": "water",
+              "hue": "cyan"
+            },
+            {
+              "value": "tea",
+              "label": "Tea",
+              "icon": "local_cafe",
+              "hue": "green"
+            },
+            {
+              "value": "coffee",
+              "label": "Coffee",
+              "icon": "local_cafe",
+              "hue": "brown"
+            },
+            {
+              "value": "juice",
+              "label": "Juice",
+              "icon": "local_drink",
+              "hue": "orange"
+            },
+            {
+              "value": "milk",
+              "label": "Milk",
+              "icon": "local_drink",
+              "hue": "grey"
+            },
+            {
+              "value": "other",
+              "label": "Other drink",
+              "icon": "local_drink",
+              "hue": "violet"
+            }
+          ],
+          "default": "water"
+        },
+        "at": {
+          "type": "datetime",
+          "label": "Date and time",
+          "required": true,
+          "default": "=now()"
+        },
+        "ml": {
+          "type": "number",
+          "label": "Millilitres",
+          "unit": "ml",
+          "compute": "=item.unit == 'oz' ? item.amount * 29.5735 : item.amount",
+          "stored": true,
+          "visible": false
+        },
+        "oz": {
+          "type": "number",
+          "label": "Ounces",
+          "unit": "oz",
+          "compute": "=item.unit == 'oz' ? item.amount : item.amount / 29.5735",
+          "stored": true,
+          "visible": false
+        },
+        "date": {
+          "type": "date",
+          "label": "Day",
+          "compute": "=date(item.at)",
+          "stored": true,
+          "visible": false
+        }
+      }
+    },
+    "cup": {
+      "label": "Quick add",
+      "labelPlural": "Quick adds",
+      "sort": ["position", "amount"],
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=formatNumber(round((item.ml) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + ' · ' + coalesce(optionLabel(item.type), 'Drink')",
+        "icon": "=coalesce(optionIcon(item.type), 'local_drink')",
+        "hue": "=optionHue(item.type)"
+      },
+      "fields": {
+        "name": {
+          "type": "text",
+          "label": "Name",
+          "required": true,
+          "maxLength": 20,
+          "placeholder": "Glass"
+        },
+        "amount": {
+          "type": "number",
+          "label": "Amount",
+          "required": true,
+          "min": 1,
+          "max": 5000,
+          "default": "=settings.unit == 'oz' ? 8.0 : 250.0"
+        },
+        "unit": {
+          "type": "choice",
+          "label": "Unit",
+          "options": [
+            {
+              "value": "ml",
+              "label": "Millilitres (ml)"
+            },
+            {
+              "value": "oz",
+              "label": "US fluid ounces (oz)"
+            }
+          ],
+          "default": "=settings.unit"
+        },
+        "type": {
+          "type": "choice",
+          "label": "Drink",
+          "options": [
+            {
+              "value": "water",
+              "label": "Water",
+              "icon": "water_drop",
+              "hue": "blue"
+            },
+            {
+              "value": "sparkling",
+              "label": "Sparkling water",
+              "icon": "water",
+              "hue": "cyan"
+            },
+            {
+              "value": "tea",
+              "label": "Tea",
+              "icon": "local_cafe",
+              "hue": "green"
+            },
+            {
+              "value": "coffee",
+              "label": "Coffee",
+              "icon": "local_cafe",
+              "hue": "brown"
+            },
+            {
+              "value": "juice",
+              "label": "Juice",
+              "icon": "local_drink",
+              "hue": "orange"
+            },
+            {
+              "value": "milk",
+              "label": "Milk",
+              "icon": "local_drink",
+              "hue": "grey"
+            },
+            {
+              "value": "other",
+              "label": "Other drink",
+              "icon": "local_drink",
+              "hue": "violet"
+            }
+          ],
+          "default": "water"
+        },
+        "position": {
+          "type": "integer",
+          "label": "Order",
+          "help": "Lower numbers come first. Today shows the first six; the first one is also on the widget and in reminders.",
+          "default": 5,
+          "min": 1,
+          "max": 99
+        },
+        "ml": {
+          "type": "number",
+          "label": "Millilitres",
+          "unit": "ml",
+          "compute": "=item.unit == 'oz' ? item.amount * 29.5735 : item.amount",
+          "stored": true,
+          "visible": false
+        }
+      }
+    }
+  },
+  "queries": {
+    "today": {
+      "entity": "drink",
+      "where": "=item.date == today()",
+      "sort": ["-at"]
+    },
+    "todayTotal": {
+      "entity": "drink",
+      "where": "=item.date == today()",
+      "aggregate": {
+        "ml": {
+          "fn": "sum",
+          "field": "ml"
+        },
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "anyDrink": {
+      "entity": "drink",
+      "limit": 1
+    },
+    "cups": {
+      "entity": "cup",
+      "sort": ["position", "amount"],
+      "limit": 100
+    },
+    "quickCups": {
+      "entity": "cup",
+      "sort": ["position", "amount"],
+      "limit": 6
+    },
+    "cupCount": {
+      "entity": "cup",
+      "aggregate": {
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "allDrinks": {
+      "entity": "drink",
+      "sort": ["-at"],
+      "limit": 2000
+    },
+    "exportDrinks": {
+      "entity": "drink",
+      "sort": ["at"],
+      "limit": 2000
+    },
+    "last7": {
+      "entity": "drink",
+      "where": "=item.date > addDays(today(), -7)",
+      "fill": true,
+      "groupBy": {
+        "field": "date",
+        "period": "day"
+      },
+      "aggregate": {
+        "ml": {
+          "fn": "sum",
+          "field": "ml"
+        },
+        "oz": {
+          "fn": "sum",
+          "field": "oz"
+        }
+      }
+    },
+    "last30": {
+      "entity": "drink",
+      "where": "=item.date > addDays(today(), -30)",
+      "fill": true,
+      "groupBy": {
+        "field": "date",
+        "period": "day"
+      },
+      "aggregate": {
+        "ml": {
+          "fn": "sum",
+          "field": "ml"
+        },
+        "oz": {
+          "fn": "sum",
+          "field": "oz"
+        }
+      }
+    },
+    "mix30": {
+      "entity": "drink",
+      "where": "=item.date > addDays(today(), -30)",
+      "groupBy": {
+        "field": "type"
+      },
+      "aggregate": {
+        "ml": {
+          "fn": "sum",
+          "field": "ml"
+        },
+        "oz": {
+          "fn": "sum",
+          "field": "oz"
+        }
+      }
+    },
+    "last120": {
+      "entity": "drink",
+      "where": "=item.date > addDays(today(), -120)",
+      "groupBy": {
+        "field": "date",
+        "period": "day"
+      },
+      "aggregate": {
+        "ml": {
+          "fn": "sum",
+          "field": "ml"
+        }
+      }
+    }
+  },
+  "navigation": {
+    "start": "today",
+    "tabs": [
+      {
+        "screen": "today",
+        "label": "Today",
+        "icon": "today"
+      },
+      {
+        "screen": "history",
+        "label": "History",
+        "icon": "insights"
+      },
+      {
+        "screen": "drinks",
+        "label": "Log",
+        "icon": "history"
+      },
+      {
+        "screen": "prefs",
+        "label": "Settings",
+        "icon": "settings"
+      }
+    ]
+  },
+  "screens": {
+    "today": {
+      "type": "dashboard",
+      "title": "Today",
+      "root": "todayCol"
+    },
+    "history": {
+      "type": "dashboard",
+      "title": "History",
+      "root": "historyCol"
+    },
+    "drinks": {
+      "type": "list",
+      "title": "Drink log",
+      "query": "allDrinks",
+      "sectionBy": "date",
+      "toolbar": ["exportBtn", "importBtn"],
+      "add": "logDrink",
+      "empty": {
+        "title": "No drinks logged yet",
+        "body": "Tap a quick add on Today, or add any amount here.",
+        "icon": "local_drink"
+      }
+    },
+    "logDrink": {
+      "type": "form",
+      "entity": "drink",
+      "onSave": { "event": { "name": "drinkLogged" } }
+    },
+    "cups": {
+      "type": "list",
+      "title": "Quick adds",
+      "query": "cups",
+      "empty": {
+        "title": "No quick adds yet",
+        "body": "Add the glasses, bottles and mugs you use, for one-tap logging.",
+        "icon": "local_drink"
+      }
+    },
+    "prefs": {
+      "type": "settings",
+      "title": "Settings"
+    },
+    "importReport": {
+      "type": "custom",
+      "title": "Import finished",
+      "present": "dialog",
+      "params": {
+        "summary": {
+          "type": "text",
+          "maxLength": 300
+        },
+        "lines": {
+          "type": "longText",
+          "maxLength": 5000
+        }
+      },
+      "root": "irCol"
+    }
+  },
+  "components": {
+    "todayCol": {
+      "component": "Column",
+      "children": [
+        "progressCard",
+        "cupList",
+        "moreCupsNote",
+        "noCups",
+        "moreRow",
+        "todaySection",
+        "welcome",
+        "noDrinks",
+        "reminderSection"
+      ]
+    },
+    "progressCard": {
+      "component": "Card",
+      "variant": "hero",
+      "child": "progressCol"
+    },
+    "progressCol": {
+      "component": "Column",
+      "align": "center",
+      "children": ["ring", "remainText", "metBadge"]
+    },
+    "ring": {
+      "component": "Progress",
+      "variant": "ring",
+      "size": "large",
+      "value": "=coalesce(q.todayTotal.ml, 0.0) / (settings.unit == 'oz' ? 29.5735 : 1.0)",
+      "max": "=(settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl))",
+      "text": "=formatNumber(round((coalesce(q.todayTotal.ml, 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0))",
+      "caption": "=t('ofGoalUnit', {'goal': formatNumber(round(((((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)))) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)), 'unit': settings.unit})",
+      "tone": "=coalesce(q.todayTotal.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) ? 'success' : 'primary'",
+      "accessibility": {
+        "label": "Water today"
+      }
+    },
+    "remainText": {
+      "component": "Text",
+      "text": "=coalesce(q.todayTotal.ml, 0.0) / (settings.unit == 'oz' ? 29.5735 : 1.0) >= (settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) ? t('metPct', {'pct': int(coalesce(q.todayTotal.ml, 0.0) / (settings.unit == 'oz' ? 29.5735 : 1.0) / (settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * 100.0)}) : t('toGo', {'left': formatNumber(round((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) - coalesce(q.todayTotal.ml, 0.0) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)), 'unit': settings.unit})"
+    },
+    "metBadge": {
+      "component": "Badge",
+      "icon": "celebration",
+      "tone": "success",
+      "text": "Daily goal reached. Well done!",
+      "visible": "=coalesce(q.todayTotal.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0))"
+    },
+    "cupList": {
+      "component": "List",
+      "columns": 2,
+      "children": {
+        "path": "/q/quickCups",
+        "componentId": "cupBtn"
+      },
+      "visible": "=size(q.quickCups) > 0"
+    },
+    "moreCupsNote": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=t('moreCups', {'n': coalesce(q.cupCount.n, 0) - 6})",
+      "visible": "=coalesce(q.cupCount.n, 0) > 6"
+    },
+    "cupBtn": {
+      "component": "Button",
+      "variant": "primary",
+      "icon": "=coalesce(optionIcon(item.type), 'local_drink')",
+      "label": "=item.name + ' · ' + formatNumber(round((item.ml) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit",
+      "action": {
+        "event": {
+          "name": "addCup",
+          "context": {
+            "cup": "=item.id"
+          }
+        }
+      }
+    },
+    "noCups": {
+      "component": "EmptyState",
+      "icon": "local_drink",
+      "title": "No quick adds yet",
+      "body": "Add the glasses and bottles you use, then log a drink with one tap.",
+      "action": {
+        "event": {
+          "name": "navigate",
+          "context": {
+            "screen": "cup.form"
+          }
+        }
+      },
+      "actionLabel": "Add a quick add",
+      "visible": "=size(q.cups) == 0",
+      "illustration": "empty_box"
+    },
+    "moreRow": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["otherBtn", "editCupsBtn"]
+    },
+    "otherBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Other amount",
+      "action": {
+        "event": {
+          "name": "navigate",
+          "context": {
+            "screen": "logDrink"
+          }
+        }
+      }
+    },
+    "editCupsBtn": {
+      "component": "Button",
+      "variant": "borderless",
+      "icon": "edit",
+      "label": "Edit quick adds",
+      "action": {
+        "event": {
+          "name": "navigate",
+          "context": {
+            "screen": "cups"
+          }
+        }
+      }
+    },
+    "todaySection": {
+      "component": "Section",
+      "title": "=t('drinksToday', {'n': size(q.today)})",
+      "children": ["todayList"],
+      "visible": "=size(q.today) > 0"
+    },
+    "todayList": {
+      "component": "List",
+      "children": {
+        "path": "/q/today",
+        "componentId": "drinkRow"
+      }
+    },
+    "drinkRow": {
+      "component": "Row",
+      "align": "center",
+      "children": ["drinkIcon", "drinkText", "drinkRemove"]
+    },
+    "drinkIcon": {
+      "component": "Icon",
+      "name": "=coalesce(optionIcon(item.type), 'local_drink')",
+      "hue": "=optionHue(item.type)"
+    },
+    "drinkText": {
+      "component": "Text",
+      "weight": 1,
+      "text": "=formatDate(item.at, 'jm') + '  ·  ' + formatNumber(round((item.ml) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + '  ' + lower(coalesce(optionLabel(item.type), 'drink'))"
+    },
+    "drinkRemove": {
+      "component": "Button",
+      "variant": "borderless",
+      "icon": "delete",
+      "iconOnly": true,
+      "label": "Remove this drink",
+      "action": {
+        "event": {
+          "name": "removeDrink",
+          "context": {
+            "drink": "=item.id"
+          }
+        }
+      }
+    },
+    "welcome": {
+      "component": "EmptyState",
+      "illustration": "welcome",
+      "icon": "water_drop",
+      "title": "Welcome to Water",
+      "body": "Tap a glass above each time you drink. Your goal, units and reminder hours are in Settings.",
+      "visible": "=size(q.anyDrink) == 0 && size(q.cups) > 0"
+    },
+    "noDrinks": {
+      "component": "EmptyState",
+      "illustration": "nothing_today",
+      "icon": "water_drop",
+      "title": "Nothing logged yet today",
+      "body": "Tap a glass above each time you drink.",
+      "visible": "=size(q.today) == 0 && size(q.anyDrink) > 0 && size(q.cups) > 0"
+    },
+    "reminderSection": {
+      "component": "Section",
+      "title": "Reminders",
+      "children": ["reminderText", "testBtn"],
+      "collapsible": true,
+      "collapsed": true
+    },
+    "reminderText": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=settings.remind ? t('remindLine', {'every': int(settings.remindEvery), 'from': formatDate(settings.remindFrom, 'jm'), 'until': formatDate(settings.remindUntil, 'jm')}) : 'Reminders are off. Turn them on in Settings.'"
+    },
+    "testBtn": {
+      "component": "Button",
+      "variant": "borderless",
+      "icon": "notifications",
+      "label": "Send a test reminder",
+      "visible": "=settings.remind",
+      "action": {
+        "event": {
+          "name": "testReminder"
+        }
+      }
+    },
+    "historyCol": {
+      "component": "Column",
+      "children": ["historyCard", "chart7ml", "chart7oz", "mixChart", "mixChartOz", "goalNote"]
+    },
+    "historyCard": {
+      "component": "Card",
+      "variant": "hero",
+      "child": "historyStats"
+    },
+    "historyStats": {
+      "component": "Column",
+      "children": ["streakStat", "statRow1"]
+    },
+    "statRow1": {
+      "component": "Row",
+      "justify": "spaceBetween",
+      "children": ["metStat", "avgStat"]
+    },
+    "streakStat": {
+      "component": "Stat",
+      "variant": "hero",
+      "label": "Goal streak",
+      "icon": "local_fire_department",
+      "value": "=t('days', {'n': streak(q.last120.filter(d, d.ml >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0))).map(d, d.key), 'FREQ=DAILY', today())})",
+      "caption": "Days in a row at your goal"
+    },
+    "metStat": {
+      "component": "Stat",
+      "variant": "compact",
+      "label": "Goal reached",
+      "value": "=t('goalDays', {'n': size(q.last30.filter(d, d.ml >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)))), 'd': 30})",
+      "caption": "In the last 30 days"
+    },
+    "avgStat": {
+      "component": "Stat",
+      "variant": "compact",
+      "label": "Average, last 7 days",
+      "value": "=size(q.last7.filter(d, d.ml > 0.0)) > 0 ? formatNumber(round((coalesce(avg(q.last7.filter(d, d.ml > 0.0).map(d, d.ml)), 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit : '–'",
+      "caption": "On days you logged a drink"
+    },
+    "chart7ml": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Last 7 days (ml)",
+      "query": "last7",
+      "x": "key",
+      "y": ["ml"],
+      "visible": "=settings.unit == 'ml'",
+      "reference": [
+        {
+          "value": "=(settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl))",
+          "label": "Goal",
+          "tone": "success"
+        }
+      ]
+    },
+    "chart7oz": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Last 7 days (oz)",
+      "query": "last7",
+      "x": "key",
+      "y": ["oz"],
+      "visible": "=settings.unit == 'oz'",
+      "reference": [
+        {
+          "value": "=(settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl))",
+          "label": "Goal",
+          "tone": "success"
+        }
+      ]
+    },
+    "mixChart": {
+      "component": "Chart",
+      "kind": "donut",
+      "title": "What you drank, last 30 days (ml)",
+      "query": "mix30",
+      "x": "key",
+      "y": ["ml"],
+      "centerText": "=formatNumber(round(coalesce(sum(q.mix30.map(r, r.ml)), 0.0))) + ' ml'",
+      "visible": "=settings.unit == 'ml' && size(q.mix30) > 1"
+    },
+    "mixChartOz": {
+      "component": "Chart",
+      "kind": "donut",
+      "title": "What you drank, last 30 days (oz)",
+      "query": "mix30",
+      "x": "key",
+      "y": ["oz"],
+      "centerText": "=formatNumber(round(coalesce(sum(q.mix30.map(r, r.oz)), 0.0), 1)) + ' oz'",
+      "visible": "=settings.unit == 'oz' && size(q.mix30) > 1"
+    },
+    "goalNote": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "How much you need depends on your body, the weather and how active you are. Food gives some of your water too. The goal here is a rule of thumb, not medical advice: if you have heart or kidney problems, or your doctor limits fluids, follow their advice."
+    },
+    "exportBtn": {
+      "component": "Button",
+      "icon": "download",
+      "iconOnly": true,
+      "label": "Save the log as a CSV file",
+      "action": {
+        "event": {
+          "name": "exportLog"
+        }
+      }
+    },
+    "importBtn": {
+      "component": "Button",
+      "icon": "upload",
+      "iconOnly": true,
+      "label": "Bring in a saved CSV log",
+      "action": {
+        "event": {
+          "name": "importLog"
+        }
+      }
+    },
+    "irCol": {
+      "component": "Column",
+      "children": ["irSummary", "irIntro", "irLines", "irOk"]
+    },
+    "irSummary": {
+      "component": "Text",
+      "variant": "h5",
+      "text": "=params.summary"
+    },
+    "irIntro": {
+      "component": "Text",
+      "text": "These rows were left out, with the reason for each:"
+    },
+    "irLines": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "=params.lines"
+    },
+    "irOk": {
+      "component": "Button",
+      "label": "OK",
+      "variant": "primary",
+      "action": {
+        "event": {
+          "name": "closeReport"
+        }
+      }
+    }
+  },
+  "actions": {
+    "addCup": {
+      "args": {
+        "cup": {
+          "type": "ref",
+          "to": "cup"
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "cancel",
+          "args": { "tag": "drink" },
+          "when": "=settings.remind",
+          "onError": "continue"
+        },
+        {
+          "type": "query",
+          "query": "todayTotal",
+          "as": "before"
+        },
+        {
+          "type": "createRecord",
+          "entity": "drink",
+          "values": {
+            "amount": "=args.cup.amount",
+            "unit": "=args.cup.unit",
+            "type": "=args.cup.type",
+            "at": "=now()"
+          }
+        },
+        {
+          "type": "toast",
+          "when": "=coalesce(vars.before.ml, 0.0) < ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) && coalesce(vars.before.ml, 0.0) + coalesce(args.cup.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0))",
+          "text": "Daily goal reached. Well done!"
+        },
+        {
+          "type": "toast",
+          "when": "=!(coalesce(vars.before.ml, 0.0) < ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) && coalesce(vars.before.ml, 0.0) + coalesce(args.cup.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)))",
+          "text": "='Added ' + formatNumber(round((coalesce(args.cup.ml, 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + '.'"
+        }
+      ]
+    },
+    "addFirstCup": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "cancel",
+          "args": { "tag": "drink" },
+          "when": "=settings.remind",
+          "onError": "continue"
+        },
+        {
+          "type": "query",
+          "query": "cups",
+          "as": "c"
+        },
+        {
+          "type": "createRecord",
+          "entity": "drink",
+          "when": "=size(vars.c) > 0",
+          "values": {
+            "amount": "=vars.c[0].amount",
+            "unit": "=vars.c[0].unit",
+            "type": "=vars.c[0].type",
+            "at": "=now()"
+          }
+        },
+        {
+          "type": "createRecord",
+          "entity": "drink",
+          "when": "=size(vars.c) == 0",
+          "values": {
+            "amount": "=settings.unit == 'oz' ? 8.0 : 250.0",
+            "unit": "=settings.unit",
+            "type": "water",
+            "at": "=now()"
+          }
+        }
+      ]
+    },
+    "removeDrink": {
+      "args": {
+        "drink": {
+          "type": "ref",
+          "to": "drink"
+        }
+      },
+      "steps": [
+        {
+          "type": "confirm",
+          "title": "=coalesce(optionLabel(args.drink.type), 'Drink') + ', ' + formatNumber(round((coalesce(args.drink.ml, 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + ' at ' + coalesce(formatDate(args.drink.at, 'jm'), '')",
+          "body": "Remove this drink from today?",
+          "confirmLabel": "Remove"
+        },
+        {
+          "type": "deleteRecords",
+          "entity": "drink",
+          "where": "=item.id == args.drink"
+        },
+        {
+          "type": "toast",
+          "text": "Drink removed."
+        }
+      ]
+    },
+    "remindDrink": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "Time for a drink",
+            "body": "=t('remindBody', {'left': formatNumber(round((max(((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) - coalesce(q.todayTotal.ml, 0.0), 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit})",
+            "open": {
+              "screen": "today"
+            },
+            "buttons": [
+              {
+                "id": "add",
+                "label": "I drank some",
+                "action": "addFirstCup"
+              }
+            ],
+            "tag": "drink",
+            "channel": "reminders",
+            "snooze": ["PT15M", "PT30M", "PT1H"]
+          }
+        }
+      ]
+    },
+    "testReminder": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "Reminders are on",
+            "body": "=t('testBody', {'every': int(settings.remindEvery), 'from': formatDate(settings.remindFrom, 'jm'), 'until': formatDate(settings.remindUntil, 'jm')})",
+            "open": {
+              "screen": "today"
+            },
+            "tag": "drink",
+            "channel": "reminders"
+          }
+        },
+        {
+          "type": "toast",
+          "text": "Test reminder sent."
+        }
+      ]
+    },
+    "exportLog": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "exportDrinks",
+            "columns": ["at", "type", "amount", "unit"],
+            "fileName": "water-log.csv"
+          },
+          "as": "saved"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.saved.saved",
+          "text": "=t('exported', {'n': coalesce(vars.saved.rows, 0)})"
+        }
+      ]
+    },
+    "importLog": {
+      "steps": [
+        {
+          "type": "confirm",
+          "title": "Import drinks from a file?",
+          "body": "Pick a CSV file saved by this app or by another water-tracking app. Date, time, amount, unit and drink columns are read, in ml, oz, litres or cups. Drinks you already have are not replaced, so import each file only once. Check the date order in Settings first.",
+          "confirmLabel": "Pick a file"
+        },
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "importCsv",
+          "args": {
+            "entity": "drink",
+            "fields": {
+              "at": {
+                "from": [
+                  "Date and time",
+                  "Date/Time",
+                  "DateTimeLocal",
+                  "DateTime",
+                  "Timestamp",
+                  "Time stamp",
+                  "Logged at",
+                  "Recorded",
+                  "Measured",
+                  "Date",
+                  "Datum",
+                  "Dátum",
+                  "Measurement date"
+                ],
+                "timeFrom": ["Time", "Uhrzeit", "Zeit", "Čas", "Measurement time"]
+              },
+              "amount": {
+                "from": ["Amount", "Volume", "Quantity", "Intake", "Size", "Menge", "Množstvo"],
+                "units": {
+                  "ml": 1,
+                  "millilitres": 1,
+                  "milliliters": 1,
+                  "cl": 10,
+                  "dl": 100,
+                  "l": 1000,
+                  "litres": 1000,
+                  "liters": 1000,
+                  "oz": 1,
+                  "fl oz": 1,
+                  "ounces": 1,
+                  "cup": 8,
+                  "cups": 8
+                }
+              },
+              "unit": {
+                "from": ["Unit", "Units", "Einheit", "Jednotka"],
+                "unitOf": "amount",
+                "values": {
+                  "millilitres": "ml",
+                  "milliliters": "ml",
+                  "cl": "ml",
+                  "dl": "ml",
+                  "l": "ml",
+                  "litres": "ml",
+                  "liters": "ml",
+                  "fl oz": "oz",
+                  "ounces": "oz",
+                  "cup": "oz",
+                  "cups": "oz"
+                }
+              },
+              "type": {
+                "from": ["Drink", "Drink type", "Beverage", "Beverage type", "Type", "Category", "Getränk", "Nápoj"],
+                "values": {
+                  "Green tea": "tea",
+                  "Black tea": "tea",
+                  "Herbal tea": "tea",
+                  "Iced tea": "tea",
+                  "Mineral water": "sparkling",
+                  "Soda water": "sparkling",
+                  "Espresso": "coffee",
+                  "Latte": "coffee",
+                  "Orange juice": "juice",
+                  "*": "other"
+                }
+              }
+            },
+            "dateOrder": "=settings.importDates == 'dayFirst' ? 'dmy' : 'mdy'",
+            "onError": "skip"
+          },
+          "as": "imported"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.imported.skipped == 0",
+          "text": "=t('imported', {'added': vars.imported.added, 'skipped': vars.imported.skipped})"
+        },
+        {
+          "type": "navigate",
+          "when": "=vars.imported.skipped > 0",
+          "screen": "importReport",
+          "params": {
+            "summary": "=t('imported', {'added': vars.imported.added, 'skipped': vars.imported.skipped})",
+            "lines": "=join(take(vars.imported.problems, 8).map(p, t('problemLine', {'row': p.row, 'reason': p.reason})), '\\n') + (vars.imported.skipped > 8 ? '\\n' + t('moreProblems', {'n': vars.imported.skipped - 8}) : '')"
+          }
+        }
+      ]
+    },
+    "seedCups": {
+      "steps": [
+        {
+          "type": "query",
+          "query": "cups",
+          "as": "c"
+        },
+        {
+          "type": "createRecord",
+          "entity": "cup",
+          "when": "=size(vars.c) == 0",
+          "values": {
+            "name": "Glass",
+            "amount": 250.0,
+            "unit": "ml",
+            "type": "water",
+            "position": 1
+          }
+        },
+        {
+          "type": "createRecord",
+          "entity": "cup",
+          "when": "=size(vars.c) == 0",
+          "values": {
+            "name": "Bottle",
+            "amount": 500.0,
+            "unit": "ml",
+            "type": "water",
+            "position": 2
+          }
+        },
+        {
+          "type": "createRecord",
+          "entity": "cup",
+          "when": "=size(vars.c) == 0",
+          "values": {
+            "name": "Mug",
+            "amount": 300.0,
+            "unit": "ml",
+            "type": "tea",
+            "position": 3
+          }
+        }
+      ]
+    },
+    "drinkLogged": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "cancel",
+          "args": { "tag": "drink" },
+          "when": "=settings.remind",
+          "onError": "continue"
+        },
+        { "type": "back" }
+      ]
+    },
+    "closeReport": {
+      "steps": [
+        {
+          "type": "back"
+        }
+      ]
+    }
+  },
+  "triggers": {
+    "setup": {
+      "type": "app",
+      "on": "firstRun",
+      "do": "seedCups"
+    },
+    "drinkReminder": {
+      "type": "schedule",
+      "rrule": "FREQ=DAILY",
+      "times": "=settings.remind ? [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23].filter(i, i * int(settings.remindEvery) * 60 <= hour(settings.remindUntil) * 60 + minute(settings.remindUntil) - hour(settings.remindFrom) * 60 - minute(settings.remindFrom)).map(i, settings.remindFrom + duration('PT' + string(i * int(settings.remindEvery)) + 'H')) : []",
+      "when": "=string(weekday(today())) in settings.remindDays && coalesce(q.todayTotal.ml, 0.0) < ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0))",
+      "do": "remindDrink",
+      "maxPerDay": 19
+    }
+  },
+  "widgets": {
+    "todayWidget": {
+      "template": "progress",
+      "title": "Water today",
+      "sizes": ["small", "medium"],
+      "value": "=coalesce(q.todayTotal.ml, 0.0) / (settings.unit == 'oz' ? 29.5735 : 1.0)",
+      "max": "=(settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl))",
+      "label": "=formatNumber(round((coalesce(q.todayTotal.ml, 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + ' of ' + formatNumber(round((((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0))) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit",
+      "caption": "=coalesce(q.todayTotal.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) ? 'Goal reached' : formatNumber(round((max(((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) - coalesce(q.todayTotal.ml, 0.0), 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + ' to go'",
+      "open": "today"
+    },
+    "addWidget": {
+      "template": "button",
+      "title": "Water",
+      "sizes": ["small"],
+      "label": "=size(q.cups) > 0 ? 'Add ' + lower(coalesce(first(q.cups).name, 'glass')) : 'Add a glass'",
+      "icon": "local_drink",
+      "action": {
+        "event": {
+          "name": "addFirstCup"
+        }
+      },
+      "open": "today"
+    }
+  },
+  "migrations": [
+    {
+      "from": "<2.0.0",
+      "steps": [
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcDate"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcTime"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcAmount"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcUnit"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcMl"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcOz"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcType"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcDatePart"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcTimeLower"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcDateNorm"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcDateShape"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcDay"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcClock"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcAt"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcUnitKey"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcNum"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcNumClean"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcAmt"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcU"
+        },
+        {
+          "op": "deleteField",
+          "entity": "drink",
+          "field": "srcTypeKey"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+"Date","Account","Category","Tags","Expense amount","Income amount","Currency","In main currency","Main currency","Description"
+"9/2/26","Cash","Food & Drinks","coffee","3.80","0","USD","3.80","USD","Morning coffee"
+"9/4/26","Card","Home","rent","1,200.00","0","USD","1,200.00","USD","September rent"
+"9/15/26","Card","Salary","","0","3,100.00","USD","3,100.00","USD","Pay day"
+"9/18/26","Card","Transport","fuel","48.25","0","USD","48.25","USD",""

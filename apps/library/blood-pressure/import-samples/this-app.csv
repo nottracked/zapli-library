@@ -1,0 +1,5 @@
+﻿"Measured at","Upper (systolic)","Lower (diastolic)","Pulse","Arm","Position","Monitor showed an irregular heartbeat","Context","Note","Time of day","Category (AHA/ACC)","Category (ESC 2024)"
+"2026-10-12T07:30:00+02:00","142","91","74","left","sitting","true","beforeMeds; stress","Slept badly","morning","stage2","hypertension"
+"2026-10-12T20:55:00+02:00","119","76","62","left","sitting","false","afterMeds","","evening","normal","elevated"
+"2026-10-13T07:05:00+02:00","135","86","70","left","sitting","false","beforeMeds","","morning","stage1","elevated"
+"2026-10-13T20:40:00+02:00","124","78","66","right","standing","false","","Right arm, left was sore","evening","elevated","elevated"

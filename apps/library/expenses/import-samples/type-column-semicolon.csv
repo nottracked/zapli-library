@@ -1,0 +1,6 @@
+account;category;currency;amount;ref_currency_amount;type;payment_type;payment_type_local;note;date;transfer;payee;labels
+Main account;Groceries;EUR;31.75;31.75;Expense;CASH;Cash;Weekly shop;2026-09-06T10:15:00.000Z;false;Fresh Corner;
+Main account;Restaurant, fast-food;EUR;18.00;18.00;Expense;DEBIT_CARD;Debit card;Pizza;2026-09-07T19:40:00.000Z;false;;
+Main account;Wage, invoices;EUR;2450.00;2450.00;Income;TRANSFER;Bank transfer;Salary;2026-09-10T08:00:00.000Z;false;Example Works;
+Main account;Transfer, withdraw;EUR;100.00;100.00;Expense;TRANSFER;Bank transfer;To savings;2026-09-12T09:00:00.000Z;true;;
+Main account;Fuel;EUR;55.20;55.20;Expense;DEBIT_CARD;Debit card;;12/09/2026 17:30;false;Fuel Stop;

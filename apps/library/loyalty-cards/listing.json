@@ -1,0 +1,204 @@
+{
+  "id": "library/loyalty-cards",
+  "category": "shopping",
+  "replaces": "Loyalty-card wallet",
+  "title": "Loyalty cards",
+  "summary": "All your store cards on your phone, ready to scan at the checkout.",
+  "description": "**Loyalty cards** keeps the store cards, membership cards and vouchers from your wallet on your phone, ready for the checkout. No account, no ads, and it works without a connection.\n\n### What it does\n- **Add a card by scanning its barcode** with the camera. The barcode type is detected for you. A card without a usable barcode? Just type the number: the app works out the barcode type from it (EAN-13, EAN-8 or UPC-A for a retail number whose last digit matches, Code 128 for the rest), and you can pick another type when you edit the card.\n- **Show it at the till:** tap a card and its code opens full screen at full brightness, so the cashier can scan it. Close it to see the code again with its number under the bars for typing by hand, plus your points and notes; the kind of shop, barcode type and how often you showed the card are under Details.\n- **Your cards as a wallet of card faces**, each in its own colour (its kind of shop's, or one you pick), with your most-used cards first; pin favourites to the top. Search finds a card by store, number, name or note as you type.\n- **Store, name on the card, kind of shop, colour, points or balance, expiry date and a note** for each card. Expired cards are marked, and you get a reminder a week before a card or voucher runs out, even for one you add in its last week.\n- **Barcode types:** Code 128, EAN-13, EAN-8, UPC-A, UPC-E, Code 39, Code 93, Codabar, ITF (Interleaved 2 of 5), QR code, Data Matrix, PDF417 and Aztec. When you pick a type yourself, the form checks that the number has the right length and characters for it before you save, and for EAN and UPC codes that the last digit matches the rest, so a mistyped number is caught before you get to the till. Imported rows with a mistyped number are left out and listed with the reason.\n- **Archive** cards you no longer use instead of deleting them.\n- **Bring your cards along:** imports a card list CSV with the usual columns (store, card number, barcode type, notes, expiry, points), including the card table that card wallet apps write into their backups. Cards you already have are left as they are, so importing the same file twice adds nothing twice. Back up all your cards to a CSV file, for example for a new phone.\n- **Share** a card’s store and number with someone in your family.\n- **Home-screen widget** with your most-used cards.\n- On phones that support it, add a card from a screenshot or photo: the app reads the barcode in the picture.\n\n### What it never does\n- No ads, no tracking, no analytics, no account and no sign-in. Your cards never depend on someone else’s server.\n- It cannot connect to the internet. Nothing leaves your phone unless you share a card or save a backup yourself.\n- It does not hold payment cards. Store and membership cards only.\n\n### Privacy\nThe camera is used only while you scan a card, inside the scanner sheet; the app receives the decoded number, never the camera picture.",
+  "license": "MIT",
+  "tags": ["loyalty cards", "store cards", "membership", "barcode", "wallet", "vouchers", "offline"],
+  "screenshots": [
+    {
+      "file": "screenshots/01-wallet-light.png",
+      "caption": "All your loyalty cards in one searchable list",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/02-card-detail-light.png",
+      "caption": "Show the barcode at the till, with its number, your points and note",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/03-add-card-light.png",
+      "caption": "Add a card by scanning it or typing its number",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/04-wallet-dark.png",
+      "caption": "Your wallet in the dark theme",
+      "theme": "dark"
+    }
+  ],
+  "sampleData": {
+    "card": [
+      {
+        "store": "Corner Grocer",
+        "number": "2900123456785",
+        "format": "ean13",
+        "group": "shopping_cart",
+        "points": 1240,
+        "pinned": true,
+        "uses": 42,
+        "lastUsed": "2026-10-14T18:05:00+02:00",
+        "note": "Double points on Tuesdays."
+      },
+      {
+        "store": "Green Basket Market",
+        "number": "GB-4471-0093",
+        "format": "auto",
+        "group": "shopping_cart",
+        "uses": 31,
+        "lastUsed": "2026-10-15T08:40:00+02:00"
+      },
+      {
+        "store": "Bean There Café",
+        "number": "BTC-STAMPS-7781",
+        "format": "qr",
+        "group": "local_cafe",
+        "points": 7,
+        "uses": 23,
+        "lastUsed": "2026-10-15T07:55:00+02:00",
+        "note": "Tenth coffee is free."
+      },
+      {
+        "store": "Fuel Stop",
+        "number": "FS 008812",
+        "format": "code39",
+        "group": "directions_car",
+        "uses": 17,
+        "lastUsed": "2026-10-09T17:20:00+02:00"
+      },
+      {
+        "store": "Pillbox Pharmacy",
+        "number": "2000451183022",
+        "format": "ean13",
+        "group": "medication",
+        "points": 85,
+        "uses": 9,
+        "lastUsed": "2026-10-12T12:10:00+02:00"
+      },
+      {
+        "store": "Riverside Gym",
+        "number": "RG|2026|00071",
+        "format": "pdf417",
+        "group": "fitness_center",
+        "holder": "Sam Rivera",
+        "expires": "2027-01-31",
+        "uses": 12,
+        "lastUsed": "2026-10-13T19:00:00+02:00"
+      },
+      {
+        "store": "City Library",
+        "number": "LIB0004417",
+        "format": "code39",
+        "group": "book",
+        "holder": "Sam Rivera",
+        "uses": 3,
+        "lastUsed": "2026-10-02T15:30:00+02:00"
+      },
+      {
+        "store": "Page and Spine Books",
+        "number": "PSB:MEMBER:550193",
+        "format": "qr",
+        "group": "menu_book",
+        "points": 320,
+        "expires": "2026-10-20",
+        "uses": 4,
+        "lastUsed": "2026-09-28T11:00:00+02:00",
+        "note": "Member voucher: 10% off until the 20th."
+      },
+      {
+        "store": "Hammer and Hinge",
+        "number": "2991700266149",
+        "format": "auto",
+        "group": "handyman",
+        "uses": 2,
+        "lastUsed": "2026-09-19T10:15:00+02:00"
+      },
+      {
+        "store": "Petal Pets",
+        "number": "036000291452",
+        "format": "upcA",
+        "group": "pets",
+        "holder": "Alex Rivera",
+        "uses": 1,
+        "lastUsed": "2026-08-30T16:45:00+02:00"
+      },
+      {
+        "store": "Shoe Barn",
+        "number": "SB-GIFT-25-90311",
+        "format": "dataMatrix",
+        "group": "sell",
+        "points": 25,
+        "expires": "2026-09-30",
+        "uses": 0,
+        "note": "Gift voucher from the office party."
+      },
+      {
+        "store": "Toy Harbor",
+        "number": "20441098",
+        "format": "ean8",
+        "group": "child_care",
+        "archived": true,
+        "uses": 5,
+        "lastUsed": "2026-03-02T14:20:00+01:00"
+      }
+    ]
+  },
+  "research": [
+    {
+      "source": "https://f-droid.org/en/packages/me.hackerchick.catima/",
+      "used_for": "Core functions of an offline card wallet: scan with the camera, type a code when there is no usable barcode, card colours, backup and transfer to a new phone, share a card, import from files."
+    },
+    {
+      "source": "https://github.com/CatimaLoyalty/Android",
+      "used_for": "Barcode types a card wallet is expected to handle (13 symbologies, including Aztec, Codabar, Code 93 and ITF, all offered since 2.1.0), fully offline use, importing from other wallets."
+    },
+    {
+      "source": "https://raw.githubusercontent.com/CatimaLoyalty/Android/main/CHANGELOG.md",
+      "used_for": "Expected extras: groups, archive, star, balance, expiry and valid-from dates, notes, front and back photos, reading a barcode from an image, brighter screen when showing a code, home-screen shortcuts and widget, CSV import and export, search that ignores accents."
+    },
+    {
+      "source": "https://packinglighttravel.com/travel-tech/best-loyalty-card-wallet-app/",
+      "used_for": "What reviewers value: most-used or recently used cards at the top, sorting by name, last use or frequency, notes and photos, working offline; complaints about being pushed to create an account."
+    },
+    {
+      "source": "https://mezha.media/en/2024/11/05/stocard-bonus-card-storage-app-is-closing",
+      "used_for": "Why the category needs a local-first app: a large card wallet shut down in December 2024 and moved users to an app with an account."
+    },
+    {
+      "source": "https://spy.macrumors.com/threads/stocard-replacement.2434874",
+      "used_for": "User needs after that shutdown: find the right card quickly, no login, moving cards over by screenshot."
+    },
+    {
+      "source": "https://support.google.com/wallet/answer/12060038",
+      "used_for": "Adding a pass from a photo or screenshot of its barcode, and typing a member number when scanning is not possible."
+    },
+    {
+      "source": "https://github.com/CatimaLoyalty/Android/blob/main/app/src/main/java/protect/card_locker/importexport/CatimaExporter.java",
+      "used_for": "Catima's export: a zip holding catima.csv with several tables (a version line, groups, cards, card groups) separated by blank lines. The cards table has _id, store, note, validfrom, expiry and balance (epoch milliseconds, numbers), balancetype, cardid, barcodeid, barcodetype (enum names such as CODE_128, EAN_13, QR_CODE), barcodeencoding, headercolor, starstatus, lastused, archive. Only that table, saved on its own, can be imported."
+    },
+    {
+      "source": "https://github.com/CatimaLoyalty/Android/blob/main/app/src/main/java/protect/card_locker/DBHelper.java",
+      "used_for": "The column names of that cards table (store, cardid, barcodeid, barcodetype, expiry, balance, starstatus, archive), mapped onto store, card number, barcode type, valid until, points, pinned and archived."
+    }
+  ],
+  "migration": {
+    "formats": ["csv"],
+    "summary": "Imports a card list CSV with store, card number and barcode type columns (common column names, comma or semicolon), including a card wallet’s card table, and this app’s own backup.",
+    "samples": [
+      {
+        "file": "import-samples/this-app-export.csv",
+        "about": "This app’s own backup: adds 3 cards, one pinned and one archived"
+      },
+      {
+        "file": "import-samples/store-cards-table.csv",
+        "about": "A card wallet’s card table: enum barcode types (ITF kept), expiry in milliseconds, star and archive flags: adds 6 cards"
+      },
+      {
+        "file": "import-samples/card-list-semicolon.csv",
+        "about": "Hand-made list: semicolons, Shop and Barcode format columns, dotted dates: adds 5, skips a too-short EAN-13"
+      }
+    ]
+  }
+}

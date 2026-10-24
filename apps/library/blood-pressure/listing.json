@@ -1,0 +1,305 @@
+{
+  "id": "library/blood-pressure",
+  "category": "medical",
+  "replaces": "Blood-pressure log",
+  "title": "Blood pressure",
+  "summary": "Log readings, see averages and trends, and share a report with your doctor",
+  "description": "**Blood pressure** is a private log for the readings you take at home with your own cuff. It does not measure blood pressure itself.\n\n**What it does**\n\n- **Log a reading** in seconds: upper (systolic) and lower (diastolic) numbers, pulse, time, arm, position (sitting, standing, lying down), whether your monitor showed an irregular heartbeat, context such as \"before medication\" or \"after coffee\", and a note.\n- **Categories for every reading**, using the band set you choose: the American Heart Association and American College of Cardiology guideline (2017, kept in the 2025 update: normal, elevated, high stage 1, high stage 2, very high) or the European Society of Cardiology 2024 guideline (not elevated, elevated, high, very high). Readings below 90/60 are marked low. Each category has its own icon and colour, always shown with its name.\n- **A clear warning for very high readings**, with what to do: rest, measure again, call your doctor, and when to call emergency services.\n- **Your latest reading** in large type with its category, and how it compares with your 30-day average.\n- **Averages** for the last 7 and 30 days, mornings and evenings separately, and how many readings were below the target you set with your doctor.\n- **Trends**: daily averages of the upper and lower numbers for 30 days, on bands that show the categories of the guideline you chose and with your target as a line, weekly averages for 6 months, pulse, and readings by category.\n- **Reminders**, morning and evening by default, at the times and on the days you choose. A reminder is skipped if you logged a reading in the last two hours, and the overview ticks off the days of this week you measured.\n- **A report for your doctor** for 7, 30 or 90 days or a year: averages, morning and evening averages, highest and lowest values, and every reading. Share it as text through any app you pick, or save a CSV file for a spreadsheet.\n- **Bring your readings along**: import the CSV file most blood-pressure apps and connected-monitor apps export: date and time in one or two columns, upper and lower numbers, pulse, and where present arm, position, irregular heartbeat, context tags and notes, with commas or semicolons and month-first or day-first dates. Readings you already have are left out, so a newer export from the same app adds only the new ones.\n- **App lock**: your readings stay behind your fingerprint, face or screen lock (on from the start; you can turn it off in the app’s Permissions after unlocking).\n- **How to measure** at home, step by step.\n\n**What it never does**\n\n- No ads, no subscriptions, no paywalled features.\n- No account and no sign-in.\n- No internet access at all: the app cannot connect to the internet, and your readings leave your phone only when you share or save them.\n- No analytics or tracking of any kind.\n\n**Not medical advice**\n\nThis app is a log, not a medical device, and does not diagnose anything. Categories describe single readings; only your doctor can diagnose high or low blood pressure, from several readings. If a reading is very high and you have chest pain, shortness of breath, back pain, numbness, weakness, a change in vision or trouble speaking, call your local emergency number.",
+  "license": "MIT",
+  "tags": ["blood pressure", "hypertension", "heart", "pulse", "health log", "doctor report", "offline", "private"],
+  "screenshots": [
+    {
+      "file": "screenshots/01-overview-light.png",
+      "caption": "Latest reading with its category, plus 7- and 30-day, morning and evening averages",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/02-reading-detail-light.png",
+      "caption": "Each reading with pulse pressure, mean arterial pressure, arm, position and context",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/03-trends-light.png",
+      "caption": "Daily blood pressure and pulse averages over 30 days",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/04-report-light.png",
+      "caption": "A report for your doctor covering 7, 30 or 90 days or a year",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/05-overview-dark.png",
+      "caption": "The overview in the dark theme",
+      "theme": "dark"
+    }
+  ],
+  "sampleData": {
+    "reading": [
+      {
+        "at": "2026-10-15T07:12:00+02:00",
+        "systolic": 132,
+        "diastolic": 84,
+        "pulse": 68,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false,
+        "tags": ["beforeMeds"]
+      },
+      {
+        "at": "2026-10-14T21:05:00+02:00",
+        "systolic": 126,
+        "diastolic": 79,
+        "pulse": 64,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false
+      },
+      {
+        "at": "2026-10-14T07:20:00+02:00",
+        "systolic": 138,
+        "diastolic": 88,
+        "pulse": 71,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false,
+        "tags": ["beforeMeds", "caffeine"],
+        "note": "Coffee at 6:45"
+      },
+      {
+        "at": "2026-10-13T20:40:00+02:00",
+        "systolic": 124,
+        "diastolic": 78,
+        "pulse": 66,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false
+      },
+      {
+        "at": "2026-10-13T07:05:00+02:00",
+        "systolic": 135,
+        "diastolic": 86,
+        "pulse": 70,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false,
+        "tags": ["beforeMeds"]
+      },
+      {
+        "at": "2026-10-12T20:55:00+02:00",
+        "systolic": 119,
+        "diastolic": 76,
+        "pulse": 62,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false,
+        "tags": ["afterMeds"]
+      },
+      {
+        "at": "2026-10-12T07:30:00+02:00",
+        "systolic": 142,
+        "diastolic": 91,
+        "pulse": 74,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": true,
+        "tags": ["beforeMeds", "stress"],
+        "note": "Slept badly"
+      },
+      {
+        "at": "2026-10-11T21:10:00+02:00",
+        "systolic": 128,
+        "diastolic": 80,
+        "pulse": 65,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false
+      },
+      {
+        "at": "2026-10-11T07:15:00+02:00",
+        "systolic": 134,
+        "diastolic": 85,
+        "pulse": 69,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false,
+        "tags": ["beforeMeds"]
+      },
+      {
+        "at": "2026-10-10T20:30:00+02:00",
+        "systolic": 122,
+        "diastolic": 77,
+        "pulse": 63,
+        "arm": "right",
+        "position": "sitting",
+        "irregular": false,
+        "note": "Right arm, left was sore"
+      },
+      {
+        "at": "2026-10-10T07:40:00+02:00",
+        "systolic": 136,
+        "diastolic": 87,
+        "pulse": 72,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false,
+        "tags": ["stress"]
+      },
+      {
+        "at": "2026-10-09T20:50:00+02:00",
+        "systolic": 118,
+        "diastolic": 75,
+        "pulse": 61,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false
+      },
+      {
+        "at": "2026-10-09T07:25:00+02:00",
+        "systolic": 131,
+        "diastolic": 83,
+        "pulse": 68,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false,
+        "tags": ["beforeMeds"]
+      },
+      {
+        "at": "2026-10-08T21:00:00+02:00",
+        "systolic": 125,
+        "diastolic": 79,
+        "pulse": 66,
+        "arm": "left",
+        "position": "standing",
+        "irregular": false,
+        "tags": ["exercise"]
+      },
+      {
+        "at": "2026-10-08T07:10:00+02:00",
+        "systolic": 139,
+        "diastolic": 89,
+        "pulse": 73,
+        "arm": "left",
+        "position": "sitting",
+        "irregular": false,
+        "tags": ["beforeMeds"]
+      }
+    ],
+    "reminder": [
+      {
+        "label": "Morning reading",
+        "at": "07:30",
+        "days": "FREQ=DAILY",
+        "on": true
+      },
+      {
+        "label": "Evening reading",
+        "at": "20:00",
+        "days": "FREQ=DAILY",
+        "on": true
+      },
+      {
+        "label": "Weekend check",
+        "at": "10:00",
+        "days": "FREQ=WEEKLY;BYDAY=SA,SU",
+        "on": false
+      }
+    ]
+  },
+  "research": [
+    {
+      "source": "https://pace-cme.org/news/new-classification-2024-esc-guidelines-management-elevated-bp-and-hypertension/2468000/",
+      "used_for": "ESC 2024 office blood pressure categories: not elevated below 120/70, elevated 120-139 or 70-89, hypertension 140/90 or more"
+    },
+    {
+      "source": "https://pcronline.com/Cases-resources-images/Tools-and-Practice/The-Essentials/Hypertension/A-review-of-the-2024-ESC-Guidelines-on-elevated-blood-pressure-and-hypertension",
+      "used_for": "Confirmation of the ESC 2024 bands and that ESC 2024 no longer grades hypertension in stages"
+    },
+    {
+      "source": "https://heart.org/bplevels",
+      "used_for": "AHA/ACC categories (normal below 120/80; elevated 120-129 and below 80; stage 1 130-139 or 80-89; stage 2 140 or 90 and over; above 180 and/or 120 severe), and the symptoms that make a very high reading an emergency (seen through search summaries; the page refused automated reading)"
+    },
+    {
+      "source": "https://www.healio.com/news/nephrology/20250903/top-10-prevention-takeaways-from-the-2025-high-blood-pressure-guideline",
+      "used_for": "The 2025 AHA/ACC guideline keeps the 2017 categories and renames hypertensive urgency to severe hypertension (above 180/120)"
+    },
+    {
+      "source": "https://www.nhs.uk/conditions/low-blood-pressure-hypotension/",
+      "used_for": "Low blood pressure threshold: a reading below 90/60 mmHg"
+    },
+    {
+      "source": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9532917/",
+      "used_for": "Home monitoring protocol (two readings, morning and evening, for 7 days): morning and evening averages, the default reminders and the how-to-measure steps"
+    },
+    {
+      "source": "https://pubmed.ncbi.nlm.nih.gov/27051984/",
+      "used_for": "Home measurement preparation: seated rest, before medication, food or exercise; at least five to seven days of readings"
+    },
+    {
+      "source": "https://mwm.ai/apps/pressurepal-bp-log/6788130900",
+      "used_for": "What users expect from leaders: a doctor export with statistics, morning and evening averages and a chronological log with context tags; morning and evening reminders at chosen times (tags paywalled there)"
+    },
+    {
+      "source": "https://mwm.ai/apps/cuff-blood-pressure-tracker/6778671735",
+      "used_for": "Doctor report with overall, morning and evening averages and guideline category context"
+    },
+    {
+      "source": "https://apps.apple.com/app/519076558",
+      "used_for": "Pulse pressure and mean arterial pressure computed per reading; readings tagged with posture and arm; the app logs readings from a separate cuff"
+    },
+    {
+      "source": "https://forums.garmin.com/de/apps-und-software/mobile-apps-web/f/garmin-connect-mobile-web/12313/export-withings-nokia-import-garmin-connect",
+      "used_for": "A connected-monitor export (blood_pressure.csv): header Date,\"Heart rate\",Systolic,Diastolic,Comments, dates as \"YYYY-MM-DD HH:MM:SS\", pulse-only rows without pressure (imported as skipped rows)"
+    },
+    {
+      "source": "https://support.withings.com/hc/en-us/articles/360001391287-Privacy-How-can-I-export-my-data",
+      "used_for": "That vendor's data export is CSV, with heart rate, systolic, diastolic and comments for blood pressure"
+    },
+    {
+      "source": "https://bppulselog.com/",
+      "used_for": "A diary app's CSV export holds date and time, systolic, diastolic, pulse, tags and note: tags are added to the note"
+    },
+    {
+      "source": "https://support.mydatahelps.org/omron-blood-pressure-readings-data-export",
+      "used_for": "A monitor-cloud export layout: DateTimeLocal (ISO local time), Systolic, Diastolic, Pulse plus unit columns, which the import reads or ignores"
+    },
+    {
+      "source": "https://forums.garmin.com/apps-software/mobile-apps-web/f/garmin-connect-web/387327/csv-export-from-blood-pressure-data-incorrectly-formatted",
+      "used_for": "A fitness-watch export (Time,Reading,Heart Rate,Category,Notes with \"130 Sys / 87 Dia\" in one cell and the date on its own line): not importable yet"
+    },
+    {
+      "source": "https://takeoutday.org/guides/how-to-export-samsung-health-data",
+      "used_for": "A phone health store export (systolic, diastolic, pulse with timestamps) whose CSV starts with a metadata line: not importable yet"
+    }
+  ],
+  "migration": {
+    "formats": ["csv"],
+    "summary": "Imports the CSV most blood-pressure apps export: date and time, systolic and diastolic in mmHg or kPa, pulse, arm, position, irregular heartbeat, tags and notes; readings you have are left out",
+    "samples": [
+      {
+        "file": "import-samples/this-app.csv",
+        "about": "This app’s own export, every column"
+      },
+      {
+        "file": "import-samples/date-and-time-in-one-column.csv",
+        "about": "Connected-monitor export: one date-time column, heart rate, systolic, diastolic, comments; a pulse-only row is skipped"
+      },
+      {
+        "file": "import-samples/separate-date-and-time-month-first.csv",
+        "about": "US-style export: month-first dates, 12-hour times, units in the column names, irregular heartbeat yes or no"
+      },
+      {
+        "file": "import-samples/day-first-with-semicolons.csv",
+        "about": "European-style export: semicolons, day-first dates with dots, SYS and DIA, arm and position"
+      },
+      {
+        "file": "import-samples/local-iso-time.csv",
+        "about": "Monitor-cloud style export: local ISO date-time, unit columns that are ignored"
+      },
+      {
+        "file": "import-samples/tags-and-notes.csv",
+        "about": "Diary-style export: one date and time column, tags read as the reading’s context"
+      }
+    ]
+  }
+}

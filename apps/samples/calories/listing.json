@@ -1,0 +1,164 @@
+{
+  "id": "samples/calories",
+  "category": "health_and_fitness",
+  "replaces": "calorie and macro counter",
+  "title": "FreeCalc Lite",
+  "summary": "Count calories and macros from barcodes or your own foods, on your phone only.",
+  "description": "Keep a food diary without signing up for anything. Scan a barcode to find a food you saved before, look a product up online when you allow it, or pick from the built-in list of generic foods. Each diary entry works out calories, protein, carbs and fat from its serving size.\n\n- **Today at a glance:** calories against your daily goal, and the macros of the day.\n- **Trends:** 7-day and 30-day charts and your daily average.\n- **Your foods:** save a food once and reuse it with any serving size.\n\n**What it never does:** no ads, no tracking and no account. The diary stays on this phone. Only a scanned barcode leaves it, and only when you look a product up online.",
+  "license": "MIT",
+  "tags": ["calories", "nutrition", "food diary", "barcode"],
+  "screenshots": [],
+  "sampleData": {
+    "food": [
+      {
+        "id": "oats",
+        "name": "Rolled oats",
+        "barcode": "2001000000012",
+        "kcal": 372,
+        "protein": 13.5,
+        "carbs": 58.7,
+        "fat": 7,
+        "servingGrams": 40,
+        "source": "manual"
+      },
+      {
+        "id": "yogurt",
+        "name": "Plain yogurt 3.5 %",
+        "barcode": "2001000000029",
+        "kcal": 66,
+        "protein": 3.6,
+        "carbs": 4.6,
+        "fat": 3.5,
+        "servingGrams": 150,
+        "source": "manual"
+      },
+      {
+        "id": "bread",
+        "name": "Wholegrain bread",
+        "barcode": "2001000000036",
+        "kcal": 247,
+        "protein": 9.7,
+        "carbs": 41,
+        "fat": 3.4,
+        "servingGrams": 45,
+        "source": "manual"
+      },
+      {
+        "id": "lentilSoup",
+        "name": "Lentil soup",
+        "kcal": 76,
+        "protein": 4.5,
+        "carbs": 11.2,
+        "fat": 1.4,
+        "servingGrams": 300,
+        "source": "manual"
+      },
+      {
+        "id": "apple",
+        "name": "Apple",
+        "kcal": 52,
+        "protein": 0.3,
+        "carbs": 13.8,
+        "fat": 0.2,
+        "servingGrams": 180,
+        "source": "manual"
+      }
+    ],
+    "entry": [
+      {
+        "name": "Rolled oats",
+        "servings": 1,
+        "servingGrams": 40,
+        "meal": "breakfast",
+        "date": "2026-10-15",
+        "kcal100": 372,
+        "protein100": 13.5,
+        "carbs100": 58.7,
+        "fat100": 7,
+        "food": "oats"
+      },
+      {
+        "name": "Plain yogurt 3.5 %",
+        "servings": 1,
+        "servingGrams": 150,
+        "meal": "breakfast",
+        "date": "2026-10-15",
+        "kcal100": 66,
+        "protein100": 3.6,
+        "carbs100": 4.6,
+        "fat100": 3.5,
+        "food": "yogurt"
+      },
+      {
+        "name": "Lentil soup",
+        "servings": 1,
+        "servingGrams": 300,
+        "meal": "lunch",
+        "date": "2026-10-15",
+        "kcal100": 76,
+        "protein100": 4.5,
+        "carbs100": 11.2,
+        "fat100": 1.4,
+        "food": "lentilSoup"
+      },
+      {
+        "name": "Wholegrain bread",
+        "servings": 2,
+        "servingGrams": 45,
+        "meal": "lunch",
+        "date": "2026-10-15",
+        "kcal100": 247,
+        "protein100": 9.7,
+        "carbs100": 41,
+        "fat100": 3.4,
+        "food": "bread"
+      },
+      {
+        "name": "Apple",
+        "servings": 1,
+        "servingGrams": 180,
+        "meal": "snack",
+        "date": "2026-10-15",
+        "kcal100": 52,
+        "protein100": 0.3,
+        "carbs100": 13.8,
+        "fat100": 0.2,
+        "food": "apple"
+      },
+      {
+        "name": "Rolled oats",
+        "servings": 1.5,
+        "servingGrams": 40,
+        "meal": "breakfast",
+        "date": "2026-10-14",
+        "kcal100": 372,
+        "protein100": 13.5,
+        "carbs100": 58.7,
+        "fat100": 7,
+        "food": "oats"
+      },
+      {
+        "name": "Lentil soup",
+        "servings": 1,
+        "servingGrams": 300,
+        "meal": "dinner",
+        "date": "2026-10-14",
+        "kcal100": 76,
+        "protein100": 4.5,
+        "carbs100": 11.2,
+        "fat100": 1.4,
+        "food": "lentilSoup"
+      }
+    ]
+  },
+  "research": [
+    {
+      "source": "https://openfoodfacts.github.io/openfoodfacts-server/api/",
+      "used_for": "The product lookup by barcode: its rate limit for reads and the User-Agent it asks apps to send."
+    },
+    {
+      "source": "https://fdc.nal.usda.gov/download-datasets/",
+      "used_for": "The generic foods data pack: what the dataset holds and its CC0 licence."
+    }
+  ]
+}

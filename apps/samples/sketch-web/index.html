@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="color-scheme" content="light dark" />
+        <title>Sketch</title>
+        <script type="application/anyapp+json" id="anyapp-manifest">
+            {
+                "spec": "anyapp/0.2",
+                "app": {
+                    "id": "samples/sketch-web",
+                    "kind": "web",
+                    "name": "Sketch",
+                    "version": "1.0.0",
+                    "icon": "palette",
+                    "ageRating": "everyone"
+                },
+                "theme": { "seedColor": "#5E35B1" },
+                "permissions": {
+                    "files.io": {
+                        "purpose": "Save your drawing as a PNG file in a place you choose",
+                        "modes": ["export"]
+                    },
+                    "share": { "purpose": "Send your drawing to another app you pick" }
+                },
+                "dataFlows": [
+                    { "from": ["*"], "to": "files.io", "purpose": "Your drawing, as a PNG file you save" },
+                    { "from": ["*"], "to": "share", "purpose": "Your drawing, sent to the app you pick" }
+                ]
+            }
+        </script>
+        <style>
+            :root {
+                color-scheme: light dark;
+                --primary: var(--anyapp-color-primary, #5e35b1);
+                --on-primary: var(--anyapp-color-on-primary, #ffffff);
+                --surface: var(--anyapp-color-surface, #fef7ff);
+                --on-surface: var(--anyapp-color-on-surface, #1d1b20);
+                --variant: var(--anyapp-color-surface-variant, #e7e0ec);
+                --outline: var(--anyapp-color-outline, #79747e);
+                --radius: var(--anyapp-radius-m, 12px);
+                --target: var(--anyapp-touch-target, 48px);
+            }
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --primary: var(--anyapp-color-primary, #cfbcff);
+                    --on-primary: var(--anyapp-color-on-primary, #381e72);
+                    --surface: var(--anyapp-color-surface, #141218);
+                    --on-surface: var(--anyapp-color-on-surface, #e6e0e9);
+                    --variant: var(--anyapp-color-surface-variant, #49454f);
+                    --outline: var(--anyapp-color-outline, #938f99);
+                }
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                height: 100%;
+            }
+            body {
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                background: var(--surface);
+                color: var(--on-surface);
+                font: 1rem/1.4 var(--anyapp-font-family, system-ui, sans-serif);
+                padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+                    env(safe-area-inset-left);
+            }
+            .bar {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.25rem;
+                padding: 0.25rem 0.5rem;
+            }
+            .bar .spacer {
+                flex: 1;
+            }
+            button {
+                font: inherit;
+                color: inherit;
+                min-height: var(--target);
+                min-width: var(--target);
+                padding: 0 0.75rem;
+                border: 1px solid var(--outline);
+                border-radius: 999px;
+                background: transparent;
+                cursor: pointer;
+            }
+            button.primary {
+                background: var(--primary);
+                color: var(--on-primary);
+                border-color: var(--primary);
+            }
+            button:disabled {
+                opacity: 0.4;
+                cursor: default;
+            }
+            :focus-visible {
+                outline: 3px solid var(--primary);
+                outline-offset: 2px;
+            }
+            main {
+                flex: 1;
+                min-height: 0;
+                padding: 0 0.5rem;
+            }
+            canvas {
+                display: block;
+                width: 100%;
+                height: 100%;
+                border-radius: var(--radius);
+                border: 1px solid var(--outline);
+                background: #ffffff;
+                touch-action: none;
+                user-select: none;
+                -webkit-user-select: none;
+                cursor: crosshair;
+            }
+            fieldset {
+                border: 0;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.25rem;
+            }
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+                white-space: nowrap;
+            }
+            .swatch {
+                position: relative;
+                width: var(--target);
+                height: var(--target);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .swatch input {
+                position: absolute;
+                inset: 0;
+                margin: 0;
+                opacity: 0;
+                cursor: pointer;
+            }
+            .swatch span {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+                border: 2px solid var(--outline);
+            }
+            .swatch input:checked + span {
+                outline: 3px solid var(--primary);
+                outline-offset: 2px;
+            }
+            .swatch input:focus-visible + span {
+                outline: 3px dashed var(--primary);
+                outline-offset: 4px;
+            }
+            .size {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                min-height: var(--target);
+                flex: 1;
+                min-width: 10rem;
+            }
+            .size input {
+                flex: 1;
+                accent-color: var(--primary);
+            }
+            dialog {
+                max-width: min(32rem, 92vw);
+                border: 0;
+                border-radius: var(--radius);
+                background: var(--surface);
+                color: var(--on-surface);
+            }
+            dialog img {
+                display: block;
+                max-width: 100%;
+                max-height: 55vh;
+                margin: 0.5rem auto;
+                border: 1px solid var(--outline);
+            }
+            dialog a {
+                color: var(--primary);
+            }
+            #status {
+                position: fixed;
+                left: 1rem;
+                right: 1rem;
+                bottom: calc(6.5rem + env(safe-area-inset-bottom));
+                margin: 0;
+                text-align: center;
+                pointer-events: none;
+            }
+            #status:not(:empty) {
+                background: var(--on-surface);
+                color: var(--surface);
+                border-radius: var(--radius);
+                padding: 0.75rem;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    animation: none !important;
+                    transition: none !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="bar" role="toolbar" aria-label="Drawing tools">
+            <h1 class="sr-only">Sketch</h1>
+            <button id="undo" type="button" disabled>Undo</button>
+            <button id="redo" type="button" disabled>Redo</button>
+            <button id="clear" type="button" disabled>Clear</button>
+            <span class="spacer"></span>
+            <button id="save" type="button" class="primary">Save</button>
+            <button id="share" type="button">Share</button>
+        </header>
+        <main>
+            <canvas id="paper" role="img" aria-label="Drawing area. Draw with a finger, a pen or a mouse."></canvas>
+        </main>
+        <footer class="bar">
+            <fieldset id="palette">
+                <legend class="sr-only">Colour</legend>
+            </fieldset>
+            <label class="size">Size <input id="size" type="range" min="1" max="40" value="6" /></label>
+        </footer>
+        <dialog id="fallback" aria-labelledby="fallbackTitle">
+            <h2 id="fallbackTitle">Your drawing</h2>
+            <p>Long-press the image to save or share it, or use the download link.</p>
+            <img id="fallbackImage" alt="Your drawing as a PNG image" />
+            <p><a id="download" href="#" download="sketch.png">Download PNG</a></p>
+            <button id="closeFallback" type="button">Close</button>
+        </dialog>
+        <p id="status" role="status" aria-live="polite"></p>
+        <script>
+            "use strict";
+
+            // Present only inside the anyApp runtime; undefined in a plain browser or a chat preview.
+            const anyapp = window.anyapp;
+            const PAPER = "#ffffff";
+            const COLOURS = [
+                ["Black", "#1b1b1f"],
+                ["Red", "#d32f2f"],
+                ["Orange", "#f57c00"],
+                ["Yellow", "#fbc02d"],
+                ["Green", "#388e3c"],
+                ["Blue", "#1976d2"],
+                ["Purple", "#7b1fa2"],
+                ["Brown", "#6d4c41"],
+                ["Eraser", PAPER],
+            ];
+
+            const canvas = document.getElementById("paper");
+            const ctx = canvas.getContext("2d");
+            const buttons = Object.fromEntries(
+                ["undo", "redo", "clear", "save", "share"].map((id) => [id, document.getElementById(id)]),
+            );
+            const sizeInput = document.getElementById("size");
+            const tool = { colour: COLOURS[0][1] };
+
+            // History: strokes ({colour, size, points: [[x, y, pressure], …]} in CSS pixels) and clear markers ({clear: true}).
+            let strokes = [];
+            let redoStack = [];
+            let current = null;
+            let activePointer = null;
+
+            // ---- Palette
+            const palette = document.getElementById("palette");
+            COLOURS.forEach(([name, value], i) => {
+                const label = document.createElement("label");
+                label.className = "swatch";
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = "colour";
+                input.value = value;
+                input.checked = i === 0;
+                input.setAttribute("aria-label", name);
+                input.addEventListener("change", () => (tool.colour = value));
+                const dot = document.createElement("span");
+                dot.style.background = value;
+                label.append(input, dot);
+                palette.append(label);
+            });
+
+            // ---- Drawing
+            const visible = () => strokes.slice(strokes.findLastIndex((entry) => entry.clear) + 1);
+            const widthAt = (stroke, pressure) => stroke.size * (0.4 + pressure * 1.2);
+
+            function drawSegment(stroke, from, to) {
+                ctx.strokeStyle = stroke.colour;
+                ctx.lineCap = "round";
+                ctx.lineJoin = "round";
+                ctx.lineWidth = widthAt(stroke, to[2]);
+                ctx.beginPath();
+                ctx.moveTo(from[0], from[1]);
+                ctx.lineTo(to[0], to[1]);
+                ctx.stroke();
+            }
+            function drawDot(stroke) {
+                const [x, y, pressure] = stroke.points[0];
+                ctx.fillStyle = stroke.colour;
+                ctx.beginPath();
+                ctx.arc(x, y, widthAt(stroke, pressure) / 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            function drawStroke(stroke) {
+                drawDot(stroke);
+                for (let i = 1; i < stroke.points.length; i++)
+                    drawSegment(stroke, stroke.points[i - 1], stroke.points[i]);
+            }
+            function redraw() {
+                ctx.save();
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.fillStyle = PAPER;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.restore();
+                for (const stroke of visible()) drawStroke(stroke);
+            }
+            function resize() {
+                const rect = canvas.getBoundingClientRect();
+                const ratio = window.devicePixelRatio || 1;
+                canvas.width = Math.max(1, Math.round(rect.width * ratio));
+                canvas.height = Math.max(1, Math.round(rect.height * ratio));
+                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+                redraw();
+            }
+            new ResizeObserver(resize).observe(canvas);
+
+            // Pens report real pressure; fingers and mice draw at the chosen size.
+            function pointOf(event) {
+                const pressure = event.pointerType === "pen" && event.pressure > 0 ? event.pressure : 0.5;
+                return [
+                    Math.round(event.offsetX * 10) / 10,
+                    Math.round(event.offsetY * 10) / 10,
+                    Math.round(pressure * 100) / 100,
+                ];
+            }
+            canvas.addEventListener("pointerdown", (event) => {
+                if (activePointer !== null || (event.pointerType === "mouse" && event.button !== 0)) return;
+                activePointer = event.pointerId;
+                canvas.setPointerCapture(event.pointerId);
+                current = { colour: tool.colour, size: Number(sizeInput.value), points: [pointOf(event)] };
+                drawDot(current);
+            });
+            canvas.addEventListener("pointermove", (event) => {
+                if (!current || event.pointerId !== activePointer) return;
+                const events = typeof event.getCoalescedEvents === "function" ? event.getCoalescedEvents() : [];
+                for (const e of events.length ? events : [event]) {
+                    const point = pointOf(e);
+                    drawSegment(current, current.points[current.points.length - 1], point);
+                    current.points.push(point);
+                }
+            });
+            function finishStroke(event) {
+                if (!current || event.pointerId !== activePointer) return;
+                strokes.push(current);
+                redoStack = [];
+                current = null;
+                activePointer = null;
+                changed();
+            }
+            canvas.addEventListener("pointerup", finishStroke);
+            canvas.addEventListener("pointercancel", finishStroke);
+
+            // ---- Undo, redo, clear (clear is undoable, so it needs no confirmation)
+            function undo() {
+                if (!strokes.length) return;
+                redoStack.push(strokes.pop());
+                redraw();
+                changed();
+            }
+            function redo() {
+                if (!redoStack.length) return;
+                strokes.push(redoStack.pop());
+                redraw();
+                changed();
+            }
+            function clearAll() {
+                if (!visible().length) return;
+                strokes.push({ clear: true });
+                redoStack = [];
+                redraw();
+                changed();
+                say("Cleared. Undo brings it back.");
+            }
+            buttons.undo.addEventListener("click", undo);
+            buttons.redo.addEventListener("click", redo);
+            buttons.clear.addEventListener("click", clearAll);
+            document.addEventListener("keydown", (event) => {
+                if (!(event.ctrlKey || event.metaKey)) return;
+                const key = event.key.toLowerCase();
+                if (key === "z" && !event.shiftKey) undo();
+                else if (key === "y" || (key === "z" && event.shiftKey)) redo();
+                else return;
+                event.preventDefault();
+            });
+
+            // ---- Keep the drawing across restarts: IndexedDB, wrapped so a blocked store never breaks drawing
+            const storage = (() => {
+                let connection;
+                const open = () =>
+                    (connection ??= new Promise((resolve, reject) => {
+                        const request = indexedDB.open("sketch", 1);
+                        request.addEventListener("upgradeneeded", () => request.result.createObjectStore("kv"));
+                        request.addEventListener("success", () => resolve(request.result));
+                        request.addEventListener("error", () => reject(request.error));
+                    }));
+                const run = async (mode, work) => {
+                    const db = await open();
+                    return new Promise((resolve, reject) => {
+                        const request = work(db.transaction("kv", mode).objectStore("kv"));
+                        request.addEventListener("success", () => resolve(request.result));
+                        request.addEventListener("error", () => reject(request.error));
+                    });
+                };
+                return {
+                    get: (key) => run("readonly", (store) => store.get(key)),
+                    set: (key, value) => run("readwrite", (store) => store.put(value, key)),
+                };
+            })();
+            let saveTimer;
+            function changed() {
+                buttons.undo.disabled = strokes.length === 0;
+                buttons.redo.disabled = redoStack.length === 0;
+                buttons.clear.disabled = visible().length === 0;
+                clearTimeout(saveTimer);
+                saveTimer = setTimeout(
+                    () => storage.set("strokes", strokes).catch((error) => console.warn("Drawing not stored:", error)),
+                    300,
+                );
+            }
+
+            // ---- Save and share
+            let statusTimer;
+            function say(text) {
+                const status = document.getElementById("status");
+                status.textContent = text;
+                clearTimeout(statusTimer);
+                statusTimer = setTimeout(() => (status.textContent = ""), 4000);
+            }
+            function report(error) {
+                if (error && (error.name === "AbortError" || error.code === "CANCELLED")) return;
+                console.warn(error);
+                const code = error && error.code;
+                if (code === "PERMISSION_DENIED" || code === "OS_DENIED")
+                    say("That permission is off. You can turn it on in the app's settings.");
+                else say("Something went wrong. Please try again.");
+            }
+            const pngOf = () =>
+                new Promise((resolve, reject) =>
+                    canvas.toBlob(
+                        (blob) => (blob ? resolve(blob) : reject(new Error("PNG export failed"))),
+                        "image/png",
+                    ),
+                );
+            function fileName() {
+                const d = new Date();
+                const pad = (n) => String(n).padStart(2, "0");
+                return `sketch-${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}.png`;
+            }
+            let fallbackUrl;
+            function showFallback(blob, name) {
+                if (fallbackUrl) URL.revokeObjectURL(fallbackUrl);
+                fallbackUrl = URL.createObjectURL(blob);
+                document.getElementById("fallbackImage").src = fallbackUrl;
+                const link = document.getElementById("download");
+                link.href = fallbackUrl;
+                link.download = name;
+                document.getElementById("fallback").showModal();
+            }
+            document
+                .getElementById("closeFallback")
+                .addEventListener("click", () => document.getElementById("fallback").close());
+
+            // Both run straight from the tap, because saving and sharing need a fresh user gesture inside anyApp.
+            buttons.save.addEventListener("click", async () => {
+                try {
+                    const blob = await pngOf();
+                    const name = fileName();
+                    if (anyapp && anyapp.supports("files.io")) {
+                        const saved = await anyapp.files.save({ name, type: "image/png", data: blob });
+                        say(saved ? "Saved." : "Not saved.");
+                    } else {
+                        showFallback(blob, name);
+                    }
+                } catch (error) {
+                    report(error);
+                }
+            });
+            buttons.share.addEventListener("click", async () => {
+                try {
+                    const blob = await pngOf();
+                    const file = new File([blob], fileName(), { type: "image/png" });
+                    if (anyapp && anyapp.supports("share")) await anyapp.share({ title: "My sketch", files: [file] });
+                    else if (navigator.canShare && navigator.canShare({ files: [file] }))
+                        await navigator.share({ title: "My sketch", files: [file] });
+                    else {
+                        showFallback(blob, file.name);
+                        say("Sharing isn't available here. Long-press the image instead.");
+                    }
+                } catch (error) {
+                    report(error);
+                }
+            });
+
+            // ---- Start
+            (async () => {
+                try {
+                    if (anyapp) await anyapp.ready;
+                    const saved = await storage.get("strokes");
+                    if (Array.isArray(saved)) strokes = saved;
+                } catch (error) {
+                    console.warn("Starting with an empty page:", error);
+                }
+                resize();
+                changed();
+            })();
+        </script>
+    </body>
+</html>

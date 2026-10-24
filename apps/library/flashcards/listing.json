@@ -1,0 +1,499 @@
+{
+  "id": "library/flashcards",
+  "category": "education",
+  "replaces": "flashcards and spaced repetition app",
+  "title": "Flashcards",
+  "summary": "Decks of cards with spaced repetition, reminders, stats and CSV import",
+  "description": "Flashcards helps you remember anything with spaced repetition, on your phone and offline.\n\n**What it does**\n\n- Make decks and cards with a front, a back and an optional hint you reveal only when you need it. Your decks are colourful tiles: each deck's icon gives it its colour, and a bar shows how much of it you have studied.\n- Study a deck: read the front, show the answer, then tap **Again**, **Hard**, **Good** or **Easy**. Each button shows when you will see the card next.\n- The schedule is a classic spaced-repetition method: cards you know well come back after days, then weeks, then months; cards you forget come back the same day and grow more slowly.\n- Each deck shows how many cards are due and how many new ones are waiting. You set how many new cards come in per day.\n- Undo your last answer, edit a card mid-session, pause a card or reset its progress.\n- A study reminder per deck, on the days and at the time you pick, or one daily reminder for all decks instead, sent only when cards are due.\n- **Stats**: your streak, the days you studied this week, cards answered today, how much you remembered over 30 days, learned and well-known cards, a 30-day chart, a study calendar, a 14-day forecast and your answer mix.\n- A home-screen widget shows how many cards are waiting.\n- Import and export CSV: bring decks along, or keep a backup.\n\n**Bring your decks with you**\n\nImports decks exported as text or CSV: one card per line, front and back separated by a comma, semicolon or tab, with column names such as front and back, question and answer, or term and definition. A deck column sorts cards into decks (new decks are created), and simple formatting such as line breaks and bold text is cleaned up. Without a line of column names the first column is the front and the second the back, and lines starting with # are skipped.\n\n**What it never does**\n\nNo ads, no paywall for study modes, no account and no internet access: the app cannot reach the network at all. Your cards and progress stay in this app's own storage on your phone. Files leave only when you export them to a place you pick.\n\nNot yet: pictures and sound on cards.",
+  "license": "MIT",
+  "tags": ["flashcards", "spaced repetition", "study", "learning", "languages", "memory", "exam prep", "education"],
+  "screenshots": [
+    {
+      "file": "screenshots/01-decks-light.png",
+      "caption": "Your decks with what's due and new today",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/02-deck-light.png",
+      "caption": "A deck: due and new cards, a daily reminder and all its cards",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/03-study-light.png",
+      "caption": "Study with spaced repetition: Again, Hard, Good, Easy",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/04-stats-light.png",
+      "caption": "Streak, cards answered, recall rate and answers over 30 days",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/05-study-dark.png",
+      "caption": "Studying in the dark theme",
+      "theme": "dark"
+    }
+  ],
+  "sampleData": {
+    "deck": [
+      {
+        "id": "spanish",
+        "icon": "language",
+        "name": "Spanish: travel phrases",
+        "description": "Phrases for getting around on a trip",
+        "newPerDay": 15,
+        "remind": true,
+        "remindAt": "19:00",
+        "remindDays": "FREQ=DAILY"
+      },
+      {
+        "id": "capitals",
+        "icon": "map",
+        "name": "World capitals",
+        "description": "Countries and their capital cities",
+        "newPerDay": 10,
+        "remind": true,
+        "remindAt": "08:00",
+        "remindDays": "FREQ=WEEKLY;BYDAY=MO,WE,FR"
+      },
+      {
+        "id": "cells",
+        "icon": "eco",
+        "name": "Cell biology basics",
+        "description": "Parts of the cell and what they do",
+        "newPerDay": 20,
+        "remind": false,
+        "remindAt": "19:00",
+        "remindDays": "FREQ=DAILY"
+      }
+    ],
+    "card": [
+      {
+        "id": "c1",
+        "deck": "spanish",
+        "front": "¿Dónde está la estación de tren?",
+        "back": "Where is the train station?",
+        "paused": false,
+        "interval": 6,
+        "reps": 3,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 0,
+        "lastReviewed": "2026-10-09",
+        "answeredAt": "2026-10-09T19:05:00+02:00"
+      },
+      {
+        "id": "c2",
+        "deck": "spanish",
+        "front": "La cuenta, por favor.",
+        "back": "The bill, please.",
+        "paused": false,
+        "interval": 15,
+        "reps": 4,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 1,
+        "lastReviewed": "2026-10-03",
+        "answeredAt": "2026-10-03T19:05:00+02:00"
+      },
+      {
+        "id": "c3",
+        "deck": "spanish",
+        "front": "¿Cuánto cuesta?",
+        "back": "How much does it cost?",
+        "paused": false,
+        "interval": 1,
+        "reps": 4,
+        "lapses": 1,
+        "hardCount": 0,
+        "easyCount": 0,
+        "lastReviewed": "2026-10-14",
+        "answeredAt": "2026-10-14T19:05:00+02:00"
+      },
+      {
+        "id": "c4",
+        "deck": "spanish",
+        "front": "Una mesa para dos.",
+        "back": "A table for two.",
+        "paused": false,
+        "interval": 0,
+        "reps": 0,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 0,
+        "hint": "mesa = table"
+      },
+      {
+        "id": "c5",
+        "deck": "spanish",
+        "front": "¿A qué hora sale el autobús?",
+        "back": "What time does the bus leave?",
+        "paused": false,
+        "interval": 0,
+        "reps": 0,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 0,
+        "hint": "salir = to leave"
+      },
+      {
+        "id": "c6",
+        "deck": "spanish",
+        "front": "Estoy perdido.",
+        "back": "I'm lost.",
+        "paused": false,
+        "interval": 32,
+        "reps": 6,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 0,
+        "lastReviewed": "2026-09-28",
+        "answeredAt": "2026-09-28T19:05:00+02:00"
+      },
+      {
+        "id": "c7",
+        "deck": "capitals",
+        "front": "Canada",
+        "back": "Ottawa",
+        "paused": false,
+        "interval": 45,
+        "reps": 6,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 0,
+        "lastReviewed": "2026-09-10",
+        "answeredAt": "2026-09-10T08:12:00+02:00"
+      },
+      {
+        "id": "c8",
+        "deck": "capitals",
+        "front": "Australia",
+        "back": "Canberra",
+        "paused": false,
+        "interval": 3,
+        "reps": 5,
+        "lapses": 1,
+        "hardCount": 2,
+        "easyCount": 0,
+        "hint": "Not the largest city",
+        "lastReviewed": "2026-10-12",
+        "answeredAt": "2026-10-12T08:05:00+02:00"
+      },
+      {
+        "id": "c9",
+        "deck": "capitals",
+        "front": "Morocco",
+        "back": "Rabat",
+        "paused": false,
+        "interval": 8,
+        "reps": 3,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 0,
+        "lastReviewed": "2026-10-10",
+        "answeredAt": "2026-10-10T08:20:00+02:00"
+      },
+      {
+        "id": "c10",
+        "deck": "capitals",
+        "front": "New Zealand",
+        "back": "Wellington",
+        "paused": false,
+        "interval": 0,
+        "reps": 0,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 0
+      },
+      {
+        "id": "c11",
+        "deck": "capitals",
+        "front": "Kenya",
+        "back": "Nairobi",
+        "paused": false,
+        "interval": 21,
+        "reps": 4,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 0,
+        "lastReviewed": "2026-10-01",
+        "answeredAt": "2026-10-01T08:09:00+02:00"
+      },
+      {
+        "id": "c12",
+        "deck": "capitals",
+        "front": "Myanmar",
+        "back": "Naypyidaw",
+        "paused": false,
+        "interval": 0,
+        "reps": 4,
+        "lapses": 2,
+        "hardCount": 0,
+        "easyCount": 0,
+        "hint": "Not the largest city",
+        "lastReviewed": "2026-10-15",
+        "answeredAt": "2026-10-15T08:03:00+02:00"
+      },
+      {
+        "id": "c13",
+        "deck": "cells",
+        "front": "Mitochondria",
+        "back": "Make most of the cell's energy as ATP",
+        "paused": false,
+        "interval": 4,
+        "reps": 2,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 1,
+        "lastReviewed": "2026-10-13",
+        "answeredAt": "2026-10-13T19:05:00+02:00"
+      },
+      {
+        "id": "c14",
+        "deck": "cells",
+        "front": "Ribosome",
+        "back": "Builds proteins from amino acids",
+        "paused": false,
+        "interval": 0,
+        "reps": 0,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 0
+      },
+      {
+        "id": "c15",
+        "deck": "cells",
+        "front": "Cell membrane",
+        "back": "Controls what enters and leaves the cell",
+        "paused": false,
+        "interval": 0,
+        "reps": 0,
+        "lapses": 0,
+        "hardCount": 0,
+        "easyCount": 0
+      }
+    ],
+    "review": [
+      {
+        "card": "c13",
+        "deck": "cells",
+        "grade": "good",
+        "date": "2026-10-06",
+        "at": "2026-10-06T19:02:00+02:00",
+        "wasNew": true,
+        "newInterval": 1,
+        "prevInterval": 0
+      },
+      {
+        "card": "c3",
+        "deck": "spanish",
+        "grade": "good",
+        "date": "2026-10-06",
+        "at": "2026-10-06T19:04:00+02:00",
+        "wasNew": true,
+        "newInterval": 1,
+        "prevInterval": 0
+      },
+      {
+        "card": "c3",
+        "deck": "spanish",
+        "grade": "good",
+        "date": "2026-10-07",
+        "at": "2026-10-07T19:10:00+02:00",
+        "wasNew": false,
+        "newInterval": 3,
+        "prevInterval": 1
+      },
+      {
+        "card": "c8",
+        "deck": "capitals",
+        "grade": "again",
+        "date": "2026-10-07",
+        "at": "2026-10-07T08:01:00+02:00",
+        "wasNew": false,
+        "newInterval": 0,
+        "prevInterval": 6
+      },
+      {
+        "card": "c8",
+        "deck": "capitals",
+        "grade": "good",
+        "date": "2026-10-07",
+        "at": "2026-10-07T08:03:00+02:00",
+        "wasNew": false,
+        "newInterval": 1,
+        "prevInterval": 0
+      },
+      {
+        "card": "c8",
+        "deck": "capitals",
+        "grade": "hard",
+        "date": "2026-10-08",
+        "at": "2026-10-08T08:06:00+02:00",
+        "wasNew": false,
+        "newInterval": 2,
+        "prevInterval": 1
+      },
+      {
+        "card": "c1",
+        "deck": "spanish",
+        "grade": "good",
+        "date": "2026-10-09",
+        "at": "2026-10-09T19:05:00+02:00",
+        "wasNew": false,
+        "newInterval": 6,
+        "prevInterval": 2
+      },
+      {
+        "card": "c9",
+        "deck": "capitals",
+        "grade": "good",
+        "date": "2026-10-10",
+        "at": "2026-10-10T08:20:00+02:00",
+        "wasNew": false,
+        "newInterval": 8,
+        "prevInterval": 3
+      },
+      {
+        "card": "c12",
+        "deck": "capitals",
+        "grade": "good",
+        "date": "2026-10-11",
+        "at": "2026-10-11T08:15:00+02:00",
+        "wasNew": false,
+        "newInterval": 5,
+        "prevInterval": 2
+      },
+      {
+        "card": "c8",
+        "deck": "capitals",
+        "grade": "hard",
+        "date": "2026-10-12",
+        "at": "2026-10-12T08:05:00+02:00",
+        "wasNew": false,
+        "newInterval": 3,
+        "prevInterval": 2
+      },
+      {
+        "card": "c13",
+        "deck": "cells",
+        "grade": "easy",
+        "date": "2026-10-13",
+        "at": "2026-10-13T19:05:00+02:00",
+        "wasNew": false,
+        "newInterval": 4,
+        "prevInterval": 1
+      },
+      {
+        "card": "c3",
+        "deck": "spanish",
+        "grade": "again",
+        "date": "2026-10-14",
+        "at": "2026-10-14T19:01:00+02:00",
+        "wasNew": false,
+        "newInterval": 0,
+        "prevInterval": 3
+      },
+      {
+        "card": "c3",
+        "deck": "spanish",
+        "grade": "good",
+        "date": "2026-10-14",
+        "at": "2026-10-14T19:06:00+02:00",
+        "wasNew": false,
+        "newInterval": 1,
+        "prevInterval": 0
+      },
+      {
+        "card": "c12",
+        "deck": "capitals",
+        "grade": "again",
+        "date": "2026-10-15",
+        "at": "2026-10-15T08:03:00+02:00",
+        "wasNew": false,
+        "newInterval": 0,
+        "prevInterval": 5
+      }
+    ]
+  },
+  "migration": {
+    "formats": ["csv", "txt"],
+    "summary": "Imports decks exported as text or CSV: front and back separated by a comma, semicolon or tab, with or without a line of column names, with an optional deck column",
+    "samples": [
+      {
+        "file": "import-samples/cards-front-back.csv",
+        "about": "Comma-separated front, back and hint columns with quoted text"
+      },
+      {
+        "file": "import-samples/cards-term-definition-tab.txt",
+        "about": "Study-set text export with term and definition separated by tabs and a header line"
+      },
+      {
+        "file": "import-samples/cards-question-answer-semicolon.csv",
+        "about": "Spreadsheet saved with semicolons and question and answer columns"
+      },
+      {
+        "file": "import-samples/cards-html-fields.txt",
+        "about": "Tab-separated note export with HTML formatting, a tags column and a header line"
+      },
+      {
+        "file": "import-samples/cards-backup-with-decks.csv",
+        "about": "This app's own full export with a deck column, including a deck that does not exist yet"
+      }
+    ]
+  },
+  "research": [
+    {
+      "source": "https://docs.ankiweb.net/deck-options.html",
+      "used_for": "Deck settings people expect: new cards per day, maximum reviews, learning steps, a starting ease of 2.50, an easy bonus of 1.30 and a hard interval of 1.20."
+    },
+    {
+      "source": "https://docs.ankiweb.net/faqs/what-spaced-repetition-algorithm",
+      "used_for": "The four answer buttons (Again, Hard, Good, Easy) and how they move the ease (-20, -15, 0, +15 points, never below 130%); every new interval at least a day longer; why the newer FSRS model needs fitted parameters."
+    },
+    {
+      "source": "https://en.wikipedia.org/wiki/SuperMemo",
+      "used_for": "The SM-2 algorithm the schedule follows: ease starts at 2.5, never below 1.3, intervals grow by the ease after each correct answer."
+    },
+    {
+      "source": "https://en.wikipedia.org/wiki/Leitner_system",
+      "used_for": "The box-based alternative that was considered: simpler, but every card in a box gets the same gap, so it adapts less to hard cards."
+    },
+    {
+      "source": "https://docs.ankiweb.net/stats.html",
+      "used_for": "Statistics people use: today's answers and correct rate, future due forecast, review calendar, card counts by stage, answer button counts, retention."
+    },
+    {
+      "source": "https://forums.ankiweb.net/t/feature-request-notification-improvements-for-ankidroid/67354",
+      "used_for": "Study reminders per deck, sent only when cards are due."
+    },
+    {
+      "source": "https://forums.ankiweb.net/t/get-a-notification-before-i-forget-to-do-my-reviews-and-lose-my-streak/28037",
+      "used_for": "People want a study streak and a reminder before they lose it."
+    },
+    {
+      "source": "https://unstar.app/blog/quizlet-anki-brainscape-knowt-studysmarter-flashcard-study-apps-ranked-2026",
+      "used_for": "What low-star reviews complain about: study modes moved behind a paywall, lost decks, missing export; what people want: free spaced repetition, unlimited cards, easy backup."
+    },
+    {
+      "source": "https://nibble-app.com/blog/is-quizlet-worth-it",
+      "used_for": "Free tiers that limit study rounds per day and show ads during study."
+    },
+    {
+      "source": "https://docs.ankiweb.net/exporting.html",
+      "used_for": "Export format A (notes as plain text): one note per line, fields separated by a tab, HTML formatting kept in the fields."
+    },
+    {
+      "source": "https://docs.ankiweb.net/importing/text-files.html",
+      "used_for": "Export format A, continued: newer files start with #key:value lines (#separator:tab, #html:true, #deck column, #tags column); separators comma, semicolon or tab; quoted fields may hold line breaks; HTML entities such as &amp; and &nbsp;."
+    },
+    {
+      "source": "https://blog.quizalize.com/?p=689",
+      "used_for": "Export format B (copy of a study set as text): term and definition separated by a tab, rows by a new line, no header line."
+    },
+    {
+      "source": "https://help.omnisets.com/guides/importing",
+      "used_for": "Export format B, continued: custom separators can be typed in for term/definition and for rows, so files vary."
+    }
+  ]
+}

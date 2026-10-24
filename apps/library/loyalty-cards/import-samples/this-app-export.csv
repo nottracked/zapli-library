@@ -1,0 +1,4 @@
+﻿"Store","Card number","Barcode type","Name on the card","Kind of shop","Points or balance","Valid until","Note","Pin to the top","Archived"
+"Corner Grocer","2900123456785","ean13","","shopping_cart","1240","","Double points on Tuesdays.","true","false"
+"Riverside Gym","RG|2026|00071","pdf417","Sam Rivera","fitness_center","","2027-01-31","","false","false"
+"Toy Harbor","20441098","ean8","","child_care","","","","false","true"

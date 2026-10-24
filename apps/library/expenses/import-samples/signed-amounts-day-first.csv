@@ -1,0 +1,8 @@
+date,account,category,amount,currency,converted amount,currency,description
+01/09/2026,Cash,Groceries,-23.40,EUR,-23.40,EUR,Market
+02/09/2026,Payment card,Eating out,-12.90,EUR,-12.90,EUR,Lunch
+03/09/2026,Payment card,Salary,"2,450.00",EUR,"2,450.00",EUR,September salary
+05/09/2026,Payment card,Home,"-1,050.00",EUR,"-1,050.00",EUR,Rent
+05/09/2026,Payment card,To 'Savings',-200.00,EUR,-200.00,EUR,
+05/09/2026,Savings,From 'Payment card',200.00,EUR,200.00,EUR,
+14/09/2026,Cash,Transport,-15.00,EUR,-15.00,EUR,Taxi home

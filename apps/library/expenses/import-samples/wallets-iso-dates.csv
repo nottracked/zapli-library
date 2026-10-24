@@ -1,0 +1,6 @@
+Date,Wallet,Type,Category name,Amount,Currency,Note,Labels,Author
+2026-09-02T08:05:00+00:00,Cash wallet,Expense,Food & Drink,-4.50,EUR,Croissant and coffee,,Sam
+2026-09-04T17:20:00+00:00,Cash wallet,Expense,Shopping,-39.99,EUR,New shoes,,Sam
+2026-09-05T09:00:00+00:00,Bank,Income,Salary,2450.00,EUR,,,Sam
+2026-09-06T12:00:00+00:00,Bank,Transfer,Transfer,-100.00,EUR,To cash wallet,,Sam
+2026-09-08T19:30:00+00:00,Bank,Expense,Entertainment,-24.00,EUR,Cinema,cinema,Sam

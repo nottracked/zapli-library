@@ -1,0 +1,390 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "samples/calories",
+    "name": "FreeCalc Lite",
+    "version": "1.0.1",
+    "icon": "restaurant",
+    "ageRating": "everyone"
+  },
+  "theme": { "seedColor": "#EF6C00", "shape": "rounded" },
+  "permissions": {
+    "scan.barcode": {
+      "purpose": "Scan a food's barcode to find it or look it up",
+      "formats": ["ean13", "ean8", "upcA"]
+    },
+    "net.http": {
+      "purpose": "Look up scanned barcodes in the Open Food Facts product database",
+      "optional": true,
+      "hosts": [{ "host": "world.openfoodfacts.org", "purpose": "Open Food Facts product lookup by barcode" }]
+    },
+    "data.packs": { "purpose": "Search an offline list of generic foods from the USDA, without a connection" }
+  },
+  "dataFlows": [
+    {
+      "from": ["lookupProduct.code"],
+      "to": "net.http:world.openfoodfacts.org",
+      "purpose": "Only the scanned barcode is sent, to fetch the product's name and nutrition values"
+    }
+  ],
+  "connectors": {
+    "off": {
+      "capability": "net.http",
+      "baseUrl": "https://world.openfoodfacts.org/api/v2",
+      "headers": { "Accept": "application/json", "User-Agent": "FreeCalcLite/1.0.0 (anyApp sample)" },
+      "timeout": "PT15S",
+      "rateLimit": { "max": 15, "per": "PT1M" },
+      "endpoints": {
+        "product": {
+          "method": "GET",
+          "path": "/product/{barcode}",
+          "args": { "barcode": { "type": "barcode" } },
+          "query": { "fields": "product_name,brands,serving_quantity,nutriments" },
+          "expect": [200, 404]
+        }
+      }
+    },
+    "usda": { "capability": "data.packs", "pack": "anyapp/usda-foods@2026.1" }
+  },
+  "settings": {
+    "kcalGoal": {
+      "type": "integer",
+      "label": "Daily goal",
+      "unit": "kcal",
+      "default": 2000,
+      "min": 800,
+      "max": 6000,
+      "sensitivity": "health"
+    }
+  },
+  "entities": {
+    "food": {
+      "label": "Food",
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=item.brand",
+        "trailing": "=string(round(item.kcal)) + ' kcal'"
+      },
+      "fields": {
+        "name": { "type": "text", "required": true, "maxLength": 120 },
+        "brand": { "type": "text", "maxLength": 80 },
+        "barcode": { "type": "barcode", "unique": true },
+        "kcal": { "type": "number", "label": "Calories per 100 g", "unit": "kcal", "required": true, "min": 0 },
+        "protein": { "type": "number", "label": "Protein per 100 g", "unit": "g", "default": 0, "min": 0, "max": 100 },
+        "carbs": { "type": "number", "label": "Carbs per 100 g", "unit": "g", "default": 0, "min": 0, "max": 100 },
+        "fat": { "type": "number", "label": "Fat per 100 g", "unit": "g", "default": 0, "min": 0, "max": 100 },
+        "servingGrams": { "type": "number", "label": "Serving size", "unit": "g", "default": 100, "min": 1 },
+        "source": { "type": "choice", "options": ["manual", "openFoodFacts"], "default": "manual", "editable": false },
+        "entries": { "type": "inverse", "of": "entry.food" }
+      }
+    },
+    "genericFood": {
+      "label": "Generic food",
+      "source": { "connector": "usda", "list": "foods" },
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=item.portion",
+        "trailing": "=string(round(item.kcal)) + ' kcal'"
+      },
+      "fields": {
+        "name": { "type": "text" },
+        "category": { "type": "text" },
+        "kcal": { "type": "number", "label": "Calories per 100 g", "unit": "kcal" },
+        "protein": { "type": "number", "label": "Protein per 100 g", "unit": "g" },
+        "carbs": { "type": "number", "label": "Carbs per 100 g", "unit": "g" },
+        "fat": { "type": "number", "label": "Fat per 100 g", "unit": "g" },
+        "servingGrams": { "type": "number", "label": "Typical portion", "unit": "g" },
+        "portion": { "type": "text" }
+      }
+    },
+    "entry": {
+      "label": "Diary entry",
+      "labelPlural": "Diary",
+      "sensitivity": "health",
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=formatNumber(item.servings) + ' × ' + formatNumber(item.servingGrams, 0) + ' g'",
+        "trailing": "=string(round(item.calories)) + ' kcal'"
+      },
+      "fields": {
+        "name": { "type": "text", "required": true, "maxLength": 120 },
+        "servings": { "type": "number", "required": true, "default": 1, "min": 0.25, "max": 50 },
+        "servingGrams": {
+          "type": "number",
+          "label": "Serving",
+          "unit": "g",
+          "required": true,
+          "default": 100,
+          "min": 1
+        },
+        "meal": {
+          "type": "choice",
+          "options": ["breakfast", "lunch", "dinner", "snack"],
+          "default": "=time(now()) < time('10:30') ? 'breakfast' : time(now()) < time('15:00') ? 'lunch' : time(now()) < time('21:00') ? 'dinner' : 'snack'"
+        },
+        "date": { "type": "date", "required": true, "default": "=today()" },
+        "kcal100": { "type": "number", "label": "Calories per 100 g", "unit": "kcal", "required": true, "min": 0 },
+        "protein100": { "type": "number", "label": "Protein per 100 g", "unit": "g", "required": true, "default": 0 },
+        "carbs100": { "type": "number", "label": "Carbs per 100 g", "unit": "g", "required": true, "default": 0 },
+        "fat100": { "type": "number", "label": "Fat per 100 g", "unit": "g", "required": true, "default": 0 },
+        "food": { "type": "ref", "to": "food", "onDelete": "setNull", "editable": false },
+        "grams": { "type": "number", "unit": "g", "compute": "=item.servings * item.servingGrams", "stored": true },
+        "calories": { "type": "number", "unit": "kcal", "compute": "=item.kcal100 * item.grams / 100", "stored": true },
+        "protein": { "type": "number", "unit": "g", "compute": "=item.protein100 * item.grams / 100", "stored": true },
+        "carbs": { "type": "number", "unit": "g", "compute": "=item.carbs100 * item.grams / 100", "stored": true },
+        "fat": { "type": "number", "unit": "g", "compute": "=item.fat100 * item.grams / 100", "stored": true }
+      }
+    }
+  },
+  "queries": {
+    "myFoods": { "entity": "food", "sort": ["name"] },
+    "byBarcode": { "entity": "food", "args": { "code": { "type": "barcode" } }, "where": "=item.barcode == args.code" },
+    "diary": { "entity": "entry", "sort": ["-date", "createdAt"], "limit": 1000 },
+    "totals": {
+      "entity": "entry",
+      "where": "=item.date == today()",
+      "aggregate": {
+        "kcal": { "fn": "sum", "field": "calories" },
+        "protein": { "fn": "sum", "field": "protein" },
+        "carbs": { "fn": "sum", "field": "carbs" },
+        "fat": { "fn": "sum", "field": "fat" }
+      }
+    },
+    "last7": {
+      "entity": "entry",
+      "where": "=item.date > addDays(today(), -7)",
+      "fill": true,
+      "groupBy": { "field": "date", "period": "day" },
+      "aggregate": { "kcal": { "fn": "sum", "field": "calories" } }
+    },
+    "last30": {
+      "entity": "entry",
+      "where": "=item.date > addDays(today(), -30)",
+      "fill": true,
+      "groupBy": { "field": "date", "period": "day" },
+      "aggregate": { "kcal": { "fn": "sum", "field": "calories" } }
+    }
+  },
+  "navigation": {
+    "start": "today",
+    "tabs": [
+      { "screen": "today", "label": "Today", "icon": "today" },
+      { "screen": "diary", "label": "Diary", "icon": "menu_book" },
+      { "screen": "foods", "label": "My foods", "icon": "restaurant_menu" },
+      { "screen": "generic", "label": "Generic", "icon": "nutrition" }
+    ]
+  },
+  "screens": {
+    "today": { "type": "dashboard", "title": "Today", "root": "todayCol" },
+    "diary": { "type": "list", "title": "Diary", "query": "diary", "sectionBy": "date" },
+    "foods": {
+      "type": "list",
+      "title": "My foods",
+      "query": "myFoods",
+      "search": ["name", "brand", "barcode"],
+      "toolbar": ["scanBtn"]
+    },
+    "generic": { "type": "list", "title": "Generic foods", "entity": "genericFood", "search": ["name"], "add": false },
+    "foodDetail": { "type": "detail", "entity": "food", "footer": "foodFooter" },
+    "genericDetail": { "type": "detail", "entity": "genericFood", "footer": "logGenericBtn" }
+  },
+  "components": {
+    "todayCol": {
+      "component": "Column",
+      "children": ["goalCard", "macroRow", "addRow", "chart7", "chart30", "avgStat"]
+    },
+    "goalCard": { "component": "Card", "child": "goalRow" },
+    "goalRow": { "component": "Row", "align": "center", "children": ["goalRing", "goalStats"] },
+    "goalRing": {
+      "component": "Progress",
+      "variant": "ring",
+      "label": "Calories eaten today",
+      "value": "=coalesce(q.totals.kcal, 0)",
+      "max": "=settings.kcalGoal",
+      "tone": "=coalesce(q.totals.kcal, 0) > settings.kcalGoal ? 'danger' : 'primary'"
+    },
+    "goalStats": { "component": "Column", "weight": 1, "children": ["eatenStat", "leftStat"] },
+    "eatenStat": {
+      "component": "Stat",
+      "label": "Eaten",
+      "unit": "kcal",
+      "value": "=round(coalesce(q.totals.kcal, 0))",
+      "caption": "='Goal ' + string(settings.kcalGoal) + ' kcal'"
+    },
+    "leftStat": {
+      "component": "Stat",
+      "label": "Left",
+      "unit": "kcal",
+      "value": "=round(settings.kcalGoal - coalesce(q.totals.kcal, 0))",
+      "tone": "=coalesce(q.totals.kcal, 0) > settings.kcalGoal ? 'danger' : 'success'"
+    },
+    "macroRow": { "component": "Row", "justify": "spaceBetween", "children": ["protStat", "carbStat", "fatStat"] },
+    "protStat": {
+      "component": "Stat",
+      "label": "Protein",
+      "unit": "g",
+      "value": "=round(coalesce(q.totals.protein, 0))"
+    },
+    "carbStat": { "component": "Stat", "label": "Carbs", "unit": "g", "value": "=round(coalesce(q.totals.carbs, 0))" },
+    "fatStat": { "component": "Stat", "label": "Fat", "unit": "g", "value": "=round(coalesce(q.totals.fat, 0))" },
+    "addRow": { "component": "Row", "justify": "spaceBetween", "children": ["scanBtn", "quickAddBtn"] },
+    "scanBtn": {
+      "component": "Button",
+      "icon": "barcode_scanner",
+      "label": "Scan",
+      "action": { "event": { "name": "scanFood" } }
+    },
+    "quickAddBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Quick add",
+      "action": { "event": { "name": "quickAdd" } }
+    },
+    "chart7": {
+      "component": "Chart",
+      "kind": "bar",
+      "title": "Last 7 days",
+      "query": "last7",
+      "x": "key",
+      "y": ["kcal"]
+    },
+    "chart30": {
+      "component": "Chart",
+      "kind": "line",
+      "title": "Last 30 days",
+      "query": "last30",
+      "x": "key",
+      "y": ["kcal"]
+    },
+    "avgStat": {
+      "component": "Stat",
+      "label": "30-day average on logged days",
+      "unit": "kcal",
+      "value": "=round(coalesce(avg(q.last30.filter(d, d.kcal > 0).map(d, d.kcal)), 0))"
+    },
+    "foodFooter": { "component": "Column", "children": ["offNote", "logFoodBtn"] },
+    "offNote": {
+      "component": "Text",
+      "variant": "caption",
+      "text": "Product data from Open Food Facts contributors, under the Open Database License (ODbL).",
+      "visible": "=record.source == 'openFoodFacts'"
+    },
+    "logFoodBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Add to diary",
+      "variant": "primary",
+      "action": { "event": { "name": "logFood", "context": { "food": "=record.id" } } }
+    },
+    "logGenericBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Add to diary",
+      "variant": "primary",
+      "action": { "event": { "name": "logGeneric", "context": { "food": "=record.id" } } }
+    }
+  },
+  "actions": {
+    "quickAdd": { "steps": [{ "type": "navigate", "screen": "entry.form" }] },
+    "scanFood": {
+      "steps": [
+        { "type": "capability", "capability": "scan.barcode", "action": "scan", "as": "scan" },
+        { "type": "query", "query": "byBarcode", "args": { "code": "=vars.scan.value" }, "as": "hit" },
+        {
+          "type": "runAction",
+          "when": "=size(vars.hit) > 0",
+          "action": "logFood",
+          "args": { "food": "=vars.hit[0].id" }
+        },
+        {
+          "type": "runAction",
+          "when": "=size(vars.hit) == 0",
+          "action": "lookupProduct",
+          "args": { "code": "=vars.scan.value" }
+        }
+      ]
+    },
+    "lookupProduct": {
+      "args": { "code": { "type": "barcode" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "net.http",
+          "action": "request",
+          "args": { "connector": "off", "endpoint": "product", "args": { "barcode": "=args.code" } },
+          "as": "off",
+          "onError": "continue"
+        },
+        {
+          "type": "createRecord",
+          "entity": "food",
+          "when": "=vars.off.status == 200 && get(vars.off.body, '/status', 0) == 1",
+          "values": {
+            "name": "=string(get(vars.off.body, '/product/product_name', 'Unnamed product'))",
+            "brand": "=string(get(vars.off.body, '/product/brands', ''))",
+            "barcode": "=args.code",
+            "kcal": "=double(get(vars.off.body, '/product/nutriments/energy-kcal_100g', 0))",
+            "protein": "=double(get(vars.off.body, '/product/nutriments/proteins_100g', 0))",
+            "carbs": "=double(get(vars.off.body, '/product/nutriments/carbohydrates_100g', 0))",
+            "fat": "=double(get(vars.off.body, '/product/nutriments/fat_100g', 0))",
+            "servingGrams": "=double(get(vars.off.body, '/product/serving_quantity', 100))",
+            "source": "openFoodFacts"
+          },
+          "as": "rec"
+        },
+        { "type": "runAction", "when": "=vars.rec != null", "action": "logFood", "args": { "food": "=vars.rec.id" } },
+        {
+          "type": "toast",
+          "when": "=vars.off == null",
+          "text": "Couldn't look it up online. Enter the food yourself."
+        },
+        {
+          "type": "toast",
+          "when": "=vars.off != null && vars.rec == null",
+          "text": "Not in Open Food Facts yet. Enter it yourself."
+        },
+        {
+          "type": "navigate",
+          "when": "=vars.rec == null",
+          "screen": "food.form",
+          "params": { "barcode": "=args.code" }
+        }
+      ]
+    },
+    "logFood": {
+      "args": { "food": { "type": "ref", "to": "food" } },
+      "steps": [
+        {
+          "type": "navigate",
+          "screen": "entry.form",
+          "params": {
+            "food": "=args.food",
+            "name": "=args.food.name",
+            "servingGrams": "=args.food.servingGrams",
+            "kcal100": "=args.food.kcal",
+            "protein100": "=args.food.protein",
+            "carbs100": "=args.food.carbs",
+            "fat100": "=args.food.fat"
+          }
+        }
+      ]
+    },
+    "logGeneric": {
+      "args": { "food": { "type": "ref", "to": "genericFood" } },
+      "steps": [
+        {
+          "type": "navigate",
+          "screen": "entry.form",
+          "params": {
+            "name": "=args.food.name",
+            "servingGrams": "=args.food.servingGrams",
+            "kcal100": "=args.food.kcal",
+            "protein100": "=args.food.protein",
+            "carbs100": "=args.food.carbs",
+            "fat100": "=args.food.fat"
+          }
+        }
+      ]
+    }
+  }
+}

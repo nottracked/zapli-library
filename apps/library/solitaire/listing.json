@@ -1,0 +1,40 @@
+{
+  "id": "library/solitaire",
+  "category": "game_card",
+  "replaces": "Klondike solitaire",
+  "title": "Solitaire",
+  "summary": "Klondike with big, clear cards, winnable deals, a daily deal and statistics",
+  "description": "**Solitaire** is the classic patience game with seven columns, four foundations and a stock, and nothing else on the screen. No ads between games, no account, no tracking.\n\n**Cards you can read**\n\n- Three card sizes: Normal, Large and Largest. Until you choose, the game picks the size that matches your phone's text size, and your choice stays.\n- Bold, drawn ranks and suits fill the top of every card, so a card that is half covered in a column still shows its rank and suit in full. They never get cut off by a large text setting.\n- Four suit colours from the start (green clubs, blue diamonds), and a high-contrast switch: pure white cards, thicker outlines, darker colours.\n- Long columns stay on the screen, and messages appear above the buttons, never on top of the cards.\n- Turn the phone sideways and the stock and the foundations move to the sides, so the columns get the whole height.\n\n**Easy to play**\n\n- Tap a card to pick it up, then tap where it should go: anywhere in the column counts, and any foundation. The places where it fits light up. Tap it again and it goes to the best place by itself. One-tap moves and dragging work too.\n- Winnable deals: every deal can be won, at Easy, Medium or Hard. An Easy deal is won just by following the hints. Or play any deal at all.\n- A daily deal, with a calendar of the days you solved. Missed days can still be played, and nothing nags you about streaks.\n- Undo as many moves as you like. Hints, safe cards going up by themselves and finishing by itself are all on at first, and each can be switched off; the clock is hidden until you want it.\n- Turn one card or three from the stock, with no limit on passes, or three passes, or one.\n\n**Make it yours**\n\n- Two card styles, Bold and Crisp; card shapes: a rectangle, a heart, lace, a ticket, a pebble or a flower, each keeping the rank and suit fully inside the card.\n- Eight card backs, from stripes and hearts to stars, and six tables, from green felt to a calm black.\n- In English or Slovak, following your phone, or chosen in the game.\n\n**Gentle progress**\n\n- Points for every card you bring up and for every win, and they never go down. Levels come at an easy pace and bring new backs, tables, shapes and a second card style.\n- Fifteen small achievements and your personal bests for every level of deal. No timers pushing you, no reminders, nothing to buy: one switch unlocks everything at once if you would rather not wait.\n- Card sizes, high contrast, four colours, the Bold style, the rectangle and heart shapes, the hearts and high-contrast backs, and the calm table are never locked.\n\n**Your game and your numbers**\n\n- The game in progress, your settings and your statistics are saved after every move, so you can close the app and carry on later. Inside the app they are part of the app's own data.\n- Statistics for one-card and three-card games: games played and won, win rate, best time, fewest moves and winning streaks.\n\n**Easy to use**\n\n- Light and dark, the stock on the left or the right, keyboard play, and screen-reader labels for every card; a screen reader's double tap picks up a card and puts it down.\n- The win celebration is short, and stays still when your phone asks for reduced motion.\n\n**What it never does**\n\n- No ads and no in-app purchases; nothing you need to read the cards is ever locked.\n- No account and no sign-in.\n- No internet access: the game works offline and cannot connect anywhere.\n- No analytics or tracking of any kind.",
+  "license": "MIT",
+  "tags": [
+    "solitaire",
+    "klondike",
+    "patience",
+    "card game",
+    "large cards",
+    "winnable deals",
+    "daily deal",
+    "slovak",
+    "offline",
+    "no ads"
+  ],
+  "screenshots": [],
+  "research": [
+    {
+      "source": "https://en.wikipedia.org/wiki/Klondike_(solitaire)",
+      "used_for": "The rules (layout, building down in alternating colours, kings into empty columns, foundations by suit), draw-one and draw-three stock variants and redeal limits, and the scoring variants (not implemented)"
+    },
+    {
+      "source": "https://apps.appfollow.io/ios/solitaire-card-game/594007249?country=us",
+      "used_for": "Read through a search summary: the most common complaints about the category are intrusive ads during and after games, freezes and crashes, and auto-complete that misbehaves"
+    },
+    {
+      "source": "https://apps.apple.com/us/app/solitaire-by-logify/id1215652581",
+      "used_for": "Read through a search summary: features expected of the type, such as a left-handed layout option and deals filtered for solvability"
+    },
+    {
+      "source": "https://apps.apple.com/app/id945996633",
+      "used_for": "Read through a search summary: hints that highlight a source and a destination, unlimited undo, statistics with win rate, streaks and best times"
+    }
+  ]
+}

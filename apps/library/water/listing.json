@@ -1,0 +1,231 @@
+{
+  "id": "library/water",
+  "category": "health_and_fitness",
+  "replaces": "Water reminder",
+  "title": "Water",
+  "summary": "Log drinks in one tap, reach a daily goal, get gentle reminders until you do",
+  "description": "**Water** helps you drink enough during the day, without ads, accounts or tracking.\n\n**What it does**\n\n- **A daily goal** you set yourself, or one suggested from your body weight (about 33 ml per kg, or half an ounce per pound). It is a rule of thumb, not medical advice.\n- **One-tap quick adds** for the glasses, bottles and mugs you use. Glass, bottle and mug come ready; add your own with any size and drink type, and put them in the order you like. Today shows the first six in two columns, all in view. Any other amount is one more tap away.\n- **Today at a glance**: a large progress ring with how much you drank and your goal inside it, how much is still to go, your quick adds right below it, and every drink you logged today, each removable if you tapped by mistake.\n- **Reminders over your waking hours**: choose when they start and end, how often they come (every 1 to 4 hours) and on which days. They stop for the day once you reach your goal. Each reminder has an \"I drank some\" button that logs your first quick add without opening the app, and a Snooze button for 15 minutes, half an hour or an hour. Logging a drink clears a reminder that is showing or snoozed, so it never comes back with an old amount.\n- **History**: your goal streak, how many of the last 30 days you reached your goal, your 7-day average, a bar chart of the last 7 days with your goal as a line, and a ring of what you drank by type, each drink in its own colour, with the 30-day total.\n- **Home-screen widgets**: today’s progress, and a one-tap add button.\n- **Millilitres or US fluid ounces**, switchable at any time. Every drink keeps the amount you entered, so nothing is lost when you switch.\n- **Bring your history along**: import the CSV drink log most water-tracking apps export, with date and time in one or two columns, amounts in ml, ounces, litres or cups (in the column name or in the cell), commas or semicolons, and month-first or day-first dates.\n- **Your data, your file**: save the whole drink log as a CSV file, and bring a saved file back in.\n\n**What it never does**\n\n- No ads, no subscriptions, no paywalled features.\n- No account and no sign-in.\n- No internet access at all: the app cannot connect to the internet, so your log stays on your phone.\n- No analytics or tracking of any kind.\n\n**Good to know**\n\nHow much water you need depends on your body, the weather and how active you are, and food gives you some of your water too. If you have heart or kidney problems, or your doctor has told you to limit fluids, follow their advice rather than the goal here.",
+  "license": "MIT",
+  "tags": ["water", "hydration", "drink reminder", "habit", "health", "widget", "offline"],
+  "screenshots": [
+    {
+      "file": "screenshots/01-today-light.png",
+      "caption": "Today’s progress toward your goal, with one-tap quick adds",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/02-log-light.png",
+      "caption": "Every drink, grouped by day",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/03-history-light.png",
+      "caption": "Goal streak, 7-day average and daily totals",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/04-today-dark.png",
+      "caption": "Today in the dark theme",
+      "theme": "dark"
+    }
+  ],
+  "sampleData": {
+    "cup": [
+      {
+        "name": "Glass",
+        "amount": 250,
+        "unit": "ml",
+        "type": "water",
+        "position": 1
+      },
+      {
+        "name": "Bottle",
+        "amount": 500,
+        "unit": "ml",
+        "type": "water",
+        "position": 2
+      },
+      {
+        "name": "Mug",
+        "amount": 300,
+        "unit": "ml",
+        "type": "tea",
+        "position": 3
+      },
+      {
+        "name": "Espresso",
+        "amount": 60,
+        "unit": "ml",
+        "type": "coffee",
+        "position": 4
+      },
+      {
+        "name": "Sports bottle",
+        "amount": 750,
+        "unit": "ml",
+        "type": "water",
+        "position": 5
+      }
+    ],
+    "drink": [
+      {
+        "amount": 250,
+        "unit": "ml",
+        "type": "water",
+        "at": "2026-10-15T07:45:00+02:00"
+      },
+      {
+        "amount": 200,
+        "unit": "ml",
+        "type": "coffee",
+        "at": "2026-10-15T09:30:00+02:00"
+      },
+      {
+        "amount": 500,
+        "unit": "ml",
+        "type": "water",
+        "at": "2026-10-15T11:15:00+02:00"
+      },
+      {
+        "amount": 250,
+        "unit": "ml",
+        "type": "sparkling",
+        "at": "2026-10-15T13:40:00+02:00"
+      },
+      {
+        "amount": 500,
+        "unit": "ml",
+        "type": "water",
+        "at": "2026-10-14T08:05:00+02:00"
+      },
+      {
+        "amount": 750,
+        "unit": "ml",
+        "type": "water",
+        "at": "2026-10-14T12:30:00+02:00"
+      },
+      {
+        "amount": 300,
+        "unit": "ml",
+        "type": "tea",
+        "at": "2026-10-14T16:45:00+02:00"
+      },
+      {
+        "amount": 750,
+        "unit": "ml",
+        "type": "water",
+        "at": "2026-10-14T19:20:00+02:00"
+      },
+      {
+        "amount": 200,
+        "unit": "ml",
+        "type": "coffee",
+        "at": "2026-10-13T07:50:00+02:00"
+      },
+      {
+        "amount": 750,
+        "unit": "ml",
+        "type": "water",
+        "at": "2026-10-13T11:00:00+02:00"
+      },
+      {
+        "amount": 750,
+        "unit": "ml",
+        "type": "water",
+        "at": "2026-10-13T15:30:00+02:00"
+      },
+      {
+        "amount": 500,
+        "unit": "ml",
+        "type": "water",
+        "at": "2026-10-12T09:10:00+02:00"
+      },
+      {
+        "amount": 1000,
+        "unit": "ml",
+        "type": "water",
+        "at": "2026-10-12T13:00:00+02:00"
+      },
+      {
+        "amount": 250,
+        "unit": "ml",
+        "type": "milk",
+        "at": "2026-10-12T18:00:00+02:00"
+      },
+      {
+        "amount": 750,
+        "unit": "ml",
+        "type": "juice",
+        "at": "2026-10-11T10:00:00+02:00"
+      }
+    ]
+  },
+  "research": [
+    {
+      "source": "https://blog.waterminder.com/tips/20-features-that-will-make-you-fall-in-love-with-the-waterminder-app/",
+      "used_for": "Expected core features of the type: custom cups with their own size and drink type, ml/oz units, home-screen widgets, history charts"
+    },
+    {
+      "source": "https://apps.apple.com/us/app/-/id6753190960",
+      "used_for": "Reminders scheduled between wake and sleep times with a chosen interval; custom drinks in ml or fl oz; streaks"
+    },
+    {
+      "source": "https://apps.apple.com/id/app/id1518929738",
+      "used_for": "Interval between notifications, no reminders at night, metric and imperial units"
+    },
+    {
+      "source": "https://apps.apple.com/us/app/id1453280308",
+      "used_for": "Reminder setup from wake-up time, bedtime and interval"
+    },
+    {
+      "source": "https://justuseapp.com/en/app/1505774276/drink-water-reminder/reviews",
+      "used_for": "User complaints to avoid: ads before changing the logged amount, drink types and other basics behind a subscription"
+    },
+    {
+      "source": "https://marlvel.ai/apps/my-water-daily-drink-tracker/reviews",
+      "used_for": "User complaints to avoid: ads covering the log buttons, quick-add widgets locked behind a subscription"
+    },
+    {
+      "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5133077",
+      "used_for": "EFSA adequate intake for total water (2.0 L women, 2.5 L men, 70-80% from drinks): the 2,000 ml default goal and the note that food supplies water too"
+    },
+    {
+      "source": "https://www.oncolink.org/blogs/determining-fluid-requirements",
+      "used_for": "Weight-based estimate of 30-35 ml per kg per day, and the caution that heart failure and other conditions change fluid needs: the optional goal suggestion (33 ml/kg, about half an ounce per pound)"
+    },
+    {
+      "source": "https://play.google.com/store/apps/details?id=com.freehydrocoach&hl=en",
+      "used_for": "Leading water trackers offer a CSV export of the drink history (often behind a paid tier); no public page documents the column layout, so the import reads the common column names for date, time, amount, unit and drink type"
+    },
+    {
+      "source": "https://play.google.com/store/apps/details?id=website.ihumbak.hydration&hl=en_US",
+      "used_for": "Drink history exported as CSV for spreadsheets or JSON for backup: the import accepts CSV with the usual column names"
+    }
+  ],
+  "migration": {
+    "formats": ["csv"],
+    "summary": "Imports the CSV drink log most water-tracking apps export: date and time, amount in ml, cl, dl, litres, oz or cups, and drink type, with commas, semicolons or tabs",
+    "samples": [
+      {
+        "file": "import-samples/this-app.csv",
+        "about": "This app’s own export: date and time with offset, drink, amount and unit"
+      },
+      {
+        "file": "import-samples/amount-in-ml-column.csv",
+        "about": "Separate date and time columns, the amount in a column named in millilitres"
+      },
+      {
+        "file": "import-samples/ounces-month-first.csv",
+        "about": "US-style export: month-first dates, 12-hour times, fluid ounces"
+      },
+      {
+        "file": "import-samples/units-in-cells-with-semicolons.csv",
+        "about": "European-style export: semicolons, day-first dates with dots, units and decimal commas in the cells"
+      },
+      {
+        "file": "import-samples/timestamp-amount-unit.csv",
+        "about": "One timestamp column with date and time, separate amount and unit columns"
+      }
+    ]
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "spec": "anyapp/0.2",
+  "app": {
+    "id": "samples/stock",
+    "name": "Shop Stock",
+    "version": "1.0.0",
+    "icon": "inventory_2",
+    "ageRating": "everyone",
+    "aiExposure": "on"
+  },
+  "theme": { "seedColor": "#1565C0", "density": "compact" },
+  "permissions": {
+    "scan.barcode": {
+      "purpose": "Find or add items by scanning their barcode",
+      "formats": ["ean13", "ean8", "upcA", "code128", "qr"]
+    },
+    "notify.local": { "purpose": "Tell you when an item runs low", "maxPerDay": 10 },
+    "files.io": { "purpose": "Export your stock list as a CSV file", "modes": ["export"] }
+  },
+  "dataFlows": [{ "from": ["*"], "to": "files.io", "purpose": "CSV export to a file you choose" }],
+  "settings": { "currency": { "type": "choice", "options": ["EUR", "USD", "GBP", "CZK"], "default": "EUR" } },
+  "entities": {
+    "category": {
+      "label": "Category",
+      "display": { "title": "=item.name" },
+      "fields": {
+        "name": { "type": "text", "required": true, "unique": true, "maxLength": 40 },
+        "items": { "type": "inverse", "of": "item.category" }
+      }
+    },
+    "item": {
+      "label": "Item",
+      "aiExposure": "write",
+      "display": {
+        "title": "=item.name",
+        "subtitle": "=item.barcode",
+        "trailing": "=string(item.stock) + ' ' + item.unit",
+        "tone": "=item.low ? 'danger' : 'neutral'"
+      },
+      "fields": {
+        "name": { "type": "text", "required": true, "maxLength": 80 },
+        "barcode": { "type": "barcode", "unique": true },
+        "category": { "type": "ref", "to": "category", "onDelete": "setNull" },
+        "unit": { "type": "choice", "options": ["pcs", "kg", "l", "box"], "default": "pcs" },
+        "stock": { "type": "integer", "default": 0, "min": 0, "merge": "counter" },
+        "minStock": { "type": "integer", "label": "Reorder at", "default": 5, "min": 0 },
+        "price": { "type": "decimal", "scale": 2, "min": 0, "currency": "=settings.currency" },
+        "photo": { "type": "image" },
+        "low": { "type": "boolean", "compute": "=item.stock <= item.minStock", "stored": true },
+        "value": { "type": "decimal", "scale": 2, "compute": "=coalesce(item.price, 0) * item.stock", "stored": true },
+        "movements": { "type": "inverse", "of": "movement.item" }
+      }
+    },
+    "movement": {
+      "label": "Stock movement",
+      "display": {
+        "title": "=(item.delta > 0 ? '+' : '') + string(item.delta)",
+        "subtitle": "=formatDate(item.createdAt, 'yMMMdjm')"
+      },
+      "fields": {
+        "item": { "type": "ref", "to": "item", "required": true, "onDelete": "cascade" },
+        "delta": { "type": "integer", "required": true },
+        "note": { "type": "text", "maxLength": 120 }
+      }
+    }
+  },
+  "queries": {
+    "all": { "entity": "item", "sort": ["name"] },
+    "lowStock": { "entity": "item", "where": "=item.low", "sort": ["stock"] },
+    "byBarcode": {
+      "entity": "item",
+      "args": { "code": { "type": "barcode" } },
+      "where": "=item.barcode == args.code",
+      "limit": 1
+    },
+    "totals": {
+      "entity": "item",
+      "aggregate": {
+        "items": { "fn": "count" },
+        "units": { "fn": "sum", "field": "stock" },
+        "value": { "fn": "sum", "field": "value" }
+      }
+    }
+  },
+  "navigation": {
+    "start": "stock",
+    "tabs": [
+      { "screen": "stock", "label": "Stock", "icon": "inventory_2" },
+      { "screen": "low", "label": "Low", "icon": "warning", "badge": "=size(q.lowStock)" },
+      { "screen": "more", "label": "More", "icon": "more_horiz" }
+    ]
+  },
+  "screens": {
+    "stock": {
+      "type": "list",
+      "title": "Stock",
+      "query": "all",
+      "search": ["name", "barcode"],
+      "sectionBy": "category",
+      "toolbar": ["scanBtn"]
+    },
+    "low": {
+      "type": "list",
+      "title": "Low stock",
+      "query": "lowStock",
+      "add": false,
+      "empty": { "title": "All stocked up", "icon": "check_circle" }
+    },
+    "itemDetail": { "type": "detail", "entity": "item", "header": "stockRow", "related": ["movements"] },
+    "more": { "type": "custom", "title": "More", "root": "moreCol" }
+  },
+  "components": {
+    "scanBtn": {
+      "component": "Button",
+      "icon": "barcode_scanner",
+      "label": "Scan",
+      "iconOnly": true,
+      "action": { "event": { "name": "scanItem" } }
+    },
+    "stockRow": { "component": "Row", "align": "center", "children": ["stockStat", "minusBtn", "plusBtn"] },
+    "stockStat": {
+      "component": "Stat",
+      "label": "In stock",
+      "weight": 1,
+      "value": "=string(record.stock) + ' ' + record.unit",
+      "tone": "=record.low ? 'danger' : 'neutral'"
+    },
+    "minusBtn": {
+      "component": "Button",
+      "icon": "remove",
+      "label": "Remove one",
+      "iconOnly": true,
+      "action": { "event": { "name": "adjust", "context": { "item": "=record.id", "delta": -1 } } }
+    },
+    "plusBtn": {
+      "component": "Button",
+      "icon": "add",
+      "label": "Add one",
+      "iconOnly": true,
+      "variant": "primary",
+      "action": { "event": { "name": "adjust", "context": { "item": "=record.id", "delta": 1 } } }
+    },
+    "moreCol": { "component": "Column", "children": ["valueStat", "exportBtn"] },
+    "valueStat": {
+      "component": "Stat",
+      "label": "Stock value",
+      "value": "=formatCurrency(q.totals.value, settings.currency)",
+      "caption": "=string(q.totals.units) + ' units in ' + string(q.totals.items) + ' items'"
+    },
+    "exportBtn": {
+      "component": "Button",
+      "icon": "download",
+      "label": "Export CSV",
+      "action": { "event": { "name": "exportCsv" } }
+    }
+  },
+  "actions": {
+    "scanItem": {
+      "steps": [
+        { "type": "capability", "capability": "scan.barcode", "action": "scan", "as": "scan" },
+        { "type": "query", "query": "byBarcode", "args": { "code": "=vars.scan.value" }, "as": "found" },
+        {
+          "type": "navigate",
+          "when": "=size(vars.found) > 0",
+          "screen": "itemDetail",
+          "params": { "id": "=vars.found[0].id" }
+        },
+        {
+          "type": "navigate",
+          "when": "=size(vars.found) == 0",
+          "screen": "item.form",
+          "params": { "barcode": "=vars.scan.value" }
+        }
+      ]
+    },
+    "adjust": {
+      "args": { "item": { "type": "ref", "to": "item" }, "delta": { "type": "integer" } },
+      "aiExposure": true,
+      "agentDescription": "Change an item's stock by delta (negative removes stock).",
+      "steps": [
+        { "type": "updateRecord", "record": "=args.item", "increment": { "stock": "=args.delta" } },
+        { "type": "createRecord", "entity": "movement", "values": { "item": "=args.item", "delta": "=args.delta" } }
+      ]
+    },
+    "notifyLow": {
+      "args": { "item": { "type": "ref", "to": "item" } },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "Low stock",
+            "body": "=coalesce(args.item.name, 'An item') + ': ' + string(args.item.stock) + ' left'",
+            "open": { "screen": "itemDetail", "params": { "id": "=args.item.id" } }
+          }
+        }
+      ]
+    },
+    "exportCsv": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "all",
+            "fileName": "='stock-' + string(today()) + '.csv'",
+            "destination": "saveAs",
+            "columns": ["name", "barcode", "category", "unit", "stock", "minStock", "price"]
+          }
+        },
+        { "type": "toast", "text": "Export saved" }
+      ]
+    }
+  },
+  "triggers": {
+    "lowStock": {
+      "type": "record",
+      "entity": "item",
+      "on": ["update"],
+      "when": "=item.low && !old.low",
+      "do": "notifyLow",
+      "args": { "item": "=item.id" },
+      "maxPerDay": 10
+    }
+  }
+}

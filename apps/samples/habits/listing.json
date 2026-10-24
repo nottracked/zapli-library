@@ -1,0 +1,128 @@
+{
+  "id": "samples/habits",
+  "category": "productivity",
+  "replaces": "habit tracker",
+  "title": "Habits",
+  "summary": "Build habits with reminders, streaks and a checklist on your home screen.",
+  "description": "Pick the habits you want to keep and how often: every day, on weekdays or on the days you choose. Tick a habit off in the app, from its reminder or from the home-screen checklist, and watch the streak grow.\n\n- **Reminders** at the time you set for each habit, with a Done button.\n- **Streaks** that follow each habit's own schedule.\n- **A checklist widget** for today's habits.\n\n**What it never does:** no ads, no tracking and no account. Your habits stay on this phone.",
+  "license": "MIT",
+  "tags": ["habits", "streaks", "reminders", "routine"],
+  "screenshots": [],
+  "sampleData": {
+    "habit": [
+      {
+        "id": "read",
+        "name": "Read 20 pages",
+        "schedule": "FREQ=DAILY",
+        "remind": true,
+        "remindAt": "21:00",
+        "archived": false
+      },
+      {
+        "id": "walk",
+        "name": "Walk 30 minutes",
+        "schedule": "FREQ=DAILY",
+        "remind": true,
+        "remindAt": "18:00",
+        "archived": false
+      },
+      {
+        "id": "stretch",
+        "name": "Stretch",
+        "schedule": "FREQ=WEEKLY;BYDAY=MO,WE,FR",
+        "remind": true,
+        "remindAt": "07:30",
+        "archived": false
+      },
+      {
+        "id": "spanish",
+        "name": "Practise Spanish",
+        "schedule": "FREQ=DAILY",
+        "remind": false,
+        "archived": false
+      },
+      {
+        "id": "plants",
+        "name": "Water the plants",
+        "schedule": "FREQ=WEEKLY;BYDAY=SU",
+        "remind": true,
+        "remindAt": "10:00",
+        "archived": false
+      }
+    ],
+    "checkin": [
+      {
+        "habit": "read",
+        "date": "2026-10-08"
+      },
+      {
+        "habit": "read",
+        "date": "2026-10-09"
+      },
+      {
+        "habit": "read",
+        "date": "2026-10-10"
+      },
+      {
+        "habit": "read",
+        "date": "2026-10-11"
+      },
+      {
+        "habit": "read",
+        "date": "2026-10-12"
+      },
+      {
+        "habit": "read",
+        "date": "2026-10-13"
+      },
+      {
+        "habit": "read",
+        "date": "2026-10-14"
+      },
+      {
+        "habit": "read",
+        "date": "2026-10-15"
+      },
+      {
+        "habit": "walk",
+        "date": "2026-10-11"
+      },
+      {
+        "habit": "walk",
+        "date": "2026-10-12"
+      },
+      {
+        "habit": "walk",
+        "date": "2026-10-13"
+      },
+      {
+        "habit": "walk",
+        "date": "2026-10-14"
+      },
+      {
+        "habit": "stretch",
+        "date": "2026-10-09"
+      },
+      {
+        "habit": "stretch",
+        "date": "2026-10-12"
+      },
+      {
+        "habit": "stretch",
+        "date": "2026-10-14"
+      },
+      {
+        "habit": "spanish",
+        "date": "2026-10-13"
+      },
+      {
+        "habit": "spanish",
+        "date": "2026-10-15"
+      },
+      {
+        "habit": "plants",
+        "date": "2026-10-11"
+      }
+    ]
+  }
+}
