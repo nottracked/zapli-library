@@ -3,7 +3,7 @@
   "app": {
     "id": "library/water",
     "name": "Water",
-    "version": "2.4.3",
+    "version": "2.4.4",
     "icon": "local_drink",
     "category": "health_and_fitness",
     "ageRating": "everyone",
@@ -18,59 +18,529 @@
     "defaultLocale": "en",
     "strings": {
       "drinksToday": {
-        "en": "{n, plural, one {# drink today} other {# drinks today}}"
+        "en": "{n, plural, one {# drink today} other {# drinks today}}",
+        "sk": "{n, plural, one {Dnes # nápoj} few {Dnes # nápoje} many {Dnes # nápoja} other {Dnes # nápojov}}"
       },
       "days": {
-        "en": "{n, plural, one {# day} other {# days}}"
+        "en": "{n, plural, one {# day} other {# days}}",
+        "sk": "{n, plural, one {# deň} few {# dni} many {# dňa} other {# dní}}"
       },
       "exported": {
-        "en": "{n, plural, =0 {Saved an empty file.} one {Saved # drink.} other {Saved # drinks.}}"
+        "en": "{n, plural, =0 {Saved an empty file.} one {Saved # drink.} other {Saved # drinks.}}",
+        "sk": "{n, plural, =0 {Uložil sa prázdny súbor.} one {Uložený # nápoj.} few {Uložené # nápoje.} many {Uložené # nápoja.} other {Uložených # nápojov.}}"
       },
       "goalDays": {
-        "en": "{n, plural, one {# of {d} days} other {# of {d} days}}"
+        "en": "{n, plural, one {# of {d} days} other {# of {d} days}}",
+        "sk": "{n, plural, one {# z {d} dní} few {# z {d} dní} many {# z {d} dní} other {# z {d} dní}}"
       },
       "remindBody": {
-        "en": "{left} to go today. A drink now keeps you on track."
+        "en": "{left} to go today. A drink now keeps you on track.",
+        "sk": "Do cieľa dnes chýba {left}. Napite sa teraz a udržíte si tempo."
       },
       "remindLine": {
-        "en": "{every, plural, one {Every hour} other {Every # hours}} from {from} to {until}, until you reach your goal."
+        "en": "{every, plural, one {Every hour} other {Every # hours}} from {from} to {until}, until you reach your goal.",
+        "sk": "{every, plural, one {Každú hodinu} few {Každé # hodiny} many {Každé # hodiny} other {Každých # hodín}} od {from} do {until}, kým nesplníte cieľ."
       },
       "testBody": {
-        "en": "Reminders will come {every, plural, one {every hour} other {every # hours}} from {from} to {until}, and stop once you reach your goal."
+        "en": "Reminders will come {every, plural, one {every hour} other {every # hours}} from {from} to {until}, and stop once you reach your goal.",
+        "sk": "Pripomienky budú chodiť {every, plural, one {každú hodinu} few {každé # hodiny} many {každé # hodiny} other {každých # hodín}} od {from} do {until} a prestanú, keď splníte cieľ."
       },
       "imported": {
-        "en": "{added, plural, =0 {No drinks added} one {Added # drink} other {Added # drinks}}{skipped, plural, =0 {.} one {; # row skipped.} other {; # rows skipped.}}"
+        "en": "{added, plural, =0 {No drinks added} one {Added # drink} other {Added # drinks}}{skipped, plural, =0 {.} one {; # row skipped.} other {; # rows skipped.}}",
+        "sk": "{added, plural, =0 {Nepridal sa žiadny nápoj} one {Pridaný # nápoj} few {Pridané # nápoje} many {Pridané # nápoja} other {Pridaných # nápojov}}{skipped, plural, =0 {.} one {; # riadok sa vynechal.} few {; # riadky sa vynechali.} many {; # riadka sa vynechalo.} other {; # riadkov sa vynechalo.}}"
       },
       "problemLine": {
-        "en": "Line {row}: {reason}"
+        "en": "Line {row}: {reason}",
+        "sk": "Riadok {row}: {reason}"
       },
       "moreCups": {
-        "en": "{n, plural, one {# more quick add is in Edit quick adds. Today shows the first six.} other {# more quick adds are in Edit quick adds. Today shows the first six.}}"
+        "en": "{n, plural, one {# more quick add is in Edit quick adds. Today shows the first six.} other {# more quick adds are in Edit quick adds. Today shows the first six.}}",
+        "sk": "{n, plural, one {Ďalšia # rýchla voľba je v časti Upraviť rýchle voľby. Tu je prvých šesť.} few {Ďalšie # rýchle voľby sú v časti Upraviť rýchle voľby. Tu je prvých šesť.} many {Ďalšie # rýchlej voľby sú v časti Upraviť rýchle voľby. Tu je prvých šesť.} other {Ďalších # rýchlych volieb je v časti Upraviť rýchle voľby. Tu je prvých šesť.}}"
       },
       "moreProblems": {
-        "en": "{n, plural, one {…and # more row} other {…and # more rows}}"
+        "en": "{n, plural, one {…and # more row} other {…and # more rows}}",
+        "sk": "{n, plural, one {…a ešte # riadok} few {…a ešte # riadky} many {…a ešte # riadka} other {…a ešte # riadkov}}"
       },
       "toGo": {
-        "en": "{left} {unit} to go"
+        "en": "{left} {unit} to go",
+        "sk": "Zostáva {left} {unit}"
       },
       "metPct": {
-        "en": "{pct}% of your daily goal"
+        "en": "{pct}% of your daily goal",
+        "sk": "{pct} % denného cieľa"
       },
       "ofGoalUnit": {
-        "en": "of {goal} {unit}"
+        "en": "of {goal} {unit}",
+        "sk": "z {goal} {unit}"
+      },
+      "remindDrinkDuringHours": {
+        "en": "Remind you to drink during the hours you choose, until you reach your daily goal",
+        "sk": "Pripomínať vám pitie v hodinách, ktoré si zvolíte, kým nesplníte denný cieľ"
+      },
+      "showTodayProgressOne": {
+        "en": "Show today’s progress and a one-tap add button on your home screen",
+        "sk": "Zobraziť na ploche dnešný postup a tlačidlo na pridanie jedným klepnutím"
+      },
+      "saveDrinkLogAs": {
+        "en": "Save your drink log as a CSV file, and bring a saved log back in",
+        "sk": "Uložiť záznam pitia ako súbor CSV a načítať uložený záznam späť"
+      },
+      "drinkLogIsSaved": {
+        "en": "Your drink log is saved as a CSV file in the place you pick",
+        "sk": "Záznam pitia sa uloží ako súbor CSV na miesto, ktoré vyberiete"
+      },
+      "units": {
+        "en": "Units",
+        "sk": "Jednotky"
+      },
+      "millilitresMl": {
+        "en": "Millilitres (ml)",
+        "sk": "Mililitre (ml)"
+      },
+      "usFluidOuncesOz": {
+        "en": "US fluid ounces (oz)",
+        "sk": "Americké tekuté unce (oz)"
+      },
+      "dailyGoal": {
+        "en": "Daily goal",
+        "sk": "Denný cieľ"
+      },
+      "iSetItMyself": {
+        "en": "I set it myself",
+        "sk": "Zadám ho ručne"
+      },
+      "suggestItFromMy": {
+        "en": "Suggest it from my body weight",
+        "sk": "Navrhnúť podľa telesnej hmotnosti"
+      },
+      "goalPerDay": {
+        "en": "Goal per day",
+        "sk": "Cieľ na deň"
+      },
+      "bodyWeight": {
+        "en": "Body weight",
+        "sk": "Telesná hmotnosť"
+      },
+      "suggestedGoalAbout33": {
+        "en": "Suggested goal: about 33 ml per kg, rounded to 50 ml. A rule of thumb, not medical advice.",
+        "sk": "Navrhovaný cieľ: asi 33 ml na kilogram, zaokrúhlené na 50 ml. Je to orientačné pravidlo, nie lekárska rada."
+      },
+      "suggestedGoalHalfOunce": {
+        "en": "Suggested goal: half an ounce per pound, rounded to a whole ounce. A rule of thumb, not medical advice.",
+        "sk": "Navrhovaný cieľ: pol unce na libru, zaokrúhlené na celé unce. Je to orientačné pravidlo, nie lekárska rada."
+      },
+      "remindMeDrink": {
+        "en": "Remind me to drink",
+        "sk": "Pripomínať pitie"
+      },
+      "remindersFrom": {
+        "en": "Reminders from",
+        "sk": "Pripomienky od"
+      },
+      "firstReminderDayComes": {
+        "en": "The first reminder of the day comes at this time.",
+        "sk": "V tomto čase príde prvá pripomienka dňa."
+      },
+      "remindersUntil": {
+        "en": "Reminders until",
+        "sk": "Pripomienky do"
+      },
+      "endRemindersAfterThey": {
+        "en": "End reminders after they start.",
+        "sk": "Pripomienky musia skončiť neskôr, ako začnú."
+      },
+      "lastReminderComesAt": {
+        "en": "The last reminder comes at this time or a little before it.",
+        "sk": "Posledná pripomienka príde v tomto čase alebo o niečo skôr."
+      },
+      "remindMe": {
+        "en": "Remind me",
+        "sk": "Pripomínať"
+      },
+      "everyHour": {
+        "en": "Every hour",
+        "sk": "Každú hodinu"
+      },
+      "every2Hours": {
+        "en": "Every 2 hours",
+        "sk": "Každé 2 hodiny"
+      },
+      "every3Hours": {
+        "en": "Every 3 hours",
+        "sk": "Každé 3 hodiny"
+      },
+      "every4Hours": {
+        "en": "Every 4 hours",
+        "sk": "Každé 4 hodiny"
+      },
+      "theseDays": {
+        "en": "On these days",
+        "sk": "V tieto dni"
+      },
+      "monday": {
+        "en": "Monday",
+        "sk": "Pondelok"
+      },
+      "tuesday": {
+        "en": "Tuesday",
+        "sk": "Utorok"
+      },
+      "wednesday": {
+        "en": "Wednesday",
+        "sk": "Streda"
+      },
+      "thursday": {
+        "en": "Thursday",
+        "sk": "Štvrtok"
+      },
+      "friday": {
+        "en": "Friday",
+        "sk": "Piatok"
+      },
+      "saturday": {
+        "en": "Saturday",
+        "sk": "Sobota"
+      },
+      "sunday": {
+        "en": "Sunday",
+        "sk": "Nedeľa"
+      },
+      "datesImportedFiles": {
+        "en": "Dates in imported files",
+        "sk": "Dátumy v importovaných súboroch"
+      },
+      "monthFirst1015": {
+        "en": "Month first (10/15/2026)",
+        "sk": "Najprv mesiac (10/15/2026)"
+      },
+      "dayFirst1510": {
+        "en": "Day first (15/10/2026)",
+        "sk": "Najprv deň (15/10/2026)"
+      },
+      "datesSuchAs03": {
+        "en": "For dates such as 03/04/2026 when no date in the file shows the order. Dates with dots are always read day first.",
+        "sk": "Pre dátumy ako 03/04/2026, keď zo žiadneho dátumu v súbore nie je jasné poradie. Dátumy s bodkami sa vždy čítajú ako deň, mesiac, rok."
+      },
+      "drink": {
+        "en": "Drink",
+        "sk": "Nápoj"
+      },
+      "drinks": {
+        "en": "Drinks",
+        "sk": "Nápoje"
+      },
+      "amount": {
+        "en": "Amount",
+        "sk": "Množstvo"
+      },
+      "unit": {
+        "en": "Unit",
+        "sk": "Jednotka"
+      },
+      "water": {
+        "en": "Water",
+        "sk": "Voda"
+      },
+      "sparklingWater": {
+        "en": "Sparkling water",
+        "sk": "Perlivá voda"
+      },
+      "tea": {
+        "en": "Tea",
+        "sk": "Čaj"
+      },
+      "coffee": {
+        "en": "Coffee",
+        "sk": "Káva"
+      },
+      "juice": {
+        "en": "Juice",
+        "sk": "Džús"
+      },
+      "milk": {
+        "en": "Milk",
+        "sk": "Mlieko"
+      },
+      "otherDrink": {
+        "en": "Other drink",
+        "sk": "Iný nápoj"
+      },
+      "dateTime": {
+        "en": "Date and time",
+        "sk": "Dátum a čas"
+      },
+      "millilitres": {
+        "en": "Millilitres",
+        "sk": "Mililitre"
+      },
+      "ounces": {
+        "en": "Ounces",
+        "sk": "Unce"
+      },
+      "day": {
+        "en": "Day",
+        "sk": "Deň"
+      },
+      "quickAdd": {
+        "en": "Quick add",
+        "sk": "Rýchla voľba"
+      },
+      "quickAdds": {
+        "en": "Quick adds",
+        "sk": "Rýchle voľby"
+      },
+      "name": {
+        "en": "Name",
+        "sk": "Názov"
+      },
+      "glass": {
+        "en": "Glass",
+        "sk": "Pohár"
+      },
+      "order": {
+        "en": "Order",
+        "sk": "Poradie"
+      },
+      "lowerNumbersComeFirst": {
+        "en": "Lower numbers come first. Today shows the first six; the first one is also on the widget and in reminders.",
+        "sk": "Nižšie čísla sú na začiatku. Obrazovka Dnes ukazuje prvých šesť; prvá je aj v miniaplikácii a v pripomienkach."
+      },
+      "today": {
+        "en": "Today",
+        "sk": "Dnes"
+      },
+      "history": {
+        "en": "History",
+        "sk": "História"
+      },
+      "log": {
+        "en": "Log",
+        "sk": "Záznam"
+      },
+      "settings": {
+        "en": "Settings",
+        "sk": "Nastavenia"
+      },
+      "drinkLog": {
+        "en": "Drink log",
+        "sk": "Záznam pitia"
+      },
+      "noDrinksLoggedYet": {
+        "en": "No drinks logged yet",
+        "sk": "Zatiaľ žiadne nápoje"
+      },
+      "tapQuickAddToday": {
+        "en": "Tap a quick add on Today, or add any amount here.",
+        "sk": "Klepnite na rýchlu voľbu na obrazovke Dnes alebo tu pridajte ľubovoľné množstvo."
+      },
+      "noQuickAddsYet": {
+        "en": "No quick adds yet",
+        "sk": "Zatiaľ žiadne rýchle voľby"
+      },
+      "addGlassesBottlesMugs": {
+        "en": "Add the glasses, bottles and mugs you use, for one-tap logging.",
+        "sk": "Pridajte poháre, fľaše a hrnčeky, ktoré používate, a nápoj zapíšete jedným klepnutím."
+      },
+      "importFinished": {
+        "en": "Import finished",
+        "sk": "Import je dokončený"
+      },
+      "waterToday": {
+        "en": "Water today",
+        "sk": "Dnes vypité"
+      },
+      "dailyGoalReachedWell": {
+        "en": "Daily goal reached. Well done!",
+        "sk": "Denný cieľ je splnený. Výborne!"
+      },
+      "addGlassesBottlesUse": {
+        "en": "Add the glasses and bottles you use, then log a drink with one tap.",
+        "sk": "Pridajte poháre a fľaše, ktoré používate, a potom nápoj zapíšete jedným klepnutím."
+      },
+      "addQuickAdd": {
+        "en": "Add a quick add",
+        "sk": "Pridať rýchlu voľbu"
+      },
+      "otherAmount": {
+        "en": "Other amount",
+        "sk": "Iné množstvo"
+      },
+      "editQuickAdds": {
+        "en": "Edit quick adds",
+        "sk": "Upraviť rýchle voľby"
+      },
+      "removeThisDrink": {
+        "en": "Remove this drink",
+        "sk": "Odstrániť tento nápoj"
+      },
+      "welcomeWater": {
+        "en": "Welcome to Water",
+        "sk": "Vitajte"
+      },
+      "tapGlassAboveEach": {
+        "en": "Tap a glass above each time you drink. Your goal, units and reminder hours are in Settings.",
+        "sk": "Vždy, keď sa napijete, klepnite hore na pohár. Cieľ, jednotky a čas pripomienok nájdete v Nastaveniach."
+      },
+      "nothingLoggedYetToday": {
+        "en": "Nothing logged yet today",
+        "sk": "Dnes zatiaľ nič"
+      },
+      "tapGlassAboveEach2": {
+        "en": "Tap a glass above each time you drink.",
+        "sk": "Vždy, keď sa napijete, klepnite hore na pohár."
+      },
+      "reminders": {
+        "en": "Reminders",
+        "sk": "Pripomienky"
+      },
+      "sendTestReminder": {
+        "en": "Send a test reminder",
+        "sk": "Poslať skúšobnú pripomienku"
+      },
+      "goalStreak": {
+        "en": "Goal streak",
+        "sk": "Séria splneného cieľa"
+      },
+      "daysRowAtGoal": {
+        "en": "Days in a row at your goal",
+        "sk": "Dni po sebe so splneným cieľom"
+      },
+      "goalReached": {
+        "en": "Goal reached",
+        "sk": "Cieľ splnený"
+      },
+      "last30Days": {
+        "en": "In the last 30 days",
+        "sk": "Za posledných 30 dní"
+      },
+      "averageLast7Days": {
+        "en": "Average, last 7 days",
+        "sk": "Priemer za posledných 7 dní"
+      },
+      "daysLoggedDrink": {
+        "en": "On days you logged a drink",
+        "sk": "V dňoch so zapísaným nápojom"
+      },
+      "last7DaysMl": {
+        "en": "Last 7 days (ml)",
+        "sk": "Posledných 7 dní (ml)"
+      },
+      "goal": {
+        "en": "Goal",
+        "sk": "Cieľ"
+      },
+      "last7DaysOz": {
+        "en": "Last 7 days (oz)",
+        "sk": "Posledných 7 dní (oz)"
+      },
+      "whatDrankLast30": {
+        "en": "What you drank, last 30 days (ml)",
+        "sk": "Čo ste pili za 30 dní (ml)"
+      },
+      "whatDrankLast302": {
+        "en": "What you drank, last 30 days (oz)",
+        "sk": "Čo ste pili za 30 dní (oz)"
+      },
+      "howMuchNeedDepends": {
+        "en": "How much you need depends on your body, the weather and how active you are. Food gives some of your water too. The goal here is a rule of thumb, not medical advice: if you have heart or kidney problems, or your doctor limits fluids, follow their advice.",
+        "sk": "Koľko tekutín potrebujete, závisí od vášho tela, počasia a pohybu. Časť vody získate aj z jedla. Tento cieľ je len orientačný, nie lekárska rada: ak máte problémy so srdcom alebo obličkami alebo vám lekár obmedzil tekutiny, riaďte sa jeho radou."
+      },
+      "saveLogAsCsv": {
+        "en": "Save the log as a CSV file",
+        "sk": "Uložiť záznam ako súbor CSV"
+      },
+      "bringSavedCsvLog": {
+        "en": "Bring in a saved CSV log",
+        "sk": "Načítať uložený záznam CSV"
+      },
+      "theseRowsWereLeft": {
+        "en": "These rows were left out, with the reason for each:",
+        "sk": "Tieto riadky sa vynechali, pri každom je dôvod:"
+      },
+      "removeThisDrinkFrom": {
+        "en": "Remove this drink from today?",
+        "sk": "Odstrániť tento nápoj z dnešného dňa?"
+      },
+      "remove": {
+        "en": "Remove",
+        "sk": "Odstrániť"
+      },
+      "drinkRemoved": {
+        "en": "Drink removed.",
+        "sk": "Nápoj je odstránený."
+      },
+      "timeDrink": {
+        "en": "Time for a drink",
+        "sk": "Čas sa napiť"
+      },
+      "iDrankSome": {
+        "en": "I drank some",
+        "sk": "Vypité"
+      },
+      "remindersAre": {
+        "en": "Reminders are on",
+        "sk": "Pripomienky sú zapnuté"
+      },
+      "testReminderSent": {
+        "en": "Test reminder sent.",
+        "sk": "Skúšobná pripomienka je odoslaná."
+      },
+      "importDrinksFromFile": {
+        "en": "Import drinks from a file?",
+        "sk": "Importovať nápoje zo súboru?"
+      },
+      "pickCsvFileSaved": {
+        "en": "Pick a CSV file saved by this app or by another water-tracking app. Date, time, amount, unit and drink columns are read, in ml, oz, litres or cups. Drinks you already have are not replaced, so import each file only once. Check the date order in Settings first.",
+        "sk": "Vyberte súbor CSV uložený touto aplikáciou alebo inou aplikáciou na pitný režim. Načítajú sa stĺpce s dátumom, časom, množstvom, jednotkou a nápojom, v ml, oz, litroch alebo šálkach. Nápoje, ktoré už máte, sa nenahradia, preto každý súbor importujte len raz. Najprv si v Nastaveniach overte poradie v dátumoch."
+      },
+      "pickFile": {
+        "en": "Pick a file",
+        "sk": "Vybrať súbor"
+      },
+      "bottle": {
+        "en": "Bottle",
+        "sk": "Fľaša"
+      },
+      "mug": {
+        "en": "Mug",
+        "sk": "Hrnček"
+      },
+      "remindersOff": {
+        "en": "Reminders are off. Turn them on in Settings.",
+        "sk": "Pripomienky sú vypnuté. Zapnete ich v Nastaveniach."
+      },
+      "addedAmount": {
+        "en": "Added {amount}.",
+        "sk": "Pridané: {amount}."
+      },
+      "drinkAt": {
+        "en": "{drink}, {amount} at {time}",
+        "sk": "{drink}, {amount} o {time}"
+      },
+      "amountOfGoal": {
+        "en": "{amount} of {goal}",
+        "sk": "{amount} z {goal}"
+      },
+      "addNamed": {
+        "en": "Add {name}",
+        "sk": "Pridať: {name}"
+      },
+      "addGlass": {
+        "en": "Add a glass",
+        "sk": "Pridať pohár"
       }
     }
   },
   "permissions": {
     "notify.local": {
-      "purpose": "Remind you to drink during the hours you choose, until you reach your daily goal",
+      "purpose": "@remindDrinkDuringHours",
       "maxPerDay": 20
     },
     "widget.home": {
-      "purpose": "Show today’s progress and a one-tap add button on your home screen"
+      "purpose": "@showTodayProgressOne"
     },
     "files.io": {
-      "purpose": "Save your drink log as a CSV file, and bring a saved log back in",
+      "purpose": "@saveDrinkLogAs",
       "modes": ["import", "export"]
     }
   },
@@ -78,43 +548,43 @@
     {
       "from": ["drink.at", "drink.type", "drink.amount", "drink.unit"],
       "to": "files.io",
-      "purpose": "Your drink log is saved as a CSV file in the place you pick"
+      "purpose": "@drinkLogIsSaved"
     }
   ],
   "settings": {
     "unit": {
       "type": "choice",
-      "label": "Units",
+      "label": "@units",
       "options": [
         {
           "value": "ml",
-          "label": "Millilitres (ml)"
+          "label": "@millilitresMl"
         },
         {
           "value": "oz",
-          "label": "US fluid ounces (oz)"
+          "label": "@usFluidOuncesOz"
         }
       ],
       "default": "ml"
     },
     "goalFrom": {
       "type": "choice",
-      "label": "Daily goal",
+      "label": "@dailyGoal",
       "options": [
         {
           "value": "fixed",
-          "label": "I set it myself"
+          "label": "@iSetItMyself"
         },
         {
           "value": "weight",
-          "label": "Suggest it from my body weight"
+          "label": "@suggestItFromMy"
         }
       ],
       "default": "fixed"
     },
     "goalMl": {
       "type": "number",
-      "label": "Goal per day",
+      "label": "@goalPerDay",
       "unit": "ml",
       "default": 2000,
       "min": 500,
@@ -123,7 +593,7 @@
     },
     "goalOz": {
       "type": "number",
-      "label": "Goal per day",
+      "label": "@goalPerDay",
       "unit": "oz",
       "default": 64,
       "min": 16,
@@ -132,70 +602,70 @@
     },
     "weightKg": {
       "type": "number",
-      "label": "Body weight",
+      "label": "@bodyWeight",
       "unit": "kg",
       "default": 70,
       "min": 20,
       "max": 300,
       "sensitivity": "health",
-      "help": "Suggested goal: about 33 ml per kg, rounded to 50 ml. A rule of thumb, not medical advice.",
+      "help": "@suggestedGoalAbout33",
       "visible": "=settings.unit == 'ml' && settings.goalFrom == 'weight'"
     },
     "weightLb": {
       "type": "number",
-      "label": "Body weight",
+      "label": "@bodyWeight",
       "unit": "lb",
       "default": 155,
       "min": 45,
       "max": 660,
       "sensitivity": "health",
-      "help": "Suggested goal: half an ounce per pound, rounded to a whole ounce. A rule of thumb, not medical advice.",
+      "help": "@suggestedGoalHalfOunce",
       "visible": "=settings.unit == 'oz' && settings.goalFrom == 'weight'"
     },
     "remind": {
       "type": "boolean",
-      "label": "Remind me to drink",
+      "label": "@remindMeDrink",
       "default": true
     },
     "remindFrom": {
       "type": "time",
-      "label": "Reminders from",
+      "label": "@remindersFrom",
       "default": "08:00",
-      "help": "The first reminder of the day comes at this time.",
+      "help": "@firstReminderDayComes",
       "visible": "=settings.remind"
     },
     "remindUntil": {
       "type": "time",
-      "label": "Reminders until",
+      "label": "@remindersUntil",
       "default": "21:00",
       "checks": [
         {
           "condition": "=settings.remindUntil > settings.remindFrom",
-          "message": "End reminders after they start."
+          "message": "@endRemindersAfterThey"
         }
       ],
-      "help": "The last reminder comes at this time or a little before it.",
+      "help": "@lastReminderComesAt",
       "visible": "=settings.remind"
     },
     "remindEvery": {
       "type": "choice",
-      "label": "Remind me",
+      "label": "@remindMe",
       "options": [
         {
           "value": "1",
-          "label": "Every hour"
+          "label": "@everyHour"
         },
         {
           "value": "2",
-          "label": "Every 2 hours"
+          "label": "@every2Hours"
         },
         {
           "value": "3",
-          "label": "Every 3 hours"
+          "label": "@every3Hours"
         },
         {
           "value": "4",
-          "label": "Every 4 hours"
+          "label": "@every4Hours"
         }
       ],
       "default": "2",
@@ -203,35 +673,35 @@
     },
     "remindDays": {
       "type": "multiChoice",
-      "label": "On these days",
+      "label": "@theseDays",
       "options": [
         {
           "value": "1",
-          "label": "Monday"
+          "label": "@monday"
         },
         {
           "value": "2",
-          "label": "Tuesday"
+          "label": "@tuesday"
         },
         {
           "value": "3",
-          "label": "Wednesday"
+          "label": "@wednesday"
         },
         {
           "value": "4",
-          "label": "Thursday"
+          "label": "@thursday"
         },
         {
           "value": "5",
-          "label": "Friday"
+          "label": "@friday"
         },
         {
           "value": "6",
-          "label": "Saturday"
+          "label": "@saturday"
         },
         {
           "value": "7",
-          "label": "Sunday"
+          "label": "@sunday"
         }
       ],
       "default": ["1", "2", "3", "4", "5", "6", "7"],
@@ -239,37 +709,37 @@
     },
     "importDates": {
       "type": "choice",
-      "label": "Dates in imported files",
+      "label": "@datesImportedFiles",
       "options": [
         {
           "value": "monthFirst",
-          "label": "Month first (10/15/2026)"
+          "label": "@monthFirst1015"
         },
         {
           "value": "dayFirst",
-          "label": "Day first (15/10/2026)"
+          "label": "@dayFirst1510"
         }
       ],
       "default": "monthFirst",
-      "help": "For dates such as 03/04/2026 when no date in the file shows the order. Dates with dots are always read day first."
+      "help": "@datesSuchAs03"
     }
   },
   "entities": {
     "drink": {
-      "label": "Drink",
-      "labelPlural": "Drinks",
+      "label": "@drink",
+      "labelPlural": "@drinks",
       "sensitivity": "personal",
       "sort": ["-at"],
       "display": {
         "title": "=formatNumber(round((item.ml) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit",
-        "subtitle": "=coalesce(optionLabel(item.type), 'Drink') + ' · ' + formatDate(item.at, 'jm')",
+        "subtitle": "=coalesce(optionLabel(item.type), t('drink')) + ' · ' + formatDate(item.at, 'jm')",
         "icon": "=coalesce(optionIcon(item.type), 'local_drink')",
         "hue": "=optionHue(item.type)"
       },
       "fields": {
         "amount": {
           "type": "number",
-          "label": "Amount",
+          "label": "@amount",
           "required": true,
           "min": 1,
           "max": 5000,
@@ -277,62 +747,62 @@
         },
         "unit": {
           "type": "choice",
-          "label": "Unit",
+          "label": "@unit",
           "options": [
             {
               "value": "ml",
-              "label": "Millilitres (ml)"
+              "label": "@millilitresMl"
             },
             {
               "value": "oz",
-              "label": "US fluid ounces (oz)"
+              "label": "@usFluidOuncesOz"
             }
           ],
           "default": "=settings.unit"
         },
         "type": {
           "type": "choice",
-          "label": "Drink",
+          "label": "@drink",
           "options": [
             {
               "value": "water",
-              "label": "Water",
+              "label": "@water",
               "icon": "water_drop",
               "hue": "blue"
             },
             {
               "value": "sparkling",
-              "label": "Sparkling water",
+              "label": "@sparklingWater",
               "icon": "water",
               "hue": "cyan"
             },
             {
               "value": "tea",
-              "label": "Tea",
+              "label": "@tea",
               "icon": "local_cafe",
               "hue": "green"
             },
             {
               "value": "coffee",
-              "label": "Coffee",
+              "label": "@coffee",
               "icon": "local_cafe",
               "hue": "brown"
             },
             {
               "value": "juice",
-              "label": "Juice",
+              "label": "@juice",
               "icon": "local_drink",
               "hue": "orange"
             },
             {
               "value": "milk",
-              "label": "Milk",
+              "label": "@milk",
               "icon": "local_drink",
               "hue": "grey"
             },
             {
               "value": "other",
-              "label": "Other drink",
+              "label": "@otherDrink",
               "icon": "local_drink",
               "hue": "violet"
             }
@@ -341,13 +811,13 @@
         },
         "at": {
           "type": "datetime",
-          "label": "Date and time",
+          "label": "@dateTime",
           "required": true,
           "default": "=now()"
         },
         "ml": {
           "type": "number",
-          "label": "Millilitres",
+          "label": "@millilitres",
           "unit": "ml",
           "compute": "=item.unit == 'oz' ? item.amount * 29.5735 : item.amount",
           "stored": true,
@@ -355,7 +825,7 @@
         },
         "oz": {
           "type": "number",
-          "label": "Ounces",
+          "label": "@ounces",
           "unit": "oz",
           "compute": "=item.unit == 'oz' ? item.amount : item.amount / 29.5735",
           "stored": true,
@@ -363,7 +833,7 @@
         },
         "date": {
           "type": "date",
-          "label": "Day",
+          "label": "@day",
           "compute": "=date(item.at)",
           "stored": true,
           "visible": false
@@ -371,26 +841,26 @@
       }
     },
     "cup": {
-      "label": "Quick add",
-      "labelPlural": "Quick adds",
+      "label": "@quickAdd",
+      "labelPlural": "@quickAdds",
       "sort": ["position", "amount"],
       "display": {
         "title": "=item.name",
-        "subtitle": "=formatNumber(round((item.ml) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + ' · ' + coalesce(optionLabel(item.type), 'Drink')",
+        "subtitle": "=formatNumber(round((item.ml) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + ' · ' + coalesce(optionLabel(item.type), t('drink'))",
         "icon": "=coalesce(optionIcon(item.type), 'local_drink')",
         "hue": "=optionHue(item.type)"
       },
       "fields": {
         "name": {
           "type": "text",
-          "label": "Name",
+          "label": "@name",
           "required": true,
           "maxLength": 20,
-          "placeholder": "Glass"
+          "placeholder": "@glass"
         },
         "amount": {
           "type": "number",
-          "label": "Amount",
+          "label": "@amount",
           "required": true,
           "min": 1,
           "max": 5000,
@@ -398,62 +868,62 @@
         },
         "unit": {
           "type": "choice",
-          "label": "Unit",
+          "label": "@unit",
           "options": [
             {
               "value": "ml",
-              "label": "Millilitres (ml)"
+              "label": "@millilitresMl"
             },
             {
               "value": "oz",
-              "label": "US fluid ounces (oz)"
+              "label": "@usFluidOuncesOz"
             }
           ],
           "default": "=settings.unit"
         },
         "type": {
           "type": "choice",
-          "label": "Drink",
+          "label": "@drink",
           "options": [
             {
               "value": "water",
-              "label": "Water",
+              "label": "@water",
               "icon": "water_drop",
               "hue": "blue"
             },
             {
               "value": "sparkling",
-              "label": "Sparkling water",
+              "label": "@sparklingWater",
               "icon": "water",
               "hue": "cyan"
             },
             {
               "value": "tea",
-              "label": "Tea",
+              "label": "@tea",
               "icon": "local_cafe",
               "hue": "green"
             },
             {
               "value": "coffee",
-              "label": "Coffee",
+              "label": "@coffee",
               "icon": "local_cafe",
               "hue": "brown"
             },
             {
               "value": "juice",
-              "label": "Juice",
+              "label": "@juice",
               "icon": "local_drink",
               "hue": "orange"
             },
             {
               "value": "milk",
-              "label": "Milk",
+              "label": "@milk",
               "icon": "local_drink",
               "hue": "grey"
             },
             {
               "value": "other",
-              "label": "Other drink",
+              "label": "@otherDrink",
               "icon": "local_drink",
               "hue": "violet"
             }
@@ -462,15 +932,15 @@
         },
         "position": {
           "type": "integer",
-          "label": "Order",
-          "help": "Lower numbers come first. Today shows the first six; the first one is also on the widget and in reminders.",
+          "label": "@order",
+          "help": "@lowerNumbersComeFirst",
           "default": 5,
           "min": 1,
           "max": 99
         },
         "ml": {
           "type": "number",
-          "label": "Millilitres",
+          "label": "@millilitres",
           "unit": "ml",
           "compute": "=item.unit == 'oz' ? item.amount * 29.5735 : item.amount",
           "stored": true,
@@ -605,22 +1075,22 @@
     "tabs": [
       {
         "screen": "today",
-        "label": "Today",
+        "label": "@today",
         "icon": "today"
       },
       {
         "screen": "history",
-        "label": "History",
+        "label": "@history",
         "icon": "insights"
       },
       {
         "screen": "drinks",
-        "label": "Log",
+        "label": "@log",
         "icon": "history"
       },
       {
         "screen": "prefs",
-        "label": "Settings",
+        "label": "@settings",
         "icon": "settings"
       }
     ]
@@ -628,24 +1098,24 @@
   "screens": {
     "today": {
       "type": "dashboard",
-      "title": "Today",
+      "title": "@today",
       "root": "todayCol"
     },
     "history": {
       "type": "dashboard",
-      "title": "History",
+      "title": "@history",
       "root": "historyCol"
     },
     "drinks": {
       "type": "list",
-      "title": "Drink log",
+      "title": "@drinkLog",
       "query": "allDrinks",
       "sectionBy": "date",
       "toolbar": ["exportBtn", "importBtn"],
       "add": "logDrink",
       "empty": {
-        "title": "No drinks logged yet",
-        "body": "Tap a quick add on Today, or add any amount here.",
+        "title": "@noDrinksLoggedYet",
+        "body": "@tapQuickAddToday",
         "icon": "local_drink"
       }
     },
@@ -656,21 +1126,21 @@
     },
     "cups": {
       "type": "list",
-      "title": "Quick adds",
+      "title": "@quickAdds",
       "query": "cups",
       "empty": {
-        "title": "No quick adds yet",
-        "body": "Add the glasses, bottles and mugs you use, for one-tap logging.",
+        "title": "@noQuickAddsYet",
+        "body": "@addGlassesBottlesMugs",
         "icon": "local_drink"
       }
     },
     "prefs": {
       "type": "settings",
-      "title": "Settings"
+      "title": "@settings"
     },
     "importReport": {
       "type": "custom",
-      "title": "Import finished",
+      "title": "@importFinished",
       "present": "dialog",
       "params": {
         "summary": {
@@ -720,7 +1190,7 @@
       "caption": "=t('ofGoalUnit', {'goal': formatNumber(round(((((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)))) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)), 'unit': settings.unit})",
       "tone": "=coalesce(q.todayTotal.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) ? 'success' : 'primary'",
       "accessibility": {
-        "label": "Water today"
+        "label": "@waterToday"
       }
     },
     "remainText": {
@@ -731,7 +1201,7 @@
       "component": "Badge",
       "icon": "celebration",
       "tone": "success",
-      "text": "Daily goal reached. Well done!",
+      "text": "@dailyGoalReachedWell",
       "visible": "=coalesce(q.todayTotal.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0))"
     },
     "cupList": {
@@ -766,8 +1236,8 @@
     "noCups": {
       "component": "EmptyState",
       "icon": "local_drink",
-      "title": "No quick adds yet",
-      "body": "Add the glasses and bottles you use, then log a drink with one tap.",
+      "title": "@noQuickAddsYet",
+      "body": "@addGlassesBottlesUse",
       "action": {
         "event": {
           "name": "navigate",
@@ -776,7 +1246,7 @@
           }
         }
       },
-      "actionLabel": "Add a quick add",
+      "actionLabel": "@addQuickAdd",
       "visible": "=size(q.cups) == 0",
       "illustration": "empty_box"
     },
@@ -788,7 +1258,7 @@
     "otherBtn": {
       "component": "Button",
       "icon": "add",
-      "label": "Other amount",
+      "label": "@otherAmount",
       "action": {
         "event": {
           "name": "navigate",
@@ -802,7 +1272,7 @@
       "component": "Button",
       "variant": "borderless",
       "icon": "edit",
-      "label": "Edit quick adds",
+      "label": "@editQuickAdds",
       "action": {
         "event": {
           "name": "navigate",
@@ -838,14 +1308,14 @@
     "drinkText": {
       "component": "Text",
       "weight": 1,
-      "text": "=formatDate(item.at, 'jm') + '  ·  ' + formatNumber(round((item.ml) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + '  ' + lower(coalesce(optionLabel(item.type), 'drink'))"
+      "text": "=formatDate(item.at, 'jm') + '  ·  ' + formatNumber(round((item.ml) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + '  ' + lower(coalesce(optionLabel(item.type), t('drink')))"
     },
     "drinkRemove": {
       "component": "Button",
       "variant": "borderless",
       "icon": "delete",
       "iconOnly": true,
-      "label": "Remove this drink",
+      "label": "@removeThisDrink",
       "action": {
         "event": {
           "name": "removeDrink",
@@ -859,21 +1329,21 @@
       "component": "EmptyState",
       "illustration": "welcome",
       "icon": "water_drop",
-      "title": "Welcome to Water",
-      "body": "Tap a glass above each time you drink. Your goal, units and reminder hours are in Settings.",
+      "title": "@welcomeWater",
+      "body": "@tapGlassAboveEach",
       "visible": "=size(q.anyDrink) == 0 && size(q.cups) > 0"
     },
     "noDrinks": {
       "component": "EmptyState",
       "illustration": "nothing_today",
       "icon": "water_drop",
-      "title": "Nothing logged yet today",
-      "body": "Tap a glass above each time you drink.",
+      "title": "@nothingLoggedYetToday",
+      "body": "@tapGlassAboveEach2",
       "visible": "=size(q.today) == 0 && size(q.anyDrink) > 0 && size(q.cups) > 0"
     },
     "reminderSection": {
       "component": "Section",
-      "title": "Reminders",
+      "title": "@reminders",
       "children": ["reminderText", "testBtn"],
       "collapsible": true,
       "collapsed": true
@@ -881,13 +1351,13 @@
     "reminderText": {
       "component": "Text",
       "variant": "caption",
-      "text": "=settings.remind ? t('remindLine', {'every': int(settings.remindEvery), 'from': formatDate(settings.remindFrom, 'jm'), 'until': formatDate(settings.remindUntil, 'jm')}) : 'Reminders are off. Turn them on in Settings.'"
+      "text": "=settings.remind ? t('remindLine', {'every': int(settings.remindEvery), 'from': formatDate(settings.remindFrom, 'jm'), 'until': formatDate(settings.remindUntil, 'jm')}) : t('remindersOff')"
     },
     "testBtn": {
       "component": "Button",
       "variant": "borderless",
       "icon": "notifications",
-      "label": "Send a test reminder",
+      "label": "@sendTestReminder",
       "visible": "=settings.remind",
       "action": {
         "event": {
@@ -916,29 +1386,29 @@
     "streakStat": {
       "component": "Stat",
       "variant": "hero",
-      "label": "Goal streak",
+      "label": "@goalStreak",
       "icon": "local_fire_department",
       "value": "=t('days', {'n': streak(q.last120.filter(d, d.ml >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0))).map(d, d.key), 'FREQ=DAILY', today())})",
-      "caption": "Days in a row at your goal"
+      "caption": "@daysRowAtGoal"
     },
     "metStat": {
       "component": "Stat",
       "variant": "compact",
-      "label": "Goal reached",
+      "label": "@goalReached",
       "value": "=t('goalDays', {'n': size(q.last30.filter(d, d.ml >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)))), 'd': 30})",
-      "caption": "In the last 30 days"
+      "caption": "@last30Days"
     },
     "avgStat": {
       "component": "Stat",
       "variant": "compact",
-      "label": "Average, last 7 days",
+      "label": "@averageLast7Days",
       "value": "=size(q.last7.filter(d, d.ml > 0.0)) > 0 ? formatNumber(round((coalesce(avg(q.last7.filter(d, d.ml > 0.0).map(d, d.ml)), 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit : '–'",
-      "caption": "On days you logged a drink"
+      "caption": "@daysLoggedDrink"
     },
     "chart7ml": {
       "component": "Chart",
       "kind": "bar",
-      "title": "Last 7 days (ml)",
+      "title": "@last7DaysMl",
       "query": "last7",
       "x": "key",
       "y": ["ml"],
@@ -946,7 +1416,7 @@
       "reference": [
         {
           "value": "=(settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl))",
-          "label": "Goal",
+          "label": "@goal",
           "tone": "success"
         }
       ]
@@ -954,7 +1424,7 @@
     "chart7oz": {
       "component": "Chart",
       "kind": "bar",
-      "title": "Last 7 days (oz)",
+      "title": "@last7DaysOz",
       "query": "last7",
       "x": "key",
       "y": ["oz"],
@@ -962,7 +1432,7 @@
       "reference": [
         {
           "value": "=(settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl))",
-          "label": "Goal",
+          "label": "@goal",
           "tone": "success"
         }
       ]
@@ -970,7 +1440,7 @@
     "mixChart": {
       "component": "Chart",
       "kind": "donut",
-      "title": "What you drank, last 30 days (ml)",
+      "title": "@whatDrankLast30",
       "query": "mix30",
       "x": "key",
       "y": ["ml"],
@@ -980,7 +1450,7 @@
     "mixChartOz": {
       "component": "Chart",
       "kind": "donut",
-      "title": "What you drank, last 30 days (oz)",
+      "title": "@whatDrankLast302",
       "query": "mix30",
       "x": "key",
       "y": ["oz"],
@@ -990,13 +1460,13 @@
     "goalNote": {
       "component": "Text",
       "variant": "caption",
-      "text": "How much you need depends on your body, the weather and how active you are. Food gives some of your water too. The goal here is a rule of thumb, not medical advice: if you have heart or kidney problems, or your doctor limits fluids, follow their advice."
+      "text": "@howMuchNeedDepends"
     },
     "exportBtn": {
       "component": "Button",
       "icon": "download",
       "iconOnly": true,
-      "label": "Save the log as a CSV file",
+      "label": "@saveLogAsCsv",
       "action": {
         "event": {
           "name": "exportLog"
@@ -1007,7 +1477,7 @@
       "component": "Button",
       "icon": "upload",
       "iconOnly": true,
-      "label": "Bring in a saved CSV log",
+      "label": "@bringSavedCsvLog",
       "action": {
         "event": {
           "name": "importLog"
@@ -1025,7 +1495,7 @@
     },
     "irIntro": {
       "component": "Text",
-      "text": "These rows were left out, with the reason for each:"
+      "text": "@theseRowsWereLeft"
     },
     "irLines": {
       "component": "Text",
@@ -1078,12 +1548,12 @@
         {
           "type": "toast",
           "when": "=coalesce(vars.before.ml, 0.0) < ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) && coalesce(vars.before.ml, 0.0) + coalesce(args.cup.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0))",
-          "text": "Daily goal reached. Well done!"
+          "text": "@dailyGoalReachedWell"
         },
         {
           "type": "toast",
           "when": "=!(coalesce(vars.before.ml, 0.0) < ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) && coalesce(vars.before.ml, 0.0) + coalesce(args.cup.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)))",
-          "text": "='Added ' + formatNumber(round((coalesce(args.cup.ml, 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + '.'"
+          "text": "=t('addedAmount', {'amount': formatNumber(round((coalesce(args.cup.ml, 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit})"
         }
       ]
     },
@@ -1136,9 +1606,9 @@
       "steps": [
         {
           "type": "confirm",
-          "title": "=coalesce(optionLabel(args.drink.type), 'Drink') + ', ' + formatNumber(round((coalesce(args.drink.ml, 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + ' at ' + coalesce(formatDate(args.drink.at, 'jm'), '')",
-          "body": "Remove this drink from today?",
-          "confirmLabel": "Remove"
+          "title": "=t('drinkAt', {'drink': coalesce(optionLabel(args.drink.type), t('drink')), 'amount': formatNumber(round((coalesce(args.drink.ml, 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit, 'time': coalesce(formatDate(args.drink.at, 'jm'), '')})",
+          "body": "@removeThisDrinkFrom",
+          "confirmLabel": "@remove"
         },
         {
           "type": "deleteRecords",
@@ -1147,7 +1617,7 @@
         },
         {
           "type": "toast",
-          "text": "Drink removed."
+          "text": "@drinkRemoved"
         }
       ]
     },
@@ -1158,7 +1628,7 @@
           "capability": "notify.local",
           "action": "show",
           "args": {
-            "title": "Time for a drink",
+            "title": "=t('timeDrink')",
             "body": "=t('remindBody', {'left': formatNumber(round((max(((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) - coalesce(q.todayTotal.ml, 0.0), 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit})",
             "open": {
               "screen": "today"
@@ -1166,7 +1636,7 @@
             "buttons": [
               {
                 "id": "add",
-                "label": "I drank some",
+                "label": "=t('iDrankSome')",
                 "action": "addFirstCup"
               }
             ],
@@ -1184,7 +1654,7 @@
           "capability": "notify.local",
           "action": "show",
           "args": {
-            "title": "Reminders are on",
+            "title": "=t('remindersAre')",
             "body": "=t('testBody', {'every': int(settings.remindEvery), 'from': formatDate(settings.remindFrom, 'jm'), 'until': formatDate(settings.remindUntil, 'jm')})",
             "open": {
               "screen": "today"
@@ -1195,7 +1665,7 @@
         },
         {
           "type": "toast",
-          "text": "Test reminder sent."
+          "text": "@testReminderSent"
         }
       ]
     },
@@ -1223,9 +1693,9 @@
       "steps": [
         {
           "type": "confirm",
-          "title": "Import drinks from a file?",
-          "body": "Pick a CSV file saved by this app or by another water-tracking app. Date, time, amount, unit and drink columns are read, in ml, oz, litres or cups. Drinks you already have are not replaced, so import each file only once. Check the date order in Settings first.",
-          "confirmLabel": "Pick a file"
+          "title": "@importDrinksFromFile",
+          "body": "@pickCsvFileSaved",
+          "confirmLabel": "@pickFile"
         },
         {
           "type": "capability",
@@ -1248,7 +1718,8 @@
                   "Date",
                   "Datum",
                   "Dátum",
-                  "Measurement date"
+                  "Measurement date",
+                  "Dátum a čas"
                 ],
                 "timeFrom": ["Time", "Uhrzeit", "Zeit", "Čas", "Measurement time"]
               },
@@ -1284,7 +1755,11 @@
                   "fl oz": "oz",
                   "ounces": "oz",
                   "cup": "oz",
-                  "cups": "oz"
+                  "cups": "oz",
+                  "Millilitres (ml)": "ml",
+                  "Mililitre (ml)": "ml",
+                  "US fluid ounces (oz)": "oz",
+                  "Americké tekuté unce (oz)": "oz"
                 }
               },
               "type": {
@@ -1299,7 +1774,16 @@
                   "Espresso": "coffee",
                   "Latte": "coffee",
                   "Orange juice": "juice",
-                  "*": "other"
+                  "*": "other",
+                  "Voda": "water",
+                  "Sparkling water": "sparkling",
+                  "Perlivá voda": "sparkling",
+                  "Čaj": "tea",
+                  "Káva": "coffee",
+                  "Džús": "juice",
+                  "Mlieko": "milk",
+                  "Other drink": "other",
+                  "Iný nápoj": "other"
                 }
               }
             },
@@ -1336,7 +1820,7 @@
           "entity": "cup",
           "when": "=size(vars.c) == 0",
           "values": {
-            "name": "Glass",
+            "name": "=t('glass')",
             "amount": 250.0,
             "unit": "ml",
             "type": "water",
@@ -1348,7 +1832,7 @@
           "entity": "cup",
           "when": "=size(vars.c) == 0",
           "values": {
-            "name": "Bottle",
+            "name": "=t('bottle')",
             "amount": 500.0,
             "unit": "ml",
             "type": "water",
@@ -1360,7 +1844,7 @@
           "entity": "cup",
           "when": "=size(vars.c) == 0",
           "values": {
-            "name": "Mug",
+            "name": "=t('mug')",
             "amount": 300.0,
             "unit": "ml",
             "type": "tea",
@@ -1408,19 +1892,19 @@
   "widgets": {
     "todayWidget": {
       "template": "progress",
-      "title": "Water today",
+      "title": "@waterToday",
       "sizes": ["small", "medium"],
       "value": "=coalesce(q.todayTotal.ml, 0.0) / (settings.unit == 'oz' ? 29.5735 : 1.0)",
       "max": "=(settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl))",
-      "label": "=formatNumber(round((coalesce(q.todayTotal.ml, 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + ' of ' + formatNumber(round((((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0))) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit",
-      "caption": "=coalesce(q.todayTotal.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) ? 'Goal reached' : formatNumber(round((max(((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) - coalesce(q.todayTotal.ml, 0.0), 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit + ' to go'",
+      "label": "=t('amountOfGoal', {'amount': formatNumber(round((coalesce(q.todayTotal.ml, 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit, 'goal': formatNumber(round((((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0))) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)) + ' ' + settings.unit})",
+      "caption": "=coalesce(q.todayTotal.ml, 0.0) >= ((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) ? t('goalReached') : t('toGo', {'left': formatNumber(round((max(((settings.unit == 'oz' ? (settings.goalFrom == 'weight' ? round(settings.weightLb * 0.5) : settings.goalOz) : (settings.goalFrom == 'weight' ? round(settings.weightKg * 33.0 / 50.0) * 50.0 : settings.goalMl)) * (settings.unit == 'oz' ? 29.5735 : 1.0)) - coalesce(q.todayTotal.ml, 0.0), 0.0)) / (settings.unit == 'oz' ? 29.5735 : 1.0), settings.unit == 'oz' ? 1 : 0)), 'unit': settings.unit})",
       "open": "today"
     },
     "addWidget": {
       "template": "button",
-      "title": "Water",
+      "title": "@water",
       "sizes": ["small"],
-      "label": "=size(q.cups) > 0 ? 'Add ' + lower(coalesce(first(q.cups).name, 'glass')) : 'Add a glass'",
+      "label": "=size(q.cups) > 0 ? t('addNamed', {'name': lower(coalesce(first(q.cups).name, t('glass')))}) : t('addGlass')",
       "icon": "local_drink",
       "action": {
         "event": {
