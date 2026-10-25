@@ -82,7 +82,7 @@ form. Zapli updates an installed tool only when the library's copy has a newer v
 
 Each tool's `listing.json` declares its licence: MIT for every tool today (Apache-2.0, MIT-0, 0BSD and CC0-1.0 are
 allowed too; non-commercial and no-derivatives licences are not). When a definition sets `app.license`, the listing
-names the same one. A licence file for the whole repository is added before the repository is public.
+names the same one. The whole repository is under the MIT licence in `LICENSE`.
 
 ## Contributing
 
@@ -97,11 +97,19 @@ Contributions come as pull requests. Fixes, better wording, accessibility improv
 4. Open a pull request that says what you changed and why. For a translation, say which language and that you are a
    native speaker.
 
+By opening a pull request you agree that your contribution is licensed under this repository's MIT licence, and that
+you have the right to license it so.
+
 A maintainer reviews every pull request and runs the library checks before merging: every definition validates with
 no errors and no warnings; every listing fits its schema and names the same id and licence as its definition; the
 sample data fits the app's data; every screenshot and sample import file exists and reads in its format; and no
 listing names another app or brand, uses comparison wording or carries real-looking e-mail addresses or phone
 numbers. `CODEOWNERS` says who reviews which folder.
+
+Phones take tools from this repository only through `library-index.json`: a list of every tool's version and the
+SHA-256 of its files, signed with Zapli's key, which never leaves the maintainers' hands. Zapli checks that signature
+on the phone and installs nothing it does not cover, so a change reaches phones only once a maintainer has merged it
+and signed a new index.
 
 Contributors who work with an AI assistant: `CLAUDE.md` and the `library-tool` skill in `.claude/skills/` describe the
 format and the rules in detail.
