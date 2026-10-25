@@ -3,7 +3,7 @@
   "app": {
     "id": "library/flashcards",
     "name": "Flashcards",
-    "version": "2.3.2",
+    "version": "2.3.3",
     "icon": "school",
     "category": "education",
     "ageRating": "everyone",
@@ -14,69 +14,732 @@
   "i18n": {
     "defaultLocale": "en",
     "strings": {
-      "ivl": { "en": "{n, plural, =0 {again today} one {# day} other {# days}}" },
-      "ivlMonths": { "en": "{n, plural, one {# month} other {# months}}" },
-      "ivlYears": { "en": "{n, plural, one {# year} other {# years}}" },
-      "days": { "en": "{n, plural, one {# day} other {# days}}" },
-      "deckDue": { "en": "{due} to review · {fresh} new" },
-      "deckDone": {
-        "en": "{n, plural, =0 {No cards yet} one {All done for today · # card} other {All done for today · # cards}}"
+      "ivl": {
+        "en": "{n, plural, =0 {again today} one {# day} other {# days}}",
+        "sk": "{n, plural, =0 {znova dnes} one {# deň} few {# dni} many {# dňa} other {# dní}}"
       },
-      "left": { "en": "{due} to review · {fresh} new" },
+      "ivlMonths": {
+        "en": "{n, plural, one {# month} other {# months}}",
+        "sk": "{n, plural, one {# mesiac} few {# mesiace} many {# mesiaca} other {# mesiacov}}"
+      },
+      "ivlYears": {
+        "en": "{n, plural, one {# year} other {# years}}",
+        "sk": "{n, plural, one {# rok} few {# roky} many {# roka} other {# rokov}}"
+      },
+      "days": {
+        "en": "{n, plural, one {# day} other {# days}}",
+        "sk": "{n, plural, one {# deň} few {# dni} many {# dňa} other {# dní}}"
+      },
+      "deckDue": {
+        "en": "{due} to review · {fresh} new",
+        "sk": "Na opakovanie {due} · nové {fresh}"
+      },
+      "deckDone": {
+        "en": "{n, plural, =0 {No cards yet} one {All done for today · # card} other {All done for today · # cards}}",
+        "sk": "{n, plural, =0 {Zatiaľ žiadne kartičky} one {Na dnes hotovo · # kartička} few {Na dnes hotovo · # kartičky} many {Na dnes hotovo · # kartičky} other {Na dnes hotovo · # kartičiek}}"
+      },
+      "left": {
+        "en": "{due} to review · {fresh} new",
+        "sk": "Na opakovanie {due} · nové {fresh}"
+      },
       "dueNow": {
-        "en": "{n, plural, one {# card is ready for you. A few minutes keeps it fresh.} other {# cards are ready for you. A few minutes keeps them fresh.}}"
+        "en": "{n, plural, one {# card is ready for you. A few minutes keeps it fresh.} other {# cards are ready for you. A few minutes keeps them fresh.}}",
+        "sk": "{n, plural, one {Na rade je # kartička. Pár minút a zostane vám v pamäti.} few {Na rade sú # kartičky. Pár minút a zostanú vám v pamäti.} many {Na rade je # kartičky. Pár minút a zostanú vám v pamäti.} other {Na rade je # kartičiek. Pár minút a zostanú vám v pamäti.}}"
       },
       "imported": {
-        "en": "{added, plural, =0 {No cards added} one {# card added} other {# cards added}}{decks, plural, =0 {} one {, # new deck} other {, # new decks}}{skipped, plural, =0 {.} one {, # row skipped.} other {, # rows skipped.}}"
+        "en": "{added, plural, =0 {No cards added} one {# card added} other {# cards added}}{decks, plural, =0 {} one {, # new deck} other {, # new decks}}{skipped, plural, =0 {.} one {, # row skipped.} other {, # rows skipped.}}",
+        "sk": "{added, plural, =0 {Nepridala sa žiadna kartička} one {Pridaná # kartička} few {Pridané # kartičky} many {Pridané # kartičky} other {Pridaných # kartičiek}}{decks, plural, =0 {} one {, # nový balíček} few {, # nové balíčky} many {, # nového balíčka} other {, # nových balíčkov}}{skipped, plural, =0 {.} one {, # riadok sa vynechal.} few {, # riadky sa vynechali.} many {, # riadka sa vynechalo.} other {, # riadkov sa vynechalo.}}"
       },
-      "exported": { "en": "{n, plural, one {# card exported} other {# cards exported}}" },
-      "moved": { "en": "{n, plural, one {# card moved to this deck} other {# cards moved to this deck}}" },
+      "exported": {
+        "en": "{n, plural, one {# card exported} other {# cards exported}}",
+        "sk": "{n, plural, one {Exportovaná # kartička} few {Exportované # kartičky} many {Exportované # kartičky} other {Exportovaných # kartičiek}}"
+      },
+      "moved": {
+        "en": "{n, plural, one {# card moved to this deck} other {# cards moved to this deck}}",
+        "sk": "{n, plural, one {# kartička sa presunula do tohto balíčka} few {# kartičky sa presunuli do tohto balíčka} many {# kartičky sa presunulo do tohto balíčka} other {# kartičiek sa presunulo do tohto balíčka}}"
+      },
       "unsorted": {
-        "en": "{n, plural, one {Move # card without a deck here} other {Move # cards without a deck here}}"
+        "en": "{n, plural, one {Move # card without a deck here} other {Move # cards without a deck here}}",
+        "sk": "{n, plural, one {Presunúť sem # kartičku bez balíčka} few {Presunúť sem # kartičky bez balíčka} many {Presunúť sem # kartičky bez balíčka} other {Presunúť sem # kartičiek bez balíčka}}"
       },
-      "problemLine": { "en": "Line {row}: {reason}" },
-      "moreProblems": { "en": "{n, plural, one {…and # more row} other {…and # more rows}}" },
-      "answers": { "en": "{n, plural, one {# answer} other {# answers}}" },
-      "studiedOf": { "en": "{done} of {total}" },
-      "toStudy": { "en": "{n, plural, one {# to study} other {# to study}}" }
+      "problemLine": {
+        "en": "Line {row}: {reason}",
+        "sk": "Riadok {row}: {reason}"
+      },
+      "moreProblems": {
+        "en": "{n, plural, one {…and # more row} other {…and # more rows}}",
+        "sk": "{n, plural, one {…a ešte # riadok} few {…a ešte # riadky} many {…a ešte # riadka} other {…a ešte # riadkov}}"
+      },
+      "answers": {
+        "en": "{n, plural, one {# answer} other {# answers}}",
+        "sk": "{n, plural, one {# odpoveď} few {# odpovede} many {# odpovede} other {# odpovedí}}"
+      },
+      "studiedOf": {
+        "en": "{done} of {total}",
+        "sk": "{done} z {total}"
+      },
+      "toStudy": {
+        "en": "{n, plural, one {# to study} other {# to study}}",
+        "sk": "{n, plural, one {# na učenie} few {# na učenie} many {# na učenie} other {# na učenie}}"
+      },
+      "remindStudyPerDeck": {
+        "en": "Remind you to study, per deck or once a day for all decks, only when cards are due",
+        "sk": "Pripomínať vám učenie, pri každom balíčku alebo raz denne pre všetky, len keď sú kartičky na rade"
+      },
+      "importCardsFromCsv": {
+        "en": "Import cards from a CSV file and export a deck or all your cards as CSV",
+        "sk": "Importovať kartičky zo súboru CSV a exportovať balíček alebo všetky kartičky do CSV"
+      },
+      "showHowManyCards": {
+        "en": "Show how many cards are waiting for you on your home screen",
+        "sk": "Zobraziť na ploche, koľko kartičiek na vás čaká"
+      },
+      "cardsFrontBackHint": {
+        "en": "Your cards (front, back, hint and deck) saved as a CSV file where you choose",
+        "sk": "Vaše kartičky (predná a zadná strana, nápoveda a balíček) sa uložia ako súbor CSV tam, kde vyberiete"
+      },
+      "oneDailyReminderAll": {
+        "en": "One daily reminder for all decks",
+        "sk": "Jedna denná pripomienka pre všetky balíčky"
+      },
+      "replacesRemindersSetEach": {
+        "en": "Replaces the reminders you set on each deck.",
+        "sk": "Nahradí pripomienky nastavené pri jednotlivých balíčkoch."
+      },
+      "reminderTime": {
+        "en": "Reminder time",
+        "sk": "Čas pripomienky"
+      },
+      "deck": {
+        "en": "Deck",
+        "sk": "Balíček"
+      },
+      "decks": {
+        "en": "Decks",
+        "sk": "Balíčky"
+      },
+      "spanishVerbs": {
+        "en": "Spanish verbs",
+        "sk": "Španielske slovesá"
+      },
+      "whatThisDeckIs": {
+        "en": "What this deck is for",
+        "sk": "Na čo je tento balíček"
+      },
+      "iconColour": {
+        "en": "Icon and colour",
+        "sk": "Ikona a farba"
+      },
+      "study": {
+        "en": "Study",
+        "sk": "Učenie"
+      },
+      "languages": {
+        "en": "Languages",
+        "sk": "Jazyky"
+      },
+      "reading": {
+        "en": "Reading",
+        "sk": "Čítanie"
+      },
+      "geography": {
+        "en": "Geography",
+        "sk": "Zemepis"
+      },
+      "history": {
+        "en": "History",
+        "sk": "Dejepis"
+      },
+      "mindMemory": {
+        "en": "Mind and memory",
+        "sk": "Myseľ a pamäť"
+      },
+      "medicine": {
+        "en": "Medicine",
+        "sk": "Medicína"
+      },
+      "nature": {
+        "en": "Nature",
+        "sk": "Príroda"
+      },
+      "animals": {
+        "en": "Animals",
+        "sk": "Zvieratá"
+      },
+      "ideas": {
+        "en": "Ideas",
+        "sk": "Nápady"
+      },
+      "music": {
+        "en": "Music",
+        "sk": "Hudba"
+      },
+      "art": {
+        "en": "Art",
+        "sk": "Umenie"
+      },
+      "computers": {
+        "en": "Computers",
+        "sk": "Počítače"
+      },
+      "money": {
+        "en": "Money",
+        "sk": "Peniaze"
+      },
+      "food": {
+        "en": "Food",
+        "sk": "Jedlo"
+      },
+      "travel": {
+        "en": "Travel",
+        "sk": "Cestovanie"
+      },
+      "sport": {
+        "en": "Sport",
+        "sk": "Šport"
+      },
+      "work": {
+        "en": "Work",
+        "sk": "Práca"
+      },
+      "favourites": {
+        "en": "Favourites",
+        "sk": "Obľúbené"
+      },
+      "newCardsPerDay": {
+        "en": "New cards per day",
+        "sk": "Nové kartičky za deň"
+      },
+      "howManyCardsHave": {
+        "en": "How many cards you have never seen come into your study each day. Due reviews always come first.",
+        "sk": "Koľko kartičiek, ktoré ste ešte nevideli, pribudne každý deň do učenia. Opakovania na rade majú vždy prednosť."
+      },
+      "studyReminder": {
+        "en": "Study reminder",
+        "sk": "Pripomienka učenia"
+      },
+      "remindMe": {
+        "en": "Remind me",
+        "sk": "Pripomínať"
+      },
+      "cards": {
+        "en": "Cards",
+        "sk": "Kartičky"
+      },
+      "answers2": {
+        "en": "Answers",
+        "sk": "Odpovede"
+      },
+      "review2": {
+        "en": "To review",
+        "sk": "Na opakovanie"
+      },
+      "newCards": {
+        "en": "New",
+        "sk": "Nové"
+      },
+      "newToday": {
+        "en": "New today",
+        "sk": "Nové dnes"
+      },
+      "newLeftToday": {
+        "en": "New left today",
+        "sk": "Zostáva nových na dnes"
+      },
+      "study2": {
+        "en": "To study",
+        "sk": "Na učenie"
+      },
+      "learned": {
+        "en": "Learned",
+        "sk": "Naučené"
+      },
+      "nextReview": {
+        "en": "Next review",
+        "sk": "Ďalšie opakovanie"
+      },
+      "card": {
+        "en": "Card",
+        "sk": "Kartička"
+      },
+      "cardsWithoutDeckAre": {
+        "en": "Cards without a deck are kept but not studied",
+        "sk": "Kartičky bez balíčka zostanú uložené, ale neopakujú sa"
+      },
+      "questionWordPrompt": {
+        "en": "Question, word or prompt",
+        "sk": "Otázka, slovo alebo zadanie"
+      },
+      "answer": {
+        "en": "Answer",
+        "sk": "Odpoveď"
+      },
+      "optionalNudge": {
+        "en": "Optional nudge",
+        "sk": "Nepovinná nápoveda"
+      },
+      "shownOnlyWhenAsk": {
+        "en": "Shown only when you ask for it while studying",
+        "sk": "Zobrazí sa, len keď si ju počas učenia vyžiadate"
+      },
+      "paused": {
+        "en": "Paused",
+        "sk": "Pozastavená"
+      },
+      "pausedCardStaysDeck": {
+        "en": "A paused card stays in the deck but is left out of study",
+        "sk": "Pozastavená kartička zostane v balíčku, ale z učenia sa vynechá"
+      },
+      "ease": {
+        "en": "Ease",
+        "sk": "Ľahkosť"
+      },
+      "howFastGapGrows": {
+        "en": "How fast the gap grows after a Good answer. It drops when a card is hard or forgotten and rises when it is easy.",
+        "sk": "Ako rýchlo rastie odstup po odpovedi Dobré. Klesá, keď je kartička ťažká alebo zabudnutá, a stúpa, keď je ľahká."
+      },
+      "currentGap": {
+        "en": "Current gap",
+        "sk": "Aktuálny odstup"
+      },
+      "days2": {
+        "en": "days",
+        "sk": "dní"
+      },
+      "forgotten": {
+        "en": "Forgotten",
+        "sk": "Zabudnuté"
+      },
+      "hardAnswers": {
+        "en": "Hard answers",
+        "sk": "Odpovede Ťažké"
+      },
+      "easyAnswers": {
+        "en": "Easy answers",
+        "sk": "Odpovede Ľahké"
+      },
+      "lastStudied": {
+        "en": "Last studied",
+        "sk": "Naposledy opakované"
+      },
+      "answeredAt": {
+        "en": "Answered at",
+        "sk": "Čas odpovede"
+      },
+      "newLabel": {
+        "en": "New",
+        "sk": "Nová"
+      },
+      "gapAfterHard": {
+        "en": "Gap after Hard",
+        "sk": "Odstup po Ťažké"
+      },
+      "gapAfterGood": {
+        "en": "Gap after Good",
+        "sk": "Odstup po Dobré"
+      },
+      "gapAfterEasy": {
+        "en": "Gap after Easy",
+        "sk": "Odstup po Ľahké"
+      },
+      "stage": {
+        "en": "Stage",
+        "sk": "Fáza"
+      },
+      "learning": {
+        "en": "Learning",
+        "sk": "V učení"
+      },
+      "young": {
+        "en": "Young",
+        "sk": "Mladá"
+      },
+      "mature": {
+        "en": "Mature",
+        "sk": "Zrelá"
+      },
+      "frontWithoutMarkup": {
+        "en": "Front without markup",
+        "sk": "Predná strana bez značiek"
+      },
+      "backWithoutMarkup": {
+        "en": "Back without markup",
+        "sk": "Zadná strana bez značiek"
+      },
+      "again": {
+        "en": "Again",
+        "sk": "Znova"
+      },
+      "hard": {
+        "en": "Hard",
+        "sk": "Ťažké"
+      },
+      "good": {
+        "en": "Good",
+        "sk": "Dobré"
+      },
+      "easy": {
+        "en": "Easy",
+        "sk": "Ľahké"
+      },
+      "firstTime": {
+        "en": "First time",
+        "sk": "Prvýkrát"
+      },
+      "nextGap": {
+        "en": "Next gap",
+        "sk": "Ďalší odstup"
+      },
+      "remembered": {
+        "en": "Remembered",
+        "sk": "Zapamätané"
+      },
+      "forgot": {
+        "en": "Forgot",
+        "sk": "Zabudnuté"
+      },
+      "stats": {
+        "en": "Stats",
+        "sk": "Štatistiky"
+      },
+      "noDecksYet": {
+        "en": "No decks yet",
+        "sk": "Zatiaľ žiadne balíčky"
+      },
+      "makeDeckAddCards": {
+        "en": "Make a deck and add cards, or import a CSV or text file with front and back columns. A deck column sorts cards into decks.",
+        "sk": "Vytvorte balíček a pridajte kartičky alebo importujte súbor CSV či textový súbor so stĺpcami pre prednú a zadnú stranu. Stĺpec s balíčkom roztriedi kartičky do balíčkov."
+      },
+      "newCard": {
+        "en": "New card",
+        "sk": "Nová kartička"
+      },
+      "editCard": {
+        "en": "Edit card",
+        "sk": "Upraviť kartičku"
+      },
+      "allCards": {
+        "en": "All cards",
+        "sk": "Všetky kartičky"
+      },
+      "noCardsYet": {
+        "en": "No cards yet",
+        "sk": "Zatiaľ žiadne kartičky"
+      },
+      "openDeckAddCards": {
+        "en": "Open a deck to add cards one by one, or import a CSV file there.",
+        "sk": "Otvorte balíček a pridávajte kartičky po jednej alebo tam importujte súbor CSV."
+      },
+      "importFinished": {
+        "en": "Import finished",
+        "sk": "Import je dokončený"
+      },
+      "exportAllCardsAs": {
+        "en": "Export all cards as CSV",
+        "sk": "Exportovať všetky kartičky do CSV"
+      },
+      "cardsStudied": {
+        "en": "Cards studied",
+        "sk": "Prebraté kartičky"
+      },
+      "studied": {
+        "en": "studied",
+        "sk": "prebraté"
+      },
+      "cardsHaveStudied": {
+        "en": "Cards you have studied",
+        "sk": "Kartičky, ktoré ste už prebrali"
+      },
+      "studyNow": {
+        "en": "Study now",
+        "sk": "Učiť sa"
+      },
+      "addCardsBelowImport": {
+        "en": "Add cards below, or import a CSV file whose first row is front,back.",
+        "sk": "Pridajte kartičky nižšie alebo importujte súbor CSV, ktorého prvý riadok je front,back."
+      },
+      "addCards": {
+        "en": "Add cards",
+        "sk": "Pridať kartičky"
+      },
+      "importCsv": {
+        "en": "Import CSV",
+        "sk": "Importovať CSV"
+      },
+      "exportCsv": {
+        "en": "Export CSV",
+        "sk": "Exportovať CSV"
+      },
+      "importCsvTextFile": {
+        "en": "Import a CSV or text file with the front and the back in two columns, separated by commas, semicolons or tabs. A first line naming the columns (front and back, question and answer, or term and definition) is used when there is one; without it the first column is the front and the second the back. Lines starting with # are skipped. A Deck column sends each card to the deck it names, made for you if it is new.",
+        "sk": "Importujte súbor CSV alebo textový súbor s prednou a zadnou stranou v dvoch stĺpcoch oddelených čiarkami, bodkočiarkami alebo tabulátormi. Ak prvý riadok pomenúva stĺpce (napríklad front a back, question a answer alebo term a definition), použije sa; inak je prvý stĺpec predná strana a druhý zadná. Riadky, ktoré začínajú znakom #, sa vynechajú. Stĺpec Deck pošle každú kartičku do balíčka, ktorý uvádza; nový balíček sa vytvorí sám."
+      },
+      "showHint": {
+        "en": "Show hint",
+        "sk": "Zobraziť nápovedu"
+      },
+      "showAnswer": {
+        "en": "Show answer",
+        "sk": "Zobraziť odpoveď"
+      },
+      "againToday": {
+        "en": "Again · today",
+        "sk": "Znova · dnes"
+      },
+      "undoLastAnswer": {
+        "en": "Undo last answer",
+        "sk": "Vrátiť poslednú odpoveď"
+      },
+      "allDoneNow": {
+        "en": "All done for now",
+        "sk": "Zatiaľ je všetko hotové"
+      },
+      "backDeck": {
+        "en": "Back to the deck",
+        "sk": "Späť na balíček"
+      },
+      "haveForgottenThisCard": {
+        "en": "You have forgotten this card many times. Try splitting it into smaller cards, rewording it or adding a hint.",
+        "sk": "Túto kartičku ste už veľakrát zabudli. Skúste ju rozdeliť na menšie, preformulovať alebo k nej pridať nápovedu."
+      },
+      "pauseCard": {
+        "en": "Pause card",
+        "sk": "Pozastaviť kartičku"
+      },
+      "studyItAgain": {
+        "en": "Study it again",
+        "sk": "Znova zaradiť do učenia"
+      },
+      "resetProgress": {
+        "en": "Reset progress",
+        "sk": "Vynulovať pokrok"
+      },
+      "streak": {
+        "en": "Streak",
+        "sk": "Séria"
+      },
+      "today": {
+        "en": "Today",
+        "sk": "Dnes"
+      },
+      "cardsAnswered": {
+        "en": "Cards answered",
+        "sk": "Zodpovedané kartičky"
+      },
+      "last30Days": {
+        "en": "Last 30 days",
+        "sk": "Posledných 30 dní"
+      },
+      "wellKnown": {
+        "en": "Well known",
+        "sk": "Dobre známe"
+      },
+      "gap3WeeksMore": {
+        "en": "Gap of 3 weeks or more",
+        "sk": "Odstup 3 týždne a viac"
+      },
+      "dueNow2": {
+        "en": "Due now",
+        "sk": "Na rade teraz"
+      },
+      "reviewsWaiting": {
+        "en": "Reviews waiting",
+        "sk": "Čakajúce opakovania"
+      },
+      "answersLast30Days": {
+        "en": "Answers, last 30 days",
+        "sk": "Odpovede za 30 dní"
+      },
+      "studyDaysLast13": {
+        "en": "Study days, last 13 weeks",
+        "sk": "Dni učenia za 13 týždňov"
+      },
+      "reviewsComingUpNext": {
+        "en": "Reviews coming up, next 14 days",
+        "sk": "Opakovania na najbližších 14 dní"
+      },
+      "answersLast30Days2": {
+        "en": "Your answers, last 30 days",
+        "sk": "Vaše odpovede za 30 dní"
+      },
+      "spacedRepetitionEachAnswer": {
+        "en": "Spaced repetition: each answer sets when you see a card next. Again brings it back today. Hard, Good and Easy push it further out, and the gap grows each time you remember it.",
+        "sk": "Opakovanie s odstupom: každá odpoveď určí, kedy kartičku uvidíte nabudúce. Znova ju vráti ešte dnes. Ťažké, Dobré a Ľahké ju posunú ďalej a odstup rastie zakaždým, keď si ju zapamätáte."
+      },
+      "importCardsFromCsv2": {
+        "en": "Import cards from a CSV or text file",
+        "sk": "Importovať kartičky zo súboru CSV alebo textového súboru"
+      },
+      "theseRowsWereLeft": {
+        "en": "These rows were left out, with the reason for each:",
+        "sk": "Tieto riadky sa vynechali, pri každom je dôvod:"
+      },
+      "lastAnswerUndone": {
+        "en": "Last answer undone",
+        "sk": "Posledná odpoveď je vrátená"
+      },
+      "cardAddedHereIs": {
+        "en": "Card added. Here is a fresh one for the next.",
+        "sk": "Kartička je pridaná. Tu je prázdna na ďalšiu."
+      },
+      "resetThisCardProgress": {
+        "en": "Reset this card's progress?",
+        "sk": "Vynulovať pokrok tejto kartičky?"
+      },
+      "itBecomesNewCard": {
+        "en": "It becomes a new card again. Its past answers stay in your stats.",
+        "sk": "Znova bude ako nová. Jej predchádzajúce odpovede zostanú v štatistikách."
+      },
+      "reset": {
+        "en": "Reset",
+        "sk": "Vynulovať"
+      },
+      "progressReset": {
+        "en": "Progress reset",
+        "sk": "Pokrok je vynulovaný"
+      },
+      "flashcards": {
+        "en": "Flashcards",
+        "sk": "Kartičky"
+      },
+      "cardsStudyToday": {
+        "en": "cards to study today",
+        "sk": "na učenie dnes"
+      },
+      "dueShort": {
+        "en": "Due",
+        "sk": "Na rade"
+      },
+      "deletedCard": {
+        "en": "Deleted card",
+        "sk": "Odstránená kartička"
+      },
+      "doneNextReview": {
+        "en": "All done for today. Next review {when}.",
+        "sk": "Na dnes je všetko hotové. Ďalšie opakovanie {when}."
+      },
+      "doneForToday": {
+        "en": "All done for today.",
+        "sk": "Na dnes je všetko hotové."
+      },
+      "review": {
+        "en": "Review",
+        "sk": "Opakovanie"
+      },
+      "hintLine": {
+        "en": "Hint: {hint}",
+        "sk": "Nápoveda: {hint}"
+      },
+      "newLimit": {
+        "en": "You have reached today’s new-card limit. Come back tomorrow, or raise New cards per day in the deck.",
+        "sk": "Dosiahli ste dnešný limit nových kartičiek. Vráťte sa zajtra alebo v balíčku zvýšte počet nových kartičiek za deň."
+      },
+      "nothingElseDue": {
+        "en": "Nothing else is due in this deck today. Well done.",
+        "sk": "V tomto balíčku už dnes nič nie je na rade. Výborne."
+      },
+      "bestStreak": {
+        "en": "Best: {days}",
+        "sk": "Najdlhšia: {days}"
+      },
+      "cardsInAll": {
+        "en": "{n, plural, one {# card in all} other {# cards in all}}",
+        "sk": "{n, plural, one {spolu # kartička} few {spolu # kartičky} many {spolu # kartičky} other {spolu # kartičiek}}"
+      },
+      "name": {
+        "en": "Name",
+        "sk": "Názov"
+      },
+      "description": {
+        "en": "Description",
+        "sk": "Popis"
+      },
+      "front": {
+        "en": "Front",
+        "sk": "Predná strana"
+      },
+      "back": {
+        "en": "Back",
+        "sk": "Zadná strana"
+      },
+      "hint": {
+        "en": "Hint",
+        "sk": "Nápoveda"
+      },
+      "hardText": {
+        "en": "Hard text",
+        "sk": "Text pre Ťažké"
+      },
+      "goodText": {
+        "en": "Good text",
+        "sk": "Text pre Dobré"
+      },
+      "easyText": {
+        "en": "Easy text",
+        "sk": "Text pre Ľahké"
+      },
+      "grade": {
+        "en": "Grade",
+        "sk": "Hodnotenie"
+      },
+      "date": {
+        "en": "Date",
+        "sk": "Dátum"
+      },
+      "at": {
+        "en": "At",
+        "sk": "Čas"
+      },
+      "prevInterval": {
+        "en": "Prev interval",
+        "sk": "Predchádzajúci odstup"
+      },
+      "prevLastReviewed": {
+        "en": "Prev last reviewed",
+        "sk": "Predtým naposledy opakované"
+      },
+      "prevAnsweredAt": {
+        "en": "Prev answered at",
+        "sk": "Predchádzajúci čas odpovede"
+      }
     }
   },
   "permissions": {
     "notify.local": {
-      "purpose": "Remind you to study, per deck or once a day for all decks, only when cards are due",
+      "purpose": "@remindStudyPerDeck",
       "maxPerDay": 11
     },
     "files.io": {
-      "purpose": "Import cards from a CSV file and export a deck or all your cards as CSV",
+      "purpose": "@importCardsFromCsv",
       "modes": ["import", "export"]
     },
-    "widget.home": { "purpose": "Show how many cards are waiting for you on your home screen" }
+    "widget.home": { "purpose": "@showHowManyCards" }
   },
   "dataFlows": [
     {
       "from": ["deck.id", "deck.name", "card.front", "card.back", "card.hint", "card.deck"],
       "to": "files.io",
-      "purpose": "Your cards (front, back, hint and deck) saved as a CSV file where you choose"
+      "purpose": "@cardsFrontBackHint"
     }
   ],
   "settings": {
     "dailyReminder": {
       "type": "boolean",
-      "label": "One daily reminder for all decks",
-      "help": "Replaces the reminders you set on each deck.",
+      "label": "@oneDailyReminderAll",
+      "help": "@replacesRemindersSetEach",
       "default": false
     },
     "dailyReminderAt": {
       "type": "time",
-      "label": "Reminder time",
+      "label": "@reminderTime",
       "default": "19:00",
       "visible": "=settings.dailyReminder"
     }
   },
   "entities": {
     "deck": {
-      "label": "Deck",
-      "labelPlural": "Decks",
+      "label": "@deck",
+      "labelPlural": "@decks",
       "sort": ["name"],
       "display": {
         "title": "=item.name",
@@ -87,141 +750,167 @@
         "trailingTone": "=item.toStudy > 0 ? 'primary' : null"
       },
       "fields": {
-        "name": { "type": "text", "required": true, "unique": true, "maxLength": 60, "placeholder": "Spanish verbs" },
-        "description": { "type": "text", "maxLength": 200, "placeholder": "What this deck is for" },
+        "name": {
+          "label": "@name",
+          "type": "text",
+          "required": true,
+          "unique": true,
+          "maxLength": 60,
+          "placeholder": "@spanishVerbs"
+        },
+        "description": {
+          "label": "@description",
+          "type": "text",
+          "maxLength": 200,
+          "placeholder": "@whatThisDeckIs"
+        },
         "icon": {
           "type": "choice",
-          "label": "Icon and colour",
+          "label": "@iconColour",
           "default": "school",
           "options": [
-            { "value": "school", "label": "Study", "icon": "school", "hue": "blue" },
-            { "value": "language", "label": "Languages", "icon": "language", "hue": "indigo" },
-            { "value": "menu_book", "label": "Reading", "icon": "menu_book", "hue": "brown" },
-            { "value": "map", "label": "Geography", "icon": "map", "hue": "teal" },
-            { "value": "history", "label": "History", "icon": "history", "hue": "amber" },
-            { "value": "psychology", "label": "Mind and memory", "icon": "psychology", "hue": "violet" },
-            { "value": "medical_services", "label": "Medicine", "icon": "medical_services", "hue": "red" },
-            { "value": "eco", "label": "Nature", "icon": "eco", "hue": "green" },
-            { "value": "pets", "label": "Animals", "icon": "pets", "hue": "orange" },
-            { "value": "lightbulb", "label": "Ideas", "icon": "lightbulb", "hue": "lime" },
-            { "value": "music_note", "label": "Music", "icon": "music_note", "hue": "pink" },
-            { "value": "palette", "label": "Art", "icon": "palette", "hue": "pink" },
-            { "value": "keyboard", "label": "Computers", "icon": "keyboard", "hue": "grey" },
-            { "value": "savings", "label": "Money", "icon": "savings", "hue": "green" },
-            { "value": "restaurant", "label": "Food", "icon": "restaurant", "hue": "orange" },
-            { "value": "flight", "label": "Travel", "icon": "flight", "hue": "cyan" },
-            { "value": "fitness_center", "label": "Sport", "icon": "fitness_center", "hue": "lime" },
-            { "value": "work", "label": "Work", "icon": "work", "hue": "indigo" },
-            { "value": "star", "label": "Favourites", "icon": "star", "hue": "amber" }
+            { "value": "school", "label": "@study", "icon": "school", "hue": "blue" },
+            { "value": "language", "label": "@languages", "icon": "language", "hue": "indigo" },
+            { "value": "menu_book", "label": "@reading", "icon": "menu_book", "hue": "brown" },
+            { "value": "map", "label": "@geography", "icon": "map", "hue": "teal" },
+            { "value": "history", "label": "@history", "icon": "history", "hue": "amber" },
+            { "value": "psychology", "label": "@mindMemory", "icon": "psychology", "hue": "violet" },
+            { "value": "medical_services", "label": "@medicine", "icon": "medical_services", "hue": "red" },
+            { "value": "eco", "label": "@nature", "icon": "eco", "hue": "green" },
+            { "value": "pets", "label": "@animals", "icon": "pets", "hue": "orange" },
+            { "value": "lightbulb", "label": "@ideas", "icon": "lightbulb", "hue": "lime" },
+            { "value": "music_note", "label": "@music", "icon": "music_note", "hue": "pink" },
+            { "value": "palette", "label": "@art", "icon": "palette", "hue": "pink" },
+            { "value": "keyboard", "label": "@computers", "icon": "keyboard", "hue": "grey" },
+            { "value": "savings", "label": "@money", "icon": "savings", "hue": "green" },
+            { "value": "restaurant", "label": "@food", "icon": "restaurant", "hue": "orange" },
+            { "value": "flight", "label": "@travel", "icon": "flight", "hue": "cyan" },
+            { "value": "fitness_center", "label": "@sport", "icon": "fitness_center", "hue": "lime" },
+            { "value": "work", "label": "@work", "icon": "work", "hue": "indigo" },
+            { "value": "star", "label": "@favourites", "icon": "star", "hue": "amber" }
           ]
         },
         "newPerDay": {
           "type": "integer",
-          "label": "New cards per day",
+          "label": "@newCardsPerDay",
           "default": 20,
           "min": 0,
           "max": 200,
-          "help": "How many cards you have never seen come into your study each day. Due reviews always come first."
+          "help": "@howManyCardsHave"
         },
-        "remind": { "type": "boolean", "label": "Study reminder", "default": true },
-        "remindAt": { "type": "time", "label": "Reminder time", "default": "19:00", "visible": "=item.remind" },
+        "remind": { "type": "boolean", "label": "@studyReminder", "default": true },
+        "remindAt": { "type": "time", "label": "@reminderTime", "default": "19:00", "visible": "=item.remind" },
         "remindDays": {
           "type": "recurrence",
-          "label": "Remind me",
+          "label": "@remindMe",
           "default": "FREQ=DAILY",
           "visible": "=item.remind"
         },
-        "cards": { "type": "inverse", "of": "card.deck", "label": "Cards", "sort": ["-createdAt"] },
-        "reviews": { "type": "inverse", "of": "review.deck", "label": "Answers", "visible": false },
-        "cardCount": { "type": "integer", "label": "Cards", "visible": false, "compute": "=size(item.cards)" },
+        "cards": { "type": "inverse", "of": "card.deck", "label": "@cards", "sort": ["-createdAt"] },
+        "reviews": { "type": "inverse", "of": "review.deck", "label": "@answers2", "visible": false },
+        "cardCount": { "type": "integer", "label": "@cards", "visible": false, "compute": "=size(item.cards)" },
         "dueCount": {
           "type": "integer",
-          "label": "To review",
+          "label": "@review2",
           "visible": false,
           "compute": "=size(item.cards.filter(c, !c.paused && !c.isNew && c.due <= today()))"
         },
         "newCount": {
           "type": "integer",
-          "label": "New",
+          "label": "@newCards",
           "visible": false,
           "compute": "=size(item.cards.filter(c, !c.paused && c.isNew))"
         },
         "newToday": {
           "type": "integer",
-          "label": "New today",
+          "label": "@newToday",
           "visible": false,
           "compute": "=size(item.reviews.filter(r, r.date == today() && r.wasNew))"
         },
         "newAvailable": {
           "type": "integer",
-          "label": "New left today",
+          "label": "@newLeftToday",
           "visible": false,
           "compute": "=max(0, min(item.newCount, item.newPerDay - item.newToday))"
         },
         "toStudy": {
           "type": "integer",
-          "label": "To study",
+          "label": "@study2",
           "visible": false,
           "compute": "=item.dueCount + item.newAvailable"
         },
         "learnedCount": {
           "type": "integer",
-          "label": "Learned",
+          "label": "@learned",
           "visible": false,
           "compute": "=size(item.cards.filter(c, !c.isNew))"
         },
         "nextDue": {
           "type": "date",
-          "label": "Next review",
+          "label": "@nextReview",
           "visible": false,
           "compute": "=min(item.cards.filter(c, !c.paused && !c.isNew && c.due > today()).map(c, c.due))"
         }
       }
     },
     "card": {
-      "label": "Card",
-      "labelPlural": "Cards",
+      "label": "@card",
+      "labelPlural": "@cards",
       "sort": ["-createdAt"],
       "display": {
         "title": "=item.front",
         "subtitle": "=item.back",
-        "trailing": "=item.paused ? 'Paused' : item.isNew ? 'New' : item.due <= today() ? 'Due' : coalesce(formatRelative(item.due), '')",
+        "trailing": "=item.paused ? t('paused') : item.isNew ? t('newLabel') : item.due <= today() ? t('dueShort') : coalesce(formatRelative(item.due), '')",
         "icon": "=item.lapses >= 8 ? 'warning' : item.isNew ? 'note_add' : 'note'",
         "tone": "=item.lapses >= 8 ? 'warning' : 'neutral'"
       },
       "fields": {
         "deck": {
+          "label": "@deck",
           "type": "ref",
           "to": "deck",
           "onDelete": "cascade",
-          "help": "Cards without a deck are kept but not studied"
+          "help": "@cardsWithoutDeckAre"
         },
-        "front": { "type": "longText", "required": true, "maxLength": 1000, "placeholder": "Question, word or prompt" },
-        "back": { "type": "longText", "required": true, "maxLength": 2000, "placeholder": "Answer" },
+        "front": {
+          "label": "@front",
+          "type": "longText",
+          "required": true,
+          "maxLength": 1000,
+          "placeholder": "@questionWordPrompt"
+        },
+        "back": {
+          "label": "@back",
+          "type": "longText",
+          "required": true,
+          "maxLength": 2000,
+          "placeholder": "@answer"
+        },
         "hint": {
+          "label": "@hint",
           "type": "text",
           "maxLength": 200,
-          "placeholder": "Optional nudge",
-          "help": "Shown only when you ask for it while studying"
+          "placeholder": "@optionalNudge",
+          "help": "@shownOnlyWhenAsk"
         },
         "paused": {
           "type": "boolean",
-          "label": "Paused",
+          "label": "@paused",
           "default": false,
-          "help": "A paused card stays in the deck but is left out of study"
+          "help": "@pausedCardStaysDeck"
         },
         "ease": {
           "type": "number",
-          "label": "Ease",
+          "label": "@ease",
           "stored": true,
           "visible": "=!item.isNew",
-          "help": "How fast the gap grows after a Good answer. It drops when a card is hard or forgotten and rises when it is easy.",
+          "help": "@howFastGapGrows",
           "compute": "=round(clamp(2.5 - 0.2 * item.lapses - 0.15 * item.hardCount + 0.15 * item.easyCount, 1.3, 5.0), 2)"
         },
         "interval": {
           "type": "integer",
-          "label": "Current gap",
-          "unit": "days",
+          "label": "@currentGap",
+          "unit": "@days2",
           "default": 0,
           "min": 0,
           "editable": false,
@@ -229,7 +918,7 @@
         },
         "reps": {
           "type": "integer",
-          "label": "Answers",
+          "label": "@answers2",
           "default": 0,
           "min": 0,
           "editable": false,
@@ -237,7 +926,7 @@
         },
         "lapses": {
           "type": "integer",
-          "label": "Forgotten",
+          "label": "@forgotten",
           "default": 0,
           "min": 0,
           "editable": false,
@@ -245,7 +934,7 @@
         },
         "hardCount": {
           "type": "integer",
-          "label": "Hard answers",
+          "label": "@hardAnswers",
           "default": 0,
           "min": 0,
           "editable": false,
@@ -253,132 +942,176 @@
         },
         "easyCount": {
           "type": "integer",
-          "label": "Easy answers",
+          "label": "@easyAnswers",
           "default": 0,
           "min": 0,
           "editable": false,
           "visible": false
         },
-        "lastReviewed": { "type": "date", "label": "Last studied", "editable": false, "visible": "=!item.isNew" },
-        "answeredAt": { "type": "datetime", "label": "Answered at", "editable": false, "visible": false },
+        "lastReviewed": { "type": "date", "label": "@lastStudied", "editable": false, "visible": "=!item.isNew" },
+        "answeredAt": { "type": "datetime", "label": "@answeredAt", "editable": false, "visible": false },
         "due": {
           "type": "date",
-          "label": "Next review",
+          "label": "@nextReview",
           "stored": true,
           "visible": "=!item.isNew",
           "compute": "=addDays(item.lastReviewed, item.interval)"
         },
         "isNew": {
           "type": "boolean",
-          "label": "New",
+          "label": "@newLabel",
           "stored": true,
           "visible": false,
           "compute": "=!has(item.lastReviewed)"
         },
         "ivHard": {
           "type": "integer",
-          "label": "Gap after Hard",
+          "label": "@gapAfterHard",
           "stored": true,
           "visible": false,
           "compute": "=item.interval == 0 ? 0 : int(min(3650.0, max(item.interval + 1.0, round(item.interval * 1.2))))"
         },
         "ivGood": {
           "type": "integer",
-          "label": "Gap after Good",
+          "label": "@gapAfterGood",
           "stored": true,
           "visible": false,
           "compute": "=item.interval == 0 ? 1 : int(min(3650.0, max(item.ivHard + 1.0, round(item.interval * item.ease))))"
         },
         "ivEasy": {
           "type": "integer",
-          "label": "Gap after Easy",
+          "label": "@gapAfterEasy",
           "stored": true,
           "visible": false,
           "compute": "=item.interval == 0 ? 4 : int(min(3650.0, max(item.ivGood + 1.0, round(item.interval * item.ease * 1.3))))"
         },
         "hardText": {
+          "label": "@hardText",
           "type": "text",
           "visible": false,
           "compute": "=item.ivHard >= 730 ? t('ivlYears', {'n': item.ivHard / 365}) : item.ivHard >= 60 ? t('ivlMonths', {'n': item.ivHard / 30}) : t('ivl', {'n': item.ivHard})"
         },
         "goodText": {
+          "label": "@goodText",
           "type": "text",
           "visible": false,
           "compute": "=item.ivGood >= 730 ? t('ivlYears', {'n': item.ivGood / 365}) : item.ivGood >= 60 ? t('ivlMonths', {'n': item.ivGood / 30}) : t('ivl', {'n': item.ivGood})"
         },
         "easyText": {
+          "label": "@easyText",
           "type": "text",
           "visible": false,
           "compute": "=item.ivEasy >= 730 ? t('ivlYears', {'n': item.ivEasy / 365}) : item.ivEasy >= 60 ? t('ivlMonths', {'n': item.ivEasy / 30}) : t('ivl', {'n': item.ivEasy})"
         },
         "stage": {
           "type": "choice",
-          "label": "Stage",
+          "label": "@stage",
           "visible": "=!item.isNew",
           "options": [
-            { "value": "new", "label": "New", "tone": "primary" },
-            { "value": "learning", "label": "Learning", "tone": "warning" },
-            { "value": "young", "label": "Young" },
-            { "value": "mature", "label": "Mature", "tone": "success" }
+            { "value": "new", "label": "@newLabel", "tone": "primary" },
+            { "value": "learning", "label": "@learning", "tone": "warning" },
+            { "value": "young", "label": "@young" },
+            { "value": "mature", "label": "@mature", "tone": "success" }
           ],
           "compute": "=item.isNew ? 'new' : item.interval == 0 ? 'learning' : item.interval < 21 ? 'young' : 'mature'"
         },
-        "reviews": { "type": "inverse", "of": "review.card", "label": "Answers", "sort": ["-at"] },
+        "reviews": { "type": "inverse", "of": "review.card", "label": "@answers2", "sort": ["-at"] },
         "frontClean": {
           "type": "text",
-          "label": "Front without markup",
+          "label": "@frontWithoutMarkup",
           "visible": false,
           "compute": "=trim(replace(replace(replace(replace(replace(replace(replaceAll(replace(replace(replace(replace(replace(replace(item.front, '<br>', '\\n'), '<br/>', '\\n'), '<br />', '\\n'), '<BR>', '\\n'), '<div>', '\\n'), '</p>', '\\n'), r'<[^<>]*>|\\[sound:[^\\[\\]]*\\]', ''), '&nbsp;', ' '), '&lt;', '<'), '&gt;', '>'), '&quot;', '\"'), '&#39;', '\\''), '&amp;', '&'))"
         },
         "backClean": {
           "type": "text",
-          "label": "Back without markup",
+          "label": "@backWithoutMarkup",
           "visible": false,
           "compute": "=trim(replace(replace(replace(replace(replace(replace(replaceAll(replace(replace(replace(replace(replace(replace(item.back, '<br>', '\\n'), '<br/>', '\\n'), '<br />', '\\n'), '<BR>', '\\n'), '<div>', '\\n'), '</p>', '\\n'), r'<[^<>]*>|\\[sound:[^\\[\\]]*\\]', ''), '&nbsp;', ' '), '&lt;', '<'), '&gt;', '>'), '&quot;', '\"'), '&#39;', '\\''), '&amp;', '&'))"
         }
       }
     },
     "review": {
-      "label": "Answer",
-      "labelPlural": "Answers",
+      "label": "@answer",
+      "labelPlural": "@answers2",
       "sort": ["-at"],
       "display": {
-        "title": "=coalesce(item.card.front, 'Deleted card')",
+        "title": "=coalesce(item.card.front, t('deletedCard'))",
         "subtitle": "=formatDate(item.at, 'yMMMdjm')",
-        "trailing": "=item.grade == 'again' ? 'Again' : item.grade == 'hard' ? 'Hard' : item.grade == 'good' ? 'Good' : 'Easy'",
+        "trailing": "=item.grade == 'again' ? t('again') : item.grade == 'hard' ? t('hard') : item.grade == 'good' ? t('good') : t('easy')",
         "trailingTone": "=item.grade == 'again' ? 'danger' : item.grade == 'hard' ? 'warning' : item.grade == 'good' ? 'primary' : 'success'"
       },
       "fields": {
-        "card": { "type": "ref", "to": "card", "onDelete": "setNull", "editable": false },
-        "deck": { "type": "ref", "to": "deck", "onDelete": "setNull", "editable": false },
+        "card": {
+          "label": "@card",
+          "type": "ref",
+          "to": "card",
+          "onDelete": "setNull",
+          "editable": false
+        },
+        "deck": {
+          "label": "@deck",
+          "type": "ref",
+          "to": "deck",
+          "onDelete": "setNull",
+          "editable": false
+        },
         "grade": {
+          "label": "@grade",
           "type": "choice",
           "required": true,
           "editable": false,
           "options": [
-            { "value": "again", "label": "Again", "tone": "danger" },
-            { "value": "hard", "label": "Hard", "tone": "warning" },
-            { "value": "good", "label": "Good", "tone": "primary" },
-            { "value": "easy", "label": "Easy", "tone": "success" }
+            { "value": "again", "label": "@again", "tone": "danger" },
+            { "value": "hard", "label": "@hard", "tone": "warning" },
+            { "value": "good", "label": "@good", "tone": "primary" },
+            { "value": "easy", "label": "@easy", "tone": "success" }
           ]
         },
-        "date": { "type": "date", "required": true, "default": "=today()", "editable": false },
-        "at": { "type": "datetime", "required": true, "default": "=now()", "editable": false },
-        "wasNew": { "type": "boolean", "label": "First time", "default": false, "editable": false },
-        "newInterval": { "type": "integer", "label": "Next gap", "unit": "days", "default": 0, "editable": false },
-        "prevInterval": { "type": "integer", "default": 0, "editable": false, "visible": false },
-        "prevLastReviewed": { "type": "date", "editable": false, "visible": false },
-        "prevAnsweredAt": { "type": "datetime", "editable": false, "visible": false },
+        "date": {
+          "label": "@date",
+          "type": "date",
+          "required": true,
+          "default": "=today()",
+          "editable": false
+        },
+        "at": {
+          "label": "@at",
+          "type": "datetime",
+          "required": true,
+          "default": "=now()",
+          "editable": false
+        },
+        "wasNew": { "type": "boolean", "label": "@firstTime", "default": false, "editable": false },
+        "newInterval": { "type": "integer", "label": "@nextGap", "unit": "@days2", "default": 0, "editable": false },
+        "prevInterval": {
+          "label": "@prevInterval",
+          "type": "integer",
+          "default": 0,
+          "editable": false,
+          "visible": false
+        },
+        "prevLastReviewed": {
+          "label": "@prevLastReviewed",
+          "type": "date",
+          "editable": false,
+          "visible": false
+        },
+        "prevAnsweredAt": {
+          "label": "@prevAnsweredAt",
+          "type": "datetime",
+          "editable": false,
+          "visible": false
+        },
         "correct": {
           "type": "integer",
-          "label": "Remembered",
+          "label": "@remembered",
           "stored": true,
           "visible": false,
           "compute": "=item.grade == 'again' ? 0 : 1"
         },
         "forgot": {
           "type": "integer",
-          "label": "Forgot",
+          "label": "@forgot",
           "stored": true,
           "visible": false,
           "compute": "=item.grade == 'again' ? 1 : 0"
@@ -473,28 +1206,28 @@
   "navigation": {
     "start": "decks",
     "tabs": [
-      { "screen": "decks", "label": "Decks", "icon": "school" },
-      { "screen": "cards", "label": "Cards", "icon": "menu_book" },
-      { "screen": "stats", "label": "Stats", "icon": "insights" }
+      { "screen": "decks", "label": "@decks", "icon": "school" },
+      { "screen": "cards", "label": "@cards", "icon": "menu_book" },
+      { "screen": "stats", "label": "@stats", "icon": "insights" }
     ]
   },
   "screens": {
     "decks": {
       "type": "list",
-      "title": "Decks",
+      "title": "@decks",
       "query": "decks",
       "item": "deckTile",
       "columns": 2,
       "toolbar": ["importAllBtn", "exportAllBtn"],
       "empty": {
-        "title": "No decks yet",
-        "body": "Make a deck and add cards, or import a CSV or text file with front and back columns. A deck column sorts cards into decks.",
+        "title": "@noDecksYet",
+        "body": "@makeDeckAddCards",
         "icon": "school"
       }
     },
     "deckDetail": {
       "type": "detail",
-      "title": "Deck",
+      "title": "@deck",
       "entity": "deck",
       "header": "deckTop",
       "show": ["description", "newPerDay", "remind", "remindAt", "remindDays"],
@@ -503,7 +1236,7 @@
     },
     "study": {
       "type": "custom",
-      "title": "=coalesce(params.deck.name, 'Study')",
+      "title": "=coalesce(params.deck.name, t('study'))",
       "params": { "deck": { "type": "ref", "to": "deck", "required": true } },
       "state": {
         "revealed": { "type": "boolean", "default": false },
@@ -517,33 +1250,33 @@
     },
     "addCard": {
       "type": "form",
-      "title": "New card",
+      "title": "@newCard",
       "entity": "card",
       "fields": ["front", "back", "hint", "deck"],
       "onSave": { "event": { "name": "cardAdded", "context": { "deck": "=record.deck" } } }
     },
     "cardEdit": {
       "type": "form",
-      "title": "Edit card",
+      "title": "@editCard",
       "entity": "card",
       "fields": ["front", "back", "hint", "deck", "paused"]
     },
     "cards": {
       "type": "list",
-      "title": "All cards",
+      "title": "@allCards",
       "query": "allCards",
       "search": ["front", "back", "hint"],
       "sectionBy": "deck",
       "add": "addCard",
       "empty": {
-        "title": "No cards yet",
-        "body": "Open a deck to add cards one by one, or import a CSV file there.",
+        "title": "@noCardsYet",
+        "body": "@openDeckAddCards",
         "icon": "menu_book"
       }
     },
     "cardDetail": {
       "type": "detail",
-      "title": "Card",
+      "title": "@card",
       "entity": "card",
       "show": ["deck", "hint", "paused", "stage", "due", "interval", "ease", "reps", "lapses", "lastReviewed"],
       "related": ["reviews"],
@@ -551,10 +1284,10 @@
       "edit": "cardEdit",
       "header": "cardTop"
     },
-    "stats": { "type": "dashboard", "title": "Stats", "root": "statsCol" },
+    "stats": { "type": "dashboard", "title": "@stats", "root": "statsCol" },
     "importReport": {
       "type": "custom",
-      "title": "Import finished",
+      "title": "@importFinished",
       "present": "dialog",
       "params": { "summary": { "type": "text", "maxLength": 300 }, "lines": { "type": "longText", "maxLength": 5000 } },
       "root": "irCol"
@@ -564,7 +1297,7 @@
     "exportAllBtn": {
       "component": "Button",
       "icon": "download",
-      "label": "Export all cards as CSV",
+      "label": "@exportAllCardsAs",
       "iconOnly": true,
       "action": { "event": { "name": "exportAll" } }
     },
@@ -581,7 +1314,7 @@
       "value": "=item.learnedCount",
       "max": "=max(item.cardCount, 1)",
       "visible": "=item.cardCount > 0",
-      "accessibility": { "label": "Cards studied" }
+      "accessibility": { "label": "@cardsStudied" }
     },
     "deckTileDue": {
       "component": "Badge",
@@ -615,21 +1348,21 @@
       "value": "=record.learnedCount",
       "max": "=max(record.cardCount, 1)",
       "text": "=t('studiedOf', {'done': record.learnedCount, 'total': record.cardCount})",
-      "caption": "studied",
+      "caption": "@studied",
       "visible": "=record.cardCount > 0",
-      "accessibility": { "label": "Cards you have studied" }
+      "accessibility": { "label": "@cardsHaveStudied" }
     },
     "studyBtn": {
       "component": "Button",
       "icon": "school",
-      "label": "Study now",
+      "label": "@studyNow",
       "variant": "primary",
       "visible": "=record.toStudy > 0",
       "action": { "event": { "name": "startStudy", "context": { "deck": "=record.id" } } }
     },
     "deckDoneText": {
       "component": "Text",
-      "text": "=has(record.nextDue) ? 'All done for today. Next review ' + coalesce(formatRelative(record.nextDue), '') + '.' : 'All done for today.'",
+      "text": "=has(record.nextDue) ? t('doneNextReview', {'when': coalesce(formatRelative(record.nextDue), '')}) : t('doneForToday')",
       "visible": "=record.toStudy == 0 && record.cardCount > 0",
       "tone": "success"
     },
@@ -637,15 +1370,15 @@
       "component": "EmptyState",
       "illustration": "empty_box",
       "icon": "note_add",
-      "title": "No cards yet",
-      "body": "Add cards below, or import a CSV file whose first row is front,back.",
+      "title": "@noCardsYet",
+      "body": "@addCardsBelowImport",
       "visible": "=record.cardCount == 0"
     },
     "deckFooter": { "component": "Column", "children": ["addCardBtn", "deckFileRow", "adoptBtn", "csvNote"] },
     "addCardBtn": {
       "component": "Button",
       "icon": "add",
-      "label": "Add cards",
+      "label": "@addCards",
       "action": { "event": { "name": "addCardTo", "context": { "deck": "=record.id" } } },
       "variant": "=record.cardCount == 0 ? 'primary' : 'default'"
     },
@@ -653,13 +1386,13 @@
     "importBtn": {
       "component": "Button",
       "icon": "upload",
-      "label": "Import CSV",
+      "label": "@importCsv",
       "action": { "event": { "name": "importCards", "context": { "deck": "=record.id" } } }
     },
     "exportBtn": {
       "component": "Button",
       "icon": "download",
-      "label": "Export CSV",
+      "label": "@exportCsv",
       "visible": "=record.cardCount > 0",
       "action": { "event": { "name": "exportDeck", "context": { "deck": "=record.id" } } }
     },
@@ -673,7 +1406,7 @@
     "csvNote": {
       "component": "Text",
       "variant": "caption",
-      "text": "Import a CSV or text file with the front and the back in two columns, separated by commas, semicolons or tabs. A first line naming the columns (front and back, question and answer, or term and definition) is used when there is one; without it the first column is the front and the second the back. Lines starting with # are skipped. A Deck column sends each card to the deck it names, made for you if it is new."
+      "text": "@importCsvTextFile"
     },
     "studyCol": {
       "component": "Column",
@@ -706,7 +1439,7 @@
     },
     "stageBadge": {
       "component": "Badge",
-      "text": "=first(q.queue).isNew ? 'New card' : first(q.queue).interval == 0 ? 'Learning' : 'Review'",
+      "text": "=first(q.queue).isNew ? t('newCard') : first(q.queue).interval == 0 ? t('learning') : t('review')",
       "icon": "=first(q.queue).isNew ? 'note_add' : 'history'",
       "tone": "=first(q.queue).isNew ? 'primary' : first(q.queue).interval == 0 ? 'warning' : 'neutral'"
     },
@@ -714,7 +1447,7 @@
     "hintText": {
       "component": "Text",
       "variant": "caption",
-      "text": "='Hint: ' + coalesce(first(q.queue).hint, '')",
+      "text": "=t('hintLine', {'hint': coalesce(first(q.queue).hint, '')})",
       "visible": "=state.hintShown && has(first(q.queue).hint)"
     },
     "answerDivider": { "component": "Divider", "visible": "=state.revealed" },
@@ -727,7 +1460,7 @@
     "hintBtn": {
       "component": "Button",
       "icon": "lightbulb",
-      "label": "Show hint",
+      "label": "@showHint",
       "variant": "borderless",
       "visible": "=!state.revealed && !state.hintShown && has(first(q.queue).hint) && (!first(q.queue).isNew || params.deck.newAvailable > 0)",
       "action": { "event": { "name": "showHint" } }
@@ -735,7 +1468,7 @@
     "showBtn": {
       "component": "Button",
       "icon": "visibility",
-      "label": "Show answer",
+      "label": "@showAnswer",
       "variant": "primary",
       "visible": "=!state.revealed && size(q.queue) > 0 && (!first(q.queue).isNew || params.deck.newAvailable > 0)",
       "action": { "event": { "name": "reveal" } }
@@ -754,28 +1487,28 @@
     },
     "againBtn": {
       "component": "Button",
-      "label": "Again · today",
+      "label": "@againToday",
       "weight": 1,
       "tone": "danger",
       "action": { "event": { "name": "answer", "context": { "card": "=first(q.queue).id", "grade": "again" } } }
     },
     "hardBtn": {
       "component": "Button",
-      "label": "='Hard · ' + coalesce(first(q.queue).hardText, '')",
+      "label": "=t('hard') + ' · ' + coalesce(first(q.queue).hardText, '')",
       "weight": 1,
       "tone": "warning",
       "action": { "event": { "name": "answer", "context": { "card": "=first(q.queue).id", "grade": "hard" } } }
     },
     "goodBtn": {
       "component": "Button",
-      "label": "='Good · ' + coalesce(first(q.queue).goodText, '')",
+      "label": "=t('good') + ' · ' + coalesce(first(q.queue).goodText, '')",
       "weight": 1,
       "action": { "event": { "name": "answer", "context": { "card": "=first(q.queue).id", "grade": "good" } } },
       "tone": "primary"
     },
     "easyBtn": {
       "component": "Button",
-      "label": "='Easy · ' + coalesce(first(q.queue).easyText, '')",
+      "label": "=t('easy') + ' · ' + coalesce(first(q.queue).easyText, '')",
       "weight": 1,
       "tone": "success",
       "action": { "event": { "name": "answer", "context": { "card": "=first(q.queue).id", "grade": "easy" } } }
@@ -784,7 +1517,7 @@
     "undoBtn": {
       "component": "Button",
       "icon": "history",
-      "label": "Undo last answer",
+      "label": "@undoLastAnswer",
       "variant": "borderless",
       "visible": "=size(q.last) > 0",
       "action": { "event": { "name": "undoLast", "context": { "deck": "=params.deck" } } }
@@ -792,19 +1525,19 @@
     "editCardBtn": {
       "component": "Button",
       "icon": "edit",
-      "label": "Edit card",
+      "label": "@editCard",
       "variant": "borderless",
       "visible": "=size(q.queue) > 0 && (!first(q.queue).isNew || params.deck.newAvailable > 0)",
       "action": { "event": { "name": "editCard", "context": { "card": "=first(q.queue).id" } } }
     },
     "studyDone": {
       "component": "EmptyState",
-      "title": "All done for now",
-      "body": "=coalesce(params.deck.newCount, 0) > 0 ? 'You have reached today’s new-card limit. Come back tomorrow, or raise New cards per day in the deck.' : 'Nothing else is due in this deck today. Well done.'",
+      "title": "@allDoneNow",
+      "body": "=coalesce(params.deck.newCount, 0) > 0 ? t('newLimit') : t('nothingElseDue')",
       "icon": "celebration",
       "visible": "=size(q.queue) == 0 || (first(q.queue).isNew && coalesce(params.deck.newAvailable, 0) <= 0)",
       "action": { "event": { "name": "back" } },
-      "actionLabel": "Back to the deck",
+      "actionLabel": "@backDeck",
       "illustration": "all_done"
     },
     "cardTop": { "component": "Column", "children": ["cardFront", "leechNote"] },
@@ -812,28 +1545,28 @@
     "leechNote": {
       "component": "Text",
       "tone": "warning",
-      "text": "You have forgotten this card many times. Try splitting it into smaller cards, rewording it or adding a hint.",
+      "text": "@haveForgottenThisCard",
       "visible": "=record.lapses >= 8"
     },
     "cardFooter": { "component": "Row", "justify": "spaceBetween", "children": ["pauseBtn", "resumeBtn", "forgetBtn"] },
     "pauseBtn": {
       "component": "Button",
       "icon": "block",
-      "label": "Pause card",
+      "label": "@pauseCard",
       "visible": "=!record.paused",
       "action": { "event": { "name": "setPaused", "context": { "card": "=record.id", "paused": true } } }
     },
     "resumeBtn": {
       "component": "Button",
       "icon": "refresh",
-      "label": "Study it again",
+      "label": "@studyItAgain",
       "visible": "=record.paused",
       "action": { "event": { "name": "setPaused", "context": { "card": "=record.id", "paused": false } } }
     },
     "forgetBtn": {
       "component": "Button",
       "icon": "delete_sweep",
-      "label": "Reset progress",
+      "label": "@resetProgress",
       "visible": "=!record.isNew",
       "action": { "event": { "name": "forgetCard", "context": { "card": "=record.id" } } }
     },
@@ -852,46 +1585,46 @@
     "streakStat": {
       "component": "Stat",
       "variant": "hero",
-      "label": "Streak",
+      "label": "@streak",
       "icon": "local_fire_department",
       "value": "=t('days', {'n': streak(q.studyDays.map(d, d.key), 'FREQ=DAILY', today())})",
-      "caption": "='Best: ' + t('days', {'n': longestStreak(q.studyDays.map(d, d.key), 'FREQ=DAILY')})"
+      "caption": "=t('bestStreak', {'days': t('days', {'n': longestStreak(q.studyDays.map(d, d.key), 'FREQ=DAILY')})})"
     },
     "todayStat": {
       "component": "Stat",
-      "label": "Today",
+      "label": "@today",
       "value": "=coalesce(q.todayAnswers.n, 0)",
-      "caption": "Cards answered"
+      "caption": "@cardsAnswered"
     },
     "retentionStat": {
       "component": "Stat",
-      "label": "Remembered",
+      "label": "@remembered",
       "value": "=coalesce(q.monthAnswers.n, 0) > 0 ? string(int(round(100.0 * coalesce(q.monthAnswers.correct, 0) / coalesce(q.monthAnswers.n, 1)))) + '%' : '–'",
-      "caption": "Last 30 days"
+      "caption": "@last30Days"
     },
     "cardRow": { "component": "Row", "justify": "spaceBetween", "children": ["learnedStat", "matureStat", "dueStat"] },
     "learnedStat": {
       "component": "Stat",
-      "label": "Learned",
+      "label": "@learned",
       "value": "=coalesce(q.cardsLearned.n, 0)",
-      "caption": "=string(coalesce(q.cardsAll.n, 0)) + ' cards in all'"
+      "caption": "=t('cardsInAll', {'n': coalesce(q.cardsAll.n, 0)})"
     },
     "matureStat": {
       "component": "Stat",
-      "label": "Well known",
+      "label": "@wellKnown",
       "value": "=coalesce(q.cardsMature.n, 0)",
-      "caption": "Gap of 3 weeks or more"
+      "caption": "@gap3WeeksMore"
     },
     "dueStat": {
       "component": "Stat",
-      "label": "Due now",
+      "label": "@dueNow2",
       "value": "=coalesce(q.dueAll.n, 0)",
-      "caption": "Reviews waiting"
+      "caption": "@reviewsWaiting"
     },
     "answersChart": {
       "component": "Chart",
       "kind": "bar",
-      "title": "Answers, last 30 days",
+      "title": "@answersLast30Days",
       "query": "last30",
       "x": "key",
       "y": ["correct", "forgot"]
@@ -899,7 +1632,7 @@
     "heatChart": {
       "component": "Chart",
       "kind": "heatmap",
-      "title": "Study days, last 13 weeks",
+      "title": "@studyDaysLast13",
       "query": "heat",
       "x": "key",
       "y": ["n"]
@@ -907,7 +1640,7 @@
     "forecastChart": {
       "component": "Chart",
       "kind": "bar",
-      "title": "Reviews coming up, next 14 days",
+      "title": "@reviewsComingUpNext",
       "query": "forecast",
       "x": "key",
       "y": ["n"]
@@ -915,7 +1648,7 @@
     "gradesChart": {
       "component": "Chart",
       "kind": "donut",
-      "title": "Your answers, last 30 days",
+      "title": "@answersLast30Days2",
       "query": "grades30",
       "x": "key",
       "y": ["n"],
@@ -924,18 +1657,18 @@
     "methodNote": {
       "component": "Text",
       "variant": "caption",
-      "text": "Spaced repetition: each answer sets when you see a card next. Again brings it back today. Hard, Good and Easy push it further out, and the gap grows each time you remember it."
+      "text": "@spacedRepetitionEachAnswer"
     },
     "importAllBtn": {
       "component": "Button",
       "icon": "upload",
-      "label": "Import cards from a CSV or text file",
+      "label": "@importCardsFromCsv2",
       "iconOnly": true,
       "action": { "event": { "name": "importCards" } }
     },
     "irCol": { "component": "Column", "children": ["irSummary", "irIntro", "irLines", "irOk"] },
     "irSummary": { "component": "Text", "variant": "h5", "text": "=params.summary" },
-    "irIntro": { "component": "Text", "text": "These rows were left out, with the reason for each:" },
+    "irIntro": { "component": "Text", "text": "@theseRowsWereLeft" },
     "irLines": { "component": "Text", "variant": "caption", "text": "=params.lines" },
     "irOk": {
       "component": "Button",
@@ -1016,7 +1749,7 @@
           "where": "=item.id == vars.last[0].id"
         },
         { "type": "setState", "set": { "revealed": false, "hintShown": false } },
-        { "type": "toast", "when": "=size(vars.last) > 0", "text": "Last answer undone" }
+        { "type": "toast", "when": "=size(vars.last) > 0", "text": "@lastAnswerUndone" }
       ]
     },
     "editCard": {
@@ -1030,7 +1763,7 @@
     "cardAdded": {
       "args": { "deck": { "type": "ref", "to": "deck" } },
       "steps": [
-        { "type": "toast", "text": "Card added. Here is a fresh one for the next." },
+        { "type": "toast", "text": "@cardAddedHereIs" },
         { "type": "navigate", "screen": "addCard", "params": { "deck": "=args.deck" } }
       ]
     },
@@ -1043,9 +1776,9 @@
       "steps": [
         {
           "type": "confirm",
-          "title": "Reset this card's progress?",
-          "body": "It becomes a new card again. Its past answers stay in your stats.",
-          "confirmLabel": "Reset"
+          "title": "@resetThisCardProgress",
+          "body": "@itBecomesNewCard",
+          "confirmLabel": "@reset"
         },
         {
           "type": "updateRecord",
@@ -1060,7 +1793,7 @@
             "easyCount": 0
           }
         },
-        { "type": "toast", "text": "Progress reset" }
+        { "type": "toast", "text": "@progressReset" }
       ]
     },
     "adoptUnsorted": {
@@ -1098,6 +1831,7 @@
                   "Side A",
                   "Expression",
                   "Card front",
+                  "Predná strana",
                   1
                 ]
               },
@@ -1112,11 +1846,12 @@
                   "Side 2",
                   "Side B",
                   "Card back",
+                  "Zadná strana",
                   2
                 ]
               },
-              "hint": { "from": ["Hint", "Clue", "Extra", "Note", "Notes"] },
-              "deck": { "from": ["Deck", "Deck name", "Set", "Set name"] }
+              "hint": { "from": ["Hint", "Clue", "Extra", "Note", "Notes", "Nápoveda"] },
+              "deck": { "from": ["Deck", "Deck name", "Set", "Set name", "Balíček"] }
             },
             "createMissing": ["deck"],
             "onError": "skip"
@@ -1191,7 +1926,7 @@
           "capability": "notify.local",
           "action": "show",
           "args": {
-            "title": "=coalesce(args.deck.name, 'Flashcards')",
+            "title": "=coalesce(args.deck.name, t('flashcards'))",
             "body": "=t('dueNow', {'n': coalesce(args.deck.toStudy, 0)})",
             "open": { "screen": "study", "params": { "deck": "=args.deck" } },
             "tag": "=string(args.deck)",
@@ -1218,7 +1953,7 @@
           "capability": "notify.local",
           "action": "show",
           "args": {
-            "title": "Flashcards",
+            "title": "=t('flashcards')",
             "body": "=t('dueNow', {'n': coalesce(sum(q.decks.map(d, d.toStudy)), 0)})",
             "open": { "screen": "decks" },
             "tag": "all-decks",
@@ -1263,10 +1998,10 @@
   "widgets": {
     "dueWidget": {
       "template": "stat",
-      "title": "Flashcards",
+      "title": "@flashcards",
       "sizes": ["small"],
       "value": "=string(coalesce(q.dueAll.n, 0) + coalesce(sum(q.decks.map(d, d.newAvailable)), 0))",
-      "caption": "cards to study today",
+      "caption": "@cardsStudyToday",
       "icon": "school",
       "open": "decks"
     }

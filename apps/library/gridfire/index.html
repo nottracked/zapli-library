@@ -18,7 +18,7 @@
                     "id": "library/gridfire",
                     "kind": "web",
                     "name": "Gridfire",
-                    "version": "1.0.2",
+                    "version": "1.0.3",
                     "icon": "local_fire_department",
                     "category": "game_arcade",
                     "ageRating": "everyone",
@@ -1462,39 +1462,41 @@
                             <use href="#word" class="lw lw-c" />
                         </svg>
                     </h1>
-                    <p class="tag">
+                    <p class="tag" data-t="tagline">
                         Steer with one thumb, shoot with the other, and light up a grid that bends under every blast.
                     </p>
                     <div class="stack">
                         <a class="btn primary" id="btn-continue" href="#/play" hidden
                             ><svg class="ico"><use href="#i-play" /></svg
-                            ><span class="lbl">Continue<small id="continue-sub"></small></span
+                            ><span class="lbl"
+                                ><span data-t="continue">Continue</span><small id="continue-sub"></small></span
                         ></a>
-                        <a class="btn primary" id="btn-play" href="#/levels">Play</a>
+                        <a class="btn primary" id="btn-play" href="#/levels" data-t="play">Play</a>
                         <div class="pair">
                             <a class="btn" href="#/help"
-                                ><svg class="ico"><use href="#i-help" /></svg>How to play</a
+                                ><svg class="ico"><use href="#i-help" /></svg
+                                ><span data-t="howToPlay">How to play</span></a
                             >
                             <a class="btn" href="#/settings"
-                                ><svg class="ico"><use href="#i-tune" /></svg>Settings</a
+                                ><svg class="ico"><use href="#i-tune" /></svg><span data-t="settings">Settings</span></a
                             >
                         </div>
                     </div>
                     <p class="stats" id="home-stats"></p>
-                    <p class="hint">Tap the empty grid to make it ring.</p>
+                    <p class="hint" data-t="gridHint">Tap the empty grid to make it ring.</p>
                 </div>
             </section>
 
             <!-- ============ SECTORS ============ -->
             <section id="screen-levels" class="screen menu" data-route="levels" aria-labelledby="levels-h" hidden>
                 <header class="bar">
-                    <button class="icon-btn" type="button" data-back aria-label="Back">
+                    <button class="icon-btn" type="button" data-back aria-label="Back" data-t-label="back">
                         <svg class="ico"><use href="#i-back" /></svg>
                     </button>
-                    <h1 id="levels-h" tabindex="-1">Sectors</h1>
+                    <h1 id="levels-h" tabindex="-1" data-t="sectors">Sectors</h1>
                 </header>
                 <div class="wrap">
-                    <p class="lede">
+                    <p class="lede" data-t="lede">
                         Clear all six waves of a sector to open the next one. Every sector brings something new to
                         fight.
                     </p>
@@ -1504,11 +1506,11 @@
 
             <!-- ============ PLAY ============ -->
             <section id="screen-play" class="screen play" data-route="play" aria-labelledby="play-h" hidden>
-                <h1 id="play-h" class="visually-hidden" tabindex="-1">
+                <h1 id="play-h" class="visually-hidden" tabindex="-1" data-t="playHeading">
                     Game. Drag on the left half to move and on the right half to aim and fire.
                 </h1>
                 <div class="hud">
-                    <button class="icon-btn" type="button" id="btn-pause" aria-label="Pause">
+                    <button class="icon-btn" type="button" id="btn-pause" aria-label="Pause" data-t-label="pause">
                         <svg class="ico"><use href="#i-pause" /></svg>
                     </button>
                     <div class="hud-mid" aria-hidden="true">
@@ -1528,7 +1530,9 @@
                     <svg class="ico"><use href="#i-bomb" /></svg><span id="hud-bombs">3</span>
                 </button>
                 <div class="pw-row" id="pw-row" aria-hidden="true"></div>
-                <button class="btn primary pick-btn" type="button" id="btn-pick" hidden>Choose an upgrade</button>
+                <button class="btn primary pick-btn" type="button" id="btn-pick" hidden data-t="chooseUpgrade">
+                    Choose an upgrade
+                </button>
                 <div class="stick" id="stick-move"><div class="knob"></div></div>
                 <div class="stick aim" id="stick-aim"><div class="knob"></div></div>
                 <div class="banner" id="banner" aria-hidden="true">
@@ -1536,12 +1540,14 @@
                 </div>
                 <div class="coach" id="coach" hidden>
                     <div class="coach-zone left">
-                        <span class="coach-ring"></span><b>Move</b><span>Drag anywhere on the left</span>
+                        <span class="coach-ring"></span><b data-t="coachMove">Move</b
+                        ><span data-t="coachMoveSub">Drag anywhere on the left</span>
                     </div>
                     <div class="coach-zone right">
-                        <span class="coach-ring"></span><b>Aim and fire</b><span>Drag anywhere on the right</span>
+                        <span class="coach-ring"></span><b data-t="coachAim">Aim and fire</b
+                        ><span data-t="coachAimSub">Drag anywhere on the right</span>
                     </div>
-                    <p class="coach-keys">
+                    <p class="coach-keys" data-t-rich="coachKeys">
                         Keyboard: <kbd>WASD</kbd> move, arrows or mouse aim, <kbd>Space</kbd> bomb, <kbd>P</kbd> pause
                     </p>
                 </div>
@@ -1551,106 +1557,123 @@
             <!-- ============ SETTINGS ============ -->
             <section id="screen-settings" class="screen menu" data-route="settings" aria-labelledby="settings-h" hidden>
                 <header class="bar">
-                    <button class="icon-btn" type="button" data-back aria-label="Back">
+                    <button class="icon-btn" type="button" data-back aria-label="Back" data-t-label="back">
                         <svg class="ico"><use href="#i-back" /></svg>
                     </button>
-                    <h1 id="settings-h" tabindex="-1">Settings</h1>
+                    <h1 id="settings-h" tabindex="-1" data-t="settings">Settings</h1>
                 </header>
                 <div class="wrap">
                     <section class="group" aria-labelledby="g-sound">
-                        <h2 id="g-sound">Sound</h2>
+                        <h2 id="g-sound" data-t="sound">Sound</h2>
                         <label class="setting"
                             ><span class="s-text"
-                                ><span class="s-label">Sound effects</span
-                                ><span class="s-desc">Every shot and blast is synthesised as it happens.</span></span
+                                ><span class="s-label" data-t="sfx">Sound effects</span
+                                ><span class="s-desc" data-t="sfxSub"
+                                    >Every shot and blast is synthesised as it happens.</span
+                                ></span
                             ><input type="checkbox" class="switch" role="switch" data-setting="sfx"
                         /></label>
                         <label class="setting"
                             ><span class="s-text"
-                                ><span class="s-label">Music</span
-                                ><span class="s-desc">A live sequencer that builds with each wave.</span></span
+                                ><span class="s-label" data-t="music">Music</span
+                                ><span class="s-desc" data-t="musicSub"
+                                    >A live sequencer that builds with each wave.</span
+                                ></span
                             ><input type="checkbox" class="switch" role="switch" data-setting="music"
                         /></label>
                         <label class="setting col"
-                            ><span class="s-label">Volume</span
+                            ><span class="s-label" data-t="volume">Volume</span
                             ><input type="range" min="0" max="100" step="5" data-setting="volume"
                         /></label>
                     </section>
                     <section class="group" aria-labelledby="g-display">
-                        <h2 id="g-display">Display and motion</h2>
+                        <h2 id="g-display" data-t="display">Display and motion</h2>
                         <fieldset class="seg">
-                            <legend>Theme</legend>
+                            <legend data-t="theme">Theme</legend>
                             <div class="opts">
                                 <label
                                     ><input type="radio" name="theme" value="system" data-setting="theme" /><span
+                                        data-t="opt_theme_system"
                                         >System</span
                                     ></label
                                 >
                                 <label
                                     ><input type="radio" name="theme" value="light" data-setting="theme" /><span
+                                        data-t="opt_theme_light"
                                         >Light</span
                                     ></label
                                 >
                                 <label
                                     ><input type="radio" name="theme" value="dark" data-setting="theme" /><span
+                                        data-t="opt_theme_dark"
                                         >Dark</span
                                     ></label
                                 >
                             </div>
                         </fieldset>
                         <fieldset class="seg">
-                            <legend>Reduce motion</legend>
-                            <span class="s-desc">Calms the grid and removes screen shake, flashes and blinking.</span>
+                            <legend data-t="motion">Reduce motion</legend>
+                            <span class="s-desc" data-t="motionSub"
+                                >Calms the grid and removes screen shake, flashes and blinking.</span
+                            >
                             <div class="opts">
                                 <label
                                     ><input type="radio" name="motion" value="system" data-setting="motion" /><span
+                                        data-t="opt_motion_system"
                                         >System</span
                                     ></label
                                 >
                                 <label
                                     ><input type="radio" name="motion" value="on" data-setting="motion" /><span
+                                        data-t="opt_motion_on"
                                         >On</span
                                     ></label
                                 >
                                 <label
                                     ><input type="radio" name="motion" value="off" data-setting="motion" /><span
+                                        data-t="opt_motion_off"
                                         >Off</span
                                     ></label
                                 >
                             </div>
                         </fieldset>
                         <fieldset class="seg">
-                            <legend>Graphics</legend>
-                            <span class="s-desc">Auto lowers the resolution if the frame rate drops.</span>
+                            <legend data-t="graphics">Graphics</legend>
+                            <span class="s-desc" data-t="graphicsSub"
+                                >Auto lowers the resolution if the frame rate drops.</span
+                            >
                             <div class="opts">
                                 <label
                                     ><input type="radio" name="quality" value="auto" data-setting="quality" /><span
+                                        data-t="opt_quality_auto"
                                         >Auto</span
                                     ></label
                                 >
                                 <label
                                     ><input type="radio" name="quality" value="high" data-setting="quality" /><span
+                                        data-t="opt_quality_high"
                                         >High</span
                                     ></label
                                 >
                                 <label
                                     ><input type="radio" name="quality" value="low" data-setting="quality" /><span
+                                        data-t="opt_quality_low"
                                         >Low</span
                                     ></label
                                 >
                             </div>
                         </fieldset>
                         <label class="setting"
-                            ><span class="s-text"><span class="s-label">Show frame rate</span></span
+                            ><span class="s-text"><span class="s-label" data-t="showFps">Show frame rate</span></span
                             ><input type="checkbox" class="switch" role="switch" data-setting="fps"
                         /></label>
                     </section>
                     <section class="group" aria-labelledby="g-controls">
-                        <h2 id="g-controls">Controls</h2>
+                        <h2 id="g-controls" data-t="controls">Controls</h2>
                         <label class="setting"
                             ><span class="s-text"
-                                ><span class="s-label">One-thumb mode</span
-                                ><span class="s-desc"
+                                ><span class="s-label" data-t="oneThumb">One-thumb mode</span
+                                ><span class="s-desc" data-t="oneThumbSub"
                                     >Your ship aims and fires at the nearest enemy by itself.</span
                                 ></span
                             ><input type="checkbox" class="switch" role="switch" data-setting="autoAim"
@@ -1660,27 +1683,31 @@
       -->
                     </section>
                     <section class="group" aria-labelledby="g-data">
-                        <h2 id="g-data">Progress</h2>
+                        <h2 id="g-data" data-t="progress">Progress</h2>
                         <p class="s-desc" id="storage-line"></p>
                         <div class="stack">
-                            <button class="btn danger" type="button" id="btn-reset">Erase progress…</button>
+                            <button class="btn danger" type="button" id="btn-reset" data-t="erase">
+                                Erase progress…
+                            </button>
                         </div>
                     </section>
-                    <p class="about" id="about">Gridfire 1.0.0, one HTML file that runs entirely offline.</p>
+                    <p class="about" id="about" data-t="about">
+                        Gridfire 1.0.0, one HTML file that runs entirely offline.
+                    </p>
                 </div>
             </section>
 
             <!-- ============ HELP ============ -->
             <section id="screen-help" class="screen menu" data-route="help" aria-labelledby="help-h" hidden>
                 <header class="bar">
-                    <button class="icon-btn" type="button" data-back aria-label="Back">
+                    <button class="icon-btn" type="button" data-back aria-label="Back" data-t-label="back">
                         <svg class="ico"><use href="#i-back" /></svg>
                     </button>
-                    <h1 id="help-h" tabindex="-1">How to play</h1>
+                    <h1 id="help-h" tabindex="-1" data-t="howToPlay">How to play</h1>
                 </header>
                 <div class="wrap">
                     <section class="card" aria-labelledby="h-controls">
-                        <h2 id="h-controls">Two thumbs</h2>
+                        <h2 id="h-controls" data-t="twoThumbs">Two thumbs</h2>
                         <svg class="illus" viewBox="0 0 320 150" aria-hidden="true">
                             <rect
                                 x="6"
@@ -1719,33 +1746,39 @@
                             />
                         </svg>
                         <ul>
-                            <li>Put a thumb down anywhere on the <b>left half</b> and drag to fly.</li>
-                            <li>
+                            <li data-t-rich="help1">
+                                Put a thumb down anywhere on the <b>left half</b> and drag to fly.
+                            </li>
+                            <li data-t-rich="help2">
                                 Drag on the <b>right half</b> to aim. Your ship fires for as long as that thumb is down.
                             </li>
-                            <li>Tap the star button to fire a <b>bomb</b> that clears every enemy around you.</li>
-                            <li>Turn on one-thumb mode in Settings if you would rather let the ship aim for you.</li>
-                            <li>
+                            <li data-t-rich="help3">
+                                Tap the star button to fire a <b>bomb</b> that clears every enemy around you.
+                            </li>
+                            <li data-t-rich="help4">
+                                Turn on one-thumb mode in Settings if you would rather let the ship aim for you.
+                            </li>
+                            <li data-t-rich="help5">
                                 On a keyboard: <kbd>WASD</kbd> to move, arrow keys or the mouse to aim and fire,
                                 <kbd>Space</kbd> for a bomb, <kbd>P</kbd> to pause.
                             </li>
                         </ul>
                     </section>
                     <section class="card" aria-labelledby="h-score">
-                        <h2 id="h-score">Scoring</h2>
-                        <p>
+                        <h2 id="h-score" data-t="scoring">Scoring</h2>
+                        <p data-t="scoring1">
                             Destroyed enemies drop glowing shards. Fly through them to fill the meter under your score
                             and raise the multiplier, up to ×10.
                         </p>
-                        <p>
+                        <p data-t="scoring2">
                             A higher multiplier widens your fire, from two parallel streams to a five-way spread. Losing
                             a ship resets it to ×1.
                         </p>
-                        <p>Extra ships arrive every 40,000 points and extra bombs every 60,000.</p>
+                        <p data-t="scoring3">Extra ships arrive every 40,000 points and extra bombs every 60,000.</p>
                     </section>
                     <section class="card" aria-labelledby="h-power">
-                        <h2 id="h-power">Power-ups</h2>
-                        <p>
+                        <h2 id="h-power" data-t="powerUps">Power-ups</h2>
+                        <p data-t="powerUpsText">
                             Every wave sends in at least one elite, ringed in gold. Elites take a few extra hits and are
                             worth triple points, and each one drops a capsule. Fly through it to take the power-up. Its
                             timer runs around the icon under the pause button.
@@ -1753,15 +1786,15 @@
                         <ul class="roster" id="powers-list"></ul>
                     </section>
                     <section class="card" aria-labelledby="h-up">
-                        <h2 id="h-up">Upgrades</h2>
-                        <p>
+                        <h2 id="h-up" data-t="upgrades">Upgrades</h2>
+                        <p data-t="upgradesText">
                             After waves 1, 3 and 5, and after every second wave in Endless, the action stops and you
                             choose one of three upgrades. They stack until the sector ends.
                         </p>
                         <ul class="roster compact" id="upgrade-list"></ul>
                     </section>
                     <section class="card" aria-labelledby="h-roster">
-                        <h2 id="h-roster">Field guide</h2>
+                        <h2 id="h-roster" data-t="fieldGuide">Field guide</h2>
                         <ul class="roster" id="roster"></ul>
                     </section>
                 </div>
@@ -1771,58 +1804,67 @@
         <!-- ============ DIALOGS ============ -->
         <dialog id="dlg-pause" aria-labelledby="pause-h">
             <div class="dlg">
-                <h2 id="pause-h">Paused</h2>
+                <h2 id="pause-h" data-t="paused">Paused</h2>
                 <p id="pause-sub"></p>
                 <p id="pause-build" class="build"></p>
                 <p id="pause-note" class="unlock" hidden></p>
                 <div class="actions">
                     <button class="btn primary" type="button" data-close="resume" data-autofocus>
-                        <svg class="ico"><use href="#i-play" /></svg>Resume
+                        <svg class="ico"><use href="#i-play" /></svg><span data-t="resume">Resume</span>
                     </button>
-                    <button class="btn" type="button" data-close="restart">Restart sector</button>
-                    <button class="btn" type="button" data-close="settings">Settings</button>
-                    <button class="btn" type="button" data-close="exit">Save and exit</button>
+                    <button class="btn" type="button" data-close="restart" data-t="restartSector">
+                        Restart sector
+                    </button>
+                    <button class="btn" type="button" data-close="settings" data-t="settings">Settings</button>
+                    <button class="btn" type="button" data-close="exit" data-t="saveExit">Save and exit</button>
                 </div>
             </div>
         </dialog>
 
         <dialog id="dlg-result" aria-labelledby="res-h">
             <div class="dlg">
-                <h2 id="res-h">Sector clear</h2>
+                <h2 id="res-h" data-t="sectorClear">Sector clear</h2>
                 <p id="res-sub"></p>
                 <div class="big-score" id="res-score">0</div>
                 <div class="best" id="res-best"></div>
                 <dl class="rstats">
                     <div>
-                        <dt>Kills</dt>
+                        <dt data-t="kills">Kills</dt>
                         <dd id="res-kills">0</dd>
                     </div>
                     <div>
-                        <dt>Top multiplier</dt>
+                        <dt data-t="topMult">Top multiplier</dt>
                         <dd id="res-mult">×1</dd>
                     </div>
                     <div>
-                        <dt>Time</dt>
+                        <dt data-t="time">Time</dt>
                         <dd id="res-time">0:00</dd>
                     </div>
                 </dl>
                 <p class="build" id="res-build"></p>
                 <p class="unlock" id="res-unlock" hidden></p>
                 <div class="actions">
-                    <button class="btn primary" type="button" id="res-primary" data-close="next" data-autofocus>
+                    <button
+                        class="btn primary"
+                        type="button"
+                        id="res-primary"
+                        data-close="next"
+                        data-autofocus
+                        data-t="nextSector"
+                    >
                         Next sector
                     </button>
-                    <button class="btn" type="button" data-close="sectors">Sectors</button>
+                    <button class="btn" type="button" data-close="sectors" data-t="sectors">Sectors</button>
                 </div>
             </div>
         </dialog>
 
         <dialog id="dlg-upgrade" aria-labelledby="up-h" aria-describedby="up-sub">
             <div class="dlg">
-                <h2 id="up-h" tabindex="-1" data-autofocus>Choose an upgrade</h2>
+                <h2 id="up-h" tabindex="-1" data-autofocus data-t="chooseUpgrade">Choose an upgrade</h2>
                 <p id="up-sub"></p>
                 <div class="up-list" id="up-list"></div>
-                <p class="up-keys" id="up-keys">Press 1, 2 or 3 to choose.</p>
+                <p class="up-keys" id="up-keys" data-t="pressKeys">Press 1, 2 or 3 to choose.</p>
             </div>
         </dialog>
 
@@ -1832,7 +1874,7 @@
                 <p id="cf-msg"></p>
                 <div class="actions">
                     <button class="btn danger" type="button" id="cf-ok" data-close="ok"></button>
-                    <button class="btn" type="button" data-close="cancel" data-autofocus>Cancel</button>
+                    <button class="btn" type="button" data-close="cancel" data-autofocus data-t="cancel">Cancel</button>
                 </div>
             </div>
         </dialog>
@@ -1861,6 +1903,498 @@
                 };
                 const $ = (s, r = document) => r.querySelector(s);
                 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+                /* =========================================================
+   Words: English and Slovak, picked by the phone's language
+   ========================================================= */
+                // Zapli tells the page the phone's language; a browser has its own. A value is text, a function of
+                // its arguments, or the plural forms of a count. Slovak also renames the game's own things below.
+                const STRINGS = {
+                    en: {
+                        appName: "Gridfire",
+                        tagline:
+                            "Steer with one thumb, shoot with the other, and light up a grid that bends under every blast.",
+                        continue: "Continue",
+                        play: "Play",
+                        howToPlay: "How to play",
+                        settings: "Settings",
+                        gridHint: "Tap the empty grid to make it ring.",
+                        back: "Back",
+                        sectors: "Sectors",
+                        lede: "Clear all six waves of a sector to open the next one. Every sector brings something new to fight.",
+                        playHeading: "Game. Drag on the left half to move and on the right half to aim and fire.",
+                        pause: "Pause",
+                        chooseUpgrade: "Choose an upgrade",
+                        coachMove: "Move",
+                        coachMoveSub: "Drag anywhere on the left",
+                        coachAim: "Aim and fire",
+                        coachAimSub: "Drag anywhere on the right",
+                        coachKeys: "Keyboard: [WASD] move, arrows or mouse aim, [Space] bomb, [P] pause",
+                        sound: "Sound",
+                        sfx: "Sound effects",
+                        sfxSub: "Every shot and blast is synthesised as it happens.",
+                        music: "Music",
+                        musicSub: "A live sequencer that builds with each wave.",
+                        volume: "Volume",
+                        display: "Display and motion",
+                        theme: "Theme",
+                        opt_theme_system: "System",
+                        opt_theme_light: "Light",
+                        opt_theme_dark: "Dark",
+                        motion: "Reduce motion",
+                        motionSub: "Calms the grid and removes screen shake, flashes and blinking.",
+                        opt_motion_system: "System",
+                        opt_motion_on: "On",
+                        opt_motion_off: "Off",
+                        graphics: "Graphics",
+                        graphicsSub: "Auto lowers the resolution if the frame rate drops.",
+                        opt_quality_auto: "Auto",
+                        opt_quality_high: "High",
+                        opt_quality_low: "Low",
+                        showFps: "Show frame rate",
+                        controls: "Controls",
+                        oneThumb: "One-thumb mode",
+                        oneThumbSub: "Your ship aims and fires at the nearest enemy by itself.",
+                        progress: "Progress",
+                        erase: "Erase progress…",
+                        about: (a) => `Gridfire ${a.version || "1.0.0"}, one HTML file that runs entirely offline.`,
+                        twoThumbs: "Two thumbs",
+                        help1: "Put a thumb down anywhere on the **left half** and drag to fly.",
+                        help2: "Drag on the **right half** to aim. Your ship fires for as long as that thumb is down.",
+                        help3: "Tap the star button to fire a **bomb** that clears every enemy around you.",
+                        help4: "Turn on one-thumb mode in Settings if you would rather let the ship aim for you.",
+                        help5: "On a keyboard: [WASD] to move, arrow keys or the mouse to aim and fire, [Space] for a bomb, [P] to pause.",
+                        scoring: "Scoring",
+                        scoring1:
+                            "Destroyed enemies drop glowing shards. Fly through them to fill the meter under your score and raise the multiplier, up to ×10.",
+                        scoring2:
+                            "A higher multiplier widens your fire, from two parallel streams to a five-way spread. Losing a ship resets it to ×1.",
+                        scoring3: "Extra ships arrive every 40,000 points and extra bombs every 60,000.",
+                        powerUps: "Power-ups",
+                        powerUpsText:
+                            "Every wave sends in at least one elite, ringed in gold. Elites take a few extra hits and are worth triple points, and each one drops a capsule. Fly through it to take the power-up. Its timer runs around the icon under the pause button.",
+                        upgrades: "Upgrades",
+                        upgradesText:
+                            "After waves 1, 3 and 5, and after every second wave in Endless, the action stops and you choose one of three upgrades. They stack until the sector ends.",
+                        fieldGuide: "Field guide",
+                        paused: "Paused",
+                        resume: "Resume",
+                        restartSector: "Restart sector",
+                        restartRun: "Restart run",
+                        saveExit: "Save and exit",
+                        sectorClear: "Sector clear",
+                        runOver: "Run over",
+                        gameOver: "Game over",
+                        kills: "Kills",
+                        topMult: "Top multiplier",
+                        time: "Time",
+                        nextSector: "Next sector",
+                        playAgain: "Play again",
+                        pressKeys: "Press 1, 2 or 3 to choose.",
+                        cancel: "Cancel",
+                        sectorNames: null,
+                        enemies: null,
+                        powers: null,
+                        upgradeTexts: null,
+                        surge: "Surge",
+                        waveN: (a) => `Wave ${a.n}`,
+                        endless: "Endless",
+                        endlessMode: "Endless mode",
+                        sectorN: (a) => `Sector ${a.n}`,
+                        sectorName: (a) => `Sector ${a.n}, ${a.name}`,
+                        lastHow: "How long can you last?",
+                        tryAgain: "Try that again",
+                        nOfM: (a) => `${a.n} of ${a.m}`,
+                        waveSay: (a) => `Wave ${a.n}.`,
+                        finalSurge: "Final surge",
+                        waveOf: (a) => `Wave ${a.n} of ${a.m}`,
+                        scoreSay: (a) => `Score ${a.score}.`,
+                        extraShip: "Extra ship",
+                        extraShipSay: (a) => `Extra ship. ${a.n} ships.`,
+                        nSeconds: { one: "# second", other: "# seconds" },
+                        blocksHit: "Blocks one hit",
+                        powerEnded: (a) => `${a.name} ended.`,
+                        shieldRebuilt: "Shield rebuilt.",
+                        bombRecharged: (a) => `Bomb recharged. ${a.n} bombs.`,
+                        upgradeTaken: (a) => `${a.name} taken.`,
+                        upgradesList: (a) => `Upgrades: ${a.list}.`,
+                        noUpgrades: "No upgrades yet.",
+                        shieldBroken: "Shield broken.",
+                        shipLost: "Ship lost.",
+                        nShipsLeft: { one: "# ship left.", other: "# ships left." },
+                        bombSay: (a) => `Bomb. ${a.n} left.`,
+                        bonus: (a) => `Bonus ${a.bonus}`,
+                        hudEndless: (a) => `Endless, wave ${a.n}`,
+                        hudSector: (a) => `Sector ${a.s}, ${a.rest}`,
+                        surgeLower: "surge",
+                        waveOfLower: (a) => `wave ${a.n} of ${a.m}`,
+                        nShips: { one: "# ship", other: "# ships" },
+                        bombLeft: (a) => `Bomb, ${a.n} left`,
+                        pauseEndless: (a) => `Endless, wave ${a.n}. Score ${a.score}.`,
+                        pauseSector: (a) => `Sector ${a.s}, ${a.name}. Wave ${a.n} of ${a.m}. Score ${a.score}.`,
+                        pausedSay: "Paused.",
+                        reachedWave: (a) => `Endless, reached wave ${a.n}`,
+                        newBest: "New best score",
+                        bestN: (a) => `Best ${a.n}`,
+                        sectorOpen: (a) => `Sector ${a.n} is open.`,
+                        endlessOpen: "Endless mode is open.",
+                        allCleared: "Every sector cleared. Endless is waiting.",
+                        playing: "Playing",
+                        pickedUp: "Picked up where you left off.",
+                        continueSector: (a) => `Sector ${a.s}, wave ${a.n}, ${a.points}`,
+                        nPoints: { one: "# point", other: "# points" },
+                        chooseSector: "Choose a sector",
+                        sectorsCleared: "Sectors cleared",
+                        best: "Best",
+                        openAfter: (a) => `Clear Sector ${a.n} to open`,
+                        wavesNoEnd: "Waves without end",
+                        notPlayed: "Not played yet",
+                        cleared: "Cleared",
+                        locked: "Locked",
+                        endlessLockedToast: "Clear Sector 2 to open Endless",
+                        clearFirst: (a) => `Clear Sector ${a.n} first`,
+                        percent: (a) => `${a.n} percent`,
+                        storageApp:
+                            "Progress and settings are saved with this app’s data, so they travel with an export.",
+                        storageDevice: "Progress and settings are saved on this device.",
+                        storageNone: "Storage is blocked here, so progress lasts until you close the app.",
+                        lasts: (a) => `Lasts ${a.n} seconds.`,
+                        upToLevel: (a) => `, up to level ${a.n}`,
+                        supply: "Supply",
+                        newUpgrade: "New",
+                        levelOf: (a) => `Level ${a.l} of ${a.m}`,
+                        waveCleared: (a) => `Wave ${a.n} cleared.`,
+                        waveOfCleared: (a) => `Wave ${a.n} of ${a.m} cleared.`,
+                        chooseUpgradeSay: "Choose an upgrade.",
+                        eraseTitle: "Erase progress?",
+                        eraseMessage:
+                            "This removes opened sectors, best scores and any saved run. Your settings stay as they are.",
+                        eraseOk: "Erase",
+                        erased: "Progress erased",
+                        fpsLine: (a) => `${a.fps} fps, ${a.w}×${a.h}, ${a.n} particles`,
+                    },
+                    sk: {
+                        appName: "Gridfire",
+                        tagline:
+                            "Jedným palcom riaďte, druhým strieľajte a rozžiarte mriežku, ktorá sa prehýba pod každým výbuchom.",
+                        continue: "Pokračovať",
+                        play: "Hrať",
+                        howToPlay: "Ako hrať",
+                        settings: "Nastavenia",
+                        gridHint: "Klepnite na prázdnu mriežku a rozvlní sa.",
+                        back: "Späť",
+                        sectors: "Sektory",
+                        lede: "Prejdite všetkých šesť vĺn sektora a otvorí sa ďalší. Každý sektor prináša nového protivníka.",
+                        playHeading: "Hra. Ťahaním na ľavej polovici sa pohybujete, na pravej mierite a strieľate.",
+                        pause: "Pozastaviť",
+                        chooseUpgrade: "Vybrať vylepšenie",
+                        coachMove: "Pohyb",
+                        coachMoveSub: "Ťahajte kdekoľvek vľavo",
+                        coachAim: "Mierenie a streľba",
+                        coachAimSub: "Ťahajte kdekoľvek vpravo",
+                        coachKeys: "Klávesnica: [WASD] pohyb, šípky alebo myš mierenie, [Medzerník] bomba, [P] pauza",
+                        sound: "Zvuk",
+                        sfx: "Zvukové efekty",
+                        sfxSub: "Každý výstrel a výbuch sa syntetizuje v okamihu, keď nastane.",
+                        music: "Hudba",
+                        musicSub: "Živý sekvencér, ktorý s každou vlnou silnie.",
+                        volume: "Hlasitosť",
+                        display: "Obraz a pohyb",
+                        theme: "Motív",
+                        opt_theme_system: "Systém",
+                        opt_theme_light: "Svetlý",
+                        opt_theme_dark: "Tmavý",
+                        motion: "Obmedziť pohyb",
+                        motionSub: "Upokojí mriežku a vypne otrasy obrazovky, záblesky a blikanie.",
+                        opt_motion_system: "Systém",
+                        opt_motion_on: "Zapnuté",
+                        opt_motion_off: "Vypnuté",
+                        graphics: "Grafika",
+                        graphicsSub: "Automaticky zníži rozlíšenie, keď klesne počet snímok za sekundu.",
+                        opt_quality_auto: "Automaticky",
+                        opt_quality_high: "Vysoká",
+                        opt_quality_low: "Nízka",
+                        showFps: "Zobraziť snímky za sekundu",
+                        controls: "Ovládanie",
+                        oneThumb: "Ovládanie jedným palcom",
+                        oneThumbSub: "Loď sama mieri a strieľa na najbližšieho nepriateľa.",
+                        progress: "Postup",
+                        erase: "Vymazať postup…",
+                        about: (a) =>
+                            `Gridfire ${a.version || "1.0.0"}, jeden súbor HTML, ktorý funguje úplne bez internetu.`,
+                        twoThumbs: "Dva palce",
+                        help1: "Položte palec kdekoľvek na **ľavú polovicu** a ťahaním leťte.",
+                        help2: "Ťahaním na **pravej polovici** mierite. Loď strieľa, kým tento palec držíte na obrazovke.",
+                        help3: "Klepnutím na tlačidlo s hviezdou odpálite **bombu**, ktorá zničí všetkých nepriateľov okolo vás.",
+                        help4: "Ak chcete, aby loď mierila za vás, zapnite v Nastaveniach ovládanie jedným palcom.",
+                        help5: "Na klávesnici: [WASD] pohyb, šípky alebo myš mierenie a streľba, [Medzerník] bomba, [P] pauza.",
+                        scoring: "Body",
+                        scoring1:
+                            "Zničení nepriatelia po sebe nechajú žiariace črepy. Preleťte cez ne, naplníte ukazovateľ pod skóre a zvýšite násobič až na ×10.",
+                        scoring2:
+                            "Vyšší násobič rozširuje streľbu, od dvoch súbežných prúdov až po vejár do piatich smerov. Keď prídete o loď, násobič klesne na ×1.",
+                        scoring3: "Loď navyše získate každých 40\u00a0000 bodov a bombu navyše každých 60\u00a0000.",
+                        powerUps: "Posilnenia",
+                        powerUpsText:
+                            "V každej vlne príde aspoň jeden elitný nepriateľ so zlatým prstencom. Elitní vydržia o pár zásahov viac, majú trojnásobnú hodnotu a každý po sebe nechá kapsulu. Preleťte cez ňu a získate posilnenie. Jeho čas ubieha okolo ikony pod tlačidlom pauzy.",
+                        upgrades: "Vylepšenia",
+                        upgradesText:
+                            "Po 1., 3. a 5. vlne a v nekonečnom režime po každej druhej vlne sa hra zastaví a vyberiete si jedno z troch vylepšení. Sčítavajú sa až do konca sektora.",
+                        fieldGuide: "Atlas nepriateľov",
+                        paused: "Pozastavené",
+                        resume: "Pokračovať",
+                        restartSector: "Začať sektor odznova",
+                        restartRun: "Začať odznova",
+                        saveExit: "Uložiť a odísť",
+                        sectorClear: "Sektor vyčistený",
+                        runOver: "Koniec pokusu",
+                        gameOver: "Koniec hry",
+                        kills: "Zničené",
+                        topMult: "Najvyšší násobič",
+                        time: "Čas",
+                        nextSector: "Ďalší sektor",
+                        playAgain: "Hrať znova",
+                        pressKeys: "Vyberte klávesom 1, 2 alebo 3.",
+                        cancel: "Zrušiť",
+                        sectorNames: [
+                            "Zážih",
+                            "Unášanie",
+                            "Zlom",
+                            "Únik",
+                            "Gravitácia",
+                            "Spodný prúd",
+                            "Preťaženie",
+                            "Singularita",
+                        ],
+                        enemies: {
+                            seeker: {
+                                name: "Stopár",
+                                info: "Zameria sa na vás a prenasleduje vás. Stále sa hýbte a strieľajte.",
+                            },
+                            wander: {
+                                name: "Tulák",
+                                info: "Bezcieľne blúdi. Ľahké body, ale zatarasí vám únikové cesty.",
+                            },
+                            lancer: {
+                                name: "Kopijník",
+                                info: "Letí presne rovno a odráža sa od stien. Sledujte uhly.",
+                            },
+                            splitter: {
+                                name: "Štiepač",
+                                info: "Vydrží dva zásahy, potom sa rozletí na tri rýchle úlomky.",
+                            },
+                            mini: {
+                                name: "Úlomok",
+                                info: "Zvyšok po štiepačovi. Malý, rýchly a nevyspytateľný.",
+                            },
+                            dodger: {
+                                name: "Uhýbač",
+                                info: "Vidí vaše strely a uhýba do strán. Strieľajte s predstihom.",
+                            },
+                            well: {
+                                name: "Gravitačná studňa",
+                                info: "Priťahuje strely, iskry aj vašu loď. Zničte ju skôr, ako sa zrúti.",
+                            },
+                        },
+                        powers: {
+                            ricochet: { name: "Odraz", info: "Strely sa dvakrát odrazia od stien a doletia ďalej." },
+                            pierce: { name: "Prieraz", info: "Každá strela prerazí až troch nepriateľov." },
+                            homing: {
+                                name: "Navádzanie",
+                                info: "Strely sa stáčajú k najbližšiemu nepriateľovi pred vami.",
+                            },
+                            drones: {
+                                name: "Drony",
+                                info: "Okolo vás krúžia dva drony, strieľajú a narážajú do nepriateľov.",
+                            },
+                            warp: {
+                                name: "Spomalenie času",
+                                info: "Nepriatelia sa pohybujú polovičnou rýchlosťou. Vy nie.",
+                            },
+                            shield: { name: "Štít", info: "Zachytí za vás jeden zásah a odhodí nepriateľov v okolí." },
+                        },
+                        upgradeTexts: {
+                            side: {
+                                name: "Bočné delá",
+                                desc: (l) =>
+                                    l === 1
+                                        ? "Dva ďalšie prúdy striel sa rozvetvia do strán."
+                                        : "Ďalšie dva bočné prúdy pre širší vejár.",
+                            },
+                            rapid: { name: "Rýchla paľba", desc: () => "Strieľate o 14\u00a0% rýchlejšie." },
+                            tail: { name: "Zadné delo", desc: () => "Každá dávka vystrelí aj jednu strelu dozadu." },
+                            chain: {
+                                name: "Reťazový blesk",
+                                desc: (l) =>
+                                    l === 1
+                                        ? "Každé zničenie vyšle blesk do blízkeho nepriateľa."
+                                        : "Blesk preskočí aj na druhého nepriateľa.",
+                            },
+                            shrapnel: {
+                                name: "Šrapnel",
+                                desc: (l) =>
+                                    l === 1
+                                        ? "Zničení nepriatelia sa rozletia na 4 úlomky, ktoré zasiahnu ich susedov."
+                                        : "Rozletia sa až na 7 úlomkov.",
+                            },
+                            magnet: {
+                                name: "Magnet",
+                                desc: () => "Priťahuje črepy a kapsuly až zo 60\u00a0% väčšej vzdialenosti.",
+                            },
+                            thrust: { name: "Motory", desc: () => "Letíte o 12\u00a0% rýchlejšie." },
+                            meter: {
+                                name: "Rýchlejší násobič",
+                                desc: () => "Každý črep sa do násobiča počíta dvakrát.",
+                            },
+                            recharge: {
+                                name: "Dobíjanie bômb",
+                                desc: (l) =>
+                                    l === 1
+                                        ? "Každých 50 sekúnd získate jednu bombu."
+                                        : "Každých 30 sekúnd získate jednu bombu.",
+                            },
+                            fuse: { name: "Dlhá poistka", desc: () => "Posilnenia trvajú o 50\u00a0% dlhšie." },
+                            scav: { name: "Zberač", desc: () => "V každej vlne o jedného elitného nosiča viac." },
+                            aegis: {
+                                name: "Egida",
+                                desc: () => "Hneď dostanete štít. Obnoví sa 20 sekúnd po tom, ako sa rozbije.",
+                            },
+                            ship: { name: "Náhradná loď", desc: () => "Jedna loď navyše, hneď teraz." },
+                            bombs: { name: "Balík bômb", desc: () => "Dve bomby navyše, hneď teraz." },
+                        },
+                        surge: "Nápor",
+                        waveN: (a) => `Vlna ${a.n}`,
+                        endless: "Nekonečno",
+                        endlessMode: "Nekonečný režim",
+                        sectorN: (a) => `Sektor ${a.n}`,
+                        sectorName: (a) => `Sektor ${a.n}, ${a.name}`,
+                        lastHow: "Ako dlho vydržíte?",
+                        tryAgain: "Skúste to znova",
+                        nOfM: (a) => `${a.n} z ${a.m}`,
+                        waveSay: (a) => `Vlna ${a.n}.`,
+                        finalSurge: "Posledný nápor",
+                        waveOf: (a) => `Vlna ${a.n} z ${a.m}`,
+                        scoreSay: (a) => `Skóre ${a.score}.`,
+                        extraShip: "Loď navyše",
+                        extraShipSay: (a) => `Loď navyše. Lode: ${a.n}.`,
+                        nSeconds: { one: "# sekunda", few: "# sekundy", many: "# sekundy", other: "# sekúnd" },
+                        blocksHit: "Zachytí jeden zásah",
+                        powerEnded: (a) => `${a.name}: koniec.`,
+                        shieldRebuilt: "Štít je obnovený.",
+                        bombRecharged: (a) => `Bomba dobitá. Bomby: ${a.n}.`,
+                        upgradeTaken: (a) => `Vybraté: ${a.name}.`,
+                        upgradesList: (a) => `Vylepšenia: ${a.list}.`,
+                        noUpgrades: "Zatiaľ žiadne vylepšenia.",
+                        shieldBroken: "Štít je rozbitý.",
+                        shipLost: "Loď zničená.",
+                        nShipsLeft: {
+                            one: "Zostáva # loď.",
+                            few: "Zostávajú # lode.",
+                            many: "Zostáva # lode.",
+                            other: "Zostáva # lodí.",
+                        },
+                        bombSay: (a) => `Bomba. Zostáva: ${a.n}.`,
+                        bonus: (a) => `Bonus ${a.bonus}`,
+                        hudEndless: (a) => `Nekonečno, vlna ${a.n}`,
+                        hudSector: (a) => `Sektor ${a.s}, ${a.rest}`,
+                        surgeLower: "nápor",
+                        waveOfLower: (a) => `vlna ${a.n} z ${a.m}`,
+                        nShips: { one: "# loď", few: "# lode", many: "# lode", other: "# lodí" },
+                        bombLeft: (a) => `Bomba, zostáva ${a.n}`,
+                        pauseEndless: (a) => `Nekonečno, vlna ${a.n}. Skóre ${a.score}.`,
+                        pauseSector: (a) => `Sektor ${a.s}, ${a.name}. Vlna ${a.n} z ${a.m}. Skóre ${a.score}.`,
+                        pausedSay: "Pozastavené.",
+                        reachedWave: (a) => `Nekonečno, dosiahnutá vlna ${a.n}`,
+                        newBest: "Nové najlepšie skóre",
+                        bestN: (a) => `Najlepšie ${a.n}`,
+                        sectorOpen: (a) => `Sektor ${a.n} je otvorený.`,
+                        endlessOpen: "Nekonečný režim je otvorený.",
+                        allCleared: "Všetky sektory sú vyčistené. Čaká vás nekonečný režim.",
+                        playing: "Hra",
+                        pickedUp: "Pokračujete tam, kde ste skončili.",
+                        continueSector: (a) => `Sektor ${a.s}, vlna ${a.n}, ${a.points}`,
+                        nPoints: { one: "# bod", few: "# body", many: "# bodu", other: "# bodov" },
+                        chooseSector: "Vybrať sektor",
+                        sectorsCleared: "Vyčistené sektory",
+                        best: "Najlepšie",
+                        openAfter: (a) => `Otvorí sa po sektore ${a.n}`,
+                        wavesNoEnd: "Vlny bez konca",
+                        notPlayed: "Zatiaľ nehrané",
+                        cleared: "Vyčistený",
+                        locked: "Zamknutý",
+                        endlessLockedToast: "Nekonečný režim sa otvorí po sektore 2",
+                        clearFirst: (a) => `Najprv vyčistite sektor ${a.n}`,
+                        percent: (a) => `${a.n} percent`,
+                        storageApp:
+                            "Postup a nastavenia sa ukladajú s údajmi tejto aplikácie, takže sa prenesú aj s exportom.",
+                        storageDevice: "Postup a nastavenia sa ukladajú v tomto zariadení.",
+                        storageNone: "Ukladanie je tu zablokované, takže postup vydrží len do zatvorenia aplikácie.",
+                        lasts: (a) => `Trvá ${a.n} sekúnd.`,
+                        upToLevel: (a) => `, až po úroveň ${a.n}`,
+                        supply: "Zásoby",
+                        newUpgrade: "Nové",
+                        levelOf: (a) => `Úroveň ${a.l} z ${a.m}`,
+                        waveCleared: (a) => `Vlna ${a.n} vyčistená.`,
+                        waveOfCleared: (a) => `Vlna ${a.n} z ${a.m} vyčistená.`,
+                        chooseUpgradeSay: "Vyberte vylepšenie.",
+                        eraseTitle: "Vymazať postup?",
+                        eraseMessage:
+                            "Vymažú sa otvorené sektory, najlepšie skóre aj uložená hra. Nastavenia zostanú tak, ako sú.",
+                        eraseOk: "Vymazať",
+                        erased: "Postup je vymazaný",
+                        fpsLine: (a) => `${a.fps} snímok/s, ${a.w}×${a.h}, častice: ${a.n}`,
+                    },
+                };
+                const lang = (() => {
+                    let loc = "";
+                    try {
+                        const app = window.zapli && window.zapli.app;
+                        if (app && typeof app.locale === "function") loc = String(app.locale() || "");
+                    } catch (e) {
+                        loc = "";
+                    }
+                    if (!loc) loc = (navigator.languages && navigator.languages[0]) || navigator.language || "en";
+                    return /^sk([-_]|$)/i.test(loc) ? "sk" : "en";
+                })();
+                const words = STRINGS[lang];
+                function t(key, args) {
+                    const v = key in words ? words[key] : STRINGS.en[key];
+                    if (typeof v === "function") return v(args || {});
+                    return v === undefined ? key : v;
+                }
+                // A count with its noun: {one: "# ship", other: "# ships"} (Slovak adds few and many). `shown` is the
+                // number as written, when it is formatted (1 250).
+                function tn(key, n, shown) {
+                    const forms = t(key);
+                    let cat = "other";
+                    try {
+                        cat = new Intl.PluralRules(lang).select(n);
+                    } catch (e) {
+                        cat = n === 1 ? "one" : lang === "sk" && n >= 2 && n <= 4 ? "few" : "other";
+                    }
+                    return (forms[cat] || forms.other).replace("#", shown === undefined ? String(n) : shown);
+                }
+                // The page's own words: data-t sets the text, data-t-label the label, and data-t-rich a line with keys
+                // in brackets and bold words in double stars ("[P] to **pause**" becomes <kbd>P</kbd> to <b>pause</b>).
+                function translatePage() {
+                    document.documentElement.lang = lang;
+                    for (const node of $$("[data-t]")) node.textContent = t(node.dataset.t);
+                    for (const node of $$("[data-t-label]")) node.setAttribute("aria-label", t(node.dataset.tLabel));
+                    for (const node of $$("[data-t-rich]")) {
+                        node.textContent = "";
+                        for (const part of t(node.dataset.tRich).split(/(\[[^\]]+\]|\*\*[^*]+\*\*)/)) {
+                            if (/^\[.+\]$/.test(part)) {
+                                const k = document.createElement("kbd");
+                                k.textContent = part.slice(1, -1);
+                                node.append(k);
+                            } else if (/^\*\*.+\*\*$/.test(part)) {
+                                const b = document.createElement("b");
+                                b.textContent = part.slice(2, -2);
+                                node.append(b);
+                            } else if (part) node.append(part);
+                        }
+                    }
+                }
+
                 const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
                 const lerp = (a, b, t) => a + (b - a) * t;
                 const TAU = Math.PI * 2;
@@ -4198,6 +4732,12 @@ void main(){
                     },
                 ];
                 const UP_BY_ID = Object.fromEntries(UPGRADES.map((u) => [u.id, u]));
+                // The game's own names and descriptions in the player's language (English is written above).
+                if (words.sectorNames) words.sectorNames.forEach((name, i) => (SECTORS[i].name = name));
+                if (words.enemies)
+                    for (const k of Object.keys(words.enemies)) Object.assign(ENEMY[k], words.enemies[k]);
+                if (words.powers) for (const k of Object.keys(words.powers)) Object.assign(POWERS[k], words.powers[k]);
+                if (words.upgradeTexts) for (const u of UPGRADES) Object.assign(u, words.upgradeTexts[u.id]);
                 const UP_GLYPHS = {
                     side: [
                         { p: [0, 0.85, -0.85, -0.75], c: false },
@@ -4454,21 +4994,25 @@ void main(){
                     }
                     run.queue = q;
                     const last = !run.endless && w === WAVES - 1;
-                    const label = last ? "Surge" : `Wave ${w + 1}`;
+                    const label = last ? t("surge") : t("waveN", { n: w + 1 });
                     if (mode === "first")
                         showBanner(
-                            run.endless ? "Endless" : `Sector ${run.si + 1}`,
-                            run.endless ? "How long can you last?" : SECTORS[run.si].name,
+                            run.endless ? t("endless") : t("sectorN", { n: run.si + 1 }),
+                            run.endless ? t("lastHow") : SECTORS[run.si].name,
                         );
                     else
                         showBanner(
                             label,
-                            mode === "again" ? "Try that again" : run.endless ? "Endless" : `${w + 1} of ${WAVES}`,
+                            mode === "again"
+                                ? t("tryAgain")
+                                : run.endless
+                                  ? t("endless")
+                                  : t("nOfM", { n: w + 1, m: WAVES }),
                         );
                     announce(
                         run.endless
-                            ? `Wave ${w + 1}.`
-                            : `${last ? "Final surge" : `Wave ${w + 1} of ${WAVES}`}. Score ${fmt(run.score)}.`,
+                            ? t("waveSay", { n: w + 1 })
+                            : `${last ? t("finalSurge") : t("waveOf", { n: w + 1, m: WAVES })}. ${t("scoreSay", { score: fmt(run.score) })}`,
                     );
                     Sound.setLevel(intensityFor(run));
                     Sound.sfx.wave();
@@ -4566,8 +5110,8 @@ void main(){
                         run.nextLife += 40000;
                         run.lives = Math.min(9, run.lives + 1);
                         Sound.sfx.life();
-                        showBanner("Extra ship", "");
-                        announce(`Extra ship. ${run.lives} ships.`);
+                        showBanner(t("extraShip"), "");
+                        announce(t("extraShipSay", { n: run.lives }));
                     }
                     if (run.score >= run.nextBomb) {
                         run.nextBomb += 60000;
@@ -5239,7 +5783,7 @@ void main(){
                     Grid.impulse(p.x, p.y, 160, 320);
                     addScore(250 * run.mult);
                     Sound.sfx.power();
-                    showBanner(def.name, dur ? `${Math.round(dur)} seconds` : "Blocks one hit");
+                    showBanner(def.name, dur ? tn("nSeconds", Math.round(dur)) : t("blocksHit"));
                     announce(`${def.name}. ${def.info}`);
                 }
                 function powerEnded(k) {
@@ -5248,7 +5792,7 @@ void main(){
                         setTint(run.vsi, false);
                     }
                     Sound.sfx.powerEnd();
-                    announce(`${POWERS[k].name} ended.`);
+                    announce(t("powerEnded", { name: POWERS[k].name }));
                 }
                 function updatePowers(dt) {
                     const pw = run.pw;
@@ -5267,7 +5811,7 @@ void main(){
                             const p = world.p;
                             addRing(p.x, p.y, POWERS.shield.col, 160, 0.5, 3);
                             Sound.sfx.recharge();
-                            announce("Shield rebuilt.");
+                            announce(t("shieldRebuilt"));
                         }
                     }
                     if (run.up.recharge) {
@@ -5277,7 +5821,7 @@ void main(){
                             if (run.bombs < 9) {
                                 run.bombs++;
                                 Sound.sfx.recharge();
-                                announce(`Bomb recharged. ${run.bombs} bombs.`);
+                                announce(t("bombRecharged", { n: run.bombs }));
                             }
                         }
                     }
@@ -5479,7 +6023,7 @@ void main(){
                     Grid.impulse(p.x, p.y, 220, 420);
                     Sound.duck(false);
                     Sound.sfx.upgrade();
-                    announce(`${UP_BY_ID[id].name} taken.`);
+                    announce(t("upgradeTaken", { name: UP_BY_ID[id].name }));
                     $("#btn-pick").hidden = true;
                     if (run.owed > 0) {
                         beginPick();
@@ -5496,7 +6040,7 @@ void main(){
                             const l = run.up[u.id];
                             if (l && u.cat !== "supply") parts.push(u.max > 1 ? `${u.name} ${l}` : u.name);
                         }
-                    return parts.length ? `Upgrades: ${parts.join(", ")}.` : "No upgrades yet.";
+                    return parts.length ? t("upgradesList", { list: parts.join(", ") }) : t("noUpgrades");
                 }
 
                 /* ---------- player hits, bombs, end of run ---------- */
@@ -5535,7 +6079,7 @@ void main(){
                     world.flashCol = [0.5, 0.8, 1];
                     Sound.sfx.shield();
                     buzz(50);
-                    announce("Shield broken.");
+                    announce(t("shieldBroken"));
                 }
                 function killPlayer() {
                     const p = world.p,
@@ -5572,7 +6116,7 @@ void main(){
                     }
                     run.state = "dead";
                     run.deadT = 2.0;
-                    announce(`Ship lost. ${run.lives} ${run.lives === 1 ? "ship" : "ships"} left.`);
+                    announce(t("shipLost") + " " + tn("nShipsLeft", run.lives));
                     saveSnapshot();
                 }
                 function respawn() {
@@ -5603,7 +6147,7 @@ void main(){
                     p.inv = Math.max(p.inv, 1);
                     Sound.sfx.bomb();
                     buzz(90);
-                    announce(`Bomb. ${run.bombs} left.`);
+                    announce(t("bombSay", { n: run.bombs }));
                 }
                 function endRun(kind) {
                     run.state = kind;
@@ -5635,13 +6179,15 @@ void main(){
                     Sound.setLevel(0);
                     if (kind === "clear") {
                         Sound.sfx.clear();
-                        showBanner("Sector clear", `Bonus ${fmt(bonus)}`);
+                        showBanner(t("sectorClear"), t("bonus", { bonus: fmt(bonus) }));
                         buzz([40, 60, 40, 60, 120]);
-                        announce(`Sector clear. Bonus ${fmt(bonus)}. Score ${fmt(run.score)}.`);
+                        announce(
+                            `${t("sectorClear")}. ${t("bonus", { bonus: fmt(bonus) })}. ${t("scoreSay", { score: fmt(run.score) })}`,
+                        );
                     } else {
                         Sound.sfx.over();
-                        showBanner(run.endless ? "Run over" : "Game over", "");
-                        announce(`Game over. Score ${fmt(run.score)}.`);
+                        showBanner(run.endless ? t("runOver") : t("gameOver"), "");
+                        announce(`${t("gameOver")}. ${t("scoreSay", { score: fmt(run.score) })}`);
                     }
                 }
                 function waveLogic(dt) {
@@ -6150,18 +6696,24 @@ void main(){
                         },
                     );
                     const wl = run.endless
-                        ? `Endless, wave ${run.wave + 1}`
-                        : `Sector ${run.si + 1}, ${run.wave === WAVES - 1 ? "surge" : `wave ${run.wave + 1} of ${WAVES}`}`;
+                        ? t("hudEndless", { n: run.wave + 1 })
+                        : t("hudSector", {
+                              s: run.si + 1,
+                              rest:
+                                  run.wave === WAVES - 1
+                                      ? t("surgeLower")
+                                      : t("waveOfLower", { n: run.wave + 1, m: WAVES }),
+                          });
                     setHud("wave", wl, (v) => {
                         hudEl.wave.textContent = v;
                     });
                     setHud("lives", run.lives, (v) => {
                         hudEl.livesN.textContent = v;
-                        hudEl.lives.setAttribute("aria-label", `${v} ${v === 1 ? "ship" : "ships"}`);
+                        hudEl.lives.setAttribute("aria-label", tn("nShips", v));
                     });
                     setHud("bombs", run.bombs, (v) => {
                         hudEl.bombs.textContent = v;
-                        hudEl.bomb.setAttribute("aria-label", `Bomb, ${v} left`);
+                        hudEl.bomb.setAttribute("aria-label", t("bombLeft", { n: v }));
                         hudEl.bomb.disabled = v <= 0;
                     });
                     updateChips();
@@ -6223,15 +6775,23 @@ void main(){
                     }
                     if (route !== "play") return;
                     $("#pause-sub").textContent = run.endless
-                        ? `Endless, wave ${run.wave + 1}. Score ${fmt(run.score)}.`
-                        : `Sector ${run.si + 1}, ${SECTORS[run.si].name}. Wave ${run.wave + 1} of ${WAVES}. Score ${fmt(run.score)}.`;
+                        ? t("pauseEndless", { n: run.wave + 1, score: fmt(run.score) })
+                        : t("pauseSector", {
+                              s: run.si + 1,
+                              name: SECTORS[run.si].name,
+                              n: run.wave + 1,
+                              m: WAVES,
+                              score: fmt(run.score),
+                          });
                     const n = $("#pause-note");
                     n.textContent = note || "";
                     n.hidden = !note;
-                    $('#dlg-pause [data-close="restart"]').textContent = run.endless ? "Restart run" : "Restart sector";
+                    $('#dlg-pause [data-close="restart"]').textContent = run.endless
+                        ? t("restartRun")
+                        : t("restartSector");
                     $("#pause-build").textContent = buildText();
                     openDialog($("#dlg-pause"));
-                    announce("Paused.");
+                    announce(t("pausedSay"));
                 }
                 function resumeGame() {
                     if (!run) return;
@@ -6245,36 +6805,36 @@ void main(){
                     const d = $("#dlg-result"),
                         clear = run.state === "clear";
                     run.done = true;
-                    $("#res-h").textContent = clear ? "Sector clear" : run.endless ? "Run over" : "Game over";
+                    $("#res-h").textContent = clear ? t("sectorClear") : run.endless ? t("runOver") : t("gameOver");
                     $("#res-sub").textContent = run.endless
-                        ? `Endless, reached wave ${run.wave + 1}`
-                        : `Sector ${run.si + 1}, ${SECTORS[run.si].name}`;
+                        ? t("reachedWave", { n: run.wave + 1 })
+                        : t("sectorName", { n: run.si + 1, name: SECTORS[run.si].name });
                     $("#res-score").textContent = fmt(run.score);
                     const best = run.endless ? P.endlessBest : P.best[run.si] || 0,
                         b = $("#res-best");
                     b.className = "best" + (run.newBest ? " new" : "");
-                    b.textContent = run.newBest ? "New best score" : `Best ${fmt(best)}`;
+                    b.textContent = run.newBest ? t("newBest") : t("bestN", { n: fmt(best) });
                     $("#res-kills").textContent = fmt(run.kills);
                     $("#res-mult").textContent = "×" + run.maxMult;
                     $("#res-time").textContent = mmss(run.time);
                     const u = $("#res-unlock"),
                         msgs = [];
                     if (clear && run.unlockedNew > 0 && run.unlockedNew < NSECT)
-                        msgs.push(`Sector ${run.unlockedNew + 1} is open.`);
-                    if (clear && run.endlessNew) msgs.push("Endless mode is open.");
-                    if (clear && run.si === NSECT - 1) msgs.push("Every sector cleared. Endless is waiting.");
+                        msgs.push(t("sectorOpen", { n: run.unlockedNew + 1 }));
+                    if (clear && run.endlessNew) msgs.push(t("endlessOpen"));
+                    if (clear && run.si === NSECT - 1) msgs.push(t("allCleared"));
                     u.textContent = msgs.join(" ");
                     u.hidden = !msgs.length;
                     const btn = $("#res-primary");
                     $("#res-build").textContent = buildText();
                     if (clear && run.si < NSECT - 1) {
                         btn.dataset.close = "next";
-                        btn.textContent = "Next sector";
+                        btn.textContent = t("nextSector");
                     } else {
                         btn.dataset.close = "retry";
-                        btn.textContent = "Play again";
+                        btn.textContent = t("playAgain");
                     }
-                    if (run.newBest) toast("New best score");
+                    if (run.newBest) toast(t("newBest"));
                     openDialog(d);
                 }
 
@@ -6283,11 +6843,11 @@ void main(){
    ========================================================= */
                 const ROUTES = ["", "levels", "play", "settings", "help"];
                 const TITLES = {
-                    "": "Gridfire",
-                    levels: "Sectors",
-                    play: "Playing",
-                    settings: "Settings",
-                    help: "How to play",
+                    "": "appName",
+                    levels: "sectors",
+                    play: "playing",
+                    settings: "settings",
+                    help: "howToPlay",
                 };
                 const screens = {
                     "": $("#screen-home"),
@@ -6374,7 +6934,7 @@ void main(){
                     if (prev === "play" && r !== "play") leavePlay();
                     route = r;
                     for (const k of ROUTES) screens[k].hidden = k !== r;
-                    document.title = r ? `Gridfire: ${TITLES[r]}` : "Gridfire";
+                    document.title = r ? `Gridfire: ${t(TITLES[r])}` : "Gridfire";
                     if (r === "") renderHome();
                     if (r === "levels") renderLevels();
                     if (r === "settings") renderSettings();
@@ -6404,7 +6964,7 @@ void main(){
                     } else if (run && !run.done) pauseGame();
                     else if (Store.data.snapshot && typeof Store.data.snapshot.si === "number") {
                         startRun(clamp(Store.data.snapshot.si, 0, ENDLESS), Store.data.snapshot);
-                        pauseGame("Picked up where you left off.");
+                        pauseGame(t("pickedUp"));
                     } else startRun(maxPlayable(P.last));
                     $("#fps").hidden = !S.fps;
                     $("#btn-pick").hidden = true;
@@ -6445,14 +7005,18 @@ void main(){
                         c.hidden = false;
                         $("#continue-sub").textContent =
                             src.si === ENDLESS
-                                ? `Endless, wave ${src.wave + 1}`
-                                : `Sector ${src.si + 1}, wave ${src.wave + 1}, ${fmt(src.score)} points`;
+                                ? t("hudEndless", { n: src.wave + 1 })
+                                : t("continueSector", {
+                                      s: src.si + 1,
+                                      n: src.wave + 1,
+                                      points: tn("nPoints", Math.round(src.score), fmt(src.score)),
+                                  });
                         playBtn.classList.remove("primary");
-                        playBtn.textContent = "Choose a sector";
+                        playBtn.textContent = t("chooseSector");
                     } else {
                         c.hidden = true;
                         playBtn.classList.add("primary");
-                        playBtn.textContent = "Play";
+                        playBtn.textContent = t("play");
                     }
                     const best = Object.values(P.best).reduce((a, b) => Math.max(a, b), 0);
                     const st = $("#home-stats");
@@ -6465,9 +7029,9 @@ void main(){
                         s.append(b);
                         st.append(s);
                     };
-                    add("Sectors cleared", `${P.cleared.length} of ${NSECT}`);
-                    if (best) add("Best", fmt(best));
-                    if (P.endlessBest) add("Endless", fmt(P.endlessBest));
+                    add(t("sectorsCleared"), t("nOfM", { n: P.cleared.length, m: NSECT }));
+                    if (best) add(t("best"), fmt(best));
+                    if (P.endlessBest) add(t("endless"), fmt(P.endlessBest));
                 }
                 const SECTOR_ICONS = ["seeker", "lancer", "splitter", "dodger", "well", "mini", "wander", "well"];
                 function renderLevels() {
@@ -6476,7 +7040,7 @@ void main(){
                     for (let i = 0; i <= NSECT; i++) {
                         const endless = i === ENDLESS,
                             unlocked = endless ? P.unlocked >= 3 : i < P.unlocked;
-                        const name = endless ? "Endless" : SECTORS[i].name,
+                        const name = endless ? t("endless") : SECTORS[i].name,
                             best = endless ? P.endlessBest : P.best[i] || 0,
                             cleared = !endless && P.cleared.includes(i);
                         const b = document.createElement("button");
@@ -6488,33 +7052,37 @@ void main(){
                         );
                         const status = !unlocked
                             ? endless
-                                ? "Clear Sector 2 to open"
-                                : `Clear Sector ${i} to open`
+                                ? t("openAfter", { n: 2 })
+                                : t("openAfter", { n: i })
                             : best
-                              ? `Best ${fmt(best)}`
+                              ? t("bestN", { n: fmt(best) })
                               : endless
-                                ? "Waves without end"
-                                : "Not played yet";
+                                ? t("wavesNoEnd")
+                                : t("notPlayed");
                         const icon = endless
                             ? '<svg class="eico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c-2-3-4-4.5-6-4.5a4.5 4.5 0 0 0 0 9c2 0 4-1.5 6-4.5s4-4.5 6-4.5a4.5 4.5 0 0 1 0 9c-2 0-4-1.5-6-4.5z"/></svg>'
                             : shapeSVG(SECTOR_ICONS[i], "eico");
                         const badge = cleared
-                            ? '<span class="badge"><svg class="ico"><use href="#i-check"/></svg>Cleared</span>'
+                            ? '<span class="badge"><svg class="ico"><use href="#i-check"/></svg>' +
+                              t("cleared") +
+                              "</span>"
                             : !unlocked
-                              ? '<span class="badge"><svg class="ico"><use href="#i-lock"/></svg>Locked</span>'
+                              ? '<span class="badge"><svg class="ico"><use href="#i-lock"/></svg>' +
+                                t("locked") +
+                                "</span>"
                               : "";
                         b.innerHTML = `${icon}<span class="num">${endless ? "∞" : String(i + 1).padStart(2, "0")}</span><span class="nm"></span><span class="meta"></span>${badge}`;
                         $(".nm", b).textContent = name;
                         $(".meta", b).textContent = status;
                         b.setAttribute(
                             "aria-label",
-                            `${endless ? "Endless mode" : `Sector ${i + 1}, ${name}`}. ${cleared ? "Cleared. " : ""}${status}.`,
+                            `${endless ? t("endlessMode") : t("sectorName", { n: i + 1, name })}. ${cleared ? t("cleared") + ". " : ""}${status}.`,
                         );
                         if (!unlocked) b.setAttribute("aria-disabled", "true");
                         b.addEventListener("click", () => {
                             Sound.sfx.ui();
                             if (!unlocked) {
-                                toast(endless ? "Clear Sector 2 to open Endless" : `Clear Sector ${i} first`);
+                                toast(endless ? t("endlessLockedToast") : t("clearFirst", { n: i }));
                                 return;
                             }
                             pendingStart = i;
@@ -6530,7 +7098,7 @@ void main(){
                         if (el.type === "checkbox") el.checked = Boolean(S[k]);
                         else if (el.type === "range") {
                             el.value = Math.round(S[k] * 100);
-                            el.setAttribute("aria-valuetext", `${el.value} percent`);
+                            el.setAttribute("aria-valuetext", t("percent", { n: el.value }));
                         } else if (el.type === "radio") el.checked = S[k] === el.value;
                     }
                     // VIBRATION: grey out the toggle where the device has no vibration
@@ -6538,10 +7106,10 @@ void main(){
                     // if (hp && typeof navigator.vibrate !== "function") { hp.disabled = true; $("#haptics-desc").textContent = "This device does not offer vibration to apps like this one."; }
                     $("#storage-line").textContent =
                         Store.where === "app"
-                            ? "Progress and settings are saved with this app’s data, so they travel with an export."
+                            ? t("storageApp")
                             : Store.where === "device"
-                              ? "Progress and settings are saved on this device."
-                              : "Storage is blocked here, so progress lasts until you close the app.";
+                              ? t("storageDevice")
+                              : t("storageNone");
                 }
                 function buildRoster() {
                     const ul = $("#roster");
@@ -6579,7 +7147,7 @@ void main(){
                         li.dataset.pw = k;
                         li.innerHTML = `${glyphSVG(POWER_GLYPHS[k], "")}<div><b></b><span></span></div>`;
                         $("b", li).textContent = d.name;
-                        $("span", li).textContent = d.info + (d.dur ? ` Lasts ${d.dur} seconds.` : "");
+                        $("span", li).textContent = d.info + (d.dur ? " " + t("lasts", { n: d.dur }) : "");
                         pl.append(li);
                     }
                     const ul2 = $("#upgrade-list");
@@ -6587,7 +7155,7 @@ void main(){
                         const li = document.createElement("li");
                         li.style.setProperty("--ec", `var(--c-${u.cat})`);
                         li.innerHTML = `${glyphSVG(UP_GLYPHS[u.id], "")}<div><b></b><span></span></div>`;
-                        $("b", li).textContent = u.name + (u.max > 1 && u.max < 99 ? `, up to level ${u.max}` : "");
+                        $("b", li).textContent = u.name + (u.max > 1 && u.max < 99 ? t("upToLevel", { n: u.max }) : "");
                         $("span", li).textContent = u.desc(1);
                         ul2.append(li);
                     }
@@ -6643,31 +7211,31 @@ void main(){
                             '<span class="up-name"></span><span class="up-lvl"></span><span class="up-desc"></span>';
                         $(".up-name", b).textContent = u.name;
                         const lv = $(".up-lvl", b);
-                        if (supply) lv.textContent = "Supply";
+                        if (supply) lv.textContent = t("supply");
                         else {
                             for (let k = 1; k <= u.max; k++) {
                                 const dot = document.createElement("i");
                                 if (k <= lvl) dot.className = "on";
                                 lv.append(dot);
                             }
-                            lv.append(lvl === 1 ? "New" : `Level ${lvl} of ${u.max}`);
+                            lv.append(lvl === 1 ? t("newUpgrade") : t("levelOf", { l: lvl, m: u.max }));
                         }
                         $(".up-desc", b).textContent = u.desc(lvl);
                         b.setAttribute(
                             "aria-label",
-                            `${i + 1}: ${u.name}. ${supply ? "" : lvl === 1 ? "New. " : `Level ${lvl} of ${u.max}. `}${u.desc(lvl)}`,
+                            `${i + 1}: ${u.name}. ${supply ? "" : lvl === 1 ? t("newUpgrade") + ". " : t("levelOf", { l: lvl, m: u.max }) + ". "}${u.desc(lvl)}`,
                         );
                         list.append(b);
                     });
                     $("#up-sub").textContent = run.endless
-                        ? `Wave ${run.wave + 1} cleared.`
-                        : `Wave ${run.wave + 1} of ${WAVES} cleared.`;
+                        ? t("waveCleared", { n: run.wave + 1 })
+                        : t("waveOfCleared", { n: run.wave + 1, m: WAVES });
                     $("#up-keys").hidden = !(window.matchMedia && matchMedia("(pointer: fine)").matches);
                     $("#btn-pick").hidden = true;
                     Sound.duck(true);
                     Sound.sfx.pick();
                     openDialog(d, 450);
-                    announce("Choose an upgrade.");
+                    announce(t("chooseUpgradeSay"));
                 }
                 const chipEls = {};
                 function updateChips() {
@@ -6788,7 +7356,7 @@ void main(){
                             if (el.type === "checkbox") S[k] = el.checked;
                             else if (el.type === "range") {
                                 S[k] = Number(el.value) / 100;
-                                el.setAttribute("aria-valuetext", `${el.value} percent`);
+                                el.setAttribute("aria-valuetext", t("percent", { n: el.value }));
                             } else if (el.type === "radio") {
                                 if (!el.checked) return;
                                 S[k] = el.value;
@@ -6810,10 +7378,9 @@ void main(){
                     }
                     $("#btn-reset").addEventListener("click", async () => {
                         const ok = await confirmBox({
-                            title: "Erase progress?",
-                            message:
-                                "This removes opened sectors, best scores and any saved run. Your settings stay as they are.",
-                            confirmLabel: "Erase",
+                            title: t("eraseTitle"),
+                            message: t("eraseMessage"),
+                            confirmLabel: t("eraseOk"),
                             danger: true,
                         });
                         if (!ok) return;
@@ -6823,7 +7390,7 @@ void main(){
                         Store.data.snapshot = null;
                         run = null;
                         Store.save();
-                        toast("Progress erased");
+                        toast(t("erased"));
                     });
                     $("#screen-home").addEventListener("pointerdown", (e) => {
                         if (e.target.closest("a,button,svg.logo,p,h1")) return;
@@ -6893,8 +7460,7 @@ void main(){
                             .then(() => app.info())
                             .then((info) => {
                                 if (info && info.version)
-                                    $("#about").textContent =
-                                        `Gridfire ${info.version}, one HTML file that runs entirely offline.`;
+                                    $("#about").textContent = t("about", { version: info.version });
                             })
                             .catch(() => {});
                     }
@@ -6915,8 +7481,12 @@ void main(){
                     perf.fpsT += dt;
                     if (perf.fpsT >= 0.5) {
                         if (S.fps)
-                            $("#fps").textContent =
-                                `${Math.round(perf.frames / perf.fpsT)} fps, ${canvas.width}×${canvas.height}, ${Parts.count()} particles`;
+                            $("#fps").textContent = t("fpsLine", {
+                                fps: Math.round(perf.frames / perf.fpsT),
+                                w: canvas.width,
+                                h: canvas.height,
+                                n: Parts.count(),
+                            });
                         perf.frames = 0;
                         perf.fpsT = 0;
                     }
@@ -6959,6 +7529,7 @@ void main(){
    Boot
    ========================================================= */
                 async function boot() {
+                    translatePage();
                     await Store.init();
                     S = Store.data.settings;
                     P = Store.data.progress;

@@ -3,7 +3,7 @@
   "app": {
     "id": "library/loyalty-cards",
     "name": "Loyalty cards",
-    "version": "2.5.2",
+    "version": "2.5.3",
     "icon": "wallet",
     "category": "shopping",
     "ageRating": "everyone",
@@ -14,26 +14,455 @@
   "i18n": {
     "defaultLocale": "en",
     "strings": {
-      "endsIn": { "en": "Number ending {digits}" },
-      "expiredLine": { "en": "Expired {date}" },
-      "imported": {
-        "en": "{n, plural, =0 {No new cards} one {Added # card} other {Added # cards}}{dup, plural, =0 {} one {; # was already in your cards} other {; # were already in your cards}}{skipped, plural, =0 {.} one {; # row skipped.} other {; # rows skipped.}}"
+      "endsIn": {
+        "en": "Number ending {digits}",
+        "sk": "Číslo končí na {digits}"
       },
-      "exported": { "en": "{n, plural, =0 {Saved an empty file.} one {Saved # card.} other {Saved # cards.}}" },
-      "expiryTitle": { "en": "{store} card expires soon" },
-      "expiryBody": { "en": "It is valid until {date}." },
-      "already": { "en": "{store} is already in your cards." },
-      "timesShown": { "en": "{n, plural, =0 {Not yet} one {# time} other {# times}}" },
-      "problemLine": { "en": "Line {row}: {reason}" },
-      "moreProblems": { "en": "{n, plural, one {…and # more row} other {…and # more rows}}" },
-      "codeLabel": { "en": "{store} barcode, number {number}" },
-      "points": { "en": "{n, plural, one {# point} other {# points}}" },
-      "balance": { "en": "Balance {n}" }
+      "expiredLine": {
+        "en": "Expired {date}",
+        "sk": "Platnosť skončila {date}"
+      },
+      "imported": {
+        "en": "{n, plural, =0 {No new cards} one {Added # card} other {Added # cards}}{dup, plural, =0 {} one {; # was already in your cards} other {; # were already in your cards}}{skipped, plural, =0 {.} one {; # row skipped.} other {; # rows skipped.}}",
+        "sk": "{n, plural, =0 {Žiadne nové karty} one {Pridaná # karta} few {Pridané # karty} many {Pridané # karty} other {Pridaných # kariet}}{dup, plural, =0 {} one {; # už medzi kartami bola} few {; # už medzi kartami boli} many {; # už medzi kartami bolo} other {; # už medzi kartami bolo}}{skipped, plural, =0 {.} one {; # riadok sa vynechal.} few {; # riadky sa vynechali.} many {; # riadka sa vynechalo.} other {; # riadkov sa vynechalo.}}"
+      },
+      "exported": {
+        "en": "{n, plural, =0 {Saved an empty file.} one {Saved # card.} other {Saved # cards.}}",
+        "sk": "{n, plural, =0 {Uložil sa prázdny súbor.} one {Uložená # karta.} few {Uložené # karty.} many {Uložené # karty.} other {Uložených # kariet.}}"
+      },
+      "expiryTitle": {
+        "en": "{store} card expires soon",
+        "sk": "Platnosť karty {store} čoskoro skončí"
+      },
+      "expiryBody": {
+        "en": "It is valid until {date}.",
+        "sk": "Platí do {date}."
+      },
+      "already": {
+        "en": "{store} is already in your cards.",
+        "sk": "Karta {store} už je medzi vašimi kartami."
+      },
+      "timesShown": {
+        "en": "{n, plural, =0 {Not yet} one {# time} other {# times}}",
+        "sk": "{n, plural, =0 {Zatiaľ nie} one {# raz} few {# razy} many {# razy} other {# ráz}}"
+      },
+      "problemLine": {
+        "en": "Line {row}: {reason}",
+        "sk": "Riadok {row}: {reason}"
+      },
+      "moreProblems": {
+        "en": "{n, plural, one {…and # more row} other {…and # more rows}}",
+        "sk": "{n, plural, one {…a ešte # riadok} few {…a ešte # riadky} many {…a ešte # riadka} other {…a ešte # riadkov}}"
+      },
+      "codeLabel": {
+        "en": "{store} barcode, number {number}",
+        "sk": "Čiarový kód {store}, číslo {number}"
+      },
+      "points": {
+        "en": "{n, plural, one {# point} other {# points}}",
+        "sk": "{n, plural, one {# bod} few {# body} many {# bodu} other {# bodov}}"
+      },
+      "balance": {
+        "en": "Balance {n}",
+        "sk": "Zostatok {n}"
+      },
+      "addCardByScanning": {
+        "en": "Add a card by scanning its barcode with the camera",
+        "sk": "Pridať kartu naskenovaním jej čiarového kódu fotoaparátom"
+      },
+      "showCardBarcodeFull": {
+        "en": "Show a card’s barcode full screen and bright, so the cashier can scan it",
+        "sk": "Zobraziť čiarový kód karty na celej obrazovke a jasne, aby sa dal pri pokladni ľahko naskenovať"
+      },
+      "remindWeekBeforeCard": {
+        "en": "Remind you a week before a card or voucher expires",
+        "sk": "Pripomenúť vám týždeň vopred, že sa končí platnosť karty alebo poukážky"
+      },
+      "backUpCardsFile": {
+        "en": "Back up your cards to a file, or add cards from one",
+        "sk": "Zálohovať karty do súboru alebo zo súboru karty pridať"
+      },
+      "sendCardStoreNumber": {
+        "en": "Send a card’s store and number to someone you choose",
+        "sk": "Poslať obchod a číslo karty niekomu, koho vyberiete"
+      },
+      "showMostUsedCards": {
+        "en": "Show your most-used cards on your home screen",
+        "sk": "Zobraziť na ploche karty, ktoré používate najčastejšie"
+      },
+      "pickScreenshotPhotoCard": {
+        "en": "Pick a screenshot or photo of a card to read its barcode",
+        "sk": "Vybrať snímku obrazovky alebo fotku karty a prečítať z nej čiarový kód"
+      },
+      "cardsSavedAsBackup": {
+        "en": "Your cards, saved as a backup file in a place you choose",
+        "sk": "Vaše karty sa uložia ako záložný súbor na miesto, ktoré vyberiete"
+      },
+      "cardStoreNumberWhen": {
+        "en": "A card’s store and number, when you tap Share",
+        "sk": "Obchod a číslo karty, keď klepnete na Zdieľať"
+      },
+      "openCardsFullScreen": {
+        "en": "Open cards full screen",
+        "sk": "Otvárať karty na celú obrazovku"
+      },
+      "codeShowsBrightLarge": {
+        "en": "The code shows bright and large, so it scans easily. Close it to see the card’s details.",
+        "sk": "Kód sa zobrazí veľký a jasný, aby sa dal ľahko naskenovať. Keď ho zavriete, uvidíte podrobnosti karty."
+      },
+      "remindMeBeforeCard": {
+        "en": "Remind me before a card expires",
+        "sk": "Pripomenúť pred koncom platnosti karty"
+      },
+      "card": {
+        "en": "Card",
+        "sk": "Karta"
+      },
+      "cards": {
+        "en": "Cards",
+        "sk": "Karty"
+      },
+      "store": {
+        "en": "Store",
+        "sk": "Obchod"
+      },
+      "cornerGrocer": {
+        "en": "Corner Grocer",
+        "sk": "Potraviny na rohu"
+      },
+      "cardNumber": {
+        "en": "Card number",
+        "sk": "Číslo karty"
+      },
+      "scanBarcodeTypeNumber": {
+        "en": "Scan the barcode, or type the number printed under it. The barcode type is worked out from the number.",
+        "sk": "Naskenujte čiarový kód alebo zadajte číslo vytlačené pod ním. Typ čiarového kódu sa určí podľa čísla."
+      },
+      "thatIsTooLong": {
+        "en": "That is too long for a card number.",
+        "sk": "Na číslo karty je to príliš dlhé."
+      },
+      "ean13Needs12": {
+        "en": "EAN-13 needs 12 or 13 digits.",
+        "sk": "EAN-13 potrebuje 12 alebo 13 číslic."
+      },
+      "lastDigitThisEan": {
+        "en": "The last digit of this EAN-13 doesn’t match the rest of the number. Check the number.",
+        "sk": "Posledná číslica tohto kódu EAN-13 nesedí so zvyškom čísla. Overte číslo."
+      },
+      "ean8Needs7": {
+        "en": "EAN-8 needs 7 or 8 digits.",
+        "sk": "EAN-8 potrebuje 7 alebo 8 číslic."
+      },
+      "lastDigitThisEan2": {
+        "en": "The last digit of this EAN-8 doesn’t match the rest of the number. Check the number.",
+        "sk": "Posledná číslica tohto kódu EAN-8 nesedí so zvyškom čísla. Overte číslo."
+      },
+      "upcNeeds1112": {
+        "en": "UPC-A needs 11 or 12 digits.",
+        "sk": "UPC-A potrebuje 11 alebo 12 číslic."
+      },
+      "lastDigitThisUpc": {
+        "en": "The last digit of this UPC-A doesn’t match the rest of the number. Check the number.",
+        "sk": "Posledná číslica tohto kódu UPC-A nesedí so zvyškom čísla. Overte číslo."
+      },
+      "upcENeeds6": {
+        "en": "UPC-E needs 6 digits, or 7 or 8 starting with 0 or 1.",
+        "sk": "UPC-E potrebuje 6 číslic, alebo 7 či 8 číslic so začiatočnou 0 alebo 1."
+      },
+      "lastDigitThisUpc2": {
+        "en": "The last digit of this UPC-E doesn’t match the rest of the number. Check the number.",
+        "sk": "Posledná číslica tohto kódu UPC-E nesedí so zvyškom čísla. Overte číslo."
+      },
+      "code39TakesCapital": {
+        "en": "Code 39 takes capital letters, digits, spaces and - . $ / + %.",
+        "sk": "Code 39 prijíma veľké písmená, číslice, medzery a - . $ / + %."
+      },
+      "code128TakesPlain": {
+        "en": "Code 128 takes plain letters, digits and symbols.",
+        "sk": "Code 128 prijíma písmená bez diakritiky, číslice a symboly."
+      },
+      "code93TakesPlain": {
+        "en": "Code 93 takes plain letters, digits and symbols.",
+        "sk": "Code 93 prijíma písmená bez diakritiky, číslice a symboly."
+      },
+      "codabarTakesDigitsWith": {
+        "en": "Codabar takes digits and - $ : / . +, with A, B, C or D at both ends or at neither.",
+        "sk": "Codabar prijíma číslice a - $ : / . +, s písmenom A, B, C alebo D na oboch koncoch alebo na žiadnom."
+      },
+      "itfNeedsEvenNumber": {
+        "en": "ITF needs an even number of digits, at least 6.",
+        "sk": "ITF potrebuje párny počet číslic, aspoň 6."
+      },
+      "barcodeType": {
+        "en": "Barcode type",
+        "sk": "Typ čiarového kódu"
+      },
+      "automaticDrawsEan13": {
+        "en": "Automatic draws EAN-13, EAN-8 or UPC-A when the number is one with a matching last digit, and Code 128 otherwise. Scanning a card sets its type for you. Pick another type only if the shop’s scanner can’t read the code.",
+        "sk": "Pri voľbe Automaticky sa nakreslí EAN-13, EAN-8 alebo UPC-A, ak je číslo takého typu a posledná číslica sedí, inak Code 128. Pri naskenovaní karty sa typ nastaví sám. Iný typ vyberte, len ak skener v obchode kód neprečíta."
+      },
+      "automatic": {
+        "en": "Automatic",
+        "sk": "Automaticky"
+      },
+      "qrCode": {
+        "en": "QR code",
+        "sk": "QR kód"
+      },
+      "nameCard": {
+        "en": "Name on the card",
+        "sk": "Meno na karte"
+      },
+      "handyWhenFamilyShares": {
+        "en": "Handy when the family shares cards.",
+        "sk": "Hodí sa, keď sa v rodine karty zdieľajú."
+      },
+      "kindShop": {
+        "en": "Kind of shop",
+        "sk": "Druh obchodu"
+      },
+      "groceries": {
+        "en": "Groceries",
+        "sk": "Potraviny"
+      },
+      "shop": {
+        "en": "Shop",
+        "sk": "Obchod"
+      },
+      "clothesShoes": {
+        "en": "Clothes and shoes",
+        "sk": "Oblečenie a obuv"
+      },
+      "pharmacy": {
+        "en": "Pharmacy",
+        "sk": "Lekáreň"
+      },
+      "beauty": {
+        "en": "Beauty",
+        "sk": "Kozmetika"
+      },
+      "fuelCar": {
+        "en": "Fuel and car",
+        "sk": "Palivo a auto"
+      },
+      "homeDiy": {
+        "en": "Home and DIY",
+        "sk": "Domácnosť a hobby"
+      },
+      "electronics": {
+        "en": "Electronics",
+        "sk": "Elektronika"
+      },
+      "books": {
+        "en": "Books",
+        "sk": "Knihy"
+      },
+      "foodDrink": {
+        "en": "Food and drink",
+        "sk": "Jedlo a nápoje"
+      },
+      "coffee": {
+        "en": "Coffee",
+        "sk": "Káva"
+      },
+      "travel": {
+        "en": "Travel",
+        "sk": "Cestovanie"
+      },
+      "sportGym": {
+        "en": "Sport and gym",
+        "sk": "Šport a fitnes"
+      },
+      "pets": {
+        "en": "Pets",
+        "sk": "Zvieratá"
+      },
+      "kids": {
+        "en": "Kids",
+        "sk": "Deti"
+      },
+      "library": {
+        "en": "Library",
+        "sk": "Knižnica"
+      },
+      "membership": {
+        "en": "Membership",
+        "sk": "Členstvo"
+      },
+      "voucherGiftCard": {
+        "en": "Voucher or gift card",
+        "sk": "Poukážka alebo darčeková karta"
+      },
+      "pointsBalance": {
+        "en": "Points or balance",
+        "sk": "Body alebo zostatok"
+      },
+      "validUntil": {
+        "en": "Valid until",
+        "sk": "Platná do"
+      },
+      "note": {
+        "en": "Note",
+        "sk": "Poznámka"
+      },
+      "discountDayWhereShow": {
+        "en": "Discount day, where to show it…",
+        "sk": "Zľavový deň, kde ju ukázať…"
+      },
+      "colour": {
+        "en": "Colour",
+        "sk": "Farba"
+      },
+      "colourCardListLeave": {
+        "en": "The colour of the card in your list. Leave it empty to use the colour of the kind of shop.",
+        "sk": "Farba karty v zozname. Ak pole necháte prázdne, použije sa farba druhu obchodu."
+      },
+      "colourName": {
+        "en": "Colour name",
+        "sk": "Názov farby"
+      },
+      "pictureCard": {
+        "en": "Picture of the card",
+        "sk": "Obrázok karty"
+      },
+      "pinTop": {
+        "en": "Pin to the top",
+        "sk": "Pripnúť navrch"
+      },
+      "archived": {
+        "en": "Archived",
+        "sk": "Archivovaná"
+      },
+      "timesShown2": {
+        "en": "Times shown",
+        "sk": "Počet zobrazení"
+      },
+      "lastShown": {
+        "en": "Last shown",
+        "sk": "Naposledy zobrazená"
+      },
+      "expired": {
+        "en": "Expired",
+        "sk": "Platnosť skončila"
+      },
+      "shown": {
+        "en": "Shown",
+        "sk": "Zobrazená"
+      },
+      "lastDigitMatches": {
+        "en": "Last digit matches",
+        "sk": "Posledná číslica sedí"
+      },
+      "eanUpcCodesLast": {
+        "en": "For EAN and UPC codes, the last digit is worked out from the others; a card whose last digit doesn’t match can’t be drawn.",
+        "sk": "Pri kódoch EAN a UPC sa posledná číslica počíta z ostatných; kartu, ktorej posledná číslica nesedí, nemožno nakresliť."
+      },
+      "noCardsYet": {
+        "en": "No cards yet",
+        "sk": "Zatiaľ žiadne karty"
+      },
+      "scanBarcodeLoyaltyCard": {
+        "en": "Scan the barcode on a loyalty card, or tap Add and type its number. Your cards stay on this phone.",
+        "sk": "Naskenujte čiarový kód vernostnej karty alebo klepnite na Pridať a zadajte jej číslo. Karty zostanú v tomto telefóne."
+      },
+      "archivedCards": {
+        "en": "Archived cards",
+        "sk": "Archivované karty"
+      },
+      "noArchivedCards": {
+        "en": "No archived cards",
+        "sk": "Žiadne archivované karty"
+      },
+      "archiveCardNoLonger": {
+        "en": "Archive a card you no longer use to hide it from the list.",
+        "sk": "Kartu, ktorú už nepoužívate, archivujte a zmizne zo zoznamu."
+      },
+      "importFinished": {
+        "en": "Import finished",
+        "sk": "Import je dokončený"
+      },
+      "scanCard": {
+        "en": "Scan a card",
+        "sk": "Naskenovať kartu"
+      },
+      "addFromPicture": {
+        "en": "Add from a picture",
+        "sk": "Pridať z obrázka"
+      },
+      "backUpCards": {
+        "en": "Back up cards",
+        "sk": "Zálohovať karty"
+      },
+      "addCardsFromFile": {
+        "en": "Add cards from a file",
+        "sk": "Pridať karty zo súboru"
+      },
+      "pinned": {
+        "en": "Pinned",
+        "sk": "Pripnutá"
+      },
+      "lastDigitThisNumber": {
+        "en": "The last digit of this number doesn’t match its barcode type, so the code can’t be drawn. Edit the card to check the number and the barcode type.",
+        "sk": "Posledná číslica tohto čísla nesedí s typom čiarového kódu, preto sa kód nedá nakresliť. Upravte kartu a overte číslo aj typ čiarového kódu."
+      },
+      "details": {
+        "en": "Details",
+        "sk": "Podrobnosti"
+      },
+      "workedOutFromNumber": {
+        "en": "Worked out from the number. If the shop’s scanner can’t read the code, edit the card and pick its barcode type.",
+        "sk": "Určené podľa čísla. Ak skener v obchode kód neprečíta, upravte kartu a vyberte typ čiarového kódu."
+      },
+      "showFullScreen": {
+        "en": "Show full screen",
+        "sk": "Zobraziť na celú obrazovku"
+      },
+      "readCodeFromPicture": {
+        "en": "Read code from picture",
+        "sk": "Prečítať kód z obrázka"
+      },
+      "share": {
+        "en": "Share",
+        "sk": "Zdieľať"
+      },
+      "theseRowsWereLeft": {
+        "en": "These rows were left out, with the reason for each:",
+        "sk": "Tieto riadky sa vynechali, pri každom je dôvod:"
+      },
+      "pointCameraAtBarcode": {
+        "en": "Point the camera at the barcode on your card",
+        "sk": "Namierte fotoaparát na čiarový kód karty"
+      },
+      "pickingPicturesDoesnT": {
+        "en": "Picking pictures doesn’t work on this phone yet. Scan the card or type its number.",
+        "sk": "Výber obrázkov v tomto telefóne zatiaľ nefunguje. Naskenujte kartu alebo zadajte jej číslo."
+      },
+      "noBarcodeFoundThat": {
+        "en": "No barcode found in that picture. Type the number instead.",
+        "sk": "Na obrázku sa nenašiel čiarový kód. Zadajte radšej číslo."
+      },
+      "noBarcodeFoundPicture": {
+        "en": "No barcode found in the picture.",
+        "sk": "Na obrázku sa nenašiel čiarový kód."
+      },
+      "cardNumberBarcodeType": {
+        "en": "Card number and barcode type updated from the picture.",
+        "sk": "Číslo karty a typ čiarového kódu sa aktualizovali podľa obrázka."
+      },
+      "unpin": {
+        "en": "Unpin",
+        "sk": "Odopnúť"
+      },
+      "pinToTop": {
+        "en": "Pin to top",
+        "sk": "Pripnúť navrch"
+      }
     }
   },
   "permissions": {
     "scan.barcode": {
-      "purpose": "Add a card by scanning its barcode with the camera",
+      "purpose": "@addCardByScanning",
       "formats": [
         "qr",
         "ean13",
@@ -50,30 +479,30 @@
         "itf"
       ]
     },
-    "barcode.render": { "purpose": "Show a card’s barcode full screen and bright, so the cashier can scan it" },
-    "notify.local": { "purpose": "Remind you a week before a card or voucher expires", "maxPerDay": 3 },
-    "files.io": { "purpose": "Back up your cards to a file, or add cards from one", "modes": ["import", "export"] },
-    "share": { "purpose": "Send a card’s store and number to someone you choose" },
-    "widget.home": { "purpose": "Show your most-used cards on your home screen" },
-    "media.pick": { "purpose": "Pick a screenshot or photo of a card to read its barcode", "optional": true }
+    "barcode.render": { "purpose": "@showCardBarcodeFull" },
+    "notify.local": { "purpose": "@remindWeekBeforeCard", "maxPerDay": 3 },
+    "files.io": { "purpose": "@backUpCardsFile", "modes": ["import", "export"] },
+    "share": { "purpose": "@sendCardStoreNumber" },
+    "widget.home": { "purpose": "@showMostUsedCards" },
+    "media.pick": { "purpose": "@pickScreenshotPhotoCard", "optional": true }
   },
   "dataFlows": [
-    { "from": ["card.*"], "to": "files.io", "purpose": "Your cards, saved as a backup file in a place you choose" },
-    { "from": ["card.store", "card.number"], "to": "share", "purpose": "A card’s store and number, when you tap Share" }
+    { "from": ["card.*"], "to": "files.io", "purpose": "@cardsSavedAsBackup" },
+    { "from": ["card.store", "card.number"], "to": "share", "purpose": "@cardStoreNumberWhen" }
   ],
   "settings": {
     "fullScreen": {
       "type": "boolean",
-      "label": "Open cards full screen",
-      "help": "The code shows bright and large, so it scans easily. Close it to see the card’s details.",
+      "label": "@openCardsFullScreen",
+      "help": "@codeShowsBrightLarge",
       "default": true
     },
-    "expiryReminders": { "type": "boolean", "label": "Remind me before a card expires", "default": true }
+    "expiryReminders": { "type": "boolean", "label": "@remindMeBeforeCard", "default": true }
   },
   "entities": {
     "card": {
-      "label": "Card",
-      "labelPlural": "Cards",
+      "label": "@card",
+      "labelPlural": "@cards",
       "unique": [["store", "number"]],
       "sort": ["-pinned", "-uses", "store"],
       "display": {
@@ -87,91 +516,91 @@
       "fields": {
         "store": {
           "type": "text",
-          "label": "Store",
+          "label": "@store",
           "required": true,
           "maxLength": 60,
           "kind": "name",
-          "placeholder": "Corner Grocer"
+          "placeholder": "@cornerGrocer"
         },
         "number": {
           "type": "barcode",
-          "label": "Card number",
-          "help": "Scan the barcode, or type the number printed under it. The barcode type is worked out from the number.",
+          "label": "@cardNumber",
+          "help": "@scanBarcodeTypeNumber",
           "required": true,
           "kind": "loyaltyCard",
           "sensitivity": "personal",
           "checks": [
-            { "condition": "=size(item.number) <= 300", "message": "That is too long for a card number." },
+            { "condition": "=size(item.number) <= 300", "message": "@thatIsTooLong" },
             {
               "condition": "=item.format != 'ean13' || item.number.matches(r'^[0-9]{12,13}$')",
-              "message": "EAN-13 needs 12 or 13 digits."
+              "message": "@ean13Needs12"
             },
             {
               "condition": "=item.format != 'ean13' || !item.number.matches(r'^[0-9]{13}$') || checkDigitValid(item.number, 'ean13')",
-              "message": "The last digit of this EAN-13 doesn’t match the rest of the number. Check the number."
+              "message": "@lastDigitThisEan"
             },
             {
               "condition": "=item.format != 'ean8' || item.number.matches(r'^[0-9]{7,8}$')",
-              "message": "EAN-8 needs 7 or 8 digits."
+              "message": "@ean8Needs7"
             },
             {
               "condition": "=item.format != 'ean8' || !item.number.matches(r'^[0-9]{8}$') || checkDigitValid(item.number, 'ean8')",
-              "message": "The last digit of this EAN-8 doesn’t match the rest of the number. Check the number."
+              "message": "@lastDigitThisEan2"
             },
             {
               "condition": "=item.format != 'upcA' || item.number.matches(r'^[0-9]{11,12}$')",
-              "message": "UPC-A needs 11 or 12 digits."
+              "message": "@upcNeeds1112"
             },
             {
               "condition": "=item.format != 'upcA' || !item.number.matches(r'^[0-9]{12}$') || checkDigitValid(item.number, 'upcA')",
-              "message": "The last digit of this UPC-A doesn’t match the rest of the number. Check the number."
+              "message": "@lastDigitThisUpc"
             },
             {
               "condition": "=item.format != 'upcE' || item.number.matches(r'^([0-9]{6}|[01][0-9]{6,7})$')",
-              "message": "UPC-E needs 6 digits, or 7 or 8 starting with 0 or 1."
+              "message": "@upcENeeds6"
             },
             {
               "condition": "=item.format != 'upcE' || !item.number.matches(r'^[01][0-9]{7}$') || checkDigitValid(item.number, 'upcE')",
-              "message": "The last digit of this UPC-E doesn’t match the rest of the number. Check the number."
+              "message": "@lastDigitThisUpc2"
             },
             {
               "condition": "=item.format != 'code39' || item.number.matches(r'^[0-9A-Z .$/+%-]+$')",
-              "message": "Code 39 takes capital letters, digits, spaces and - . $ / + %."
+              "message": "@code39TakesCapital"
             },
             {
               "condition": "=item.format != 'code128' || item.number.matches(r'^[ -~]+$')",
-              "message": "Code 128 takes plain letters, digits and symbols."
+              "message": "@code128TakesPlain"
             },
             {
               "condition": "=item.format != 'code93' || item.number.matches(r'^[ -~]+$')",
-              "message": "Code 93 takes plain letters, digits and symbols."
+              "message": "@code93TakesPlain"
             },
             {
               "condition": "=item.format != 'codabar' || item.number.matches(r'^([A-D][0-9$:/.+-]{2,}[A-D]|[0-9$:/.+-]{2,})$')",
-              "message": "Codabar takes digits and - $ : / . +, with A, B, C or D at both ends or at neither."
+              "message": "@codabarTakesDigitsWith"
             },
             {
               "condition": "=item.format != 'itf' || item.number.matches(r'^([0-9][0-9]){3,}$')",
-              "message": "ITF needs an even number of digits, at least 6."
+              "message": "@itfNeedsEvenNumber"
             }
           ]
         },
         "format": {
           "type": "choice",
-          "label": "Barcode type",
-          "help": "Automatic draws EAN-13, EAN-8 or UPC-A when the number is one with a matching last digit, and Code 128 otherwise. Scanning a card sets its type for you. Pick another type only if the shop’s scanner can’t read the code.",
+          "label": "@barcodeType",
+          "help": "@automaticDrawsEan13",
           "required": true,
           "default": "auto",
           "visible": "=has(item.id)",
           "options": [
-            { "value": "auto", "label": "Automatic", "icon": "barcode" },
+            { "value": "auto", "label": "@automatic", "icon": "barcode" },
             { "value": "code128", "label": "Code 128", "icon": "barcode" },
             { "value": "ean13", "label": "EAN-13", "icon": "barcode" },
             { "value": "ean8", "label": "EAN-8", "icon": "barcode" },
             { "value": "upcA", "label": "UPC-A", "icon": "barcode" },
             { "value": "upcE", "label": "UPC-E", "icon": "barcode" },
             { "value": "code39", "label": "Code 39", "icon": "barcode" },
-            { "value": "qr", "label": "QR code", "icon": "qr_code_2" },
+            { "value": "qr", "label": "@qrCode", "icon": "qr_code_2" },
             { "value": "dataMatrix", "label": "Data Matrix", "icon": "qr_code" },
             { "value": "pdf417", "label": "PDF417", "icon": "barcode" },
             { "value": "aztec", "label": "Aztec", "icon": "qr_code" },
@@ -182,7 +611,7 @@
         },
         "drawnFormat": {
           "type": "choice",
-          "label": "Barcode type",
+          "label": "@barcodeType",
           "compute": "=item.format != 'auto' ? item.format : checkDigitValid(item.number, 'ean13') ? 'ean13' : checkDigitValid(item.number, 'ean8') ? 'ean8' : checkDigitValid(item.number, 'upcA') ? 'upcA' : item.number.matches(r'^[ -~]+$') ? 'code128' : 'qr'",
           "options": [
             { "value": "code128", "label": "Code 128", "icon": "barcode" },
@@ -191,7 +620,7 @@
             { "value": "upcA", "label": "UPC-A", "icon": "barcode" },
             { "value": "upcE", "label": "UPC-E", "icon": "barcode" },
             { "value": "code39", "label": "Code 39", "icon": "barcode" },
-            { "value": "qr", "label": "QR code", "icon": "qr_code_2" },
+            { "value": "qr", "label": "@qrCode", "icon": "qr_code_2" },
             { "value": "dataMatrix", "label": "Data Matrix", "icon": "qr_code" },
             { "value": "pdf417", "label": "PDF417", "icon": "barcode" },
             { "value": "aztec", "label": "Aztec", "icon": "qr_code" },
@@ -202,77 +631,81 @@
         },
         "holder": {
           "type": "text",
-          "label": "Name on the card",
+          "label": "@nameCard",
           "maxLength": 60,
           "kind": "name",
           "sensitivity": "personal",
-          "help": "Handy when the family shares cards."
+          "help": "@handyWhenFamilyShares"
         },
         "group": {
           "type": "choice",
-          "label": "Kind of shop",
+          "label": "@kindShop",
           "options": [
-            { "value": "shopping_cart", "label": "Groceries", "icon": "shopping_cart", "hue": "green" },
-            { "value": "storefront", "label": "Shop", "icon": "storefront", "hue": "indigo" },
-            { "value": "shopping_bag", "label": "Clothes and shoes", "icon": "shopping_bag", "hue": "violet" },
-            { "value": "medication", "label": "Pharmacy", "icon": "medication", "hue": "red" },
-            { "value": "spa", "label": "Beauty", "icon": "spa", "hue": "pink" },
-            { "value": "directions_car", "label": "Fuel and car", "icon": "directions_car", "hue": "blue" },
-            { "value": "handyman", "label": "Home and DIY", "icon": "handyman", "hue": "orange" },
-            { "value": "keyboard", "label": "Electronics", "icon": "keyboard", "hue": "grey" },
-            { "value": "menu_book", "label": "Books", "icon": "menu_book", "hue": "amber" },
-            { "value": "restaurant", "label": "Food and drink", "icon": "restaurant", "hue": "orange" },
-            { "value": "local_cafe", "label": "Coffee", "icon": "local_cafe", "hue": "brown" },
-            { "value": "flight", "label": "Travel", "icon": "flight", "hue": "cyan" },
-            { "value": "fitness_center", "label": "Sport and gym", "icon": "fitness_center", "hue": "lime" },
-            { "value": "pets", "label": "Pets", "icon": "pets", "hue": "cyan" },
-            { "value": "child_care", "label": "Kids", "icon": "child_care", "hue": "pink" },
-            { "value": "book", "label": "Library", "icon": "book", "hue": "teal" },
-            { "value": "badge", "label": "Membership", "icon": "badge", "hue": "indigo" },
-            { "value": "sell", "label": "Voucher or gift card", "icon": "sell", "hue": "violet" }
+            { "value": "shopping_cart", "label": "@groceries", "icon": "shopping_cart", "hue": "green" },
+            { "value": "storefront", "label": "@shop", "icon": "storefront", "hue": "indigo" },
+            { "value": "shopping_bag", "label": "@clothesShoes", "icon": "shopping_bag", "hue": "violet" },
+            { "value": "medication", "label": "@pharmacy", "icon": "medication", "hue": "red" },
+            { "value": "spa", "label": "@beauty", "icon": "spa", "hue": "pink" },
+            { "value": "directions_car", "label": "@fuelCar", "icon": "directions_car", "hue": "blue" },
+            { "value": "handyman", "label": "@homeDiy", "icon": "handyman", "hue": "orange" },
+            { "value": "keyboard", "label": "@electronics", "icon": "keyboard", "hue": "grey" },
+            { "value": "menu_book", "label": "@books", "icon": "menu_book", "hue": "amber" },
+            { "value": "restaurant", "label": "@foodDrink", "icon": "restaurant", "hue": "orange" },
+            { "value": "local_cafe", "label": "@coffee", "icon": "local_cafe", "hue": "brown" },
+            { "value": "flight", "label": "@travel", "icon": "flight", "hue": "cyan" },
+            { "value": "fitness_center", "label": "@sportGym", "icon": "fitness_center", "hue": "lime" },
+            { "value": "pets", "label": "@pets", "icon": "pets", "hue": "cyan" },
+            { "value": "child_care", "label": "@kids", "icon": "child_care", "hue": "pink" },
+            { "value": "book", "label": "@library", "icon": "book", "hue": "teal" },
+            { "value": "badge", "label": "@membership", "icon": "badge", "hue": "indigo" },
+            { "value": "sell", "label": "@voucherGiftCard", "icon": "sell", "hue": "violet" }
           ]
         },
-        "points": { "type": "number", "label": "Points or balance", "min": 0 },
-        "expires": { "type": "date", "label": "Valid until" },
+        "points": { "type": "number", "label": "@pointsBalance", "min": 0 },
+        "expires": { "type": "date", "label": "@validUntil" },
         "note": {
           "type": "longText",
-          "label": "Note",
+          "label": "@note",
           "maxLength": 500,
-          "placeholder": "Discount day, where to show it…"
+          "placeholder": "@discountDayWhereShow"
         },
         "color": {
           "type": "color",
-          "label": "Colour",
-          "help": "The colour of the card in your list. Leave it empty to use the colour of the kind of shop."
+          "label": "@colour",
+          "help": "@colourCardListLeave"
         },
         "hueName": {
           "type": "text",
-          "label": "Colour name",
+          "label": "@colourName",
           "visible": false,
           "compute": "=upper(coalesce(item.color, '')) == '#D32F2F' ? 'red' : upper(coalesce(item.color, '')) == '#C2185B' ? 'pink' : upper(coalesce(item.color, '')) == '#7B1FA2' ? 'violet' : upper(coalesce(item.color, '')) == '#512DA8' ? 'indigo' : upper(coalesce(item.color, '')) == '#1976D2' ? 'blue' : upper(coalesce(item.color, '')) == '#0288D1' ? 'cyan' : upper(coalesce(item.color, '')) == '#00897B' ? 'teal' : upper(coalesce(item.color, '')) == '#388E3C' ? 'green' : upper(coalesce(item.color, '')) == '#F9A825' ? 'amber' : upper(coalesce(item.color, '')) == '#EF6C00' ? 'orange' : upper(coalesce(item.color, '')) == '#6D4C41' ? 'brown' : upper(coalesce(item.color, '')) == '#546E7A' ? 'grey' : optionHue(item.group)"
         },
-        "picture": { "type": "image", "label": "Picture of the card", "visible": "=available('media.pick')" },
-        "pinned": { "type": "boolean", "label": "Pin to the top", "default": false },
-        "archived": { "type": "boolean", "label": "Archived", "default": false, "visible": "=has(item.id)" },
+        "picture": { "type": "image", "label": "@pictureCard", "visible": "=available('media.pick')" },
+        "pinned": { "type": "boolean", "label": "@pinTop", "default": false },
+        "archived": { "type": "boolean", "label": "@archived", "default": false, "visible": "=has(item.id)" },
         "uses": {
           "type": "integer",
-          "label": "Times shown",
+          "label": "@timesShown2",
           "default": 0,
           "min": 0,
           "merge": "counter",
           "editable": false
         },
-        "lastUsed": { "type": "datetime", "label": "Last shown", "editable": false },
-        "expired": { "type": "boolean", "label": "Expired", "compute": "=has(item.expires) && item.expires < today()" },
+        "lastUsed": { "type": "datetime", "label": "@lastShown", "editable": false },
+        "expired": {
+          "type": "boolean",
+          "label": "@expired",
+          "compute": "=has(item.expires) && item.expires < today()"
+        },
         "timesShown": {
           "type": "text",
-          "label": "Shown",
+          "label": "@shown",
           "compute": "=t('timesShown', {'n': coalesce(item.uses, 0)})"
         },
         "checkDigitOk": {
           "type": "boolean",
-          "label": "Last digit matches",
-          "help": "For EAN and UPC codes, the last digit is worked out from the others; a card whose last digit doesn’t match can’t be drawn.",
+          "label": "@lastDigitMatches",
+          "help": "@eanUpcCodesLast",
           "compute": "=(item.format != 'ean13' || !item.number.matches(r'^[0-9]{13}$') || checkDigitValid(item.number, 'ean13')) && (item.format != 'ean8' || !item.number.matches(r'^[0-9]{8}$') || checkDigitValid(item.number, 'ean8')) && (item.format != 'upcA' || !item.number.matches(r'^[0-9]{12}$') || checkDigitValid(item.number, 'upcA')) && (item.format != 'upcE' || !item.number.matches(r'^[01][0-9]{7}$') || checkDigitValid(item.number, 'upcE'))"
         }
       }
@@ -299,7 +732,7 @@
   "screens": {
     "wallet": {
       "type": "list",
-      "title": "Cards",
+      "title": "@cards",
       "query": "wallet",
       "item": "walletTile",
       "columns": 2,
@@ -307,14 +740,14 @@
       "toolbar": ["scanBtn", "pictureBtn", "exportBtn", "importBtn"],
       "onTap": { "event": { "name": "openCard", "context": { "card": "=item.id" } } },
       "empty": {
-        "title": "No cards yet",
-        "body": "Scan the barcode on a loyalty card, or tap Add and type its number. Your cards stay on this phone.",
+        "title": "@noCardsYet",
+        "body": "@scanBarcodeLoyaltyCard",
         "icon": "wallet"
       }
     },
     "cardDetail": {
       "type": "detail",
-      "title": "Card",
+      "title": "@card",
       "entity": "card",
       "header": "cardTop",
       "footer": "cardActions",
@@ -322,18 +755,18 @@
     },
     "archived": {
       "type": "list",
-      "title": "Archived cards",
+      "title": "@archivedCards",
       "query": "archivedCards",
       "add": false,
       "empty": {
-        "title": "No archived cards",
-        "body": "Archive a card you no longer use to hide it from the list.",
+        "title": "@noArchivedCards",
+        "body": "@archiveCardNoLonger",
         "icon": "archive"
       }
     },
     "importReport": {
       "type": "custom",
-      "title": "Import finished",
+      "title": "@importFinished",
       "present": "dialog",
       "params": { "summary": { "type": "text", "maxLength": 300 }, "lines": { "type": "longText", "maxLength": 5000 } },
       "root": "irCol"
@@ -343,14 +776,14 @@
     "scanBtn": {
       "component": "Button",
       "icon": "barcode_scanner",
-      "label": "Scan a card",
+      "label": "@scanCard",
       "iconOnly": true,
       "action": { "event": { "name": "scanCard" } }
     },
     "pictureBtn": {
       "component": "Button",
       "icon": "photo_library",
-      "label": "Add from a picture",
+      "label": "@addFromPicture",
       "iconOnly": true,
       "visible": "=available('media.pick')",
       "action": { "event": { "name": "addFromPicture" } }
@@ -358,14 +791,14 @@
     "exportBtn": {
       "component": "Button",
       "icon": "download",
-      "label": "Back up cards",
+      "label": "@backUpCards",
       "iconOnly": true,
       "action": { "event": { "name": "exportCards" } }
     },
     "importBtn": {
       "component": "Button",
       "icon": "upload",
-      "label": "Add cards from a file",
+      "label": "@addCardsFromFile",
       "iconOnly": true,
       "action": { "event": { "name": "importCards" } }
     },
@@ -387,7 +820,7 @@
       "component": "Icon",
       "name": "push_pin",
       "visible": "=item.pinned",
-      "accessibility": { "label": "Pinned" }
+      "accessibility": { "label": "@pinned" }
     },
     "tileStore": { "component": "Text", "variant": "h4", "text": "=item.store" },
     "tileSub": {
@@ -432,12 +865,12 @@
       "component": "Text",
       "tone": "warning",
       "visible": "=!record.checkDigitOk",
-      "text": "The last digit of this number doesn’t match its barcode type, so the code can’t be drawn. Edit the card to check the number and the barcode type."
+      "text": "@lastDigitThisNumber"
     },
     "cardActions": { "component": "Column", "children": ["moreRow", "detailsSection"] },
     "detailsSection": {
       "component": "Section",
-      "title": "Details",
+      "title": "@details",
       "collapsible": true,
       "children": ["groupField", "formatField", "autoNote", "shownField", "lastShownField"],
       "collapsed": true
@@ -447,7 +880,7 @@
     "autoNote": {
       "component": "Text",
       "variant": "caption",
-      "text": "Worked out from the number. If the shop’s scanner can’t read the code, edit the card and pick its barcode type.",
+      "text": "@workedOutFromNumber",
       "visible": "=record.format == 'auto'"
     },
     "shownField": { "component": "Field", "field": "timesShown", "mode": "display" },
@@ -455,7 +888,7 @@
     "fullBtn": {
       "component": "Button",
       "icon": "fullscreen",
-      "label": "Show full screen",
+      "label": "@showFullScreen",
       "variant": "primary",
       "visible": "=record.checkDigitOk",
       "action": { "event": { "name": "showFull", "context": { "card": "=record.id" } } }
@@ -464,14 +897,14 @@
     "pinBtn": {
       "component": "Button",
       "icon": "push_pin",
-      "label": "=record.pinned ? 'Unpin' : 'Pin to top'",
+      "label": "=record.pinned ? t('unpin') : t('pinToTop')",
       "variant": "borderless",
       "action": { "event": { "name": "togglePin", "context": { "card": "=record.id" } } }
     },
     "readBtn": {
       "component": "Button",
       "icon": "qr_code_scanner",
-      "label": "Read code from picture",
+      "label": "@readCodeFromPicture",
       "variant": "borderless",
       "visible": "=has(record.picture)",
       "action": { "event": { "name": "readPicture", "context": { "card": "=record.id" } } }
@@ -479,7 +912,7 @@
     "shareBtn": {
       "component": "Button",
       "icon": "share",
-      "label": "Share",
+      "label": "@share",
       "variant": "borderless",
       "action": { "event": { "name": "shareCard", "context": { "card": "=record.id" } } }
     },
@@ -487,7 +920,7 @@
     "irSummary": { "component": "Text", "variant": "h5", "text": "=params.summary" },
     "irIntro": {
       "component": "Text",
-      "text": "These rows were left out, with the reason for each:"
+      "text": "@theseRowsWereLeft"
     },
     "irLines": { "component": "Text", "variant": "caption", "text": "=params.lines" },
     "irOk": {
@@ -556,7 +989,7 @@
           "type": "capability",
           "capability": "scan.barcode",
           "action": "scan",
-          "args": { "prompt": "Point the camera at the barcode on your card" },
+          "args": { "prompt": "@pointCameraAtBarcode" },
           "as": "scan"
         },
         { "type": "query", "query": "byNumber", "args": { "code": "=vars.scan.value" }, "as": "found" },
@@ -590,7 +1023,7 @@
         {
           "type": "toast",
           "when": "=!available('media.pick') || (vars.pickError != null && vars.pickError.code != 'CANCELLED')",
-          "text": "Picking pictures doesn’t work on this phone yet. Scan the card or type its number."
+          "text": "@pickingPicturesDoesnT"
         },
         {
           "type": "capability",
@@ -605,7 +1038,7 @@
         {
           "type": "toast",
           "when": "=vars.picked != null && size(vars.picked.files) > 0 && (vars.decoded == null || size(vars.decoded.codes) == 0)",
-          "text": "No barcode found in that picture. Type the number instead."
+          "text": "@noBarcodeFoundThat"
         },
         {
           "type": "navigate",
@@ -634,7 +1067,7 @@
         {
           "type": "toast",
           "when": "=vars.decoded == null || size(vars.decoded.codes) == 0",
-          "text": "No barcode found in the picture."
+          "text": "@noBarcodeFoundPicture"
         },
         {
           "type": "updateRecord",
@@ -645,7 +1078,7 @@
         {
           "type": "toast",
           "when": "=vars.decoded != null && size(vars.decoded.codes) > 0",
-          "text": "Card number and barcode type updated from the picture."
+          "text": "@cardNumberBarcodeType"
         }
       ]
     },
@@ -703,7 +1136,7 @@
           "args": {
             "entity": "card",
             "fields": {
-              "store": { "from": ["Store", "Shop", "Merchant", "Store name", "Retailer"] },
+              "store": { "from": ["Store", "Shop", "Merchant", "Store name", "Retailer", "Obchod"] },
               "number": {
                 "from": [
                   "barcodeid",
@@ -714,18 +1147,73 @@
                   "Member number",
                   "Membership number",
                   "Code",
-                  "Barcode"
+                  "Barcode",
+                  "Číslo karty"
                 ]
               },
-              "format": { "from": ["Barcode type", "Barcode format", "Format"], "values": { "*": "auto" } },
-              "holder": { "from": ["Name on the card", "Card holder", "Holder"] },
-              "group": { "from": ["Kind of shop", "Group", "Category"] },
-              "points": { "from": ["Points or balance", "Points", "Balance"] },
-              "expires": { "from": ["Valid until", "Expiry date", "Expiry", "Expires"] },
-              "note": { "from": ["Note", "Notes", "Comment"] },
-              "pinned": { "from": ["Pin to the top", "starstatus", "Favourite", "Favorite", "Starred"] },
-              "archived": { "from": ["Archived", "archive"] },
-              "lastUsed": { "from": ["Last shown", "lastused", "Last used"], "values": { "0": "" } }
+              "format": {
+                "from": ["Barcode type", "Barcode format", "Format", "Typ čiarového kódu"],
+                "values": {
+                  "*": "auto",
+                  "Automatic": "auto",
+                  "Automaticky": "auto",
+                  "QR code": "qr",
+                  "QR kód": "qr",
+                  "ITF (Interleaved 2 of 5)": "itf"
+                }
+              },
+              "holder": { "from": ["Name on the card", "Card holder", "Holder", "Meno na karte"] },
+              "group": {
+                "values": {
+                  "Groceries": "shopping_cart",
+                  "Potraviny": "shopping_cart",
+                  "Shop": "storefront",
+                  "Obchod": "storefront",
+                  "Clothes and shoes": "shopping_bag",
+                  "Oblečenie a obuv": "shopping_bag",
+                  "Pharmacy": "medication",
+                  "Lekáreň": "medication",
+                  "Beauty": "spa",
+                  "Kozmetika": "spa",
+                  "Fuel and car": "directions_car",
+                  "Palivo a auto": "directions_car",
+                  "Home and DIY": "handyman",
+                  "Domácnosť a hobby": "handyman",
+                  "Electronics": "keyboard",
+                  "Elektronika": "keyboard",
+                  "Books": "menu_book",
+                  "Knihy": "menu_book",
+                  "Food and drink": "restaurant",
+                  "Jedlo a nápoje": "restaurant",
+                  "Coffee": "local_cafe",
+                  "Káva": "local_cafe",
+                  "Travel": "flight",
+                  "Cestovanie": "flight",
+                  "Sport and gym": "fitness_center",
+                  "Šport a fitnes": "fitness_center",
+                  "Zvieratá": "pets",
+                  "Kids": "child_care",
+                  "Deti": "child_care",
+                  "Library": "book",
+                  "Knižnica": "book",
+                  "Membership": "badge",
+                  "Členstvo": "badge",
+                  "Voucher or gift card": "sell",
+                  "Poukážka alebo darčeková karta": "sell"
+                },
+                "from": ["Kind of shop", "Group", "Category", "Druh obchodu"]
+              },
+              "points": { "from": ["Points or balance", "Points", "Balance", "Body alebo zostatok"] },
+              "expires": { "from": ["Valid until", "Expiry date", "Expiry", "Expires", "Platná do"] },
+              "note": { "from": ["Note", "Notes", "Comment", "Poznámka"] },
+              "pinned": {
+                "from": ["Pin to the top", "starstatus", "Favourite", "Favorite", "Starred", "Pripnúť navrch"]
+              },
+              "archived": { "from": ["Archived", "archive", "Archivovaná"] },
+              "lastUsed": {
+                "from": ["Last shown", "lastused", "Last used", "Naposledy zobrazená"],
+                "values": { "0": "" }
+              }
             },
             "onDuplicate": "skip",
             "key": ["store", "number"],
@@ -783,7 +1271,7 @@
   "widgets": {
     "topCards": {
       "template": "list",
-      "title": "Cards",
+      "title": "@cards",
       "sizes": ["medium", "large"],
       "query": "top",
       "label": "=item.store",
