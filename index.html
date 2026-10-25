@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'"
+        />
+        <meta name="referrer" content="no-referrer" />
+        <meta name="color-scheme" content="light dark" />
+        <meta
+            name="description"
+            content="The Zapli library: the small apps Zapli installs and runs on your phone. Free, no ads, no tracking."
+        />
+        <title>Zapli library</title>
+        <link
+            rel="icon"
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233b37d9'/%3E%3Crect x='9' y='9' width='14' height='14' rx='4' fill='%23fff'/%3E%3C/svg%3E"
+        />
+        <link rel="stylesheet" href="gallery.css" />
+        <script src="gallery.js" defer></script>
+    </head>
+    <body>
+        <a class="skip" href="#content">Skip to the tools</a>
+
+        <header class="sheet">
+            <div class="wrap">
+                <div class="bar">
+                    <a class="brand" href="#" id="home-link">
+                        <span class="brand-mark" aria-hidden="true"></span>
+                        <span>Zapli library</span>
+                    </a>
+                    <a class="bar-link" href="https://github.com/nottracked/zapli-library">GitHub</a>
+                </div>
+                <div class="hero" id="hero">
+                    <h1>The Zapli library</h1>
+                    <p class="lead">
+                        Zapli installs and runs small apps, called tools, on your phone. These are its own tools: free,
+                        with no ads and no tracking.
+                    </p>
+                    <ul class="facts" aria-label="Every tool here is">
+                        <li>Free</li>
+                        <li>No ads</li>
+                        <li>No tracking</li>
+                        <li>No account</li>
+                        <li>Works offline</li>
+                    </ul>
+                    <div class="stickers" id="stickers" aria-hidden="true"></div>
+                </div>
+            </div>
+        </header>
+
+        <main id="content" class="wrap" tabindex="-1">
+            <div id="list-view">
+                <p class="status" id="status" role="status">Loading the tools…</p>
+                <noscript>
+                    <p class="status">This page needs JavaScript to list the tools.</p>
+                    <p><a href="https://github.com/nottracked/zapli-library">The tools on GitHub</a></p>
+                </noscript>
+            </div>
+            <div id="detail-view" hidden></div>
+        </main>
+
+        <footer class="footer">
+            <div class="wrap">
+                <p>
+                    The tools are original, open source and free to copy and remix. This page uses no cookies, no
+                    trackers and nothing from other sites.
+                </p>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/nottracked/zapli-library">The repository on GitHub</a></li>
+                    <li><a href="https://github.com/nottracked/zapli-library/blob/main/LICENSE">MIT licence</a></li>
+                    <li>
+                        <a href="https://nottracked.github.io/zapli-site/privacy/">The Zapli app's privacy policy</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </body>
+</html>

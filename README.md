@@ -11,6 +11,14 @@ copy and remix under its licence. Each one works offline and keeps its data on t
 The file formats use the Zapli names (`"spec": "zapli/0.2"`, `window.zapli`, the `--zapli-*` CSS properties, `.zapli`
 packages). Files with the old anyApp names keep working, but every tool here uses the new ones.
 
+## Browse the tools
+
+The tools have a gallery at <https://nottracked.github.io/zapli-library/>: each one with its icon, summary, version,
+licence and screenshots. The web apps open right there in your browser, where they keep their data only in that
+browser; the declarative apps run in the Zapli app. The page (`index.html`, `gallery.js` and `gallery.css`) has no
+build step: it reads `library-index.json` and each tool's `listing.json` when it opens, so a tool shows up there once
+the signed index lists it, just as it reaches phones.
+
 ## Layout
 
 ```
