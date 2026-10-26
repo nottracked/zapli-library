@@ -91,7 +91,7 @@
     const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
     const payload = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
     if (!payload || payload.format !== INDEX_FORMAT || !Array.isArray(payload.tools)) {
-      throw new Error(`${INDEX_FILE} lists no tools`);
+      throw new Error(`${INDEX_FILE} lists no apps`);
     }
     return payload;
   }
@@ -399,7 +399,7 @@
             el("p", { class: "runs-in" }, el("span", { class: "dot", "aria-hidden": "true" }), "Runs in the Zapli app"),
             el("p", {
               class: "note",
-              text: "This tool is made of Zapli's own screens, so it runs only inside the Zapli app, where it works offline and keeps its data on your phone.",
+              text: "This app is made of Zapli's own screens, so it runs only inside the Zapli app, where it works offline and keeps its data on your phone.",
             }),
           );
 
@@ -409,7 +409,7 @@
       el(
         "p",
         { class: "back" },
-        el("a", { href: "#", class: "back-link" }, el("span", { "aria-hidden": "true", text: "←" }), "All tools"),
+        el("a", { href: "#", class: "back-link" }, el("span", { "aria-hidden": "true", text: "←" }), "All apps"),
       ),
       el(
         "div",
@@ -496,9 +496,9 @@
       el(
         "div",
         { class: "problem", role: "alert" },
-        el("h2", { text: "The tools could not be loaded" }),
-        el("p", { text: "Check your connection and reload the page, or browse the tools in the repository." }),
-        el("p", null, el("a", { href: `${REPO}/tree/main/apps/library` }, "The tools on GitHub")),
+        el("h2", { text: "The apps could not be loaded" }),
+        el("p", { text: "Check your connection and reload the page, or browse the apps in the repository." }),
+        el("p", null, el("a", { href: `${REPO}/tree/main/apps/library` }, "The apps on GitHub")),
         el("p", { class: "problem-detail", text: message }),
       ),
     );
@@ -506,7 +506,7 @@
 
   function render() {
     if (!tools.length) {
-      listView.replaceChildren(el("p", { class: "status", text: "No tools are listed yet." }));
+      listView.replaceChildren(el("p", { class: "status", text: "No apps are listed yet." }));
       return;
     }
     stickers.replaceChildren(...tools.map((tool) => sticker(tool, "small")));
@@ -515,13 +515,13 @@
         section(
           "web-tools",
           "Try them in your browser",
-          "These tools are web apps: open one and use it right here, with nothing to install. In a browser, a tool keeps its data only in that browser on that device.",
+          "These are web apps: open one and use it right here, with nothing to install. In a browser, an app keeps its data only in that browser on that device.",
           tools.filter((t) => t.kind === "web"),
         ),
         section(
           "app-tools",
           "In the Zapli app",
-          "These tools are made of Zapli's own screens, so they run only inside the Zapli app on your phone.",
+          "These apps are made of Zapli's own screens, so they run only inside the Zapli app on your phone.",
           tools.filter((t) => t.kind === "declarative"),
         ),
       ].filter(Boolean),
