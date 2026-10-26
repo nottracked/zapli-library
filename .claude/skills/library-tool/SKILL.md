@@ -1,6 +1,6 @@
 ---
 name: library-tool
-description: Write a new app or improve an existing one in the Zapli library (this repository) - a declarative app (app.json, spec "zapli/0.2") or a web app (index.html with an embedded manifest), its listing.json, fictional sample data and import samples, its own icon from icons/, a translation, and the version bump. Use for any change under apps/ or icons/, for fixing an app's bug or wording, adding an import format, or translating an app. Do not use for changing the Zapli app itself or the file format, and never for ads, tracking, accounts or network access without a maintainer's review.
+description: Write a new app or improve an existing one in the Zapli library (this repository) - a declarative app (app.json, spec "zapli/0.2"), a web app (index.html with an embedded manifest) or a package app (a package/ folder with manifest.json, modules, workers, pictures and sounds), its listing.json, fictional sample data and import samples, its own icon from icons/, a translation, and the version bump. Use for any change under apps/ or icons/, for fixing an app's bug or wording, adding an import format, or translating an app. Do not use for changing the Zapli app itself or the file format, and never for ads, tracking, accounts or network access without a maintainer's review.
 ---
 
 # Writing an app for the Zapli library
@@ -8,11 +8,12 @@ description: Write a new app or improve an existing one in the Zapli library (th
 The library is a set of original, offline, ad-free apps that Zapli (formerly anyApp) ships and updates from
 this repository. An app is one of two kinds, never both:
 
-| The app                                                                | Kind                                  | File         |
-| ---------------------------------------------------------------------- | ------------------------------------- | ------------ |
-| Keeps records: a tracker, log, list, wallet, flashcards                | **Declarative app**: Zapli draws it   | `app.json`   |
-| Draws its own screen: a game, a canvas, a camera flow, a custom visual | **Web app**: HTML, CSS and JavaScript | `index.html` |
-| Keeps records but needs one drawn screen (a heatmap, a board)          | Declarative app with one HTML screen  | `app.json`   |
+| The app                                                                       | Kind                                  | File         |
+| ----------------------------------------------------------------------------- | ------------------------------------- | ------------ |
+| Keeps records: a tracker, log, list, wallet, flashcards                       | **Declarative app**: Zapli draws it   | `app.json`   |
+| Draws its own screen: a game, a canvas, a camera flow, a custom visual        | **Web app**: HTML, CSS and JavaScript | `index.html` |
+| Draws its own screen and needs many files: pictures, sounds, modules, workers | **Package app**: a web app's folder   | `package/`   |
+| Keeps records but needs one drawn screen (a heatmap, a board)                 | Declarative app with one HTML screen  | `app.json`   |
 
 Declarative apps get native screens, automatic light and dark, accessibility and the most precise install review, so
 prefer them for data. Use the Zapli format names (`"spec": "zapli/0.2"`, `window.zapli`, `--zapli-*`); files with the old anyApp
@@ -22,11 +23,11 @@ names still work, but the library check flags them.
 
 ```
 apps/library/<name>/          one app; its app id is "library/<name>" (lowercase a-z, 0-9 and -)
-  app.json | index.html       the app
+  app.json | index.html       the app (or package/ for a package app, section 4)
   listing.json                how the library presents it
   import-samples/<file>       fictional files in each format the app imports (every file listed in the listing)
   screenshots/<file>.png      screenshots with the sample data (taken by maintainers)
-  dev/                        scripts that are not shipped (optional)
+  dev/                        scripts and sources that are not shipped (optional)
 icons/svg/<name>.svg          the app's icon source; icons/render.swift embeds it as app.iconData
 ```
 
@@ -104,13 +105,10 @@ days}}"`).
 
 ## 3. A web app (`index.html`)
 
-One self-contained HTML file with its manifest in `<head>`. A library app is always one
-file, so everything it shows is in it: keep the file under 2 MB, the most every Zapli version installs. Draw with
-CSS, SVG or a canvas instead of embedding pictures, and never paste big images, sounds or fonts in as base64 (it
-adds a third to their size). A bigger game, or an app with many images, sounds or fonts, does not fit the library's
-one-file format: make it a `.zapli` package (a zip of `manifest.json`, `index.html` and its files, packed with
-`zapli pack`; up to 20 MB, 10 MB a file) and import it in Zapli with Import, then From a file, as Zapli's skill pack
-describes.
+One self-contained HTML file with its manifest in `<head>`, so everything it shows is in it: keep the file under
+2 MB, the most every Zapli version installs. Draw with CSS, SVG or a canvas instead of embedding pictures, and never
+paste big images, sounds or fonts in as base64 (it adds a third to their size). A bigger game, or an app with
+pictures, sounds, fonts, modules or workers, is a package app instead (section 4).
 
 Mines' head, shortened:
 
@@ -168,7 +166,111 @@ Mines' head, shortened:
 - Never draw anything that looks like the phone's or Zapli's own dialogs or bars, and never use Zapli's own words in
   your dialogs ("Allow", "Don't allow", "Reviewed", "Contains its own code").
 
-## 4. `listing.json`
+## 4. A package app (`package/`)
+
+A package app is a web app whose files are in a folder: an entry page, its JavaScript modules, workers, pictures,
+sounds, fonts and data. Choose one HTML file whenever the app fits in one: it opens anywhere, Zapli ships it built in
+and every Zapli version installs it. Choose a package when the app needs pictures, sounds, music or fonts (one file
+would carry them as base64), WebGL shaders and textures, level data, code split into modules, or a worker (a worker
+always starts from a script file of its own). Zapli never ships a package app built in: a phone downloads its files
+when someone installs it from the library (Zapli says how much first), and an update downloads only the files that
+changed.
+
+```
+apps/library/<name>/
+  listing.json                beside package/, never inside it
+  screenshots/                optional, beside package/
+  dev/                        optional: readable sources and build scripts; a phone never downloads them
+  package/                    exactly the files of the app
+    manifest.json             the definition: app.kind "web", web.entry and web.files
+    index.html                the page the app opens with (web.entry)
+    js/main.mjs, workers/…, img/…, audio/…
+```
+
+`manifest.json` is the manifest a single-file web app would embed, as its own file, with the entry page and the list of
+files. The HTML pages carry no embedded manifest.
+
+```json
+{
+  "spec": "zapli/0.2",
+  "app": {
+    "id": "library/<name>",
+    "kind": "web",
+    "name": "…",
+    "version": "1.0.0",
+    "icon": "sports_esports",
+    "category": "game_arcade",
+    "ageRating": "everyone",
+    "license": "MIT"
+  },
+  "theme": { "seedColor": "#3F6B47" },
+  "web": {
+    "entry": "index.html",
+    "orientation": "any",
+    "files": {
+      "index.html": { "sha256": "<64 hex digits>", "size": 2625 },
+      "js/main.mjs": { "sha256": "<64 hex digits>", "size": 12958 }
+    }
+  }
+}
+```
+
+- **`web.files` lists every file of `package/` except `manifest.json`**, each with its SHA-256 and size in bytes.
+  Never write it by hand: run `zapli library inventory --write` (coming in Zapli's command-line tool) after every
+  change to a file of the package. The library check refuses a package whose list and files differ in any way, and
+  phones refuse a file whose bytes do not match.
+- **Path rules** for every file and folder in `package/`:
+  - only ASCII letters, digits, `.`, `_` and `-`; a name at most 128 characters, not starting or ending with `.`;
+  - at most 12 names deep (folders and the file) and 255 characters in all;
+  - no hidden files: macOS leaves `.DS_Store` in folders opened in Finder, so delete them
+    (`find package -name .DS_Store -delete`) before you commit;
+  - no symbolic links, and nothing under a folder named `_zapli` or `_anyapp` in any case;
+  - no Windows device names, also with an extension: `CON`, `PRN`, `AUX`, `NUL`, `COM1` to `COM9`, `LPT1` to `LPT9`
+    (`nul.js`, `Aux.png`);
+  - no two names that differ only in case (`Logo.png` beside `logo.png`, `Img/` beside `img/`), and no file named
+    like a folder.
+- **Limits:** at most 25 MiB a file, 100 MiB for the whole package, 1,000 files, and 512 KiB for `manifest.json`.
+  Smaller is kinder: every byte is downloaded on the phone, often over mobile data. Compress pictures (WebP or PNG)
+  and sounds (MP3 or M4A, which every phone plays) before you add them.
+- **Readable code.** A maintainer reads all of it before the app is signed, so no minified or packed JavaScript. Code
+  from a build step (TypeScript, a bundler) is allowed only when `dev/` holds its readable source and the script that
+  builds the shipped file, so a reviewer can build it again and compare.
+- **No service workers**, in any app: the gallery serves every app from one web address, where one app's service
+  worker would take over the others' pages, and Zapli refuses them. The files are on the phone, so the app is
+  offline without one.
+- **Relative paths only.** Pages, style sheets and modules name the other files by relative paths (`img/ship.png`,
+  `./lib/board.mjs`), never `/…`: the app runs at the root of its own address in Zapli and under
+  `apps/library/<name>/package/` in the gallery.
+- **Workers** start only from the package's `.js` or `.mjs` files, at most 4 at a time. A worker's path is read
+  relative to the page, not to the script that starts it. From a script beside the page:
+
+  ```js
+  const sim = new Worker("workers/sim.js");
+  ```
+
+  From a module in a subfolder (`js/main.mjs`), relative to the module itself:
+
+  ```js
+  const sim = new Worker(new URL("../workers/sim.mjs", import.meta.url), { type: "module" });
+  ```
+
+  Inside a worker, `importScripts` and `import` are relative to the worker's own file. A worker has no `zapli`: it
+  posts its results to the page. WebGL2 works in a worker on an `OffscreenCanvas` the page hands over
+  (`canvas.transferControlToOffscreen()`); drive the frames from the page's `requestAnimationFrame`, one message a
+  frame, and keep a 2D fallback, since some phones have no WebGL.
+
+- **Pictures, sounds and data.** Load pictures and sounds with `<img>`, `<audio>`, CSS or `new Image()`, and keep
+  the data the code needs in modules (`export const levels = […]`) rather than fetching it: the "no network" rule of
+  section 3 holds here too. Start sound from a tap (`click`), as browsers and Zapli require.
+- **Try it** from a local web server, since browsers run modules and workers only from a web address: run
+  `python3 -m http.server` in the repository's folder and open
+  `http://localhost:8000/apps/library/<name>/package/index.html`. To try it in Zapli, pack the folder with
+  `zapli pack apps/library/<name>/package` and import the `.zapli` file (Import, then From a file; an imported file may
+  have at most 20 MB, and no file in it more than 10 MB).
+- **Its own icon:** draw `icons/svg/<name>.svg` as for any app (section 6); the render script writes the icon into
+  `app.json` and `index.html` only, so for a package app a maintainer adds it.
+
+## 5. `listing.json`
 
 | Field         | Required | What it holds                                                                                                                               |
 | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -196,7 +298,7 @@ Mines' head, shortened:
 - Every file in `import-samples/` is listed in `migration.samples`, and its extension is one of `formats`. Keep the
   bytes of a sample exactly as the exporting app writes them (some use CRLF line endings on purpose).
 
-## 5. The icon
+## 6. The icon
 
 Each app carries its own 192 × 192 px PNG in `app.iconData` (plain base64, the last member of the `app` block) and
 keeps `app.icon` as the fallback. Never edit `iconData` by hand: draw `icons/svg/<name>.svg` (192 × 192, full bleed,
@@ -205,7 +307,7 @@ everything that matters inside the inscribed circle, bold shapes that read at 48
 `app.iconData` and `icons/contact-sheet.png`; `swift icons/render.swift --check` verifies them. Without a Mac, send the
 SVG and ask a maintainer to render it.
 
-## 6. A translation
+## 7. A translation
 
 - **Web apps** keep their texts in a `STRINGS` table with one object per language (Solitaire and Pocket Scan have `en`
   and `sk`). Add a language as a complete object with every key of `en` and the plural forms the language needs (the
@@ -220,20 +322,21 @@ SVG and ask a maintainer to render it.
   speakers; a machine translation alone is not enough.
 - Mention the new language in the listing's description, and raise the version (a minor version).
 
-## 7. Versions
+## 8. Versions
 
 - Raise `app.version` for every change users should get: a patch for fixes and wording, a minor version for new
   features or a new language, a major version for a rework. Zapli updates an installed app only to a newer version.
+  A package app's version is in `package/manifest.json`; write its `web.files` again after the change.
 - Keep `listing.json` in step: when features change, the description says so.
 - Users keep their data. Never rename or remove a stored field or entity, or change a field's type, without a
   `migrations` entry; ask a maintainer first.
 
-## 8. Comments
+## 9. Comments
 
 Comments explain what the code does and why, in plain neutral words. No notes about who asked for something, no
 ticket or decision numbers, no TODOs, no jokes, no personal names, paths or devices.
 
-## 9. Before you open a pull request
+## 10. Before you open a pull request
 
 - [ ] The JSON parses (the definition, the manifest block, the listing), and the files are formatted like the ones
       around them (Prettier, 120 columns).
@@ -241,7 +344,10 @@ ticket or decision numbers, no TODOs, no jokes, no personal names, paths or devi
       `app.category` and the listing's `category` agree.
 - [ ] `app.version` is raised for a change users should get, and the listing's description matches the app.
 - [ ] Every phone feature used has a `permissions` entry with a purpose; nothing reaches the network.
-- [ ] No code, font or style loaded from the network; no `eval`, frames or password fields.
+- [ ] No code, font or style loaded from the network; no `eval`, frames or password fields; no service worker.
+- [ ] A package app: `web.files` written by `zapli library inventory --write` after the last change; the path rules
+      kept (no `.DS_Store` or other hidden file); within the limits; no minified code without its source in `dev/`;
+      tried from a local web server.
 - [ ] Sample data and import samples are fictional; every import sample is listed in `migration.samples`.
 - [ ] No other app's name or comparison wording outside `research`.
 - [ ] Every control has a label; it works in light and dark, at 360 px width and at 200 % text size.

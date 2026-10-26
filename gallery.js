@@ -1,15 +1,23 @@
 // The gallery of the Zapli library's tools.
 //
-// It reads the signed tool list (library-index.json) and each tool's listing.json from this same site when the page
-// opens, so it needs no build step: a tool shows here once it is in the index, as it reaches phones. Nothing is
-// fetched from any other site. Text from the files goes into the page as text, never as HTML, and every path the page
-// builds comes from parts that were checked first.
+// It reads the signed tool list and each tool's listing.json from this same site when the page opens, so it needs no
+// build step: a tool shows here once it is in the index, as it reaches phones. The list is library-index-v2.json,
+// which also lists package apps (an app made of many files in its package/ folder), or library-index.json where
+// there is no such file yet. Nothing is fetched from any other site. Text from the files goes into the page as text,
+// never as HTML, and every path the page builds comes from parts that were checked first.
 "use strict";
 
 (() => {
   const REPO = "https://github.com/nottracked/zapli-library";
-  const INDEX_FILE = "library-index.json";
-  const INDEX_FORMAT = "zapli-library-index/1";
+  // The newer list first; the first one that reads is used.
+  const INDEXES = [
+    { file: "library-index-v2.json", format: "zapli-library-index/2", packages: true },
+    { file: "library-index.json", format: "zapli-library-index/1", packages: false },
+  ];
+  const MAX_INDEX_BYTES = 256 * 1024;
+  const MAX_LISTING_BYTES = 256 * 1024;
+  const MAX_MANIFEST_BYTES = 512 * 1024;
+  const MAX_PACKAGE_BYTES = 100 * 1024 * 1024;
 
   // An app id is "<publisher>/<name>"; both parts are lowercase letters, digits and dashes.
   const APP_ID = /^([a-z0-9][a-z0-9-]{0,62})\/([a-z0-9][a-z0-9-]{0,62})$/;
@@ -17,6 +25,18 @@
   const SCREENSHOT_FILE = /^screenshots\/[A-Za-z0-9][A-Za-z0-9._-]{0,99}\.(png|jpe?g|webp)$/;
   const CATEGORY_ID = /^[a-z_]{1,40}$/;
   const ROUTE = /^#\/([a-z0-9-]+\/[a-z0-9-]+)$/;
+
+  // The path rules of a file in a package app (the library's package paths): at most 12 segments, each of ASCII
+  // letters, digits, ".", "_" and "-" that does not start with "." (no hidden files, no "." or ".."), does not end in
+  // "." and is not a Windows device name before its first "."; nothing under _zapli/ or _anyapp/ in any case, and none
+  // of the names the package format keeps for itself.
+  const PACKAGE_SEGMENT = /^[A-Za-z0-9_-][A-Za-z0-9._-]{0,127}$/;
+  const PACKAGE_MAX_DEPTH = 12;
+  const PACKAGE_MAX_PATH = 255;
+  const WINDOWS_DEVICE = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])$/i;
+  const RESERVED_FOLDER = /^_(zapli|anyapp)$/i;
+  const RESERVED_FILES = ["manifest.json", "signature.json", "web-storage.json"];
+  const ENTRY_PAGE = /\.html?$/i;
 
   // Play category ids whose plain name is not simply the id in words.
   const CATEGORY_NAMES = {
@@ -76,47 +96,124 @@
 
   // ---- reading the files ----
 
-  async function getJson(path) {
+  // A JSON file of this site, read as strict UTF-8 and refused above its size limit.
+  async function getJson(path, maxBytes) {
     const response = await fetch(path, { cache: "no-cache", credentials: "same-origin" });
     if (!response.ok) throw new Error(`${path} answered ${response.status}`);
-    return response.json();
+    const bytes = await response.arrayBuffer();
+    if (bytes.byteLength > maxBytes) throw new Error(`${path} is larger than ${maxBytes} bytes`);
+    return JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
   }
 
   // The index keeps its signed content as base64 in "payload"; the page shows it and leaves the signature to Zapli.
-  function decodePayload(index) {
-    if (!index || index.format !== INDEX_FORMAT || typeof index.payload !== "string") {
-      throw new Error(`${INDEX_FILE} is not in a format this page knows`);
+  function decodePayload(index, known) {
+    if (!index || index.format !== known.format || typeof index.payload !== "string") {
+      throw new Error(`${known.file} is not in a format this page knows`);
     }
     const binary = atob(index.payload);
     const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
     const payload = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
-    if (!payload || payload.format !== INDEX_FORMAT || !Array.isArray(payload.tools)) {
-      throw new Error(`${INDEX_FILE} lists no apps`);
+    if (
+      !payload ||
+      payload.format !== known.format ||
+      !Array.isArray(payload.tools) ||
+      (known.packages && !Array.isArray(payload.packages))
+    ) {
+      throw new Error(`${known.file} lists no apps`);
     }
     return payload;
   }
 
-  function toolFromEntry(entry) {
+  // The first index that reads: library-index-v2.json, else library-index.json.
+  async function loadIndex() {
+    const problems = [];
+    for (const known of INDEXES) {
+      try {
+        const payload = decodePayload(await getJson(known.file, MAX_INDEX_BYTES), known);
+        return { tools: payload.tools, packages: known.packages ? payload.packages : [] };
+      } catch (e) {
+        problems.push(e && e.message ? String(e.message) : `${known.file} could not be read`);
+      }
+    }
+    throw new Error(problems.join("; "));
+  }
+
+  // The part every entry shares: the id, its folder and the listing's path, each checked.
+  function appFromEntry(entry) {
     if (!entry || typeof entry !== "object") return null;
     const id = typeof entry.id === "string" ? APP_ID.exec(entry.id) : null;
     if (!id) return null;
     const folder = `apps/${id[1]}/${id[2]}`;
     if (entry.folder !== folder) return null;
-    const kind = entry.file === "index.html" ? "web" : entry.file === "app.json" ? "declarative" : null;
-    if (!kind) return null;
     const listing = typeof entry.listing === "string" && FILE_NAME.test(entry.listing) ? entry.listing : null;
     return {
       id: entry.id,
       publisher: id[1],
       name: id[2],
       folder,
-      kind,
-      file: entry.file,
       version: str(entry.version, 30),
       listingPath: listing ? `${folder}/${listing}` : null,
       listing: null,
       listingFailed: false,
     };
+  }
+
+  // A single-file tool: its app.json or index.html is in its folder.
+  function toolFromEntry(entry) {
+    const tool = appFromEntry(entry);
+    if (!tool) return null;
+    const kind = entry.file === "index.html" ? "web" : entry.file === "app.json" ? "declarative" : null;
+    if (!kind) return null;
+    return Object.assign(tool, {
+      kind,
+      isPackage: false,
+      openPath: kind === "web" ? `${tool.folder}/${entry.file}` : null,
+    });
+  }
+
+  // A package app: a web app whose files are in its folder's package/; which page opens first is in the package's
+  // manifest, read later (readEntry).
+  function packageFromEntry(entry) {
+    const tool = appFromEntry(entry);
+    if (!tool) return null;
+    const bytes =
+      Number.isSafeInteger(entry.bytes) && entry.bytes > 0 && entry.bytes <= MAX_PACKAGE_BYTES ? entry.bytes : 0;
+    return Object.assign(tool, {
+      kind: "web",
+      isPackage: true,
+      bytes,
+      manifestPath: `${tool.folder}/package/manifest.json`,
+      openPath: null,
+    });
+  }
+
+  // Whether a path keeps the path rules of a package's files.
+  function packagePath(path) {
+    if (typeof path !== "string" || path.length === 0 || path.length > PACKAGE_MAX_PATH) return false;
+    if (RESERVED_FILES.includes(path)) return false;
+    const segments = path.split("/");
+    if (segments.length > PACKAGE_MAX_DEPTH || RESERVED_FOLDER.test(segments[0])) return false;
+    return segments.every(
+      (segment) =>
+        PACKAGE_SEGMENT.test(segment) && !segment.endsWith(".") && !WINDOWS_DEVICE.test(segment.split(".")[0]),
+    );
+  }
+
+  // The page a package app opens with: its manifest's web.entry, when the manifest is this app's, the entry is an HTML
+  // page that keeps the path rules, and web.files lists it. Anything else opens nothing.
+  function readEntry(manifest, tool) {
+    if (!manifest || typeof manifest !== "object") throw new Error("not a manifest");
+    const app = manifest.app;
+    const web = manifest.web;
+    if (!app || app.id !== tool.id || app.kind !== "web") throw new Error("the manifest is not this web app's");
+    if (!web || typeof web !== "object" || !web.files || typeof web.files !== "object") {
+      throw new Error("the manifest lists no files");
+    }
+    const entry = web.entry;
+    if (!packagePath(entry) || !ENTRY_PAGE.test(entry) || !Object.prototype.hasOwnProperty.call(web.files, entry)) {
+      throw new Error("the manifest's start page is not a listed page of the package");
+    }
+    return entry;
   }
 
   // Keeps only the listing fields the page shows, each checked for its type and length.
@@ -141,22 +238,39 @@
     };
   }
 
+  async function loadListing(tool) {
+    if (!tool.listingPath) {
+      tool.listingFailed = true;
+      return;
+    }
+    try {
+      tool.listing = readListing(await getJson(tool.listingPath, MAX_LISTING_BYTES));
+    } catch (e) {
+      tool.listingFailed = true;
+    }
+  }
+
+  async function loadEntry(tool) {
+    try {
+      const entry = readEntry(await getJson(tool.manifestPath, MAX_MANIFEST_BYTES), tool);
+      tool.openPath = `${tool.folder}/package/${entry}`;
+    } catch (e) {
+      // Without a start page that keeps the rules, the app gets no link here (openLink says so).
+    }
+  }
+
+  // Tools and package apps in one list, by id; an id listed twice is shown once.
   async function loadTools() {
-    const payload = decodePayload(await getJson(INDEX_FILE));
-    const list = payload.tools.map(toolFromEntry).filter(Boolean);
-    await Promise.all(
-      list.map(async (tool) => {
-        if (!tool.listingPath) {
-          tool.listingFailed = true;
-          return;
-        }
-        try {
-          tool.listing = readListing(await getJson(tool.listingPath));
-        } catch (e) {
-          tool.listingFailed = true;
-        }
-      }),
-    );
+    const index = await loadIndex();
+    const list = [];
+    const seen = new Set();
+    for (const tool of [...index.tools.map(toolFromEntry), ...index.packages.map(packageFromEntry)]) {
+      if (!tool || seen.has(tool.id)) continue;
+      seen.add(tool.id);
+      list.push(tool);
+    }
+    list.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+    await Promise.all(list.map((tool) => Promise.all([loadListing(tool), tool.isPackage ? loadEntry(tool) : null])));
     return list;
   }
 
@@ -205,13 +319,24 @@
     return [chip, line];
   }
 
+  // The link that opens a web app here; a package app whose start page could not be read gets a line instead.
   function openLink(tool, extraClass) {
+    if (!tool.openPath) {
+      return el("p", { class: "note", text: "It cannot be opened here just now. Reload the page to try again." });
+    }
     return el(
       "a",
-      { class: `button ${extraClass || ""}`.trim(), href: `${tool.folder}/${tool.file}` },
+      { class: `button ${extraClass || ""}`.trim(), href: tool.openPath },
       el("span", null, "Open ", hidden(`${titleOf(tool)} `), "in your browser"),
       el("span", { "aria-hidden": "true", text: "→" }),
     );
+  }
+
+  // A download size in the units phones show: kB and MB of 1,000 and 1,000,000 bytes.
+  function sizeText(bytes) {
+    if (bytes < 1000) return `${bytes} bytes`;
+    if (bytes < 1000000) return `${Math.round(bytes / 1000)} kB`;
+    return `${(bytes / 1000000).toFixed(1)} MB`;
   }
 
   function screenshotStrip(tool, large) {
@@ -267,9 +392,12 @@
     );
     const actions = el("div", { class: "actions" });
     const foot = el("div", { class: "card-foot" }, actions);
-    if (tool.kind === "web") {
+    if (tool.kind === "web" && tool.openPath) {
       actions.append(openLink(tool), detailsLink);
       foot.append(el("p", { class: "note", text: "In the browser, it keeps its data only in that browser." }));
+    } else if (tool.kind === "web") {
+      actions.append(detailsLink);
+      foot.append(openLink(tool));
     } else {
       actions.append(
         el("p", { class: "runs-in" }, el("span", { class: "dot", "aria-hidden": "true" }), "Runs in the Zapli app"),
@@ -381,6 +509,7 @@
     fact("Version", tool.version);
     fact("Licence", listing.license);
     if (tool.kind === "web") fact("Runs", "In your browser and in the Zapli app");
+    if (tool.isPackage && tool.bytes) fact("Download", `${sizeText(tool.bytes)}, when you install it in the Zapli app`);
 
     const action =
       tool.kind === "web"
@@ -388,10 +517,12 @@
             "div",
             { class: "detail-action" },
             openLink(tool, "button-large"),
-            el("p", {
-              class: "note",
-              text: "Nothing to install. In the browser, it keeps its data only in that browser on this device; in the Zapli app, it keeps it on your phone.",
-            }),
+            tool.openPath
+              ? el("p", {
+                  class: "note",
+                  text: "Nothing to install. In the browser, it keeps its data only in that browser on this device; in the Zapli app, it keeps it on your phone.",
+                })
+              : null,
           )
         : el(
             "div",
