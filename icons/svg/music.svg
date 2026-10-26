@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Music: two beamed notes with a spark of light. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B2367A"/>
+      <stop offset="1" stop-color="#8F2560"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <g fill="#000" fill-opacity="0.2" transform="translate(0 8)">
+    <ellipse cx="70" cy="130" rx="25" ry="19" transform="rotate(-22 70 130)"/>
+    <ellipse cx="132" cy="118" rx="25" ry="19" transform="rotate(-22 132 118)"/>
+    <path d="M82 60 L94 58 V128 H82 Z"/>
+    <path d="M144 48 L156 46 V116 H144 Z"/>
+    <path d="M82 56 L156 42 V68 L82 82 Z"/>
+  </g>
+  <g fill="#FFF">
+    <ellipse cx="70" cy="130" rx="25" ry="19" transform="rotate(-22 70 130)"/>
+    <ellipse cx="132" cy="118" rx="25" ry="19" transform="rotate(-22 132 118)"/>
+    <path d="M82 60 L94 58 V128 H82 Z"/>
+    <path d="M144 48 L156 46 V116 H144 Z"/>
+    <path d="M82 56 L156 42 V68 L82 82 Z"/>
+  </g>
+  <path fill="#FFC531" d="M44 34 Q47.5 51.5 64 55 Q47.5 58.5 44 76 Q40.5 58.5 24 55 Q40.5 51.5 44 34 Z"/>
+</svg>

@@ -1,0 +1,3691 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="color-scheme" content="light dark" />
+        <title>Music</title>
+        <script type="application/zapli+json" id="zapli-manifest">
+            {
+                "spec": "zapli/0.2",
+                "app": {
+                    "id": "library/music",
+                    "kind": "web",
+                    "name": "Music",
+                    "version": "1.0.0",
+                    "icon": "music_note",
+                    "category": "music_and_audio",
+                    "ageRating": "everyone",
+                    "license": "MIT",
+                    "iconData": "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"
+                },
+                "theme": { "seedColor": "#9E2B6B" },
+                "i18n": {
+                    "defaultLocale": "en",
+                    "strings": {
+                        "purposeMusic": {
+                            "en": "Find the songs on your phone and play them, also with the screen off",
+                            "sk": "Nájsť skladby vo vašom telefóne a prehrávať ich, aj pri vypnutej obrazovke"
+                        }
+                    }
+                },
+                "permissions": {
+                    "audio.music": { "purpose": "@purposeMusic" }
+                },
+                "web": {
+                    "routes": {
+                        "songs": "#/",
+                        "albums": "#/albums",
+                        "artists": "#/artists",
+                        "search": "#/search",
+                        "player": "#/now"
+                    },
+                    "orientation": "any"
+                }
+            }
+        </script>
+        <style>
+            /* Colours of the now-playing screen, taken from the song's cover; registered so they fade into each other. */
+            @property --np1 {
+                syntax: "<color>";
+                inherits: true;
+                initial-value: #3a2236;
+            }
+            @property --np2 {
+                syntax: "<color>";
+                inherits: true;
+                initial-value: #1a1018;
+            }
+            @property --npa {
+                syntax: "<color>";
+                inherits: true;
+                initial-value: #f4a6cf;
+            }
+            :root {
+                color-scheme: light dark;
+                --bg: #fbf6f9;
+                --surface: #ffffff;
+                --surface-2: #f3e9f0;
+                --ink: #1d1420;
+                --muted: #5b4e60;
+                --line: #e6d9e2;
+                --accent: var(--zapli-color-primary, #9e2b6b);
+                --on-accent: var(--zapli-color-on-primary, #ffffff);
+                --accent-soft: color-mix(in srgb, var(--accent) 13%, var(--surface));
+                --demo-bg: linear-gradient(120deg, #fff1c4, #ffe0ee);
+                --demo-ink: #3b2a0c;
+                --shadow: 0 1px 2px rgba(40, 10, 30, 0.08), 0 6px 18px rgba(40, 10, 30, 0.08);
+                --shadow-lg: 0 18px 40px rgba(40, 10, 30, 0.26);
+                --radius: 18px;
+                --radius-s: 12px;
+                --font: var(--zapli-font-family, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+                --tap: clamp(48px, 3rem, 64px);
+                --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+                --mini-h: 0px;
+                --np-ink: #1a1220;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --bg: #140f15;
+                    --surface: #1f1820;
+                    --surface-2: #2c222d;
+                    --ink: #f6eef4;
+                    --muted: #c3b6c1;
+                    --line: #3a2f3b;
+                    --accent: var(--zapli-color-primary, #f39bc9);
+                    --on-accent: var(--zapli-color-on-primary, #4a0d2e);
+                    --demo-bg: linear-gradient(120deg, #3b3011, #3d1d2d);
+                    --demo-ink: #ffeec2;
+                    --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 6px 18px rgba(0, 0, 0, 0.35);
+                    --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.55);
+                    --np-ink: #ffffff;
+                }
+            }
+            * {
+                box-sizing: border-box;
+            }
+            [hidden] {
+                display: none !important;
+            }
+            html,
+            body {
+                margin: 0;
+                height: 100%;
+            }
+            body {
+                background: var(--bg);
+                color: var(--ink);
+                font: 400 1.125rem/1.45 var(--font);
+                -webkit-tap-highlight-color: transparent;
+                overflow: hidden;
+            }
+            button {
+                font: inherit;
+                color: inherit;
+                background: none;
+                border: 0;
+                padding: 0;
+                margin: 0;
+                cursor: pointer;
+                touch-action: manipulation;
+            }
+            button:disabled {
+                cursor: default;
+                opacity: 0.5;
+            }
+            :focus-visible {
+                outline: 3px solid var(--accent);
+                outline-offset: 2px;
+            }
+            svg {
+                fill: currentColor;
+                flex: none;
+            }
+            h1,
+            h2,
+            h3,
+            p {
+                margin: 0;
+            }
+            .vh {
+                position: absolute !important;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                clip-path: inset(50%);
+                white-space: nowrap;
+            }
+
+            /* ---------- screens: each one scrolls by itself, so going back keeps the place in a list ---------- */
+            .view {
+                position: fixed;
+                inset: 0;
+                overflow-x: hidden;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+                    calc(env(safe-area-inset-bottom, 0px) + var(--mini-h) + 1.5rem) env(safe-area-inset-left, 0px);
+                background: var(--bg);
+            }
+            .view.off {
+                visibility: hidden;
+            }
+            .top {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 1rem 0.75rem 0.75rem 1.25rem;
+            }
+            .brand {
+                flex: 1;
+                min-width: 0;
+                font-size: clamp(28px, 1.875rem, 44px);
+                font-weight: 800;
+                letter-spacing: -0.01em;
+                overflow-wrap: anywhere;
+                display: flex;
+                align-items: center;
+                gap: 0.65rem;
+            }
+            .logo {
+                width: clamp(40px, 2.6rem, 54px);
+                height: clamp(40px, 2.6rem, 54px);
+                border-radius: 13px;
+                display: grid;
+                place-items: center;
+                background: linear-gradient(160deg, #b2367a, #8f2560);
+                color: #fff;
+                box-shadow: var(--shadow);
+                flex: none;
+            }
+            .logo svg {
+                width: 60%;
+                height: 60%;
+            }
+            .icon-btn {
+                min-width: var(--tap);
+                min-height: var(--tap);
+                border-radius: 999px;
+                display: inline-grid;
+                place-items: center;
+                flex: none;
+            }
+            .icon-btn svg {
+                width: clamp(24px, 1.65rem, 34px);
+                height: clamp(24px, 1.65rem, 34px);
+            }
+            .icon-btn:active {
+                background: var(--surface-2);
+            }
+            .round-btn {
+                background: var(--surface-2);
+            }
+            .tabbar {
+                position: sticky;
+                top: 0;
+                z-index: 5;
+                display: flex;
+                align-items: center;
+                gap: 0.45rem;
+                padding: 0.5rem 0.75rem 0.75rem 1rem;
+                background: color-mix(in srgb, var(--bg) 90%, transparent);
+                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(12px);
+            }
+            .tabs {
+                flex: 1;
+                min-width: 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.45rem;
+            }
+            .tab {
+                flex: 1 1 auto;
+                min-height: var(--tap);
+                padding: 0.45rem 0.9rem;
+                border-radius: 999px;
+                font-weight: 700;
+                background: var(--surface-2);
+                color: var(--muted);
+                transition:
+                    background 0.2s,
+                    color 0.2s;
+            }
+            .tab[aria-selected="true"] {
+                background: var(--accent);
+                color: var(--on-accent);
+                box-shadow: var(--shadow);
+            }
+            .demo {
+                margin: 0 1rem 0.75rem;
+                padding: 0.8rem 1rem;
+                border-radius: 16px;
+                background: var(--demo-bg);
+                color: var(--demo-ink);
+                font-size: 1rem;
+                line-height: 1.4;
+                display: flex;
+                gap: 0.7rem;
+                align-items: flex-start;
+            }
+            .demo svg {
+                width: clamp(22px, 1.5rem, 30px);
+                height: clamp(22px, 1.5rem, 30px);
+                margin-top: 0.05rem;
+            }
+            .demo b {
+                display: block;
+            }
+
+            /* ---------- lists ---------- */
+            .actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.6rem;
+                padding: 0.25rem 1rem 0.5rem;
+                align-items: center;
+            }
+            .pill {
+                min-height: 3.25rem;
+                padding: 0.55rem 1.25rem;
+                border-radius: 999px;
+                font-weight: 750;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                background: var(--surface-2);
+                transition: transform 0.15s var(--ease);
+            }
+            .pill:active {
+                transform: scale(0.97);
+            }
+            .pill svg {
+                width: clamp(22px, 1.5rem, 32px);
+                height: clamp(22px, 1.5rem, 32px);
+            }
+            .pill.primary {
+                background: var(--accent);
+                color: var(--on-accent);
+                box-shadow: var(--shadow);
+            }
+            .count {
+                color: var(--muted);
+                font-size: 1rem;
+                padding: 0.1rem 1.25rem 0.25rem;
+            }
+            .sec {
+                content-visibility: auto;
+                contain-intrinsic-size: auto 640px;
+            }
+            .sech {
+                margin: 0.25rem 0 0;
+                padding: 0 0.75rem;
+                scroll-margin-top: var(--tabs-h, 4.5rem);
+            }
+            .sech button {
+                min-width: var(--tap);
+                min-height: var(--tap);
+                padding: 0 0.6rem;
+                border-radius: 12px;
+                font-size: 1.3rem;
+                font-weight: 800;
+                color: var(--accent);
+                text-align: left;
+            }
+            .rows {
+                list-style: none;
+                margin: 0;
+                padding: 0 0.5rem;
+            }
+            .row {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 0.9rem;
+                padding: 0.5rem 0.6rem;
+                min-height: 4.5rem;
+                border-radius: var(--radius-s);
+                text-align: left;
+                transition: background 0.2s;
+            }
+            .row:active {
+                background: var(--surface-2);
+            }
+            .row.cur {
+                background: var(--accent-soft);
+            }
+            .row.cur .t1 {
+                color: var(--accent);
+            }
+            .txt {
+                flex: 1;
+                min-width: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 0.1rem;
+            }
+            .t1 {
+                font-weight: 650;
+                overflow-wrap: anywhere;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .t2 {
+                color: var(--muted);
+                font-size: 1rem;
+                overflow-wrap: anywhere;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .dur {
+                color: var(--muted);
+                font-size: 0.95rem;
+                font-variant-numeric: tabular-nums;
+                flex: none;
+            }
+            .num {
+                width: 2rem;
+                text-align: center;
+                color: var(--muted);
+                font-weight: 700;
+                font-variant-numeric: tabular-nums;
+                flex: none;
+            }
+            .row .nowlbl {
+                display: none;
+            }
+            .row.cur .nowlbl {
+                display: inline;
+            }
+            .eq {
+                display: none;
+                gap: 3px;
+                align-items: flex-end;
+                height: 1.1rem;
+                width: 1.2rem;
+                flex: none;
+            }
+            .row.cur .eq {
+                display: inline-flex;
+            }
+            .eq i {
+                width: 4px;
+                border-radius: 2px;
+                background: var(--accent);
+                height: 45%;
+            }
+            .eq i:nth-child(2) {
+                height: 85%;
+                animation-delay: -0.45s;
+            }
+            .eq i:nth-child(3) {
+                height: 60%;
+                animation-delay: -0.75s;
+            }
+            body.playing .row.cur .eq i {
+                animation: eq 0.9s ease-in-out infinite alternate;
+            }
+            @keyframes eq {
+                from {
+                    height: 22%;
+                }
+                to {
+                    height: 100%;
+                }
+            }
+            .chev {
+                width: 1.6rem;
+                height: 1.6rem;
+                color: var(--muted);
+            }
+
+            /* ---------- covers: the song's own picture, or a tile drawn from its album's name ---------- */
+            .art {
+                position: relative;
+                display: block;
+                flex: none;
+                overflow: hidden;
+                border-radius: 10px;
+                isolation: isolate;
+            }
+            .art {
+                background: var(--art);
+            }
+            .art.nocover {
+                background: var(--base);
+            }
+            .art img {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0;
+                transition: opacity 0.35s;
+            }
+            .art img.on {
+                opacity: 1;
+            }
+            .art .mark {
+                position: absolute;
+                left: 24%;
+                top: 24%;
+                width: 52%;
+                height: 52%;
+                fill: rgba(255, 255, 255, 0.62);
+                display: none;
+            }
+            .art.nocover .mark {
+                display: block;
+            }
+            .art.sm {
+                width: clamp(48px, 3.6rem, 72px);
+                height: clamp(48px, 3.6rem, 72px);
+            }
+            .art.round {
+                border-radius: 50%;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr));
+                gap: 1.1rem 0.9rem;
+                padding: 0.25rem 1rem 1rem;
+            }
+            .tile {
+                display: flex;
+                flex-direction: column;
+                gap: 0.3rem;
+                text-align: left;
+                border-radius: var(--radius);
+                min-width: 0;
+            }
+            .tile .art {
+                width: 100%;
+                aspect-ratio: 1;
+                border-radius: var(--radius);
+                box-shadow: var(--shadow);
+                transition: transform 0.2s var(--ease);
+                margin-bottom: 0.25rem;
+            }
+            .tile:active .art {
+                transform: scale(0.96);
+            }
+            .tile .t1 {
+                font-size: 1.05rem;
+            }
+            .strip {
+                display: flex;
+                gap: 0.9rem;
+                overflow-x: auto;
+                padding: 0.25rem 1rem 1rem;
+                scroll-snap-type: x proximity;
+            }
+            .strip .tile {
+                width: 9.5rem;
+                flex: none;
+                scroll-snap-align: start;
+            }
+            .arow {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 0.9rem;
+                padding: 0.5rem 0.6rem;
+                min-height: 4.75rem;
+                border-radius: var(--radius-s);
+                text-align: left;
+            }
+            .arow:active {
+                background: var(--surface-2);
+            }
+            .rh {
+                font-size: 1.25rem;
+                font-weight: 800;
+                padding: 1rem 1.25rem 0.4rem;
+            }
+
+            /* ---------- album, artist and search screens ---------- */
+            .subtop {
+                position: sticky;
+                top: 0;
+                z-index: 5;
+                display: flex;
+                align-items: center;
+                gap: 0.25rem;
+                padding: 0.5rem 0.5rem;
+                min-height: 4rem;
+                background: color-mix(in srgb, var(--bg) 90%, transparent);
+                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(12px);
+            }
+            .subtop:not(.scrolled) {
+                background: transparent;
+                -webkit-backdrop-filter: none;
+                backdrop-filter: none;
+            }
+            .subtop .st {
+                flex: 1;
+                min-width: 0;
+                font-size: 1.15rem;
+                font-weight: 700;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                opacity: 0;
+                transition: opacity 0.2s;
+            }
+            .subtop.scrolled .st {
+                opacity: 1;
+            }
+            .hero {
+                position: relative;
+                isolation: isolate;
+                padding: 0.25rem 1.25rem 0.75rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 0.45rem;
+            }
+            .hero::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: -5rem;
+                height: 24rem;
+                background: radial-gradient(80% 65% at 50% 25%, var(--tint, transparent), transparent 72%);
+                opacity: 0.5;
+                z-index: -1;
+                transition: background 0.6s;
+            }
+            .hero .art.xl {
+                width: min(16rem, 68vw);
+                aspect-ratio: 1;
+                border-radius: 22px;
+                box-shadow: var(--shadow-lg);
+                margin-bottom: 0.5rem;
+            }
+            .hero h1 {
+                font-size: 1.65rem;
+                line-height: 1.2;
+                overflow-wrap: anywhere;
+            }
+            .hero .by {
+                font-size: 1.15rem;
+                font-weight: 600;
+                color: var(--accent);
+            }
+            .hero .meta2 {
+                color: var(--muted);
+                font-size: 1rem;
+            }
+            .hero .actions {
+                justify-content: center;
+                padding-top: 0.6rem;
+            }
+            .avatar {
+                width: min(10rem, 45vw);
+                height: min(10rem, 45vw);
+                border-radius: 50%;
+                box-shadow: var(--shadow-lg);
+                margin-bottom: 0.5rem;
+            }
+            .searchbox {
+                flex: 1;
+                min-width: 0;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                min-height: 3.25rem;
+                padding: 0 0.4rem 0 0.9rem;
+                border-radius: 999px;
+                background: var(--surface-2);
+            }
+            .searchbox:focus-within {
+                outline: 3px solid var(--accent);
+                outline-offset: -3px;
+            }
+            .searchbox svg {
+                width: 1.5rem;
+                height: 1.5rem;
+                color: var(--muted);
+            }
+            .searchbox input {
+                flex: 1;
+                min-width: 0;
+                min-height: 3rem;
+                border: 0;
+                background: transparent;
+                font: inherit;
+                color: inherit;
+                outline: none;
+            }
+            .searchbox input::-webkit-search-cancel-button {
+                -webkit-appearance: none;
+            }
+            .hint {
+                color: var(--muted);
+                padding: 1.5rem 1.5rem;
+                text-align: center;
+            }
+
+            /* ---------- first run, permission, empty, loading and error states ---------- */
+            .state {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1rem;
+                padding: 0.5rem 1.5rem 2rem;
+                max-width: 34rem;
+                margin: 0 auto;
+            }
+            .state h2 {
+                font-size: 1.65rem;
+                line-height: 1.25;
+            }
+            .state p {
+                color: var(--muted);
+            }
+            .state .lead {
+                color: var(--ink);
+                font-size: 1.2rem;
+            }
+            .state .steps {
+                text-align: left;
+                background: var(--surface);
+                border: 1px solid var(--line);
+                border-radius: var(--radius);
+                padding: 1rem 1.1rem;
+                display: flex;
+                gap: 0.8rem;
+                align-items: flex-start;
+                color: var(--ink);
+            }
+            .state .steps svg {
+                width: 1.75rem;
+                height: 1.75rem;
+                color: var(--accent);
+                margin-top: 0.1rem;
+            }
+            .big {
+                width: 100%;
+                min-height: 4.25rem;
+                padding: 0.75rem 1.5rem;
+                border-radius: 999px;
+                font-size: 1.35rem;
+                font-weight: 800;
+                background: var(--accent);
+                color: var(--on-accent);
+                box-shadow: var(--shadow-lg);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.6rem;
+                transition: transform 0.15s var(--ease);
+            }
+            .big:active {
+                transform: scale(0.98);
+            }
+            .big svg {
+                width: clamp(26px, 1.9rem, 38px);
+                height: clamp(26px, 1.9rem, 38px);
+            }
+            .big.quiet {
+                background: var(--surface-2);
+                color: var(--ink);
+                box-shadow: none;
+                font-size: 1.2rem;
+                min-height: 3.5rem;
+            }
+            .illo {
+                width: min(15rem, 66vw);
+                height: auto;
+                margin-top: 0.5rem;
+            }
+            .float {
+                animation: float 3.2s ease-in-out infinite alternate;
+            }
+            .float.b {
+                animation-delay: -1.6s;
+            }
+            @keyframes float {
+                from {
+                    transform: translateY(4px);
+                }
+                to {
+                    transform: translateY(-8px);
+                }
+            }
+            .spin {
+                transform-origin: 120px 92px;
+                animation: spin 2.4s linear infinite;
+            }
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            .bar {
+                width: 100%;
+                height: 10px;
+                border-radius: 99px;
+                background: var(--surface-2);
+                overflow: hidden;
+            }
+            .bar i {
+                display: block;
+                height: 100%;
+                width: 0;
+                background: var(--accent);
+                border-radius: 99px;
+                transition: width 0.3s;
+            }
+
+            /* ---------- the mini player on the library screens ---------- */
+            .mini {
+                position: fixed;
+                left: max(0.6rem, env(safe-area-inset-left, 0px));
+                right: max(0.6rem, env(safe-area-inset-right, 0px));
+                bottom: calc(env(safe-area-inset-bottom, 0px) + 0.6rem);
+                z-index: 20;
+                display: flex;
+                align-items: center;
+                gap: 0.2rem;
+                padding: 0.5rem 0.4rem 0.45rem 0.5rem;
+                border-radius: 22px;
+                background: var(--surface);
+                border: 1px solid var(--line);
+                box-shadow: var(--shadow-lg);
+                overflow: hidden;
+                max-width: 44rem;
+                margin: 0 auto;
+                transform: translateY(160%);
+                visibility: hidden;
+                transition:
+                    transform 0.38s var(--ease),
+                    visibility 0s 0.38s;
+            }
+            .mini.show {
+                transform: none;
+                visibility: visible;
+                transition:
+                    transform 0.38s var(--ease),
+                    visibility 0s;
+            }
+            .mprog {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                height: 4px;
+                background: var(--line);
+            }
+            .mprog i {
+                display: block;
+                height: 100%;
+                background: var(--accent);
+                transform-origin: left;
+                transform: scaleX(0);
+            }
+            .mopen {
+                flex: 1;
+                min-width: 0;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                text-align: left;
+                min-height: var(--tap);
+                border-radius: 14px;
+                padding-right: 0.25rem;
+            }
+            .mini .art {
+                width: clamp(48px, 3.4rem, 64px);
+                height: clamp(48px, 3.4rem, 64px);
+                border-radius: 12px;
+            }
+            .mini .t1 {
+                -webkit-line-clamp: 1;
+            }
+            .mini .t2 {
+                -webkit-line-clamp: 1;
+            }
+            .mplay {
+                width: clamp(52px, 3.5rem, 64px);
+                height: clamp(52px, 3.5rem, 64px);
+                background: var(--accent);
+                color: var(--on-accent);
+            }
+            .mplay:active {
+                background: var(--accent);
+                transform: scale(0.95);
+            }
+
+            /* play and pause in one button; a ring while the player is getting ready */
+            .pp .i-pause,
+            .pp .i-wait {
+                display: none;
+            }
+            .pp.is-playing .i-play {
+                display: none;
+            }
+            .pp.is-playing .i-pause {
+                display: block;
+            }
+            .pp.is-waiting .i-play,
+            .pp.is-waiting .i-pause {
+                display: none;
+            }
+            .pp.is-waiting .i-wait {
+                display: block;
+                animation: spin2 1s linear infinite;
+            }
+            @keyframes spin2 {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* ---------- now playing ---------- */
+            .now {
+                position: fixed;
+                inset: 0;
+                z-index: 40;
+                color: var(--np-ink);
+                background:
+                    radial-gradient(
+                        110% 60% at 15% 0%,
+                        color-mix(in srgb, var(--npa) 35%, transparent),
+                        transparent 70%
+                    ),
+                    radial-gradient(130% 75% at 50% 0%, var(--np1), var(--np2));
+                overflow-x: hidden;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                transform: translateY(100%);
+                visibility: hidden;
+                transition:
+                    transform 0.42s var(--ease),
+                    visibility 0s 0.42s,
+                    --np1 0.9s ease,
+                    --np2 0.9s ease,
+                    --npa 0.9s ease;
+            }
+            .now.open {
+                transform: none;
+                visibility: visible;
+                transition:
+                    transform 0.42s var(--ease),
+                    visibility 0s,
+                    --np1 0.9s ease,
+                    --np2 0.9s ease,
+                    --npa 0.9s ease;
+            }
+            .glowbox {
+                position: absolute;
+                inset: 0;
+                overflow: hidden;
+                pointer-events: none;
+            }
+            .glow {
+                position: absolute;
+                width: 70vmax;
+                height: 70vmax;
+                border-radius: 50%;
+                pointer-events: none;
+                background: radial-gradient(closest-side, color-mix(in srgb, var(--npa) 26%, transparent), transparent);
+                right: -30vmax;
+                bottom: -25vmax;
+                animation: drift 18s ease-in-out infinite alternate;
+            }
+            @keyframes drift {
+                to {
+                    transform: translate(-12vmax, -10vmax) scale(1.15);
+                }
+            }
+            .nowin {
+                position: relative;
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 0.9rem;
+                max-width: 40rem;
+                margin: 0 auto;
+                padding: calc(env(safe-area-inset-top, 0px) + 0.4rem) calc(env(safe-area-inset-right, 0px) + 1.25rem)
+                    calc(env(safe-area-inset-bottom, 0px) + 1.25rem) calc(env(safe-area-inset-left, 0px) + 1.25rem);
+            }
+            .nowtop {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin: 0 -0.5rem;
+            }
+            .nowtop .icon-btn:active {
+                background: color-mix(in srgb, var(--np-ink) 14%, transparent);
+            }
+            .nowlabel {
+                flex: 1;
+                text-align: center;
+                font-weight: 750;
+                font-size: 0.95rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                opacity: 0.85;
+            }
+            .chipline {
+                text-align: center;
+                margin-top: -0.6rem;
+            }
+            .chip {
+                display: inline-block;
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0;
+                text-transform: none;
+                padding: 0.15rem 0.6rem;
+                border-radius: 99px;
+                background: color-mix(in srgb, var(--np-ink) 14%, transparent);
+            }
+            .coverwrap {
+                flex: 1 1 auto;
+                display: grid;
+                place-items: center;
+                min-height: 0;
+                touch-action: pan-y;
+                padding: 0.25rem 0;
+            }
+            .cover {
+                position: relative;
+                width: min(100%, 46vh, 27rem);
+                aspect-ratio: 1;
+            }
+            .cover .art {
+                position: absolute;
+                inset: 0;
+                border-radius: 28px;
+                box-shadow: 0 24px 60px rgba(0, 0, 0, 0.36);
+                transition:
+                    transform 0.45s var(--ease),
+                    opacity 0.45s;
+            }
+            .cover .art.enter-next {
+                transform: translateX(60%) scale(0.85);
+                opacity: 0;
+            }
+            .cover .art.enter-prev {
+                transform: translateX(-60%) scale(0.85);
+                opacity: 0;
+            }
+            .cover .art.enter-fade {
+                transform: scale(0.92);
+                opacity: 0;
+            }
+            .cover .art.leave-next {
+                transform: translateX(-60%) scale(0.85);
+                opacity: 0;
+            }
+            .cover .art.leave-prev {
+                transform: translateX(60%) scale(0.85);
+                opacity: 0;
+            }
+            .cover .art.leave-fade {
+                opacity: 0;
+            }
+            .cover .art.drag {
+                transition: none;
+            }
+            .nowctl {
+                display: flex;
+                flex-direction: column;
+                gap: 0.9rem;
+            }
+            .meta {
+                text-align: center;
+            }
+            .meta h2 {
+                font-size: 1.6rem;
+                line-height: 1.25;
+                overflow-wrap: anywhere;
+            }
+            .meta p {
+                margin-top: 0.3rem;
+                font-size: 1.2rem;
+                opacity: 0.85;
+                overflow-wrap: anywhere;
+            }
+            .seek input {
+                width: 100%;
+                height: var(--tap);
+                -webkit-appearance: none;
+                appearance: none;
+                background: transparent;
+                margin: 0;
+                --p: 0%;
+            }
+            .seek input::-webkit-slider-runnable-track {
+                height: 8px;
+                border-radius: 99px;
+                background: linear-gradient(
+                    to right,
+                    var(--npa) var(--p),
+                    color-mix(in srgb, var(--np-ink) 24%, transparent) var(--p)
+                );
+            }
+            .seek input::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 28px;
+                height: 28px;
+                margin-top: -10px;
+                border-radius: 50%;
+                background: var(--npa);
+                border: 4px solid var(--np1);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            }
+            .seek input::-moz-range-track {
+                height: 8px;
+                border-radius: 99px;
+                background: color-mix(in srgb, var(--np-ink) 24%, transparent);
+            }
+            .seek input::-moz-range-progress {
+                height: 8px;
+                border-radius: 99px;
+                background: var(--npa);
+            }
+            .seek input::-moz-range-thumb {
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                background: var(--npa);
+                border: 4px solid var(--np1);
+            }
+            .seek input:focus-visible {
+                outline: 3px solid var(--np-ink);
+                outline-offset: 4px;
+                border-radius: 8px;
+            }
+            .times {
+                display: flex;
+                justify-content: space-between;
+                font-variant-numeric: tabular-nums;
+                font-size: 1rem;
+                font-weight: 600;
+                opacity: 0.85;
+                margin-top: -0.3rem;
+            }
+            .controls {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: clamp(0.75rem, 7vw, 2.25rem);
+            }
+            .ctl {
+                width: clamp(60px, 4.25rem, 80px);
+                height: clamp(60px, 4.25rem, 80px);
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                transition: transform 0.15s var(--ease);
+            }
+            .ctl svg {
+                width: clamp(34px, 2.5rem, 46px);
+                height: clamp(34px, 2.5rem, 46px);
+            }
+            .ctl:active {
+                background: color-mix(in srgb, var(--np-ink) 14%, transparent);
+                transform: scale(0.94);
+            }
+            .ctl.main {
+                width: clamp(80px, 5.75rem, 104px);
+                height: clamp(80px, 5.75rem, 104px);
+                background: var(--npa);
+                color: var(--np1);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+            }
+            .ctl.main svg {
+                width: clamp(42px, 3rem, 54px);
+                height: clamp(42px, 3rem, 54px);
+            }
+            .extras {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.25rem;
+                margin: 0 -0.5rem;
+            }
+            .xbtn {
+                flex: 1 1 3.9rem;
+                max-width: 7.5rem;
+                min-height: 4.4rem;
+                padding: 0.45rem 0.3rem;
+                border-radius: 18px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.2rem;
+                font-size: 0.95rem;
+                font-weight: 650;
+                line-height: 1.2;
+                text-align: center;
+                transition:
+                    background 0.25s,
+                    color 0.25s;
+            }
+            .xbtn svg {
+                width: clamp(24px, 1.7rem, 34px);
+                height: clamp(24px, 1.7rem, 34px);
+            }
+            .xbtn:active {
+                background: color-mix(in srgb, var(--np-ink) 14%, transparent);
+            }
+            .xbtn.on,
+            .xbtn[aria-pressed="true"] {
+                background: var(--npa);
+                color: var(--np1);
+            }
+
+            /* ---------- up next ---------- */
+            .qpanel {
+                position: fixed;
+                inset: 0;
+                z-index: 50;
+                background: var(--bg);
+                overflow-x: hidden;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+                    calc(env(safe-area-inset-bottom, 0px) + 1.5rem) env(safe-area-inset-left, 0px);
+                transform: translateX(100%);
+                visibility: hidden;
+                transition:
+                    transform 0.36s var(--ease),
+                    visibility 0s 0.36s;
+            }
+            .qpanel.open {
+                transform: none;
+                visibility: visible;
+                transition:
+                    transform 0.36s var(--ease),
+                    visibility 0s;
+            }
+            .qpanel .subtop .st {
+                opacity: 1;
+                font-size: 1.3rem;
+            }
+            .note {
+                margin: 0.25rem 1rem 0.5rem;
+                padding: 0.8rem 1rem;
+                border-radius: 14px;
+                background: var(--surface-2);
+                color: var(--ink);
+                font-size: 1rem;
+                display: flex;
+                gap: 0.6rem;
+                align-items: flex-start;
+            }
+            .note svg {
+                width: 1.4rem;
+                height: 1.4rem;
+                color: var(--accent);
+            }
+
+            /* ---------- sheets (speed, sleep timer, letters) ---------- */
+            dialog.sheet {
+                position: fixed;
+                inset: auto 0 0 0;
+                margin: 0 auto;
+                width: 100%;
+                max-width: 40rem;
+                max-height: 90%;
+                border: 0;
+                padding: 0;
+                background: transparent;
+                color: var(--ink);
+                overflow: visible;
+            }
+            dialog.sheet::backdrop {
+                background: rgba(12, 6, 12, 0.55);
+            }
+            .sheetin {
+                background: var(--surface);
+                border-radius: 26px 26px 0 0;
+                padding: 0.75rem 1.25rem calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
+                max-height: 90vh;
+                overflow-y: auto;
+                animation: up 0.32s var(--ease);
+            }
+            @keyframes up {
+                from {
+                    transform: translateY(40%);
+                    opacity: 0;
+                }
+            }
+            .sheethead {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .sheethead h2 {
+                flex: 1;
+                font-size: 1.4rem;
+            }
+            .sheet p.sub {
+                color: var(--muted);
+                margin-top: 0.25rem;
+            }
+            .opts {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(min(100%, 7.5rem), 1fr));
+                gap: 0.6rem;
+                margin-top: 1rem;
+            }
+            .opts.wide {
+                grid-template-columns: 1fr;
+            }
+            .opt {
+                min-height: 3.6rem;
+                padding: 0.5rem 0.75rem;
+                border-radius: 16px;
+                background: var(--surface-2);
+                font-weight: 700;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+            .opt svg {
+                width: 1.4rem;
+                height: 1.4rem;
+            }
+            .opt[aria-pressed="true"] {
+                background: var(--accent);
+                color: var(--on-accent);
+            }
+            .opt.danger {
+                background: transparent;
+                border: 2px solid var(--line);
+            }
+            .letters {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(3.5rem, 1fr));
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+            .letters .opt {
+                font-size: 1.3rem;
+                min-height: 3.5rem;
+            }
+
+            .toast {
+                position: fixed;
+                left: 50%;
+                bottom: calc(env(safe-area-inset-bottom, 0px) + var(--mini-h) + 1.5rem);
+                z-index: 70;
+                transform: translate(-50%, 1rem);
+                opacity: 0;
+                max-width: min(92vw, 30rem);
+                width: max-content;
+                padding: 0.85rem 1.15rem;
+                border-radius: 14px;
+                background: var(--ink);
+                color: var(--bg);
+                font-weight: 650;
+                text-align: center;
+                pointer-events: none;
+                transition:
+                    opacity 0.25s,
+                    transform 0.25s var(--ease);
+            }
+            .toast.show {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+            body.now-open .toast {
+                bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+            }
+
+            /* the phone's largest text sizes: room for the words first */
+            html.big .mini .art,
+            html.big .row .dur {
+                display: none;
+            }
+            html.big .mini .t1,
+            html.big .mini .t2 {
+                -webkit-line-clamp: 2;
+            }
+            html.big .row .t1 {
+                -webkit-line-clamp: 3;
+            }
+            html.big .row .art.sm,
+            html.big .arow .art.sm {
+                width: 44px;
+                height: 44px;
+            }
+            html.big .row,
+            html.big .arow {
+                gap: 0.6rem;
+            }
+            html.big .tabbar {
+                position: static;
+            }
+            html.big .nowlabel {
+                font-size: 0.75rem;
+                letter-spacing: 0.02em;
+            }
+            html.big .demo {
+                font-size: 0.85rem;
+            }
+            html.big .demo svg {
+                display: none;
+            }
+
+            /* sideways on a phone: the cover beside the controls */
+            @media (orientation: landscape) and (min-width: 560px) and (max-height: 600px) {
+                .nowin {
+                    display: grid;
+                    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+                    grid-template-rows: auto auto 1fr;
+                    column-gap: 2rem;
+                    row-gap: 0.4rem;
+                    max-width: 64rem;
+                }
+                .nowtop,
+                .chipline {
+                    grid-column: 1 / -1;
+                }
+                .chipline {
+                    grid-row: 2;
+                    margin: 0;
+                }
+                .coverwrap {
+                    grid-row: 3;
+                }
+                .nowctl {
+                    grid-row: 3;
+                    align-self: center;
+                    gap: 0.4rem;
+                }
+                .cover {
+                    width: min(100%, 66vh);
+                }
+                .meta h2 {
+                    font-size: 1.35rem;
+                }
+                .xbtn {
+                    min-height: 3.6rem;
+                    padding: 0.25rem;
+                }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                *,
+                *::before,
+                *::after {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                    scroll-behavior: auto !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <noscript><p style="padding: 1rem">Music needs JavaScript to run.</p></noscript>
+        <span
+            id="remProbe"
+            aria-hidden="true"
+            style="position: absolute; width: 10rem; height: 0; visibility: hidden"
+        ></span>
+
+        <div id="lib" class="view">
+            <header class="top">
+                <h1 class="brand"><span class="logo" id="logo" aria-hidden="true"></span><span>Music</span></h1>
+            </header>
+            <div id="demoBar" class="demo" hidden></div>
+            <div class="tabbar" id="tabbar" hidden>
+                <nav class="tabs" id="tabs" role="tablist">
+                    <button
+                        class="tab"
+                        role="tab"
+                        id="tab-songs"
+                        data-act="tab"
+                        data-tab="songs"
+                        aria-controls="libBody"
+                    ></button>
+                    <button
+                        class="tab"
+                        role="tab"
+                        id="tab-albums"
+                        data-act="tab"
+                        data-tab="albums"
+                        aria-controls="libBody"
+                    ></button>
+                    <button
+                        class="tab"
+                        role="tab"
+                        id="tab-artists"
+                        data-act="tab"
+                        data-tab="artists"
+                        aria-controls="libBody"
+                    ></button>
+                </nav>
+                <button class="icon-btn round-btn" id="searchBtn" data-act="search"></button>
+            </div>
+            <main id="libBody" aria-live="off"></main>
+        </div>
+
+        <div id="sub" class="view" hidden></div>
+
+        <div id="mini" class="mini" role="region">
+            <div class="mprog" aria-hidden="true"><i id="mBar"></i></div>
+            <button class="mopen" id="mOpen" data-act="openNow">
+                <span class="art" id="mArt"></span>
+                <span class="txt"><span class="t1" id="mTitle"></span><span class="t2" id="mArtist"></span></span>
+            </button>
+            <button class="icon-btn mplay pp" id="mPlay" data-act="toggle"></button>
+            <button class="icon-btn" id="mNext" data-act="next"></button>
+        </div>
+
+        <section id="now" class="now" role="dialog" aria-modal="true" aria-labelledby="npTitle">
+            <div class="glowbox" aria-hidden="true"><div class="glow"></div></div>
+            <div class="nowin">
+                <header class="nowtop">
+                    <button class="icon-btn" id="npClose" data-act="closeNow"></button>
+                    <span class="nowlabel" id="npLabel"></span>
+                    <button class="icon-btn" id="npQueueTop" data-act="queue"></button>
+                </header>
+                <div class="chipline" id="npChipLine" hidden><span class="chip" id="npChip"></span></div>
+                <div class="coverwrap" id="coverWrap">
+                    <div class="cover" id="npCover"></div>
+                </div>
+                <div class="nowctl">
+                    <div class="meta">
+                        <h2 id="npTitle"></h2>
+                        <p id="npArtist"></p>
+                    </div>
+                    <div class="seek">
+                        <input type="range" id="seek" min="0" max="1000" step="1000" value="0" />
+                        <div class="times" aria-hidden="true">
+                            <span id="tNow">0:00</span><span id="tAll">0:00</span>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button class="ctl" id="npPrev" data-act="prev"></button>
+                        <button class="ctl main pp" id="npPlay" data-act="toggle"></button>
+                        <button class="ctl" id="npNext" data-act="next"></button>
+                    </div>
+                    <div class="extras">
+                        <button class="xbtn" id="xShuffle" data-act="shuffle"></button>
+                        <button class="xbtn" id="xRepeat" data-act="repeat"></button>
+                        <button class="xbtn" id="xSpeed" data-act="speed"></button>
+                        <button class="xbtn" id="xSleep" data-act="sleep"></button>
+                        <button class="xbtn" id="xQueue" data-act="queue"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="queue" class="qpanel" role="dialog" aria-modal="true" aria-labelledby="qTitle"></section>
+
+        <dialog id="sheet" class="sheet"></dialog>
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+        <script>
+            "use strict";
+            const Z = window.zapli; // Zapli's API; undefined in a plain browser, where Music shows its demo
+            const $ = (s, root = document) => root.querySelector(s);
+            const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
+
+            /* ---------- words: English and Slovak, after the phone's language ---------- */
+            const STRINGS = {
+                en: {
+                    songs: "Songs",
+                    albums: "Albums",
+                    artists: "Artists",
+                    search: "Search",
+                    searchPh: "Song, album or artist",
+                    searchHint: "Type a few letters of a song, an album or an artist.",
+                    noResults: (a) => `Nothing found for “${a.q}”.`,
+                    clearSearch: "Clear the search",
+                    back: "Back",
+                    album: "Album",
+                    artist: "Artist",
+                    playAll: "Play all",
+                    play: "Play",
+                    pause: "Pause",
+                    shuffle: "Shuffle",
+                    next: "Next song",
+                    previous: "Previous song",
+                    openPlayer: (a) => `Open the player. ${a.t}`,
+                    closePlayer: "Close the player",
+                    nowPlaying: "Now playing",
+                    upNext: "Up next",
+                    playingNow: "Playing now",
+                    repeatOff: "Repeat",
+                    repeatAll: "Repeat all",
+                    repeatOne: "Repeat one",
+                    repeatSay: (a) => `Repeat: ${a.v}. Tap to change.`,
+                    repeatOffSay: "off",
+                    repeatAllSay: "all songs",
+                    repeatOneSay: "this song",
+                    speed: "Speed",
+                    speedTitle: "Playback speed",
+                    speedHint: "Slower or faster, handy for audiobooks and talks.",
+                    speedSay: (a) => `Speed: ${a.v}`,
+                    normal: "Normal",
+                    sleep: "Sleep",
+                    sleepTitle: "Sleep timer",
+                    sleepHint: "The music pauses by itself, also with the screen off.",
+                    sleepIn: (a) => `Pauses in ${a.t}`,
+                    sleepEnd: "Pauses after this song",
+                    sleepSay: (a) => `Sleep timer: ${a.v}`,
+                    sleepNone: "off",
+                    endOfSong: "At the end of this song",
+                    sleepOff: "Turn the timer off",
+                    sleepNeedsPlay: "Start a song first: the timer counts down while music plays.",
+                    endShort: "Song end",
+                    minutes: { one: "# minute", other: "# minutes" },
+                    hours: { one: "# hour", other: "# hours" },
+                    seekLabel: "Position in the song",
+                    timeOf: (a) => `${a.a} of ${a.b}`,
+                    letters: "Jump to a letter",
+                    lettersShort: "A–Z",
+                    unknownArtist: "Unknown artist",
+                    unknownAlbum: "Unknown album",
+                    various: "Various artists",
+                    songCount: { one: "# song", other: "# songs" },
+                    albumCount: { one: "# album", other: "# albums" },
+                    disc: (a) => `Disc ${a.n}`,
+                    welcomeTitle: "Your music, right here",
+                    welcomeBody: "Play the songs saved on this phone, with big buttons, no ads and no account.",
+                    findMusic: "Find my music",
+                    welcomeSteps: "Tap the button, then agree when your phone asks about your music.",
+                    welcomeAgain: "Nothing changed. Tap the button again whenever you are ready.",
+                    deniedTitle: "Music can’t see your songs yet",
+                    deniedBody:
+                        "Access to your music is switched off for this app. Tap Open settings and switch it on, then come back here.",
+                    osDeniedTitle: "Music access is off in the phone’s settings",
+                    osDeniedBody:
+                        "Open the phone’s Settings, then Apps, Zapli and Permissions, and switch on Music and audio. Then come back here.",
+                    openSettings: "Open settings",
+                    checkAgain: "Check again",
+                    emptyTitle: "No songs on this phone yet",
+                    emptyBody: "Music shows the songs that are saved on the phone itself.",
+                    emptyHow:
+                        "To add songs, connect the phone to a computer with its cable, open the phone on the computer and copy your songs into its Music folder. They appear here by themselves.",
+                    emptyNote: "Songs in streaming apps stay inside those apps and don’t show here.",
+                    lookAgain: "Look again",
+                    loading: "Looking for your songs…",
+                    loadingCount: (a) => `${a.n} of ${a.t} songs`,
+                    errorTitle: "Your songs couldn’t be read",
+                    errorBody: "Something went wrong while reading the songs. Please try again.",
+                    tryAgain: "Try again",
+                    unsupportedTitle: "This version of Zapli can’t play music yet",
+                    unsupportedBody: "Update Zapli, then open Music again.",
+                    seeDemo: "See a demo",
+                    demoTitle: "A demo with made-up songs and no sound.",
+                    demoBody: "Inside the Zapli app, Music plays your own songs from your phone.",
+                    demoChip: "Demo, no sound",
+                    gone: "That song is no longer on the phone.",
+                    tapAgain: "Please tap again.",
+                    tooFast: "One moment, please.",
+                    failed: "That didn’t work. Please try again.",
+                    otherApp: "Another app is playing now. Tap Play to carry on here.",
+                    shuffleNote: "Shuffle is on: the next song is picked at random from this list.",
+                    tapSong: "Tap a song to play it.",
+                    close: "Close",
+                    demoOnly: "This is only a demo.",
+                },
+                sk: {
+                    songs: "Skladby",
+                    albums: "Albumy",
+                    artists: "Interpreti",
+                    search: "Hľadať",
+                    searchPh: "Skladba, album alebo interpret",
+                    searchHint: "Napíšte pár písmen z názvu skladby, albumu alebo mena interpreta.",
+                    noResults: (a) => `Pre „${a.q}“ sa nič nenašlo.`,
+                    clearSearch: "Vymazať vyhľadávanie",
+                    back: "Späť",
+                    album: "Album",
+                    artist: "Interpret",
+                    playAll: "Prehrať všetko",
+                    play: "Prehrať",
+                    pause: "Pozastaviť",
+                    shuffle: "Náhodne",
+                    next: "Ďalšia skladba",
+                    previous: "Predchádzajúca skladba",
+                    openPlayer: (a) => `Otvoriť prehrávač. ${a.t}`,
+                    closePlayer: "Zavrieť prehrávač",
+                    nowPlaying: "Práve hrá",
+                    upNext: "Poradie",
+                    playingNow: "Práve hrá",
+                    repeatOff: "Opakovať",
+                    repeatAll: "Opakovať všetko",
+                    repeatOne: "Opakovať jednu",
+                    repeatSay: (a) => `Opakovanie: ${a.v}. Klepnutím ho zmeníte.`,
+                    repeatOffSay: "vypnuté",
+                    repeatAllSay: "všetky skladby",
+                    repeatOneSay: "táto skladba",
+                    speed: "Rýchlosť",
+                    speedTitle: "Rýchlosť prehrávania",
+                    speedHint: "Pomalšie alebo rýchlejšie, napríklad pri audioknihách.",
+                    speedSay: (a) => `Rýchlosť: ${a.v}`,
+                    normal: "Normálna",
+                    sleep: "Časovač",
+                    sleepTitle: "Časovač spánku",
+                    sleepHint: "Hudba sa sama pozastaví, aj keď je obrazovka vypnutá.",
+                    sleepIn: (a) => `Pozastaví sa o ${a.t}`,
+                    sleepEnd: "Pozastaví sa po tejto skladbe",
+                    sleepSay: (a) => `Časovač spánku: ${a.v}`,
+                    sleepNone: "vypnutý",
+                    endOfSong: "Na konci tejto skladby",
+                    sleepOff: "Vypnúť časovač",
+                    sleepNeedsPlay: "Najprv spustite skladbu: časovač odpočítava, kým hrá hudba.",
+                    endShort: "Koniec skladby",
+                    minutes: { one: "# minúta", few: "# minúty", many: "# minúty", other: "# minút" },
+                    hours: { one: "# hodina", few: "# hodiny", many: "# hodiny", other: "# hodín" },
+                    seekLabel: "Miesto v skladbe",
+                    timeOf: (a) => `${a.a} z ${a.b}`,
+                    letters: "Prejsť na písmeno",
+                    lettersShort: "A – Ž",
+                    unknownArtist: "Neznámy interpret",
+                    unknownAlbum: "Neznámy album",
+                    various: "Rôzni interpreti",
+                    songCount: { one: "# skladba", few: "# skladby", many: "# skladby", other: "# skladieb" },
+                    albumCount: { one: "# album", few: "# albumy", many: "# albumu", other: "# albumov" },
+                    disc: (a) => `${a.n}. disk`,
+                    welcomeTitle: "Vaša hudba, priamo tu",
+                    welcomeBody:
+                        "Prehrávajte skladby uložené v tomto telefóne, s veľkými tlačidlami, bez reklám a bez účtu.",
+                    findMusic: "Nájsť moju hudbu",
+                    welcomeSteps: "Klepnite na tlačidlo a keď sa telefón opýta na vašu hudbu, súhlaste.",
+                    welcomeAgain: "Nič sa nezmenilo. Keď budete pripravení, klepnite na tlačidlo znova.",
+                    deniedTitle: "Vaše skladby sa zatiaľ nedajú zobraziť",
+                    deniedBody:
+                        "Prístup k hudbe je pre túto aplikáciu vypnutý. Klepnite na Otvoriť nastavenia, zapnite ho a potom sa sem vráťte.",
+                    osDeniedTitle: "Prístup k hudbe je vypnutý v nastaveniach telefónu",
+                    osDeniedBody:
+                        "Otvorte Nastavenia telefónu, potom Aplikácie, Zapli a Povolenia, a zapnite Hudba a zvuk. Potom sa sem vráťte.",
+                    openSettings: "Otvoriť nastavenia",
+                    checkAgain: "Skontrolovať znova",
+                    emptyTitle: "V telefóne zatiaľ nie sú žiadne skladby",
+                    emptyBody: "Tu sa zobrazujú skladby, ktoré sú uložené priamo v telefóne.",
+                    emptyHow:
+                        "Skladby pridáte tak, že telefón pripojíte káblom k počítaču, v počítači ho otvoríte a skladby skopírujete do jeho priečinka Music. Potom sa tu zobrazia samy.",
+                    emptyNote: "Skladby zo streamovacích aplikácií zostávajú v týchto aplikáciách a tu sa nezobrazia.",
+                    lookAgain: "Hľadať znova",
+                    loading: "Hľadajú sa vaše skladby…",
+                    loadingCount: (a) => `${a.n} z ${a.t} skladieb`,
+                    errorTitle: "Skladby sa nepodarilo načítať",
+                    errorBody: "Pri načítaní skladieb sa niečo pokazilo. Skúste to znova.",
+                    tryAgain: "Skúsiť znova",
+                    unsupportedTitle: "Táto verzia aplikácie Zapli zatiaľ nevie prehrávať hudbu",
+                    unsupportedBody: "Aktualizujte Zapli a potom znova otvorte nástroj „Music“.",
+                    seeDemo: "Pozrieť ukážku",
+                    demoTitle: "Ukážka s vymyslenými skladbami, bez zvuku.",
+                    demoBody: "V aplikácii Zapli prehráva nástroj „Music“ vaše vlastné skladby z telefónu.",
+                    demoChip: "Ukážka, bez zvuku",
+                    gone: "Táto skladba už v telefóne nie je.",
+                    tapAgain: "Klepnite, prosím, znova.",
+                    tooFast: "Moment, prosím.",
+                    failed: "Nepodarilo sa. Skúste to znova.",
+                    otherApp: "Teraz hrá iná aplikácia. Klepnutím na Prehrať budete pokračovať tu.",
+                    shuffleNote: "Náhodné poradie je zapnuté: ďalšia skladba sa vyberie náhodne z tohto zoznamu.",
+                    tapSong: "Skladbu prehráte klepnutím na ňu.",
+                    close: "Zavrieť",
+                    demoOnly: "Toto je len ukážka.",
+                },
+            };
+            // The phone's language: Zapli tells the page, a browser has its own. Slovak for Slovak, else English.
+            const locale = (() => {
+                let loc = "";
+                try {
+                    if (Z && typeof Z.app.locale === "function") loc = String(Z.app.locale() || "");
+                } catch {
+                    loc = "";
+                }
+                return (loc || (navigator.languages && navigator.languages[0]) || navigator.language || "en").replace(
+                    /_/g,
+                    "-",
+                );
+            })();
+            const lang = /^sk(-|$)/i.test(locale) ? "sk" : "en";
+            const words = STRINGS[lang];
+            document.documentElement.lang = lang;
+            function t(key, args) {
+                const v = key in words ? words[key] : STRINGS.en[key];
+                return typeof v === "function" ? v(args || {}) : v;
+            }
+            const plural = (() => {
+                try {
+                    const rules = new Intl.PluralRules(lang);
+                    return (n) => rules.select(n);
+                } catch {
+                    return (n) => (n === 1 ? "one" : lang === "sk" && n >= 2 && n <= 4 ? "few" : "other");
+                }
+            })();
+            function tn(key, n) {
+                const forms = t(key);
+                return (forms[plural(n)] || forms.other).replace("#", num(n));
+            }
+            const numFmt = (() => {
+                try {
+                    return new Intl.NumberFormat(lang);
+                } catch {
+                    return null;
+                }
+            })();
+            const num = (n) => (numFmt ? numFmt.format(n) : String(n));
+            const collator = new Intl.Collator(lang, { sensitivity: "base", numeric: true });
+            const fold = (s) =>
+                String(s || "")
+                    .normalize("NFD")
+                    .replace(/[̀-ͯ]/g, "")
+                    .toLowerCase();
+            const esc = (s) =>
+                String(s == null ? "" : s).replace(
+                    /[&<>"']/g,
+                    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+                );
+            function clock(ms) {
+                const s = Math.max(0, Math.floor((ms || 0) / 1000));
+                const h = Math.floor(s / 3600),
+                    m = Math.floor((s % 3600) / 60),
+                    x = String(s % 60).padStart(2, "0");
+                return h ? `${h}:${String(m).padStart(2, "0")}:${x}` : `${m}:${x}`;
+            }
+            function minutesText(ms) {
+                const m = Math.max(1, Math.round(ms / 60000));
+                return m >= 60 ? `${Math.floor(m / 60)} h ${m % 60} min` : `${m} min`;
+            }
+            const speedText = (v) => `${num(v)}×`;
+            const reduceMotion = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const darkMode = () => window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+
+            /* ---------- icons (24 × 24) ---------- */
+            const P = {
+                play: "M8 5.6v12.8a1 1 0 0 0 1.53.85l10.1-6.4a1 1 0 0 0 0-1.7L9.53 4.75A1 1 0 0 0 8 5.6z",
+                pause: "M7.5 5h3a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 .5-.5zm6 0h3a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 .5-.5z",
+                wait: "M12 2a10 10 0 1 0 10 10h-2.5A7.5 7.5 0 1 1 12 4.5z",
+                next: "M5 6.3v11.4a1 1 0 0 0 1.55.83L15 12.83V17a1 1 0 0 0 2 0V7a1 1 0 0 0-2 0v4.17L6.55 5.47A1 1 0 0 0 5 6.3z",
+                prev: "M19 6.3v11.4a1 1 0 0 1-1.55.83L9 12.83V17a1 1 0 0 1-2 0V7a1 1 0 0 1 2 0v4.17l8.45-5.7A1 1 0 0 1 19 6.3z",
+                shuffle:
+                    "M10.59 9.17 5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z",
+                repeat: "M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z",
+                repeatOne: "M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4zm-4-2V9h-1l-2 1v1h1.5v4H13z",
+                speed: "M20.38 8.57l-1.23 1.85a8 8 0 0 1-.22 7.58H5.07A8 8 0 0 1 15.58 6.85l1.85-1.23A10 10 0 0 0 3.35 19a2 2 0 0 0 1.72 1h13.85a2 2 0 0 0 1.74-1 10 10 0 0 0-.27-10.44zm-9.79 6.84a2 2 0 0 0 2.83 0l5.66-8.49-8.49 5.66a2 2 0 0 0 0 2.83z",
+                moon: "M12.34 2.02C6.59 1.82 2 6.42 2 12c0 5.52 4.48 10 10 10 3.71 0 6.93-2.02 8.66-5.02-7.51-.25-12.09-8.43-8.32-14.96z",
+                queue: "M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z",
+                search: "M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z",
+                back: "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z",
+                down: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z",
+                right: "M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z",
+                close: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z",
+                note: "M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z",
+                check: "M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z",
+                info: "M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z",
+                refresh:
+                    "M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z",
+                gear: "M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.48.48 0 0 0-.59.22L2.74 8.87a.47.47 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.47.47 0 0 0-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z",
+            };
+            const icon = (name, cls = "") =>
+                `<svg viewBox="0 0 24 24" aria-hidden="true"${cls ? ` class="${cls}"` : ""}><path d="${P[name]}"/></svg>`;
+            const PP_ICONS = icon("play", "i-play") + icon("pause", "i-pause") + icon("wait", "i-wait");
+            const EQ = '<span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>';
+            const MARK = icon("note", "mark");
+
+            /* ---------- generated covers: a tile drawn from the album's name for songs without a picture ---------- */
+            function hash(s) {
+                let h = 2166136261;
+                for (const ch of String(s)) {
+                    h ^= ch.codePointAt(0);
+                    h = Math.imul(h, 16777619);
+                }
+                return h >>> 0;
+            }
+            function art(key, seed) {
+                const h = hash(key);
+                const h1 = seed ? seed.h : h % 360;
+                const h2 = (h1 + 28 + ((h >>> 9) % 70)) % 360;
+                const v = seed ? seed.v : (h >>> 17) % 6;
+                const c1 = `hsl(${h1} 64% 52%)`,
+                    c2 = `hsl(${h2} 60% 30%)`,
+                    c3 = `hsl(${(h1 + 40) % 360} 92% 76%)`,
+                    c4 = `hsl(${(h1 + 200) % 360} 80% 82% / 0.4)`;
+                const base = `linear-gradient(160deg, ${c1}, ${c2})`;
+                const layers = [
+                    `radial-gradient(circle at 50% 56%, ${c3} 0 19%, transparent 19.6%), linear-gradient(to bottom, transparent 63%, rgb(0 0 0 / 0.26) 63%), ${base}`,
+                    `repeating-radial-gradient(circle at 0% 100%, transparent 0 8%, ${c4} 8% 11%), ${base}`,
+                    `repeating-linear-gradient(-45deg, rgb(255 255 255 / 0.16) 0 7%, transparent 7% 14%), radial-gradient(circle at 70% 30%, ${c3} 0 15%, transparent 15.6%), ${base}`,
+                    `radial-gradient(circle at 30% 32%, ${c3} 0 14%, transparent 14.6%), radial-gradient(circle at 68% 66%, ${c4} 0 27%, transparent 27.6%), ${base}`,
+                    `linear-gradient(135deg, transparent 50%, rgb(0 0 0 / 0.22) 50%), radial-gradient(circle at 64% 36%, ${c3} 0 16%, transparent 16.6%), ${base}`,
+                    `radial-gradient(130% 55% at 50% 108%, ${c4} 0 42%, transparent 42.6%), radial-gradient(130% 55% at 50% 126%, rgb(0 0 0 / 0.22) 0 58%, transparent 58.6%), ${base}`,
+                ];
+                return { bg: layers[v], base, style: `--art:${layers[v]};--base:${base}`, hues: { h1, h2, s: 0.6 } };
+            }
+
+            /* ---------- small storage helpers (a cache of the song list; never needed for anything to work) ---------- */
+            const store = {
+                get(k) {
+                    try {
+                        const v = localStorage.getItem(k);
+                        return v == null ? null : JSON.parse(v);
+                    } catch {
+                        return null;
+                    }
+                },
+                set(k, v) {
+                    try {
+                        localStorage.setItem(k, JSON.stringify(v));
+                    } catch {
+                        /* full or blocked: the cache is only a speed-up */
+                    }
+                },
+                del(k) {
+                    try {
+                        localStorage.removeItem(k);
+                    } catch {
+                        /* blocked */
+                    }
+                },
+            };
+            const CACHE_KEY = "music.songs.v1";
+
+            /* ---------- the demo: made-up songs and a player that keeps time without sound ---------- */
+            const DEMO_ALBUMS = [
+                {
+                    al: ["Blue Hour", "Modrá hodinka"],
+                    ar: "Velvet Lanterns",
+                    year: 2021,
+                    seed: { h: 222, v: 0 },
+                    songs: [
+                        ["Blue Hour", "Modrá hodinka", 214],
+                        ["Lantern Light", "Svetlo lampáša", 187],
+                        ["Window Rain", "Dážď na okne", 243],
+                        ["Slow River", "Pomalá rieka", 201],
+                        ["Paper Boats", "Papierové lodičky", 176],
+                        ["Goodnight, City", "Dobrú noc, mesto", 232],
+                    ],
+                },
+                {
+                    al: ["Apple Orchard", "Jabloňový sad"],
+                    ar: "The Orchard Strings",
+                    year: 2018,
+                    seed: { h: 8, v: 3 },
+                    songs: [
+                        ["Apple Blossom Waltz", "Valčík jabloňových kvetov", 198],
+                        ["Sunday Bread", "Nedeľný chlieb", 165],
+                        ["Far Hills", "Ďaleké kopce", 224],
+                        ["Harvest Moon Dance", "Tanec pri mesiaci", 191],
+                        ["Grandmother’s Garden", "Babičkina záhrada", 208],
+                    ],
+                },
+                {
+                    al: ["Coastline", "Pobrežie"],
+                    ar: "Seabird Choir",
+                    year: 2015,
+                    seed: { h: 186, v: 5 },
+                    songs: [
+                        ["Morning Tide", "Ranný príliv", 236],
+                        ["Seabirds", "Čajky", 182],
+                        ["Salt and Sun", "Soľ a slnko", 205],
+                        ["Long Way Home", "Dlhá cesta domov", 261],
+                    ],
+                },
+                {
+                    al: ["Little Star", "Hviezdička"],
+                    ar: "Velvet Lanterns",
+                    year: 2023,
+                    seed: { h: 266, v: 1 },
+                    songs: [
+                        ["Little Star", "Hviezdička", 158],
+                        ["Cradle Song", "Uspávanka", 172],
+                        ["Snow at Night", "Sneh v noci", 219],
+                    ],
+                },
+                {
+                    al: ["Evening Dances", "Večerné tance"],
+                    ar: "Café Trio",
+                    year: 2012,
+                    seed: { h: 338, v: 2 },
+                    songs: [
+                        ["Quickstep for Two", "Quickstep pre dvoch", 169],
+                        ["Midnight Tango", "Polnočné tango", 213],
+                        ["Last Waltz", "Posledný valčík", 247],
+                    ],
+                },
+                {
+                    al: ["The Lighthouse Keeper", "Strážca majáka"],
+                    ar: "Story Hour Readers",
+                    year: 2020,
+                    seed: { h: 34, v: 4 },
+                    songs: [
+                        ["Chapter 1: The Storm", "1. kapitola: Búrka", 1312],
+                        ["Chapter 2: A Light at Sea", "2. kapitola: Svetlo na mori", 1187],
+                        ["Chapter 3: The Visitor", "3. kapitola: Návšteva", 1420],
+                        ["Chapter 4: Morning", "4. kapitola: Ráno", 1096],
+                    ],
+                },
+            ];
+            const DEMO_SEEDS = new Map();
+            const DEMO_TRACKS = (() => {
+                const out = [];
+                const li = lang === "sk" ? 1 : 0;
+                DEMO_ALBUMS.forEach((a, ai) => {
+                    const albumId = "demoalbum" + String(ai + 1).padStart(13, "0");
+                    DEMO_SEEDS.set("a" + albumId, a.seed);
+                    a.songs.forEach((s, si) => {
+                        out.push({
+                            id: "demosong" + String(out.length + 1).padStart(14, "0"),
+                            title: s[li],
+                            artist: a.ar,
+                            album: a.al[li],
+                            albumId,
+                            duration: s[2] * 1000,
+                            track: si + 1,
+                            year: a.year,
+                        });
+                    });
+                });
+                return out;
+            })();
+
+            function zerr(code) {
+                const e = new Error(code);
+                e.code = code;
+                return e;
+            }
+            // The same shape as zapli.music, so the whole page runs the same code in the demo.
+            function demoMusic() {
+                const listeners = { state: new Set(), library: new Set() };
+                const dur = (id) => (DEMO_TRACKS.find((x) => x.id === id) || {}).duration || 180000;
+                const s = { owner: false, status: "idle", speed: 1, shuffle: false, repeat: "off" };
+                let endTimer = 0,
+                    sleepTimer = 0;
+                const cur = () => (s.queue ? s.queue[s.index] : null);
+                const live = () =>
+                    s.status === "playing"
+                        ? Math.min(dur(cur()), s.position + (Date.now() - s.measuredAt) * s.speed)
+                        : s.position;
+                function snapshot() {
+                    const o = {
+                        owner: s.owner,
+                        status: s.status,
+                        speed: s.speed,
+                        shuffle: s.shuffle,
+                        repeat: s.repeat,
+                    };
+                    if (s.queue) {
+                        o.queue = s.queue.slice();
+                        o.index = s.index;
+                        o.track = cur();
+                        o.position = Math.round(s.position);
+                        if (s.owner) {
+                            o.measuredAt = s.measuredAt;
+                            o.duration = dur(cur());
+                        }
+                    }
+                    if (s.owner && s.sleep) o.sleep = { ...s.sleep };
+                    return o;
+                }
+                function emit() {
+                    const snap = snapshot();
+                    setTimeout(() => listeners.state.forEach((f) => f(snap)), 0);
+                }
+                function settle() {
+                    if (!s.queue) return;
+                    s.position = live();
+                    s.measuredAt = Date.now();
+                }
+                function schedule() {
+                    clearTimeout(endTimer);
+                    if (s.status !== "playing") return;
+                    endTimer = setTimeout(ended, Math.max(0, (dur(cur()) - s.position) / s.speed));
+                }
+                function advance() {
+                    const len = s.queue.length;
+                    if (s.shuffle && len > 1) {
+                        let n;
+                        do n = Math.floor(Math.random() * len);
+                        while (n === s.index);
+                        return n;
+                    }
+                    if (s.index + 1 < len) return s.index + 1;
+                    return s.repeat === "all" ? 0 : null;
+                }
+                function ended() {
+                    s.measuredAt = Date.now();
+                    if (s.sleep && s.sleep.endOfTrack) {
+                        s.sleep = null;
+                        s.status = "paused";
+                        s.position = 0;
+                        const n = advance();
+                        if (n !== null) s.index = n;
+                        emit();
+                        return;
+                    }
+                    if (s.repeat !== "one") {
+                        const n = advance();
+                        if (n === null) {
+                            s.status = "ended";
+                            s.position = dur(cur());
+                            emit();
+                            return;
+                        }
+                        s.index = n;
+                    }
+                    s.position = 0;
+                    schedule();
+                    emit();
+                }
+                const need = () => {
+                    if (!s.owner || !s.queue) throw zerr("NOT_FOUND");
+                };
+                return {
+                    access: async () => "granted",
+                    requestAccess: async () => "granted",
+                    tracks: async ({ offset = 0, limit = 200 } = {}) => ({
+                        tracks: DEMO_TRACKS.slice(offset, offset + limit),
+                        total: DEMO_TRACKS.length,
+                        version: "demolibraryversion0001",
+                    }),
+                    cover: async () => null,
+                    async play(queue, { index = 0, position = 0 } = {}) {
+                        s.queue = queue.slice();
+                        s.index = Math.min(index, queue.length - 1);
+                        s.position = position;
+                        s.owner = true;
+                        s.status = "playing";
+                        s.measuredAt = Date.now();
+                        schedule();
+                        emit();
+                    },
+                    async pause() {
+                        need();
+                        settle();
+                        s.status = "paused";
+                        schedule();
+                        emit();
+                    },
+                    async resume() {
+                        if (!s.queue) throw zerr("NOT_FOUND");
+                        settle();
+                        if (s.status === "ended") s.position = 0;
+                        s.owner = true;
+                        s.status = "playing";
+                        s.measuredAt = Date.now();
+                        schedule();
+                        emit();
+                    },
+                    async seek(position) {
+                        need();
+                        s.position = Math.max(0, Math.min(position, dur(cur())));
+                        s.measuredAt = Date.now();
+                        if (s.status === "ended") s.status = "paused";
+                        schedule();
+                        emit();
+                    },
+                    async skip(to) {
+                        need();
+                        settle();
+                        if (to && typeof to === "object") s.index = Math.min(to.index, s.queue.length - 1);
+                        else if (to === "next") {
+                            const n = advance();
+                            s.index = n === null ? 0 : n;
+                        } else if (s.position < 3000) s.index = Math.max(0, s.index - 1);
+                        s.position = 0;
+                        s.measuredAt = Date.now();
+                        if (s.status === "ended") s.status = "playing";
+                        schedule();
+                        emit();
+                    },
+                    async set(o) {
+                        settle();
+                        if ("shuffle" in o) s.shuffle = !!o.shuffle;
+                        if ("repeat" in o) s.repeat = o.repeat;
+                        if ("speed" in o) s.speed = o.speed;
+                        schedule();
+                        emit();
+                    },
+                    async sleep(o) {
+                        need();
+                        clearTimeout(sleepTimer);
+                        if (o.minutes) {
+                            s.sleep = { at: Date.now() + o.minutes * 60000 };
+                            sleepTimer = setTimeout(() => {
+                                settle();
+                                s.status = "paused";
+                                s.sleep = null;
+                                schedule();
+                                emit();
+                            }, o.minutes * 60000);
+                        } else s.sleep = { endOfTrack: true };
+                        emit();
+                    },
+                    async cancelSleep() {
+                        clearTimeout(sleepTimer);
+                        s.sleep = null;
+                        emit();
+                    },
+                    state: async () => snapshot(),
+                    on(event, fn) {
+                        listeners[event].add(fn);
+                        if (event === "state") setTimeout(() => fn(snapshot()), 0);
+                        return () => listeners[event].delete(fn);
+                    },
+                    // Where a listener left off last time: the third song of the first album, a minute in.
+                    remember(queue, index, position) {
+                        Object.assign(s, {
+                            queue,
+                            index,
+                            position,
+                            owner: false,
+                            status: "idle",
+                            measuredAt: Date.now(),
+                        });
+                    },
+                };
+            }
+
+            /* ---------- state ---------- */
+            let M = null; // zapli.music, or the demo's stand-in
+            let DEMO = false;
+            let appState = "start"; // start | welcome | denied | osDenied | loading | empty | error | unsupported | ready
+            let welcomeNote = "";
+            let lib = null;
+            let ps = null; // the player as this app sees it (zapli.music's state)
+            let pendingSeek = null; // a place picked while the player holds another app's queue
+            let skipDir = 0,
+                skipAt = 0;
+            let loadProgress = { n: 0, total: 0 };
+            const lists = {}; // list id → track ids, for playing a list from a tapped row
+            let tab = "songs";
+            const tabScroll = { songs: 0, albums: 0, artists: 0 };
+            let subKey = "";
+            const has = (f) => {
+                try {
+                    return !!(Z && Z.supports(f));
+                } catch {
+                    return false;
+                }
+            };
+
+            const el = {
+                lib: $("#lib"),
+                libBody: $("#libBody"),
+                tabs: $("#tabs"),
+                tabbar: $("#tabbar"),
+                sub: $("#sub"),
+                mini: $("#mini"),
+                now: $("#now"),
+                queue: $("#queue"),
+                sheet: $("#sheet"),
+                toast: $("#toast"),
+                seek: $("#seek"),
+            };
+
+            /* ---------- the library: songs sorted for people, albums and artists grouped ---------- */
+            function sectionOf(title) {
+                const s = String(title || "")
+                    .trim()
+                    .replace(/^[^\p{L}\p{N}]+/u, "");
+                if (!s) return "#";
+                if (lang === "sk" && /^ch/i.test(s)) return "Ch";
+                const c = Array.from(s)[0].toLocaleUpperCase(lang);
+                if (!/\p{L}/u.test(c)) return "#";
+                const base = c.normalize("NFD")[0];
+                return collator.compare(c, base) === 0 ? base : c;
+            }
+            function buildLibrary(raw) {
+                const songs = raw.filter((x) => x && x.id && x.title).map((x) => ({ ...x }));
+                const albums = new Map(),
+                    artists = new Map();
+                for (const s of songs) {
+                    s.ar = s.artist || "";
+                    s.al = s.album || "";
+                    s.ak = s.albumId ? "a" + s.albumId : s.al ? "n" + s.al.toLowerCase() : "u";
+                    s.rk = s.ar ? s.ar.toLowerCase() : "-";
+                    s.sec = sectionOf(s.title);
+                    s.q = fold(`${s.title} ${s.ar} ${s.al}`);
+                    let a = albums.get(s.ak);
+                    if (!a) albums.set(s.ak, (a = { key: s.ak, title: s.al, tracks: [], names: new Set(), year: 0 }));
+                    a.tracks.push(s);
+                    if (s.ar) a.names.add(s.ar);
+                    if (s.year) a.year = Math.max(a.year, s.year);
+                    let r = artists.get(s.rk);
+                    if (!r) artists.set(s.rk, (r = { key: s.rk, name: s.ar, tracks: [], keys: new Set() }));
+                    r.tracks.push(s);
+                    r.keys.add(s.ak);
+                }
+                const byTitle = (a, b) =>
+                    collator.compare(a.title, b.title) || collator.compare(a.ar, b.ar) || collator.compare(a.al, b.al);
+                songs.sort(byTitle);
+                for (const a of albums.values()) {
+                    a.tracks.sort(
+                        (x, y) =>
+                            (x.disc || 1) - (y.disc || 1) ||
+                            (x.track || 999) - (y.track || 999) ||
+                            collator.compare(x.title, y.title),
+                    );
+                    a.artist = a.names.size === 1 ? [...a.names][0] : a.names.size > 1 ? null : "";
+                    a.duration = a.tracks.reduce((n, x) => n + (x.duration || 0), 0);
+                    a.discs = new Set(a.tracks.map((x) => x.disc || 1)).size;
+                    a.q = fold(`${a.title} ${a.artist || ""}`);
+                }
+                const albumList = [...albums.values()].sort(
+                    (a, b) =>
+                        !a.title - !b.title ||
+                        collator.compare(a.title, b.title) ||
+                        collator.compare(a.artist || "", b.artist || ""),
+                );
+                for (const r of artists.values()) {
+                    r.tracks.sort(byTitle);
+                    r.albums = [...r.keys]
+                        .map((k) => albums.get(k))
+                        .sort((a, b) => (b.year || 0) - (a.year || 0) || collator.compare(a.title, b.title));
+                    r.q = fold(r.name);
+                }
+                const artistList = [...artists.values()].sort(
+                    (a, b) => !a.name - !b.name || collator.compare(a.name, b.name),
+                );
+                lib = {
+                    songs,
+                    byId: new Map(songs.map((s) => [s.id, s])),
+                    albums: albumList,
+                    albumByKey: albums,
+                    artists: artistList,
+                    artistByKey: artists,
+                };
+            }
+            const albumTitle = (a) => a.title || t("unknownAlbum");
+            const albumArtist = (a) => (a.artist === null ? t("various") : a.artist || t("unknownArtist"));
+            const artistName = (r) => r.name || t("unknownArtist");
+            const songArtist = (s) => s.ar || t("unknownArtist");
+            const artFor = (key) => art(key, DEMO_SEEDS.get(key));
+
+            let loading = false,
+                loadAgain = false;
+            // Reads every page of the phone's songs. A changed version halfway means the songs changed: start again.
+            async function loadLibrary(quiet) {
+                if (loading) {
+                    loadAgain = true;
+                    return;
+                }
+                loading = true;
+                const cached = store.get(CACHE_KEY);
+                if (!lib && cached && Array.isArray(cached.tracks) && cached.tracks.length) {
+                    buildLibrary(cached.tracks);
+                    setAppState("ready");
+                    if (ps) applyState(ps, true);
+                } else if (!lib && !quiet) {
+                    loadProgress = { n: 0, total: 0 };
+                    setAppState("loading");
+                }
+                try {
+                    let all = [],
+                        offset = 0,
+                        version = null,
+                        restarts = 0,
+                        same = false;
+                    for (;;) {
+                        const page = await M.tracks({ offset, limit: 500 });
+                        if (offset === 0 && lib && cached && page.version === cached.version) {
+                            same = true;
+                            break;
+                        }
+                        if (version !== null && page.version !== version) {
+                            if (++restarts > 3) throw zerr("INTERNAL");
+                            all = [];
+                            offset = 0;
+                            version = null;
+                            continue;
+                        }
+                        version = page.version;
+                        all = all.concat(page.tracks || []);
+                        offset += (page.tracks || []).length;
+                        if (appState === "loading") {
+                            loadProgress = { n: offset, total: page.total };
+                            paintLoading();
+                        }
+                        if (offset >= page.total || !(page.tracks || []).length) break;
+                    }
+                    if (!same) {
+                        const where = el.lib.scrollTop;
+                        buildLibrary(all);
+                        if (all.length && JSON.stringify(all).length < 4000000)
+                            store.set(CACHE_KEY, { version, tracks: all });
+                        else store.del(CACHE_KEY);
+                        if (!all.length) setAppState("empty");
+                        else {
+                            const was = appState;
+                            appState = "ready";
+                            subKey = "";
+                            render(true);
+                            if (was === "ready") el.lib.scrollTop = where;
+                        }
+                        if (ps) applyState(ps, true);
+                    }
+                } catch (e) {
+                    if (e && (e.code === "PERMISSION_DENIED" || e.code === "OS_DENIED")) checkAccess(true);
+                    else if (!lib) setAppState("error");
+                } finally {
+                    loading = false;
+                    if (loadAgain) {
+                        loadAgain = false;
+                        loadLibrary(true);
+                    }
+                }
+            }
+
+            /* ---------- covers: fetched from Zapli a few at a time (it allows 20 a second), newest first ---------- */
+            const coverCache = new Map();
+            const coverJobs = [];
+            let coverBusy = 0,
+                coverPauseUntil = 0;
+            const coverStamps = [];
+            function coverUrl(song, size) {
+                const key = (song.albumId ? "a" + song.albumId : "t" + song.id) + "@" + size;
+                let p = coverCache.get(key);
+                if (!p) {
+                    p = new Promise((resolve) => coverJobs.push({ id: song.id, size, resolve }));
+                    coverCache.set(key, p);
+                    pumpCovers();
+                }
+                return p;
+            }
+            function pumpCovers() {
+                while (coverBusy < 4 && coverJobs.length) {
+                    const now = performance.now();
+                    while (coverStamps.length && now - coverStamps[0] > 1000) coverStamps.shift();
+                    const wait = Math.max(
+                        coverPauseUntil - now,
+                        coverStamps.length >= 14 ? 1010 - (now - coverStamps[0]) : 0,
+                    );
+                    if (wait > 0) {
+                        setTimeout(pumpCovers, wait);
+                        return;
+                    }
+                    const job = coverJobs.pop();
+                    coverBusy++;
+                    coverStamps.push(now);
+                    M.cover(job.id, { size: job.size })
+                        .then(
+                            (blob) => job.resolve(blob ? URL.createObjectURL(blob) : null),
+                            (e) => {
+                                if (e && e.code === "RATE_LIMITED") {
+                                    coverPauseUntil = performance.now() + 1200;
+                                    coverJobs.push(job);
+                                } else job.resolve(null);
+                            },
+                        )
+                        .finally(() => {
+                            coverBusy--;
+                            pumpCovers();
+                        });
+                }
+            }
+            const io =
+                "IntersectionObserver" in window
+                    ? new IntersectionObserver(
+                          (entries) => {
+                              for (const e of entries)
+                                  if (e.isIntersecting) {
+                                      io.unobserve(e.target);
+                                      loadArt(e.target);
+                                  }
+                          },
+                          { rootMargin: "500px 0px" },
+                      )
+                    : null;
+            function observeArts(root) {
+                for (const a of $$(".art[data-cv]:not([data-seen])", root)) {
+                    a.dataset.seen = "1";
+                    if (io) io.observe(a);
+                    else loadArt(a);
+                }
+            }
+            function loadArt(node) {
+                const song = lib && lib.byId.get(node.dataset.cv);
+                if (!song) return;
+                coverUrl(song, node.classList.contains("xl") ? 512 : 256).then((url) => paintArt(node, url));
+            }
+            function paintArt(node, url, onHues) {
+                if (!url) {
+                    if (!DEMO) node.classList.add("nocover");
+                    return;
+                }
+                const img = new Image();
+                img.alt = "";
+                img.decoding = "async";
+                img.addEventListener("load", () => {
+                    img.classList.add("on");
+                    if (onHues) onHues(huesOf(img));
+                });
+                img.src = url;
+                node.append(img);
+            }
+            // The cover's main colours: hue histogram of a 24 × 24 copy, weighted by colourfulness.
+            const huesCache = new Map();
+            function huesOf(img) {
+                const key = img.src;
+                if (huesCache.has(key)) return huesCache.get(key);
+                let out = null;
+                try {
+                    const c = document.createElement("canvas");
+                    c.width = c.height = 24;
+                    const g = c.getContext("2d", { willReadFrequently: true });
+                    g.drawImage(img, 0, 0, 24, 24);
+                    const d = g.getImageData(0, 0, 24, 24).data;
+                    const bins = new Float64Array(24);
+                    let wsum = 0,
+                        ssum = 0;
+                    for (let i = 0; i < d.length; i += 4) {
+                        const r = d[i] / 255,
+                            gr = d[i + 1] / 255,
+                            b = d[i + 2] / 255;
+                        const mx = Math.max(r, gr, b),
+                            mn = Math.min(r, gr, b),
+                            l = (mx + mn) / 2,
+                            dd = mx - mn;
+                        if (dd < 0.04) continue;
+                        const sat = dd / (1 - Math.abs(2 * l - 1));
+                        let h = mx === r ? ((gr - b) / dd) % 6 : mx === gr ? (b - r) / dd + 2 : (r - gr) / dd + 4;
+                        h = (h * 60 + 360) % 360;
+                        const w = sat * Math.max(0, 1 - Math.abs(l - 0.5) * 1.7);
+                        if (w <= 0) continue;
+                        bins[Math.floor(h / 15) % 24] += w;
+                        wsum += w;
+                        ssum += sat * w;
+                    }
+                    if (wsum > 20) {
+                        const sm = bins.map((v, i) => v * 2 + bins[(i + 23) % 24] + bins[(i + 1) % 24]);
+                        let a = 0;
+                        for (let i = 1; i < 24; i++) if (sm[i] > sm[a]) a = i;
+                        let b = -1;
+                        for (let i = 0; i < 24; i++) {
+                            const dist = Math.min(Math.abs(i - a), 24 - Math.abs(i - a));
+                            if (dist >= 3 && sm[i] > 0.25 * sm[a] && (b < 0 || sm[i] > sm[b])) b = i;
+                        }
+                        const h1 = a * 15 + 7;
+                        out = { h1, h2: b < 0 ? (h1 + 35) % 360 : b * 15 + 7, s: ssum / wsum };
+                    }
+                } catch {
+                    out = null;
+                }
+                huesCache.set(key, out);
+                return out;
+            }
+            function tintVars(hues) {
+                const dark = darkMode();
+                if (!hues)
+                    return dark
+                        ? ["hsl(300 8% 20%)", "hsl(300 8% 9%)", "hsl(322 72% 80%)"]
+                        : ["hsl(310 14% 92%)", "hsl(310 10% 82%)", "hsl(325 62% 32%)"];
+                const s = Math.round(Math.min(58, Math.max(22, hues.s * 100)));
+                return dark
+                    ? [`hsl(${hues.h1} ${s}% 24%)`, `hsl(${hues.h2} ${s}% 10%)`, `hsl(${hues.h1} 82% 78%)`]
+                    : [`hsl(${hues.h1} ${s}% 89%)`, `hsl(${hues.h2} ${s}% 78%)`, `hsl(${hues.h1} 72% 29%)`];
+            }
+            let lastHues = null;
+            function tintNow(hues) {
+                lastHues = hues;
+                const [a, b, c] = tintVars(hues);
+                el.now.style.setProperty("--np1", a);
+                el.now.style.setProperty("--np2", b);
+                el.now.style.setProperty("--npa", c);
+            }
+
+            /* ---------- pieces of the lists ---------- */
+            function artHtml(song, cls) {
+                const a = artFor(song.ak || song.id);
+                return `<span class="art ${cls}" data-cv="${esc(song.id)}" style="${a.style}">${MARK}</span>`;
+            }
+            function curId() {
+                return ps && ps.queue && ps.queue.length ? ps.track || ps.queue[ps.index || 0] : null;
+            }
+            function songRow(s, l, i, opts = {}) {
+                const lead = opts.num
+                    ? `<span class="num" aria-hidden="true">${s.track ? esc(s.track) : i + 1}</span>`
+                    : artHtml(s, "sm");
+                const sub = opts.noArtist
+                    ? s.duration
+                        ? clock(s.duration)
+                        : ""
+                    : songArtist(s) + (opts.album && s.al ? ` · ${s.al}` : "");
+                const dur = opts.noArtist || !s.duration ? "" : `<span class="dur">${clock(s.duration)}</span>`;
+                const cur = curId() === s.id ? " cur" : "";
+                return `<li><button class="row${cur}" data-act="play" data-l="${esc(l)}" data-i="${i}" data-id="${esc(s.id)}">${lead}<span class="txt"><span class="t1">${esc(s.title)}</span><span class="t2">${esc(sub)}<span class="nowlbl vh">, ${esc(t("playingNow"))}</span></span></span>${dur}${EQ}</button></li>`;
+            }
+            function albumTile(a) {
+                const first = a.tracks[0];
+                const ar = artFor(a.key);
+                return `<button class="tile" data-act="album" data-k="${esc(a.key)}"><span class="art" data-cv="${esc(first.id)}" style="${ar.style}">${MARK}</span><span class="t1">${esc(albumTitle(a))}</span><span class="t2">${esc(albumArtist(a))}</span></button>`;
+            }
+            function artistRow(r) {
+                const first = (r.albums[0] && r.albums[0].tracks[0]) || r.tracks[0];
+                const ar = artFor(first.ak);
+                const meta = `${tn("songCount", r.tracks.length)} · ${tn("albumCount", r.albums.length)}`;
+                return `<li><button class="arow" data-act="artist" data-k="${esc(r.key)}"><span class="art sm round" data-cv="${esc(first.id)}" style="${ar.style}">${MARK}</span><span class="txt"><span class="t1">${esc(artistName(r))}</span><span class="t2">${esc(meta)}</span></span>${icon("right", "chev")}</button></li>`;
+            }
+            function listActions(l, extra = "") {
+                return `<div class="actions"><button class="pill primary" data-act="playAll" data-l="${esc(l)}">${icon("play")}<span>${esc(t("playAll"))}</span></button><button class="pill" data-act="shuffleAll" data-l="${esc(l)}">${icon("shuffle")}<span>${esc(t("shuffle"))}</span></button>${extra}</div>`;
+            }
+
+            /* ---------- the library screen ---------- */
+            let chunkJob = 0;
+            let songGroups = [];
+            function renderTab(name) {
+                cancelAnimationFrame(chunkJob);
+                const body = el.libBody;
+                body.setAttribute("role", "tabpanel");
+                body.setAttribute("aria-labelledby", "tab-" + name);
+                if (name === "albums") {
+                    body.innerHTML = `<p class="count">${esc(tn("albumCount", lib.albums.length))}</p><div class="grid">${lib.albums.map(albumTile).join("")}</div>`;
+                    observeArts(body);
+                    return;
+                }
+                if (name === "artists") {
+                    body.innerHTML = `<p class="count">${esc(tn("songCount", lib.songs.length))} · ${esc(tn("albumCount", lib.albums.length))}</p><ul class="rows">${lib.artists.map(artistRow).join("")}</ul>`;
+                    observeArts(body);
+                    return;
+                }
+                lists.songs = lib.songs.map((s) => s.id);
+                songGroups = [];
+                lib.songs.forEach((s, i) => {
+                    const g = songGroups[songGroups.length - 1];
+                    if (g && collator.compare(g.key, s.sec) === 0) g.end = i + 1;
+                    else songGroups.push({ key: s.sec, start: i, end: i + 1 });
+                });
+                const az =
+                    songGroups.length > 1
+                        ? `<button class="pill" data-act="letters" aria-label="${esc(t("letters"))}">${esc(t("lettersShort"))}</button>`
+                        : "";
+                body.innerHTML = `${listActions("songs", az)}<p class="count">${esc(tn("songCount", lib.songs.length))}</p><div id="songSecs"></div>`;
+                const host = $("#songSecs");
+                let gi = 0;
+                const step = () => {
+                    let html = "",
+                        n = 0;
+                    while (gi < songGroups.length && n < 160) {
+                        const g = songGroups[gi];
+                        let rows = "";
+                        for (let i = g.start; i < g.end; i++) rows += songRow(lib.songs[i], "songs", i);
+                        html += `<section class="sec" style="contain-intrinsic-size:auto ${(g.end - g.start) * 80 + 56}px"><h2 class="sech" id="sec-${gi}"><button data-act="letters" aria-label="${esc(g.key)}. ${esc(t("letters"))}">${esc(g.key)}</button></h2><ul class="rows">${rows}</ul></section>`;
+                        n += g.end - g.start;
+                        gi++;
+                    }
+                    host.insertAdjacentHTML("beforeend", html);
+                    observeArts(host);
+                    if (gi < songGroups.length) chunkJob = requestAnimationFrame(step);
+                };
+                step();
+                renderTab.flush = () => {
+                    cancelAnimationFrame(chunkJob);
+                    while (gi < songGroups.length) step();
+                    cancelAnimationFrame(chunkJob);
+                };
+            }
+            renderTab.flush = () => {};
+
+            function showTab(name, keepScroll) {
+                if (!keepScroll) tabScroll[tab] = el.lib.scrollTop;
+                tab = name;
+                for (const b of $$(".tab", el.tabs)) b.setAttribute("aria-selected", String(b.dataset.tab === name));
+                renderTab(name);
+                el.lib.scrollTop = keepScroll ? el.lib.scrollTop : tabScroll[name] || 0;
+            }
+
+            /* ---------- first run and the other states ---------- */
+            function illo(kind) {
+                const g = `<defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c94a8e"/><stop offset="1" stop-color="#6d1d4a"/></linearGradient></defs>`;
+                const disc = (cls) =>
+                    `<g class="${cls}"><circle cx="120" cy="92" r="70" fill="url(#ig)"/><circle cx="120" cy="92" r="56" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="3"/><circle cx="120" cy="92" r="42" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="3"/><circle cx="120" cy="92" r="20" fill="#ffc531"/><circle cx="120" cy="92" r="5" fill="#6d1d4a"/><path d="M84 52a52 52 0 0 1 30-14" stroke="#fff" stroke-opacity=".45" stroke-width="6" stroke-linecap="round" fill="none"/></g>`;
+                const noteA = `<g class="float"><path fill="#ffc531" d="M196 30v34.5a9 9 0 1 0 6 8.5V44h12V30z"/></g>`;
+                const noteB = `<g class="float b"><path fill="#e2333b" d="M42 112v26.5a8 8 0 1 0 5 7.5v-22h10v-12z"/></g>`;
+                let body;
+                if (kind === "welcome") body = disc("") + noteA + noteB;
+                else if (kind === "loading") body = disc("spin") + noteA;
+                else if (kind === "empty")
+                    body = `<rect x="18" y="34" width="120" height="84" rx="10" fill="#8a7b88"/><rect x="26" y="42" width="104" height="66" rx="5" fill="#f3e9f0"/><rect x="56" y="122" width="44" height="10" rx="4" fill="#8a7b88"/><rect x="164" y="40" width="58" height="104" rx="12" fill="url(#ig)"/><rect x="171" y="52" width="44" height="76" rx="5" fill="#fff" fill-opacity=".9"/><path d="M138 128c14 0 16 14 30 14" stroke="#8a7b88" stroke-width="5" fill="none" stroke-linecap="round"/><g class="float"><path fill="#c94a8e" d="M72 56v26a8 8 0 1 0 5 7.4V66h11V56z"/></g><path fill="#c94a8e" d="M190 72v22a7 7 0 1 0 5 6.6V80h9v-8z"/>`;
+                else if (kind === "error")
+                    body =
+                        disc("") +
+                        `<circle cx="186" cy="44" r="22" fill="#e2333b"/><rect x="183" y="30" width="6" height="18" rx="3" fill="#fff"/><circle cx="186" cy="56" r="3.5" fill="#fff"/>`;
+                else if (kind === "unsupported")
+                    body = `<rect x="88" y="16" width="64" height="148" rx="14" fill="url(#ig)"/><rect x="96" y="30" width="48" height="112" rx="6" fill="#fff" fill-opacity=".92"/><path d="M120 108V64m-16 16 16-16 16 16" stroke="#c94a8e" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+                else
+                    body =
+                        disc("") +
+                        `<rect x="160" y="18" width="62" height="34" rx="17" fill="#8a7b88"/><circle cx="177" cy="35" r="12" fill="#fff"/>`;
+                return `<svg class="illo" viewBox="0 0 240 184" aria-hidden="true">${g}${body}</svg>`;
+            }
+            function stateHtml(kind) {
+                const btn = (act, label, ic, quiet) =>
+                    `<button class="big${quiet ? " quiet" : ""}" data-act="${act}">${ic ? icon(ic) : ""}<span>${esc(label)}</span></button>`;
+                switch (kind) {
+                    case "welcome":
+                        return `<div class="state">${illo("welcome")}<h2>${esc(t("welcomeTitle"))}</h2><p class="lead">${esc(t("welcomeBody"))}</p>${btn("find", t("findMusic"), "search")}<p class="steps">${icon("info")}<span>${esc(welcomeNote || t("welcomeSteps"))}</span></p></div>`;
+                    case "denied":
+                        return `<div class="state">${illo("denied")}<h2>${esc(t("deniedTitle"))}</h2><p class="lead">${esc(t("deniedBody"))}</p>${btn("settings", t("openSettings"), "gear")}${btn("recheck", t("checkAgain"), "refresh", true)}</div>`;
+                    case "osDenied":
+                        return `<div class="state">${illo("denied")}<h2>${esc(t("osDeniedTitle"))}</h2><p class="lead">${esc(t("osDeniedBody"))}</p>${btn("settings", t("openSettings"), "gear")}${btn("recheck", t("checkAgain"), "refresh", true)}</div>`;
+                    case "empty":
+                        return `<div class="state">${illo("empty")}<h2>${esc(t("emptyTitle"))}</h2><p class="lead">${esc(t("emptyBody"))}</p><p class="steps">${icon("info")}<span>${esc(t("emptyHow"))}</span></p><p>${esc(t("emptyNote"))}</p>${btn("retry", t("lookAgain"), "refresh")}</div>`;
+                    case "loading":
+                        return `<div class="state" aria-busy="true">${illo("loading")}<h2>${esc(t("loading"))}</h2><div class="bar" role="progressbar" aria-label="${esc(t("loading"))}" aria-valuemin="0" aria-valuemax="100" id="loadBar"><i></i></div><p id="loadText" aria-live="polite"></p></div>`;
+                    case "error":
+                        return `<div class="state">${illo("error")}<h2>${esc(t("errorTitle"))}</h2><p class="lead">${esc(t("errorBody"))}</p>${btn("retry", t("tryAgain"), "refresh")}</div>`;
+                    case "unsupported":
+                        return `<div class="state">${illo("unsupported")}<h2>${esc(t("unsupportedTitle"))}</h2><p class="lead">${esc(t("unsupportedBody"))}</p>${btn("demo", t("seeDemo"), "play", true)}</div>`;
+                    default:
+                        return "";
+                }
+            }
+            function paintLoading() {
+                const bar = $("#loadBar"),
+                    text = $("#loadText");
+                if (!bar || !text) return;
+                const { n, total } = loadProgress;
+                const pc = total ? Math.round((n / total) * 100) : 0;
+                bar.firstChild.style.width = pc + "%";
+                bar.setAttribute("aria-valuenow", String(pc));
+                text.textContent = total ? t("loadingCount", { n: num(n), t: num(total) }) : "";
+            }
+            function setAppState(s) {
+                appState = s;
+                render(true);
+            }
+
+            /* ---------- album, artist and search screens ---------- */
+            function subHeader(title, extra = "") {
+                return `<header class="subtop" id="subtop"><button class="icon-btn" data-act="back" aria-label="${esc(t("back"))}">${icon("back")}</button><span class="st">${esc(title)}</span>${extra}</header>`;
+            }
+            function renderAlbum(a) {
+                const l = "album:" + a.key;
+                lists[l] = a.tracks.map((s) => s.id);
+                const first = a.tracks[0];
+                const ar = artFor(a.key);
+                const bits = [
+                    a.year ? String(a.year) : "",
+                    tn("songCount", a.tracks.length),
+                    minutesText(a.duration),
+                ].filter(Boolean);
+                let rows = "",
+                    disc = 0;
+                a.tracks.forEach((s, i) => {
+                    if (a.discs > 1 && (s.disc || 1) !== disc) {
+                        disc = s.disc || 1;
+                        rows += `</ol><h3 class="rh">${esc(t("disc", { n: disc }))}</h3><ol class="rows">`;
+                    }
+                    rows += songRow(s, l, i, { num: true, noArtist: a.artist !== null });
+                });
+                const by = a.artist
+                    ? `<button class="by" data-act="artist" data-k="${esc(first.rk)}">${esc(albumArtist(a))}</button>`
+                    : `<p class="by">${esc(albumArtist(a))}</p>`;
+                el.sub.innerHTML = `${subHeader(albumTitle(a))}<div class="hero" id="hero" style="--tint:hsl(${ar.hues.h1} 70% 55%)"><span class="art xl" data-cv="${esc(first.id)}" style="${ar.style}">${MARK}</span><h1>${esc(albumTitle(a))}</h1>${by}<p class="meta2">${esc(bits.join(" · "))}</p>${listActions(l)}</div><ol class="rows">${rows}</ol>`;
+                const big = $(".art.xl", el.sub);
+                big.dataset.seen = "1";
+                coverUrl(first, 512).then((url) =>
+                    paintArt(big, url, (h) => {
+                        if (h) $("#hero").style.setProperty("--tint", `hsl(${h.h1} 70% 55%)`);
+                    }),
+                );
+                observeArts(el.sub);
+            }
+            function renderArtist(r) {
+                const l = "artist:" + r.key;
+                lists[l] = r.tracks.map((s) => s.id);
+                const first = (r.albums[0] && r.albums[0].tracks[0]) || r.tracks[0];
+                const ar = artFor(first.ak);
+                const meta = `${tn("songCount", r.tracks.length)} · ${tn("albumCount", r.albums.length)}`;
+                const albums = r.albums.length
+                    ? `<h2 class="rh">${esc(t("albums"))}</h2><div class="strip">${r.albums.map(albumTile).join("")}</div>`
+                    : "";
+                el.sub.innerHTML = `${subHeader(artistName(r))}<div class="hero" style="--tint:hsl(${ar.hues.h1} 70% 55%)"><span class="art avatar round" data-cv="${esc(first.id)}" style="${ar.style}">${MARK}</span><h1>${esc(artistName(r))}</h1><p class="meta2">${esc(meta)}</p>${listActions(l)}</div>${albums}<h2 class="rh">${esc(t("songs"))}</h2><ul class="rows">${r.tracks.map((s, i) => songRow(s, l, i, { album: true })).join("")}</ul>`;
+                observeArts(el.sub);
+            }
+            let searchTimer = 0;
+            function renderSearch() {
+                const q0 = ssGet("music.q");
+                el.sub.innerHTML = `<header class="subtop scrolled"><button class="icon-btn" data-act="back" aria-label="${esc(t("back"))}">${icon("back")}</button><label class="searchbox">${icon("search")}<input type="search" id="q" placeholder="${esc(t("searchPh"))}" aria-label="${esc(t("search"))}" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" /><button class="icon-btn" data-act="clearSearch" id="qClear" aria-label="${esc(t("clearSearch"))}" hidden>${icon("close")}</button></label></header><div id="results"></div>`;
+                const input = $("#q");
+                input.value = q0 || "";
+                input.addEventListener("input", () => {
+                    clearTimeout(searchTimer);
+                    searchTimer = setTimeout(runSearch, 120);
+                });
+                input.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") input.blur();
+                });
+                runSearch();
+                setTimeout(() => input.focus(), 60);
+            }
+            function ssGet(k) {
+                try {
+                    return sessionStorage.getItem(k) || "";
+                } catch {
+                    return "";
+                }
+            }
+            function ssSet(k, v) {
+                try {
+                    sessionStorage.setItem(k, v);
+                } catch {
+                    /* blocked */
+                }
+            }
+            function runSearch() {
+                const input = $("#q"),
+                    out = $("#results");
+                if (!input || !out) return;
+                const raw = input.value.trim();
+                ssSet("music.q", input.value);
+                $("#qClear").hidden = !input.value;
+                if (!raw) {
+                    out.innerHTML = `<p class="hint">${esc(t("searchHint"))}</p>`;
+                    return;
+                }
+                const terms = fold(raw).split(/\s+/).filter(Boolean);
+                const hit = (q) => terms.every((w) => q.includes(w));
+                const songs = lib.songs.filter((s) => hit(s.q)).slice(0, 60);
+                const albums = lib.albums.filter((a) => hit(a.q)).slice(0, 24);
+                const artists = lib.artists.filter((r) => r.name && hit(r.q)).slice(0, 24);
+                if (!songs.length && !albums.length && !artists.length) {
+                    out.innerHTML = `<p class="hint">${esc(t("noResults", { q: raw }))}</p>`;
+                    return;
+                }
+                lists.search = songs.map((s) => s.id);
+                let html = "";
+                if (artists.length)
+                    html += `<h2 class="rh">${esc(t("artists"))}</h2><ul class="rows">${artists.map(artistRow).join("")}</ul>`;
+                if (albums.length)
+                    html += `<h2 class="rh">${esc(t("albums"))}</h2><div class="strip">${albums.map(albumTile).join("")}</div>`;
+                if (songs.length)
+                    html += `<h2 class="rh">${esc(t("songs"))}</h2><ul class="rows">${songs.map((s, i) => songRow(s, "search", i, { album: true })).join("")}</ul>`;
+                out.innerHTML = html;
+                observeArts(out);
+            }
+
+            /* ---------- routes: #/ songs, #/albums, #/artists, #/album/<key>, #/artist/<key>, #/search, #/now, #/queue ---------- */
+            function route() {
+                const h = location.hash.replace(/^#\/?/, "");
+                const i = h.indexOf("/");
+                const name = (i < 0 ? h : h.slice(0, i)) || "songs";
+                let key = null;
+                if (i >= 0) {
+                    try {
+                        key = decodeURIComponent(h.slice(i + 1));
+                    } catch {
+                        key = null;
+                    }
+                }
+                return { name, key };
+            }
+            const depth = () => (history.state && history.state.d) || 0;
+            function go(path) {
+                history.pushState({ d: depth() + 1 }, "", "#/" + path);
+                render();
+            }
+            function back() {
+                if (depth() > 0) history.back();
+                else {
+                    history.replaceState({ d: 0 }, "", tab === "songs" ? "#/" : "#/" + tab);
+                    render();
+                }
+            }
+            let underlay = ""; // the screen under the player: a tab name, or "album", "artist", "search"
+            let underlayRoute = null;
+            function render(force) {
+                const r = route();
+                const ready = appState === "ready";
+                el.tabbar.hidden = !ready;
+                if (!ready) {
+                    setNowOpen(false);
+                    setQueueOpen(false);
+                    el.sub.hidden = true;
+                    el.lib.classList.remove("off");
+                    el.lib.inert = false;
+                    el.libBody.removeAttribute("role");
+                    el.libBody.dataset.tab = "";
+                    el.libBody.innerHTML = stateHtml(appState);
+                    if (appState === "loading") paintLoading();
+                    updateMini();
+                    return;
+                }
+                const overlay = r.name === "now" || r.name === "queue";
+                if (overlay && !(ps && ps.queue && ps.queue.length)) {
+                    history.replaceState({ d: 0 }, "", "#/");
+                    return render(force);
+                }
+                if (overlay) {
+                    if (!underlay || force) showBase(underlayRoute || { name: "songs", key: null }, force);
+                    setNowOpen(true);
+                    setQueueOpen(r.name === "queue");
+                } else {
+                    setQueueOpen(false);
+                    setNowOpen(false);
+                    showBase(r, force);
+                }
+                updateMini();
+            }
+            function showBase(r, force) {
+                if (
+                    ["songs", "albums", "artists"].includes(r.name) ||
+                    !["album", "artist", "search"].includes(r.name)
+                ) {
+                    const name = ["albums", "artists"].includes(r.name) ? r.name : "songs";
+                    el.sub.hidden = true;
+                    el.lib.classList.remove("off");
+                    el.lib.inert = false;
+                    if (force || el.libBody.dataset.tab !== name) {
+                        showTab(name, force && name === tab);
+                        el.libBody.dataset.tab = name;
+                    }
+                    underlay = name;
+                    underlayRoute = { name, key: null };
+                    subKey = "";
+                    return;
+                }
+                const key = r.name + ":" + (r.key || "");
+                el.lib.classList.add("off");
+                el.lib.inert = true;
+                el.sub.hidden = false;
+                underlay = r.name;
+                underlayRoute = r;
+                if (key === subKey && !force) return;
+                subKey = key;
+                if (r.name === "album") {
+                    const a = lib.albumByKey.get(r.key);
+                    if (!a) return back();
+                    renderAlbum(a);
+                } else if (r.name === "artist") {
+                    const a = lib.artistByKey.get(r.key);
+                    if (!a) return back();
+                    renderArtist(a);
+                } else renderSearch();
+                el.sub.scrollTop = 0;
+            }
+            el.sub.addEventListener(
+                "scroll",
+                () => {
+                    const top = $("#subtop");
+                    if (top) top.classList.toggle("scrolled", el.sub.scrollTop > 140);
+                },
+                { passive: true },
+            );
+
+            /* ---------- the player: what the page shows of Zapli's one player ---------- */
+            const curSong = () => {
+                const id = curId();
+                return id && lib ? lib.byId.get(id) || null : null;
+            };
+            function curDuration() {
+                if (ps && ps.owner && ps.duration) return ps.duration;
+                const s = curSong();
+                return (s && s.duration) || (ps && ps.duration) || 0;
+            }
+            function livePos() {
+                if (!ps || !ps.queue) return 0;
+                if (!ps.owner && pendingSeek != null) return pendingSeek;
+                let p = ps.position || 0;
+                if (ps.owner && ps.status === "playing" && ps.measuredAt)
+                    p += Math.max(0, Date.now() - ps.measuredAt) * (ps.speed || 1);
+                const d = curDuration();
+                return d ? Math.min(p, d) : p;
+            }
+            const isPlaying = () => !!(ps && ps.owner && (ps.status === "playing" || ps.status === "buffering"));
+            let wasOwner = false;
+            function applyState(s, quiet) {
+                if (!s) return;
+                const prev = ps;
+                ps = s;
+                if (s.owner) pendingSeek = null;
+                if (!quiet && wasOwner && !s.owner && prev && prev.status === "playing") toast(t("otherApp"));
+                wasOwner = !!s.owner;
+                const changed = !prev || curIdOf(prev) !== curId() || quiet;
+                document.body.classList.toggle("playing", isPlaying() && s.status === "playing");
+                updateMini(changed);
+                updateNow(changed, prev);
+                markCurrent();
+                if (el.queue.classList.contains("open")) renderQueue(false);
+                if (!(s.queue && s.queue.length) && /^#\/(now|queue)/.test(location.hash)) back();
+                kick();
+            }
+            const curIdOf = (s) => (s && s.queue && s.queue.length ? s.track || s.queue[s.index || 0] : null);
+            function markCurrent() {
+                const id = curId();
+                for (const r of $$(".row.cur")) if (r.dataset.id !== id) r.classList.remove("cur");
+                if (id) for (const r of $$(`.row[data-id="${id}"]`)) r.classList.add("cur");
+                for (const r of $$("#queue .row"))
+                    r.classList.toggle("cur", ps && Number(r.dataset.i) === (ps.index || 0));
+            }
+            function ppState(btn) {
+                const waiting = ps && ps.owner && ps.status === "buffering";
+                btn.classList.toggle("is-playing", isPlaying() && !waiting);
+                btn.classList.toggle("is-waiting", !!waiting);
+                btn.setAttribute("aria-label", t(isPlaying() ? "pause" : "play"));
+            }
+            function updateMini(changed) {
+                const show =
+                    appState === "ready" && !!(ps && ps.queue && ps.queue.length) && !el.now.classList.contains("open");
+                el.mini.classList.toggle("show", show);
+                el.mini.inert = !show;
+                document.body.classList.toggle("has-mini", show);
+                requestAnimationFrame(() =>
+                    document.documentElement.style.setProperty(
+                        "--mini-h",
+                        show ? el.mini.offsetHeight + 12 + "px" : "0px",
+                    ),
+                );
+                if (!ps || !ps.queue) return;
+                const s = curSong();
+                if (changed) {
+                    $("#mTitle").textContent = s ? s.title : "…";
+                    $("#mArtist").textContent = s ? songArtist(s) : "";
+                    const box = $("#mArt");
+                    box.innerHTML = MARK;
+                    box.className = "art";
+                    box.removeAttribute("data-seen");
+                    if (s) {
+                        box.setAttribute("style", artFor(s.ak).style);
+                        box.dataset.cv = s.id;
+                        coverUrl(s, 256).then((url) => box.dataset.cv === s.id && paintArt(box, url));
+                    }
+                    $("#mOpen").setAttribute(
+                        "aria-label",
+                        t("openPlayer", { t: s ? `${s.title}, ${songArtist(s)}` : "" }),
+                    );
+                }
+                ppState($("#mPlay"));
+            }
+            function updateNow(changed, prev) {
+                if (!ps || !ps.queue) return;
+                const s = curSong();
+                if (changed) {
+                    $("#npTitle").textContent = s ? s.title : "…";
+                    $("#npArtist").textContent = s ? songArtist(s) : "";
+                    let dir = 0;
+                    if (Date.now() - skipAt < 2500) dir = skipDir;
+                    else if (prev && prev.queue && typeof prev.index === "number" && typeof ps.index === "number")
+                        dir = ps.index === prev.index + 1 ? 1 : ps.index === prev.index - 1 ? -1 : 0;
+                    skipAt = 0;
+                    setNowCover(s, prev ? dir : null);
+                    el.seek.max = String(Math.max(1000, curDuration()));
+                }
+                ppState($("#npPlay"));
+                const sh = $("#xShuffle");
+                sh.setAttribute("aria-pressed", String(!!ps.shuffle));
+                const rep = ps.repeat || "off";
+                const rb = $("#xRepeat");
+                rb.classList.toggle("on", rep !== "off");
+                rb.innerHTML =
+                    icon(rep === "one" ? "repeatOne" : "repeat") +
+                    `<span aria-hidden="true">${esc(t(rep === "one" ? "repeatOne" : rep === "all" ? "repeatAll" : "repeatOff"))}</span>`;
+                rb.setAttribute(
+                    "aria-label",
+                    t("repeatSay", {
+                        v: t(rep === "one" ? "repeatOneSay" : rep === "all" ? "repeatAllSay" : "repeatOffSay"),
+                    }),
+                );
+                const sp = $("#xSpeed");
+                const speed = ps.speed || 1;
+                sp.classList.toggle("on", speed !== 1);
+                sp.innerHTML =
+                    icon("speed") +
+                    `<span aria-hidden="true">${esc(speed === 1 ? t("speed") : speedText(speed))}</span>`;
+                sp.setAttribute("aria-label", t("speedSay", { v: speed === 1 ? t("normal") : speedText(speed) }));
+                paintSleep();
+            }
+            let sleepShown = "";
+            function paintSleep() {
+                const b = $("#xSleep");
+                const sl = ps && ps.owner ? ps.sleep : null;
+                let label = t("sleep"),
+                    say = t("sleepNone");
+                if (sl && sl.endOfTrack) {
+                    label = t("endShort");
+                    say = t("sleepEnd");
+                } else if (sl && sl.at) {
+                    label = minutesText(Math.max(0, sl.at - Date.now()));
+                    say = t("sleepIn", { t: label });
+                }
+                const key = label + "|" + !!sl;
+                if (key === sleepShown) return;
+                sleepShown = key;
+                b.classList.toggle("on", !!sl);
+                b.innerHTML = icon("moon") + `<span aria-hidden="true">${esc(label)}</span>`;
+                b.setAttribute("aria-label", t("sleepSay", { v: say }));
+            }
+            function setNowCover(s, dir) {
+                const box = $("#npCover");
+                const old = $$(".art", box);
+                const node = document.createElement("span");
+                const a = s ? artFor(s.ak) : art("none");
+                node.className = "art xl";
+                node.setAttribute("style", a.style);
+                node.innerHTML = MARK;
+                const motion = dir !== null && !reduceMotion() && el.now.classList.contains("open");
+                const kind = dir > 0 ? "next" : dir < 0 ? "prev" : "fade";
+                if (motion) node.classList.add("enter-" + kind);
+                box.append(node);
+                for (const o of old) {
+                    o.classList.remove("drag");
+                    o.style.transform = "";
+                    if (motion) {
+                        o.classList.add("leave-" + kind);
+                        setTimeout(() => o.remove(), 480);
+                    } else o.remove();
+                }
+                if (motion)
+                    requestAnimationFrame(() => requestAnimationFrame(() => node.classList.remove("enter-" + kind)));
+                tintNow(a.hues);
+                if (!s) return;
+                node.dataset.cv = s.id;
+                node.dataset.seen = "1";
+                coverUrl(s, 512).then((url) => {
+                    if (!node.isConnected) return;
+                    paintArt(node, url, (h) => {
+                        if (node.isConnected && h) tintNow(h);
+                        else if (node.isConnected && !h) tintNow(null);
+                    });
+                });
+            }
+
+            /* the position: computed from the state's position, measuredAt and speed, drawn every frame while visible */
+            let raf = 0,
+                dragging = false,
+                lastSecond = -1;
+            function needsLoop() {
+                return (
+                    isPlaying() &&
+                    !document.hidden &&
+                    (el.now.classList.contains("open") || el.mini.classList.contains("show"))
+                );
+            }
+            function kick() {
+                paint();
+                if (!raf && needsLoop()) raf = requestAnimationFrame(loop);
+            }
+            function loop() {
+                raf = 0;
+                paint();
+                if (needsLoop()) raf = requestAnimationFrame(loop);
+            }
+            function paint() {
+                if (!ps || !ps.queue) return;
+                const d = curDuration(),
+                    p = livePos();
+                const f = d ? Math.min(1, p / d) : 0;
+                $("#mBar").style.transform = `scaleX(${f})`;
+                if (!el.now.classList.contains("open")) return;
+                if (!dragging) {
+                    el.seek.value = String(Math.round(p));
+                    el.seek.style.setProperty("--p", f * 100 + "%");
+                }
+                const sec = Math.floor((dragging ? Number(el.seek.value) : p) / 1000);
+                if (sec !== lastSecond) {
+                    lastSecond = sec;
+                    const shown = dragging ? Number(el.seek.value) : p;
+                    $("#tNow").textContent = clock(shown);
+                    $("#tAll").textContent = clock(d);
+                    el.seek.setAttribute("aria-valuetext", t("timeOf", { a: clock(shown), b: clock(d) }));
+                    paintSleep();
+                }
+            }
+            el.seek.addEventListener("input", () => {
+                dragging = true;
+                const d = curDuration();
+                el.seek.style.setProperty("--p", (d ? (Number(el.seek.value) / d) * 100 : 0) + "%");
+                lastSecond = -1;
+                paint();
+            });
+            el.seek.addEventListener("change", () => {
+                const v = Math.round(Number(el.seek.value));
+                dragging = false;
+                if (!ps || !ps.queue) return;
+                if (ps.owner) {
+                    // Show the new place at once; the player's own state follows.
+                    ps = { ...ps, position: v, measuredAt: Date.now() };
+                    call(M.seek(v));
+                } else pendingSeek = v;
+                lastSecond = -1;
+                kick();
+            });
+            document.addEventListener("visibilitychange", kick);
+            if (window.matchMedia) {
+                const scheme = matchMedia("(prefers-color-scheme: dark)");
+                if (scheme.addEventListener) scheme.addEventListener("change", () => tintNow(lastHues));
+            }
+
+            /* ---------- what the buttons do; the calls that need a tap are made right in the tap ---------- */
+            function call(p) {
+                return Promise.resolve(p).catch(failed);
+            }
+            function failed(e) {
+                const code = e && e.code;
+                if (code === "PERMISSION_DENIED" || code === "OS_DENIED") checkAccess();
+                else if (code === "NEEDS_GESTURE") toast(t("tapAgain"));
+                else if (code === "RATE_LIMITED") toast(t("tooFast"));
+                else if (code === "NOT_FOUND") {
+                    toast(t(ps && ps.owner ? "gone" : "tapSong"));
+                    loadLibrary(true);
+                } else toast(t("failed"));
+            }
+            function playFrom(l, i) {
+                const ids = lists[l];
+                if (!ids || !ids.length) return;
+                let q = ids,
+                    idx = Math.max(0, Math.min(i, ids.length - 1));
+                if (ids.length > 1000) {
+                    const start = Math.max(0, Math.min(idx - 100, ids.length - 1000));
+                    q = ids.slice(start, start + 1000);
+                    idx -= start;
+                }
+                call(M.play(q, { index: idx, position: 0 }));
+            }
+            function toggle() {
+                if (!ps || !ps.queue) return;
+                if (isPlaying()) return call(M.pause());
+                if (!ps.owner && pendingSeek != null) {
+                    const at = pendingSeek;
+                    pendingSeek = null;
+                    return call(M.play(ps.queue, { index: ps.index || 0, position: at }));
+                }
+                call(M.resume());
+            }
+            function step(dir) {
+                if (!ps || !ps.queue) return;
+                skipDir = dir;
+                skipAt = Date.now();
+                if (ps.owner) return call(M.skip(dir > 0 ? "next" : "previous"));
+                const len = ps.queue.length;
+                let i = (ps.index || 0) + dir;
+                if (i < 0) i = 0;
+                if (i >= len) i = 0;
+                call(M.play(ps.queue, { index: i }));
+            }
+            function setNowOpen(open) {
+                const was = el.now.classList.contains("open");
+                if (open === was) return;
+                el.now.classList.toggle("open", open);
+                el.now.inert = !open;
+                document.body.classList.toggle("now-open", open);
+                el.lib.inert = open || el.lib.classList.contains("off");
+                el.sub.inert = open;
+                if (open) {
+                    updateNow(true, null);
+                    lastSecond = -1;
+                    setTimeout(() => $("#npClose").focus({ preventScroll: true }), 60);
+                } else if (ps && ps.queue && ps.queue.length)
+                    setTimeout(() => $("#mOpen").focus({ preventScroll: true }), 60);
+                updateMini();
+                kick();
+            }
+            function setQueueOpen(open) {
+                const was = el.queue.classList.contains("open");
+                if (open === was) return;
+                el.queue.classList.toggle("open", open);
+                el.queue.inert = !open;
+                if (open) {
+                    renderQueue(true);
+                    setTimeout(() => {
+                        const b = $("#queue [data-act=back]");
+                        if (b) b.focus({ preventScroll: true });
+                    }, 60);
+                }
+            }
+            function renderQueue(scroll) {
+                if (!ps || !ps.queue) return;
+                const q = ps.queue;
+                const top = el.queue.scrollTop;
+                const rows = q
+                    .map((id, i) => {
+                        const s = (lib && lib.byId.get(id)) || { id, title: "…", ar: "", ak: id };
+                        const cur = i === (ps.index || 0) ? " cur" : "";
+                        return `<li><button class="row${cur}" data-act="qplay" data-i="${i}" data-id="${esc(id)}">${artHtml(s, "sm")}<span class="txt"><span class="t1">${esc(s.title)}</span><span class="t2">${esc(songArtist(s))}<span class="nowlbl vh">, ${esc(t("playingNow"))}</span></span></span>${s.duration ? `<span class="dur">${clock(s.duration)}</span>` : ""}${EQ}</button></li>`;
+                    })
+                    .join("");
+                const note = ps.shuffle
+                    ? `<p class="note">${icon("shuffle")}<span>${esc(t("shuffleNote"))}</span></p>`
+                    : "";
+                el.queue.innerHTML = `<header class="subtop scrolled"><button class="icon-btn" data-act="back" aria-label="${esc(t("back"))}">${icon("back")}</button><h2 class="st" id="qTitle">${esc(t("upNext"))}</h2></header>${note}<p class="count">${esc(tn("songCount", q.length))}</p><ol class="rows">${rows}</ol>`;
+                observeArts(el.queue);
+                if (scroll) {
+                    const c = $("#queue .row.cur");
+                    if (c) c.scrollIntoView({ block: "center" });
+                } else el.queue.scrollTop = top;
+            }
+
+            /* sheets: speed, sleep timer and the letter jump */
+            function sheet(title, body, sub = "") {
+                el.sheet.innerHTML = `<div class="sheetin"><div class="sheethead"><h2 id="sheetTitle">${esc(title)}</h2><button class="icon-btn round-btn" data-act="closeSheet" aria-label="${esc(t("close"))}">${icon("close")}</button></div>${sub ? `<p class="sub">${esc(sub)}</p>` : ""}${body}</div>`;
+                el.sheet.setAttribute("aria-labelledby", "sheetTitle");
+                if (!el.sheet.open) {
+                    try {
+                        el.sheet.showModal();
+                    } catch {
+                        el.sheet.setAttribute("open", "");
+                    }
+                }
+                const pressed = $('[aria-pressed="true"]', el.sheet) || $(".opt", el.sheet);
+                if (pressed) setTimeout(() => pressed.focus(), 30);
+            }
+            function closeSheet() {
+                if (el.sheet.open) el.sheet.close();
+            }
+            el.sheet.addEventListener("click", (e) => {
+                if (e.target === el.sheet) closeSheet();
+            });
+            function speedSheet() {
+                const cur = (ps && ps.speed) || 1;
+                const opts = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
+                    .map(
+                        (v) =>
+                            `<button class="opt" data-act="setSpeed" data-v="${v}" aria-pressed="${v === cur}">${v === cur ? icon("check") : ""}<span>${esc(v === 1 ? `${speedText(1)} ${t("normal")}` : speedText(v))}</span></button>`,
+                    )
+                    .join("");
+                sheet(t("speedTitle"), `<div class="opts">${opts}</div>`, t("speedHint"));
+            }
+            function sleepSheet() {
+                const owner = !!(ps && ps.owner);
+                const sl = owner ? ps.sleep : null;
+                const dis = owner ? "" : " disabled";
+                const label = (m) =>
+                    m < 60
+                        ? tn("minutes", m)
+                        : m % 60
+                          ? `${tn("hours", Math.floor(m / 60))} ${tn("minutes", m % 60)}`
+                          : tn("hours", m / 60);
+                const opts = [5, 10, 15, 30, 45, 60, 90, 120]
+                    .map((m) => `<button class="opt" data-act="setSleep" data-v="${m}"${dis}>${esc(label(m))}</button>`)
+                    .join("");
+                let status = "";
+                if (sl)
+                    status = `<p class="note">${icon("moon")}<span>${esc(sl.endOfTrack ? t("sleepEnd") : t("sleepIn", { t: minutesText(sl.at - Date.now()) }))}</span></p>`;
+                else if (!owner) status = `<p class="note">${icon("info")}<span>${esc(t("sleepNeedsPlay"))}</span></p>`;
+                const end = `<button class="opt" data-act="setSleepEnd" aria-pressed="${!!(sl && sl.endOfTrack)}"${dis}>${icon("note")}<span>${esc(t("endOfSong"))}</span></button>`;
+                const off = sl
+                    ? `<button class="opt danger" data-act="sleepOff">${icon("close")}<span>${esc(t("sleepOff"))}</span></button>`
+                    : "";
+                sheet(
+                    t("sleepTitle"),
+                    `${status}<div class="opts">${opts}</div><div class="opts wide">${end}${off}</div>`,
+                    t("sleepHint"),
+                );
+            }
+            function lettersSheet() {
+                const btns = songGroups
+                    .map((g, i) => `<button class="opt" data-act="jump" data-v="${i}">${esc(g.key)}</button>`)
+                    .join("");
+                sheet(t("letters"), `<div class="letters">${btns}</div>`);
+            }
+
+            /* ---------- access ---------- */
+            // afterRead: reading the songs was just refused, so "granted" here means something is off: show the error.
+            async function checkAccess(afterRead) {
+                let status;
+                try {
+                    status = await M.access();
+                } catch {
+                    status = "error";
+                }
+                if (afterRead && status === "granted") setAppState("error");
+                else afterAccess(status);
+            }
+            function afterAccess(status) {
+                if (status === "granted") {
+                    if (appState !== "ready") loadLibrary(false);
+                } else if (status === "denied") setAppState("denied");
+                else if (status === "osDenied") setAppState("osDenied");
+                else if (status === "notAsked") setAppState("welcome");
+                else setAppState("error");
+            }
+            function findMusic() {
+                // Called right in the tap: Zapli asks only from a tap.
+                call(
+                    M.requestAccess().then((status) => {
+                        if (status === "notAsked") {
+                            welcomeNote = t("welcomeAgain");
+                            setAppState("welcome");
+                        } else afterAccess(status);
+                    }),
+                );
+            }
+
+            document.addEventListener("click", (e) => {
+                const b = e.target.closest("[data-act]");
+                if (!b || b.disabled) return;
+                const d = b.dataset;
+                switch (d.act) {
+                    case "tab":
+                        if (tab !== d.tab || route().name !== d.tab) {
+                            history.replaceState(history.state, "", d.tab === "songs" ? "#/" : "#/" + d.tab);
+                            el.libBody.dataset.tab = "";
+                            showTab(d.tab);
+                            el.libBody.dataset.tab = d.tab;
+                            underlay = d.tab;
+                            underlayRoute = { name: d.tab, key: null };
+                        }
+                        break;
+                    case "search":
+                        go("search");
+                        break;
+                    case "back":
+                        back();
+                        break;
+                    case "album":
+                        go("album/" + encodeURIComponent(d.k));
+                        break;
+                    case "artist":
+                        go("artist/" + encodeURIComponent(d.k));
+                        break;
+                    case "play":
+                        playFrom(d.l, Number(d.i));
+                        break;
+                    case "playAll":
+                        if (ps && ps.shuffle) call(M.set({ shuffle: false }));
+                        playFrom(d.l, 0);
+                        break;
+                    case "shuffleAll": {
+                        if (!ps || !ps.shuffle) call(M.set({ shuffle: true }));
+                        const n = (lists[d.l] || []).length;
+                        playFrom(d.l, Math.floor(Math.random() * n));
+                        break;
+                    }
+                    case "letters":
+                        renderTab.flush();
+                        lettersSheet();
+                        break;
+                    case "jump": {
+                        closeSheet();
+                        const h = document.getElementById("sec-" + d.v);
+                        if (h) {
+                            h.scrollIntoView({ block: "start" });
+                            const btn = $("button", h);
+                            if (btn) btn.focus({ preventScroll: true });
+                        }
+                        break;
+                    }
+                    case "openNow":
+                        go("now");
+                        break;
+                    case "closeNow":
+                        back();
+                        break;
+                    case "toggle":
+                        toggle();
+                        break;
+                    case "next":
+                        step(1);
+                        break;
+                    case "prev":
+                        step(-1);
+                        break;
+                    case "shuffle":
+                        if (ps) call(M.set({ shuffle: !ps.shuffle }));
+                        break;
+                    case "repeat":
+                        if (ps) call(M.set({ repeat: { off: "all", all: "one", one: "off" }[ps.repeat || "off"] }));
+                        break;
+                    case "speed":
+                        speedSheet();
+                        break;
+                    case "setSpeed":
+                        call(M.set({ speed: Number(d.v) }));
+                        closeSheet();
+                        break;
+                    case "sleep":
+                        sleepSheet();
+                        break;
+                    case "setSleep":
+                        call(M.sleep({ minutes: Number(d.v) }));
+                        closeSheet();
+                        break;
+                    case "setSleepEnd":
+                        call(M.sleep({ endOfTrack: true }));
+                        closeSheet();
+                        break;
+                    case "sleepOff":
+                        call(M.cancelSleep());
+                        closeSheet();
+                        break;
+                    case "closeSheet":
+                        closeSheet();
+                        break;
+                    case "queue":
+                        if (route().name !== "queue") go("queue");
+                        break;
+                    case "qplay": {
+                        const i = Number(d.i);
+                        if (ps && ps.owner) call(M.skip({ index: i }));
+                        else if (ps && ps.queue) call(M.play(ps.queue, { index: i }));
+                        break;
+                    }
+                    case "find":
+                        findMusic();
+                        break;
+                    case "settings":
+                        if (Z && Z.ui && typeof Z.ui.openSettings === "function") call(Z.ui.openSettings());
+                        else toast(t("demoOnly"));
+                        break;
+                    case "recheck":
+                        if (DEMO) toast(t("demoOnly"));
+                        else checkAccess();
+                        break;
+                    case "retry":
+                        if (DEMO && demoPreview) toast(t("demoOnly"));
+                        else loadLibrary(false);
+                        break;
+                    case "demo":
+                        demoPreview = "";
+                        startDemo(true);
+                        break;
+                    case "clearSearch": {
+                        const q = $("#q");
+                        if (q) {
+                            q.value = "";
+                            runSearch();
+                            q.focus();
+                        }
+                        break;
+                    }
+                }
+            });
+            window.addEventListener("popstate", () => render());
+            window.addEventListener("hashchange", () => render());
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && el.queue.classList.contains("open") && !el.sheet.open) back();
+                else if (e.key === "Escape" && el.now.classList.contains("open") && !el.sheet.open) back();
+            });
+
+            /* swipe the big cover sideways to skip a song */
+            (() => {
+                const wrap = $("#coverWrap");
+                let x0 = 0,
+                    y0 = 0,
+                    id = null,
+                    axis = "",
+                    t0 = 0;
+                const front = () => {
+                    const all = $$("#npCover .art");
+                    return all[all.length - 1];
+                };
+                wrap.addEventListener("pointerdown", (e) => {
+                    if (!ps || !ps.queue) return;
+                    id = e.pointerId;
+                    x0 = e.clientX;
+                    y0 = e.clientY;
+                    axis = "";
+                    t0 = performance.now();
+                });
+                wrap.addEventListener("pointermove", (e) => {
+                    if (e.pointerId !== id) return;
+                    const dx = e.clientX - x0,
+                        dy = e.clientY - y0;
+                    if (!axis && Math.hypot(dx, dy) > 10) axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+                    if (axis === "x" && !reduceMotion()) {
+                        const f = front();
+                        if (f) {
+                            f.classList.add("drag");
+                            f.style.transform = `translateX(${dx}px) rotate(${dx / 40}deg)`;
+                        }
+                    }
+                });
+                const end = (e) => {
+                    if (e.pointerId !== id) return;
+                    id = null;
+                    const dx = e.clientX - x0;
+                    const fast = Math.abs(dx) / Math.max(1, performance.now() - t0) > 0.5;
+                    const f = front();
+                    if (axis === "x" && (Math.abs(dx) > 80 || (fast && Math.abs(dx) > 30)) && e.type === "pointerup") {
+                        step(dx < 0 ? 1 : -1);
+                        // Back to its place if no other song comes (the skip failed, or it was the only song).
+                        setTimeout(() => {
+                            if (f && f.isConnected && f.classList.contains("drag")) {
+                                f.classList.remove("drag");
+                                f.style.transform = "";
+                            }
+                        }, 1500);
+                    } else if (f) {
+                        f.classList.remove("drag");
+                        f.style.transform = "";
+                    }
+                    axis = "";
+                };
+                wrap.addEventListener("pointerup", end);
+                wrap.addEventListener("pointercancel", end);
+            })();
+
+            /* ---------- toasts ---------- */
+            let toastTimer = 0;
+            function toast(text) {
+                el.toast.textContent = text;
+                el.toast.classList.add("show");
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => el.toast.classList.remove("show"), 3800);
+            }
+
+            /* ---------- start ---------- */
+            // Large text (150 % or more of the usual size): the page drops a few extras to keep words readable.
+            function measureText() {
+                const px = $("#remProbe").offsetWidth / 10 || 16;
+                document.documentElement.classList.toggle("big", px >= 24);
+            }
+            measureText();
+            if ("ResizeObserver" in window) new ResizeObserver(measureText).observe($("#remProbe"));
+            for (const ev of ["DOMContentLoaded", "load", "resize"]) window.addEventListener(ev, measureText);
+            function labelStatic() {
+                $("#logo").innerHTML = icon("note");
+                const sb = $("#searchBtn");
+                sb.innerHTML = icon("search");
+                sb.setAttribute("aria-label", t("search"));
+                for (const b of $$(".tab", el.tabs)) b.textContent = t(b.dataset.tab);
+                $("#mPlay").innerHTML = PP_ICONS;
+                $("#npPlay").innerHTML = PP_ICONS;
+                const n = $("#mNext");
+                n.innerHTML = icon("next");
+                n.setAttribute("aria-label", t("next"));
+                $("#npClose").innerHTML = icon("down");
+                $("#npClose").setAttribute("aria-label", t("closePlayer"));
+                $("#npQueueTop").innerHTML = icon("queue");
+                $("#npQueueTop").setAttribute("aria-label", t("upNext"));
+                $("#npPrev").innerHTML = icon("prev");
+                $("#npPrev").setAttribute("aria-label", t("previous"));
+                $("#npNext").innerHTML = icon("next");
+                $("#npNext").setAttribute("aria-label", t("next"));
+                $("#xShuffle").innerHTML = icon("shuffle") + `<span>${esc(t("shuffle"))}</span>`;
+                $("#xQueue").innerHTML = icon("queue") + `<span>${esc(t("upNext"))}</span>`;
+                $("#npLabel").textContent = t("nowPlaying");
+                $("#npChip").textContent = t("demoChip");
+                $("#npChipLine").hidden = !DEMO;
+                el.seek.setAttribute("aria-label", t("seekLabel"));
+                el.mini.setAttribute("aria-label", t("nowPlaying"));
+                const bar = $("#demoBar");
+                bar.hidden = !DEMO;
+                if (DEMO)
+                    bar.innerHTML = `${icon("info")}<span><b>${esc(t("demoTitle"))}</b>${esc(t("demoBody"))}</span>`;
+                el.now.inert = true;
+                el.queue.inert = true;
+                el.mini.inert = true;
+            }
+            function listen() {
+                try {
+                    M.on("state", (s) => applyState(s));
+                    M.on("library", () => loadLibrary(true));
+                } catch {
+                    /* an older Zapli without events: the state is read after each call instead */
+                }
+                M.state().then(
+                    (s) => {
+                        if (!ps) applyState(s, true);
+                    },
+                    () => null,
+                );
+            }
+            let demoPreview = "";
+            function startDemo(fromButton) {
+                DEMO = true;
+                M = demoMusic();
+                const first = DEMO_TRACKS.filter((x) => x.albumId === DEMO_TRACKS[0].albumId).map((x) => x.id);
+                M.remember(first, 2, 64000);
+                labelStatic();
+                listen();
+                // ?state=welcome|denied|osDenied|empty|loading|error|unsupported shows that screen, for screenshots.
+                const preview = fromButton ? "" : new URLSearchParams(location.search).get("state") || "";
+                if (/^(welcome|denied|osDenied|empty|loading|error|unsupported)$/.test(preview)) {
+                    demoPreview = preview;
+                    if (preview === "loading") loadProgress = { n: 500, total: 1240 };
+                    setAppState(preview);
+                    if (preview === "welcome") demoPreview = "";
+                    return;
+                }
+                loadLibrary(false);
+            }
+            async function start() {
+                if (!history.state) history.replaceState({ d: 0 }, "", location.hash || "#/");
+                const r = route();
+                if (["albums", "artists"].includes(r.name)) tab = r.name;
+                if (!Z) return startDemo();
+                labelStatic();
+                await Z.ready.catch(() => null);
+                if (!has("music.tracks") || !Z.music) {
+                    setAppState("unsupported");
+                    return;
+                }
+                M = Z.music;
+                listen();
+                try {
+                    Z.app.on("resume", () => {
+                        if (["welcome", "denied", "osDenied"].includes(appState)) checkAccess();
+                        kick();
+                    });
+                    Z.app.on("pause", () => {
+                        cancelAnimationFrame(raf);
+                        raf = 0;
+                    });
+                } catch {
+                    /* an older Zapli */
+                }
+                checkAccess();
+            }
+            if ("ResizeObserver" in window) {
+                const sizes = new ResizeObserver(() => {
+                    const show = el.mini.classList.contains("show");
+                    document.documentElement.style.setProperty(
+                        "--mini-h",
+                        show ? el.mini.offsetHeight + 12 + "px" : "0px",
+                    );
+                    document.documentElement.style.setProperty("--tabs-h", el.tabbar.offsetHeight + 8 + "px");
+                });
+                sizes.observe(el.mini);
+                sizes.observe(el.tabbar);
+            }
+            start();
+        </script>
+    </body>
+</html>
