@@ -104,7 +104,15 @@ days}}"`).
 
 ## 3. A web app (`index.html`)
 
-One self-contained HTML file (at most 2 MB) with its manifest in `<head>` (Mines' head, shortened):
+One self-contained HTML file with its manifest in `<head>`. A library tool is always one
+file, so everything it shows is in it: keep the file under 2 MB, the most every Zapli version installs. Draw with
+CSS, SVG or a canvas instead of embedding pictures, and never paste big images, sounds or fonts in as base64 (it
+adds a third to their size). A bigger game, or a tool with many images, sounds or fonts, does not fit the library's
+one-file format: make it a `.zapli` package (a zip of `manifest.json`, `index.html` and its files, packed with
+`zapli pack`; up to 20 MB, 10 MB a file) and import it in Zapli with Import, then From a file, as Zapli's skill pack
+describes.
+
+Mines' head, shortened:
 
 ```html
 <!doctype html>
