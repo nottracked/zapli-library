@@ -3,7 +3,7 @@
   "app": {
     "id": "library/todo",
     "name": "To-do",
-    "version": "3.3.2",
+    "version": "3.3.3",
     "icon": "task_alt",
     "category": "productivity",
     "ageRating": "everyone",
@@ -18,56 +18,653 @@
     "defaultLocale": "en",
     "strings": {
       "openTasks": {
-        "en": "{n, plural, =0 {Nothing open} one {# open task} other {# open tasks}}"
+        "en": "{n, plural, =0 {Nothing open} one {# open task} other {# open tasks}}",
+        "sk": "{n, plural, =0 {Žiadne nesplnené} one {# nesplnená úloha} few {# nesplnené úlohy} many {# nesplnenej úlohy} other {# nesplnených úloh}}"
       },
       "overdueTasks": {
-        "en": "{n, plural, one {# overdue} other {# overdue}}"
+        "en": "{n, plural, one {# overdue} other {# overdue}}",
+        "sk": "{n, plural, one {# po termíne} few {# po termíne} many {# po termíne} other {# po termíne}}"
       },
       "stepsDone": {
-        "en": "{done} of {total} steps"
+        "en": "{done} of {total} steps",
+        "sk": "Kroky: {done} z {total}"
       },
       "days": {
-        "en": "{n, plural, one {# day} other {# days}}"
+        "en": "{n, plural, one {# day} other {# days}}",
+        "sk": "{n, plural, one {# deň} few {# dni} many {# dňa} other {# dní}}"
       },
       "moveOverdue": {
-        "en": "{n, plural, one {Move # overdue task to today?} other {Move # overdue tasks to today?}}"
+        "en": "{n, plural, one {Move # overdue task to today?} other {Move # overdue tasks to today?}}",
+        "sk": "{n, plural, one {Presunúť # úlohu po termíne na dnes?} few {Presunúť # úlohy po termíne na dnes?} many {Presunúť # úlohy po termíne na dnes?} other {Presunúť # úloh po termíne na dnes?}}"
       },
       "clearDone": {
-        "en": "{n, plural, one {Delete # completed task for good?} other {Delete # completed tasks for good?}}"
+        "en": "{n, plural, one {Delete # completed task for good?} other {Delete # completed tasks for good?}}",
+        "sk": "{n, plural, one {Natrvalo odstrániť # splnenú úlohu?} few {Natrvalo odstrániť # splnené úlohy?} many {Natrvalo odstrániť # splnenej úlohy?} other {Natrvalo odstrániť # splnených úloh?}}"
       },
       "imported": {
-        "en": "{added, plural, =0 {No tasks added} one {# task added} other {# tasks added}}{lists, plural, =0 {} one {, # new list} other {, # new lists}}{skipped, plural, =0 {.} one {, # row skipped.} other {, # rows skipped.}}"
+        "en": "{added, plural, =0 {No tasks added} one {# task added} other {# tasks added}}{lists, plural, =0 {} one {, # new list} other {, # new lists}}{skipped, plural, =0 {.} one {, # row skipped.} other {, # rows skipped.}}",
+        "sk": "{added, plural, =0 {Nepridala sa žiadna úloha} one {Pridaná # úloha} few {Pridané # úlohy} many {Pridané # úlohy} other {Pridaných # úloh}}{lists, plural, =0 {} one {, # nový zoznam} few {, # nové zoznamy} many {, # nového zoznamu} other {, # nových zoznamov}}{skipped, plural, =0 {.} one {, # riadok sa vynechal.} few {, # riadky sa vynechali.} many {, # riadka sa vynechalo.} other {, # riadkov sa vynechalo.}}"
       },
       "exported": {
-        "en": "{n, plural, =0 {Saved an empty file.} one {# task exported.} other {# tasks exported.}}"
+        "en": "{n, plural, =0 {Saved an empty file.} one {# task exported.} other {# tasks exported.}}",
+        "sk": "{n, plural, =0 {Uložil sa prázdny súbor.} one {Exportovaná # úloha.} few {Exportované # úlohy.} many {Exportované # úlohy.} other {Exportovaných # úloh.}}"
       },
       "problemLine": {
-        "en": "Line {row}: {reason}"
+        "en": "Line {row}: {reason}",
+        "sk": "Riadok {row}: {reason}"
       },
       "moreProblems": {
-        "en": "{n, plural, one {…and # more row} other {…and # more rows}}"
+        "en": "{n, plural, one {…and # more row} other {…and # more rows}}",
+        "sk": "{n, plural, one {…a ešte # riadok} few {…a ešte # riadky} many {…a ešte # riadka} other {…a ešte # riadkov}}"
       },
       "digestBody": {
-        "en": "{due, plural, =0 {Nothing due today} one {# task due today} other {# tasks due today}}{overdue, plural, =0 {} one {, # overdue} other {, # overdue}}"
+        "en": "{due, plural, =0 {Nothing due today} one {# task due today} other {# tasks due today}}{overdue, plural, =0 {} one {, # overdue} other {, # overdue}}",
+        "sk": "{due, plural, =0 {Na dnes nič} one {Na dnes # úloha} few {Na dnes # úlohy} many {Na dnes # úlohy} other {Na dnes # úloh}}{overdue, plural, =0 {} one {, # po termíne} few {, # po termíne} many {, # po termíne} other {, # po termíne}}"
       },
       "doneOf": {
-        "en": "{done} of {total}"
+        "en": "{done} of {total}",
+        "sk": "{done} z {total}"
       },
       "leftToday": {
-        "en": "{n, plural, =0 {All done for today} one {# task still to do today} other {# tasks still to do today}}"
+        "en": "{n, plural, =0 {All done for today} one {# task still to do today} other {# tasks still to do today}}",
+        "sk": "{n, plural, =0 {Na dnes je všetko hotové} one {Na dnes zostáva # úloha} few {Na dnes zostávajú # úlohy} many {Na dnes zostáva # úlohy} other {Na dnes zostáva # úloh}}"
+      },
+      "remindWhenTaskIs": {
+        "en": "Remind you when a task is due, with Done and Snooze buttons",
+        "sk": "Pripomínať vám úlohy v termíne, s tlačidlami Hotovo a Odložiť"
+      },
+      "showTodayTasksHome": {
+        "en": "Show today’s tasks on your home screen so you can tick them off there",
+        "sk": "Zobraziť dnešné úlohy na ploche, aby ste ich mohli odškrtnúť priamo tam"
+      },
+      "importTasksFromCsv": {
+        "en": "Import tasks from a CSV file and export your tasks to a file you choose",
+        "sk": "Importovať úlohy zo súboru CSV a exportovať ich do súboru, ktorý vyberiete"
+      },
+      "tasksListsSavedAs": {
+        "en": "Your tasks and lists, saved as a CSV file where you choose, as a backup or to move them",
+        "sk": "Vaše úlohy a zoznamy sa uložia ako súbor CSV tam, kde vyberiete, ako záloha alebo na presun"
+      },
+      "remindMeTasksWithout": {
+        "en": "Remind me of tasks without a time",
+        "sk": "Pripomínať aj úlohy bez času"
+      },
+      "timeThoseReminders": {
+        "en": "Time for those reminders",
+        "sk": "Čas týchto pripomienok"
+      },
+      "morningSummaryTodayTasks": {
+        "en": "Morning summary of today’s tasks",
+        "sk": "Ranný prehľad dnešných úloh"
+      },
+      "oneNotificationWithWhat": {
+        "en": "One notification with what is due today and what is overdue, sent only when there is something.",
+        "sk": "Jedno upozornenie s úlohami na dnes a úlohami po termíne. Príde, len keď nejaké sú."
+      },
+      "summaryAt": {
+        "en": "Summary at",
+        "sk": "Prehľad o"
+      },
+      "snooze": {
+        "en": "Snooze for",
+        "sk": "Odložiť o"
+      },
+      "n15Minutes": {
+        "en": "15 minutes",
+        "sk": "15 minút"
+      },
+      "n30Minutes": {
+        "en": "30 minutes",
+        "sk": "30 minút"
+      },
+      "n1Hour": {
+        "en": "1 hour",
+        "sk": "1 hodinu"
+      },
+      "n3Hours": {
+        "en": "3 hours",
+        "sk": "3 hodiny"
+      },
+      "list": {
+        "en": "List",
+        "sk": "Zoznam"
+      },
+      "lists": {
+        "en": "Lists",
+        "sk": "Zoznamy"
+      },
+      "workGroceriesTrip": {
+        "en": "Work, Groceries, Trip",
+        "sk": "Práca, Nákup, Výlet"
+      },
+      "iconColour": {
+        "en": "Icon and colour",
+        "sk": "Ikona a farba"
+      },
+      "work": {
+        "en": "Work",
+        "sk": "Práca"
+      },
+      "home": {
+        "en": "Home",
+        "sk": "Domov"
+      },
+      "shopping": {
+        "en": "Shopping",
+        "sk": "Nákupy"
+      },
+      "school": {
+        "en": "School",
+        "sk": "Škola"
+      },
+      "fitness": {
+        "en": "Fitness",
+        "sk": "Šport"
+      },
+      "family": {
+        "en": "Family",
+        "sk": "Rodina"
+      },
+      "travel": {
+        "en": "Travel",
+        "sk": "Cestovanie"
+      },
+      "ideas": {
+        "en": "Ideas",
+        "sk": "Nápady"
+      },
+      "important": {
+        "en": "Important",
+        "sk": "Dôležité"
+      },
+      "tasks": {
+        "en": "Tasks",
+        "sk": "Úlohy"
+      },
+      "openTasks2": {
+        "en": "Open tasks",
+        "sk": "Nesplnené úlohy"
+      },
+      "overdue": {
+        "en": "Overdue",
+        "sk": "Po termíne"
+      },
+      "task": {
+        "en": "Task",
+        "sk": "Úloha"
+      },
+      "whatNeedsDoing": {
+        "en": "What needs doing?",
+        "sk": "Čo treba urobiť?"
+      },
+      "leaveItEmptyKeep": {
+        "en": "Leave it empty to keep the task in your Inbox",
+        "sk": "Nechajte prázdne a úloha zostane medzi nezaradenými"
+      },
+      "dueDate": {
+        "en": "Due date",
+        "sk": "Termín"
+      },
+      "time": {
+        "en": "Time",
+        "sk": "Čas"
+      },
+      "withoutTimeTaskIs": {
+        "en": "Without a time the task is due any time that day",
+        "sk": "Bez času stačí úlohu splniť kedykoľvek počas dňa"
+      },
+      "repeat": {
+        "en": "Repeat",
+        "sk": "Opakovanie"
+      },
+      "pickDueDateRepeating": {
+        "en": "Pick a due date for a repeating task.",
+        "sk": "Opakujúca sa úloha potrebuje termín."
+      },
+      "high": {
+        "en": "High",
+        "sk": "Vysoká"
+      },
+      "medium": {
+        "en": "Medium",
+        "sk": "Stredná"
+      },
+      "low": {
+        "en": "Low",
+        "sk": "Nízka"
+      },
+      "none": {
+        "en": "None",
+        "sk": "Žiadna"
+      },
+      "remindMe": {
+        "en": "Remind me",
+        "sk": "Pripomenúť"
+      },
+      "atDueTimeAt": {
+        "en": "At the due time, or at your daily reminder time when the task has no time",
+        "sk": "V čase termínu, a keď úloha nemá čas, v čase denných pripomienok"
+      },
+      "detailsAddressesWhatBring": {
+        "en": "Details, addresses, what to bring",
+        "sk": "Podrobnosti, adresy, čo vziať so sebou"
+      },
+      "done": {
+        "en": "Done",
+        "sk": "Splnené"
+      },
+      "completedAt": {
+        "en": "Completed",
+        "sk": "Čas splnenia"
+      },
+      "lastCompleted": {
+        "en": "Last completed",
+        "sk": "Naposledy splnené"
+      },
+      "snoozedUntil": {
+        "en": "Snoozed until",
+        "sk": "Odložené do"
+      },
+      "steps": {
+        "en": "Steps",
+        "sk": "Kroky"
+      },
+      "stepsDone2": {
+        "en": "Steps done",
+        "sk": "Splnené kroky"
+      },
+      "when": {
+        "en": "When",
+        "sk": "Kedy"
+      },
+      "today": {
+        "en": "Today",
+        "sk": "Dnes"
+      },
+      "later": {
+        "en": "Later",
+        "sk": "Neskôr"
+      },
+      "noDate": {
+        "en": "No date",
+        "sk": "Bez dátumu"
+      },
+      "doneToday": {
+        "en": "Done today",
+        "sk": "Dnes splnené"
+      },
+      "due": {
+        "en": "Due",
+        "sk": "Termín"
+      },
+      "summary": {
+        "en": "Summary",
+        "sk": "Súhrn"
+      },
+      "importedAllDayFlag": {
+        "en": "Imported all-day flag",
+        "sk": "Importované: celý deň"
+      },
+      "importedRepeatRule": {
+        "en": "Imported repeat rule",
+        "sk": "Importované pravidlo opakovania"
+      },
+      "importedDueDateTime": {
+        "en": "Imported due date and time",
+        "sk": "Importovaný termín a čas"
+      },
+      "importedDueDateLocal": {
+        "en": "Imported due date (local)",
+        "sk": "Importovaný termín (miestny)"
+      },
+      "importedTime": {
+        "en": "Imported time",
+        "sk": "Importovaný čas"
+      },
+      "importedRepeatRuleRaw": {
+        "en": "Imported repeat rule (raw)",
+        "sk": "Importované pravidlo opakovania (pôvodné)"
+      },
+      "importedDueDateFinal": {
+        "en": "Imported due date (final)",
+        "sk": "Importovaný termín (výsledný)"
+      },
+      "importedDateThatCould": {
+        "en": "Imported date that could not be read",
+        "sk": "Importovaný dátum, ktorý sa nedal prečítať"
+      },
+      "step": {
+        "en": "Step",
+        "sk": "Krok"
+      },
+      "completedTask": {
+        "en": "Completed task",
+        "sk": "Splnená úloha"
+      },
+      "completedTasks": {
+        "en": "Completed tasks",
+        "sk": "Splnené úlohy"
+      },
+      "upcoming": {
+        "en": "Upcoming",
+        "sk": "Plánované"
+      },
+      "inbox": {
+        "en": "Inbox",
+        "sk": "Nezaradené"
+      },
+      "allDoneToday": {
+        "en": "All done for today",
+        "sk": "Na dnes je všetko hotové"
+      },
+      "nothingIsDueOverdue": {
+        "en": "Nothing is due or overdue. Tap + to add a task for today, or plan ahead under Upcoming.",
+        "sk": "Žiadna úloha nemá termín dnes ani nie je po termíne. Klepnutím na + pridáte úlohu na dnes, alebo plánujte dopredu v časti Plánované."
+      },
+      "nothingPlanned": {
+        "en": "Nothing planned",
+        "sk": "Nič naplánované"
+      },
+      "giveTaskDueDate": {
+        "en": "Give a task a due date and it shows up here, grouped by day.",
+        "sk": "Keď úlohe zadáte termín, zobrazí sa tu, zoradená podľa dní."
+      },
+      "inboxIsEmpty": {
+        "en": "Inbox is empty",
+        "sk": "Žiadne nezaradené úlohy"
+      },
+      "jotDownAnythingHere": {
+        "en": "Jot down anything here, then give it a date or move it to a list.",
+        "sk": "Zapíšte si sem čokoľvek a potom tomu dajte termín alebo to presuňte do zoznamu."
+      },
+      "noListsYet": {
+        "en": "No lists yet",
+        "sk": "Zatiaľ žiadne zoznamy"
+      },
+      "makeListWorkHome": {
+        "en": "Make a list for work, home, shopping or a trip.",
+        "sk": "Vytvorte si zoznam na prácu, domácnosť, nákupy alebo výlet."
+      },
+      "nothingOpenThisList": {
+        "en": "Nothing open in this list",
+        "sk": "V tomto zozname nie sú nesplnené úlohy"
+      },
+      "addTaskGiveOne": {
+        "en": "Add a task, or give one a due date to see it under Today and Upcoming too.",
+        "sk": "Pridajte úlohu alebo jej zadajte termín, aby sa zobrazila aj v častiach Dnes a Plánované."
+      },
+      "newTask": {
+        "en": "New task",
+        "sk": "Nová úloha"
+      },
+      "calendar": {
+        "en": "Calendar",
+        "sk": "Kalendár"
+      },
+      "allOpenTasks": {
+        "en": "All open tasks",
+        "sk": "Všetky nesplnené úlohy"
+      },
+      "nothingOpen": {
+        "en": "Nothing open",
+        "sk": "Žiadne nesplnené úlohy"
+      },
+      "everyTaskAddAny": {
+        "en": "Every task you add, in any list, shows up here until it is done.",
+        "sk": "Každá úloha, ktorú pridáte do akéhokoľvek zoznamu, je tu, kým ju nesplníte."
+      },
+      "completed": {
+        "en": "Completed",
+        "sk": "Splnené"
+      },
+      "noCompletedTasks": {
+        "en": "No completed tasks",
+        "sk": "Žiadne splnené úlohy"
+      },
+      "tickedOffTasksRest": {
+        "en": "Ticked-off tasks rest here, so you can bring one back if you need it.",
+        "sk": "Splnené úlohy zostávajú tu, takže ktorúkoľvek môžete v prípade potreby vrátiť."
+      },
+      "progress": {
+        "en": "Progress",
+        "sk": "Pokrok"
+      },
+      "importFinished": {
+        "en": "Import finished",
+        "sk": "Import je dokončený"
+      },
+      "addTaskToday": {
+        "en": "Add a task for today",
+        "sk": "Pridať úlohu na dnes"
+      },
+      "moveOverdueTasksToday": {
+        "en": "Move overdue tasks to today",
+        "sk": "Presunúť úlohy po termíne na dnes"
+      },
+      "importTasksFromCsv2": {
+        "en": "Import tasks from CSV",
+        "sk": "Importovať úlohy zo súboru CSV"
+      },
+      "exportTasksAsCsv": {
+        "en": "Export tasks as CSV",
+        "sk": "Exportovať úlohy do súboru CSV"
+      },
+      "addTask": {
+        "en": "Add task",
+        "sk": "Pridať úlohu"
+      },
+      "editList": {
+        "en": "Edit list",
+        "sk": "Upraviť zoznam"
+      },
+      "deleteAllCompletedTasks": {
+        "en": "Delete all completed tasks",
+        "sk": "Odstrániť všetky splnené úlohy"
+      },
+      "removeStep": {
+        "en": "Remove step",
+        "sk": "Odstrániť krok"
+      },
+      "addStep": {
+        "en": "Add a step",
+        "sk": "Nový krok"
+      },
+      "addStep2": {
+        "en": "Add step",
+        "sk": "Pridať krok"
+      },
+      "typeStepFirst": {
+        "en": "Type the step first.",
+        "sk": "Najprv napíšte krok."
+      },
+      "restore": {
+        "en": "Restore",
+        "sk": "Obnoviť"
+      },
+      "skipThisTime": {
+        "en": "Skip this time",
+        "sk": "Tentoraz vynechať"
+      },
+      "tomorrow": {
+        "en": "Tomorrow",
+        "sk": "Zajtra"
+      },
+      "doneToday2": {
+        "en": "done today",
+        "sk": "dnes splnené"
+      },
+      "todayTasksDone": {
+        "en": "Today’s tasks done",
+        "sk": "Splnené dnešné úlohy"
+      },
+      "thisWeek": {
+        "en": "This week",
+        "sk": "Tento týždeň"
+      },
+      "tasksDone": {
+        "en": "Tasks done",
+        "sk": "Splnené úlohy"
+      },
+      "streak": {
+        "en": "Streak",
+        "sk": "Séria"
+      },
+      "daysRowWithTask": {
+        "en": "Days in a row with a task done",
+        "sk": "Dni po sebe so splnenou úlohou"
+      },
+      "planned": {
+        "en": "Planned",
+        "sk": "Naplánované"
+      },
+      "tasksDoneLast14": {
+        "en": "Tasks done, last 14 days",
+        "sk": "Splnené úlohy za 14 dní"
+      },
+      "everyCompletionCountsIncluding": {
+        "en": "Every completion counts, including each round of a repeating task. Deleting completed tasks keeps these numbers.",
+        "sk": "Počíta sa každé splnenie, aj každé kolo opakujúcej sa úlohy. Keď splnené úlohy odstránite, tieto čísla zostanú."
+      },
+      "finishImportingTasks": {
+        "en": "Finish importing tasks",
+        "sk": "Dokončiť import úloh"
+      },
+      "theseRowsWereLeft": {
+        "en": "These rows were left out, with the reason for each:",
+        "sk": "Tieto riadky sa vynechali, pri každom je dôvod:"
+      },
+      "skippedSeeNextTime": {
+        "en": "Skipped. See you next time.",
+        "sk": "Vynechané. Uvidíme sa nabudúce."
+      },
+      "theirTimeDayStays": {
+        "en": "Their time of day stays as it is.",
+        "sk": "Čas v rámci dňa zostane rovnaký."
+      },
+      "moveToday": {
+        "en": "Move to today",
+        "sk": "Presunúť na dnes"
+      },
+      "movedToday": {
+        "en": "Moved to today.",
+        "sk": "Presunuté na dnes."
+      },
+      "theyCanTBe": {
+        "en": "They can’t be restored afterwards. Your progress numbers stay.",
+        "sk": "Potom sa už nedajú obnoviť. Čísla o pokroku zostanú."
+      },
+      "delete": {
+        "en": "Delete",
+        "sk": "Odstrániť"
+      },
+      "completedTasksDeleted": {
+        "en": "Completed tasks deleted.",
+        "sk": "Splnené úlohy sú odstránené."
+      },
+      "doneButton": {
+        "en": "Done",
+        "sk": "Hotovo"
+      },
+      "snooze2": {
+        "en": "Snooze",
+        "sk": "Odložiť"
+      },
+      "importedTasksAreReady": {
+        "en": "Imported tasks are ready.",
+        "sk": "Importované úlohy sú pripravené."
+      },
+      "todoWidget": {
+        "en": "To-do",
+        "sk": "To-do"
+      },
+      "addTask2": {
+        "en": "Add a task",
+        "sk": "Pridať úlohu"
+      },
+      "yesterday": {
+        "en": "Yesterday",
+        "sk": "Včera"
+      },
+      "highPriority": {
+        "en": "High priority",
+        "sk": "Vysoká priorita"
+      },
+      "mediumPriority": {
+        "en": "Medium priority",
+        "sk": "Stredná priorita"
+      },
+      "lowPriority": {
+        "en": "Low priority",
+        "sk": "Nízka priorita"
+      },
+      "doneOn": {
+        "en": "Done {date}",
+        "sk": "Splnené {date}"
+      },
+      "doneForNow": {
+        "en": "Done for now",
+        "sk": "Tentoraz splnené"
+      },
+      "markAsDone": {
+        "en": "Mark as done",
+        "sk": "Označiť ako splnené"
+      },
+      "nothingDueToday": {
+        "en": "Nothing due today",
+        "sk": "Na dnes nič nie je"
+      },
+      "dueAt": {
+        "en": "Due {time}",
+        "sk": "Termín o {time}"
+      },
+      "dueToday": {
+        "en": "Due today",
+        "sk": "Termín dnes"
+      },
+      "importedLeftover": {
+        "en": "Date or repeat from the imported file: {text}",
+        "sk": "Dátum alebo opakovanie z importovaného súboru: {text}"
+      },
+      "name": {
+        "en": "Name",
+        "sk": "Názov"
+      },
+      "title": {
+        "en": "Title",
+        "sk": "Názov"
+      },
+      "priority": {
+        "en": "Priority",
+        "sk": "Priorita"
+      },
+      "notes": {
+        "en": "Notes",
+        "sk": "Poznámky"
+      },
+      "rank": {
+        "en": "Rank",
+        "sk": "Poradie"
+      },
+      "date": {
+        "en": "Date",
+        "sk": "Dátum"
+      },
+      "at": {
+        "en": "At",
+        "sk": "Čas"
       }
     }
   },
   "permissions": {
     "notify.local": {
-      "purpose": "Remind you when a task is due, with Done and Snooze buttons",
+      "purpose": "@remindWhenTaskIs",
       "maxPerDay": 20
     },
     "widget.home": {
-      "purpose": "Show today’s tasks on your home screen so you can tick them off there"
+      "purpose": "@showTodayTasksHome"
     },
     "files.io": {
-      "purpose": "Import tasks from a CSV file and export your tasks to a file you choose",
+      "purpose": "@importTasksFromCsv",
       "modes": ["import", "export"]
     }
   },
@@ -85,61 +682,61 @@
         "task.doneAt"
       ],
       "to": "files.io",
-      "purpose": "Your tasks and lists, saved as a CSV file where you choose, as a backup or to move them"
+      "purpose": "@tasksListsSavedAs"
     }
   ],
   "settings": {
     "dayReminder": {
       "type": "boolean",
-      "label": "Remind me of tasks without a time",
+      "label": "@remindMeTasksWithout",
       "default": true
     },
     "dayReminderAt": {
       "type": "time",
-      "label": "Time for those reminders",
+      "label": "@timeThoseReminders",
       "default": "09:00",
       "visible": "=settings.dayReminder"
     },
     "digest": {
       "type": "boolean",
-      "label": "Morning summary of today’s tasks",
-      "help": "One notification with what is due today and what is overdue, sent only when there is something.",
+      "label": "@morningSummaryTodayTasks",
+      "help": "@oneNotificationWithWhat",
       "default": false
     },
     "digestAt": {
       "type": "time",
-      "label": "Summary at",
+      "label": "@summaryAt",
       "default": "08:00",
       "visible": "=settings.digest"
     },
     "snooze": {
       "type": "choice",
-      "label": "Snooze for",
+      "label": "@snooze",
       "default": "PT1H",
       "options": [
         {
           "value": "PT15M",
-          "label": "15 minutes"
+          "label": "@n15Minutes"
         },
         {
           "value": "PT30M",
-          "label": "30 minutes"
+          "label": "@n30Minutes"
         },
         {
           "value": "PT1H",
-          "label": "1 hour"
+          "label": "@n1Hour"
         },
         {
           "value": "PT3H",
-          "label": "3 hours"
+          "label": "@n3Hours"
         }
       ]
     }
   },
   "entities": {
     "taskList": {
-      "label": "List",
-      "labelPlural": "Lists",
+      "label": "@list",
+      "labelPlural": "@lists",
       "sort": ["name"],
       "display": {
         "title": "=item.name",
@@ -151,74 +748,75 @@
       },
       "fields": {
         "name": {
+          "label": "@name",
           "type": "text",
           "required": true,
           "unique": true,
           "maxLength": 60,
-          "placeholder": "Work, Groceries, Trip"
+          "placeholder": "@workGroceriesTrip"
         },
         "icon": {
           "type": "choice",
-          "label": "Icon and colour",
+          "label": "@iconColour",
           "default": "list",
           "options": [
             {
               "value": "list",
-              "label": "List",
+              "label": "@list",
               "icon": "list",
               "hue": "blue"
             },
             {
               "value": "work",
-              "label": "Work",
+              "label": "@work",
               "icon": "work",
               "hue": "indigo"
             },
             {
               "value": "home",
-              "label": "Home",
+              "label": "@home",
               "icon": "home",
               "hue": "orange"
             },
             {
               "value": "shopping_cart",
-              "label": "Shopping",
+              "label": "@shopping",
               "icon": "shopping_cart",
               "hue": "green"
             },
             {
               "value": "school",
-              "label": "School",
+              "label": "@school",
               "icon": "school",
               "hue": "teal"
             },
             {
               "value": "fitness_center",
-              "label": "Fitness",
+              "label": "@fitness",
               "icon": "fitness_center",
               "hue": "lime"
             },
             {
               "value": "family_restroom",
-              "label": "Family",
+              "label": "@family",
               "icon": "family_restroom",
               "hue": "pink"
             },
             {
               "value": "flight",
-              "label": "Travel",
+              "label": "@travel",
               "icon": "flight",
               "hue": "cyan"
             },
             {
               "value": "lightbulb",
-              "label": "Ideas",
+              "label": "@ideas",
               "icon": "lightbulb",
               "hue": "amber"
             },
             {
               "value": "star",
-              "label": "Important",
+              "label": "@important",
               "icon": "star",
               "hue": "red"
             }
@@ -227,24 +825,24 @@
         "tasks": {
           "type": "inverse",
           "of": "task.list",
-          "label": "Tasks",
+          "label": "@tasks",
           "sort": ["done", "due"]
         },
         "openCount": {
           "type": "integer",
-          "label": "Open tasks",
+          "label": "@openTasks2",
           "compute": "=size(item.tasks.filter(t, !t.done))"
         },
         "overdueCount": {
           "type": "integer",
-          "label": "Overdue",
+          "label": "@overdue",
           "compute": "=size(item.tasks.filter(t, !t.done && t.due < today()))"
         }
       }
     },
     "task": {
-      "label": "Task",
-      "labelPlural": "Tasks",
+      "label": "@task",
+      "labelPlural": "@tasks",
       "sort": ["done", "due", "dueTime", "-rank"],
       "display": {
         "title": "=item.title",
@@ -255,63 +853,66 @@
       },
       "fields": {
         "title": {
+          "label": "@title",
           "type": "text",
           "required": true,
           "maxLength": 200,
-          "placeholder": "What needs doing?"
+          "placeholder": "@whatNeedsDoing"
         },
         "list": {
+          "label": "@list",
           "type": "ref",
           "to": "taskList",
           "onDelete": "cascade",
-          "help": "Leave it empty to keep the task in your Inbox"
+          "help": "@leaveItEmptyKeep"
         },
         "due": {
           "type": "date",
-          "label": "Due date"
+          "label": "@dueDate"
         },
         "dueTime": {
           "type": "time",
-          "label": "Time",
+          "label": "@time",
           "visible": "=has(item.due)",
-          "help": "Without a time the task is due any time that day"
+          "help": "@withoutTimeTaskIs"
         },
         "repeat": {
           "type": "recurrence",
-          "label": "Repeat",
+          "label": "@repeat",
           "visible": "=has(item.due)",
           "checks": [
             {
               "condition": "=!has(item.repeat) || has(item.due)",
-              "message": "Pick a due date for a repeating task."
+              "message": "@pickDueDateRepeating"
             }
           ]
         },
         "priority": {
+          "label": "@priority",
           "type": "choice",
           "default": "none",
           "options": [
             {
               "value": "high",
-              "label": "High",
+              "label": "@high",
               "icon": "flag",
               "tone": "danger"
             },
             {
               "value": "medium",
-              "label": "Medium",
+              "label": "@medium",
               "icon": "flag",
               "tone": "warning"
             },
             {
               "value": "low",
-              "label": "Low",
+              "label": "@low",
               "icon": "flag",
               "tone": "primary"
             },
             {
               "value": "none",
-              "label": "None",
+              "label": "@none",
               "icon": "flag",
               "tone": "neutral"
             }
@@ -319,53 +920,55 @@
         },
         "remind": {
           "type": "boolean",
-          "label": "Remind me",
+          "label": "@remindMe",
           "default": true,
           "visible": "=has(item.due)",
-          "help": "At the due time, or at your daily reminder time when the task has no time"
+          "help": "@atDueTimeAt"
         },
         "notes": {
+          "label": "@notes",
           "type": "longText",
           "maxLength": 5000,
-          "placeholder": "Details, addresses, what to bring"
+          "placeholder": "@detailsAddressesWhatBring"
         },
         "done": {
           "type": "boolean",
-          "label": "Done",
+          "label": "@done",
           "default": false,
           "visible": "=item.done"
         },
         "doneAt": {
           "type": "datetime",
-          "label": "Completed",
+          "label": "@completedAt",
           "editable": false,
           "visible": "=item.done"
         },
         "lastDone": {
           "type": "date",
-          "label": "Last completed",
+          "label": "@lastCompleted",
           "editable": false,
           "visible": "=has(item.repeat) && has(item.lastDone)"
         },
         "snoozedUntil": {
           "type": "datetime",
-          "label": "Snoozed until",
+          "label": "@snoozedUntil",
           "editable": false,
           "visible": "=!item.done && item.snoozedUntil > now()"
         },
         "steps": {
           "type": "inverse",
           "of": "step.task",
-          "label": "Steps",
+          "label": "@steps",
           "sort": ["createdAt"]
         },
         "stepsDone": {
           "type": "integer",
-          "label": "Steps done",
+          "label": "@stepsDone2",
           "visible": false,
           "compute": "=size(item.steps.filter(s, s.done))"
         },
         "rank": {
+          "label": "@rank",
           "type": "integer",
           "visible": false,
           "stored": true,
@@ -373,35 +976,35 @@
         },
         "bucket": {
           "type": "choice",
-          "label": "When",
+          "label": "@when",
           "visible": false,
           "options": [
             {
               "value": "overdue",
-              "label": "Overdue",
+              "label": "@overdue",
               "tone": "danger"
             },
             {
               "value": "today",
-              "label": "Today",
+              "label": "@today",
               "tone": "primary"
             },
             {
               "value": "later",
-              "label": "Later"
+              "label": "@later"
             },
             {
               "value": "someday",
-              "label": "No date"
+              "label": "@noDate"
             },
             {
               "value": "doneToday",
-              "label": "Done today",
+              "label": "@doneToday",
               "tone": "success"
             },
             {
               "value": "done",
-              "label": "Done",
+              "label": "@done",
               "tone": "success"
             }
           ],
@@ -409,102 +1012,105 @@
         },
         "dueLabel": {
           "type": "text",
-          "label": "Due",
+          "label": "@due",
           "visible": false,
-          "compute": "=!has(item.due) ? '' : coalesce(item.due == today() ? 'Today' : item.due == addDays(today(), 1) ? 'Tomorrow' : item.due == addDays(today(), -1) ? 'Yesterday' : formatDate(item.due, 'MMMEd'), '') + (has(item.dueTime) ? ', ' + coalesce(formatDate(item.dueTime, 'jm'), '') : '')"
+          "compute": "=!has(item.due) ? '' : coalesce(item.due == today() ? t('today') : item.due == addDays(today(), 1) ? t('tomorrow') : item.due == addDays(today(), -1) ? t('yesterday') : formatDate(item.due, 'MMMEd'), '') + (has(item.dueTime) ? ', ' + coalesce(formatDate(item.dueTime, 'jm'), '') : '')"
         },
         "summary": {
           "type": "text",
-          "label": "Summary",
+          "label": "@summary",
           "visible": false,
-          "compute": "=join([item.dueLabel, has(item.repeat) ? formatRecurrence(item.repeat) : '', coalesce(item.list.name, 'Inbox'), size(item.steps) > 0 ? t('stepsDone', {'done': item.stepsDone, 'total': size(item.steps)}) : ''].filter(s, s != ''), ' · ')"
+          "compute": "=join([item.dueLabel, has(item.repeat) ? formatRecurrence(item.repeat) : '', coalesce(item.list.name, t('inbox')), size(item.steps) > 0 ? t('stepsDone', {'done': item.stepsDone, 'total': size(item.steps)}) : ''].filter(s, s != ''), ' · ')"
         },
         "importAllDay": {
           "type": "text",
-          "label": "Imported all-day flag",
+          "label": "@importedAllDayFlag",
           "maxLength": 500,
           "editable": false,
           "visible": false
         },
         "importRepeat": {
           "type": "text",
-          "label": "Imported repeat rule",
+          "label": "@importedRepeatRule",
           "maxLength": 500,
           "editable": false,
           "visible": false
         },
         "importDueAt": {
           "type": "datetime",
-          "label": "Imported due date and time",
+          "label": "@importedDueDateTime",
           "editable": false,
           "visible": false
         },
         "impDay": {
           "type": "date",
-          "label": "Imported due date (local)",
+          "label": "@importedDueDateLocal",
           "visible": false,
           "compute": "=has(item.importDueAt) ? date(item.importDueAt) : null"
         },
         "impClock": {
           "type": "time",
-          "label": "Imported time",
+          "label": "@importedTime",
           "visible": false,
           "compute": "=has(item.importDueAt) && !(lower(trim(coalesce(item.importAllDay, ''))) in ['true', 'yes', 'y', '1']) && time(item.importDueAt) != time('00:00') ? time(item.importDueAt) : null"
         },
         "impRuleText": {
           "type": "text",
-          "label": "Imported repeat rule (raw)",
+          "label": "@importedRepeatRuleRaw",
           "visible": false,
           "compute": "=upper(trim(replace(upper(coalesce(item.importRepeat, '')), 'RRULE:', '')))"
         },
         "impRule": {
           "type": "text",
-          "label": "Imported repeat rule",
+          "label": "@importedRepeatRule",
           "visible": false,
           "compute": "=!(item.impRuleText.matches(r'^FREQ=(DAILY|WEEKLY|MONTHLY|YEARLY)(;(INTERVAL|COUNT|UNTIL|BYDAY|BYMONTHDAY|BYMONTH|WKST|DTSTART)=[A-Z0-9,+-]+)*$') && !item.impRuleText.matches(r'INTERVAL=0+(;|$)') && !(contains(item.impRuleText, 'COUNT=') && contains(item.impRuleText, 'UNTIL=')) && !(!contains(item.impRuleText, 'FREQ=MONTHLY') && !contains(item.impRuleText, 'FREQ=YEARLY') && item.impRuleText.matches(r'BYDAY=[^;]*[0-9]')) && !(contains(item.impRuleText, 'FREQ=WEEKLY') && contains(item.impRuleText, 'BYMONTHDAY'))) ? '' : contains(item.impRuleText, 'DTSTART=') ? item.impRuleText : item.impRuleText + ';DTSTART=' + replace(string(coalesce(item.impDay, today())), '-', '')"
         },
         "impDue": {
           "type": "date",
-          "label": "Imported due date (final)",
+          "label": "@importedDueDateFinal",
           "visible": false,
           "compute": "=has(item.impDay) ? item.impDay : item.impRule != '' ? (occursOn(item.impRule, today()) ? today() : nextOccurrence(item.impRule, today())) : null"
         },
         "impLeftover": {
           "type": "text",
-          "label": "Imported date that could not be read",
+          "label": "@importedDateThatCould",
           "visible": false,
           "compute": "=item.impRule == '' && !has(item.impDay) && trim(coalesce(item.importRepeat, '')) != '' ? trim(coalesce(item.importRepeat, '')) : ''"
         }
       }
     },
     "step": {
-      "label": "Step",
-      "labelPlural": "Steps",
+      "label": "@step",
+      "labelPlural": "@steps",
       "display": {
         "title": "=item.title",
         "icon": "=item.done ? 'check_circle' : 'checklist'"
       },
       "fields": {
         "task": {
+          "label": "@task",
           "type": "ref",
           "to": "task",
           "required": true,
           "onDelete": "cascade"
         },
         "title": {
+          "label": "@title",
           "type": "text",
           "required": true,
           "maxLength": 200
         },
         "done": {
+          "label": "@done",
           "type": "boolean",
           "default": false
         }
       }
     },
     "completion": {
-      "label": "Completed task",
-      "labelPlural": "Completed tasks",
+      "label": "@completedTask",
+      "labelPlural": "@completedTasks",
       "sort": ["-at"],
       "display": {
         "title": "=item.title",
@@ -513,24 +1119,28 @@
       },
       "fields": {
         "task": {
+          "label": "@task",
           "type": "ref",
           "to": "task",
           "onDelete": "setNull",
           "editable": false
         },
         "title": {
+          "label": "@title",
           "type": "text",
           "required": true,
           "maxLength": 200,
           "editable": false
         },
         "date": {
+          "label": "@date",
           "type": "date",
           "required": true,
           "default": "=today()",
           "editable": false
         },
         "at": {
+          "label": "@at",
           "type": "datetime",
           "required": true,
           "default": "=now()",
@@ -677,23 +1287,23 @@
     "tabs": [
       {
         "screen": "today",
-        "label": "Today",
+        "label": "@today",
         "icon": "today",
         "badge": "=size(q.overdue) + size(q.dueToday)"
       },
       {
         "screen": "upcoming",
-        "label": "Upcoming",
+        "label": "@upcoming",
         "icon": "calendar_month"
       },
       {
         "screen": "inbox",
-        "label": "Inbox",
+        "label": "@inbox",
         "icon": "inbox"
       },
       {
         "screen": "lists",
-        "label": "Lists",
+        "label": "@lists",
         "icon": "list"
       }
     ],
@@ -702,47 +1312,47 @@
   "screens": {
     "today": {
       "type": "list",
-      "title": "Today",
+      "title": "@today",
       "query": "today",
       "item": "todayRow",
       "sectionBy": "bucket",
       "add": false,
       "toolbar": ["addTodayBtn", "rescheduleBtn"],
       "empty": {
-        "title": "All done for today",
-        "body": "Nothing is due or overdue. Tap + to add a task for today, or plan ahead under Upcoming.",
+        "title": "@allDoneToday",
+        "body": "@nothingIsDueOverdue",
         "icon": "celebration"
       }
     },
     "upcoming": {
       "type": "list",
-      "title": "Upcoming",
+      "title": "@upcoming",
       "query": "upcoming",
       "item": "upcomingRow",
       "sectionBy": "due",
       "add": "quickAdd",
       "empty": {
-        "title": "Nothing planned",
-        "body": "Give a task a due date and it shows up here, grouped by day.",
+        "title": "@nothingPlanned",
+        "body": "@giveTaskDueDate",
         "icon": "event_available"
       }
     },
     "inbox": {
       "type": "list",
-      "title": "Inbox",
+      "title": "@inbox",
       "query": "inbox",
       "item": "inboxRow",
       "search": ["title", "notes"],
       "add": "quickAdd",
       "empty": {
-        "title": "Inbox is empty",
-        "body": "Jot down anything here, then give it a date or move it to a list.",
+        "title": "@inboxIsEmpty",
+        "body": "@jotDownAnythingHere",
         "icon": "inbox"
       }
     },
     "lists": {
       "type": "list",
-      "title": "Lists",
+      "title": "@lists",
       "query": "lists",
       "onTap": {
         "event": {
@@ -754,14 +1364,14 @@
       },
       "toolbar": ["importBtn", "exportBtn", "finishImportBtn"],
       "empty": {
-        "title": "No lists yet",
-        "body": "Make a list for work, home, shopping or a trip.",
+        "title": "@noListsYet",
+        "body": "@makeListWorkHome",
         "icon": "list"
       }
     },
     "listTasks": {
       "type": "list",
-      "title": "=coalesce(params.list.name, 'List')",
+      "title": "=coalesce(params.list.name, t('list'))",
       "params": {
         "list": {
           "type": "ref",
@@ -782,21 +1392,21 @@
       "add": false,
       "toolbar": ["addInListBtn", "listInfoBtn"],
       "empty": {
-        "title": "Nothing open in this list",
-        "body": "Add a task, or give one a due date to see it under Today and Upcoming too.",
+        "title": "@nothingOpenThisList",
+        "body": "@addTaskGiveOne",
         "icon": "task_alt"
       }
     },
     "quickAdd": {
       "type": "form",
-      "title": "New task",
+      "title": "@newTask",
       "entity": "task",
       "present": "sheet",
       "fields": ["title", "due", "dueTime", "priority", "list", "repeat"]
     },
     "taskDetail": {
       "type": "detail",
-      "title": "Task",
+      "title": "@task",
       "entity": "task",
       "state": {
         "newStep": {
@@ -822,46 +1432,46 @@
     },
     "calendar": {
       "type": "calendar",
-      "title": "Calendar",
+      "title": "@calendar",
       "query": "openTasks",
       "date": "due",
       "item": "calMark"
     },
     "allTasks": {
       "type": "list",
-      "title": "All open tasks",
+      "title": "@allOpenTasks",
       "query": "openTasks",
       "search": ["title", "notes"],
       "sectionBy": "list",
       "add": "quickAdd",
       "empty": {
-        "title": "Nothing open",
-        "body": "Every task you add, in any list, shows up here until it is done.",
+        "title": "@nothingOpen",
+        "body": "@everyTaskAddAny",
         "icon": "task_alt"
       }
     },
     "completed": {
       "type": "list",
-      "title": "Completed",
+      "title": "@completed",
       "query": "completed",
       "item": "doneRow",
       "search": ["title", "notes"],
       "add": false,
       "toolbar": ["clearDoneBtn"],
       "empty": {
-        "title": "No completed tasks",
-        "body": "Ticked-off tasks rest here, so you can bring one back if you need it.",
+        "title": "@noCompletedTasks",
+        "body": "@tickedOffTasksRest",
         "icon": "task_alt"
       }
     },
     "progress": {
       "type": "dashboard",
-      "title": "Progress",
+      "title": "@progress",
       "root": "progressCol"
     },
     "importReport": {
       "type": "custom",
-      "title": "Import finished",
+      "title": "@importFinished",
       "present": "dialog",
       "params": {
         "summary": {
@@ -880,7 +1490,7 @@
     "addTodayBtn": {
       "component": "Button",
       "icon": "add",
-      "label": "Add a task for today",
+      "label": "@addTaskToday",
       "iconOnly": true,
       "action": {
         "event": {
@@ -891,7 +1501,7 @@
     "rescheduleBtn": {
       "component": "Button",
       "icon": "edit_calendar",
-      "label": "Move overdue tasks to today",
+      "label": "@moveOverdueTasksToday",
       "iconOnly": true,
       "visible": "=size(q.overdue) > 0",
       "action": {
@@ -903,7 +1513,7 @@
     "importBtn": {
       "component": "Button",
       "icon": "upload",
-      "label": "Import tasks from CSV",
+      "label": "@importTasksFromCsv2",
       "iconOnly": true,
       "action": {
         "event": {
@@ -914,7 +1524,7 @@
     "exportBtn": {
       "component": "Button",
       "icon": "download",
-      "label": "Export tasks as CSV",
+      "label": "@exportTasksAsCsv",
       "iconOnly": true,
       "action": {
         "event": {
@@ -925,7 +1535,7 @@
     "addInListBtn": {
       "component": "Button",
       "icon": "add",
-      "label": "Add task",
+      "label": "@addTask",
       "action": {
         "event": {
           "name": "addToList",
@@ -939,7 +1549,7 @@
     "listInfoBtn": {
       "component": "Button",
       "icon": "edit",
-      "label": "Edit list",
+      "label": "@editList",
       "action": {
         "event": {
           "name": "openListInfo",
@@ -952,7 +1562,7 @@
     "clearDoneBtn": {
       "component": "Button",
       "icon": "delete_sweep",
-      "label": "Delete all completed tasks",
+      "label": "@deleteAllCompletedTasks",
       "iconOnly": true,
       "visible": "=size(q.completed) > 0",
       "action": {
@@ -1012,7 +1622,7 @@
       "tone": "=item.rank == 3 ? 'danger' : item.rank == 2 ? 'warning' : 'primary'",
       "visible": "=item.rank > 0 && !item.done",
       "accessibility": {
-        "label": "=item.rank == 3 ? 'High priority' : item.rank == 2 ? 'Medium priority' : 'Low priority'"
+        "label": "=item.rank == 3 ? t('highPriority') : item.rank == 2 ? t('mediumPriority') : t('lowPriority')"
       }
     },
     "upcomingRow": {
@@ -1064,7 +1674,7 @@
       "tone": "=item.rank == 3 ? 'danger' : item.rank == 2 ? 'warning' : 'primary'",
       "visible": "=item.rank > 0",
       "accessibility": {
-        "label": "=item.rank == 3 ? 'High priority' : item.rank == 2 ? 'Medium priority' : 'Low priority'"
+        "label": "=item.rank == 3 ? t('highPriority') : item.rank == 2 ? t('mediumPriority') : t('lowPriority')"
       }
     },
     "inboxRow": {
@@ -1117,7 +1727,7 @@
       "tone": "=item.rank == 3 ? 'danger' : item.rank == 2 ? 'warning' : 'primary'",
       "visible": "=item.rank > 0",
       "accessibility": {
-        "label": "=item.rank == 3 ? 'High priority' : item.rank == 2 ? 'Medium priority' : 'Low priority'"
+        "label": "=item.rank == 3 ? t('highPriority') : item.rank == 2 ? t('mediumPriority') : t('lowPriority')"
       }
     },
     "listRow": {
@@ -1170,7 +1780,7 @@
       "tone": "=item.rank == 3 ? 'danger' : item.rank == 2 ? 'warning' : 'primary'",
       "visible": "=item.rank > 0",
       "accessibility": {
-        "label": "=item.rank == 3 ? 'High priority' : item.rank == 2 ? 'Medium priority' : 'Low priority'"
+        "label": "=item.rank == 3 ? t('highPriority') : item.rank == 2 ? t('mediumPriority') : t('lowPriority')"
       }
     },
     "doneRow": {
@@ -1214,7 +1824,7 @@
     "doneSub": {
       "component": "Text",
       "variant": "caption",
-      "text": "='Done ' + coalesce(formatDate(item.doneAt, 'MMMEd'), '') + ' · ' + coalesce(item.list.name, 'Inbox')"
+      "text": "=t('doneOn', {'date': coalesce(formatDate(item.doneAt, 'MMMEd'), '')}) + ' · ' + coalesce(item.list.name, t('inbox'))"
     },
     "calMark": {
       "component": "Badge",
@@ -1234,7 +1844,7 @@
     },
     "stepsSection": {
       "component": "Section",
-      "title": "=size(record.steps) > 0 ? t('stepsDone', {'done': record.stepsDone, 'total': size(record.steps)}) : 'Steps'",
+      "title": "=size(record.steps) > 0 ? t('stepsDone', {'done': record.stepsDone, 'total': size(record.steps)}) : t('steps')",
       "children": ["stepList", "addStepRow"]
     },
     "stepList": {
@@ -1267,7 +1877,7 @@
     "stepRemove": {
       "component": "Button",
       "icon": "close",
-      "label": "Remove step",
+      "label": "@removeStep",
       "iconOnly": true,
       "variant": "borderless",
       "action": {
@@ -1286,19 +1896,19 @@
     },
     "newStepField": {
       "component": "TextField",
-      "label": "Add a step",
+      "label": "@addStep",
       "bind": "/state/newStep",
       "weight": 1
     },
     "addStepBtn": {
       "component": "Button",
       "icon": "add",
-      "label": "Add step",
+      "label": "@addStep2",
       "iconOnly": true,
       "checks": [
         {
           "condition": "=trim(state.newStep) != ''",
-          "message": "Type the step first."
+          "message": "@typeStepFirst"
         }
       ],
       "action": {
@@ -1319,7 +1929,7 @@
     "markDoneBtn": {
       "component": "Button",
       "icon": "check",
-      "label": "=has(record.repeat) ? 'Done for now' : 'Mark as done'",
+      "label": "=has(record.repeat) ? t('doneForNow') : t('markAsDone')",
       "variant": "primary",
       "visible": "=!record.done",
       "action": {
@@ -1335,7 +1945,7 @@
     "restoreBtn": {
       "component": "Button",
       "icon": "refresh",
-      "label": "Restore",
+      "label": "@restore",
       "visible": "=record.done",
       "action": {
         "event": {
@@ -1350,7 +1960,7 @@
     "skipBtn": {
       "component": "Button",
       "icon": "update",
-      "label": "Skip this time",
+      "label": "@skipThisTime",
       "visible": "=!record.done && has(record.repeat)",
       "action": {
         "event": {
@@ -1364,7 +1974,7 @@
     "tomorrowBtn": {
       "component": "Button",
       "icon": "event",
-      "label": "Tomorrow",
+      "label": "@tomorrow",
       "visible": "=!record.done && !has(record.repeat)",
       "action": {
         "event": {
@@ -1396,17 +2006,17 @@
       "value": "=(coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday))) == 0 ? 1 : coalesce(q.doneTodayCount.n, 0)",
       "max": "=(coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday))) == 0 ? 1 : (coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday)))",
       "text": "=(coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday))) == 0 ? '0' : t('doneOf', {'done': coalesce(q.doneTodayCount.n, 0), 'total': (coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday)))})",
-      "caption": "done today",
+      "caption": "@doneToday2",
       "tone": "=(size(q.overdue) + size(q.dueToday)) == 0 ? 'success' : 'primary'",
       "accessibility": {
-        "label": "Today’s tasks done"
+        "label": "@todayTasksDone"
       }
     },
     "todayLeft": {
       "component": "Text",
-      "text": "=(coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday))) == 0 ? 'Nothing due today' : t('leftToday', {'n': (size(q.overdue) + size(q.dueToday))})"
+      "text": "=(coalesce(q.doneTodayCount.n, 0) + (size(q.overdue) + size(q.dueToday))) == 0 ? t('nothingDueToday') : t('leftToday', {'n': (size(q.overdue) + size(q.dueToday))})"
     },
-    "weekSection": { "component": "Section", "title": "This week", "children": ["weekStrip", "progressStats"] },
+    "weekSection": { "component": "Section", "title": "@thisWeek", "children": ["weekStrip", "progressStats"] },
     "weekStrip": { "component": "Calendar", "variant": "week", "query": "doneThisWeek", "date": "date" },
     "progressStats": {
       "component": "Row",
@@ -1415,15 +2025,15 @@
     },
     "doneWeekStat": {
       "component": "Stat",
-      "label": "Tasks done",
+      "label": "@tasksDone",
       "value": "=q.doneWeekCount.n"
     },
     "streakStat": {
       "component": "Stat",
-      "label": "Streak",
+      "label": "@streak",
       "icon": "local_fire_department",
       "value": "=t('days', {'n': streak(q.doneDays.map(d, d.key), 'FREQ=DAILY', today())})",
-      "caption": "Days in a row with a task done"
+      "caption": "@daysRowWithTask"
     },
     "openStats": {
       "component": "Row",
@@ -1432,19 +2042,19 @@
     },
     "overdueStat": {
       "component": "Stat",
-      "label": "Overdue",
+      "label": "@overdue",
       "value": "=size(q.overdue)",
       "tone": "=size(q.overdue) > 0 ? 'danger' : 'neutral'"
     },
     "upcomingStat": {
       "component": "Stat",
-      "label": "Planned",
+      "label": "@planned",
       "value": "=size(q.upcoming)"
     },
     "progressChart": {
       "component": "Chart",
       "kind": "bar",
-      "title": "Tasks done, last 14 days",
+      "title": "@tasksDoneLast14",
       "query": "last14",
       "x": "key",
       "y": ["done"]
@@ -1452,12 +2062,12 @@
     "progressNote": {
       "component": "Text",
       "variant": "caption",
-      "text": "Every completion counts, including each round of a repeating task. Deleting completed tasks keeps these numbers."
+      "text": "@everyCompletionCountsIncluding"
     },
     "finishImportBtn": {
       "component": "Button",
       "icon": "playlist_add",
-      "label": "Finish importing tasks",
+      "label": "@finishImportingTasks",
       "iconOnly": true,
       "visible": "=size(q.importPending) > 0",
       "action": {
@@ -1477,7 +2087,7 @@
     },
     "irIntro": {
       "component": "Text",
-      "text": "These rows were left out, with the reason for each:"
+      "text": "@theseRowsWereLeft"
     },
     "irLines": {
       "component": "Text",
@@ -1594,7 +2204,7 @@
         },
         {
           "type": "toast",
-          "text": "Skipped. See you next time."
+          "text": "@skippedSeeNextTime"
         }
       ]
     },
@@ -1656,8 +2266,8 @@
         {
           "type": "confirm",
           "title": "=t('moveOverdue', {'n': size(q.overdue)})",
-          "body": "Their time of day stays as it is.",
-          "confirmLabel": "Move to today"
+          "body": "@theirTimeDayStays",
+          "confirmLabel": "@moveToday"
         },
         {
           "type": "forEach",
@@ -1669,7 +2279,7 @@
         },
         {
           "type": "toast",
-          "text": "Moved to today."
+          "text": "@movedToday"
         }
       ]
     },
@@ -1803,8 +2413,8 @@
         {
           "type": "confirm",
           "title": "=t('clearDone', {'n': size(q.completed)})",
-          "body": "They can’t be restored afterwards. Your progress numbers stay.",
-          "confirmLabel": "Delete"
+          "body": "@theyCanTBe",
+          "confirmLabel": "@delete"
         },
         {
           "type": "deleteRecords",
@@ -1813,7 +2423,7 @@
         },
         {
           "type": "toast",
-          "text": "Completed tasks deleted."
+          "text": "@completedTasksDeleted"
         }
       ]
     },
@@ -1831,7 +2441,7 @@
           "action": "show",
           "args": {
             "title": "=args.task.title",
-            "body": "=join([has(args.task.dueTime) ? 'Due ' + coalesce(formatDate(args.task.dueTime, 'jm'), '') : 'Due today', coalesce(args.task.list.name, 'Inbox'), size(args.task.steps) > 0 ? t('stepsDone', {'done': args.task.stepsDone, 'total': size(args.task.steps)}) : ''].filter(s, s != ''), ' · ')",
+            "body": "=join([has(args.task.dueTime) ? t('dueAt', {'time': coalesce(formatDate(args.task.dueTime, 'jm'), '')}) : t('dueToday'), coalesce(args.task.list.name, t('inbox')), size(args.task.steps) > 0 ? t('stepsDone', {'done': args.task.stepsDone, 'total': size(args.task.steps)}) : ''].filter(s, s != ''), ' · ')",
             "open": {
               "screen": "taskDetail",
               "params": {
@@ -1841,17 +2451,17 @@
             "buttons": [
               {
                 "id": "done",
-                "label": "Done",
+                "label": "=t('doneButton')",
                 "action": "completeFromReminder"
               },
               {
                 "id": "snooze",
-                "label": "Snooze",
+                "label": "=t('snooze2')",
                 "action": "snoozeTask"
               },
               {
                 "id": "tomorrow",
-                "label": "Tomorrow",
+                "label": "=t('tomorrow')",
                 "action": "moveToTomorrow"
               }
             ],
@@ -1871,7 +2481,7 @@
           "capability": "notify.local",
           "action": "show",
           "args": {
-            "title": "Today",
+            "title": "=t('today')",
             "body": "=t('digestBody', {'due': size(q.dueToday), 'overdue': size(q.overdue)})",
             "open": {
               "screen": "today"
@@ -1923,19 +2533,20 @@
             ],
             "fields": {
               "title": {
-                "from": ["Title", "Task", "Task name", "Name", "Subject", "CONTENT"]
+                "from": ["Title", "Task", "Task name", "Name", "Subject", "CONTENT", "Názov"]
               },
               "notes": {
-                "from": ["Notes", "Note", "Content", "Description", "Details"]
+                "from": ["Notes", "Note", "Content", "Description", "Details", "Poznámky"]
               },
               "list": {
-                "from": ["List", "List name", "Project"],
+                "from": ["List", "List name", "Project", "Zoznam"],
                 "values": {
-                  "Inbox": ""
+                  "Inbox": "",
+                  "Nezaradené": ""
                 }
               },
               "importDueAt": {
-                "from": ["Due date", "Due", "Due date and time", "Date", "DATE", "Deadline"],
+                "from": ["Due date", "Due", "Due date and time", "Date", "DATE", "Deadline", "Termín"],
                 "values": {
                   "*": ""
                 }
@@ -1944,10 +2555,10 @@
                 "from": ["Is All Day", "All day"]
               },
               "dueTime": {
-                "from": ["Time", "Due time"]
+                "from": ["Time", "Due time", "Čas"]
               },
               "importRepeat": {
-                "from": ["Repeat", "Recurrence", "RRULE", "Repeats", "DATE"],
+                "from": ["Repeat", "Recurrence", "RRULE", "Repeats", "DATE", "Opakovanie"],
                 "values": {
                   "every day": "FREQ=DAILY",
                   "daily": "FREQ=DAILY",
@@ -1969,7 +2580,7 @@
                 }
               },
               "priority": {
-                "from": ["Priority", "PRIORITY"],
+                "from": ["Priority", "PRIORITY", "Priorita"],
                 "values": {
                   "urgent": "high",
                   "important": "high",
@@ -1981,7 +2592,11 @@
                   "p3": "low",
                   "!": "low",
                   "normal": "none",
-                  "p4": "none"
+                  "p4": "none",
+                  "Vysoká": "high",
+                  "Stredná": "medium",
+                  "Nízka": "low",
+                  "Žiadna": "none"
                 },
                 "columnValues": {
                   "PRIORITY": {
@@ -1999,7 +2614,7 @@
                 }
               },
               "done": {
-                "from": ["Done", "Status", "Is completed", "Completed?"],
+                "from": ["Done", "Status", "Is completed", "Completed?", "Splnené"],
                 "values": {
                   "completed": "true",
                   "complete": "true",
@@ -2021,7 +2636,7 @@
                 }
               },
               "doneAt": {
-                "from": ["Completed", "Completed time", "Date completed", "Completed at", "Done at"]
+                "from": ["Completed", "Completed time", "Date completed", "Completed at", "Done at", "Čas splnenia"]
               }
             },
             "createMissing": ["list"],
@@ -2066,7 +2681,7 @@
         },
         {
           "type": "toast",
-          "text": "Imported tasks are ready."
+          "text": "@importedTasksAreReady"
         }
       ]
     },
@@ -2085,7 +2700,7 @@
             "due": "=coalesce(args.task.impDue, args.task.due)",
             "dueTime": "=has(args.task.dueTime) ? args.task.dueTime : args.task.impDue != null ? args.task.impClock : null",
             "repeat": "=args.task.impRule != '' && args.task.impDue != null ? rrule(args.task.impRule) : args.task.repeat",
-            "notes": "=args.task.impLeftover != '' ? substring(coalesce(args.task.notes, '') + (has(args.task.notes) ? '\\n\\n' : '') + 'Date or repeat from the imported file: ' + coalesce(args.task.impLeftover, ''), 0, 5000) : args.task.notes",
+            "notes": "=args.task.impLeftover != '' ? substring(coalesce(args.task.notes, '') + (has(args.task.notes) ? '\\n\\n' : '') + t('importedLeftover', {'text': coalesce(args.task.impLeftover, '')}), 0, 5000) : args.task.notes",
             "importRepeat": null,
             "importAllDay": null,
             "importDueAt": null
@@ -2125,7 +2740,7 @@
   "widgets": {
     "todayWidget": {
       "template": "checklist",
-      "title": "Today",
+      "title": "@today",
       "sizes": ["small", "medium", "large"],
       "query": "today",
       "label": "=item.title",
@@ -2143,9 +2758,9 @@
     },
     "addWidget": {
       "template": "button",
-      "title": "To-do",
+      "title": "@todoWidget",
       "sizes": ["small"],
-      "label": "Add a task",
+      "label": "@addTask2",
       "icon": "add",
       "action": {
         "event": {

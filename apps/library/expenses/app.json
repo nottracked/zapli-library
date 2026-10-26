@@ -3,7 +3,7 @@
   "app": {
     "id": "library/expenses",
     "name": "Expenses",
-    "version": "3.4.2",
+    "version": "3.4.3",
     "icon": "receipt_long",
     "category": "finance",
     "ageRating": "everyone",
@@ -14,51 +14,867 @@
   "i18n": {
     "defaultLocale": "en",
     "strings": {
-      "ofBudget": { "en": "{spent} of {budget} this month" },
-      "spentThisMonth": { "en": "{spent} this month" },
-      "nextOn": { "en": "{rule} · next {date}" },
-      "dueSince": { "en": "{rule} · due {date}" },
-      "paused": { "en": "{rule} · paused" },
-      "nExpenses": { "en": "{n, plural, =0 {No expenses} one {# expense} other {# expenses}}" },
-      "perDay": { "en": "{amount} a day · {n, plural, one {# expense} other {# expenses}}" },
+      "ofBudget": {
+        "en": "{spent} of {budget} this month",
+        "sk": "{spent} z {budget} tento mesiac"
+      },
+      "spentThisMonth": {
+        "en": "{spent} this month",
+        "sk": "{spent} tento mesiac"
+      },
+      "nextOn": {
+        "en": "{rule} · next {date}",
+        "sk": "{rule} · najbližšie {date}"
+      },
+      "dueSince": {
+        "en": "{rule} · due {date}",
+        "sk": "{rule} · splatné {date}"
+      },
+      "paused": {
+        "en": "{rule} · paused",
+        "sk": "{rule} · pozastavené"
+      },
+      "nExpenses": {
+        "en": "{n, plural, =0 {No expenses} one {# expense} other {# expenses}}",
+        "sk": "{n, plural, =0 {Žiadne výdavky} one {# výdavok} few {# výdavky} many {# výdavku} other {# výdavkov}}"
+      },
+      "perDay": {
+        "en": "{amount} a day · {n, plural, one {# expense} other {# expenses}}",
+        "sk": "{amount} na deň · {n, plural, one {# výdavok} few {# výdavky} many {# výdavku} other {# výdavkov}}"
+      },
       "vsLastMonth": {
-        "en": "{dir, select, less {{pct}% less than this time last month} more {{pct}% more than this time last month} other {About the same as this time last month}}"
+        "en": "{dir, select, less {{pct}% less than this time last month} more {{pct}% more than this time last month} other {About the same as this time last month}}",
+        "sk": "{dir, select, less {O {pct} % menej ako minulý mesiac k tomuto dňu} more {O {pct} % viac ako minulý mesiac k tomuto dňu} other {Približne ako minulý mesiac k tomuto dňu}}"
       },
-      "seeAll": { "en": "{n, plural, =0 {No expenses this month} one {See the expense} other {See all # expenses}}" },
-      "leftOf": { "en": "{left} left of {budget}" },
-      "overBy": { "en": "{over} over your {budget} budget" },
-      "nearTitle": { "en": "{name}: budget almost used" },
-      "overTitle": { "en": "{name}: over budget" },
-      "budgetBody": { "en": "{spent} of {budget} spent this month." },
-      "totalNearTitle": { "en": "Monthly budget almost used" },
-      "totalOverTitle": { "en": "Over your monthly budget" },
-      "dueTitle": { "en": "{name} is due" },
-      "dueBody": { "en": "{amount} on {date}. Add it to your expenses?" },
-      "addedTitle": { "en": "Added {name}" },
-      "addedBody": { "en": "{amount}, as planned. Tap to check it." },
-      "exported": { "en": "{n, plural, =0 {Saved an empty file.} one {Saved # expense.} other {Saved # expenses.}}" },
+      "seeAll": {
+        "en": "{n, plural, =0 {No expenses this month} one {See the expense} other {See all # expenses}}",
+        "sk": "{n, plural, =0 {Tento mesiac žiadne výdavky} one {Zobraziť výdavok} few {Zobraziť všetky # výdavky} many {Zobraziť všetky # výdavku} other {Zobraziť všetkých # výdavkov}}"
+      },
+      "leftOf": {
+        "en": "{left} left of {budget}",
+        "sk": "Zostáva {left} z {budget}"
+      },
+      "overBy": {
+        "en": "{over} over your {budget} budget",
+        "sk": "O {over} nad rozpočtom {budget}"
+      },
+      "nearTitle": {
+        "en": "{name}: budget almost used",
+        "sk": "{name}: rozpočet je takmer vyčerpaný"
+      },
+      "overTitle": {
+        "en": "{name}: over budget",
+        "sk": "{name}: rozpočet je prekročený"
+      },
+      "budgetBody": {
+        "en": "{spent} of {budget} spent this month.",
+        "sk": "Tento mesiac minuté {spent} z {budget}."
+      },
+      "totalNearTitle": {
+        "en": "Monthly budget almost used",
+        "sk": "Mesačný rozpočet je takmer vyčerpaný"
+      },
+      "totalOverTitle": {
+        "en": "Over your monthly budget",
+        "sk": "Mesačný rozpočet je prekročený"
+      },
+      "dueTitle": {
+        "en": "{name} is due",
+        "sk": "Splatné: {name}"
+      },
+      "dueBody": {
+        "en": "{amount} on {date}. Add it to your expenses?",
+        "sk": "{amount} dňa {date}. Pridať k výdavkom?"
+      },
+      "addedTitle": {
+        "en": "Added {name}",
+        "sk": "Pridané: {name}"
+      },
+      "addedBody": {
+        "en": "{amount}, as planned. Tap to check it.",
+        "sk": "{amount} podľa plánu. Klepnutím si ho pozriete."
+      },
+      "exported": {
+        "en": "{n, plural, =0 {Saved an empty file.} one {Saved # expense.} other {Saved # expenses.}}",
+        "sk": "{n, plural, =0 {Uložil sa prázdny súbor.} one {Uložený # výdavok.} few {Uložené # výdavky.} many {Uložené # výdavku.} other {Uložených # výdavkov.}}"
+      },
       "importDone": {
-        "en": "{added, plural, =0 {No expenses added} one {Added # expense} other {Added # expenses}}{created, plural, =0 {} one {, # new category} other {, # new categories}}{skipped, plural, =0 {.} one {; # row could not be read.} other {; # rows could not be read.}}"
+        "en": "{added, plural, =0 {No expenses added} one {Added # expense} other {Added # expenses}}{created, plural, =0 {} one {, # new category} other {, # new categories}}{skipped, plural, =0 {.} one {; # row could not be read.} other {; # rows could not be read.}}",
+        "sk": "{added, plural, =0 {Nepridal sa žiadny výdavok} one {Pridaný # výdavok} few {Pridané # výdavky} many {Pridané # výdavku} other {Pridaných # výdavkov}}{created, plural, =0 {} one {, # nová kategória} few {, # nové kategórie} many {, # novej kategórie} other {, # nových kategórií}}{skipped, plural, =0 {.} one {; # riadok sa nedal prečítať.} few {; # riadky sa nedali prečítať.} many {; # riadka sa nedalo prečítať.} other {; # riadkov sa nedalo prečítať.}}"
       },
-      "problemLine": { "en": "Line {row}: {reason}" },
-      "moreProblems": { "en": "{n, plural, one {…and # more row} other {…and # more rows}}" }
+      "problemLine": {
+        "en": "Line {row}: {reason}",
+        "sk": "Riadok {row}: {reason}"
+      },
+      "moreProblems": {
+        "en": "{n, plural, one {…and # more row} other {…and # more rows}}",
+        "sk": "{n, plural, one {…a ešte # riadok} few {…a ešte # riadky} many {…a ešte # riadka} other {…a ešte # riadkov}}"
+      },
+      "keepSpendingBehindFingerprint": {
+        "en": "Keep your spending behind your fingerprint, face or screen lock if you turn the lock on",
+        "sk": "Chrániť vaše výdavky odtlačkom prsta, tvárou alebo zámkou obrazovky, ak zámku zapnete"
+      },
+      "warnWhenBudgetIs": {
+        "en": "Warn you when a budget is nearly used up and remind you about recurring payments",
+        "sk": "Upozorniť vás, keď je rozpočet takmer vyčerpaný, a pripomínať pravidelné platby"
+      },
+      "saveExpensesAsCsv": {
+        "en": "Save your expenses as a CSV file, or add expenses from one",
+        "sk": "Uložiť výdavky ako súbor CSV alebo z neho výdavky pridať"
+      },
+      "showThisMonthSpending": {
+        "en": "Show this month’s spending and an Add button on your home screen",
+        "sk": "Zobraziť na ploche tohtomesačné výdavky a tlačidlo Pridať"
+      },
+      "takePhotoReceiptKeep": {
+        "en": "Take a photo of a receipt to keep with the expense",
+        "sk": "Odfotiť bloček a uložiť ho k výdavku"
+      },
+      "expensesSavedAsCsv": {
+        "en": "Your expenses, saved as a CSV file in a place you choose",
+        "sk": "Vaše výdavky sa uložia ako súbor CSV na miesto, ktoré vyberiete"
+      },
+      "currency": {
+        "en": "Currency",
+        "sk": "Mena"
+      },
+      "amountsAreShownThis": {
+        "en": "Amounts are shown in this currency. Changing it does not convert amounts you already entered.",
+        "sk": "Sumy sa zobrazujú v tejto mene. Zmena meny neprepočíta sumy, ktoré ste už zadali."
+      },
+      "euroEur": {
+        "en": "Euro (EUR)",
+        "sk": "Euro (EUR)"
+      },
+      "usDollarUsd": {
+        "en": "US dollar (USD)",
+        "sk": "Americký dolár (USD)"
+      },
+      "britishPoundGbp": {
+        "en": "British pound (GBP)",
+        "sk": "Britská libra (GBP)"
+      },
+      "swissFrancChf": {
+        "en": "Swiss franc (CHF)",
+        "sk": "Švajčiarsky frank (CHF)"
+      },
+      "czechKorunaCzk": {
+        "en": "Czech koruna (CZK)",
+        "sk": "Česká koruna (CZK)"
+      },
+      "polishZOtyPln": {
+        "en": "Polish złoty (PLN)",
+        "sk": "Poľský zlotý (PLN)"
+      },
+      "hungarianForintHuf": {
+        "en": "Hungarian forint (HUF)",
+        "sk": "Maďarský forint (HUF)"
+      },
+      "romanianLeuRon": {
+        "en": "Romanian leu (RON)",
+        "sk": "Rumunský lei (RON)"
+      },
+      "swedishKronaSek": {
+        "en": "Swedish krona (SEK)",
+        "sk": "Švédska koruna (SEK)"
+      },
+      "norwegianKroneNok": {
+        "en": "Norwegian krone (NOK)",
+        "sk": "Nórska koruna (NOK)"
+      },
+      "danishKroneDkk": {
+        "en": "Danish krone (DKK)",
+        "sk": "Dánska koruna (DKK)"
+      },
+      "ukrainianHryvniaUah": {
+        "en": "Ukrainian hryvnia (UAH)",
+        "sk": "Ukrajinská hrivna (UAH)"
+      },
+      "turkishLiraTry": {
+        "en": "Turkish lira (TRY)",
+        "sk": "Turecká líra (TRY)"
+      },
+      "canadianDollarCad": {
+        "en": "Canadian dollar (CAD)",
+        "sk": "Kanadský dolár (CAD)"
+      },
+      "australianDollarAud": {
+        "en": "Australian dollar (AUD)",
+        "sk": "Austrálsky dolár (AUD)"
+      },
+      "newZealandDollarNzd": {
+        "en": "New Zealand dollar (NZD)",
+        "sk": "Novozélandský dolár (NZD)"
+      },
+      "japaneseYenJpy": {
+        "en": "Japanese yen (JPY)",
+        "sk": "Japonský jen (JPY)"
+      },
+      "chineseYuanCny": {
+        "en": "Chinese yuan (CNY)",
+        "sk": "Čínsky jüan (CNY)"
+      },
+      "indianRupeeInr": {
+        "en": "Indian rupee (INR)",
+        "sk": "Indická rupia (INR)"
+      },
+      "brazilianRealBrl": {
+        "en": "Brazilian real (BRL)",
+        "sk": "Brazílsky real (BRL)"
+      },
+      "mexicanPesoMxn": {
+        "en": "Mexican peso (MXN)",
+        "sk": "Mexické peso (MXN)"
+      },
+      "southAfricanRandZar": {
+        "en": "South African rand (ZAR)",
+        "sk": "Juhoafrický rand (ZAR)"
+      },
+      "monthlyBudget": {
+        "en": "Monthly budget",
+        "sk": "Mesačný rozpočet"
+      },
+      "allSpendingTogetherLeave": {
+        "en": "For all your spending together. Leave it empty for none.",
+        "sk": "Pre všetky výdavky spolu. Ak ho nechcete, nechajte pole prázdne."
+      },
+      "budgetWarnings": {
+        "en": "Budget warnings",
+        "sk": "Upozornenia na rozpočet"
+      },
+      "warnMeAt": {
+        "en": "Warn me at",
+        "sk": "Upozorniť pri"
+      },
+      "budget": {
+        "en": "% of a budget",
+        "sk": "% rozpočtu"
+      },
+      "tellMeWhenRecurring": {
+        "en": "Tell me when a recurring expense is added",
+        "sk": "Oznámiť, keď sa pridá pravidelný výdavok"
+      },
+      "dailyReminderLogSpending": {
+        "en": "Daily reminder to log spending",
+        "sk": "Denná pripomienka na zápis výdavkov"
+      },
+      "onlyDaysWithNothing": {
+        "en": "Only on days with nothing logged yet.",
+        "sk": "Len v dňoch, keď ešte nič nie je zapísané."
+      },
+      "reminderTime": {
+        "en": "Reminder time",
+        "sk": "Čas pripomienky"
+      },
+      "usualWayPay": {
+        "en": "Usual way to pay",
+        "sk": "Bežný spôsob platby"
+      },
+      "cash": {
+        "en": "Cash",
+        "sk": "Hotovosť"
+      },
+      "card": {
+        "en": "Card",
+        "sk": "Karta"
+      },
+      "bankTransfer": {
+        "en": "Bank transfer",
+        "sk": "Bankový prevod"
+      },
+      "phoneWatch": {
+        "en": "Phone or watch",
+        "sk": "Telefón alebo hodinky"
+      },
+      "other": {
+        "en": "Other",
+        "sk": "Iné"
+      },
+      "category": {
+        "en": "Category",
+        "sk": "Kategória"
+      },
+      "categories": {
+        "en": "Categories",
+        "sk": "Kategórie"
+      },
+      "groceries": {
+        "en": "Groceries",
+        "sk": "Potraviny"
+      },
+      "eatingOut": {
+        "en": "Eating out",
+        "sk": "Jedlo vonku"
+      },
+      "coffee": {
+        "en": "Coffee",
+        "sk": "Káva"
+      },
+      "drinks": {
+        "en": "Drinks",
+        "sk": "Nápoje"
+      },
+      "carFuel": {
+        "en": "Car and fuel",
+        "sk": "Auto a palivo"
+      },
+      "bike": {
+        "en": "Bike",
+        "sk": "Bicykel"
+      },
+      "gettingAround": {
+        "en": "Getting around",
+        "sk": "Doprava"
+      },
+      "travel": {
+        "en": "Travel",
+        "sk": "Cestovanie"
+      },
+      "homeRent": {
+        "en": "Home and rent",
+        "sk": "Bývanie"
+      },
+      "energy": {
+        "en": "Energy",
+        "sk": "Energie"
+      },
+      "water": {
+        "en": "Water",
+        "sk": "Voda"
+      },
+      "internet": {
+        "en": "Internet",
+        "sk": "Internet"
+      },
+      "phone": {
+        "en": "Phone",
+        "sk": "Telefón"
+      },
+      "bills": {
+        "en": "Bills",
+        "sk": "Účty"
+      },
+      "subscriptions": {
+        "en": "Subscriptions",
+        "sk": "Predplatné"
+      },
+      "health": {
+        "en": "Health",
+        "sk": "Zdravie"
+      },
+      "pharmacy": {
+        "en": "Pharmacy",
+        "sk": "Lekáreň"
+      },
+      "sport": {
+        "en": "Sport",
+        "sk": "Šport"
+      },
+      "personalCare": {
+        "en": "Personal care",
+        "sk": "Osobná starostlivosť"
+      },
+      "shopping": {
+        "en": "Shopping",
+        "sk": "Nákupy"
+      },
+      "goingOut": {
+        "en": "Going out",
+        "sk": "Zábava"
+      },
+      "games": {
+        "en": "Games",
+        "sk": "Hry"
+      },
+      "music": {
+        "en": "Music",
+        "sk": "Hudba"
+      },
+      "books": {
+        "en": "Books",
+        "sk": "Knihy"
+      },
+      "education": {
+        "en": "Education",
+        "sk": "Vzdelávanie"
+      },
+      "kids": {
+        "en": "Kids",
+        "sk": "Deti"
+      },
+      "family": {
+        "en": "Family",
+        "sk": "Rodina"
+      },
+      "pets": {
+        "en": "Pets",
+        "sk": "Zvieratá"
+      },
+      "gifts": {
+        "en": "Gifts",
+        "sk": "Darčeky"
+      },
+      "garden": {
+        "en": "Garden",
+        "sk": "Záhrada"
+      },
+      "cleaning": {
+        "en": "Cleaning",
+        "sk": "Upratovanie"
+      },
+      "repairs": {
+        "en": "Repairs",
+        "sk": "Opravy"
+      },
+      "work": {
+        "en": "Work",
+        "sk": "Práca"
+      },
+      "savings": {
+        "en": "Savings",
+        "sk": "Úspory"
+      },
+      "giving": {
+        "en": "Giving",
+        "sk": "Dary"
+      },
+      "bankFees": {
+        "en": "Bank and fees",
+        "sk": "Banka a poplatky"
+      },
+      "otherCategory": {
+        "en": "Other",
+        "sk": "Ostatné"
+      },
+      "colour": {
+        "en": "Colour",
+        "sk": "Farba"
+      },
+      "leaveItEmptyUse": {
+        "en": "Leave it empty to use the colour of the category's icon.",
+        "sk": "Ak pole necháte prázdne, použije sa farba ikony kategórie."
+      },
+      "colourName": {
+        "en": "Colour name",
+        "sk": "Názov farby"
+      },
+      "leaveItEmptyNo": {
+        "en": "Leave it empty for no budget.",
+        "sk": "Ak rozpočet nechcete, nechajte pole prázdne."
+      },
+      "expenses": {
+        "en": "Expenses",
+        "sk": "Výdavky"
+      },
+      "recurringExpenses": {
+        "en": "Recurring expenses",
+        "sk": "Pravidelné výdavky"
+      },
+      "spentThisMonth2": {
+        "en": "Spent this month",
+        "sk": "Tento mesiac minuté"
+      },
+      "leftThisMonth": {
+        "en": "Left this month",
+        "sk": "Tento mesiac zostáva"
+      },
+      "budget2": {
+        "en": "Budget",
+        "sk": "Rozpočet"
+      },
+      "expense": {
+        "en": "Expense",
+        "sk": "Výdavok"
+      },
+      "whatWasIt": {
+        "en": "What was it for?",
+        "sk": "Za čo to bolo?"
+      },
+      "paidWith": {
+        "en": "Paid with",
+        "sk": "Spôsob platby"
+      },
+      "receipt": {
+        "en": "Receipt",
+        "sk": "Bloček"
+      },
+      "addedFrom": {
+        "en": "Added from",
+        "sk": "Pridané z"
+      },
+      "recurringExpense": {
+        "en": "Recurring expense",
+        "sk": "Pravidelný výdavok"
+      },
+      "recurring": {
+        "en": "Recurring",
+        "sk": "Pravidelné"
+      },
+      "rentPhoneStreaming": {
+        "en": "Rent, phone, streaming…",
+        "sk": "Nájom, telefón, streamovanie…"
+      },
+      "repeats": {
+        "en": "Repeats",
+        "sk": "Opakuje sa"
+      },
+      "nextPayment": {
+        "en": "Next payment",
+        "sk": "Ďalšia platba"
+      },
+      "nextDateItIs": {
+        "en": "The next date it is added. After that, it follows the schedule.",
+        "sk": "Dátum, keď sa pridá nabudúce. Potom sa pridáva podľa plánu."
+      },
+      "whenItIsDue": {
+        "en": "When it is due",
+        "sk": "Keď je splatný"
+      },
+      "addItMe": {
+        "en": "Add it for me",
+        "sk": "Pridať automaticky"
+      },
+      "askMeFirst": {
+        "en": "Ask me first",
+        "sk": "Najprv sa opýtať"
+      },
+      "active": {
+        "en": "Active",
+        "sk": "Aktívny"
+      },
+      "dueNow": {
+        "en": "Due now",
+        "sk": "Splatné teraz"
+      },
+      "perYear": {
+        "en": "Per year",
+        "sk": "Za rok"
+      },
+      "addedSoFar": {
+        "en": "Added so far",
+        "sk": "Doteraz pridané"
+      },
+      "thisMonth": {
+        "en": "This month",
+        "sk": "Tento mesiac"
+      },
+      "months": {
+        "en": "Months",
+        "sk": "Mesiace"
+      },
+      "budgets": {
+        "en": "Budgets",
+        "sk": "Rozpočty"
+      },
+      "noExpensesYet": {
+        "en": "No expenses yet",
+        "sk": "Zatiaľ žiadne výdavky"
+      },
+      "addWhatSpendFew": {
+        "en": "Add what you spend in a few taps. Everything stays on this phone.",
+        "sk": "Zapíšte, čo miniete, niekoľkými klepnutiami. Všetko zostane v tomto telefóne."
+      },
+      "addExpense": {
+        "en": "Add expense",
+        "sk": "Pridať výdavok"
+      },
+      "nothingSpentThisMonth": {
+        "en": "Nothing spent this month",
+        "sk": "Tento mesiac zatiaľ nič"
+      },
+      "findExpenses": {
+        "en": "Find expenses",
+        "sk": "Hľadať výdavky"
+      },
+      "foundExpenses": {
+        "en": "Found expenses",
+        "sk": "Nájdené výdavky"
+      },
+      "noExpensesMatch": {
+        "en": "No expenses match",
+        "sk": "Nenašli sa žiadne výdavky"
+      },
+      "tryLongerPeriodLower": {
+        "en": "Try a longer period or a lower amount.",
+        "sk": "Skúste dlhšie obdobie alebo nižšiu sumu."
+      },
+      "noCategoriesYet": {
+        "en": "No categories yet",
+        "sk": "Zatiaľ žiadne kategórie"
+      },
+      "addCategoriesSuchAs": {
+        "en": "Add categories such as Groceries or Rent, and give them a monthly budget if you like.",
+        "sk": "Pridajte kategórie, napríklad Potraviny alebo Nájom, a ak chcete, nastavte im mesačný rozpočet."
+      },
+      "noRecurringExpenses": {
+        "en": "No recurring expenses",
+        "sk": "Žiadne pravidelné výdavky"
+      },
+      "addRentBillsSubscriptions": {
+        "en": "Add rent, bills and subscriptions once. They are added to your expenses when they are due.",
+        "sk": "Nájom, účty a predplatné pridajte raz. K výdavkom sa pridajú vždy, keď budú splatné."
+      },
+      "settings": {
+        "en": "Settings",
+        "sk": "Nastavenia"
+      },
+      "importExpenses": {
+        "en": "Import expenses",
+        "sk": "Importovať výdavky"
+      },
+      "importFinished": {
+        "en": "Import finished",
+        "sk": "Import je dokončený"
+      },
+      "welcome": {
+        "en": "Welcome",
+        "sk": "Vitajte"
+      },
+      "chooseCurrencyIfLike": {
+        "en": "Choose your currency and, if you like, a monthly budget. Then add your first expense. Your data stays on this phone: no account, no ads.",
+        "sk": "Vyberte si menu a ak chcete, aj mesačný rozpočet. Potom pridajte prvý výdavok. Vaše údaje zostanú v tomto telefóne: bez prihlasovania, bez reklám."
+      },
+      "chooseCurrencyBudget": {
+        "en": "Choose currency and budget",
+        "sk": "Vybrať menu a rozpočet"
+      },
+      "monthlyBudgetUsed": {
+        "en": "Monthly budget used",
+        "sk": "Využitie mesačného rozpočtu"
+      },
+      "skip": {
+        "en": "Skip",
+        "sk": "Vynechať"
+      },
+      "add": {
+        "en": "Add",
+        "sk": "Pridať"
+      },
+      "byCategory": {
+        "en": "By category",
+        "sk": "Podľa kategórií"
+      },
+      "whereItWentThis": {
+        "en": "Where it went this month",
+        "sk": "Na čo išli peniaze tento mesiac"
+      },
+      "last7Days": {
+        "en": "Last 7 days",
+        "sk": "Posledných 7 dní"
+      },
+      "spendingLast12Months": {
+        "en": "Spending, last 12 months",
+        "sk": "Výdavky za 12 mesiacov"
+      },
+      "recent": {
+        "en": "Recent",
+        "sk": "Nedávne"
+      },
+      "exportCsv": {
+        "en": "Export to CSV",
+        "sk": "Exportovať do CSV"
+      },
+      "importFromCsv": {
+        "en": "Import from CSV",
+        "sk": "Importovať z CSV"
+      },
+      "addAgainToday": {
+        "en": "Add again today",
+        "sk": "Pridať znova s dnešným dátumom"
+      },
+      "addExpenseHere": {
+        "en": "Add expense here",
+        "sk": "Pridať výdavok sem"
+      },
+      "skipNext": {
+        "en": "Skip next",
+        "sk": "Vynechať najbližší"
+      },
+      "addNextOneNow": {
+        "en": "Add next one now",
+        "sk": "Pridať najbližší hneď"
+      },
+      "previousMonth": {
+        "en": "Previous month",
+        "sk": "Predchádzajúci mesiac"
+      },
+      "nextMonth": {
+        "en": "Next month",
+        "sk": "Nasledujúci mesiac"
+      },
+      "expensesAddThisMonth": {
+        "en": "Expenses you add for this month show up here. The arrows above go to other months.",
+        "sk": "Výdavky, ktoré pridáte za tento mesiac, sa zobrazia tu. Šípkami hore prejdete na iné mesiace."
+      },
+      "spent": {
+        "en": "Spent",
+        "sk": "Minuté"
+      },
+      "perDay2": {
+        "en": "Per day",
+        "sk": "Na deň"
+      },
+      "whereItWent": {
+        "en": "Where it went",
+        "sk": "Na čo išli peniaze"
+      },
+      "exportMonth": {
+        "en": "Export month",
+        "sk": "Exportovať mesiac"
+      },
+      "pickPeriodNarrowIt": {
+        "en": "Pick a period and narrow it down. To see one category, open it under Budgets.",
+        "sk": "Vyberte obdobie a zúžte výber. Jednu kategóriu si pozriete, keď ju otvoríte v časti Rozpočty."
+      },
+      "from": {
+        "en": "From",
+        "sk": "Od"
+      },
+      "to": {
+        "en": "To",
+        "sk": "Do"
+      },
+      "any": {
+        "en": "Any",
+        "sk": "Akýkoľvek"
+      },
+      "atLeastThisAmount": {
+        "en": "At least this amount",
+        "sk": "Aspoň táto suma"
+      },
+      "showExpenses": {
+        "en": "Show expenses",
+        "sk": "Zobraziť výdavky"
+      },
+      "startIsAfterEnd": {
+        "en": "The start is after the end.",
+        "sk": "Začiatok je neskôr ako koniec."
+      },
+      "exportPeriod": {
+        "en": "Export period",
+        "sk": "Exportovať obdobie"
+      },
+      "bringHistoryWithPick": {
+        "en": "Bring your history with you. Pick a CSV file exported from this app, from most expense and budget apps, or from a spreadsheet.",
+        "sk": "Preneste si svoju históriu. Vyberte súbor CSV exportovaný z tejto aplikácie, z väčšiny aplikácií na výdavky a rozpočet alebo z tabuľkového editora."
+      },
+      "columnsAreMatchedBy": {
+        "en": "Columns are matched by name, in any case: a date; an amount (or separate expense and income amounts); a category; a note, description, title or payee; a type, income or transfer column; a payment method. Amounts may use a decimal comma or point, a currency sign or brackets for spending. They are added as they are, in your app’s currency.",
+        "sk": "Stĺpce sa hľadajú podľa názvu, bez ohľadu na veľké a malé písmená: dátum; suma (alebo zvlášť sumy výdavkov a príjmov); kategória; poznámka, popis, názov alebo príjemca; stĺpec s typom, príjmom alebo prevodom; spôsob platby. Sumy môžu mať desatinnú čiarku alebo bodku, znak meny alebo zátvorky pri výdavkoch. Pridajú sa tak, ako sú, v mene aplikácie."
+      },
+      "datesSuchAs03": {
+        "en": "Dates such as 03/04/2026 mean",
+        "sk": "Dátum ako 03/04/2026 znamená"
+      },
+      "n3AprilDayFirst": {
+        "en": "3 April (day first)",
+        "sk": "3. apríla (najprv deň)"
+      },
+      "march4MonthFirst": {
+        "en": "March 4 (month first)",
+        "sk": "4. marca (najprv mesiac)"
+      },
+      "chooseCsvFile": {
+        "en": "Choose a CSV file",
+        "sk": "Vybrať súbor CSV"
+      },
+      "incomeTransfersAreLeft": {
+        "en": "Income and transfers are left out when the file marks them with a type, income or transfer column, separate income amounts, or To and From transfer rows. A file with an account or wallet column and none of those has signed amounts: only its negative amounts are added, as spending. Other files are read as spending. Missing categories are created for you. Rows without a readable date or amount are skipped, and you see which ones and why.",
+        "sk": "Príjmy a prevody sa vynechajú, ak ich súbor označuje stĺpcom s typom, príjmom alebo prevodom, zvlášť sumami príjmov alebo riadkami prevodov „To“ a „From“. Súbor so stĺpcom účtu alebo peňaženky bez týchto stĺpcov má sumy so znamienkom: pridajú sa len záporné sumy, ako výdavky. Ostatné súbory sa čítajú ako výdavky. Chýbajúce kategórie sa vytvoria samy. Riadky bez čitateľného dátumu alebo sumy sa vynechajú a uvidíte, ktoré a prečo."
+      },
+      "theseRowsCouldNot": {
+        "en": "These rows could not be read, with the reason for each:",
+        "sk": "Tieto riadky sa nedali prečítať, pri každom je dôvod:"
+      },
+      "thisPhoneCanT": {
+        "en": "This phone can’t take photos here yet.",
+        "sk": "V tomto telefóne sa tu zatiaľ nedá fotiť."
+      },
+      "transport": {
+        "en": "Transport",
+        "sk": "Doprava"
+      },
+      "skippedThisOne": {
+        "en": "Skipped this one.",
+        "sk": "Tentoraz vynechané."
+      },
+      "spentAnythingToday": {
+        "en": "Spent anything today?",
+        "sk": "Minuli ste dnes niečo?"
+      },
+      "addItNowIt": {
+        "en": "Add it now, it takes a few seconds.",
+        "sk": "Zapíšte to hneď, zaberie to pár sekúnd."
+      },
+      "overBudget": {
+        "en": "Over budget",
+        "sk": "Nad rozpočtom"
+      },
+      "almostUsed": {
+        "en": "Almost used",
+        "sk": "Takmer vyčerpaný"
+      },
+      "noCategory": {
+        "en": "No category",
+        "sk": "Bez kategórie"
+      },
+      "retakeReceipt": {
+        "en": "Retake receipt photo",
+        "sk": "Znova odfotiť bloček"
+      },
+      "receiptPhoto": {
+        "en": "Photo of receipt",
+        "sk": "Odfotiť bloček"
+      },
+      "nothingSpentIn": {
+        "en": "Nothing spent in {month}",
+        "sk": "Za {month} žiadne výdavky"
+      },
+      "periodSummary": {
+        "en": "{count} in this period, {total} in total",
+        "sk": "{count} v tomto období, spolu {total}"
+      },
+      "aRecurringExpense": {
+        "en": "a recurring expense",
+        "sk": "pravidelný výdavok"
+      },
+      "name": {
+        "en": "Name",
+        "sk": "Názov"
+      },
+      "icon": {
+        "en": "Icon",
+        "sk": "Ikona"
+      },
+      "amount": {
+        "en": "Amount",
+        "sk": "Suma"
+      },
+      "note": {
+        "en": "Note",
+        "sk": "Poznámka"
+      },
+      "date": {
+        "en": "Date",
+        "sk": "Dátum"
+      }
     }
   },
   "permissions": {
     "auth.lock": {
-      "purpose": "Keep your spending behind your fingerprint, face or screen lock if you turn the lock on",
+      "purpose": "@keepSpendingBehindFingerprint",
       "default": "off"
     },
     "notify.local": {
-      "purpose": "Warn you when a budget is nearly used up and remind you about recurring payments",
+      "purpose": "@warnWhenBudgetIs",
       "maxPerDay": 15
     },
     "files.io": {
-      "purpose": "Save your expenses as a CSV file, or add expenses from one",
+      "purpose": "@saveExpensesAsCsv",
       "modes": ["import", "export"]
     },
-    "widget.home": { "purpose": "Show this month’s spending and an Add button on your home screen" },
-    "camera.photo": { "purpose": "Take a photo of a receipt to keep with the expense", "optional": true }
+    "widget.home": { "purpose": "@showThisMonthSpending" },
+    "camera.photo": { "purpose": "@takePhotoReceiptKeep", "optional": true }
   },
   "dataFlows": [
     {
@@ -73,166 +889,174 @@
         "exportRange.to"
       ],
       "to": "files.io",
-      "purpose": "Your expenses, saved as a CSV file in a place you choose"
+      "purpose": "@expensesSavedAsCsv"
     }
   ],
   "settings": {
     "currency": {
       "type": "choice",
-      "label": "Currency",
-      "help": "Amounts are shown in this currency. Changing it does not convert amounts you already entered.",
+      "label": "@currency",
+      "help": "@amountsAreShownThis",
       "default": "EUR",
       "options": [
-        { "value": "EUR", "label": "Euro (EUR)" },
-        { "value": "USD", "label": "US dollar (USD)" },
-        { "value": "GBP", "label": "British pound (GBP)" },
-        { "value": "CHF", "label": "Swiss franc (CHF)" },
-        { "value": "CZK", "label": "Czech koruna (CZK)" },
-        { "value": "PLN", "label": "Polish złoty (PLN)" },
-        { "value": "HUF", "label": "Hungarian forint (HUF)" },
-        { "value": "RON", "label": "Romanian leu (RON)" },
-        { "value": "SEK", "label": "Swedish krona (SEK)" },
-        { "value": "NOK", "label": "Norwegian krone (NOK)" },
-        { "value": "DKK", "label": "Danish krone (DKK)" },
-        { "value": "UAH", "label": "Ukrainian hryvnia (UAH)" },
-        { "value": "TRY", "label": "Turkish lira (TRY)" },
-        { "value": "CAD", "label": "Canadian dollar (CAD)" },
-        { "value": "AUD", "label": "Australian dollar (AUD)" },
-        { "value": "NZD", "label": "New Zealand dollar (NZD)" },
-        { "value": "JPY", "label": "Japanese yen (JPY)" },
-        { "value": "CNY", "label": "Chinese yuan (CNY)" },
-        { "value": "INR", "label": "Indian rupee (INR)" },
-        { "value": "BRL", "label": "Brazilian real (BRL)" },
-        { "value": "MXN", "label": "Mexican peso (MXN)" },
-        { "value": "ZAR", "label": "South African rand (ZAR)" }
+        { "value": "EUR", "label": "@euroEur" },
+        { "value": "USD", "label": "@usDollarUsd" },
+        { "value": "GBP", "label": "@britishPoundGbp" },
+        { "value": "CHF", "label": "@swissFrancChf" },
+        { "value": "CZK", "label": "@czechKorunaCzk" },
+        { "value": "PLN", "label": "@polishZOtyPln" },
+        { "value": "HUF", "label": "@hungarianForintHuf" },
+        { "value": "RON", "label": "@romanianLeuRon" },
+        { "value": "SEK", "label": "@swedishKronaSek" },
+        { "value": "NOK", "label": "@norwegianKroneNok" },
+        { "value": "DKK", "label": "@danishKroneDkk" },
+        { "value": "UAH", "label": "@ukrainianHryvniaUah" },
+        { "value": "TRY", "label": "@turkishLiraTry" },
+        { "value": "CAD", "label": "@canadianDollarCad" },
+        { "value": "AUD", "label": "@australianDollarAud" },
+        { "value": "NZD", "label": "@newZealandDollarNzd" },
+        { "value": "JPY", "label": "@japaneseYenJpy" },
+        { "value": "CNY", "label": "@chineseYuanCny" },
+        { "value": "INR", "label": "@indianRupeeInr" },
+        { "value": "BRL", "label": "@brazilianRealBrl" },
+        { "value": "MXN", "label": "@mexicanPesoMxn" },
+        { "value": "ZAR", "label": "@southAfricanRandZar" }
       ]
     },
     "monthlyBudget": {
       "type": "decimal",
-      "label": "Monthly budget",
-      "help": "For all your spending together. Leave it empty for none.",
+      "label": "@monthlyBudget",
+      "help": "@allSpendingTogetherLeave",
       "scale": 2,
       "min": 0,
       "sensitivity": "financial"
     },
-    "budgetAlerts": { "type": "boolean", "label": "Budget warnings", "default": true },
+    "budgetAlerts": { "type": "boolean", "label": "@budgetWarnings", "default": true },
     "warnAt": {
       "type": "integer",
-      "label": "Warn me at",
-      "unit": "% of a budget",
+      "label": "@warnMeAt",
+      "unit": "@budget",
       "default": 80,
       "min": 50,
       "max": 100
     },
-    "addedNotice": { "type": "boolean", "label": "Tell me when a recurring expense is added", "default": true },
+    "addedNotice": { "type": "boolean", "label": "@tellMeWhenRecurring", "default": true },
     "remindDaily": {
       "type": "boolean",
-      "label": "Daily reminder to log spending",
-      "help": "Only on days with nothing logged yet.",
+      "label": "@dailyReminderLogSpending",
+      "help": "@onlyDaysWithNothing",
       "default": false
     },
     "remindAt": {
       "type": "time",
-      "label": "Reminder time",
+      "label": "@reminderTime",
       "default": "20:00",
       "visible": "=settings.remindDaily"
     },
     "defaultPayment": {
       "type": "choice",
-      "label": "Usual way to pay",
+      "label": "@usualWayPay",
       "default": "card",
       "options": [
-        { "value": "cash", "label": "Cash", "icon": "payments" },
-        { "value": "card", "label": "Card", "icon": "credit_card" },
-        { "value": "transfer", "label": "Bank transfer", "icon": "account_balance" },
-        { "value": "mobile", "label": "Phone or watch", "icon": "wallet" },
-        { "value": "other", "label": "Other", "icon": "more_horiz" }
+        { "value": "cash", "label": "@cash", "icon": "payments" },
+        { "value": "card", "label": "@card", "icon": "credit_card" },
+        { "value": "transfer", "label": "@bankTransfer", "icon": "account_balance" },
+        { "value": "mobile", "label": "@phoneWatch", "icon": "wallet" },
+        { "value": "other", "label": "@other", "icon": "more_horiz" }
       ]
     }
   },
   "entities": {
     "category": {
-      "label": "Category",
-      "labelPlural": "Categories",
+      "label": "@category",
+      "labelPlural": "@categories",
       "sort": ["name"],
       "display": {
         "title": "=item.name",
         "subtitle": "=has(item.budget) ? t('ofBudget', {'spent': formatCurrency(item.spentMonth, settings.currency), 'budget': formatCurrency(item.budget, settings.currency)}) : t('spentThisMonth', {'spent': formatCurrency(item.spentMonth, settings.currency)})",
-        "trailing": "=item.budgetState == 'over' ? 'Over budget' : item.budgetState == 'near' ? 'Almost used' : null",
+        "trailing": "=item.budgetState == 'over' ? t('overBudget') : item.budgetState == 'near' ? t('almostUsed') : null",
         "icon": "=item.icon",
         "hue": "=item.hueName",
         "trailingTone": "=item.budgetState == 'over' ? 'danger' : item.budgetState == 'near' ? 'warning' : null"
       },
       "fields": {
-        "name": { "type": "text", "required": true, "unique": true, "maxLength": 60, "placeholder": "Groceries" },
+        "name": {
+          "label": "@name",
+          "type": "text",
+          "required": true,
+          "unique": true,
+          "maxLength": 60,
+          "placeholder": "@groceries"
+        },
         "icon": {
+          "label": "@icon",
           "type": "choice",
           "default": "category",
           "options": [
-            { "value": "shopping_cart", "label": "Groceries", "icon": "shopping_cart", "hue": "green" },
-            { "value": "restaurant", "label": "Eating out", "icon": "restaurant", "hue": "orange" },
-            { "value": "local_cafe", "label": "Coffee", "icon": "local_cafe", "hue": "brown" },
-            { "value": "local_drink", "label": "Drinks", "icon": "local_drink", "hue": "amber" },
-            { "value": "directions_car", "label": "Car and fuel", "icon": "directions_car", "hue": "blue" },
-            { "value": "directions_bike", "label": "Bike", "icon": "directions_bike", "hue": "lime" },
-            { "value": "directions_walk", "label": "Getting around", "icon": "directions_walk", "hue": "teal" },
-            { "value": "flight", "label": "Travel", "icon": "flight", "hue": "cyan" },
-            { "value": "home", "label": "Home and rent", "icon": "home", "hue": "brown" },
-            { "value": "bolt", "label": "Energy", "icon": "bolt", "hue": "amber" },
-            { "value": "water_drop", "label": "Water", "icon": "water_drop", "hue": "cyan" },
-            { "value": "wifi", "label": "Internet", "icon": "wifi", "hue": "indigo" },
-            { "value": "call", "label": "Phone", "icon": "call", "hue": "indigo" },
-            { "value": "receipt_long", "label": "Bills", "icon": "receipt_long", "hue": "indigo" },
-            { "value": "autorenew", "label": "Subscriptions", "icon": "autorenew", "hue": "violet" },
-            { "value": "medical_services", "label": "Health", "icon": "medical_services", "hue": "red" },
-            { "value": "medication", "label": "Pharmacy", "icon": "medication", "hue": "red" },
-            { "value": "fitness_center", "label": "Sport", "icon": "fitness_center", "hue": "lime" },
-            { "value": "spa", "label": "Personal care", "icon": "spa", "hue": "pink" },
-            { "value": "shopping_bag", "label": "Shopping", "icon": "shopping_bag", "hue": "violet" },
-            { "value": "movie", "label": "Going out", "icon": "movie", "hue": "pink" },
-            { "value": "sports_esports", "label": "Games", "icon": "sports_esports", "hue": "violet" },
-            { "value": "music_note", "label": "Music", "icon": "music_note", "hue": "pink" },
-            { "value": "menu_book", "label": "Books", "icon": "menu_book", "hue": "brown" },
-            { "value": "school", "label": "Education", "icon": "school", "hue": "blue" },
-            { "value": "child_care", "label": "Kids", "icon": "child_care", "hue": "amber" },
-            { "value": "family_restroom", "label": "Family", "icon": "family_restroom", "hue": "orange" },
-            { "value": "pets", "label": "Pets", "icon": "pets", "hue": "brown" },
-            { "value": "cake", "label": "Gifts", "icon": "cake", "hue": "pink" },
-            { "value": "local_florist", "label": "Garden", "icon": "local_florist", "hue": "green" },
-            { "value": "cleaning_services", "label": "Cleaning", "icon": "cleaning_services", "hue": "cyan" },
-            { "value": "handyman", "label": "Repairs", "icon": "handyman", "hue": "orange" },
-            { "value": "work", "label": "Work", "icon": "work", "hue": "blue" },
-            { "value": "savings", "label": "Savings", "icon": "savings", "hue": "green" },
-            { "value": "volunteer_activism", "label": "Giving", "icon": "volunteer_activism", "hue": "red" },
-            { "value": "account_balance", "label": "Bank and fees", "icon": "account_balance", "hue": "grey" },
-            { "value": "category", "label": "Other", "icon": "category", "hue": "grey" }
+            { "value": "shopping_cart", "label": "@groceries", "icon": "shopping_cart", "hue": "green" },
+            { "value": "restaurant", "label": "@eatingOut", "icon": "restaurant", "hue": "orange" },
+            { "value": "local_cafe", "label": "@coffee", "icon": "local_cafe", "hue": "brown" },
+            { "value": "local_drink", "label": "@drinks", "icon": "local_drink", "hue": "amber" },
+            { "value": "directions_car", "label": "@carFuel", "icon": "directions_car", "hue": "blue" },
+            { "value": "directions_bike", "label": "@bike", "icon": "directions_bike", "hue": "lime" },
+            { "value": "directions_walk", "label": "@gettingAround", "icon": "directions_walk", "hue": "teal" },
+            { "value": "flight", "label": "@travel", "icon": "flight", "hue": "cyan" },
+            { "value": "home", "label": "@homeRent", "icon": "home", "hue": "brown" },
+            { "value": "bolt", "label": "@energy", "icon": "bolt", "hue": "amber" },
+            { "value": "water_drop", "label": "@water", "icon": "water_drop", "hue": "cyan" },
+            { "value": "wifi", "label": "@internet", "icon": "wifi", "hue": "indigo" },
+            { "value": "call", "label": "@phone", "icon": "call", "hue": "indigo" },
+            { "value": "receipt_long", "label": "@bills", "icon": "receipt_long", "hue": "indigo" },
+            { "value": "autorenew", "label": "@subscriptions", "icon": "autorenew", "hue": "violet" },
+            { "value": "medical_services", "label": "@health", "icon": "medical_services", "hue": "red" },
+            { "value": "medication", "label": "@pharmacy", "icon": "medication", "hue": "red" },
+            { "value": "fitness_center", "label": "@sport", "icon": "fitness_center", "hue": "lime" },
+            { "value": "spa", "label": "@personalCare", "icon": "spa", "hue": "pink" },
+            { "value": "shopping_bag", "label": "@shopping", "icon": "shopping_bag", "hue": "violet" },
+            { "value": "movie", "label": "@goingOut", "icon": "movie", "hue": "pink" },
+            { "value": "sports_esports", "label": "@games", "icon": "sports_esports", "hue": "violet" },
+            { "value": "music_note", "label": "@music", "icon": "music_note", "hue": "pink" },
+            { "value": "menu_book", "label": "@books", "icon": "menu_book", "hue": "brown" },
+            { "value": "school", "label": "@education", "icon": "school", "hue": "blue" },
+            { "value": "child_care", "label": "@kids", "icon": "child_care", "hue": "amber" },
+            { "value": "family_restroom", "label": "@family", "icon": "family_restroom", "hue": "orange" },
+            { "value": "pets", "label": "@pets", "icon": "pets", "hue": "brown" },
+            { "value": "cake", "label": "@gifts", "icon": "cake", "hue": "pink" },
+            { "value": "local_florist", "label": "@garden", "icon": "local_florist", "hue": "green" },
+            { "value": "cleaning_services", "label": "@cleaning", "icon": "cleaning_services", "hue": "cyan" },
+            { "value": "handyman", "label": "@repairs", "icon": "handyman", "hue": "orange" },
+            { "value": "work", "label": "@work", "icon": "work", "hue": "blue" },
+            { "value": "savings", "label": "@savings", "icon": "savings", "hue": "green" },
+            { "value": "volunteer_activism", "label": "@giving", "icon": "volunteer_activism", "hue": "red" },
+            { "value": "account_balance", "label": "@bankFees", "icon": "account_balance", "hue": "grey" },
+            { "value": "category", "label": "@otherCategory", "icon": "category", "hue": "grey" }
           ]
         },
         "color": {
           "type": "color",
-          "label": "Colour",
-          "help": "Leave it empty to use the colour of the category's icon."
+          "label": "@colour",
+          "help": "@leaveItEmptyUse"
         },
         "hueName": {
           "type": "text",
-          "label": "Colour name",
+          "label": "@colourName",
           "visible": false,
           "compute": "=upper(coalesce(item.color, '')) == '#D32F2F' ? 'red' : upper(coalesce(item.color, '')) == '#C2185B' ? 'pink' : upper(coalesce(item.color, '')) == '#7B1FA2' ? 'violet' : upper(coalesce(item.color, '')) == '#512DA8' ? 'indigo' : upper(coalesce(item.color, '')) == '#1976D2' ? 'blue' : upper(coalesce(item.color, '')) == '#0288D1' ? 'cyan' : upper(coalesce(item.color, '')) == '#00897B' ? 'teal' : upper(coalesce(item.color, '')) == '#388E3C' ? 'green' : upper(coalesce(item.color, '')) == '#F9A825' ? 'amber' : upper(coalesce(item.color, '')) == '#EF6C00' ? 'orange' : upper(coalesce(item.color, '')) == '#6D4C41' ? 'brown' : upper(coalesce(item.color, '')) == '#546E7A' ? 'grey' : optionHue(item.icon)"
         },
         "budget": {
           "type": "decimal",
-          "label": "Monthly budget",
-          "help": "Leave it empty for no budget.",
+          "label": "@monthlyBudget",
+          "help": "@leaveItEmptyNo",
           "scale": 2,
           "min": 0,
           "currency": "=settings.currency",
           "sensitivity": "financial"
         },
-        "expenses": { "type": "inverse", "of": "expense.category", "label": "Expenses" },
-        "recurring": { "type": "inverse", "of": "recurring.category", "label": "Recurring expenses" },
+        "expenses": { "type": "inverse", "of": "expense.category", "label": "@expenses" },
+        "recurring": { "type": "inverse", "of": "recurring.category", "label": "@recurringExpenses" },
         "spentMonth": {
           "type": "decimal",
-          "label": "Spent this month",
+          "label": "@spentThisMonth2",
           "scale": 2,
           "currency": "=settings.currency",
           "sensitivity": "financial",
@@ -240,7 +1064,7 @@
         },
         "left": {
           "type": "decimal",
-          "label": "Left this month",
+          "label": "@leftThisMonth",
           "scale": 2,
           "currency": "=settings.currency",
           "sensitivity": "financial",
@@ -249,7 +1073,7 @@
         },
         "budgetState": {
           "type": "choice",
-          "label": "Budget",
+          "label": "@budget2",
           "sensitivity": "financial",
           "visible": false,
           "options": ["none", "ok", "near", "over"],
@@ -258,19 +1082,20 @@
       }
     },
     "expense": {
-      "label": "Expense",
-      "labelPlural": "Expenses",
+      "label": "@expense",
+      "labelPlural": "@expenses",
       "sensitivity": "financial",
       "sort": ["-date", "-createdAt"],
       "display": {
-        "title": "=has(item.note) && item.note != '' ? item.note : coalesce(item.category.name, 'Expense')",
-        "subtitle": "=(has(item.note) && item.note != '' ? coalesce(item.category.name, 'No category') + ' · ' : '') + coalesce(optionLabel(item.payment), '') + ' · ' + formatDate(item.date, 'MMMEd')",
+        "title": "=has(item.note) && item.note != '' ? item.note : coalesce(item.category.name, t('expense'))",
+        "subtitle": "=(has(item.note) && item.note != '' ? coalesce(item.category.name, t('noCategory')) + ' · ' : '') + coalesce(optionLabel(item.payment), '') + ' · ' + formatDate(item.date, 'MMMEd')",
         "trailing": "=formatCurrency(item.amount, settings.currency)",
         "icon": "=coalesce(item.category.icon, 'category')",
         "hue": "=item.category.hueName"
       },
       "fields": {
         "amount": {
+          "label": "@amount",
           "type": "decimal",
           "required": true,
           "scale": 2,
@@ -278,34 +1103,49 @@
           "currency": "=settings.currency",
           "placeholder": "0.00"
         },
-        "category": { "type": "ref", "to": "category", "required": true },
-        "note": { "type": "text", "maxLength": 500, "placeholder": "What was it for?" },
-        "date": { "type": "date", "required": true, "default": "=today()" },
+        "category": {
+          "label": "@category",
+          "type": "ref",
+          "to": "category",
+          "required": true
+        },
+        "note": {
+          "label": "@note",
+          "type": "text",
+          "maxLength": 500,
+          "placeholder": "@whatWasIt"
+        },
+        "date": {
+          "label": "@date",
+          "type": "date",
+          "required": true,
+          "default": "=today()"
+        },
         "payment": {
           "type": "choice",
-          "label": "Paid with",
+          "label": "@paidWith",
           "default": "=settings.defaultPayment",
           "options": [
-            { "value": "cash", "label": "Cash", "icon": "payments" },
-            { "value": "card", "label": "Card", "icon": "credit_card" },
-            { "value": "transfer", "label": "Bank transfer", "icon": "account_balance" },
-            { "value": "mobile", "label": "Phone or watch", "icon": "wallet" },
-            { "value": "other", "label": "Other", "icon": "more_horiz" }
+            { "value": "cash", "label": "@cash", "icon": "payments" },
+            { "value": "card", "label": "@card", "icon": "credit_card" },
+            { "value": "transfer", "label": "@bankTransfer", "icon": "account_balance" },
+            { "value": "mobile", "label": "@phoneWatch", "icon": "wallet" },
+            { "value": "other", "label": "@other", "icon": "more_horiz" }
           ]
         },
-        "receipt": { "type": "image", "label": "Receipt", "visible": "=available('camera.photo')" },
+        "receipt": { "type": "image", "label": "@receipt", "visible": "=available('camera.photo')" },
         "recurring": {
           "type": "ref",
           "to": "recurring",
-          "label": "Added from",
+          "label": "@addedFrom",
           "onDelete": "setNull",
           "editable": false
         }
       }
     },
     "recurring": {
-      "label": "Recurring expense",
-      "labelPlural": "Recurring",
+      "label": "@recurringExpense",
+      "labelPlural": "@recurring",
       "sensitivity": "financial",
       "sort": ["nextDue"],
       "display": {
@@ -317,54 +1157,76 @@
         "tone": "=item.dueNow ? 'warning' : null"
       },
       "fields": {
-        "name": { "type": "text", "required": true, "maxLength": 60, "placeholder": "Rent, phone, streaming…" },
-        "amount": { "type": "decimal", "required": true, "scale": 2, "min": 0.01, "currency": "=settings.currency" },
-        "category": { "type": "ref", "to": "category", "required": true },
+        "name": {
+          "label": "@name",
+          "type": "text",
+          "required": true,
+          "maxLength": 60,
+          "placeholder": "@rentPhoneStreaming"
+        },
+        "amount": {
+          "label": "@amount",
+          "type": "decimal",
+          "required": true,
+          "scale": 2,
+          "min": 0.01,
+          "currency": "=settings.currency"
+        },
+        "category": {
+          "label": "@category",
+          "type": "ref",
+          "to": "category",
+          "required": true
+        },
         "schedule": {
           "type": "recurrence",
-          "label": "Repeats",
+          "label": "@repeats",
           "required": true,
           "default": "FREQ=MONTHLY;BYMONTHDAY=1"
         },
         "nextDue": {
           "type": "date",
-          "label": "Next payment",
-          "help": "The next date it is added. After that, it follows the schedule.",
+          "label": "@nextPayment",
+          "help": "@nextDateItIs",
           "required": true,
           "default": "=today()"
         },
         "mode": {
           "type": "choice",
-          "label": "When it is due",
+          "label": "@whenItIsDue",
           "default": "auto",
           "options": [
-            { "value": "auto", "label": "Add it for me", "icon": "autorenew" },
-            { "value": "ask", "label": "Ask me first", "icon": "notifications" }
+            { "value": "auto", "label": "@addItMe", "icon": "autorenew" },
+            { "value": "ask", "label": "@askMeFirst", "icon": "notifications" }
           ]
         },
         "payment": {
           "type": "choice",
-          "label": "Paid with",
+          "label": "@paidWith",
           "default": "=settings.defaultPayment",
           "options": [
-            { "value": "cash", "label": "Cash", "icon": "payments" },
-            { "value": "card", "label": "Card", "icon": "credit_card" },
-            { "value": "transfer", "label": "Bank transfer", "icon": "account_balance" },
-            { "value": "mobile", "label": "Phone or watch", "icon": "wallet" },
-            { "value": "other", "label": "Other", "icon": "more_horiz" }
+            { "value": "cash", "label": "@cash", "icon": "payments" },
+            { "value": "card", "label": "@card", "icon": "credit_card" },
+            { "value": "transfer", "label": "@bankTransfer", "icon": "account_balance" },
+            { "value": "mobile", "label": "@phoneWatch", "icon": "wallet" },
+            { "value": "other", "label": "@other", "icon": "more_horiz" }
           ]
         },
-        "active": { "type": "boolean", "label": "Active", "default": true },
-        "note": { "type": "text", "maxLength": 120 },
-        "dueNow": { "type": "boolean", "label": "Due now", "compute": "=item.active && item.nextDue <= today()" },
+        "active": { "type": "boolean", "label": "@active", "default": true },
+        "note": {
+          "label": "@note",
+          "type": "text",
+          "maxLength": 120
+        },
+        "dueNow": { "type": "boolean", "label": "@dueNow", "compute": "=item.active && item.nextDue <= today()" },
         "perYear": {
           "type": "decimal",
-          "label": "Per year",
+          "label": "@perYear",
           "scale": 2,
           "currency": "=settings.currency",
           "compute": "=item.active ? item.amount * size(occurrences(item.schedule, today(), addDays(addMonths(today(), 12), -1))) : decimal('0')"
         },
-        "expenses": { "type": "inverse", "of": "expense.recurring", "label": "Added so far" }
+        "expenses": { "type": "inverse", "of": "expense.recurring", "label": "@addedSoFar" }
       }
     }
   },
@@ -462,13 +1324,13 @@
   "navigation": {
     "start": "overview",
     "tabs": [
-      { "screen": "overview", "label": "This month", "icon": "dashboard" },
-      { "screen": "expenses", "label": "Expenses", "icon": "receipt_long" },
-      { "screen": "months", "label": "Months", "icon": "calendar_month" },
-      { "screen": "categories", "label": "Budgets", "icon": "pie_chart" },
+      { "screen": "overview", "label": "@thisMonth", "icon": "dashboard" },
+      { "screen": "expenses", "label": "@expenses", "icon": "receipt_long" },
+      { "screen": "months", "label": "@months", "icon": "calendar_month" },
+      { "screen": "categories", "label": "@budgets", "icon": "pie_chart" },
       {
         "screen": "recurringList",
-        "label": "Recurring",
+        "label": "@recurring",
         "icon": "autorenew",
         "badge": "=size(q.dueAsk) > 0 ? string(size(q.dueAsk)) : ''"
       }
@@ -479,27 +1341,27 @@
     "overview": { "type": "dashboard", "title": "=formatDate(today(), 'yMMMM')", "root": "ovCol" },
     "expenses": {
       "type": "list",
-      "title": "Expenses",
+      "title": "@expenses",
       "query": "history",
       "search": ["note", "category", "amount"],
       "sectionBy": "date",
       "add": "addExpense",
       "toolbar": ["filterBtn", "exportBtn", "importBtn"],
       "empty": {
-        "title": "No expenses yet",
-        "body": "Add what you spend in a few taps. Everything stays on this phone.",
+        "title": "@noExpensesYet",
+        "body": "@addWhatSpendFew",
         "icon": "receipt_long"
       }
     },
     "addExpense": {
       "type": "form",
-      "title": "Add expense",
+      "title": "@addExpense",
       "entity": "expense",
       "fields": ["amount", "category", "note", "date", "payment", "receipt"]
     },
     "expenseDetail": {
       "type": "detail",
-      "title": "Expense",
+      "title": "@expense",
       "entity": "expense",
       "header": "expAmount",
       "show": ["payment", "recurring", "receipt"],
@@ -507,7 +1369,7 @@
     },
     "months": {
       "type": "custom",
-      "title": "Months",
+      "title": "@months",
       "state": { "month": { "type": "date", "default": "=startOf(today(), 'month')" } },
       "queries": {
         "mTotal": { "query": "rangeTotal", "args": { "from": "=state.month", "to": "=endOf(state.month, 'month')" } },
@@ -527,11 +1389,11 @@
       "search": ["note", "category", "amount"],
       "sectionBy": "date",
       "add": false,
-      "empty": { "title": "Nothing spent this month", "icon": "savings" }
+      "empty": { "title": "@nothingSpentThisMonth", "icon": "savings" }
     },
     "filter": {
       "type": "custom",
-      "title": "Find expenses",
+      "title": "@findExpenses",
       "state": {
         "from": { "type": "date", "default": "=addMonths(startOf(today(), 'month'), -2)" },
         "to": { "type": "date", "default": "=today()" },
@@ -543,7 +1405,7 @@
     },
     "results": {
       "type": "list",
-      "title": "Found expenses",
+      "title": "@foundExpenses",
       "params": {
         "from": { "type": "date", "required": true },
         "to": { "type": "date", "required": true },
@@ -565,16 +1427,16 @@
       "search": ["note", "category"],
       "sectionBy": "date",
       "add": false,
-      "empty": { "title": "No expenses match", "body": "Try a longer period or a lower amount.", "icon": "search" }
+      "empty": { "title": "@noExpensesMatch", "body": "@tryLongerPeriodLower", "icon": "search" }
     },
     "categories": {
       "type": "list",
-      "title": "Budgets",
+      "title": "@budgets",
       "query": "categories",
       "search": ["name"],
       "empty": {
-        "title": "No categories yet",
-        "body": "Add categories such as Groceries or Rent, and give them a monthly budget if you like.",
+        "title": "@noCategoriesYet",
+        "body": "@addCategoriesSuchAs",
         "icon": "pie_chart"
       }
     },
@@ -587,25 +1449,25 @@
     },
     "recurringList": {
       "type": "list",
-      "title": "Recurring",
+      "title": "@recurring",
       "query": "allRecurring",
       "empty": {
-        "title": "No recurring expenses",
-        "body": "Add rent, bills and subscriptions once. They are added to your expenses when they are due.",
+        "title": "@noRecurringExpenses",
+        "body": "@addRentBillsSubscriptions",
         "icon": "autorenew"
       }
     },
     "recDetail": { "type": "detail", "entity": "recurring", "related": ["expenses"], "footer": "recFooter" },
-    "prefs": { "type": "settings", "title": "Settings" },
+    "prefs": { "type": "settings", "title": "@settings" },
     "importScreen": {
       "type": "custom",
-      "title": "Import expenses",
+      "title": "@importExpenses",
       "state": { "order": { "type": "text", "default": "dmy" } },
       "root": "imCol"
     },
     "importReport": {
       "type": "custom",
-      "title": "Import finished",
+      "title": "@importFinished",
       "present": "dialog",
       "params": { "summary": { "type": "text", "maxLength": 300 }, "lines": { "type": "longText", "maxLength": 5000 } },
       "root": "irCol"
@@ -630,16 +1492,16 @@
       "component": "EmptyState",
       "illustration": "welcome",
       "icon": "receipt_long",
-      "title": "Welcome",
-      "body": "Choose your currency and, if you like, a monthly budget. Then add your first expense. Your data stays on this phone: no account, no ads.",
+      "title": "@welcome",
+      "body": "@chooseCurrencyIfLike",
       "action": { "event": { "name": "openPrefs" } },
-      "actionLabel": "Choose currency and budget",
+      "actionLabel": "@chooseCurrencyBudget",
       "visible": "=coalesce(q.monthTotal.n, 0) == 0 && size(q.recent) == 0"
     },
     "addBtn": {
       "component": "Button",
       "icon": "add",
-      "label": "Add expense",
+      "label": "@addExpense",
       "variant": "primary",
       "action": { "event": { "name": "openAdd" } }
     },
@@ -651,7 +1513,7 @@
     "spentStat": {
       "component": "Stat",
       "variant": "hero",
-      "label": "Spent this month",
+      "label": "@spentThisMonth2",
       "value": "=formatCurrency(coalesce(q.monthTotal.total, decimal('0')), settings.currency)",
       "delta": "=t('vsLastMonth', {'dir': int(round(double(abs(coalesce(q.monthTotal.total, decimal('0')) - coalesce(q.lastMonthSoFar.total, decimal('0')))) * 100.0 / max(double(coalesce(q.lastMonthSoFar.total, decimal('0'))), 0.01))) == 0 ? 'same' : coalesce(q.monthTotal.total, decimal('0')) < coalesce(q.lastMonthSoFar.total, decimal('0')) ? 'less' : 'more', 'pct': int(round(double(abs(coalesce(q.monthTotal.total, decimal('0')) - coalesce(q.lastMonthSoFar.total, decimal('0')))) * 100.0 / max(double(coalesce(q.lastMonthSoFar.total, decimal('0'))), 0.01)))})",
       "deltaTone": "=int(round(double(abs(coalesce(q.monthTotal.total, decimal('0')) - coalesce(q.lastMonthSoFar.total, decimal('0')))) * 100.0 / max(double(coalesce(q.lastMonthSoFar.total, decimal('0'))), 0.01))) == 0 ? 'neutral' : coalesce(q.monthTotal.total, decimal('0')) < coalesce(q.lastMonthSoFar.total, decimal('0')) ? 'success' : 'warning'",
@@ -661,7 +1523,7 @@
     "spentOnly": {
       "component": "Stat",
       "variant": "hero",
-      "label": "Spent this month",
+      "label": "@spentThisMonth2",
       "value": "=formatCurrency(coalesce(q.monthTotal.total, decimal('0')), settings.currency)",
       "visible": "=coalesce(q.lastMonthSoFar.total, decimal('0')) <= decimal('0')"
     },
@@ -672,7 +1534,7 @@
     },
     "budgetBar": {
       "component": "Progress",
-      "label": "Monthly budget used",
+      "label": "@monthlyBudgetUsed",
       "value": "=coalesce(q.monthTotal.total, decimal('0'))",
       "max": "=coalesce(settings.monthlyBudget, decimal('1'))",
       "visible": "=has(settings.monthlyBudget) && settings.monthlyBudget > 0",
@@ -686,7 +1548,7 @@
     },
     "dueCard": { "component": "Card", "child": "dueCol", "visible": "=size(q.dueAsk) > 0" },
     "dueCol": { "component": "Column", "children": ["dueTitle", "dueList"] },
-    "dueTitle": { "component": "Text", "variant": "h4", "text": "Due now" },
+    "dueTitle": { "component": "Text", "variant": "h4", "text": "@dueNow" },
     "dueList": { "component": "List", "children": { "path": "/q/dueAsk", "componentId": "dueRow" } },
     "dueRow": { "component": "Row", "align": "center", "children": ["dueInfo", "dueSkipBtn", "dueAddBtn"] },
     "dueInfo": { "component": "Column", "weight": 1, "children": ["dueName", "dueAmount"] },
@@ -698,7 +1560,7 @@
     },
     "dueSkipBtn": {
       "component": "Button",
-      "label": "Skip",
+      "label": "@skip",
       "variant": "borderless",
       "action": {
         "event": { "name": "skipRecurring", "context": { "rule": "=item.id", "due": "=string(item.nextDue)" } }
@@ -706,7 +1568,7 @@
     },
     "dueAddBtn": {
       "component": "Button",
-      "label": "Add",
+      "label": "@add",
       "icon": "add",
       "action": {
         "event": { "name": "postRecurring", "context": { "rule": "=item.id", "due": "=string(item.nextDue)" } }
@@ -714,7 +1576,7 @@
     },
     "budgetSection": {
       "component": "Section",
-      "title": "Budgets",
+      "title": "@budgets",
       "visible": "=size(q.budgeted) > 0",
       "children": ["budgetList"]
     },
@@ -733,7 +1595,7 @@
     },
     "catSection": {
       "component": "Section",
-      "title": "By category",
+      "title": "@byCategory",
       "visible": "=coalesce(q.monthTotal.n, 0) > 0",
       "children": ["catList"]
     },
@@ -747,7 +1609,7 @@
     "catName": {
       "component": "Text",
       "weight": 1,
-      "text": "=coalesce(item.key.name, 'No category') + ' (' + string(item.n) + ')'"
+      "text": "=coalesce(item.key.name, t('noCategory')) + ' (' + string(item.n) + ')'"
     },
     "catTotal": {
       "component": "Text",
@@ -756,7 +1618,7 @@
     "pieChart": {
       "component": "Chart",
       "kind": "donut",
-      "title": "Where it went this month",
+      "title": "@whereItWentThis",
       "query": "monthByCategory",
       "x": "key",
       "y": ["total"],
@@ -766,7 +1628,7 @@
     "weekChart": {
       "component": "Chart",
       "kind": "bar",
-      "title": "Last 7 days",
+      "title": "@last7Days",
       "query": "last7",
       "x": "key",
       "y": ["total"],
@@ -775,7 +1637,7 @@
     "trendChart": {
       "component": "Chart",
       "kind": "bar",
-      "title": "Spending, last 12 months",
+      "title": "@spendingLast12Months",
       "query": "months12",
       "x": "key",
       "y": ["total"],
@@ -784,18 +1646,18 @@
     "trendBudget": {
       "component": "Chart",
       "kind": "bar",
-      "title": "Spending, last 12 months",
+      "title": "@spendingLast12Months",
       "query": "months12",
       "x": "key",
       "y": ["total"],
       "reference": [
-        { "value": "=coalesce(settings.monthlyBudget, decimal('0'))", "label": "Monthly budget", "tone": "warning" }
+        { "value": "=coalesce(settings.monthlyBudget, decimal('0'))", "label": "@monthlyBudget", "tone": "warning" }
       ],
       "visible": "=size(q.recent) > 0 && has(settings.monthlyBudget) && settings.monthlyBudget > 0"
     },
     "recentSection": {
       "component": "Section",
-      "title": "Recent",
+      "title": "@recent",
       "visible": "=size(q.recent) > 0",
       "children": ["recentList"]
     },
@@ -823,28 +1685,28 @@
     "filterBtn": {
       "component": "Button",
       "icon": "filter_list",
-      "label": "Find expenses",
+      "label": "@findExpenses",
       "iconOnly": true,
       "action": { "event": { "name": "openFilter" } }
     },
     "exportBtn": {
       "component": "Button",
       "icon": "download",
-      "label": "Export to CSV",
+      "label": "@exportCsv",
       "iconOnly": true,
       "action": { "event": { "name": "exportAll" } }
     },
     "importBtn": {
       "component": "Button",
       "icon": "upload",
-      "label": "Import from CSV",
+      "label": "@importFromCsv",
       "iconOnly": true,
       "action": { "event": { "name": "openImport" } }
     },
     "expAmount": {
       "component": "Stat",
       "variant": "hero",
-      "label": "=has(record.note) && record.note != '' ? record.note : coalesce(record.category.name, 'Expense')",
+      "label": "=has(record.note) && record.note != '' ? record.note : coalesce(record.category.name, t('expense'))",
       "value": "=formatCurrency(record.amount, settings.currency)",
       "icon": "=coalesce(record.category.icon, 'category')"
     },
@@ -852,27 +1714,27 @@
     "againBtn": {
       "component": "Button",
       "icon": "content_copy",
-      "label": "Add again today",
+      "label": "@addAgainToday",
       "action": { "event": { "name": "addAgain", "context": { "expense": "=record.id" } } }
     },
     "receiptBtn": {
       "component": "Button",
       "icon": "photo_camera",
-      "label": "=has(record.receipt) ? 'Retake receipt photo' : 'Photo of receipt'",
+      "label": "=has(record.receipt) ? t('retakeReceipt') : t('receiptPhoto')",
       "visible": "=available('camera.photo')",
       "action": { "event": { "name": "attachReceipt", "context": { "expense": "=record.id" } } }
     },
     "catFooter": {
       "component": "Button",
       "icon": "add",
-      "label": "Add expense here",
+      "label": "@addExpenseHere",
       "variant": "primary",
       "action": { "event": { "name": "addInCategory", "context": { "category": "=record.id" } } }
     },
     "recFooter": { "component": "Row", "justify": "spaceBetween", "children": ["recSkipBtn", "recAddBtn"] },
     "recSkipBtn": {
       "component": "Button",
-      "label": "Skip next",
+      "label": "@skipNext",
       "variant": "borderless",
       "visible": "=record.active",
       "action": {
@@ -882,7 +1744,7 @@
     "recAddBtn": {
       "component": "Button",
       "icon": "add",
-      "label": "Add next one now",
+      "label": "@addNextOneNow",
       "visible": "=record.active",
       "action": {
         "event": { "name": "postRecurring", "context": { "rule": "=record.id", "due": "=string(record.nextDue)" } }
@@ -901,7 +1763,7 @@
     "mPrev": {
       "component": "Button",
       "icon": "chevron_left",
-      "label": "Previous month",
+      "label": "@previousMonth",
       "iconOnly": true,
       "action": { "event": { "name": "showMonth", "context": { "month": "=addMonths(state.month, -1)" } } }
     },
@@ -909,7 +1771,7 @@
     "mNext": {
       "component": "Button",
       "icon": "chevron_right",
-      "label": "Next month",
+      "label": "@nextMonth",
       "iconOnly": true,
       "visible": "=state.month < startOf(today(), 'month')",
       "action": { "event": { "name": "showMonth", "context": { "month": "=addMonths(state.month, 1)" } } }
@@ -919,26 +1781,26 @@
       "component": "EmptyState",
       "illustration": "no_data",
       "icon": "savings",
-      "title": "='Nothing spent in ' + formatDate(state.month, 'yMMMM')",
-      "body": "Expenses you add for this month show up here. The arrows above go to other months.",
+      "title": "=t('nothingSpentIn', {'month': formatDate(state.month, 'yMMMM')})",
+      "body": "@expensesAddThisMonth",
       "visible": "=coalesce(q.mTotal.n, 0) == 0"
     },
     "mStats": { "component": "Row", "justify": "spaceBetween", "children": ["mSpent", "mCount", "mAvg"] },
     "mSpent": {
       "component": "Stat",
-      "label": "Spent",
+      "label": "@spent",
       "value": "=formatCurrency(coalesce(q.mTotal.total, decimal('0')), settings.currency)"
     },
-    "mCount": { "component": "Stat", "label": "Expenses", "value": "=coalesce(q.mTotal.n, 0)" },
+    "mCount": { "component": "Stat", "label": "@expenses", "value": "=coalesce(q.mTotal.n, 0)" },
     "mAvg": {
       "component": "Stat",
-      "label": "Per day",
+      "label": "@perDay2",
       "value": "=formatCurrency(coalesce(q.mTotal.total, decimal('0')) / (daysBetween(state.month, min(endOf(state.month, 'month'), today())) + 1), settings.currency)"
     },
     "mPie": {
       "component": "Chart",
       "kind": "donut",
-      "title": "Where it went",
+      "title": "@whereItWent",
       "query": "mCats",
       "x": "key",
       "y": ["total"],
@@ -947,7 +1809,7 @@
     },
     "mCatSection": {
       "component": "Section",
-      "title": "By category",
+      "title": "@byCategory",
       "visible": "=coalesce(q.mTotal.n, 0) > 0",
       "children": ["mCatList"]
     },
@@ -961,7 +1823,7 @@
     "mCatName": {
       "component": "Text",
       "weight": 1,
-      "text": "=coalesce(item.key.name, 'No category') + ' (' + string(item.n) + ')'"
+      "text": "=coalesce(item.key.name, t('noCategory')) + ' (' + string(item.n) + ')'"
     },
     "mCatTotal": {
       "component": "Text",
@@ -982,7 +1844,7 @@
     "mExportBtn": {
       "component": "Button",
       "icon": "download",
-      "label": "Export month",
+      "label": "@exportMonth",
       "visible": "=coalesce(q.mTotal.n, 0) > 0",
       "action": {
         "event": { "name": "exportRange", "context": { "from": "=state.month", "to": "=endOf(state.month, 'month')" } }
@@ -995,42 +1857,42 @@
     "fIntro": {
       "component": "Text",
       "variant": "caption",
-      "text": "Pick a period and narrow it down. To see one category, open it under Budgets."
+      "text": "@pickPeriodNarrowIt"
     },
-    "fFrom": { "component": "DateTimeInput", "label": "From", "enableDate": true, "bind": "/state/from" },
-    "fTo": { "component": "DateTimeInput", "label": "To", "enableDate": true, "bind": "/state/to" },
+    "fFrom": { "component": "DateTimeInput", "label": "@from", "enableDate": true, "bind": "/state/from" },
+    "fTo": { "component": "DateTimeInput", "label": "@to", "enableDate": true, "bind": "/state/to" },
     "fPayment": {
       "component": "ChoicePicker",
-      "label": "Paid with",
+      "label": "@paidWith",
       "displayStyle": "chips",
       "bind": "/state/payment",
       "options": [
-        { "value": "any", "label": "Any" },
-        { "value": "cash", "label": "Cash" },
-        { "value": "card", "label": "Card" },
-        { "value": "transfer", "label": "Bank transfer" },
-        { "value": "mobile", "label": "Phone or watch" },
-        { "value": "other", "label": "Other" }
+        { "value": "any", "label": "@any" },
+        { "value": "cash", "label": "@cash" },
+        { "value": "card", "label": "@card" },
+        { "value": "transfer", "label": "@bankTransfer" },
+        { "value": "mobile", "label": "@phoneWatch" },
+        { "value": "other", "label": "@other" }
       ]
     },
     "fMin": {
       "component": "TextField",
-      "label": "At least this amount",
+      "label": "@atLeastThisAmount",
       "variant": "number",
       "bind": "/state/minAmount"
     },
     "fSummary": {
       "component": "Text",
       "variant": "caption",
-      "text": "=t('nExpenses', {'n': coalesce(q.fTotal.n, 0)}) + ' in this period, ' + formatCurrency(coalesce(q.fTotal.total, decimal('0')), settings.currency) + ' in total'"
+      "text": "=t('periodSummary', {'count': t('nExpenses', {'n': coalesce(q.fTotal.n, 0)}), 'total': formatCurrency(coalesce(q.fTotal.total, decimal('0')), settings.currency)})"
     },
     "fButtons": { "component": "Row", "justify": "spaceBetween", "children": ["fExportBtn", "fShowBtn"] },
     "fShowBtn": {
       "component": "Button",
       "icon": "search",
-      "label": "Show expenses",
+      "label": "@showExpenses",
       "variant": "primary",
-      "checks": [{ "condition": "=state.from <= state.to", "message": "The start is after the end." }],
+      "checks": [{ "condition": "=state.from <= state.to", "message": "@startIsAfterEnd" }],
       "action": {
         "event": {
           "name": "openResults",
@@ -1046,8 +1908,8 @@
     "fExportBtn": {
       "component": "Button",
       "icon": "download",
-      "label": "Export period",
-      "checks": [{ "condition": "=state.from <= state.to", "message": "The start is after the end." }],
+      "label": "@exportPeriod",
+      "checks": [{ "condition": "=state.from <= state.to", "message": "@startIsAfterEnd" }],
       "action": { "event": { "name": "exportRange", "context": { "from": "=state.from", "to": "=state.to" } } }
     },
     "imCol": {
@@ -1056,38 +1918,38 @@
     },
     "imIntro": {
       "component": "Text",
-      "text": "Bring your history with you. Pick a CSV file exported from this app, from most expense and budget apps, or from a spreadsheet."
+      "text": "@bringHistoryWithPick"
     },
     "imList": {
       "component": "Text",
       "variant": "caption",
-      "text": "Columns are matched by name, in any case: a date; an amount (or separate expense and income amounts); a category; a note, description, title or payee; a type, income or transfer column; a payment method. Amounts may use a decimal comma or point, a currency sign or brackets for spending. They are added as they are, in your app’s currency."
+      "text": "@columnsAreMatchedBy"
     },
     "imOrder": {
       "component": "ChoicePicker",
-      "label": "Dates such as 03/04/2026 mean",
+      "label": "@datesSuchAs03",
       "displayStyle": "chips",
       "bind": "/state/order",
       "options": [
-        { "value": "dmy", "label": "3 April (day first)" },
-        { "value": "mdy", "label": "March 4 (month first)" }
+        { "value": "dmy", "label": "@n3AprilDayFirst" },
+        { "value": "mdy", "label": "@march4MonthFirst" }
       ]
     },
     "imBtn": {
       "component": "Button",
       "icon": "upload",
-      "label": "Choose a CSV file",
+      "label": "@chooseCsvFile",
       "variant": "primary",
       "action": { "event": { "name": "importCsv", "context": { "order": "=state.order" } } }
     },
     "imSkip": {
       "component": "Text",
       "variant": "caption",
-      "text": "Income and transfers are left out when the file marks them with a type, income or transfer column, separate income amounts, or To and From transfer rows. A file with an account or wallet column and none of those has signed amounts: only its negative amounts are added, as spending. Other files are read as spending. Missing categories are created for you. Rows without a readable date or amount are skipped, and you see which ones and why."
+      "text": "@incomeTransfersAreLeft"
     },
     "irCol": { "component": "Column", "children": ["irSummary", "irIntro", "irLines", "irOk"] },
     "irSummary": { "component": "Text", "variant": "h5", "text": "=params.summary" },
-    "irIntro": { "component": "Text", "text": "These rows could not be read, with the reason for each:" },
+    "irIntro": { "component": "Text", "text": "@theseRowsCouldNot" },
     "irLines": { "component": "Text", "variant": "caption", "text": "=params.lines" },
     "irOk": {
       "component": "Button",
@@ -1135,7 +1997,7 @@
         {
           "type": "toast",
           "when": "=vars.photoError != null && vars.photoError.code == 'UNSUPPORTED'",
-          "text": "This phone can’t take photos here yet."
+          "text": "@thisPhoneCanT"
         },
         {
           "type": "updateRecord",
@@ -1180,61 +2042,61 @@
           "type": "createRecord",
           "when": "=size(vars.existing) == 0",
           "entity": "category",
-          "values": { "name": "Groceries", "icon": "shopping_cart" }
+          "values": { "name": "=t('groceries')", "icon": "shopping_cart" }
         },
         {
           "type": "createRecord",
           "when": "=size(vars.existing) == 0",
           "entity": "category",
-          "values": { "name": "Eating out", "icon": "restaurant" }
+          "values": { "name": "=t('eatingOut')", "icon": "restaurant" }
         },
         {
           "type": "createRecord",
           "when": "=size(vars.existing) == 0",
           "entity": "category",
-          "values": { "name": "Transport", "icon": "directions_car" }
+          "values": { "name": "=t('transport')", "icon": "directions_car" }
         },
         {
           "type": "createRecord",
           "when": "=size(vars.existing) == 0",
           "entity": "category",
-          "values": { "name": "Home and rent", "icon": "home" }
+          "values": { "name": "=t('homeRent')", "icon": "home" }
         },
         {
           "type": "createRecord",
           "when": "=size(vars.existing) == 0",
           "entity": "category",
-          "values": { "name": "Bills", "icon": "receipt_long" }
+          "values": { "name": "=t('bills')", "icon": "receipt_long" }
         },
         {
           "type": "createRecord",
           "when": "=size(vars.existing) == 0",
           "entity": "category",
-          "values": { "name": "Subscriptions", "icon": "autorenew" }
+          "values": { "name": "=t('subscriptions')", "icon": "autorenew" }
         },
         {
           "type": "createRecord",
           "when": "=size(vars.existing) == 0",
           "entity": "category",
-          "values": { "name": "Health", "icon": "medical_services" }
+          "values": { "name": "=t('health')", "icon": "medical_services" }
         },
         {
           "type": "createRecord",
           "when": "=size(vars.existing) == 0",
           "entity": "category",
-          "values": { "name": "Shopping", "icon": "shopping_bag" }
+          "values": { "name": "=t('shopping')", "icon": "shopping_bag" }
         },
         {
           "type": "createRecord",
           "when": "=size(vars.existing) == 0",
           "entity": "category",
-          "values": { "name": "Going out", "icon": "movie" }
+          "values": { "name": "=t('goingOut')", "icon": "movie" }
         },
         {
           "type": "createRecord",
           "when": "=size(vars.existing) == 0",
           "entity": "category",
-          "values": { "name": "Other", "icon": "category" }
+          "values": { "name": "=t('otherCategory')", "icon": "category" }
         }
       ]
     },
@@ -1283,7 +2145,7 @@
             "active": "=nextOccurrence(args.rule.schedule, args.rule.nextDue) != null"
           }
         },
-        { "type": "toast", "text": "Skipped this one." }
+        { "type": "toast", "text": "@skippedThisOne" }
       ]
     },
     "askDue": {
@@ -1303,8 +2165,8 @@
             "body": "=t('dueBody', {'amount': formatCurrency(args.rule.amount, settings.currency), 'date': formatDate(args.rule.nextDue, 'MMMd')})",
             "open": { "screen": "recDetail", "params": { "id": "=args.rule.id" } },
             "buttons": [
-              { "id": "add", "label": "Add", "action": "postRecurring" },
-              { "id": "skip", "label": "Skip", "action": "skipRecurring" }
+              { "id": "add", "label": "=t('add')", "action": "postRecurring" },
+              { "id": "skip", "label": "=t('skip')", "action": "skipRecurring" }
             ],
             "data": { "rule": "=string(args.rule.id)", "due": "=string(args.rule.nextDue)" },
             "tag": "='due-' + string(args.rule.id)",
@@ -1321,7 +2183,7 @@
           "capability": "notify.local",
           "action": "show",
           "args": {
-            "title": "=t('addedTitle', {'name': coalesce(args.expense.recurring.name, 'a recurring expense')})",
+            "title": "=t('addedTitle', {'name': coalesce(args.expense.recurring.name, t('aRecurringExpense'))})",
             "body": "=t('addedBody', {'amount': formatCurrency(args.expense.amount, settings.currency)})",
             "open": { "screen": "expenseDetail", "params": { "id": "=args.expense.id" } },
             "channel": "recurring"
@@ -1369,8 +2231,8 @@
           "capability": "notify.local",
           "action": "show",
           "args": {
-            "title": "Spent anything today?",
-            "body": "Add it now, it takes a few seconds.",
+            "title": "=t('spentAnythingToday')",
+            "body": "=t('addItNowIt')",
             "open": { "screen": "addExpense" },
             "tag": "evening",
             "channel": "reminders"
@@ -1447,21 +2309,28 @@
               }
             ],
             "fields": {
-              "date": { "from": ["Date", "Transaction date", "Booking date"] },
+              "date": { "from": ["Date", "Transaction date", "Booking date", "Dátum"] },
               "amount": {
                 "from": ["Amount", "Expense amount", "Sum", "Value", "Betrag", "Suma"],
                 "absolute": true
               },
-              "category": { "from": ["Category", "Category name"] },
-              "note": { "from": ["Note", "Notes", "Description", "Title", "Memo", "Comment", "Payee"] },
+              "category": { "from": ["Category", "Category name", "Kategória"] },
+              "note": { "from": ["Note", "Notes", "Description", "Title", "Memo", "Comment", "Payee", "Poznámka"] },
               "payment": {
-                "from": ["Paid with", "Payment method", "Payment type", "Payment"],
+                "from": ["Paid with", "Payment method", "Payment type", "Payment", "Spôsob platby"],
                 "values": {
                   "Debit card": "card",
                   "Credit card": "card",
                   "Phone": "mobile",
                   "Mobile": "mobile",
-                  "*": "other"
+                  "*": "other",
+                  "Hotovosť": "cash",
+                  "Karta": "card",
+                  "Bank transfer": "transfer",
+                  "Bankový prevod": "transfer",
+                  "Phone or watch": "mobile",
+                  "Telefón alebo hodinky": "mobile",
+                  "Iné": "other"
                 }
               }
             },
@@ -1565,7 +2434,7 @@
   "widgets": {
     "monthWidget": {
       "template": "stat",
-      "title": "Spent this month",
+      "title": "@spentThisMonth2",
       "sizes": ["small", "medium"],
       "value": "=formatCurrency(coalesce(q.monthTotal.total, decimal('0')), settings.currency)",
       "caption": "=t('nExpenses', {'n': coalesce(q.monthTotal.n, 0)})",
@@ -1574,9 +2443,9 @@
     },
     "addWidget": {
       "template": "button",
-      "title": "Add expense",
+      "title": "@addExpense",
       "sizes": ["small"],
-      "label": "Add expense",
+      "label": "@addExpense",
       "icon": "add",
       "action": { "event": { "name": "openAdd" } }
     }
