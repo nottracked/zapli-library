@@ -373,9 +373,13 @@
         "en": "Remove this drink",
         "sk": "Odstrániť tento nápoj"
       },
+      "appName": {
+        "en": "Water",
+        "sk": "Water"
+      },
       "welcomeWater": {
         "en": "Welcome to Water",
-        "sk": "Vitajte"
+        "sk": "Vitajte v aplikácii Water"
       },
       "tapGlassAboveEach": {
         "en": "Tap a glass above each time you drink. Your goal, units and reminder hours are in Settings.",
@@ -1902,7 +1906,7 @@
     },
     "addWidget": {
       "template": "button",
-      "title": "@water",
+      "title": "@appName",
       "sizes": ["small"],
       "label": "=size(q.cups) > 0 ? t('addNamed', {'name': lower(coalesce(first(q.cups).name, t('glass')))}) : t('addGlass')",
       "icon": "local_drink",
