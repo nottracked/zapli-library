@@ -11,7 +11,7 @@
                     "id": "library/mines",
                     "kind": "web",
                     "name": "Mines",
-                    "version": "1.0.2",
+                    "version": "1.0.3",
                     "icon": "flag",
                     "category": "game_puzzle",
                     "ageRating": "everyone",
@@ -1032,7 +1032,7 @@
                         <path class="g-tape" d="M8 4.2h11.2l-3.4 3.9 3.4 3.9H8z" />
                         <path class="g-post" d="M4 20.5h7" />
                     </svg>
-                    Mines
+                    <span data-t="appName">Mines</span>
                 </h1>
                 <button class="level-btn" id="levelBtn" type="button" aria-haspopup="dialog">
                     <span class="level-text">
@@ -1048,13 +1048,14 @@
                             stroke-linecap="round"
                         />
                     </svg>
-                    <span class="vh">, choose a level</span>
+                    <span class="vh" data-t="chooseLevel">, choose a level</span>
                 </button>
                 <button
                     class="icon-btn push"
                     id="statsBtn"
                     type="button"
                     aria-label="Statistics"
+                    data-t-label="statistics"
                     aria-haspopup="dialog"
                 >
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -1067,7 +1068,14 @@
                         />
                     </svg>
                 </button>
-                <button class="icon-btn" id="helpBtn" type="button" aria-label="How to play" aria-haspopup="dialog">
+                <button
+                    class="icon-btn"
+                    id="helpBtn"
+                    type="button"
+                    aria-label="How to play"
+                    data-t-label="howToPlay"
+                    aria-haspopup="dialog"
+                >
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
                         <path
@@ -1080,7 +1088,14 @@
                         <circle cx="12" cy="17" r="1.2" fill="currentColor" />
                     </svg>
                 </button>
-                <button class="icon-btn" id="settingsBtn" type="button" aria-label="Settings" aria-haspopup="dialog">
+                <button
+                    class="icon-btn"
+                    id="settingsBtn"
+                    type="button"
+                    aria-label="Settings"
+                    data-t-label="settings"
+                    aria-haspopup="dialog"
+                >
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path
                             d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"
@@ -1096,9 +1111,9 @@
                 </button>
             </header>
 
-            <section class="readout" aria-label="Game">
+            <section class="readout" aria-label="Game" data-t-label="game">
                 <div class="gauge">
-                    <span class="gauge-label">Mines left</span>
+                    <span class="gauge-label" data-t="minesLeft">Mines left</span>
                     <span class="gauge-value" id="minesLeft">10</span>
                 </div>
                 <button class="new-btn" id="newBtn" type="button">
@@ -1112,18 +1127,25 @@
                             stroke-linejoin="round"
                         />
                     </svg>
-                    <span id="newLabel">New field</span>
+                    <span id="newLabel" data-t="newField">New field</span>
                 </button>
                 <div class="gauge gauge-end">
-                    <span class="gauge-label" id="clockLabel">Time</span>
+                    <span class="gauge-label" id="clockLabel" data-t="time">Time</span>
                     <span class="gauge-value" id="clock" role="timer" aria-labelledby="clockLabel clock">0:00</span>
                 </div>
             </section>
 
             <div class="sheet" id="sheet">
-                <div class="board" id="board" role="grid" aria-label="Minefield" aria-describedby="boardKeys"></div>
+                <div
+                    class="board"
+                    id="board"
+                    role="grid"
+                    aria-label="Minefield"
+                    data-t-label="minefield"
+                    aria-describedby="boardKeys"
+                ></div>
             </div>
-            <p class="vh" id="boardKeys">
+            <p class="vh" id="boardKeys" data-t="boardKeys">
                 Arrow keys move between squares. Space or Enter opens a square, F places or removes a flag, H gives a
                 hint.
             </p>
@@ -1131,7 +1153,7 @@
             <p class="status" id="status" role="status"></p>
 
             <div class="tools" id="tools">
-                <div class="mode" role="group" aria-label="What a tap does">
+                <div class="mode" role="group" aria-label="What a tap does" data-t-label="tapDoes">
                     <button type="button" id="modeReveal" aria-pressed="true">
                         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <rect
@@ -1146,7 +1168,7 @@
                             />
                             <path d="M8.5 12.5l2.4 2.4 4.6-5.2" fill="none" stroke="currentColor" stroke-width="2.2" />
                         </svg>
-                        Reveal
+                        <span data-t="reveal">Reveal</span>
                     </button>
                     <button type="button" id="modeFlag" aria-pressed="false">
                         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -1154,7 +1176,7 @@
                             <path class="g-tape" d="M8 4.2h11.2l-3.4 3.9 3.4 3.9H8z" />
                             <path class="g-post" d="M4 20.5h7" />
                         </svg>
-                        Flag
+                        <span data-t="flag">Flag</span>
                     </button>
                 </div>
                 <button class="tool-btn" id="hintBtn" type="button">
@@ -1162,10 +1184,16 @@
                         <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
                         <path d="M12 5.5l2.2 6.5-2.2 6.5-2.2-6.5z" fill="currentColor" />
                     </svg>
-                    Hint
+                    <span data-t="hint">Hint</span>
                 </button>
-                <div class="zoom" role="group" aria-label="Square size">
-                    <button class="icon-btn" id="zoomOut" type="button" aria-label="Smaller squares">
+                <div class="zoom" role="group" aria-label="Square size" data-t-label="squareSize">
+                    <button
+                        class="icon-btn"
+                        id="zoomOut"
+                        type="button"
+                        aria-label="Smaller squares"
+                        data-t-label="smaller"
+                    >
                         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path
                                 d="M6 12h12"
@@ -1176,7 +1204,13 @@
                             />
                         </svg>
                     </button>
-                    <button class="icon-btn" id="zoomIn" type="button" aria-label="Larger squares">
+                    <button
+                        class="icon-btn"
+                        id="zoomIn"
+                        type="button"
+                        aria-label="Larger squares"
+                        data-t-label="larger"
+                    >
                         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path
                                 d="M6 12h12M12 6v12"
@@ -1191,12 +1225,12 @@
             </div>
 
             <section class="result" id="result" aria-labelledby="resultTitle" hidden>
-                <h2 id="resultTitle">Field cleared</h2>
+                <h2 id="resultTitle" data-t="fieldCleared">Field cleared</h2>
                 <p id="resultText"></p>
                 <div class="actions">
-                    <button class="btn primary" id="playAgain" type="button">Play again</button>
-                    <button class="btn" id="retry" type="button">Try this field again</button>
-                    <button class="btn" id="changeLevel" type="button">Change level</button>
+                    <button class="btn primary" id="playAgain" type="button" data-t="playAgain">Play again</button>
+                    <button class="btn" id="retry" type="button" data-t="retry">Try this field again</button>
+                    <button class="btn" id="changeLevel" type="button" data-t="changeLevel">Change level</button>
                 </div>
             </section>
 
@@ -1206,8 +1240,8 @@
         <dialog id="newPanel" aria-labelledby="newTitle">
             <form id="newForm" novalidate>
                 <div class="panel-head">
-                    <h2 id="newTitle">New field</h2>
-                    <button class="icon-btn" type="button" data-close aria-label="Close">
+                    <h2 id="newTitle" data-t="newField">New field</h2>
+                    <button class="icon-btn" type="button" data-close aria-label="Close" data-t-label="close">
                         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                             <path
                                 d="M6 6l12 12M18 6L6 18"
@@ -1221,31 +1255,35 @@
                 </div>
                 <div class="panel-body">
                     <fieldset class="levels">
-                        <legend>Level</legend>
+                        <legend data-t="level">Level</legend>
                         <label class="level-opt">
                             <input type="radio" name="level" value="easy" id="levelEasy" />
-                            <span class="opt-name">Easy</span>
-                            <span class="opt-meta">9 × 9 squares, 10 mines</span>
+                            <span class="opt-name" data-t="level_easy">Easy</span>
+                            <span class="opt-meta" data-t="levelEasyMeta">9 × 9 squares, 10 mines</span>
                         </label>
                         <label class="level-opt">
                             <input type="radio" name="level" value="medium" id="levelMedium" />
-                            <span class="opt-name">Medium</span>
-                            <span class="opt-meta">16 × 16 squares, 40 mines</span>
+                            <span class="opt-name" data-t="level_medium">Medium</span>
+                            <span class="opt-meta" data-t="levelMediumMeta">16 × 16 squares, 40 mines</span>
                         </label>
                         <label class="level-opt">
                             <input type="radio" name="level" value="hard" id="levelHard" />
-                            <span class="opt-name">Hard</span>
-                            <span class="opt-meta">16 × 30 squares, 99 mines. Stands upright on narrow screens.</span>
+                            <span class="opt-name" data-t="level_hard">Hard</span>
+                            <span class="opt-meta" data-t="levelHardMeta"
+                                >16 × 30 squares, 99 mines. Stands upright on narrow screens.</span
+                            >
                         </label>
                         <label class="level-opt">
                             <input type="radio" name="level" value="custom" id="levelCustom" />
-                            <span class="opt-name">Custom</span>
-                            <span class="opt-meta" id="customSummary">Your own size and number of mines</span>
+                            <span class="opt-name" data-t="level_custom">Custom</span>
+                            <span class="opt-meta" id="customSummary" data-t="customOwn"
+                                >Your own size and number of mines</span
+                            >
                         </label>
                     </fieldset>
                     <div class="custom" id="customFields" hidden>
                         <div class="field">
-                            <label for="customRows">Rows</label>
+                            <label for="customRows" data-t="rows">Rows</label>
                             <input
                                 id="customRows"
                                 type="number"
@@ -1257,7 +1295,7 @@
                             />
                         </div>
                         <div class="field">
-                            <label for="customCols">Columns</label>
+                            <label for="customCols" data-t="columns">Columns</label>
                             <input
                                 id="customCols"
                                 type="number"
@@ -1269,7 +1307,7 @@
                             />
                         </div>
                         <div class="field">
-                            <label for="customMines">Mines</label>
+                            <label for="customMines" data-t="minesLabel">Mines</label>
                             <input
                                 id="customMines"
                                 type="number"
@@ -1279,22 +1317,22 @@
                                 aria-describedby="customHelp customError"
                             />
                         </div>
-                        <p class="hint-text" id="customHelp">Rows and columns from 5 to 50.</p>
+                        <p class="hint-text" id="customHelp" data-t="sideRange">Rows and columns from 5 to 50.</p>
                         <p class="error" id="customError" hidden></p>
                     </div>
                     <label class="check">
                         <input type="checkbox" id="logicOnly" />
-                        <span class="check-name">Logic-only field</span>
-                        <span class="hint-text"
+                        <span class="check-name" data-t="logicOnly">Logic-only field</span>
+                        <span class="hint-text" data-t="logicOnlySub"
                             >Every field can be cleared by reasoning alone. You never have to guess.</span
                         >
                     </label>
-                    <p class="note" id="leaveNote" hidden>
+                    <p class="note" id="leaveNote" data-t="leaveNote" hidden>
                         Starting a new field leaves this one unfinished. It counts as played.
                     </p>
                     <div class="actions">
-                        <button class="btn primary" type="submit">Start</button>
-                        <button class="btn" type="button" data-close>Cancel</button>
+                        <button class="btn primary" type="submit" data-t="start">Start</button>
+                        <button class="btn" type="button" data-close data-t="cancel">Cancel</button>
                     </div>
                 </div>
             </form>
@@ -1302,8 +1340,8 @@
 
         <dialog id="statsPanel" aria-labelledby="statsTitle">
             <div class="panel-head">
-                <h2 id="statsTitle">Statistics</h2>
-                <button class="icon-btn" type="button" data-close aria-label="Close">
+                <h2 id="statsTitle" data-t="statistics">Statistics</h2>
+                <button class="icon-btn" type="button" data-close aria-label="Close" data-t-label="close">
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path
                             d="M6 6l12 12M18 6L6 18"
@@ -1318,18 +1356,20 @@
             <div class="panel-body">
                 <p class="stats-total" id="statsTotal"></p>
                 <div class="stat-list" id="statList"></div>
-                <p class="hint-text">
+                <p class="hint-text" data-t="statsNote">
                     A field you leave unfinished counts as played. Fields where you used a hint don't set best times,
                     and replays aren't counted. Everything stays on this device.
                 </p>
                 <div class="actions" id="resetRow">
-                    <button class="btn" type="button" id="resetStats">Reset statistics</button>
+                    <button class="btn" type="button" id="resetStats" data-t="resetStats">Reset statistics</button>
                 </div>
                 <div id="resetConfirm" hidden>
-                    <p>Delete all best times, wins and streaks? This can't be undone.</p>
+                    <p data-t="resetAsk">Delete all best times, wins and streaks? This can't be undone.</p>
                     <div class="actions">
-                        <button class="btn danger" type="button" id="resetYes">Delete statistics</button>
-                        <button class="btn" type="button" id="resetNo">Keep them</button>
+                        <button class="btn danger" type="button" id="resetYes" data-t="resetYes">
+                            Delete statistics
+                        </button>
+                        <button class="btn" type="button" id="resetNo" data-t="resetNo">Keep them</button>
                     </div>
                 </div>
             </div>
@@ -1337,8 +1377,8 @@
 
         <dialog id="settingsPanel" aria-labelledby="settingsTitle">
             <div class="panel-head">
-                <h2 id="settingsTitle">Settings</h2>
-                <button class="icon-btn" type="button" data-close aria-label="Close">
+                <h2 id="settingsTitle" data-t="settings">Settings</h2>
+                <button class="icon-btn" type="button" data-close aria-label="Close" data-t-label="close">
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path
                             d="M6 6l12 12M18 6L6 18"
@@ -1353,28 +1393,32 @@
             <div class="panel-body">
                 <label class="check">
                     <input type="checkbox" id="setMarks" />
-                    <span class="check-name">Question marks</span>
-                    <span class="hint-text">Flag a flagged square again to mark it “?” while you're not sure.</span>
+                    <span class="check-name" data-t="marks">Question marks</span>
+                    <span class="hint-text" data-t="marksSub"
+                        >Flag a flagged square again to mark it “?” while you're not sure.</span
+                    >
                 </label>
                 <label class="check">
                     <input type="checkbox" id="setChord" />
-                    <span class="check-name">Tap a number to open around it</span>
-                    <span class="hint-text">Works once the number has that many flags around it.</span>
+                    <span class="check-name" data-t="chord">Tap a number to open around it</span>
+                    <span class="hint-text" data-t="chordSub"
+                        >Works once the number has that many flags around it.</span
+                    >
                 </label>
                 <div class="field">
-                    <label for="setPress">Long-press time</label>
+                    <label for="setPress" data-t="pressTime">Long-press time</label>
                     <select id="setPress">
-                        <option value="short">Short (a quarter second)</option>
-                        <option value="normal">Normal (under half a second)</option>
-                        <option value="long">Long (over half a second)</option>
+                        <option value="short" data-t="pressShort">Short (a quarter second)</option>
+                        <option value="normal" data-t="pressNormal">Normal (under half a second)</option>
+                        <option value="long" data-t="pressLong">Long (over half a second)</option>
                     </select>
                 </div>
                 <div class="field">
-                    <label for="setTheme">Appearance</label>
+                    <label for="setTheme" data-t="appearance">Appearance</label>
                     <select id="setTheme">
-                        <option value="system">Same as the device</option>
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
+                        <option value="system" data-t="themeSystem">Same as the device</option>
+                        <option value="light" data-t="themeLight">Light</option>
+                        <option value="dark" data-t="themeDark">Dark</option>
                     </select>
                 </div>
             </div>
@@ -1382,8 +1426,8 @@
 
         <dialog id="helpPanel" aria-labelledby="helpTitle">
             <div class="panel-head">
-                <h2 id="helpTitle">How to play</h2>
-                <button class="icon-btn" type="button" data-close aria-label="Close">
+                <h2 id="helpTitle" data-t="howToPlay">How to play</h2>
+                <button class="icon-btn" type="button" data-close aria-label="Close" data-t-label="close">
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path
                             d="M6 6l12 12M18 6L6 18"
@@ -1396,29 +1440,35 @@
                 </button>
             </div>
             <div class="panel-body">
-                <p>Some squares of the field hide mines. Open every square that doesn't.</p>
+                <p data-t="help0">Some squares of the field hide mines. Open every square that doesn't.</p>
                 <ul class="help-list">
-                    <li>Tap a square to open it. Your first tap is always safe and always opens an area.</li>
-                    <li>
+                    <li data-t="help1">
+                        Tap a square to open it. Your first tap is always safe and always opens an area.
+                    </li>
+                    <li data-t="help2">
                         A number tells how many of the eight squares around it hide a mine. A square with none around
                         opens its neighbours by itself.
                     </li>
-                    <li>
+                    <li data-t="help3">
                         Long-press a square (or right-click it) to place a flag where you're sure a mine is. Prefer
                         tapping? Switch the tools below the field from Reveal to Flag.
                     </li>
-                    <li>
+                    <li data-t="help4">
                         Tap a number that already has all its flags around it to open the rest of its neighbours at
                         once.
                     </li>
-                    <li>You win when every safe square is open. Opening a mine ends the field.</li>
-                    <li>
+                    <li data-t="help5">You win when every safe square is open. Opening a mine ends the field.</li>
+                    <li data-t="help6">
                         Stuck? Hint shows a square that is certain from what's open, or tells you when only a guess is
                         left.
                     </li>
                 </ul>
-                <h3>Numbers</h3>
-                <ul class="legend" aria-label="The numbers 1 to 8 as they appear on the field">
+                <h3 data-t="numbers">Numbers</h3>
+                <ul
+                    class="legend"
+                    aria-label="The numbers 1 to 8 as they appear on the field"
+                    data-t-label="numbersLegend"
+                >
                     <li class="n1">1</li>
                     <li class="n2">2</li>
                     <li class="n3">3</li>
@@ -1428,15 +1478,17 @@
                     <li class="n7">7</li>
                     <li class="n8">8</li>
                 </ul>
-                <h3>Keyboard</h3>
+                <h3 data-t="keyboard">Keyboard</h3>
                 <ul class="help-list">
-                    <li><kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> move between squares</li>
-                    <li><kbd>Space</kbd> or <kbd>Enter</kbd> opens a square</li>
-                    <li><kbd>F</kbd> places or removes a flag, <kbd>H</kbd> gives a hint</li>
-                    <li><kbd>N</kbd> starts a new field once one is over</li>
+                    <li data-t-keys="keys1">
+                        <kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> move between squares
+                    </li>
+                    <li data-t-keys="keys2"><kbd>Space</kbd> or <kbd>Enter</kbd> opens a square</li>
+                    <li data-t-keys="keys3"><kbd>F</kbd> places or removes a flag, <kbd>H</kbd> gives a hint</li>
+                    <li data-t-keys="keys4"><kbd>N</kbd> starts a new field once one is over</li>
                 </ul>
-                <h3>Logic-only fields</h3>
-                <p>
+                <h3 data-t="logicTitle">Logic-only fields</h3>
+                <p data-t="logicHelp">
                     Turn on Logic-only field under New field to play fields that can always be cleared by reasoning.
                     Classic fields sometimes end in a pure guess.
                 </p>
@@ -1869,6 +1921,389 @@
 
                 // ---- The page ----
                 const $ = (id) => document.getElementById(id);
+
+                // ---- Words: English and Slovak, picked by the phone's language (Zapli tells the page; a browser has
+                // its own). A value is text, a function of its arguments, or the plural forms of a count.
+                const STRINGS = {
+                    en: {
+                        appName: "Mines",
+                        chooseLevel: ", choose a level",
+                        statistics: "Statistics",
+                        howToPlay: "How to play",
+                        settings: "Settings",
+                        game: "Game",
+                        minesLeft: "Mines left",
+                        newField: "New field",
+                        time: "Time",
+                        minefield: "Minefield",
+                        boardKeys:
+                            "Arrow keys move between squares. Space or Enter opens a square, F places or removes a flag, H gives a hint.",
+                        tapDoes: "What a tap does",
+                        reveal: "Reveal",
+                        flag: "Flag",
+                        hint: "Hint",
+                        squareSize: "Square size",
+                        smaller: "Smaller squares",
+                        larger: "Larger squares",
+                        fieldCleared: "Field cleared",
+                        mineHit: "Mine hit",
+                        playAgain: "Play again",
+                        retry: "Try this field again",
+                        changeLevel: "Change level",
+                        close: "Close",
+                        level: "Level",
+                        level_easy: "Easy",
+                        level_medium: "Medium",
+                        level_hard: "Hard",
+                        level_custom: "Custom",
+                        levelEasyMeta: "9 × 9 squares, 10 mines",
+                        levelMediumMeta: "16 × 16 squares, 40 mines",
+                        levelHardMeta: "16 × 30 squares, 99 mines. Stands upright on narrow screens.",
+                        customOwn: "Your own size and number of mines",
+                        rows: "Rows",
+                        columns: "Columns",
+                        minesLabel: "Mines",
+                        sideRange: "Rows and columns from 5 to 50.",
+                        logicOnly: "Logic-only field",
+                        logicOnlySub: "Every field can be cleared by reasoning alone. You never have to guess.",
+                        leaveNote: "Starting a new field leaves this one unfinished. It counts as played.",
+                        start: "Start",
+                        cancel: "Cancel",
+                        statsNote:
+                            "A field you leave unfinished counts as played. Fields where you used a hint don't set best times, and replays aren't counted. Everything stays on this device.",
+                        resetStats: "Reset statistics",
+                        resetAsk: "Delete all best times, wins and streaks? This can't be undone.",
+                        resetYes: "Delete statistics",
+                        resetNo: "Keep them",
+                        marks: "Question marks",
+                        marksSub: "Flag a flagged square again to mark it “?” while you're not sure.",
+                        chord: "Tap a number to open around it",
+                        chordSub: "Works once the number has that many flags around it.",
+                        pressTime: "Long-press time",
+                        pressShort: "Short (a quarter second)",
+                        pressNormal: "Normal (under half a second)",
+                        pressLong: "Long (over half a second)",
+                        appearance: "Appearance",
+                        themeSystem: "Same as the device",
+                        themeLight: "Light",
+                        themeDark: "Dark",
+                        help0: "Some squares of the field hide mines. Open every square that doesn't.",
+                        help1: "Tap a square to open it. Your first tap is always safe and always opens an area.",
+                        help2: "A number tells how many of the eight squares around it hide a mine. A square with none around opens its neighbours by itself.",
+                        help3: "Long-press a square (or right-click it) to place a flag where you're sure a mine is. Prefer tapping? Switch the tools below the field from Reveal to Flag.",
+                        help4: "Tap a number that already has all its flags around it to open the rest of its neighbours at once.",
+                        help5: "You win when every safe square is open. Opening a mine ends the field.",
+                        help6: "Stuck? Hint shows a square that is certain from what's open, or tells you when only a guess is left.",
+                        numbers: "Numbers",
+                        numbersLegend: "The numbers 1 to 8 as they appear on the field",
+                        keyboard: "Keyboard",
+                        keys1: "[←] [↑] [→] [↓] move between squares",
+                        keys2: "[Space] or [Enter] opens a square",
+                        keys3: "[F] places or removes a flag, [H] gives a hint",
+                        keys4: "[N] starts a new field once one is over",
+                        logicTitle: "Logic-only fields",
+                        logicHelp:
+                            "Turn on Logic-only field under New field to play fields that can always be cleared by reasoning. Classic fields sometimes end in a pure guess.",
+                        nMines: { one: "# mine", other: "# mines" },
+                        nFlags: { one: "# flag", other: "# flags" },
+                        nFlagsMore: { one: "# more", other: "# more" },
+                        nMinesLeft: { one: "# mine left.", other: "# mines left." },
+                        nOpened: { one: "# square opened.", other: "# squares opened." },
+                        statusReady: "Tap any square to start. Your first tap is always safe.",
+                        statusFlagMode: "Flag mode: a tap places a flag, a long-press opens a square.",
+                        boardLabel: (a) => `Minefield, ${a.rows} rows by ${a.cols} columns, ${a.mines}`,
+                        state_cov: "covered",
+                        state_flag: "flagged",
+                        state_mark: "question mark",
+                        state_mine: "mine",
+                        state_hit: "mine, opened",
+                        state_wrong: "flagged, but no mine here",
+                        openNone: "open, no mines around",
+                        openNear: (a) => `${a.mines} around`,
+                        cellLabel: (a) => `Row ${a.r}, column ${a.c}, ${a.what}`,
+                        hintedMine: ", hint: certainly a mine",
+                        hintedSafe: ", hint: safe to open",
+                        logicSuffix: ", logic-only",
+                        squaresWide: (a) => `Squares ${a.n} pixels wide.`,
+                        flagFirst: "That square has a flag on it. Remove the flag first, or open another square.",
+                        openedNone: "Opened, no mines around.",
+                        openedNear: (a) => `Opened, ${a.mines} around.`,
+                        needFlags: (a) =>
+                            `This ${a.n} has ${a.flags} around it. Place ${a.more} to open the rest with a tap.`,
+                        tooManyFlags: (a) =>
+                            `This ${a.n} has ${a.flags} around it, more than its number. One of them is wrong.`,
+                        flagPlaced: "Flag placed.",
+                        markPlaced: "Question mark.",
+                        flagRemoved: "Flag removed.",
+                        laying: "Laying out a field you can clear by logic alone…",
+                        noLogicField:
+                            "No logic-only field turned up in time, so this is a classic field. It may need a guess.",
+                        hintFirst: "Any square will do for your first tap. It is always safe.",
+                        hintNone: "Nothing is certain from what's open now. Your next move is a guess.",
+                        hintFlagWrong: (a) => `The flag at row ${a.r}, column ${a.c} is wrong: that square is safe.`,
+                        hintSafe: (a) => `The square at row ${a.r}, column ${a.c} is safe to open.`,
+                        hintMine: (a) => `The square at row ${a.r}, column ${a.c} is certainly a mine. Flag it.`,
+                        wonIn: (a) => `${a.level} cleared in ${a.time}.`,
+                        sampleNotCounted: "Sample fields aren't counted.",
+                        replayNotCounted: "Replays aren't counted.",
+                        hintNotRanked: "You used a hint, so the time isn't ranked.",
+                        newBest: (a) => `New best time: ${a.time}.`,
+                        bestTime: (a) => `Best time: ${a.time}.`,
+                        lostText: (a) => `You opened ${a.opened} of ${a.safe} safe squares in ${a.time}.`,
+                        replayNote:
+                            "The same field again, opened at the same first square. The clock starts with your next move.",
+                        sampleNote: "Sample field. Tap New field to play your own.",
+                        tapAgain: "Tap again",
+                        leaveConfirm:
+                            "This field isn't finished. Tap again within a few seconds to leave it; it counts as played.",
+                        flagModeSay: "Flag mode. A tap places a flag.",
+                        revealModeSay: "Reveal mode. A tap opens a square.",
+                        rowsError: "Rows must be a whole number from 5 to 50.",
+                        colsError: "Columns must be a whole number from 5 to 50.",
+                        minesError: (a) => `Mines must be from 1 to ${a.most} on a field of ${a.rows} × ${a.cols}.`,
+                        fitHelp: (a) => `Up to ${a.most} mines fit on ${a.rows} × ${a.cols} squares.`,
+                        lastUsed: (a) => `Last used: ${a.rows} × ${a.cols} squares, ${a.mines}`,
+                        startSay: (a) => `${a.level}, ${a.mines}. Tap any square to start.`,
+                        statBest: "Best time",
+                        statWon: "Won",
+                        statRate: "Win rate",
+                        statStreak: "Streak",
+                        wonOf: (a) => `${a.won} of ${a.played}`,
+                        pct: (a) => `${a.n}%`,
+                        streakValue: (a) => `${a.s} (best ${a.b})`,
+                        noFields: "No fields played yet",
+                        noFieldsSub:
+                            "Your best times, wins and streaks for each level appear here after your first finished field.",
+                        totalWon: (a) => `Won ${a.won} of ${a.played} fields (${a.pct}%)`,
+                        statsDeleted: "Statistics deleted.",
+                        welcomeBack: "Welcome back. The clock goes on with your next move.",
+                    },
+                    sk: {
+                        appName: "Mines",
+                        chooseLevel: ", vybrať úroveň",
+                        statistics: "Štatistiky",
+                        howToPlay: "Ako hrať",
+                        settings: "Nastavenia",
+                        game: "Hra",
+                        minesLeft: "Zostáva mín",
+                        newField: "Nové pole",
+                        time: "Čas",
+                        minefield: "Mínové pole",
+                        boardKeys:
+                            "Šípkami sa presúvate medzi políčkami. Medzerník alebo Enter odkryje políčko, F položí alebo odstráni vlajku, H ukáže nápovedu.",
+                        tapDoes: "Čo urobí klepnutie",
+                        reveal: "Odkryť",
+                        flag: "Vlajka",
+                        hint: "Nápoveda",
+                        squareSize: "Veľkosť políčok",
+                        smaller: "Menšie políčka",
+                        larger: "Väčšie políčka",
+                        fieldCleared: "Pole vyčistené",
+                        mineHit: "Mína vybuchla",
+                        playAgain: "Hrať znova",
+                        retry: "Skúsiť toto pole znova",
+                        changeLevel: "Zmeniť úroveň",
+                        close: "Zavrieť",
+                        level: "Úroveň",
+                        level_easy: "Ľahká",
+                        level_medium: "Stredná",
+                        level_hard: "Ťažká",
+                        level_custom: "Vlastná",
+                        levelEasyMeta: "9 × 9 políčok, 10 mín",
+                        levelMediumMeta: "16 × 16 políčok, 40 mín",
+                        levelHardMeta: "16 × 30 políčok, 99 mín. Na úzkej obrazovke stojí na výšku.",
+                        customOwn: "Vlastná veľkosť a počet mín",
+                        rows: "Riadky",
+                        columns: "Stĺpce",
+                        minesLabel: "Míny",
+                        sideRange: "Riadky a stĺpce od 5 do 50.",
+                        logicOnly: "Pole bez hádania",
+                        logicOnlySub: "Každé pole sa dá vyčistiť len úvahou. Nikdy nemusíte hádať.",
+                        leaveNote: "Nové pole nechá toto nedohrané. Započíta sa ako odohrané.",
+                        start: "Začať",
+                        cancel: "Zrušiť",
+                        statsNote:
+                            "Nedohrané pole sa počíta ako odohrané. Polia, v ktorých ste použili nápovedu, nemenia najlepšie časy a opakované polia sa nepočítajú. Všetko zostáva v tomto zariadení.",
+                        resetStats: "Vynulovať štatistiky",
+                        resetAsk: "Vymazať všetky najlepšie časy, výhry a série? Nedá sa to vrátiť.",
+                        resetYes: "Vymazať štatistiky",
+                        resetNo: "Ponechať",
+                        marks: "Otázniky",
+                        marksSub: "Keď váhate, označte políčko s vlajkou ešte raz a dostane „?“.",
+                        chord: "Klepnutím na číslo odkryť okolie",
+                        chordSub: "Funguje, keď je okolo čísla toľko vlajok, koľko ukazuje.",
+                        pressTime: "Dĺžka dlhého stlačenia",
+                        pressShort: "Krátke (štvrť sekundy)",
+                        pressNormal: "Normálne (necelá pol sekunda)",
+                        pressLong: "Dlhé (viac ako pol sekundy)",
+                        appearance: "Vzhľad",
+                        themeSystem: "Ako zariadenie",
+                        themeLight: "Svetlý",
+                        themeDark: "Tmavý",
+                        help0: "Pod niektorými políčkami sú míny. Odkryte všetky políčka, pod ktorými nie sú.",
+                        help1: "Klepnutím políčko odkryjete. Prvé klepnutie je vždy bezpečné a vždy odkryje celú oblasť.",
+                        help2: "Číslo ukazuje, pod koľkými z ôsmich okolitých políčok je mína. Políčko bez mín v okolí odkryje susedov samo.",
+                        help3: "Dlhým stlačením políčka (alebo pravým tlačidlom myši) položíte vlajku tam, kde je určite mína. Radšej klepete? Prepnite nástroje pod poľom z Odkryť na Vlajka.",
+                        help4: "Klepnutím na číslo, ktoré už má okolo seba všetky vlajky, odkryjete naraz ostatných susedov.",
+                        help5: "Vyhráte, keď sú odkryté všetky bezpečné políčka. Keď odkryjete mínu, hra sa skončí.",
+                        help6: "Neviete ďalej? Nápoveda ukáže políčko, ktoré je isté podľa toho, čo je odkryté, alebo povie, že zostáva už len hádať.",
+                        numbers: "Čísla",
+                        numbersLegend: "Čísla 1 až 8 tak, ako vyzerajú na poli",
+                        keyboard: "Klávesnica",
+                        keys1: "[←] [↑] [→] [↓] presun medzi políčkami",
+                        keys2: "[Medzerník] alebo [Enter] odkryje políčko",
+                        keys3: "[F] položí alebo odstráni vlajku, [H] ukáže nápovedu",
+                        keys4: "[N] začne nové pole, keď sa hra skončí",
+                        logicTitle: "Polia bez hádania",
+                        logicHelp:
+                            "Zapnite Pole bez hádania v časti Nové pole a budete hrať polia, ktoré sa dajú vždy vyčistiť úvahou. Klasické polia sa niekedy dajú dohrať len hádaním.",
+                        nMines: { one: "# mína", few: "# míny", many: "# míny", other: "# mín" },
+                        nFlags: { one: "# vlajka", few: "# vlajky", many: "# vlajky", other: "# vlajok" },
+                        nFlagsMore: {
+                            one: "ešte # vlajku",
+                            few: "ešte # vlajky",
+                            many: "ešte # vlajky",
+                            other: "ešte # vlajok",
+                        },
+                        nMinesLeft: {
+                            one: "Zostáva # mína.",
+                            few: "Zostávajú # míny.",
+                            many: "Zostáva # míny.",
+                            other: "Zostáva # mín.",
+                        },
+                        nOpened: {
+                            one: "Odkryté # políčko.",
+                            few: "Odkryté # políčka.",
+                            many: "Odkryté # políčka.",
+                            other: "Odkrytých # políčok.",
+                        },
+                        statusReady: "Klepnite na ľubovoľné políčko a začnite. Prvé klepnutie je vždy bezpečné.",
+                        statusFlagMode: "Režim vlajok: klepnutie položí vlajku, dlhé stlačenie odkryje políčko.",
+                        boardLabel: (a) => `Mínové pole, riadky: ${a.rows}, stĺpce: ${a.cols}, ${a.mines}`,
+                        state_cov: "zakryté",
+                        state_flag: "s vlajkou",
+                        state_mark: "otáznik",
+                        state_mine: "mína",
+                        state_hit: "mína, odkrytá",
+                        state_wrong: "s vlajkou, ale bez míny",
+                        openNone: "odkryté, v okolí nie sú míny",
+                        openNear: (a) => `v okolí ${a.mines}`,
+                        cellLabel: (a) => `Riadok ${a.r}, stĺpec ${a.c}, ${a.what}`,
+                        hintedMine: ", nápoveda: určite mína",
+                        hintedSafe: ", nápoveda: bezpečné na odkrytie",
+                        logicSuffix: ", bez hádania",
+                        squaresWide: (a) => `Políčka široké ${a.n} pixelov.`,
+                        flagFirst: "Na políčku je vlajka. Najprv ju odstráňte alebo odkryte iné políčko.",
+                        openedNone: "Odkryté, v okolí nie sú míny.",
+                        openedNear: (a) => `Odkryté, v okolí ${a.mines}.`,
+                        needFlags: (a) =>
+                            `Okolo čísla ${a.n}: ${a.flags}. Položte ${a.more} a zvyšok odkryjete klepnutím.`,
+                        tooManyFlags: (a) => `Okolo čísla ${a.n}: ${a.flags}, viac, ako ukazuje. Jedna z nich je zle.`,
+                        flagPlaced: "Vlajka položená.",
+                        markPlaced: "Otáznik.",
+                        flagRemoved: "Vlajka odstránená.",
+                        laying: "Pripravuje sa pole, ktoré vyriešite bez hádania…",
+                        noLogicField:
+                            "Pole bez hádania sa nepodarilo včas pripraviť, preto je toto klasické pole. Možno bude treba hádať.",
+                        hintFirst: "Na prvé klepnutie sa hodí ktorékoľvek políčko. Je vždy bezpečné.",
+                        hintNone: "Z toho, čo je odkryté, teraz nič nie je isté. Ďalší ťah bude hádanie.",
+                        hintFlagWrong: (a) => `Vlajka v riadku ${a.r}, stĺpci ${a.c} je zle: to políčko je bezpečné.`,
+                        hintSafe: (a) => `Políčko v riadku ${a.r}, stĺpci ${a.c} môžete bezpečne odkryť.`,
+                        hintMine: (a) =>
+                            `Pod políčkom v riadku ${a.r}, stĺpci ${a.c} je určite mína. Označte ho vlajkou.`,
+                        wonIn: (a) => `${a.level}: pole vyčistené za ${a.time}.`,
+                        sampleNotCounted: "Ukážkové polia sa nepočítajú.",
+                        replayNotCounted: "Opakované polia sa nepočítajú.",
+                        hintNotRanked: "Použili ste nápovedu, takže čas sa nehodnotí.",
+                        newBest: (a) => `Nový najlepší čas: ${a.time}.`,
+                        bestTime: (a) => `Najlepší čas: ${a.time}.`,
+                        lostText: (a) => `Odkryli ste ${a.opened} z ${a.safe} bezpečných políčok za ${a.time}.`,
+                        replayNote:
+                            "To isté pole znova, odkryté na tom istom prvom políčku. Čas sa spustí vaším ďalším ťahom.",
+                        sampleNote: "Ukážkové pole. Klepnite na Nové pole a hrajte vlastné.",
+                        tapAgain: "Klepnite znova",
+                        leaveConfirm:
+                            "Toto pole nie je dohrané. Ak ho chcete opustiť, do pár sekúnd klepnite znova; započíta sa ako odohrané.",
+                        flagModeSay: "Režim vlajok. Klepnutie položí vlajku.",
+                        revealModeSay: "Režim odkrývania. Klepnutie odkryje políčko.",
+                        rowsError: "Počet riadkov musí byť celé číslo od 5 do 50.",
+                        colsError: "Počet stĺpcov musí byť celé číslo od 5 do 50.",
+                        minesError: (a) => `Počet mín musí byť od 1 do ${a.most} na poli ${a.rows} × ${a.cols}.`,
+                        fitHelp: (a) => `Na ${a.rows} × ${a.cols} políčok sa zmestí najviac ${a.most} mín.`,
+                        lastUsed: (a) => `Naposledy: ${a.rows} × ${a.cols} políčok, ${a.mines}`,
+                        startSay: (a) => `${a.level}, ${a.mines}. Klepnite na ľubovoľné políčko a začnite.`,
+                        statBest: "Najlepší čas",
+                        statWon: "Vyhrané",
+                        statRate: "Úspešnosť",
+                        statStreak: "Séria",
+                        wonOf: (a) => `${a.won} z ${a.played}`,
+                        pct: (a) => `${a.n}\u00a0%`,
+                        streakValue: (a) => `${a.s} (najdlhšia ${a.b})`,
+                        noFields: "Zatiaľ žiadne odohrané polia",
+                        noFieldsSub:
+                            "Najlepšie časy, výhry a série pre každú úroveň sa tu zobrazia po prvom dokončenom poli.",
+                        totalWon: (a) => `Vyhrané polia: ${a.won} z ${a.played} (${a.pct}\u00a0%)`,
+                        statsDeleted: "Štatistiky sú vymazané.",
+                        welcomeBack: "Vitajte späť. Čas sa rozbehne vaším ďalším ťahom.",
+                    },
+                };
+                const lang = (() => {
+                    let loc = "";
+                    try {
+                        const app = window.zapli && window.zapli.app;
+                        if (app && typeof app.locale === "function") loc = String(app.locale() || "");
+                    } catch (e) {
+                        loc = "";
+                    }
+                    if (!loc) loc = (navigator.languages && navigator.languages[0]) || navigator.language || "en";
+                    return /^sk([-_]|$)/i.test(loc) ? "sk" : "en";
+                })();
+                const words = STRINGS[lang];
+
+                function t(key, args) {
+                    const v = key in words ? words[key] : STRINGS.en[key];
+                    if (typeof v === "function") return v(args || {});
+                    return v === undefined ? key : v;
+                }
+
+                // A count with its noun: {one: "# mine", other: "# mines"} (Slovak adds few and many).
+                function tn(key, n) {
+                    const forms = t(key);
+                    let cat = "other";
+                    try {
+                        cat = new Intl.PluralRules(lang).select(n);
+                    } catch (e) {
+                        cat = n === 1 ? "one" : lang === "sk" && n >= 2 && n <= 4 ? "few" : "other";
+                    }
+                    return (forms[cat] || forms.other).replace("#", String(n));
+                }
+
+                // The page's own words: data-t sets the text, data-t-label the label, and data-t-keys a line with
+                // keys in brackets ("[F] places a flag" becomes <kbd>F</kbd> places a flag).
+                function translatePage() {
+                    document.documentElement.lang = lang;
+                    document.title = t("appName");
+                    document.querySelectorAll("[data-t]").forEach((node) => {
+                        node.textContent = t(node.dataset.t);
+                    });
+                    document.querySelectorAll("[data-t-label]").forEach((node) => {
+                        node.setAttribute("aria-label", t(node.dataset.tLabel));
+                    });
+                    document.querySelectorAll("[data-t-keys]").forEach((node) => {
+                        node.textContent = "";
+                        t(node.dataset.tKeys)
+                            .split(/(\[[^\]]+\])/)
+                            .forEach((part) => {
+                                if (/^\[.+\]$/.test(part)) {
+                                    const k = document.createElement("kbd");
+                                    k.textContent = part.slice(1, -1);
+                                    node.appendChild(k);
+                                } else if (part) node.appendChild(document.createTextNode(part));
+                            });
+                    });
+                }
+                translatePage();
+
                 const els = {
                     board: $("board"),
                     sheet: $("sheet"),
@@ -1920,9 +2355,9 @@
                 };
 
                 const LEVELS = {
-                    easy: { name: "Easy", rows: 9, cols: 9, mines: 10 },
-                    medium: { name: "Medium", rows: 16, cols: 16, mines: 40 },
-                    hard: { name: "Hard", rows: 16, cols: 30, mines: 99 },
+                    easy: { rows: 9, cols: 9, mines: 10 },
+                    medium: { rows: 16, cols: 16, mines: 40 },
+                    hard: { rows: 16, cols: 30, mines: 99 },
                 };
                 const SIDE = { min: 5, max: 50 };
                 const PRESS = { short: 250, normal: 400, long: 600 };
@@ -2049,9 +2484,9 @@
                 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
                 const rowOf = (i) => Math.floor(i / S.game.cols);
                 const colOf = (i) => i % S.game.cols;
-                const where = (i) => "row " + (rowOf(i) + 1) + ", column " + (colOf(i) + 1);
-                const minesWord = (n) => (n === 1 ? "1 mine" : n + " mines");
-                const levelName = (g) => (g.level in LEVELS ? LEVELS[g.level].name : "Custom");
+                const spot = (i) => ({ r: rowOf(i) + 1, c: colOf(i) + 1 });
+                const minesWord = (n) => tn("nMines", n);
+                const levelName = (g) => t("level_" + (g.level in LEVELS ? g.level : "custom"));
                 const bucketOf = (g) => g.level + (g.logic ? ":logic" : "");
 
                 function fmtClock(ms) {
@@ -2080,9 +2515,9 @@
                     let text = S.note;
                     if (!text && g) {
                         if (g.status === "ready") {
-                            text = "Tap any square to start. Your first tap is always safe.";
+                            text = t("statusReady");
                         } else if (g.status === "playing" && S.mode === "flag") {
-                            text = "Flag mode: a tap places a flag, a long-press opens a square.";
+                            text = t("statusFlagMode");
                         }
                     }
                     if (els.status.textContent !== text) els.status.textContent = text;
@@ -2164,7 +2599,7 @@
                     board.textContent = "";
                     board.setAttribute(
                         "aria-label",
-                        "Minefield, " + g.rows + " rows by " + g.cols + " columns, " + minesWord(g.mines),
+                        t("boardLabel", { rows: g.rows, cols: g.cols, mines: minesWord(g.mines) }),
                     );
                     const frag = document.createDocumentFragment();
                     const head = el("div", "ruler-row");
@@ -2219,20 +2654,11 @@
                     return "cov";
                 }
 
-                const STATE_WORDS = {
-                    cov: "covered",
-                    flag: "flagged",
-                    mark: "question mark",
-                    mine: "mine",
-                    hit: "mine, opened",
-                    wrong: "flagged, but no mine here",
-                };
-
                 function labelOf(i, kind, n, hinted) {
-                    let what = STATE_WORDS[kind];
-                    if (kind === "open") what = n === 0 ? "open, no mines around" : minesWord(n) + " around";
-                    let text = "Row " + (rowOf(i) + 1) + ", column " + (colOf(i) + 1) + ", " + what;
-                    if (hinted) text += S.hintKind === "mine" ? ", hint: certainly a mine" : ", hint: safe to open";
+                    let what = t("state_" + kind);
+                    if (kind === "open") what = n === 0 ? t("openNone") : t("openNear", { mines: minesWord(n) });
+                    let text = t("cellLabel", { r: rowOf(i) + 1, c: colOf(i) + 1, what });
+                    if (hinted) text += S.hintKind === "mine" ? t("hintedMine") : t("hintedSafe");
                     return text;
                 }
 
@@ -2271,7 +2697,7 @@
                     els.levelMeta.textContent =
                         (g.level === "custom" ? g.rows + " × " + g.cols + ", " : "") +
                         minesWord(g.mines) +
-                        (g.logic ? ", logic-only" : "");
+                        (g.logic ? t("logicSuffix") : "");
                     els.modeReveal.setAttribute("aria-pressed", String(S.mode === "reveal"));
                     els.modeFlag.setAttribute("aria-pressed", String(S.mode === "flag"));
                     els.hintBtn.disabled = over || S.generating;
@@ -2316,7 +2742,7 @@
                     store.set("zoom", S.zoom);
                     sheet.scrollLeft = cx * sheet.scrollWidth - sheet.clientWidth / 2;
                     sheet.scrollTop = cy * sheet.scrollHeight - sheet.clientHeight / 2;
-                    say("Squares " + after.size + " pixels wide.");
+                    say(t("squaresWide", { n: after.size }));
                 }
 
                 function centreBoard() {
@@ -2368,7 +2794,7 @@
                     setFocus(i, false);
                     if (g.status === "ready") {
                         if (g.cells[i] === Core.FLAG) {
-                            note("That square has a flag on it. Remove the flag first, or open another square.");
+                            note(t("flagFirst"));
                             return;
                         }
                         if (g.logic) {
@@ -2402,9 +2828,10 @@
                     animateOpen(res.opened, origin);
                     say(
                         res.opened.length === 1
-                            ? "Opened, " +
-                                  (g.nums[origin] === 0 ? "no mines around." : minesWord(g.nums[origin]) + " around.")
-                            : res.opened.length + " squares opened.",
+                            ? g.nums[origin] === 0
+                                ? t("openedNone")
+                                : t("openedNear", { mines: minesWord(g.nums[origin]) })
+                            : tn("nOpened", res.opened.length),
                     );
                 }
 
@@ -2420,24 +2847,9 @@
                     const n = g.nums[i];
                     if (!covered) return;
                     if (flags < n) {
-                        note(
-                            "This " +
-                                n +
-                                " has " +
-                                (flags === 1 ? "1 flag" : flags + " flags") +
-                                " around it. " +
-                                "Place " +
-                                (n - flags) +
-                                " more to open the rest with a tap.",
-                        );
+                        note(t("needFlags", { n, flags: tn("nFlags", flags), more: tn("nFlagsMore", n - flags) }));
                     } else if (flags > n) {
-                        note(
-                            "This " +
-                                n +
-                                " has " +
-                                flags +
-                                " flags around it, more than its number. One of them is wrong.",
-                        );
+                        note(t("tooManyFlags", { n, flags: tn("nFlags", flags) }));
                     }
                 }
 
@@ -2455,11 +2867,11 @@
                     const left = g.mines - g.flags;
                     if (s === Core.FLAG) {
                         animateFlag(i);
-                        say("Flag placed. " + minesWord(left) + " left.");
+                        say(t("flagPlaced") + " " + tn("nMinesLeft", left));
                     } else if (s === Core.MARK) {
-                        say("Question mark. " + minesWord(left) + " left.");
+                        say(t("markPlaced") + " " + tn("nMinesLeft", left));
                     } else {
-                        say("Flag removed. " + minesWord(left) + " left.");
+                        say(t("flagRemoved") + " " + tn("nMinesLeft", left));
                     }
                 }
 
@@ -2481,7 +2893,7 @@
                     const started = performance.now();
                     S.generating = true;
                     els.board.setAttribute("aria-busy", "true");
-                    note("Laying out a field you can clear by logic alone…");
+                    note(t("laying"));
                     render();
                     const step = () => {
                         if (token !== S.gen) return;
@@ -2495,8 +2907,7 @@
                         S.note = "";
                         if (!bombs) {
                             g.logic = false;
-                            S.note =
-                                "No logic-only field turned up in time, so this is a classic field. It may need a guess.";
+                            S.note = t("noLogicField");
                         }
                         Core.begin(g, i, rand, bombs || null);
                         startClock();
@@ -2510,14 +2921,14 @@
                 function giveHint() {
                     const g = S.game;
                     if (g.status === "ready") {
-                        note("Any square will do for your first tap. It is always safe.");
+                        note(t("hintFirst"));
                         return;
                     }
                     if (g.status !== "playing" || S.generating) return;
                     const h = Core.hint(g, S.focus);
                     if (!h) {
                         clearHint();
-                        note("Nothing is certain from what's open now. Your next move is a guess.");
+                        note(t("hintNone"));
                         render();
                         return;
                     }
@@ -2528,13 +2939,13 @@
                         S.hintKind = "safe";
                         note(
                             g.cells[h.safe] === Core.FLAG
-                                ? "The flag at " + where(h.safe) + " is wrong: that square is safe."
-                                : "The square at " + where(h.safe) + " is safe to open.",
+                                ? t("hintFlagWrong", spot(h.safe))
+                                : t("hintSafe", spot(h.safe)),
                         );
                     } else {
                         S.hint = h.mine;
                         S.hintKind = "mine";
-                        note("The square at " + where(h.mine) + " is certainly a mine. Flag it.");
+                        note(t("hintMine", spot(h.mine)));
                     }
                     saveGame();
                     render();
@@ -2555,18 +2966,17 @@
                     saveGame();
                     let text;
                     if (won) {
-                        text = levelName(g) + " cleared in " + fmtClock(g.elapsed) + ".";
-                        if (!counted) text += g.sample ? " Sample fields aren't counted." : " Replays aren't counted.";
-                        else if (g.hints) text += " You used a hint, so the time isn't ranked.";
-                        else if (info.newBest) text += " New best time: " + fmtBest(info.best) + ".";
-                        else if (info.best != null) text += " Best time: " + fmtBest(info.best) + ".";
+                        text = t("wonIn", { level: levelName(g), time: fmtClock(g.elapsed) });
+                        if (!counted) text += " " + t(g.sample ? "sampleNotCounted" : "replayNotCounted");
+                        else if (g.hints) text += " " + t("hintNotRanked");
+                        else if (info.newBest) text += " " + t("newBest", { time: fmtBest(info.best) });
+                        else if (info.best != null) text += " " + t("bestTime", { time: fmtBest(info.best) });
                     } else {
                         const safe = g.rows * g.cols - g.mines;
-                        text =
-                            "You opened " + g.opened + " of " + safe + " safe squares in " + fmtClock(g.elapsed) + ".";
-                        if (!counted) text += g.sample ? " Sample fields aren't counted." : " Replays aren't counted.";
+                        text = t("lostText", { opened: g.opened, safe, time: fmtClock(g.elapsed) });
+                        if (!counted) text += " " + t(g.sample ? "sampleNotCounted" : "replayNotCounted");
                     }
-                    els.resultTitle.textContent = won ? "Field cleared" : "Mine hit";
+                    els.resultTitle.textContent = won ? t("fieldCleared") : t("mineHit");
                     els.resultText.textContent = text;
                     els.result.classList.toggle("is-won", won);
                     els.result.classList.toggle("is-lost", !won);
@@ -2576,7 +2986,7 @@
                     els.result.hidden = false;
                     S.note = "";
                     render();
-                    say((won ? "Field cleared. " : "Mine hit. ") + text);
+                    say((won ? t("fieldCleared") : t("mineHit")) + ". " + text);
                     if (hadFocus) els.playAgain.focus({ preventScroll: true });
                 }
 
@@ -2646,9 +3056,7 @@
                     hideResult();
                     buildBoard();
                     drawClock();
-                    note(
-                        "The same field again, opened at the same first square. The clock starts with your next move.",
-                    );
+                    note(t("replayNote"));
                     saveGame();
                 }
 
@@ -2680,7 +3088,7 @@
                     hideResult();
                     buildBoard();
                     drawClock();
-                    note("Sample field. Tap New field to play your own.");
+                    note(t("sampleNote"));
                 }
 
                 // ---- New field button: a second tap confirms leaving a field in progress ----
@@ -2688,16 +3096,14 @@
                     if (S.armed) clearTimeout(S.armed);
                     S.armed = 0;
                     els.newBtn.classList.remove("is-armed");
-                    els.newLabel.textContent = "New field";
+                    els.newLabel.textContent = t("newField");
                 }
                 els.newBtn.addEventListener("click", () => {
                     if (leaving() && S.game.opened > 0 && !S.armed) {
                         S.armed = setTimeout(disarmNew, 4000);
                         els.newBtn.classList.add("is-armed");
-                        els.newLabel.textContent = "Tap again";
-                        note(
-                            "This field isn't finished. Tap again within a few seconds to leave it; it counts as played.",
-                        );
+                        els.newLabel.textContent = t("tapAgain");
+                        note(t("leaveConfirm"));
                         return;
                     }
                     newGame(S.level);
@@ -2838,7 +3244,7 @@
                     S.mode = mode;
                     S.note = "";
                     render();
-                    say(mode === "flag" ? "Flag mode. A tap places a flag." : "Reveal mode. A tap opens a square.");
+                    say(t(mode === "flag" ? "flagModeSay" : "revealModeSay"));
                 }
                 els.modeReveal.addEventListener("click", () => setMode("reveal"));
                 els.modeFlag.addEventListener("click", () => setMode("flag"));
@@ -2946,19 +3352,17 @@
                     let bad = null;
                     const most = sideOk(rows) && sideOk(cols) ? rows * cols - 9 : 0;
                     if (!sideOk(rows)) {
-                        error = "Rows must be a whole number from 5 to 50.";
+                        error = t("rowsError");
                         bad = els.customRows;
                     } else if (!sideOk(cols)) {
-                        error = "Columns must be a whole number from 5 to 50.";
+                        error = t("colsError");
                         bad = els.customCols;
                     } else if (!Number.isInteger(mines) || mines < 1 || mines > most) {
-                        error = "Mines must be from 1 to " + most + " on a field of " + rows + " × " + cols + ".";
+                        error = t("minesError", { most, rows, cols });
                         bad = els.customMines;
                     }
                     els.customMines.max = String(most || SIDE.max * SIDE.max - 9);
-                    els.customHelp.textContent = most
-                        ? "Up to " + most + " mines fit on " + rows + " × " + cols + " squares."
-                        : "Rows and columns from 5 to 50.";
+                    els.customHelp.textContent = most ? t("fitHelp", { most, rows, cols }) : t("sideRange");
                     for (const input of [els.customRows, els.customCols, els.customMines]) {
                         if (report && input === bad) input.setAttribute("aria-invalid", "true");
                         else input.removeAttribute("aria-invalid");
@@ -2975,13 +3379,11 @@
                         els.customRows.value = String(S.custom.rows);
                         els.customCols.value = String(S.custom.cols);
                         els.customMines.value = String(S.custom.mines);
-                        els.customSummary.textContent =
-                            "Last used: " +
-                            S.custom.rows +
-                            " × " +
-                            S.custom.cols +
-                            " squares, " +
-                            minesWord(S.custom.mines);
+                        els.customSummary.textContent = t("lastUsed", {
+                            rows: S.custom.rows,
+                            cols: S.custom.cols,
+                            mines: minesWord(S.custom.mines),
+                        });
                         els.logicOnly.checked = S.settings.logic;
                         els.leaveNote.hidden = !(leaving() && S.game.opened > 0);
                         checkCustom(false);
@@ -3019,7 +3421,7 @@
                     saveSettings();
                     PANELS.new.close();
                     newGame(level);
-                    say(levelName(S.game) + ", " + minesWord(S.game.mines) + ". Tap any square to start.");
+                    say(t("startSay", { level: levelName(S.game), mines: minesWord(S.game.mines) }));
                 });
 
                 // Statistics panel
@@ -3045,14 +3447,15 @@
                         const [level, logic] = key.split(":");
                         const box = el("section", "stat");
                         const h = el("h3");
-                        h.textContent = (LEVELS[level] ? LEVELS[level].name : "Custom") + (logic ? ", logic-only" : "");
+                        h.textContent =
+                            t("level_" + (LEVELS[level] ? level : "custom")) + (logic ? t("logicSuffix") : "");
                         box.appendChild(h);
                         const dl = el("dl");
                         const rows = [
-                            ["Best time", st.best != null && level !== "custom" ? fmtBest(st.best) : "–"],
-                            ["Won", st.won + " of " + st.played],
-                            ["Win rate", Math.round((100 * st.won) / st.played) + "%"],
-                            ["Streak", st.streak + " (best " + st.bestStreak + ")"],
+                            [t("statBest"), st.best != null && level !== "custom" ? fmtBest(st.best) : "–"],
+                            [t("statWon"), t("wonOf", { won: st.won, played: st.played })],
+                            [t("statRate"), t("pct", { n: Math.round((100 * st.won) / st.played) })],
+                            [t("statStreak"), t("streakValue", { s: st.streak, b: st.bestStreak })],
                         ];
                         for (const [term, value] of rows) {
                             const pair = el("div");
@@ -3068,15 +3471,17 @@
                         list.appendChild(box);
                     }
                     if (!played) {
-                        els.statsTotal.textContent = "No fields played yet";
+                        els.statsTotal.textContent = t("noFields");
                         const p = el("p", "hint-text");
-                        p.textContent =
-                            "Your best times, wins and streaks for each level appear here after your first finished field.";
+                        p.textContent = t("noFieldsSub");
                         list.appendChild(p);
                         els.resetRow.hidden = true;
                     } else {
-                        els.statsTotal.textContent =
-                            "Won " + won + " of " + played + " fields (" + Math.round((100 * won) / played) + "%)";
+                        els.statsTotal.textContent = t("totalWon", {
+                            won,
+                            played,
+                            pct: Math.round((100 * won) / played),
+                        });
                     }
                 }
                 $("resetStats").addEventListener("click", () => {
@@ -3093,7 +3498,7 @@
                     S.stats = {};
                     store.set("stats", S.stats);
                     renderStats();
-                    say("Statistics deleted.");
+                    say(t("statsDeleted"));
                     $("statsPanel").querySelector("[data-close]").focus();
                 });
 
@@ -3199,7 +3604,7 @@
                         buildBoard();
                         centreBoard();
                         drawClock();
-                        if (restored.elapsed > 0) note("Welcome back. The clock goes on with your next move.");
+                        if (restored.elapsed > 0) note(t("welcomeBack"));
                     } else {
                         newGame(S.level);
                     }

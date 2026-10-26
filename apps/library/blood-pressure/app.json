@@ -3,7 +3,7 @@
   "app": {
     "id": "library/blood-pressure",
     "name": "Blood pressure",
-    "version": "2.4.2",
+    "version": "2.4.3",
     "icon": "monitor_heart",
     "category": "medical",
     "ageRating": "everyone",
@@ -18,43 +18,658 @@
     "defaultLocale": "en",
     "strings": {
       "readings": {
-        "en": "{n, plural, =0 {No readings} one {# reading} other {# readings}}"
+        "en": "{n, plural, =0 {No readings} one {# reading} other {# readings}}",
+        "sk": "{n, plural, =0 {Žiadne merania} one {# meranie} few {# merania} many {# merania} other {# meraní}}"
       },
       "saved": {
-        "en": "{n, plural, =0 {Saved an empty file.} one {Saved # reading.} other {Saved # readings.}}"
+        "en": "{n, plural, =0 {Saved an empty file.} one {Saved # reading.} other {Saved # readings.}}",
+        "sk": "{n, plural, =0 {Uložil sa prázdny súbor.} one {Uložené # meranie.} few {Uložené # merania.} many {Uložené # merania.} other {Uložených # meraní.}}"
       },
       "report": {
-        "en": "Blood pressure readings, {from} to {to}\n\nAverage: {n, plural, =0 {none} one {{s}/{d} mmHg} other {{s}/{d} mmHg}}, pulse {p, plural, =0 {not logged} one {# bpm} other {# bpm}} ({n, plural, one {# reading} other {# readings}})\nMorning average: {mn, plural, =0 {none} one {{ms}/{md} mmHg} other {{ms}/{md} mmHg}}\nEvening average: {en, plural, =0 {none} one {{es}/{ed} mmHg} other {{es}/{ed} mmHg}}\nCategories: {b, select, esc {ESC 2024} other {AHA/ACC}}\n\nReadings, newest first (time, mmHg, pulse):\n{lines}\n\nMeasured at home and logged by the patient."
+        "en": "Blood pressure readings, {from} to {to}\n\nAverage: {n, plural, =0 {none} one {{s}/{d} mmHg} other {{s}/{d} mmHg}}, pulse {p, plural, =0 {not logged} one {# bpm} other {# bpm}} ({n, plural, one {# reading} other {# readings}})\nMorning average: {mn, plural, =0 {none} one {{ms}/{md} mmHg} other {{ms}/{md} mmHg}}\nEvening average: {en, plural, =0 {none} one {{es}/{ed} mmHg} other {{es}/{ed} mmHg}}\nCategories: {b, select, esc {ESC 2024} other {AHA/ACC}}\n\nReadings, newest first (time, mmHg, pulse):\n{lines}\n\nMeasured at home and logged by the patient.",
+        "sk": "Merania krvného tlaku, {from} – {to}\n\nPriemer: {n, plural, =0 {žiadny} one {{s}/{d} mmHg} few {{s}/{d} mmHg} many {{s}/{d} mmHg} other {{s}/{d} mmHg}}, pulz {p, plural, =0 {nezapísaný} one {#/min} few {#/min} many {#/min} other {#/min}} ({n, plural, one {# meranie} few {# merania} many {# merania} other {# meraní}})\nRanný priemer: {mn, plural, =0 {žiadny} one {{ms}/{md} mmHg} few {{ms}/{md} mmHg} many {{ms}/{md} mmHg} other {{ms}/{md} mmHg}}\nVečerný priemer: {en, plural, =0 {žiadny} one {{es}/{ed} mmHg} few {{es}/{ed} mmHg} many {{es}/{ed} mmHg} other {{es}/{ed} mmHg}}\nKategórie: {b, select, esc {ESC 2024} other {AHA/ACC}}\n\nMerania od najnovšieho (čas, mmHg, pulz):\n{lines}\n\nNamerané doma a zapísané pacientom."
       },
       "imported": {
-        "en": "{added, plural, =0 {No readings imported} one {Imported # reading} other {Imported # readings}}{duplicates, plural, =0 {} one {; # was already in the app} other {; # were already in the app}}{skipped, plural, =0 {.} one {; # row skipped.} other {; # rows skipped.}}"
+        "en": "{added, plural, =0 {No readings imported} one {Imported # reading} other {Imported # readings}}{duplicates, plural, =0 {} one {; # was already in the app} other {; # were already in the app}}{skipped, plural, =0 {.} one {; # row skipped.} other {; # rows skipped.}}",
+        "sk": "{added, plural, =0 {Neimportovalo sa žiadne meranie} one {Importované # meranie} few {Importované # merania} many {Importované # merania} other {Importovaných # meraní}}{duplicates, plural, =0 {} one {; # už v aplikácii bolo} few {; # už v aplikácii boli} many {; # už v aplikácii bolo} other {; # už v aplikácii bolo}}{skipped, plural, =0 {.} one {; # riadok sa vynechal.} few {; # riadky sa vynechali.} many {; # riadka sa vynechalo.} other {; # riadkov sa vynechalo.}}"
       },
       "problemLine": {
-        "en": "Line {row}: {reason}"
+        "en": "Line {row}: {reason}",
+        "sk": "Riadok {row}: {reason}"
       },
       "moreProblems": {
-        "en": "{n, plural, one {…and # more row} other {…and # more rows}}"
+        "en": "{n, plural, one {…and # more row} other {…and # more rows}}",
+        "sk": "{n, plural, one {…a ešte # riadok} few {…a ešte # riadky} many {…a ešte # riadka} other {…a ešte # riadkov}}"
       },
       "vsAverage": {
-        "en": "{dir, select, same {Same as your 30-day average} lower {{s}/{d} below your 30-day average} higher {{s}/{d} above your 30-day average} other {{up, select, yes {Upper {s} above, lower {d} below your 30-day average} other {Upper {s} below, lower {d} above your 30-day average}}}}"
+        "en": "{dir, select, same {Same as your 30-day average} lower {{s}/{d} below your 30-day average} higher {{s}/{d} above your 30-day average} other {{up, select, yes {Upper {s} above, lower {d} below your 30-day average} other {Upper {s} below, lower {d} above your 30-day average}}}}",
+        "sk": "{dir, select, same {Rovnako ako 30-dňový priemer} lower {O {s}/{d} pod 30-dňovým priemerom} higher {O {s}/{d} nad 30-dňovým priemerom} other {{up, select, yes {Horný o {s} vyšší, dolný o {d} nižší ako 30-dňový priemer} other {Horný o {s} nižší, dolný o {d} vyšší ako 30-dňový priemer}}}}"
+      },
+      "keepReadingsBehindFingerprint": {
+        "en": "Keep your readings behind your fingerprint, face or screen lock",
+        "sk": "Chrániť vaše merania odtlačkom prsta, tvárou alebo zámkou obrazovky"
+      },
+      "remindMeasureAtTimes": {
+        "en": "Remind you to measure at the times you set, such as morning and evening",
+        "sk": "Pripomínať vám meranie v nastavených časoch, napríklad ráno a večer"
+      },
+      "sendReadingsReportDoctor": {
+        "en": "Send a readings report to your doctor through an app you pick",
+        "sk": "Poslať správu o meraniach lekárovi cez aplikáciu, ktorú vyberiete"
+      },
+      "saveReadingsAsCsv": {
+        "en": "Save your readings as a CSV file for your doctor, and import readings from another app’s file",
+        "sk": "Uložiť merania ako súbor CSV pre lekára a importovať merania zo súboru inej aplikácie"
+      },
+      "readingsPeriodPickAre": {
+        "en": "Your readings for the period you pick are saved as a CSV file where you choose",
+        "sk": "Merania za vybrané obdobie sa uložia ako súbor CSV tam, kde vyberiete"
+      },
+      "textReportReadingsGoes": {
+        "en": "A text report of your readings goes to the app and person you pick",
+        "sk": "Textová správa o meraniach sa pošle do aplikácie a osobe, ktorú vyberiete"
+      },
+      "categoryBands": {
+        "en": "Category bands",
+        "sk": "Pásma kategórií"
+      },
+      "americanAhaAcc": {
+        "en": "American (AHA/ACC)",
+        "sk": "Americké (AHA/ACC)"
+      },
+      "europeanEsc2024": {
+        "en": "European (ESC 2024)",
+        "sk": "Európske (ESC 2024)"
+      },
+      "whichGuidelineNamesCategories": {
+        "en": "Which guideline names the categories. Ask your doctor which one they use.",
+        "sk": "Podľa ktorých odporúčaní sa kategórie pomenúvajú. Opýtajte sa lekára, ktoré používa."
+      },
+      "myTargetUpperNumber": {
+        "en": "My target, upper number",
+        "sk": "Môj cieľ, horný tlak"
+      },
+      "doctorCanTellOwn": {
+        "en": "Your doctor can tell you your own target. Many guidelines aim for below 130/80.",
+        "sk": "Váš osobný cieľ vám povie lekár. Mnohé odporúčania uvádzajú cieľ pod 130/80."
+      },
+      "myTargetLowerNumber": {
+        "en": "My target, lower number",
+        "sk": "Môj cieľ, dolný tlak"
+      },
+      "armIUsuallyUse": {
+        "en": "Arm I usually use",
+        "sk": "Ruka, na ktorej zvyčajne meriam"
+      },
+      "leftArm": {
+        "en": "Left arm",
+        "sk": "Ľavá ruka"
+      },
+      "rightArm": {
+        "en": "Right arm",
+        "sk": "Pravá ruka"
+      },
+      "datesImportedFiles": {
+        "en": "Dates in imported files",
+        "sk": "Dátumy v importovaných súboroch"
+      },
+      "monthFirst1015": {
+        "en": "Month first (10/15/2026)",
+        "sk": "Najprv mesiac (10/15/2026)"
+      },
+      "dayFirst1510": {
+        "en": "Day first (15/10/2026)",
+        "sk": "Najprv deň (15/10/2026)"
+      },
+      "datesSuchAs03": {
+        "en": "For dates such as 03/04/2026 when no date in the file shows the order. Dates with dots are always read day first.",
+        "sk": "Pre dátumy ako 03/04/2026, keď zo žiadneho dátumu v súbore nie je jasné poradie. Dátumy s bodkami sa vždy čítajú ako deň, mesiac, rok."
+      },
+      "reading": {
+        "en": "Reading",
+        "sk": "Meranie"
+      },
+      "readings2": {
+        "en": "Readings",
+        "sk": "Merania"
+      },
+      "upperSystolic": {
+        "en": "Upper (systolic)",
+        "sk": "Horný (systolický)"
+      },
+      "lowerDiastolic": {
+        "en": "Lower (diastolic)",
+        "sk": "Dolný (diastolický)"
+      },
+      "lowerNumberMustBe": {
+        "en": "The lower number must be below the upper number.",
+        "sk": "Dolný tlak musí byť nižší ako horný."
+      },
+      "pulse": {
+        "en": "Pulse",
+        "sk": "Pulz"
+      },
+      "bpm": {
+        "en": "bpm",
+        "sk": "tepov/min"
+      },
+      "dateTime": {
+        "en": "Date and time",
+        "sk": "Dátum a čas"
+      },
+      "arm": {
+        "en": "Arm",
+        "sk": "Ruka"
+      },
+      "position": {
+        "en": "Position",
+        "sk": "Poloha"
+      },
+      "sitting": {
+        "en": "Sitting",
+        "sk": "V sede"
+      },
+      "standing": {
+        "en": "Standing",
+        "sk": "V stoji"
+      },
+      "lyingDown": {
+        "en": "Lying down",
+        "sk": "V ľahu"
+      },
+      "monitorShowedIrregularHeartbeat": {
+        "en": "Monitor showed an irregular heartbeat",
+        "sk": "Tlakomer ukázal nepravidelný tep"
+      },
+      "context": {
+        "en": "Context",
+        "sk": "Okolnosti"
+      },
+      "beforeMedication": {
+        "en": "Before medication",
+        "sk": "Pred liekmi"
+      },
+      "afterMedication": {
+        "en": "After medication",
+        "sk": "Po liekoch"
+      },
+      "afterExercise": {
+        "en": "After exercise",
+        "sk": "Po cvičení"
+      },
+      "afterCoffeeTea": {
+        "en": "After coffee or tea",
+        "sk": "Po káve alebo čaji"
+      },
+      "stressedAnxious": {
+        "en": "Stressed or anxious",
+        "sk": "Stres alebo úzkosť"
+      },
+      "feelingUnwell": {
+        "en": "Feeling unwell",
+        "sk": "Nevoľnosť"
+      },
+      "pain": {
+        "en": "In pain",
+        "sk": "Bolesť"
+      },
+      "note": {
+        "en": "Note",
+        "sk": "Poznámka"
+      },
+      "day": {
+        "en": "Day",
+        "sk": "Deň"
+      },
+      "timeDay": {
+        "en": "Time of day",
+        "sk": "Časť dňa"
+      },
+      "morning": {
+        "en": "Morning",
+        "sk": "Ráno"
+      },
+      "afternoon": {
+        "en": "Afternoon",
+        "sk": "Popoludnie"
+      },
+      "evening": {
+        "en": "Evening",
+        "sk": "Večer"
+      },
+      "categoryAhaAcc": {
+        "en": "Category (AHA/ACC)",
+        "sk": "Kategória (AHA/ACC)"
+      },
+      "low": {
+        "en": "Low",
+        "sk": "Nízky"
+      },
+      "normal": {
+        "en": "Normal",
+        "sk": "Normálny"
+      },
+      "elevated": {
+        "en": "Elevated",
+        "sk": "Zvýšený"
+      },
+      "highStage1": {
+        "en": "High, stage 1",
+        "sk": "Vysoký, 1. stupeň"
+      },
+      "highStage2": {
+        "en": "High, stage 2",
+        "sk": "Vysoký, 2. stupeň"
+      },
+      "veryHigh": {
+        "en": "Very high",
+        "sk": "Veľmi vysoký"
+      },
+      "categoryEsc2024": {
+        "en": "Category (ESC 2024)",
+        "sk": "Kategória (ESC 2024)"
+      },
+      "notElevated": {
+        "en": "Not elevated",
+        "sk": "Nezvýšený"
+      },
+      "high": {
+        "en": "High",
+        "sk": "Vysoký"
+      },
+      "pulsePressure": {
+        "en": "Pulse pressure",
+        "sk": "Pulzový tlak"
+      },
+      "meanArterialPressure": {
+        "en": "Mean arterial pressure",
+        "sk": "Stredný arteriálny tlak"
+      },
+      "reminder": {
+        "en": "Reminder",
+        "sk": "Pripomienka"
+      },
+      "reminders": {
+        "en": "Reminders",
+        "sk": "Pripomienky"
+      },
+      "name": {
+        "en": "Name",
+        "sk": "Názov"
+      },
+      "time": {
+        "en": "Time",
+        "sk": "Čas"
+      },
+      "repeat": {
+        "en": "Repeat",
+        "sk": "Opakovanie"
+      },
+      "remindMe": {
+        "en": "Remind me",
+        "sk": "Pripomínať"
+      },
+      "overview": {
+        "en": "Overview",
+        "sk": "Prehľad"
+      },
+      "trends": {
+        "en": "Trends",
+        "sk": "Vývoj"
+      },
+      "report2": {
+        "en": "Report",
+        "sk": "Správa"
+      },
+      "bloodPressure": {
+        "en": "Blood pressure",
+        "sk": "Blood pressure"
+      },
+      "noReadingsYet": {
+        "en": "No readings yet",
+        "sk": "Zatiaľ žiadne merania"
+      },
+      "tapAfterMeasureLog": {
+        "en": "Tap + after you measure to log the upper and lower numbers.",
+        "sk": "Po meraní klepnite na + a zapíšte horný a dolný tlak."
+      },
+      "reportDoctor": {
+        "en": "Report for your doctor",
+        "sk": "Správa pre lekára"
+      },
+      "period": {
+        "en": "Period",
+        "sk": "Obdobie"
+      },
+      "n7Days": {
+        "en": "7 days",
+        "sk": "7 dní"
+      },
+      "n30Days": {
+        "en": "30 days",
+        "sk": "30 dní"
+      },
+      "n90Days": {
+        "en": "90 days",
+        "sk": "90 dní"
+      },
+      "n1Year": {
+        "en": "1 year",
+        "sk": "1 rok"
+      },
+      "noReminders": {
+        "en": "No reminders",
+        "sk": "Žiadne pripomienky"
+      },
+      "doctorsOftenAskReadings": {
+        "en": "Doctors often ask for readings each morning and evening. Tap + to add a reminder.",
+        "sk": "Lekári často chcú merania každé ráno a večer. Klepnutím na + pridáte pripomienku."
+      },
+      "settings": {
+        "en": "Settings",
+        "sk": "Nastavenia"
+      },
+      "importFinished": {
+        "en": "Import finished",
+        "sk": "Import je dokončený"
+      },
+      "logFirstReading": {
+        "en": "Log your first reading",
+        "sk": "Zapíšte prvé meranie"
+      },
+      "sitQuietlyFiveMinutes": {
+        "en": "Sit quietly for five minutes with your back supported and your arm resting at heart level. Then measure and log both numbers. Moving from another app? Import its CSV file.",
+        "sk": "Päť minút pokojne seďte, s opretým chrbtom a rukou položenou vo výške srdca. Potom si zmerajte tlak a zapíšte obe hodnoty. Prechádzate z inej aplikácie? Importujte jej súbor CSV."
+      },
+      "importReadingsFromFile": {
+        "en": "Import readings from a file",
+        "sk": "Importovať merania zo súboru"
+      },
+      "latestReading": {
+        "en": "Latest reading",
+        "sk": "Posledné meranie"
+      },
+      "thisReadingIsVery": {
+        "en": "This reading is very high. Rest quietly for five minutes and measure again. If it stays this high, contact your doctor straight away. If you also have chest pain, shortness of breath, back pain, numbness, weakness, a change in vision or trouble speaking, call your local emergency number now.",
+        "sk": "Toto meranie je veľmi vysoké. Päť minút pokojne odpočívajte a zmerajte si tlak znova. Ak zostane takto vysoký, ihneď kontaktujte lekára. Ak máte aj bolesť na hrudi, dýchavičnosť, bolesť chrbta, necitlivosť, slabosť, zmenu videnia alebo problémy s rečou, hneď volajte záchrannú službu."
+      },
+      "logReading": {
+        "en": "Log a reading",
+        "sk": "Zapísať meranie"
+      },
+      "averages": {
+        "en": "Averages",
+        "sk": "Priemery"
+      },
+      "last7Days": {
+        "en": "Last 7 days",
+        "sk": "Posledných 7 dní"
+      },
+      "last30Days": {
+        "en": "Last 30 days",
+        "sk": "Posledných 30 dní"
+      },
+      "mornings30Days": {
+        "en": "Mornings, 30 days",
+        "sk": "Rána, 30 dní"
+      },
+      "evenings30Days": {
+        "en": "Evenings, 30 days",
+        "sk": "Večery, 30 dní"
+      },
+      "belowMyTarget30": {
+        "en": "Below my target, 30 days",
+        "sk": "Pod mojím cieľom, 30 dní"
+      },
+      "dailyAveragesLast30": {
+        "en": "Daily averages, last 30 days",
+        "sk": "Denné priemery za 30 dní"
+      },
+      "upperTarget": {
+        "en": "Upper target",
+        "sk": "Horný cieľ"
+      },
+      "lowerTarget": {
+        "en": "Lower target",
+        "sk": "Dolný cieľ"
+      },
+      "routine": {
+        "en": "Routine",
+        "sk": "Pravidelnosť"
+      },
+      "daysWithReadingThis": {
+        "en": "Days with a reading this week",
+        "sk": "Dni s meraním tento týždeň"
+      },
+      "editReminders": {
+        "en": "Edit reminders",
+        "sk": "Upraviť pripomienky"
+      },
+      "notMedicalAdviceThis": {
+        "en": "Not medical advice. This app does not measure blood pressure; use a validated cuff. Categories describe single readings, using the AHA/ACC guideline (2017, kept in 2025) or the ESC 2024 guideline as you choose in Settings. Only your doctor can diagnose high or low blood pressure, from several readings.",
+        "sk": "Nejde o lekársku radu. Táto aplikácia tlak nemeria; použite overený tlakomer. Kategórie opisujú jednotlivé merania podľa odporúčaní AHA/ACC (2017, platné aj v roku 2025) alebo ESC 2024, podľa voľby v Nastaveniach. Vysoký alebo nízky tlak môže určiť len lekár, z viacerých meraní."
+      },
+      "notEnoughReadingsYet": {
+        "en": "Not enough readings yet",
+        "sk": "Zatiaľ málo meraní"
+      },
+      "chartsAppearOnceHave": {
+        "en": "Charts appear once you have readings on two different days.",
+        "sk": "Grafy sa zobrazia, keď budete mať merania aspoň z dvoch rôznych dní."
+      },
+      "upperNumberDailyAverages": {
+        "en": "Upper number, daily averages (mmHg)",
+        "sk": "Horný tlak, denné priemery (mmHg)"
+      },
+      "lowerNumberDailyAverages": {
+        "en": "Lower number, daily averages (mmHg)",
+        "sk": "Dolný tlak, denné priemery (mmHg)"
+      },
+      "notHigh": {
+        "en": "Not high",
+        "sk": "Nie je vysoký"
+      },
+      "weeklyAveragesLast6": {
+        "en": "Weekly averages, last 6 months (mmHg)",
+        "sk": "Týždenné priemery za 6 mesiacov (mmHg)"
+      },
+      "pulseDailyAveragesBpm": {
+        "en": "Pulse, daily averages (bpm)",
+        "sk": "Pulz, denné priemery (tepov/min)"
+      },
+      "readingsByCategoryLast": {
+        "en": "Readings by category, last 30 days",
+        "sk": "Merania podľa kategórií za 30 dní"
+      },
+      "howMeasureAtHome": {
+        "en": "How to measure at home",
+        "sk": "Ako merať doma"
+      },
+      "noCoffeeExerciseSmoking": {
+        "en": "- No coffee, exercise or smoking for 30 minutes before.\n- Empty your bladder, then sit with your back supported and feet flat for five minutes.\n- Rest your arm on a table at heart level, with the cuff on bare skin.\n- Don’t talk while measuring.\n- Take two readings a minute apart, in the morning before medication and in the evening, and log both.\n- For a check before a doctor’s visit, many doctors ask for this every day for a week.",
+        "sk": "- 30 minút pred meraním nepite kávu, necvičte a nefajčite.\n- Vyprázdnite močový mechúr a potom päť minút seďte s opretým chrbtom a chodidlami na zemi.\n- Ruku položte na stôl vo výške srdca, manžetu na holú kožu.\n- Počas merania nehovorte.\n- Zmerajte si tlak dvakrát s minútovým odstupom, ráno pred liekmi a večer, a zapíšte obe merania.\n- Pred návštevou lekára mnohí lekári chcú takto merať každý deň počas jedného týždňa."
+      },
+      "aboutCategories": {
+        "en": "About the categories",
+        "sk": "O kategóriách"
+      },
+      "ahaAccAmericanHeart": {
+        "en": "AHA/ACC (American Heart Association and American College of Cardiology): normal below 120/80; elevated 120–129 and below 80; high stage 1 130–139 or 80–89; high stage 2 140 or more, or 90 or more; very high above 180 or above 120. Low means below 90/60 (a common threshold, used by the NHS).",
+        "sk": "AHA/ACC (Americká kardiologická asociácia a Americké kardiologické kolégium): normálny pod 120/80; zvýšený 120 – 129 a pod 80; vysoký 1. stupňa 130 – 139 alebo 80 – 89; vysoký 2. stupňa 140 a viac alebo 90 a viac; veľmi vysoký nad 180 alebo nad 120. Nízky znamená pod 90/60 (bežná hranica, ktorú používa aj britská NHS)."
+      },
+      "esc2024EuropeanSociety": {
+        "en": "ESC 2024 (European Society of Cardiology): not elevated below 120/70; elevated 120–139 or 70–89; high (hypertension) 140/90 or more; very high 180 or more, or 110 or more. Low means below 90/60.",
+        "sk": "ESC 2024 (Európska kardiologická spoločnosť): nezvýšený pod 120/70; zvýšený 120 – 139 alebo 70 – 89; vysoký (hypertenzia) 140/90 a viac; veľmi vysoký 180 a viac alebo 110 a viac. Nízky znamená pod 90/60."
+      },
+      "average": {
+        "en": "Average",
+        "sk": "Priemer"
+      },
+      "belowMyTarget": {
+        "en": "Below my target",
+        "sk": "Pod mojím cieľom"
+      },
+      "mornings": {
+        "en": "Mornings",
+        "sk": "Rána"
+      },
+      "evenings": {
+        "en": "Evenings",
+        "sk": "Večery"
+      },
+      "highest": {
+        "en": "Highest",
+        "sk": "Najvyšší"
+      },
+      "upperLowerEachAt": {
+        "en": "Upper and lower, each at its highest",
+        "sk": "Najvyšší horný a najvyšší dolný tlak"
+      },
+      "lowest": {
+        "en": "Lowest",
+        "sk": "Najnižší"
+      },
+      "upperLowerEachAt2": {
+        "en": "Upper and lower, each at its lowest",
+        "sk": "Najnižší horný a najnižší dolný tlak"
+      },
+      "dailyAveragesMmhg": {
+        "en": "Daily averages (mmHg)",
+        "sk": "Denné priemery (mmHg)"
+      },
+      "shareAsText": {
+        "en": "Share as text",
+        "sk": "Zdieľať ako text"
+      },
+      "saveAsCsvFile": {
+        "en": "Save as CSV file",
+        "sk": "Uložiť ako súbor CSV"
+      },
+      "textReportListsEvery": {
+        "en": "The text report lists every reading in the period with its time, pulse, arm, position and notes. The CSV file opens in any spreadsheet. A PDF report is not available yet.",
+        "sk": "Textová správa obsahuje každé meranie z obdobia s časom, pulzom, rukou, polohou a poznámkami. Súbor CSV otvoríte v akomkoľvek tabuľkovom editore. Správa vo formáte PDF zatiaľ nie je k dispozícii."
+      },
+      "sendTestReminder": {
+        "en": "Send a test reminder",
+        "sk": "Poslať skúšobnú pripomienku"
+      },
+      "theseRowsWereLeft": {
+        "en": "These rows were left out, with the reason for each:",
+        "sk": "Tieto riadky sa vynechali, pri každom je dôvod:"
+      },
+      "bloodPressureReadings": {
+        "en": "Blood pressure readings",
+        "sk": "Merania krvného tlaku"
+      },
+      "sitQuietlyFiveMinutes2": {
+        "en": "Sit quietly for five minutes, then take two readings a minute apart.",
+        "sk": "Päť minút pokojne seďte, potom si zmerajte tlak dvakrát s minútovým odstupom."
+      },
+      "remindersAre": {
+        "en": "Reminders are on",
+        "sk": "Pripomienky sú zapnuté"
+      },
+      "llGetReminderAt": {
+        "en": "You’ll get a reminder at the times you set. Tap one to log a reading.",
+        "sk": "Pripomienky prídu v nastavených časoch. Klepnutím na pripomienku zapíšete meranie."
+      },
+      "testReminderSent": {
+        "en": "Test reminder sent.",
+        "sk": "Skúšobná pripomienka je odoslaná."
+      },
+      "importReadingsFromFile2": {
+        "en": "Import readings from a file?",
+        "sk": "Importovať merania zo súboru?"
+      },
+      "pickCsvFileSaved": {
+        "en": "Pick a CSV file saved by this app or by another blood-pressure app. Date, time, upper and lower numbers, pulse, arm, position, irregular heartbeat, context tags and notes are read, in mmHg or kPa; rows without both numbers or with an unreadable date are skipped. A reading already in the app, with the same time and both numbers, is left out, so a newer file from the same app adds only what is new. Check the date order in Settings first.",
+        "sk": "Vyberte súbor CSV uložený touto aplikáciou alebo inou aplikáciou na krvný tlak. Načíta sa dátum, čas, horný a dolný tlak, pulz, ruka, poloha, nepravidelný tep, okolnosti a poznámky, v mmHg alebo kPa; riadky bez oboch hodnôt tlaku alebo s nečitateľným dátumom sa vynechajú. Meranie, ktoré už v aplikácii je s rovnakým časom a oboma hodnotami, sa vynechá, takže novší súbor z tej istej aplikácie pridá len nové merania. Najprv si v Nastaveniach overte poradie v dátumoch."
+      },
+      "pickFile": {
+        "en": "Pick a file",
+        "sk": "Vybrať súbor"
+      },
+      "morningReading": {
+        "en": "Morning reading",
+        "sk": "Ranné meranie"
+      },
+      "eveningReading": {
+        "en": "Evening reading",
+        "sk": "Večerné meranie"
+      },
+      "pulseN": {
+        "en": "pulse {n}",
+        "sk": "pulz {n}"
+      },
+      "irregularBeat": {
+        "en": "irregular heartbeat",
+        "sk": "nepravidelný tep"
+      },
+      "ruleAt": {
+        "en": "{rule} at {time}",
+        "sk": "{rule} o {time}"
+      },
+      "off": {
+        "en": "Off",
+        "sk": "Vypnuté"
+      },
+      "pulseBpm": {
+        "en": "pulse {n} bpm",
+        "sk": "pulz {n}/min"
+      },
+      "targetBelow": {
+        "en": "Target: below {s}/{d} mmHg",
+        "sk": "Cieľ: pod {s}/{d} mmHg"
+      },
+      "remindersList": {
+        "en": "Reminders: {list}",
+        "sk": "Pripomienky: {list}"
+      },
+      "labelAt": {
+        "en": "{label} at {time}",
+        "sk": "{label} o {time}"
+      },
+      "noRemindersOn": {
+        "en": "No reminders are on.",
+        "sk": "Žiadna pripomienka nie je zapnutá."
+      },
+      "pulseCap": {
+        "en": "Pulse {n} bpm",
+        "sk": "Pulz {n}/min"
+      },
+      "noPulse": {
+        "en": "No pulse logged",
+        "sk": "Pulz nie je zapísaný"
+      },
+      "belowTarget": {
+        "en": "Below {s}/{d} mmHg",
+        "sk": "Pod {s}/{d} mmHg"
+      },
+      "irregular": {
+        "en": "irregular",
+        "sk": "nepravidelný"
+      },
+      "bloodPressureCheck": {
+        "en": "Blood pressure check",
+        "sk": "Meranie tlaku"
       }
     }
   },
   "permissions": {
     "auth.lock": {
-      "purpose": "Keep your readings behind your fingerprint, face or screen lock",
+      "purpose": "@keepReadingsBehindFingerprint",
       "default": "on",
       "relockAfter": "PT5M"
     },
     "notify.local": {
-      "purpose": "Remind you to measure at the times you set, such as morning and evening",
+      "purpose": "@remindMeasureAtTimes",
       "maxPerDay": 6
     },
     "share": {
-      "purpose": "Send a readings report to your doctor through an app you pick"
+      "purpose": "@sendReadingsReportDoctor"
     },
     "files.io": {
-      "purpose": "Save your readings as a CSV file for your doctor, and import readings from another app’s file",
+      "purpose": "@saveReadingsAsCsv",
       "modes": ["import", "export"]
     }
   },
@@ -77,44 +692,44 @@
         "exportCsv.days"
       ],
       "to": "files.io",
-      "purpose": "Your readings for the period you pick are saved as a CSV file where you choose"
+      "purpose": "@readingsPeriodPickAre"
     },
     {
       "from": ["reading.*", "settings.guideline", "shareReport.days"],
       "to": "share",
-      "purpose": "A text report of your readings goes to the app and person you pick"
+      "purpose": "@textReportReadingsGoes"
     }
   ],
   "settings": {
     "guideline": {
       "type": "choice",
-      "label": "Category bands",
+      "label": "@categoryBands",
       "options": [
         {
           "value": "aha",
-          "label": "American (AHA/ACC)"
+          "label": "@americanAhaAcc"
         },
         {
           "value": "esc",
-          "label": "European (ESC 2024)"
+          "label": "@europeanEsc2024"
         }
       ],
       "default": "aha",
-      "help": "Which guideline names the categories. Ask your doctor which one they use."
+      "help": "@whichGuidelineNamesCategories"
     },
     "targetSys": {
       "type": "integer",
-      "label": "My target, upper number",
+      "label": "@myTargetUpperNumber",
       "unit": "mmHg",
       "default": 130,
       "min": 90,
       "max": 180,
       "sensitivity": "health",
-      "help": "Your doctor can tell you your own target. Many guidelines aim for below 130/80."
+      "help": "@doctorCanTellOwn"
     },
     "targetDia": {
       "type": "integer",
-      "label": "My target, lower number",
+      "label": "@myTargetLowerNumber",
       "unit": "mmHg",
       "default": 80,
       "min": 50,
@@ -123,46 +738,46 @@
     },
     "usualArm": {
       "type": "choice",
-      "label": "Arm I usually use",
+      "label": "@armIUsuallyUse",
       "options": [
         {
           "value": "left",
-          "label": "Left arm"
+          "label": "@leftArm"
         },
         {
           "value": "right",
-          "label": "Right arm"
+          "label": "@rightArm"
         }
       ],
       "default": "left"
     },
     "importDates": {
       "type": "choice",
-      "label": "Dates in imported files",
+      "label": "@datesImportedFiles",
       "options": [
         {
           "value": "monthFirst",
-          "label": "Month first (10/15/2026)"
+          "label": "@monthFirst1015"
         },
         {
           "value": "dayFirst",
-          "label": "Day first (15/10/2026)"
+          "label": "@dayFirst1510"
         }
       ],
       "default": "monthFirst",
-      "help": "For dates such as 03/04/2026 when no date in the file shows the order. Dates with dots are always read day first."
+      "help": "@datesSuchAs03"
     }
   },
   "entities": {
     "reading": {
-      "label": "Reading",
-      "labelPlural": "Readings",
+      "label": "@reading",
+      "labelPlural": "@readings2",
       "sensitivity": "health",
       "sort": ["-at"],
       "unique": [["at", "systolic", "diastolic"]],
       "display": {
         "title": "=string(item.systolic) + '/' + string(item.diastolic) + ' mmHg'",
-        "subtitle": "=(settings.guideline == 'esc' ? optionLabel(item.esc) : optionLabel(item.aha)) + (has(item.pulse) ? ' · pulse ' + string(item.pulse) : '') + (item.irregular ? ' · irregular heartbeat' : '')",
+        "subtitle": "=(settings.guideline == 'esc' ? optionLabel(item.esc) : optionLabel(item.aha)) + (has(item.pulse) ? ' · ' + t('pulseN', {'n': string(item.pulse)}) : '') + (item.irregular ? ' · ' + t('irregularBeat') : '')",
         "trailing": "=formatDate(item.at, 'jm')",
         "icon": "=coalesce(settings.guideline == 'esc' ? optionIcon(item.esc) : optionIcon(item.aha), 'monitor_heart')",
         "tone": "=(settings.guideline == 'esc' ? item.esc : item.aha) == 'normal' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'nonElevated' ? 'success' : (settings.guideline == 'esc' ? item.esc : item.aha) == 'stage2' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'hypertension' || (settings.guideline == 'esc' ? item.esc : item.aha) == 'severe' ? 'danger' : 'warning'"
@@ -170,7 +785,7 @@
       "fields": {
         "systolic": {
           "type": "integer",
-          "label": "Upper (systolic)",
+          "label": "@upperSystolic",
           "unit": "mmHg",
           "required": true,
           "min": 50,
@@ -179,7 +794,7 @@
         },
         "diastolic": {
           "type": "integer",
-          "label": "Lower (diastolic)",
+          "label": "@lowerDiastolic",
           "unit": "mmHg",
           "required": true,
           "min": 30,
@@ -188,124 +803,124 @@
           "checks": [
             {
               "condition": "=item.diastolic < item.systolic",
-              "message": "The lower number must be below the upper number."
+              "message": "@lowerNumberMustBe"
             }
           ]
         },
         "pulse": {
           "type": "integer",
-          "label": "Pulse",
-          "unit": "bpm",
+          "label": "@pulse",
+          "unit": "@bpm",
           "min": 25,
           "max": 250,
           "placeholder": "70"
         },
         "at": {
           "type": "datetime",
-          "label": "Date and time",
+          "label": "@dateTime",
           "required": true,
           "default": "=now() - (time(now()) - time(padStart(string(hour(now())), 2, '0') + ':' + padStart(string(minute(now())), 2, '0')))"
         },
         "arm": {
           "type": "choice",
-          "label": "Arm",
+          "label": "@arm",
           "options": [
             {
               "value": "left",
-              "label": "Left arm"
+              "label": "@leftArm"
             },
             {
               "value": "right",
-              "label": "Right arm"
+              "label": "@rightArm"
             }
           ],
           "default": "=settings.usualArm"
         },
         "position": {
           "type": "choice",
-          "label": "Position",
+          "label": "@position",
           "options": [
             {
               "value": "sitting",
-              "label": "Sitting"
+              "label": "@sitting"
             },
             {
               "value": "standing",
-              "label": "Standing"
+              "label": "@standing"
             },
             {
               "value": "lying",
-              "label": "Lying down"
+              "label": "@lyingDown"
             }
           ],
           "default": "sitting"
         },
         "irregular": {
           "type": "boolean",
-          "label": "Monitor showed an irregular heartbeat",
+          "label": "@monitorShowedIrregularHeartbeat",
           "default": false
         },
         "tags": {
           "type": "multiChoice",
-          "label": "Context",
+          "label": "@context",
           "options": [
             {
               "value": "beforeMeds",
-              "label": "Before medication"
+              "label": "@beforeMedication"
             },
             {
               "value": "afterMeds",
-              "label": "After medication"
+              "label": "@afterMedication"
             },
             {
               "value": "exercise",
-              "label": "After exercise"
+              "label": "@afterExercise"
             },
             {
               "value": "caffeine",
-              "label": "After coffee or tea"
+              "label": "@afterCoffeeTea"
             },
             {
               "value": "stress",
-              "label": "Stressed or anxious"
+              "label": "@stressedAnxious"
             },
             {
               "value": "unwell",
-              "label": "Feeling unwell"
+              "label": "@feelingUnwell"
             },
             {
               "value": "pain",
-              "label": "In pain"
+              "label": "@pain"
             }
           ]
         },
         "note": {
           "type": "longText",
-          "label": "Note",
+          "label": "@note",
           "maxLength": 1000
         },
         "date": {
           "type": "date",
-          "label": "Day",
+          "label": "@day",
           "compute": "=date(item.at)",
           "stored": true,
           "visible": false
         },
         "daypart": {
           "type": "choice",
-          "label": "Time of day",
+          "label": "@timeDay",
           "options": [
             {
               "value": "morning",
-              "label": "Morning"
+              "label": "@morning"
             },
             {
               "value": "afternoon",
-              "label": "Afternoon"
+              "label": "@afternoon"
             },
             {
               "value": "evening",
-              "label": "Evening"
+              "label": "@evening"
             }
           ],
           "compute": "=time(item.at) < time('04:00') ? 'evening' : time(item.at) < time('12:00') ? 'morning' : time(item.at) < time('18:00') ? 'afternoon' : 'evening'",
@@ -313,41 +928,41 @@
         },
         "aha": {
           "type": "choice",
-          "label": "Category (AHA/ACC)",
+          "label": "@categoryAhaAcc",
           "options": [
             {
               "value": "low",
-              "label": "Low",
+              "label": "@low",
               "icon": "trending_down",
               "tone": "warning"
             },
             {
               "value": "normal",
-              "label": "Normal",
+              "label": "@normal",
               "icon": "check_circle",
               "tone": "success"
             },
             {
               "value": "elevated",
-              "label": "Elevated",
+              "label": "@elevated",
               "icon": "trending_up",
               "tone": "warning"
             },
             {
               "value": "stage1",
-              "label": "High, stage 1",
+              "label": "@highStage1",
               "icon": "trending_up",
               "tone": "warning"
             },
             {
               "value": "stage2",
-              "label": "High, stage 2",
+              "label": "@highStage2",
               "icon": "warning",
               "tone": "danger"
             },
             {
               "value": "severe",
-              "label": "Very high",
+              "label": "@veryHigh",
               "icon": "error",
               "tone": "danger"
             }
@@ -358,35 +973,35 @@
         },
         "esc": {
           "type": "choice",
-          "label": "Category (ESC 2024)",
+          "label": "@categoryEsc2024",
           "options": [
             {
               "value": "low",
-              "label": "Low",
+              "label": "@low",
               "icon": "trending_down",
               "tone": "warning"
             },
             {
               "value": "nonElevated",
-              "label": "Not elevated",
+              "label": "@notElevated",
               "icon": "check_circle",
               "tone": "success"
             },
             {
               "value": "elevated",
-              "label": "Elevated",
+              "label": "@elevated",
               "icon": "trending_up",
               "tone": "warning"
             },
             {
               "value": "hypertension",
-              "label": "High",
+              "label": "@high",
               "icon": "warning",
               "tone": "danger"
             },
             {
               "value": "severe",
-              "label": "Very high",
+              "label": "@veryHigh",
               "icon": "error",
               "tone": "danger"
             }
@@ -397,14 +1012,14 @@
         },
         "pulsePressure": {
           "type": "integer",
-          "label": "Pulse pressure",
+          "label": "@pulsePressure",
           "unit": "mmHg",
           "compute": "=item.systolic - item.diastolic",
           "stored": true
         },
         "map": {
           "type": "number",
-          "label": "Mean arterial pressure",
+          "label": "@meanArterialPressure",
           "unit": "mmHg",
           "compute": "=round(double(item.diastolic) + double(item.systolic - item.diastolic) / 3.0)",
           "stored": true
@@ -412,37 +1027,37 @@
       }
     },
     "reminder": {
-      "label": "Reminder",
-      "labelPlural": "Reminders",
+      "label": "@reminder",
+      "labelPlural": "@reminders",
       "sort": ["at"],
       "display": {
         "title": "=item.label",
-        "subtitle": "=item.on ? formatRecurrence(item.days) + ' at ' + formatDate(item.at, 'jm') : 'Off'",
+        "subtitle": "=item.on ? t('ruleAt', {'rule': formatRecurrence(item.days), 'time': formatDate(item.at, 'jm')}) : t('off')",
         "icon": "=item.on ? 'alarm_on' : 'alarm'"
       },
       "fields": {
         "label": {
           "type": "text",
-          "label": "Name",
+          "label": "@name",
           "required": true,
           "maxLength": 40,
-          "default": "Blood pressure check"
+          "default": "=t('bloodPressureCheck')"
         },
         "at": {
           "type": "time",
-          "label": "Time",
+          "label": "@time",
           "required": true,
           "default": "08:00"
         },
         "days": {
           "type": "recurrence",
-          "label": "Repeat",
+          "label": "@repeat",
           "required": true,
           "default": "FREQ=DAILY"
         },
         "on": {
           "type": "boolean",
-          "label": "Remind me",
+          "label": "@remindMe",
           "default": true
         }
       }
@@ -793,22 +1408,22 @@
     "tabs": [
       {
         "screen": "overview",
-        "label": "Overview",
+        "label": "@overview",
         "icon": "monitor_heart"
       },
       {
         "screen": "readings",
-        "label": "Readings",
+        "label": "@readings2",
         "icon": "list"
       },
       {
         "screen": "trends",
-        "label": "Trends",
+        "label": "@trends",
         "icon": "show_chart"
       },
       {
         "screen": "report",
-        "label": "Report",
+        "label": "@report2",
         "icon": "description"
       }
     ],
@@ -817,12 +1432,12 @@
   "screens": {
     "overview": {
       "type": "dashboard",
-      "title": "Blood pressure",
+      "title": "@bloodPressure",
       "root": "overviewCol"
     },
     "readings": {
       "type": "list",
-      "title": "Readings",
+      "title": "@readings2",
       "query": "allReadings",
       "sectionBy": "date",
       "search": ["note"],
@@ -838,14 +1453,14 @@
         }
       },
       "empty": {
-        "title": "No readings yet",
-        "body": "Tap + after you measure to log the upper and lower numbers.",
+        "title": "@noReadingsYet",
+        "body": "@tapAfterMeasureLog",
         "icon": "monitor_heart"
       }
     },
     "readingDetail": {
       "type": "detail",
-      "title": "Reading",
+      "title": "@reading",
       "entity": "reading",
       "header": "detailTop",
       "show": ["pulsePressure", "map", "arm", "position", "tags", "note", "daypart"],
@@ -853,7 +1468,7 @@
     },
     "readingForm": {
       "type": "form",
-      "title": "Reading",
+      "title": "@reading",
       "entity": "reading",
       "fields": ["systolic", "diastolic", "pulse", "at", "arm", "position", "irregular", "tags", "note"],
       "onSave": {
@@ -864,33 +1479,33 @@
     },
     "trends": {
       "type": "dashboard",
-      "title": "Trends",
+      "title": "@trends",
       "root": "trendsCol"
     },
     "report": {
       "type": "dashboard",
-      "title": "Report for your doctor",
+      "title": "@reportDoctor",
       "root": "reportCol",
       "state": {
         "days": {
           "type": "choice",
-          "label": "Period",
+          "label": "@period",
           "options": [
             {
               "value": "7",
-              "label": "7 days"
+              "label": "@n7Days"
             },
             {
               "value": "30",
-              "label": "30 days"
+              "label": "@n30Days"
             },
             {
               "value": "90",
-              "label": "90 days"
+              "label": "@n90Days"
             },
             {
               "value": "365",
-              "label": "1 year"
+              "label": "@n1Year"
             }
           ],
           "default": "30"
@@ -931,22 +1546,22 @@
     },
     "reminders": {
       "type": "list",
-      "title": "Reminders",
+      "title": "@reminders",
       "query": "reminders",
       "toolbar": ["testBtn"],
       "empty": {
-        "title": "No reminders",
-        "body": "Doctors often ask for readings each morning and evening. Tap + to add a reminder.",
+        "title": "@noReminders",
+        "body": "@doctorsOftenAskReadings",
         "icon": "alarm"
       }
     },
     "prefs": {
       "type": "settings",
-      "title": "Settings"
+      "title": "@settings"
     },
     "importReport": {
       "type": "custom",
-      "title": "Import finished",
+      "title": "@importFinished",
       "present": "dialog",
       "params": {
         "summary": {
@@ -969,14 +1584,14 @@
     "firstRun": {
       "component": "EmptyState",
       "icon": "monitor_heart",
-      "title": "Log your first reading",
-      "body": "Sit quietly for five minutes with your back supported and your arm resting at heart level. Then measure and log both numbers. Moving from another app? Import its CSV file.",
+      "title": "@logFirstReading",
+      "body": "@sitQuietlyFiveMinutes",
       "action": {
         "event": {
           "name": "importReadings"
         }
       },
-      "actionLabel": "Import readings from a file",
+      "actionLabel": "@importReadingsFromFile",
       "visible": "=size(q.latest) == 0",
       "illustration": "welcome"
     },
@@ -1000,7 +1615,7 @@
     "latestValue": {
       "component": "Stat",
       "variant": "hero",
-      "label": "Latest reading",
+      "label": "@latestReading",
       "value": "=string(item.systolic) + '/' + string(item.diastolic)",
       "unit": "mmHg",
       "delta": "=t('vsAverage', {'dir': ((item.systolic - int(round(coalesce(q.avg30.sys, 0.0)))) == 0 && (item.diastolic - int(round(coalesce(q.avg30.dia, 0.0)))) == 0 ? 'same' : (item.systolic - int(round(coalesce(q.avg30.sys, 0.0)))) <= 0 && (item.diastolic - int(round(coalesce(q.avg30.dia, 0.0)))) <= 0 ? 'lower' : (item.systolic - int(round(coalesce(q.avg30.sys, 0.0)))) >= 0 && (item.diastolic - int(round(coalesce(q.avg30.dia, 0.0)))) >= 0 ? 'higher' : 'mixed'), 's': abs((item.systolic - int(round(coalesce(q.avg30.sys, 0.0))))), 'd': abs((item.diastolic - int(round(coalesce(q.avg30.dia, 0.0))))), 'up': (item.systolic - int(round(coalesce(q.avg30.sys, 0.0)))) > 0 ? 'yes' : 'no'})",
@@ -1009,7 +1624,7 @@
     "latestOnly": {
       "component": "Stat",
       "variant": "hero",
-      "label": "Latest reading",
+      "label": "@latestReading",
       "value": "=string(item.systolic) + '/' + string(item.diastolic)",
       "unit": "mmHg",
       "visible": "=coalesce(q.avg30.n, 0) <= 1"
@@ -1023,19 +1638,19 @@
     "latestMeta": {
       "component": "Text",
       "variant": "caption",
-      "text": "=formatRelative(item.at) + ', ' + formatDate(item.at, 'jm') + (has(item.pulse) ? ' · pulse ' + string(item.pulse) + ' bpm' : '') + (item.irregular ? ' · irregular heartbeat' : '')"
+      "text": "=formatRelative(item.at) + ', ' + formatDate(item.at, 'jm') + (has(item.pulse) ? ' · ' + t('pulseBpm', {'n': string(item.pulse)}) : '') + (item.irregular ? ' · ' + t('irregularBeat') : '')"
     },
     "severeNote": {
       "component": "Text",
       "tone": "danger",
-      "text": "This reading is very high. Rest quietly for five minutes and measure again. If it stays this high, contact your doctor straight away. If you also have chest pain, shortness of breath, back pain, numbness, weakness, a change in vision or trouble speaking, call your local emergency number now.",
+      "text": "@thisReadingIsVery",
       "visible": "=(settings.guideline == 'esc' ? item.esc : item.aha) == 'severe' && now() - item.at < duration('PT24H')"
     },
     "logBtn": {
       "component": "Button",
       "variant": "primary",
       "icon": "add",
-      "label": "Log a reading",
+      "label": "@logReading",
       "action": {
         "event": {
           "name": "navigate",
@@ -1047,7 +1662,7 @@
     },
     "avgSection": {
       "component": "Section",
-      "title": "Averages",
+      "title": "@averages",
       "children": ["avgRow1", "avgRow2", "targetStat"],
       "visible": "=size(q.latest) > 0"
     },
@@ -1058,17 +1673,17 @@
     },
     "avg7Stat": {
       "component": "Stat",
-      "label": "Last 7 days",
+      "label": "@last7Days",
       "unit": "mmHg",
       "value": "=coalesce(q.avg7.n, 0) > 0 ? string(int(round(coalesce(q.avg7.sys, 0.0)))) + '/' + string(int(round(coalesce(q.avg7.dia, 0.0)))) : '–'",
-      "caption": "=t('readings', {'n': coalesce(q.avg7.n, 0)}) + (has(q.avg7.pulse) ? ' · pulse ' + string(int(round(coalesce(q.avg7.pulse, 0.0)))) : '')"
+      "caption": "=t('readings', {'n': coalesce(q.avg7.n, 0)}) + (has(q.avg7.pulse) ? ' · ' + t('pulseN', {'n': string(int(round(coalesce(q.avg7.pulse, 0.0))))}) : '')"
     },
     "avg30Stat": {
       "component": "Stat",
-      "label": "Last 30 days",
+      "label": "@last30Days",
       "unit": "mmHg",
       "value": "=coalesce(q.avg30.n, 0) > 0 ? string(int(round(coalesce(q.avg30.sys, 0.0)))) + '/' + string(int(round(coalesce(q.avg30.dia, 0.0)))) : '–'",
-      "caption": "=t('readings', {'n': coalesce(q.avg30.n, 0)}) + (has(q.avg30.pulse) ? ' · pulse ' + string(int(round(coalesce(q.avg30.pulse, 0.0)))) : '')"
+      "caption": "=t('readings', {'n': coalesce(q.avg30.n, 0)}) + (has(q.avg30.pulse) ? ' · ' + t('pulseN', {'n': string(int(round(coalesce(q.avg30.pulse, 0.0))))}) : '')"
     },
     "avgRow2": {
       "component": "Row",
@@ -1077,31 +1692,31 @@
     },
     "morningStat": {
       "component": "Stat",
-      "label": "Mornings, 30 days",
+      "label": "@mornings30Days",
       "icon": "today",
       "unit": "mmHg",
       "value": "=coalesce(q.morning30.n, 0) > 0 ? string(int(round(coalesce(q.morning30.sys, 0.0)))) + '/' + string(int(round(coalesce(q.morning30.dia, 0.0)))) : '–'",
-      "caption": "=t('readings', {'n': coalesce(q.morning30.n, 0)}) + (has(q.morning30.pulse) ? ' · pulse ' + string(int(round(coalesce(q.morning30.pulse, 0.0)))) : '')"
+      "caption": "=t('readings', {'n': coalesce(q.morning30.n, 0)}) + (has(q.morning30.pulse) ? ' · ' + t('pulseN', {'n': string(int(round(coalesce(q.morning30.pulse, 0.0))))}) : '')"
     },
     "eveningStat": {
       "component": "Stat",
-      "label": "Evenings, 30 days",
+      "label": "@evenings30Days",
       "icon": "bedtime",
       "unit": "mmHg",
       "value": "=coalesce(q.evening30.n, 0) > 0 ? string(int(round(coalesce(q.evening30.sys, 0.0)))) + '/' + string(int(round(coalesce(q.evening30.dia, 0.0)))) : '–'",
-      "caption": "=t('readings', {'n': coalesce(q.evening30.n, 0)}) + (has(q.evening30.pulse) ? ' · pulse ' + string(int(round(coalesce(q.evening30.pulse, 0.0)))) : '')"
+      "caption": "=t('readings', {'n': coalesce(q.evening30.n, 0)}) + (has(q.evening30.pulse) ? ' · ' + t('pulseN', {'n': string(int(round(coalesce(q.evening30.pulse, 0.0))))}) : '')"
     },
     "targetStat": {
       "component": "Stat",
-      "label": "Below my target, 30 days",
+      "label": "@belowMyTarget30",
       "icon": "flag",
       "value": "=coalesce(q.avg30.n, 0) > 0 ? string(int(round(double(coalesce(q.inTarget30.n, 0)) * 100.0 / double(coalesce(q.avg30.n, 1))))) + '%' : '–'",
-      "caption": "='Target: below ' + string(settings.targetSys) + '/' + string(settings.targetDia) + ' mmHg'"
+      "caption": "=t('targetBelow', {'s': string(settings.targetSys), 'd': string(settings.targetDia)})"
     },
     "trendChart": {
       "component": "Chart",
       "kind": "line",
-      "title": "Daily averages, last 30 days",
+      "title": "@dailyAveragesLast30",
       "query": "daily30",
       "x": "key",
       "y": ["systolic", "diastolic"],
@@ -1109,33 +1724,33 @@
       "reference": [
         {
           "value": "=settings.targetSys",
-          "label": "Upper target"
+          "label": "@upperTarget"
         },
         {
           "value": "=settings.targetDia",
-          "label": "Lower target"
+          "label": "@lowerTarget"
         }
       ]
     },
     "routineSection": {
       "component": "Section",
-      "title": "Routine",
+      "title": "@routine",
       "children": ["weekBox", "routineText", "remindersBtn"],
       "collapsible": true
     },
     "weekBox": { "component": "Column", "children": ["weekCaption", "weekStrip"], "visible": "=size(q.latest) > 0" },
-    "weekCaption": { "component": "Text", "variant": "caption", "text": "Days with a reading this week" },
+    "weekCaption": { "component": "Text", "variant": "caption", "text": "@daysWithReadingThis" },
     "weekStrip": { "component": "Calendar", "variant": "week", "query": "thisWeek", "date": "date" },
     "routineText": {
       "component": "Text",
       "variant": "caption",
-      "text": "=size(q.reminders.filter(r, r.on)) > 0 ? 'Reminders: ' + join(q.reminders.filter(r, r.on).map(r, r.label + ' at ' + formatDate(r.at, 'jm')), ', ') : 'No reminders are on.'"
+      "text": "=size(q.reminders.filter(r, r.on)) > 0 ? t('remindersList', {'list': join(q.reminders.filter(r, r.on).map(r, t('labelAt', {'label': r.label, 'time': formatDate(r.at, 'jm')})), ', ')}) : t('noRemindersOn')"
     },
     "remindersBtn": {
       "component": "Button",
       "variant": "borderless",
       "icon": "alarm",
-      "label": "Edit reminders",
+      "label": "@editReminders",
       "action": {
         "event": {
           "name": "navigate",
@@ -1148,7 +1763,7 @@
     "disclaimer": {
       "component": "Text",
       "variant": "caption",
-      "text": "Not medical advice. This app does not measure blood pressure; use a validated cuff. Categories describe single readings, using the AHA/ACC guideline (2017, kept in 2025) or the ESC 2024 guideline as you choose in Settings. Only your doctor can diagnose high or low blood pressure, from several readings."
+      "text": "@notMedicalAdviceThis"
     },
     "detailTop": {
       "component": "Column",
@@ -1171,7 +1786,7 @@
     "detailHeader": {
       "component": "Text",
       "tone": "danger",
-      "text": "This reading is very high. Rest quietly for five minutes and measure again. If it stays this high, contact your doctor straight away. If you also have chest pain, shortness of breath, back pain, numbness, weakness, a change in vision or trouble speaking, call your local emergency number now.",
+      "text": "@thisReadingIsVery",
       "visible": "=(settings.guideline == 'esc' ? record.esc : record.aha) == 'severe'"
     },
     "trendsCol": {
@@ -1193,47 +1808,47 @@
     "noTrend": {
       "component": "EmptyState",
       "icon": "show_chart",
-      "title": "Not enough readings yet",
-      "body": "Charts appear once you have readings on two different days.",
+      "title": "@notEnoughReadingsYet",
+      "body": "@chartsAppearOnceHave",
       "visible": "=size(q.daily30) < 2",
       "illustration": "no_data"
     },
     "sysAha": {
       "component": "Chart",
       "kind": "line",
-      "title": "Upper number, daily averages (mmHg)",
+      "title": "@upperNumberDailyAverages",
       "query": "daily30",
       "x": "key",
       "y": ["systolic"],
       "reference": [
         {
           "value": "=settings.targetSys",
-          "label": "Upper target"
+          "label": "@upperTarget"
         }
       ],
       "bands": [
         {
           "from": 90,
           "to": 120,
-          "label": "Normal",
+          "label": "@normal",
           "tone": "success"
         },
         {
           "from": 120,
           "to": 130,
-          "label": "Elevated",
+          "label": "@elevated",
           "tone": "warning"
         },
         {
           "from": 130,
           "to": 140,
-          "label": "High, stage 1",
+          "label": "@highStage1",
           "tone": "warning"
         },
         {
           "from": 140,
           "to": "=max(160.0, coalesce(max(q.daily30.map(r, r.systolic)), 0.0))",
-          "label": "High, stage 2",
+          "label": "@highStage2",
           "tone": "danger"
         }
       ],
@@ -1242,33 +1857,33 @@
     "sysEsc": {
       "component": "Chart",
       "kind": "line",
-      "title": "Upper number, daily averages (mmHg)",
+      "title": "@upperNumberDailyAverages",
       "query": "daily30",
       "x": "key",
       "y": ["systolic"],
       "reference": [
         {
           "value": "=settings.targetSys",
-          "label": "Upper target"
+          "label": "@upperTarget"
         }
       ],
       "bands": [
         {
           "from": 90,
           "to": 120,
-          "label": "Not elevated",
+          "label": "@notElevated",
           "tone": "success"
         },
         {
           "from": 120,
           "to": 140,
-          "label": "Elevated",
+          "label": "@elevated",
           "tone": "warning"
         },
         {
           "from": 140,
           "to": "=max(160.0, coalesce(max(q.daily30.map(r, r.systolic)), 0.0))",
-          "label": "High",
+          "label": "@high",
           "tone": "danger"
         }
       ],
@@ -1277,33 +1892,33 @@
     "diaAha": {
       "component": "Chart",
       "kind": "line",
-      "title": "Lower number, daily averages (mmHg)",
+      "title": "@lowerNumberDailyAverages",
       "query": "daily30",
       "x": "key",
       "y": ["diastolic"],
       "reference": [
         {
           "value": "=settings.targetDia",
-          "label": "Lower target"
+          "label": "@lowerTarget"
         }
       ],
       "bands": [
         {
           "from": 60,
           "to": 80,
-          "label": "Not high",
+          "label": "@notHigh",
           "tone": "success"
         },
         {
           "from": 80,
           "to": 90,
-          "label": "High, stage 1",
+          "label": "@highStage1",
           "tone": "warning"
         },
         {
           "from": 90,
           "to": "=max(100.0, coalesce(max(q.daily30.map(r, r.diastolic)), 0.0))",
-          "label": "High, stage 2",
+          "label": "@highStage2",
           "tone": "danger"
         }
       ],
@@ -1312,33 +1927,33 @@
     "diaEsc": {
       "component": "Chart",
       "kind": "line",
-      "title": "Lower number, daily averages (mmHg)",
+      "title": "@lowerNumberDailyAverages",
       "query": "daily30",
       "x": "key",
       "y": ["diastolic"],
       "reference": [
         {
           "value": "=settings.targetDia",
-          "label": "Lower target"
+          "label": "@lowerTarget"
         }
       ],
       "bands": [
         {
           "from": 60,
           "to": 70,
-          "label": "Not elevated",
+          "label": "@notElevated",
           "tone": "success"
         },
         {
           "from": 70,
           "to": 90,
-          "label": "Elevated",
+          "label": "@elevated",
           "tone": "warning"
         },
         {
           "from": 90,
           "to": "=max(100.0, coalesce(max(q.daily30.map(r, r.diastolic)), 0.0))",
-          "label": "High",
+          "label": "@high",
           "tone": "danger"
         }
       ],
@@ -1347,7 +1962,7 @@
     "weeklyChart": {
       "component": "Chart",
       "kind": "line",
-      "title": "Weekly averages, last 6 months (mmHg)",
+      "title": "@weeklyAveragesLast6",
       "query": "weekly26",
       "x": "key",
       "y": ["systolic", "diastolic"],
@@ -1355,18 +1970,18 @@
       "reference": [
         {
           "value": "=settings.targetSys",
-          "label": "Upper target"
+          "label": "@upperTarget"
         },
         {
           "value": "=settings.targetDia",
-          "label": "Lower target"
+          "label": "@lowerTarget"
         }
       ]
     },
     "pulseChart": {
       "component": "Chart",
       "kind": "line",
-      "title": "Pulse, daily averages (bpm)",
+      "title": "@pulseDailyAveragesBpm",
       "query": "daily30",
       "x": "key",
       "y": ["pulse"],
@@ -1375,7 +1990,7 @@
     "ahaBars": {
       "component": "Chart",
       "kind": "bar",
-      "title": "Readings by category, last 30 days",
+      "title": "@readingsByCategoryLast",
       "query": "aha30",
       "x": "key",
       "y": ["readings"],
@@ -1384,7 +1999,7 @@
     "escBars": {
       "component": "Chart",
       "kind": "bar",
-      "title": "Readings by category, last 30 days",
+      "title": "@readingsByCategoryLast",
       "query": "esc30",
       "x": "key",
       "y": ["readings"],
@@ -1392,18 +2007,18 @@
     },
     "howTo": {
       "component": "Section",
-      "title": "How to measure at home",
+      "title": "@howMeasureAtHome",
       "collapsible": true,
       "children": ["howToText"],
       "collapsed": true
     },
     "howToText": {
       "component": "Text",
-      "text": "- No coffee, exercise or smoking for 30 minutes before.\n- Empty your bladder, then sit with your back supported and feet flat for five minutes.\n- Rest your arm on a table at heart level, with the cuff on bare skin.\n- Don’t talk while measuring.\n- Take two readings a minute apart, in the morning before medication and in the evening, and log both.\n- For a check before a doctor’s visit, many doctors ask for this every day for a week."
+      "text": "@noCoffeeExerciseSmoking"
     },
     "aboutBands": {
       "component": "Section",
-      "title": "About the categories",
+      "title": "@aboutCategories",
       "collapsible": true,
       "children": ["aboutAha", "aboutEsc"],
       "collapsed": true
@@ -1411,12 +2026,12 @@
     "aboutAha": {
       "component": "Text",
       "variant": "caption",
-      "text": "AHA/ACC (American Heart Association and American College of Cardiology): normal below 120/80; elevated 120–129 and below 80; high stage 1 130–139 or 80–89; high stage 2 140 or more, or 90 or more; very high above 180 or above 120. Low means below 90/60 (a common threshold, used by the NHS)."
+      "text": "@ahaAccAmericanHeart"
     },
     "aboutEsc": {
       "component": "Text",
       "variant": "caption",
-      "text": "ESC 2024 (European Society of Cardiology): not elevated below 120/70; elevated 120–139 or 70–89; high (hypertension) 140/90 or more; very high 180 or more, or 110 or more. Low means below 90/60."
+      "text": "@esc2024EuropeanSociety"
     },
     "reportCol": {
       "component": "Column",
@@ -1434,24 +2049,24 @@
     },
     "periodPicker": {
       "component": "ChoicePicker",
-      "label": "Period",
+      "label": "@period",
       "displayStyle": "chips",
       "options": [
         {
           "value": "7",
-          "label": "7 days"
+          "label": "@n7Days"
         },
         {
           "value": "30",
-          "label": "30 days"
+          "label": "@n30Days"
         },
         {
           "value": "90",
-          "label": "90 days"
+          "label": "@n90Days"
         },
         {
           "value": "365",
-          "label": "1 year"
+          "label": "@n1Year"
         }
       ],
       "bind": "/state/days"
@@ -1468,16 +2083,16 @@
     },
     "rAvgStat": {
       "component": "Stat",
-      "label": "Average",
+      "label": "@average",
       "unit": "mmHg",
       "value": "=coalesce(q.rAgg.n, 0) > 0 ? string(int(round(coalesce(q.rAgg.sys, 0.0)))) + '/' + string(int(round(coalesce(q.rAgg.dia, 0.0)))) : '–'",
-      "caption": "=has(q.rAgg.pulse) ? 'Pulse ' + string(int(round(coalesce(q.rAgg.pulse, 0.0)))) + ' bpm' : 'No pulse logged'"
+      "caption": "=has(q.rAgg.pulse) ? t('pulseCap', {'n': string(int(round(coalesce(q.rAgg.pulse, 0.0))))}) : t('noPulse')"
     },
     "rTargetStat": {
       "component": "Stat",
-      "label": "Below my target",
+      "label": "@belowMyTarget",
       "value": "=coalesce(q.rAgg.n, 0) > 0 ? string(int(round(double(coalesce(q.rTarget.n, 0)) * 100.0 / double(coalesce(q.rAgg.n, 1))))) + '%' : '–'",
-      "caption": "='Below ' + string(settings.targetSys) + '/' + string(settings.targetDia) + ' mmHg'"
+      "caption": "=t('belowTarget', {'s': string(settings.targetSys), 'd': string(settings.targetDia)})"
     },
     "rStatRow2": {
       "component": "Row",
@@ -1486,19 +2101,19 @@
     },
     "rMorningStat": {
       "component": "Stat",
-      "label": "Mornings",
+      "label": "@mornings",
       "icon": "today",
       "unit": "mmHg",
       "value": "=coalesce(q.rMorning.n, 0) > 0 ? string(int(round(coalesce(q.rMorning.sys, 0.0)))) + '/' + string(int(round(coalesce(q.rMorning.dia, 0.0)))) : '–'",
-      "caption": "=t('readings', {'n': coalesce(q.rMorning.n, 0)}) + (has(q.rMorning.pulse) ? ' · pulse ' + string(int(round(coalesce(q.rMorning.pulse, 0.0)))) : '')"
+      "caption": "=t('readings', {'n': coalesce(q.rMorning.n, 0)}) + (has(q.rMorning.pulse) ? ' · ' + t('pulseN', {'n': string(int(round(coalesce(q.rMorning.pulse, 0.0))))}) : '')"
     },
     "rEveningStat": {
       "component": "Stat",
-      "label": "Evenings",
+      "label": "@evenings",
       "icon": "bedtime",
       "unit": "mmHg",
       "value": "=coalesce(q.rEvening.n, 0) > 0 ? string(int(round(coalesce(q.rEvening.sys, 0.0)))) + '/' + string(int(round(coalesce(q.rEvening.dia, 0.0)))) : '–'",
-      "caption": "=t('readings', {'n': coalesce(q.rEvening.n, 0)}) + (has(q.rEvening.pulse) ? ' · pulse ' + string(int(round(coalesce(q.rEvening.pulse, 0.0)))) : '')"
+      "caption": "=t('readings', {'n': coalesce(q.rEvening.n, 0)}) + (has(q.rEvening.pulse) ? ' · ' + t('pulseN', {'n': string(int(round(coalesce(q.rEvening.pulse, 0.0))))}) : '')"
     },
     "rStatRow3": {
       "component": "Row",
@@ -1507,24 +2122,24 @@
     },
     "rHighStat": {
       "component": "Stat",
-      "label": "Highest",
+      "label": "@highest",
       "icon": "trending_up",
       "unit": "mmHg",
       "value": "=coalesce(q.rAgg.n, 0) > 0 ? string(coalesce(q.rAgg.maxSys, 0)) + '/' + string(coalesce(q.rAgg.maxDia, 0)) : '–'",
-      "caption": "Upper and lower, each at its highest"
+      "caption": "@upperLowerEachAt"
     },
     "rLowStat": {
       "component": "Stat",
-      "label": "Lowest",
+      "label": "@lowest",
       "icon": "trending_down",
       "unit": "mmHg",
       "value": "=coalesce(q.rAgg.n, 0) > 0 ? string(coalesce(q.rAgg.minSys, 0)) + '/' + string(coalesce(q.rAgg.minDia, 0)) : '–'",
-      "caption": "Upper and lower, each at its lowest"
+      "caption": "@upperLowerEachAt2"
     },
     "rChart": {
       "component": "Chart",
       "kind": "line",
-      "title": "Daily averages (mmHg)",
+      "title": "@dailyAveragesMmhg",
       "query": "rDaily",
       "x": "key",
       "y": ["systolic", "diastolic"],
@@ -1532,11 +2147,11 @@
       "reference": [
         {
           "value": "=settings.targetSys",
-          "label": "Upper target"
+          "label": "@upperTarget"
         },
         {
           "value": "=settings.targetDia",
-          "label": "Lower target"
+          "label": "@lowerTarget"
         }
       ]
     },
@@ -1544,7 +2159,7 @@
       "component": "Button",
       "variant": "primary",
       "icon": "share",
-      "label": "Share as text",
+      "label": "@shareAsText",
       "visible": "=coalesce(q.rAgg.n, 0) > 0",
       "action": {
         "event": {
@@ -1558,7 +2173,7 @@
     "csvBtn": {
       "component": "Button",
       "icon": "download",
-      "label": "Save as CSV file",
+      "label": "@saveAsCsvFile",
       "visible": "=coalesce(q.rAgg.n, 0) > 0",
       "action": {
         "event": {
@@ -1572,13 +2187,13 @@
     "reportNote": {
       "component": "Text",
       "variant": "caption",
-      "text": "The text report lists every reading in the period with its time, pulse, arm, position and notes. The CSV file opens in any spreadsheet. A PDF report is not available yet."
+      "text": "@textReportListsEvery"
     },
     "importBtn": {
       "component": "Button",
       "icon": "upload",
       "iconOnly": true,
-      "label": "Import readings from a file",
+      "label": "@importReadingsFromFile",
       "action": {
         "event": {
           "name": "importReadings"
@@ -1589,7 +2204,7 @@
       "component": "Button",
       "icon": "notifications",
       "iconOnly": true,
-      "label": "Send a test reminder",
+      "label": "@sendTestReminder",
       "action": {
         "event": {
           "name": "testReminder"
@@ -1607,7 +2222,7 @@
     },
     "irIntro": {
       "component": "Text",
-      "text": "These rows were left out, with the reason for each:"
+      "text": "@theseRowsWereLeft"
     },
     "irLines": {
       "component": "Text",
@@ -1693,8 +2308,8 @@
           "capability": "share",
           "action": "share",
           "args": {
-            "title": "Blood pressure readings",
-            "text": "=t('report', {'from': formatDate(addDays(today(), 1 - args.days), 'yMMMd'), 'to': formatDate(today(), 'yMMMd'), 'n': coalesce(vars.a.n, 0), 's': int(round(coalesce(vars.a.sys, 0.0))), 'd': int(round(coalesce(vars.a.dia, 0.0))), 'p': int(round(coalesce(vars.a.pulse, 0.0))), 'mn': coalesce(vars.m.n, 0), 'ms': int(round(coalesce(vars.m.sys, 0.0))), 'md': int(round(coalesce(vars.m.dia, 0.0))), 'en': coalesce(vars.e.n, 0), 'es': int(round(coalesce(vars.e.sys, 0.0))), 'ed': int(round(coalesce(vars.e.dia, 0.0))), 'b': settings.guideline, 'lines': join(vars.r.map(r, formatDate(r.at, 'yMMMEdjm') + '  ' + string(r.systolic) + '/' + string(r.diastolic) + (has(r.pulse) ? '  pulse ' + string(r.pulse) : '') + (r.irregular ? '  irregular' : '') + (has(r.note) ? '  – ' + coalesce(r.note, '') : '')), '\\n')})"
+            "title": "=t('bloodPressureReadings')",
+            "text": "=t('report', {'from': formatDate(addDays(today(), 1 - args.days), 'yMMMd'), 'to': formatDate(today(), 'yMMMd'), 'n': coalesce(vars.a.n, 0), 's': int(round(coalesce(vars.a.sys, 0.0))), 'd': int(round(coalesce(vars.a.dia, 0.0))), 'p': int(round(coalesce(vars.a.pulse, 0.0))), 'mn': coalesce(vars.m.n, 0), 'ms': int(round(coalesce(vars.m.sys, 0.0))), 'md': int(round(coalesce(vars.m.dia, 0.0))), 'en': coalesce(vars.e.n, 0), 'es': int(round(coalesce(vars.e.sys, 0.0))), 'ed': int(round(coalesce(vars.e.dia, 0.0))), 'b': settings.guideline, 'lines': join(vars.r.map(r, formatDate(r.at, 'yMMMEdjm') + '  ' + string(r.systolic) + '/' + string(r.diastolic) + (has(r.pulse) ? '  ' + t('pulseN', {'n': string(r.pulse)}) : '') + (r.irregular ? '  ' + t('irregular') : '') + (has(r.note) ? '  – ' + coalesce(r.note, '') : '')), '\\n')})"
           }
         }
       ]
@@ -1756,8 +2371,8 @@
           "capability": "notify.local",
           "action": "show",
           "args": {
-            "title": "=coalesce(args.reminder.label, 'Blood pressure check')",
-            "body": "Sit quietly for five minutes, then take two readings a minute apart.",
+            "title": "=coalesce(args.reminder.label, t('bloodPressureCheck'))",
+            "body": "=t('sitQuietlyFiveMinutes2')",
             "open": {
               "screen": "readingForm"
             },
@@ -1774,8 +2389,8 @@
           "capability": "notify.local",
           "action": "show",
           "args": {
-            "title": "Reminders are on",
-            "body": "You’ll get a reminder at the times you set. Tap one to log a reading.",
+            "title": "=t('remindersAre')",
+            "body": "=t('llGetReminderAt')",
             "open": {
               "screen": "reminders"
             },
@@ -1785,7 +2400,7 @@
         },
         {
           "type": "toast",
-          "text": "Test reminder sent."
+          "text": "@testReminderSent"
         }
       ]
     },
@@ -1793,9 +2408,9 @@
       "steps": [
         {
           "type": "confirm",
-          "title": "Import readings from a file?",
-          "body": "Pick a CSV file saved by this app or by another blood-pressure app. Date, time, upper and lower numbers, pulse, arm, position, irregular heartbeat, context tags and notes are read, in mmHg or kPa; rows without both numbers or with an unreadable date are skipped. A reading already in the app, with the same time and both numbers, is left out, so a newer file from the same app adds only what is new. Check the date order in Settings first.",
-          "confirmLabel": "Pick a file"
+          "title": "@importReadingsFromFile2",
+          "body": "@pickCsvFileSaved",
+          "confirmLabel": "@pickFile"
         },
         {
           "type": "capability",
@@ -1819,7 +2434,8 @@
                   "Logged at",
                   "Date",
                   "Datum",
-                  "Dátum"
+                  "Dátum",
+                  "Dátum a čas"
                 ],
                 "timeFrom": ["Time", "Measurement time", "Uhrzeit", "Zeit", "Čas"]
               },
@@ -1833,7 +2449,8 @@
                   "Systolic BP",
                   "BP Systolic",
                   "Systole",
-                  "Systolisch"
+                  "Systolisch",
+                  "Horný (systolický)"
                 ],
                 "units": {
                   "kPa": 7.50062
@@ -1849,7 +2466,8 @@
                   "Diastolic BP",
                   "BP Diastolic",
                   "Diastole",
-                  "Diastolisch"
+                  "Diastolisch",
+                  "Dolný (diastolický)"
                 ],
                 "units": {
                   "kPa": 7.50062
@@ -1859,24 +2477,32 @@
                 "from": ["Pulse", "Pulse rate", "Heart rate", "HR", "BPM", "Puls", "Pulz", "PUL"]
               },
               "arm": {
-                "from": ["Arm", "Side", "Measurement arm"],
+                "from": ["Arm", "Side", "Measurement arm", "Ruka"],
                 "values": {
                   "L": "left",
                   "links": "left",
                   "ľavá": "left",
                   "R": "right",
                   "rechts": "right",
-                  "pravá": "right"
+                  "pravá": "right",
+                  "Left arm": "left",
+                  "Ľavá ruka": "left",
+                  "Right arm": "right",
+                  "Pravá ruka": "right"
                 }
               },
               "position": {
-                "from": ["Position", "Posture", "Body position", "Measurement position"],
+                "from": ["Position", "Posture", "Body position", "Measurement position", "Poloha"],
                 "values": {
                   "Lying": "lying",
                   "Seated": "sitting",
                   "Sitzend": "sitting",
                   "Stehend": "standing",
-                  "Liegend": "lying"
+                  "Liegend": "lying",
+                  "V sede": "sitting",
+                  "V stoji": "standing",
+                  "Lying down": "lying",
+                  "V ľahu": "lying"
                 }
               },
               "irregular": {
@@ -1887,7 +2513,9 @@
                   "Irregular",
                   "Irregular pulse",
                   "Arrhythmia",
-                  "AFib"
+                  "AFib",
+                  "Monitor showed an irregular heartbeat",
+                  "Tlakomer ukázal nepravidelný tep"
                 ],
                 "values": {
                   "Detected": "true",
@@ -1897,7 +2525,7 @@
                 }
               },
               "tags": {
-                "from": ["Context", "Tags", "Tag", "Labels", "Label"],
+                "from": ["Context", "Tags", "Tag", "Labels", "Label", "Okolnosti"],
                 "values": {
                   "After coffee": "caffeine",
                   "After tea": "caffeine",
@@ -1908,7 +2536,21 @@
                   "Sport": "exercise",
                   "Unwell": "unwell",
                   "Pain": "pain",
-                  "*": ""
+                  "*": "",
+                  "Before medication": "beforeMeds",
+                  "Pred liekmi": "beforeMeds",
+                  "After medication": "afterMeds",
+                  "Po liekoch": "afterMeds",
+                  "After exercise": "exercise",
+                  "Po cvičení": "exercise",
+                  "After coffee or tea": "caffeine",
+                  "Po káve alebo čaji": "caffeine",
+                  "Stressed or anxious": "stress",
+                  "Stres alebo úzkosť": "stress",
+                  "Feeling unwell": "unwell",
+                  "Nevoľnosť": "unwell",
+                  "In pain": "pain",
+                  "Bolesť": "pain"
                 }
               },
               "note": {
@@ -1961,7 +2603,7 @@
           "entity": "reminder",
           "when": "=size(vars.r) == 0",
           "values": {
-            "label": "Morning reading",
+            "label": "=t('morningReading')",
             "at": "07:30",
             "days": "FREQ=DAILY",
             "on": true
@@ -1972,7 +2614,7 @@
           "entity": "reminder",
           "when": "=size(vars.r) == 0",
           "values": {
-            "label": "Evening reading",
+            "label": "=t('eveningReading')",
             "at": "20:00",
             "days": "FREQ=DAILY",
             "on": true
