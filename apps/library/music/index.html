@@ -4,15 +4,15 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="color-scheme" content="light dark" />
-        <title>Music</title>
+        <title>Music Player</title>
         <script type="application/zapli+json" id="zapli-manifest">
             {
                 "spec": "zapli/0.2",
                 "app": {
                     "id": "library/music",
                     "kind": "web",
-                    "name": "Music",
-                    "version": "1.0.0",
+                    "name": "Music Player",
+                    "version": "1.0.1",
                     "icon": "music_note",
                     "category": "music_and_audio",
                     "ageRating": "everyone",
@@ -1435,7 +1435,7 @@
         </style>
     </head>
     <body>
-        <noscript><p style="padding: 1rem">Music needs JavaScript to run.</p></noscript>
+        <noscript><p style="padding: 1rem">Music Player needs JavaScript to run.</p></noscript>
         <span
             id="remProbe"
             aria-hidden="true"
@@ -1444,7 +1444,7 @@
 
         <div id="lib" class="view">
             <header class="top">
-                <h1 class="brand"><span class="logo" id="logo" aria-hidden="true"></span><span>Music</span></h1>
+                <h1 class="brand"><span class="logo" id="logo" aria-hidden="true"></span><span>Music Player</span></h1>
             </header>
             <div id="demoBar" class="demo" hidden></div>
             <div class="tabbar" id="tabbar" hidden>
@@ -1606,7 +1606,7 @@
                     findMusic: "Find my music",
                     welcomeSteps: "Tap the button, then agree when your phone asks about your music.",
                     welcomeAgain: "Nothing changed. Tap the button again whenever you are ready.",
-                    deniedTitle: "Music can’t see your songs yet",
+                    deniedTitle: "Music Player can’t see your songs yet",
                     deniedBody:
                         "Access to your music is switched off for this app. Tap Open settings and switch it on, then come back here.",
                     osDeniedTitle: "Music access is off in the phone’s settings",
@@ -1615,7 +1615,7 @@
                     openSettings: "Open settings",
                     checkAgain: "Check again",
                     emptyTitle: "No songs on this phone yet",
-                    emptyBody: "Music shows the songs that are saved on the phone itself.",
+                    emptyBody: "Music Player shows the songs that are saved on the phone itself.",
                     emptyHow:
                         "To add songs, connect the phone to a computer with its cable, open the phone on the computer and copy your songs into its Music folder. They appear here by themselves.",
                     emptyNote: "Songs in streaming apps stay inside those apps and don’t show here.",
@@ -1626,10 +1626,10 @@
                     errorBody: "Something went wrong while reading the songs. Please try again.",
                     tryAgain: "Try again",
                     unsupportedTitle: "This version of Zapli can’t play music yet",
-                    unsupportedBody: "Update Zapli, then open Music again.",
+                    unsupportedBody: "Update Zapli, then open Music Player again.",
                     seeDemo: "See a demo",
                     demoTitle: "A demo with made-up songs and no sound.",
-                    demoBody: "Inside the Zapli app, Music plays your own songs from your phone.",
+                    demoBody: "Inside the Zapli app, Music Player plays your own songs from your phone.",
                     demoChip: "Demo, no sound",
                     gone: "That song is no longer on the phone.",
                     tapAgain: "Please tap again.",
@@ -1725,10 +1725,10 @@
                     errorBody: "Pri načítaní skladieb sa niečo pokazilo. Skúste to znova.",
                     tryAgain: "Skúsiť znova",
                     unsupportedTitle: "Táto verzia aplikácie Zapli zatiaľ nevie prehrávať hudbu",
-                    unsupportedBody: "Aktualizujte Zapli a potom znova otvorte nástroj „Music“.",
+                    unsupportedBody: "Aktualizujte Zapli a potom znova otvorte aplikáciu „Music Player“.",
                     seeDemo: "Pozrieť ukážku",
                     demoTitle: "Ukážka s vymyslenými skladbami, bez zvuku.",
-                    demoBody: "V aplikácii Zapli prehráva nástroj „Music“ vaše vlastné skladby z telefónu.",
+                    demoBody: "V Zapli prehráva aplikácia „Music Player“ vaše vlastné skladby z telefónu.",
                     demoChip: "Ukážka, bez zvuku",
                     gone: "Táto skladba už v telefóne nie je.",
                     tapAgain: "Klepnite, prosím, znova.",
