@@ -1,14 +1,14 @@
 ---
 name: library-tool
-description: Write a new tool or improve an existing one in the Zapli library (this repository) - a declarative app (app.json, spec "zapli/0.2") or a web app (index.html with an embedded manifest), its listing.json, fictional sample data and import samples, its own icon from icons/, a translation, and the version bump. Use for any change under apps/ or icons/, for fixing a tool's bug or wording, adding an import format, or translating a tool. Do not use for changing the Zapli app itself or the file format, and never for ads, tracking, accounts or network access without a maintainer's review.
+description: Write a new app or improve an existing one in the Zapli library (this repository) - a declarative app (app.json, spec "zapli/0.2") or a web app (index.html with an embedded manifest), its listing.json, fictional sample data and import samples, its own icon from icons/, a translation, and the version bump. Use for any change under apps/ or icons/, for fixing an app's bug or wording, adding an import format, or translating an app. Do not use for changing the Zapli app itself or the file format, and never for ads, tracking, accounts or network access without a maintainer's review.
 ---
 
-# Writing a tool for the Zapli library
+# Writing an app for the Zapli library
 
-The library is a set of original, offline, ad-free tools that the Zapli app (formerly anyApp) ships and updates from
-this repository. A tool is one of two kinds, never both:
+The library is a set of original, offline, ad-free apps that Zapli (formerly anyApp) ships and updates from
+this repository. An app is one of two kinds, never both:
 
-| The tool                                                               | Kind                                  | File         |
+| The app                                                                | Kind                                  | File         |
 | ---------------------------------------------------------------------- | ------------------------------------- | ------------ |
 | Keeps records: a tracker, log, list, wallet, flashcards                | **Declarative app**: Zapli draws it   | `app.json`   |
 | Draws its own screen: a game, a canvas, a camera flow, a custom visual | **Web app**: HTML, CSS and JavaScript | `index.html` |
@@ -21,13 +21,13 @@ names still work, but the library check flags them.
 ## 1. Where things go
 
 ```
-apps/library/<name>/          one tool; its app id is "library/<name>" (lowercase a-z, 0-9 and -)
-  app.json | index.html       the tool
+apps/library/<name>/          one app; its app id is "library/<name>" (lowercase a-z, 0-9 and -)
+  app.json | index.html       the app
   listing.json                how the library presents it
-  import-samples/<file>       fictional files in each format the tool imports (every file listed in the listing)
+  import-samples/<file>       fictional files in each format the app imports (every file listed in the listing)
   screenshots/<file>.png      screenshots with the sample data (taken by maintainers)
   dev/                        scripts that are not shipped (optional)
-icons/svg/<name>.svg          the tool's icon source; icons/render.swift embeds it as app.iconData
+icons/svg/<name>.svg          the app's icon source; icons/render.swift embeds it as app.iconData
 ```
 
 `apps/samples/<name>/` holds sample apps that show the format; they follow the same rules but are not shipped.
@@ -66,7 +66,7 @@ screen by default.
 
 Top-level keys: `spec`, `app`, `theme`, `i18n`, `permissions`, `credentials`, `dataFlows`, `connectors`, `settings`,
 `entities`, `queries`, `actions`, `triggers`, `navigation`, `screens`, `components`, `widgets`, `sharing`,
-`migrations`, `meta`, `functions`, `web`. Read the existing tools (Water and To-do are good starting points) for how
+`migrations`, `meta`, `functions`, `web`. Read the existing apps (Water and To-do are good starting points) for how
 each is used; copy their patterns rather than inventing new ones.
 
 The rules that catch most mistakes:
@@ -82,7 +82,7 @@ The rules that catch most mistakes:
   `url`, `email`, `phone`, `recurrence` (an RRULE that names its day, `"FREQ=WEEKLY;BYDAY=MO"`), `ref` and `inverse`.
   Dates and durations are ISO 8601 (`"2026-10-13"`, `"08:00"`, `"P1D"`).
 - **Icons** are names from the built-in Material Symbols set (`task_alt`, `local_drink`, `receipt_long`, …); copy a
-  name another tool uses when you are unsure. An unknown name shows a neutral fallback.
+  name another library app uses when you are unsure. An unknown name shows a neutral fallback.
 - **No raw styling:** `theme` tokens and a semantic `tone` (`primary`, `neutral`, `success`, `warning`, `danger`) or a
   `hue`. Light and dark follow by themselves.
 - **Accessibility:** a `label` on every icon-only button and image; a name field gets `kind: "name"`.
@@ -91,7 +91,7 @@ The rules that catch most mistakes:
   Data that leaves the app (share, file export) needs a `dataFlows` entry `{from, to, purpose}`, and health, money or
   private fields carry a `sensitivity` (`personal`, `financial`, `health` or `secret`).
 - **Never** a password, PIN, card-number or seed-phrase field, and no such word in an ordinary label or id (`pin`,
-  `cvv`, `mnemonic`, "Pin to the top"): lock a tool with `auth.lock` instead.
+  `cvv`, `mnemonic`, "Pin to the top"): lock an app with `auth.lock` instead.
 - **Text in the user's language:** `"@key"` for a plain string or `"=t('key', {'n': x})"` for a message with
   arguments, both from `i18n.strings`, whose messages use ICU plural and select (`"{n, plural, one {# day} other {#
 days}}"`).
@@ -104,10 +104,10 @@ days}}"`).
 
 ## 3. A web app (`index.html`)
 
-One self-contained HTML file with its manifest in `<head>`. A library tool is always one
+One self-contained HTML file with its manifest in `<head>`. A library app is always one
 file, so everything it shows is in it: keep the file under 2 MB, the most every Zapli version installs. Draw with
 CSS, SVG or a canvas instead of embedding pictures, and never paste big images, sounds or fonts in as base64 (it
-adds a third to their size). A bigger game, or a tool with many images, sounds or fonts, does not fit the library's
+adds a third to their size). A bigger game, or an app with many images, sounds or fonts, does not fit the library's
 one-file format: make it a `.zapli` package (a zip of `manifest.json`, `index.html` and its files, packed with
 `zapli pack`; up to 20 MB, 10 MB a file) and import it in Zapli with Import, then From a file, as Zapli's skill pack
 describes.
@@ -155,7 +155,7 @@ Mines' head, shortened:
   `await zapli.ready` (it can reject: catch it) before `zapli.supports("…")`, and keep a browser fallback for every
   call (`localStorage` for `zapli.data.kv`, the page's own dialog for `zapli.ui.confirm`).
 - **Storage:** wrap `localStorage` and IndexedDB in `try`/`catch` with an in-memory fallback. `zapli.data.kv` keeps
-  data in the tool's own store, which travels with the user's export (Solitaire keeps both and lets the newer win).
+  data in the app's own store, which travels with the user's export (Solitaire keeps both and lets the newer win).
 - **Save on `pause`:** `zapli.app.on("pause", …)` (and `visibilitychange` in a browser); rotation and a dark-mode
   switch reload the page, so restore state from storage at start.
 - **Hash routes** (`#/stats`) for panels and screens; Back closes the open panel first. Declare them in `web.routes`.
@@ -175,7 +175,7 @@ Mines' head, shortened:
 | `id`          | yes      | The app id, the same as `app.id` and the folder: `library/<name>`                                                                           |
 | `category`    | yes      | A Google Play category id in lowercase: `finance`, `health_and_fitness`, `productivity`, `tools`, `game_puzzle`, …; equal to `app.category` |
 | `replaces`    | yes      | The app type in generic words, at most 60 characters: `expense tracker`, `water reminder`. Never another app's name                         |
-| `title`       | yes      | The tool's name in the library, at most 30 characters, usually `app.name`                                                                   |
+| `title`       | yes      | The app's name in the library, at most 30 characters, usually `app.name`                                                                    |
 | `summary`     | yes      | One line, at most 80 characters: what it does for its user                                                                                  |
 | `description` | yes      | Markdown, at most 4,000 characters: what it does, what it never does (ads, tracking, accounts) and where the data stays                     |
 | `license`     | yes      | `MIT` (or `Apache-2.0`, `MIT-0`, `0BSD`, `CC0-1.0`); the same as `app.license`                                                              |
@@ -198,10 +198,10 @@ Mines' head, shortened:
 
 ## 5. The icon
 
-Each tool carries its own 192 × 192 px PNG in `app.iconData` (plain base64, the last member of the `app` block) and
+Each app carries its own 192 × 192 px PNG in `app.iconData` (plain base64, the last member of the `app` block) and
 keeps `app.icon` as the fallback. Never edit `iconData` by hand: draw `icons/svg/<name>.svg` (192 × 192, full bleed,
 everything that matters inside the inscribed circle, bold shapes that read at 48 px, no text) following
-`icons/README.md`, then run `swift icons/render.swift` on a Mac. It writes `icons/png/<name>.png`, the tool's
+`icons/README.md`, then run `swift icons/render.swift` on a Mac. It writes `icons/png/<name>.png`, the app's
 `app.iconData` and `icons/contact-sheet.png`; `swift icons/render.swift --check` verifies them. Without a Mac, send the
 SVG and ask a maintainer to render it.
 
@@ -209,11 +209,11 @@ SVG and ask a maintainer to render it.
 
 - **Web apps** keep their texts in a `STRINGS` table with one object per language (Solitaire and Pocket Scan have `en`
   and `sk`). Add a language as a complete object with every key of `en` and the plural forms the language needs (the
-  `sk` object shows how), extend the code that picks the language (the user's choice where the tool offers one, then
-  `zapli.app.locale()`, then `navigator.language`), and add it to any language setting the tool shows.
+  `sk` object shows how), extend the code that picks the language (the user's choice where the app offers one, then
+  `zapli.app.locale()`, then `navigator.language`), and add it to any language setting the app shows.
 - **Declarative apps** read translations from `i18n.strings` (`{ "key": { "en": "…", "sk": "…" } }`), but most of their
   texts are still plain strings. Ask in an issue before translating one, so the strings can be moved to keys first.
-- Keep the tool's name as it is in every language (Solitaire stays Solitaire, Water stays Water): in its title,
+- Keep the app's name as it is in every language (Solitaire stays Solitaire, Water stays Water): in its title,
   widgets and notifications, a name is a name. Translate everything else.
 - Translate for people, not word by word: natural wording a native speaker would use, the phone's own words for
   everyday actions (tap, share, photos), and the same term for the same thing everywhere. Translations come from native
@@ -223,7 +223,7 @@ SVG and ask a maintainer to render it.
 ## 7. Versions
 
 - Raise `app.version` for every change users should get: a patch for fixes and wording, a minor version for new
-  features or a new language, a major version for a rework. Zapli updates an installed tool only to a newer version.
+  features or a new language, a major version for a rework. Zapli updates an installed app only to a newer version.
 - Keep `listing.json` in step: when features change, the description says so.
 - Users keep their data. Never rename or remove a stored field or entity, or change a field's type, without a
   `migrations` entry; ask a maintainer first.
@@ -239,7 +239,7 @@ ticket or decision numbers, no TODOs, no jokes, no personal names, paths or devi
       around them (Prettier, 120 columns).
 - [ ] `app.id`, the listing's `id` and the folder agree; `app.license` and the listing's `license` agree;
       `app.category` and the listing's `category` agree.
-- [ ] `app.version` is raised for a change users should get, and the listing's description matches the tool.
+- [ ] `app.version` is raised for a change users should get, and the listing's description matches the app.
 - [ ] Every phone feature used has a `permissions` entry with a purpose; nothing reaches the network.
 - [ ] No code, font or style loaded from the network; no `eval`, frames or password fields.
 - [ ] Sample data and import samples are fictional; every import sample is listed in `migration.samples`.
