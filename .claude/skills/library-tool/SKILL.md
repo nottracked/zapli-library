@@ -205,6 +205,8 @@ SVG and ask a maintainer to render it.
   `zapli.app.locale()`, then `navigator.language`), and add it to any language setting the tool shows.
 - **Declarative apps** read translations from `i18n.strings` (`{ "key": { "en": "…", "sk": "…" } }`), but most of their
   texts are still plain strings. Ask in an issue before translating one, so the strings can be moved to keys first.
+- Keep the tool's name as it is in every language (Solitaire stays Solitaire, Water stays Water): in its title,
+  widgets and notifications, a name is a name. Translate everything else.
 - Translate for people, not word by word: natural wording a native speaker would use, the phone's own words for
   everyday actions (tap, share, photos), and the same term for the same thing everywhere. Translations come from native
   speakers; a machine translation alone is not enough.

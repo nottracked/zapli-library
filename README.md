@@ -72,8 +72,8 @@ There are two kinds of app, and a tool is one or the other:
 7. **Accessible.** Real labels on every control, touch targets of at least 48 px, readable at large text sizes, and
    nothing told by colour alone.
 8. **Light and dark.** Every screen works in both.
-9. **English first, translations welcome.** Every tool works in English; some also speak other languages (Solitaire
-   and Pocket Scan speak Slovak too).
+9. **English first, translations welcome.** Every tool works in English and Slovak, following the phone's language;
+   a tool's name stays the same in every language.
 
 ## Versions
 
