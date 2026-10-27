@@ -831,7 +831,8 @@
                         <li><strong>It works offline.</strong> The app runs on your phone and needs no internet.</li>
                         <li>
                             <strong>Your data stays on your phone.</strong> What you enter is kept in Zapli’s private
-                            storage on your phone.
+                            storage on your phone. The prompt asks your AI to keep it in Zapli’s own store, so it goes
+                            with Zapli’s backups once they arrive in a later version.
                         </li>
                         <li>
                             <strong>No ads, no tracking, no account.</strong> Zapli has none, and it refuses every
@@ -940,9 +941,10 @@
                         the app out of the chat
                     </h2>
                     <p>
-                        The app is one file in the AI’s answer: a web page that starts with
-                        <code>&lt;!doctype html&gt;</code>, or a data app that starts with <code>{</code>. Bring the
-                        whole file to Zapli in one of these ways.
+                        The app is one file in the AI’s answer: usually a web page that starts with
+                        <code>&lt;!doctype html&gt;</code>, or a data app that starts with <code>{</code>. An app with
+                        pictures or sounds may come as a <code>.zapli</code> file to download instead. Bring the whole
+                        file to Zapli in one of these ways.
                     </p>
                     <ul class="ways">
                         <li>
@@ -1224,8 +1226,8 @@
 
                     <h3>The AI made something else</h3>
                     <p>
-                        If you got several files, a zip, or a React component instead of a page, ask: “Please make it
-                        one complete HTML file for Zapli.”
+                        If you got several loose files or a React component instead of a page, ask: “Please make it one
+                        complete HTML file for Zapli.”
                     </p>
 
                     <h3>Limits</h3>
@@ -1252,9 +1254,9 @@
                         </tbody>
                     </table>
                     <p>
-                        Most apps an AI writes are far smaller. An app gets big when pictures or sounds are packed
-                        inside it: ask your AI to draw pictures in code instead. Packages are for developers; the
-                        <a href="https://github.com/nottracked/zapli-library#package-apps">README</a> describes them.
+                        Most apps an AI writes are far smaller. An app with pictures, sounds or many files comes as a
+                        <code>.zapli</code> package, a zip of its files: download it and import it with
+                        <span class="ui">From a file</span>.
                     </p>
                 </section>
 
