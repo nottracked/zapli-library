@@ -245,6 +245,18 @@ h1:focus {
     font-weight: 600;
 }
 
+/* The link to the guide for making your own app. */
+.hero-more {
+    margin: -12px 0 16px;
+}
+
+.hero-more a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    font-weight: 600;
+}
+
 .stickers {
     display: flex;
     flex-wrap: wrap;

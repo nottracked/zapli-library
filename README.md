@@ -9,6 +9,9 @@ here when someone installs one.
 Every app is an **original**: written from scratch for this library, free of ads, tracking and accounts, and free to
 copy and remix under its licence. Each one works offline and keeps its data on the phone.
 
+Want an app of your own? [Make your own app for Zapli with your AI](https://nottracked.github.io/zapli-library/guide/)
+(`guide/`) shows how, step by step, with a prompt to paste into any AI chat.
+
 The file formats use the Zapli names (`"spec": "zapli/0.2"`, `window.zapli`, the `--zapli-*` CSS properties, `.zapli`
 packages). Files with the old anyApp names keep working, but every app here uses the new ones.
 
