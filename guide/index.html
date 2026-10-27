@@ -7,7 +7,7 @@
              hash here (openssl dgst -sha256 -binary on the script's text, then base64). -->
         <meta
             http-equiv="Content-Security-Policy"
-            content="default-src 'none'; script-src 'sha256-bjsSEP79ZWk5AgxbVLdgiYzU+Ti9cqJYTtM3BxiidfE='; style-src 'unsafe-inline'; img-src data:; connect-src 'self'; base-uri 'none'; form-action 'none'"
+            content="default-src 'none'; script-src 'sha256-bjsSEP79ZWk5AgxbVLdgiYzU+Ti9cqJYTtM3BxiidfE='; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'"
         />
         <meta name="referrer" content="no-referrer" />
         <meta name="color-scheme" content="light dark" />
@@ -257,24 +257,98 @@
                 color: var(--on-sheet-2);
             }
 
-            .path {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 8px;
+            /* ---- the three steps, drawn: a chat, the app's file, Zapli on a phone ---- */
+
+            .steps-pic {
+                --tile: 84px;
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 24px;
+                max-width: 28rem;
                 margin: 0;
                 padding: 0;
                 list-style: none;
             }
 
-            .path li {
-                display: inline-flex;
+            .steps-pic li {
+                position: relative;
+                display: flex;
+                flex-direction: column;
                 align-items: center;
-                gap: 8px;
-                padding: 4px 14px 4px 4px;
-                border-radius: 999px;
-                background: var(--sheet-chip);
+                gap: 10px;
+                text-align: center;
                 font-size: 0.95rem;
                 font-weight: 600;
+                line-height: 1.3;
+            }
+
+            /* An arrow in the gap after each step but the last. */
+            .steps-pic li:not(:last-child)::after {
+                content: "";
+                position: absolute;
+                top: calc(var(--tile) / 2 - 6px);
+                right: -18px;
+                width: 10px;
+                height: 10px;
+                border-top: 3px solid var(--on-sheet-2);
+                border-right: 3px solid var(--on-sheet-2);
+                transform: rotate(45deg);
+            }
+
+            .step-art {
+                position: relative;
+                display: grid;
+                place-items: center;
+                width: var(--tile);
+                height: var(--tile);
+                border-radius: 30%;
+                background: var(--sheet-chip);
+            }
+
+            .step-art svg {
+                width: 76%;
+                height: 76%;
+            }
+
+            .step-art .path-num {
+                position: absolute;
+                top: -6px;
+                left: -6px;
+            }
+
+            .art-paper {
+                fill: var(--keyline);
+            }
+
+            .art-fold {
+                fill: var(--on-sheet-2);
+            }
+
+            .art-ink {
+                fill: var(--sheet);
+            }
+
+            .art-line {
+                fill: none;
+                stroke: var(--sheet);
+                stroke-width: 5;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+            .art-warm {
+                fill: #ffc94d;
+            }
+
+            @media (min-width: 40rem) {
+                .steps-pic {
+                    --tile: 104px;
+                    gap: 32px;
+                }
+
+                .steps-pic li:not(:last-child)::after {
+                    right: -22px;
+                }
             }
 
             .path-num {
@@ -589,69 +663,75 @@
                 margin-bottom: 0;
             }
 
-            /* ---- Zapli's import sheet, drawn with its own words ---- */
+            /* ---- screenshots of Zapli: phone-sized, in a thin rounded frame ---- */
 
-            .sheet-mock {
-                max-width: 26rem;
-                margin: 12px 0 16px;
-                padding: 8px 8px 12px;
-                border: 1px solid var(--line);
-                border-radius: 28px;
-                background: var(--surface);
+            /* Centred on a phone; placed beside the text on a wider screen (below). */
+            .shot {
+                width: min(100%, 17.5rem);
+                margin: 0 auto;
+            }
+
+            .shot img {
+                display: block;
+                width: 100%;
+                height: auto;
+                border: 1px solid var(--line-strong);
+                border-radius: 24px;
+                background: var(--surface-2);
                 box-shadow: var(--card-shadow);
             }
 
-            .sheet-mock::before {
-                content: "";
-                display: block;
-                width: 32px;
-                height: 4px;
-                margin: 6px auto 10px;
-                border-radius: 2px;
-                background: var(--line-strong);
-            }
-
-            .sheet-title {
-                margin: 0 12px 6px;
-                font-size: 1.1rem;
-                font-weight: 700;
-            }
-
-            .sheet-mock ul {
-                margin: 0;
-                padding: 0;
-                list-style: none;
-            }
-
-            .sheet-mock li {
-                display: flex;
-                align-items: center;
-                gap: 14px;
-                min-height: 64px;
-                margin: 0;
-                padding: 8px 12px;
-            }
-
-            .sheet-mock svg {
-                flex: none;
-                width: 40px;
-                height: 40px;
-                padding: 8px;
-                border-radius: 50%;
-                background: var(--chip);
-                color: var(--on-chip);
-            }
-
-            .way-name {
-                display: block;
-                font-weight: 650;
-            }
-
-            .way-hint {
-                display: block;
+            .shot figcaption {
+                margin-top: 10px;
                 color: var(--text-2);
-                font-size: 0.9rem;
-                line-height: 1.4;
+                font-size: 0.875rem;
+                line-height: 1.45;
+            }
+
+            /* Text with its screenshot: one under the other on a phone, side by side on a wider screen. */
+            .split {
+                display: grid;
+                gap: 20px;
+                margin: 16px 0 20px;
+            }
+
+            .split > :last-child,
+            .split > div > :last-child {
+                margin-bottom: 0;
+            }
+
+            .shots {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+                margin: 20px 0;
+            }
+
+            @media (min-width: 48rem) {
+                .split {
+                    grid-template-columns: minmax(0, 1fr) 17.5rem;
+                    column-gap: 32px;
+                    align-items: start;
+                }
+
+                .split > .shot {
+                    grid-column: 2;
+                    grid-row: 1 / span 4;
+                }
+
+                .split > :not(.shot) {
+                    grid-column: 1;
+                }
+
+                .shots {
+                    justify-content: flex-start;
+                }
+
+                .shots .shot {
+                    width: 15.5rem;
+                    margin: 0;
+                }
             }
 
             /* ---- the review's words ---- */
@@ -797,10 +877,58 @@
                         Describe the app you want to an AI chat, such as Claude, ChatGPT or Gemini. It writes the app as
                         one file, and Zapli installs it on your Android phone. You don’t need to know how to code.
                     </p>
-                    <ol class="path" aria-label="Three steps">
-                        <li><span class="path-num" aria-hidden="true">1</span>Ask your AI</li>
-                        <li><span class="path-num" aria-hidden="true">2</span>Get the file</li>
-                        <li><span class="path-num" aria-hidden="true">3</span>Import it in Zapli</li>
+                    <ol class="steps-pic" aria-label="Three steps">
+                        <li>
+                            <span class="step-art" aria-hidden="true">
+                                <span class="path-num">1</span>
+                                <svg viewBox="0 0 96 96" focusable="false">
+                                    <path
+                                        class="art-paper"
+                                        d="M18 12h46a10 10 0 0 1 10 10v22a10 10 0 0 1-10 10H34l-12 10v-10h-4a10 10 0 0 1-10-10V22a10 10 0 0 1 10-10z"
+                                    />
+                                    <rect class="art-ink" x="20" y="25" width="38" height="5" rx="2.5" />
+                                    <rect class="art-ink" x="20" y="36" width="26" height="5" rx="2.5" />
+                                    <path
+                                        class="art-warm"
+                                        d="M44 50h34a10 10 0 0 1 10 10v12a10 10 0 0 1-10 10h-2v10l-12-10H44a10 10 0 0 1-10-10V60a10 10 0 0 1 10-10z"
+                                    />
+                                    <rect class="art-ink" x="44" y="61" width="32" height="4.5" rx="2.25" />
+                                    <rect class="art-ink" x="44" y="70" width="20" height="4.5" rx="2.25" />
+                                </svg>
+                            </span>
+                            Ask your AI
+                        </li>
+                        <li>
+                            <span class="step-art" aria-hidden="true">
+                                <span class="path-num">2</span>
+                                <svg viewBox="0 0 96 96" focusable="false">
+                                    <path
+                                        class="art-paper"
+                                        d="M24 8h34l20 20v56a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6z"
+                                    />
+                                    <path class="art-fold" d="M58 8v14a6 6 0 0 0 6 6h14z" />
+                                    <path class="art-line" d="M38 46l-9 9 9 9M58 46l9 9-9 9M52 42l-8 26" />
+                                </svg>
+                            </span>
+                            Get the app’s file
+                        </li>
+                        <li>
+                            <span class="step-art" aria-hidden="true">
+                                <span class="path-num">3</span>
+                                <svg viewBox="0 0 96 96" focusable="false">
+                                    <rect class="art-paper" x="24" y="4" width="48" height="88" rx="10" />
+                                    <rect class="art-ink" x="29" y="13" width="38" height="66" rx="5" />
+                                    <rect class="art-paper" x="34" y="19" width="12" height="12" rx="4" />
+                                    <rect class="art-paper" x="50" y="19" width="12" height="12" rx="4" />
+                                    <rect class="art-paper" x="34" y="35" width="12" height="12" rx="4" />
+                                    <rect class="art-paper" x="50" y="35" width="12" height="12" rx="4" />
+                                    <rect class="art-paper" x="34" y="51" width="12" height="12" rx="4" />
+                                    <rect class="art-warm" x="50" y="51" width="12" height="12" rx="4" />
+                                    <rect class="art-ink" x="42" y="84" width="12" height="3" rx="1.5" />
+                                </svg>
+                            </span>
+                            Import it in Zapli
+                        </li>
                     </ol>
                 </div>
             </div>
@@ -827,33 +955,50 @@
                         An app made from your own words: a tracker, a list, a calculator, a small game. It lives in
                         Zapli next to the apps of the Zapli library.
                     </p>
-                    <ul class="gets">
-                        <li><strong>It works offline.</strong> The app runs on your phone and needs no internet.</li>
-                        <li>
-                            <strong>Your data stays on your phone.</strong> What you enter is kept in Zapli’s private
-                            storage on your phone. The prompt asks your AI to keep it in Zapli’s own store, so it goes
-                            with Zapli’s backups once they arrive in a later version.
-                        </li>
-                        <li>
-                            <strong>No ads, no tracking, no account.</strong> Zapli has none, and it refuses every
-                            connection an app asks for. Apps with their own code have one caveat, in
-                            <a href="#import">Step 3</a>.
-                        </li>
-                        <li>
-                            <strong>Phone features only with your OK.</strong> An app can use only the features its
-                            install review lists, and Zapli asks you before it first uses the camera, notifications and
-                            the like.
-                        </li>
-                        <li>
-                            <strong>Yours to change.</strong> Ask your AI for a change, import the new version, and your
-                            data stays.
-                        </li>
-                    </ul>
-                    <p class="muted">
-                        Your AI picks one of two kinds of app, so you don’t have to: a data app that Zapli draws with
-                        its own screens (lists, forms, reminders), or a web app, a page your AI draws itself (games,
-                        drawing, custom charts).
-                    </p>
+                    <div class="split">
+                        <div>
+                            <ul class="gets">
+                                <li>
+                                    <strong>It works offline.</strong> The app runs on your phone and needs no internet.
+                                </li>
+                                <li>
+                                    <strong>Your data stays on your phone.</strong> What you enter is kept in Zapli’s
+                                    private storage on your phone. The prompt asks your AI to keep it in Zapli’s own
+                                    store, so it goes with Zapli’s backups once they arrive in a later version.
+                                </li>
+                                <li>
+                                    <strong>No ads, no tracking, no account.</strong> Zapli has none, and it refuses
+                                    every connection an app asks for. Apps with their own code have one caveat, in
+                                    <a href="#import">Step 3</a>.
+                                </li>
+                                <li>
+                                    <strong>Phone features only with your OK.</strong> An app can use only the features
+                                    its install review lists, and Zapli asks you before it first uses the camera,
+                                    notifications and the like.
+                                </li>
+                                <li>
+                                    <strong>Yours to change.</strong> Ask your AI for a change, import the new version,
+                                    and your data stays.
+                                </li>
+                            </ul>
+                            <p class="muted">
+                                Your AI picks one of two kinds of app, so you don’t have to: a data app that Zapli draws
+                                with its own screens (lists, forms, reminders), or a web app, a page your AI draws
+                                itself (games, drawing, custom charts).
+                            </p>
+                        </div>
+                        <figure class="shot">
+                            <img
+                                src="img/app.webp"
+                                width="540"
+                                height="1120"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Sketch running full screen: the buttons Undo, Redo, Clear, Save and Share above a drawing of a house, a tree, the sun and two birds, with colour swatches and a Size slider below."
+                            />
+                            <figcaption>Sketch, a small drawing app made for Zapli, running full screen.</figcaption>
+                        </figure>
+                    </div>
                 </section>
 
                 <section id="ask" aria-labelledby="ask-title">
@@ -1004,142 +1149,122 @@
                         <span class="num" aria-hidden="true">3</span><span class="visually-hidden">Step 3: </span>Import
                         it in Zapli
                     </h2>
-                    <ol>
-                        <li>
-                            Open Zapli and tap <span class="ui">Import</span>. With no apps yet, it is on the welcome
-                            screen; otherwise it floats over your apps.
-                        </li>
-                        <li>
-                            Choose how the app comes:
-                            <div class="sheet-mock">
-                                <p class="sheet-title">Import an app</p>
-                                <ul>
-                                    <li>
-                                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                            <path
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linejoin="round"
-                                                d="M9 4h6v3H9zM8 5.5H6v15h12v-15h-2"
-                                            />
-                                        </svg>
-                                        <span>
-                                            <span class="way-name">Paste from clipboard</span>
-                                            <span class="way-hint">An app you copied, for example from an AI chat</span>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                            <path
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                d="M10 7H7a5 5 0 0 0 0 10h3M14 7h3a5 5 0 0 1 0 10h-3M8 12h8"
-                                            />
-                                        </svg>
-                                        <span>
-                                            <span class="way-name">From a link</span>
-                                            <span class="way-hint">The web address of an app</span>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                            <path
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linejoin="round"
-                                                d="M3 6.5h6.5l2 2H21V19H3z"
-                                            />
-                                        </svg>
-                                        <span>
-                                            <span class="way-name">From a file</span>
-                                            <span class="way-hint">A file on your phone</span>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                            For a link, paste it and tap <span class="ui">Next</span>. Zapli shows the site and the
-                            whole link and asks “Download the app from …?” Nothing is downloaded until you tap
-                            <span class="ui">Download</span>.
-                        </li>
-                        <li>
-                            Zapli checks the app and shows <span class="ui">Install app</span>: what the app is and what
-                            it may do. Read it, then tap <span class="ui">Install</span>.
-                        </li>
-                    </ol>
+                    <div class="split">
+                        <ol>
+                            <li>
+                                Open Zapli and tap <span class="ui">Import</span>. With no apps yet, it is on the
+                                welcome screen; otherwise it floats over your apps.
+                            </li>
+                            <li>
+                                Choose how the app comes: <span class="ui">Paste from clipboard</span>,
+                                <span class="ui">From a link</span> or <span class="ui">From a file</span>.
+                            </li>
+                            <li>
+                                For a link, paste it and tap <span class="ui">Next</span>. Zapli shows the site and the
+                                whole link and asks “Download the app from …?” Nothing is downloaded until you tap
+                                <span class="ui">Download</span>.
+                            </li>
+                            <li>
+                                Zapli checks the app and shows its install review: what the app is and what it may do.
+                                Read it, then tap <span class="ui">Install</span>.
+                            </li>
+                        </ol>
+                        <figure class="shot">
+                            <img
+                                src="img/import-sheet.webp"
+                                width="540"
+                                height="595"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Zapli’s sheet “Import an app” over the dimmed library, with three choices: “Paste from clipboard: An app you copied, for example from an AI chat”, “From a link: The web address of an app” and “From a file: A file on your phone”."
+                            />
+                            <figcaption>Zapli’s Import sheet.</figcaption>
+                        </figure>
+                    </div>
                     <p class="muted">
                         You can also open a downloaded file with Zapli, or share the file or the code to Zapli from
                         another app.
                     </p>
 
                     <h3>What the install review tells you</h3>
-                    <dl class="words">
-                        <div>
-                            <dt>
-                                Unreviewed
-                                <span class="said">“Install only if you trust where it came from.”</span>
-                            </dt>
-                            <dd>
-                                Nobody has checked this app: not Zapli, not anyone else. Every app you import says so,
-                                even the one you just made. Install only apps you made yourself or got from someone you
-                                trust.
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>Unknown author</dt>
-                            <dd>Zapli can’t tell who made a file you import.</dd>
-                        </div>
-                        <div>
-                            <dt>Contains its own code</dt>
-                            <dd>The app runs its own JavaScript. Every web app does.</dd>
-                        </div>
-                        <div>
-                            <dt>Cannot connect to the internet.</dt>
-                            <dd>The app has no way to reach the internet.</dd>
-                        </div>
-                        <div>
-                            <dt>Zapli can’t fully stop this app’s own code from reaching the internet.</dt>
-                            <dd>
-                                Shown instead for an imported app whose code runs as a web page. Zapli refuses every
-                                connection the app asks for and narrows the other ways out, but it can’t promise more
-                                for such code. One more reason to install only what you trust.
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>What it can do</dt>
-                            <dd>
-                                The phone features the app may use, each with the app’s own reason. “Asks the first time
-                                you use it” means Zapli asks you then.
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>Where your data goes</dt>
-                            <dd>What the app could send off your phone, and where.</dd>
-                        </div>
-                        <div>
-                            <dt>Background</dt>
-                            <dd>
-                                What it does while it is closed, such as reminders, and how many notifications it may
-                                show a day.
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>Notes</dt>
-                            <dd>
-                                Details behind a tap, such as what its code tries that Zapli blocks. Those parts may not
-                                work.
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>Downloaded from …</dt>
-                            <dd>
-                                Where an app from a link came from. It tells you the place, not whether the app is safe.
-                            </dd>
-                        </div>
-                    </dl>
+                    <div class="split">
+                        <figure class="shot">
+                            <img
+                                src="img/review.webp"
+                                width="540"
+                                height="1095"
+                                loading="lazy"
+                                decoding="async"
+                                alt="The install review of Sketch: “Version 1.0.0 · Unknown author · For everyone”; the tiles “Unreviewed: Install only if you trust where it came from.”, “Contains its own code” and “Runs nothing in the background.”; the amber line “Zapli can’t fully stop this app’s own code from reaching the internet.”; “What it can do” with Opening and saving, and Sharing; the buttons Cancel and Install."
+                            />
+                            <figcaption>The install review of Sketch, an app with its own code.</figcaption>
+                        </figure>
+                        <dl class="words">
+                            <div>
+                                <dt>
+                                    Unreviewed
+                                    <span class="said">“Install only if you trust where it came from.”</span>
+                                </dt>
+                                <dd>
+                                    Nobody has checked this app: not Zapli, not anyone else. Every app you import says
+                                    so, even the one you just made. Install only apps you made yourself or got from
+                                    someone you trust.
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>Unknown author</dt>
+                                <dd>Zapli can’t tell who made a file you import.</dd>
+                            </div>
+                            <div>
+                                <dt>Contains its own code</dt>
+                                <dd>The app runs its own JavaScript. Every web app does.</dd>
+                            </div>
+                            <div>
+                                <dt>Cannot connect to the internet.</dt>
+                                <dd>The app has no way to reach the internet.</dd>
+                            </div>
+                            <div>
+                                <dt>Zapli can’t fully stop this app’s own code from reaching the internet.</dt>
+                                <dd>
+                                    Shown instead for an imported app whose code runs as a web page. Zapli refuses every
+                                    connection the app asks for and narrows the other ways out, but it can’t promise
+                                    more for such code. One more reason to install only what you trust.
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>What it can do</dt>
+                                <dd>
+                                    The phone features the app may use, each with the app’s own reason. “Asks the first
+                                    time you use it” means Zapli asks you then.
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>Where your data goes</dt>
+                                <dd>What the app could send off your phone, and where.</dd>
+                            </div>
+                            <div>
+                                <dt>Background</dt>
+                                <dd>
+                                    What it does while it is closed, such as reminders, and how many notifications it
+                                    may show a day.
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>Notes</dt>
+                                <dd>
+                                    Details behind a tap, such as what its code tries that Zapli blocks. Those parts may
+                                    not work.
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>Downloaded from …</dt>
+                                <dd>
+                                    Where an app from a link came from. It tells you the place, not whether the app is
+                                    safe.
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
 
                     <h3>Permissions are asked when needed</h3>
                     <p>
@@ -1161,20 +1286,44 @@
                             The AI gives you the whole new file. The prompt tells it to keep the app’s id and raise its
                             version number: that is how Zapli knows it is a new version of your app.
                         </li>
-                        <li>
-                            Import it the same way. Zapli recognises the app and shows
-                            <span class="ui">Update app</span>.
-                        </li>
+                        <li>Import it the same way. Zapli recognises the app and asks whether to update it.</li>
                         <li>
                             The update review lists what is new: any new permissions (or “Asks for nothing new.”) and
-                            what happens to your data. Zapli backs up the app’s data before it changes anything, and
-                            puts it back if the update fails.
+                            what happens to your data (“Your data stays as it is.” when nothing changes). When an update
+                            does change how your data is kept, Zapli backs it up first and puts it back if the update
+                            fails.
                         </li>
                         <li>
                             Tap <span class="ui">Update</span>. Your data, permissions and home-screen shortcut stay
                             with the app.
                         </li>
                     </ol>
+                    <div class="shots">
+                        <figure class="shot">
+                            <img
+                                src="img/update.webp"
+                                width="540"
+                                height="1095"
+                                loading="lazy"
+                                decoding="async"
+                                alt="The update review of Sketch: “The app on this phone was installed on Oct 27, 2026.”; “Unreviewed: Zapli can’t tell who made this file. Update only if it comes from the same place as “Sketch”.”; “Contains its own code”; “Asks for nothing new.”; “Code changed: 1 part of its own code is new or different.”; “Your data stays as it is.”; the buttons Install as a separate copy, Cancel and Update."
+                            />
+                            <figcaption>Updating Sketch to version 1.1.0: it asks for nothing new.</figcaption>
+                        </figure>
+                        <figure class="shot">
+                            <img
+                                src="img/after-update.webp"
+                                width="540"
+                                height="1105"
+                                loading="lazy"
+                                decoding="async"
+                                alt="Sketch after the update: the same drawing of a house, a tree, the sun and two birds, and a new pink colour among the swatches."
+                            />
+                            <figcaption>
+                                After the update: the drawing is still there, and there is a new pink.
+                            </figcaption>
+                        </figure>
+                    </div>
                     <ul>
                         <li>
                             <span class="ui">Install as a separate copy</span> gives you a second app with its own,
@@ -1199,11 +1348,25 @@
                     <h2 id="problems-title">When something goes wrong</h2>
 
                     <h3>“This app has errors”</h3>
-                    <p>
-                        Zapli found mistakes in the file and didn’t install it. Tap
-                        <span class="ui">Copy errors for your AI</span>, paste them into the chat with the AI that made
-                        the app, and ask for the whole fixed file. Then import that. One or two rounds are common.
-                    </p>
+                    <div class="split">
+                        <p>
+                            Zapli found mistakes in the file and didn’t install it. Tap
+                            <span class="ui">Copy errors for your AI</span>, paste them into the chat with the AI that
+                            made the app, and ask for the whole fixed file. Then import that. One or two rounds are
+                            common.
+                        </p>
+                        <figure class="shot">
+                            <img
+                                src="img/errors.webp"
+                                width="540"
+                                height="825"
+                                loading="lazy"
+                                decoding="async"
+                                alt="“This app has errors”: “Its definition has 2 errors. Ask its author (or the AI that made it) to fix them:”, the button “Copy errors for your AI”, and two errors with the code AA-SCHEMA-013: the app is missing its version, and the share permission is missing its purpose."
+                            />
+                            <figcaption>Two mistakes, ready to copy for your AI.</figcaption>
+                        </figure>
+                    </div>
 
                     <h3>“This cannot be imported”</h3>
                     <p>
