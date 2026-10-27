@@ -12,7 +12,7 @@
                     "id": "library/music",
                     "kind": "web",
                     "name": "Music Player",
-                    "version": "1.0.1",
+                    "version": "1.0.2",
                     "icon": "music_note",
                     "category": "music_and_audio",
                     "ageRating": "everyone",
@@ -992,17 +992,20 @@
                 border-radius: 99px;
                 background: color-mix(in srgb, var(--np-ink) 14%, transparent);
             }
+            /* The cover takes the room the other parts leave, so the whole screen fits without scrolling.
+               Only when even the smallest cover (the min-height) does not fit does the screen scroll. */
             .coverwrap {
-                flex: 1 1 auto;
+                flex: 1 1 0;
                 display: grid;
                 place-items: center;
-                min-height: 0;
+                min-height: 8.5rem;
+                container-type: size;
                 touch-action: pan-y;
                 padding: 0.25rem 0;
             }
             .cover {
                 position: relative;
-                width: min(100%, 46vh, 27rem);
+                width: min(100cqw, 100cqh, 27rem);
                 aspect-ratio: 1;
             }
             .cover .art {
@@ -1412,7 +1415,7 @@
                     gap: 0.4rem;
                 }
                 .cover {
-                    width: min(100%, 66vh);
+                    width: min(100cqw, 100cqh, 66vh);
                 }
                 .meta h2 {
                     font-size: 1.35rem;
@@ -1575,7 +1578,7 @@
                     repeatOneSay: "this song",
                     speed: "Speed",
                     speedTitle: "Playback speed",
-                    speedHint: "Slower or faster, handy for audiobooks and talks.",
+                    speedHint: "Faster sounds higher, slower sounds lower, like a record.",
                     speedSay: (a) => `Speed: ${a.v}`,
                     normal: "Normal",
                     sleep: "Sleep",
@@ -1673,7 +1676,7 @@
                     repeatOneSay: "táto skladba",
                     speed: "Rýchlosť",
                     speedTitle: "Rýchlosť prehrávania",
-                    speedHint: "Pomalšie alebo rýchlejšie, napríklad pri audioknihách.",
+                    speedHint: "Rýchlejšie znie vyššie, pomalšie nižšie, ako na platni.",
                     speedSay: (a) => `Rýchlosť: ${a.v}`,
                     normal: "Normálna",
                     sleep: "Časovač",
