@@ -688,6 +688,66 @@
                 line-height: 1.45;
             }
 
+            /*
+             * The apps' screens in turn, one every five seconds, stopped while the pointer is on them. Without motion
+             * the first one stays: the page's reduced-motion rule ends the animation, and the others stay hidden.
+             */
+            .slides {
+                position: relative;
+                aspect-ratio: 540 / 1058;
+            }
+
+            .slides img {
+                position: absolute;
+                inset: 0;
+                height: 100%;
+                opacity: 0;
+                animation: slide 30s linear infinite backwards;
+            }
+
+            .slides img:first-child {
+                opacity: 1;
+                animation-delay: -0.6s;
+            }
+
+            .slides img:nth-child(2) {
+                animation-delay: 4.4s;
+            }
+
+            .slides img:nth-child(3) {
+                animation-delay: 9.4s;
+            }
+
+            .slides img:nth-child(4) {
+                animation-delay: 14.4s;
+            }
+
+            .slides img:nth-child(5) {
+                animation-delay: 19.4s;
+            }
+
+            .slides img:nth-child(6) {
+                animation-delay: 24.4s;
+            }
+
+            .slides:hover img {
+                animation-play-state: paused;
+            }
+
+            @keyframes slide {
+                0% {
+                    opacity: 0;
+                }
+                2%,
+                16.6% {
+                    opacity: 1;
+                }
+                18.6%,
+                100% {
+                    opacity: 0;
+                }
+            }
+
             /* Text with its screenshot: one under the other on a phone, side by side on a wider screen. */
             .split {
                 display: grid;
@@ -988,15 +1048,34 @@
                             </p>
                         </div>
                         <figure class="shot">
-                            <img
-                                src="img/app.webp"
-                                width="540"
-                                height="1120"
-                                loading="lazy"
-                                decoding="async"
-                                alt="Sketch running full screen: the buttons Undo, Redo, Clear, Save and Share above a drawing of a house, a tree, the sun and two birds, with colour swatches and a Size slider below."
-                            />
-                            <figcaption>Sketch, a small drawing app made for Zapli, running full screen.</figcaption>
+                            <div
+                                class="slides"
+                                role="img"
+                                aria-label="Six apps in turn: the game Gridfire on its main menu, Expenses with this month’s spending, To-do with today’s tasks, Blood pressure with its trends, Loyalty cards with a list of cards, and Water with its history."
+                            >
+                                <img src="img/app-gridfire.webp" width="540" height="1058" decoding="async" alt="" />
+                                <img src="img/app-expenses.webp" width="540" height="1058" decoding="async" alt="" />
+                                <img src="img/app-todo.webp" width="540" height="1058" decoding="async" alt="" />
+                                <img
+                                    src="img/app-blood-pressure.webp"
+                                    width="540"
+                                    height="1058"
+                                    decoding="async"
+                                    alt=""
+                                />
+                                <img
+                                    src="img/app-loyalty-cards.webp"
+                                    width="540"
+                                    height="1058"
+                                    decoding="async"
+                                    alt=""
+                                />
+                                <img src="img/app-water.webp" width="540" height="1058" decoding="async" alt="" />
+                            </div>
+                            <figcaption>
+                                Some of the apps in Zapli’s library: Gridfire, Expenses, To-do, Blood pressure, Loyalty
+                                cards and Water.
+                            </figcaption>
                         </figure>
                     </div>
                 </section>
@@ -1309,19 +1388,6 @@
                                 alt="The update review of Sketch: “The app on this phone was installed on Oct 27, 2026.”; “Unreviewed: Zapli can’t tell who made this file. Update only if it comes from the same place as “Sketch”.”; “Contains its own code”; “Asks for nothing new.”; “Code changed: 1 part of its own code is new or different.”; “Your data stays as it is.”; the buttons Install as a separate copy, Cancel and Update."
                             />
                             <figcaption>Updating Sketch to version 1.1.0: it asks for nothing new.</figcaption>
-                        </figure>
-                        <figure class="shot">
-                            <img
-                                src="img/after-update.webp"
-                                width="540"
-                                height="1105"
-                                loading="lazy"
-                                decoding="async"
-                                alt="Sketch after the update: the same drawing of a house, a tree, the sun and two birds, and a new pink colour among the swatches."
-                            />
-                            <figcaption>
-                                After the update: the drawing is still there, and there is a new pink.
-                            </figcaption>
                         </figure>
                     </div>
                     <ul>
