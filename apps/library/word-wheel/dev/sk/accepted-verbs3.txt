@@ -1,0 +1,6 @@
+# Accepted words, verbs with prefixes (infinitive, without sa or si). Hand-written for this list (CC0 1.0).
+
+vzbudiť zabaviť pobaviť zahojiť nakŕmiť vylomiť odlomiť zrušiť narušiť porušiť vyrušiť ustlať
+zvoliť povoliť zahasiť uhasiť poradiť zaradiť vyradiť zradiť upraviť stvoriť utvoriť skloniť
+zmazať namazať pomazať vymazať vyplniť doplniť splniť spustiť opustiť overiť zveriť uveriť
+zbaviť snímať

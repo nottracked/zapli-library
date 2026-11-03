@@ -1,0 +1,35 @@
+# Answer words, adjectives: the masculine nominative singular.
+# Hand-written for this list (CC0 1.0).
+
+# everyday qualities
+dobrý zlý veľký malý nový starý mladý pekný škaredý krásny dlhý krátky vysoký nízky
+široký úzky hrubý tenký ťažký ľahký tvrdý mäkký teplý studený horúci chladný suchý
+mokrý čistý špinavý rýchly pomalý silný slabý zdravý chorý bohatý chudobný múdry
+hlúpy šikovný lenivý usilovný veselý smutný šťastný nešťastný milý drahý lacný
+sladký slaný kyslý horký pálivý chutný čerstvý zrelý surový plný prázdny ostrý tupý
+hladký drsný svetlý tmavý jasný hlboký plytký rovný krivý okrúhly hranatý dutý tichý
+hlasný hlučný pokojný divoký krotký verný skutočný pravý ľavý posledný ďalší iný istý
+celý vlastný cudzí domáci ranný večerný nočný denný letný zimný jarný jesenný dnešný
+včerajší zajtrajší blízky ďaleký dôležitý zaujímavý nudný jednoduchý zložitý možný
+nemožný potrebný užitočný zbytočný vzácny obyčajný zvláštny čudný divný známy
+neznámy slávny obľúbený moderný starodávny dávny prísny láskavý štedrý skúpy poctivý
+čestný úprimný falošný odvážny statočný zbabelý smelý plachý hanblivý zvedavý hladný
+smädný unavený ospalý živý mŕtvy nahý bosý holý tučný chudý štíhly drobný obrovský
+malinký maličký hrdý pyšný skromný lakomý zlostný nahnevaný nervózny mierny prudký
+búrlivý veterný daždivý slnečný zamračený hmlistý mrazivý vlažný vlhký lepkavý mastný
+sýty pevný krehký pružný mocný bledý opálený kučeravý ryšavý plešatý fúzatý bradatý
+ušatý chlpatý huňatý pásikavý bodkovaný kockovaný priehľadný lesklý matný rád hotový
+lysý slepý hluchý nemý chromý hustý riedky tuhý pustý mdlý chabý čulý bystrý drzý
+vďačný sám spokojný nespokojný ochotný pripravený pozorný opatrný rozumný tajný
+slušný zdvorilý hrubý milý mladučký starší mladší lepší horší väčší menší
+
+# colours and looks
+biely čierny červený modrý zelený žltý hnedý sivý ružový fialový oranžový zlatý
+strieborný béžový tyrkysový purpurový bordový pestrý farebný čiernobiely
+
+# what things are made of, where they are from
+drevený kamenný železný sklenený papierový kožený vlnený hodvábny bavlnený plastový
+kovový hlinený morský horský lesný poľný riečny vodný vzdušný nebeský mesačný
+hviezdny ročný týždenný detský ženský mužský ľudský zvierací vtáčí psí mačací konský
+kozí ovčí kurací rybí včelí medový čokoládový mliečny domový školský mestský
+dedinský sedliacky kráľovský rodinný verejný súkromný národný svetový miestny

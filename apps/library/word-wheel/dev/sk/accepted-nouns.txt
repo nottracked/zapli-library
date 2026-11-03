@@ -1,0 +1,58 @@
+# Accepted words, nouns: less common nouns, diminutives and feminine forms.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+# short nouns
+báj bôľ cech gong hľuza hon chrup jarok klin rasca kvas lán lúh mýto nit nitka ohník oje
+omša opar orba osika ovad pahorok pecka piliny plť rasa rez rúno ryha sieň slad sloj
+snop spád srieň stoh struk suk šrot štoľa tôňa trám trs údel úkon úpal úsek útek uzda
+vánok var väz vŕšok zrub žľaza žrď žula žumpa bas kód rod rub rúb pud kút chrt chlp puch
+tlach chalan chlapík chudák ozón opál oáza uško očko elán éter eso ego idol ikona arch
+aróma krúpy
+
+# animals
+daniel muflón kozliatko jahniatko teliatko šteniatko žriebätko húsatko káčatko zajačik
+medvedica vlčica sliepočka kohútik vtáča orlica orliak drop dudok brhlík strnádka
+stehlík trasochvost dážďovník rybárik lyska potápka hrdlička kavka krkavec myšiak kuvik
+sluka tetrov hlucháň pelikán ibis fretka ondatra hraboš sysel plch rosnička skokan
+leguán gekon kobra pytón anakonda aligátor varan chameleón zubáč ostriež pleskáč karas
+lieň mrena lipeň hlavátka jeseter sleď makrela treska platesa rejnok termit modlivka
+roháč chrúst bystruška fúzač lykožrút mandelinka muška pavučina pavúčik ježko srnček
+
+# plants
+hrab brest jelša agát platan céder cyprus borovička kosodrevina brusnica černica
+moruša dula mišpuľa drieň bršlen kaleráb špenát šťavel rebarbora chren majorán
+tymián oregano estragón aníz zázvor muškát klinček oliva avokádo mango papája pistácia
+lieskovec kosatec hyacint georgína nechtík bodliak lopúch skorocel pýr trstina sitina
+bleduľa prvosienka veternica
+
+# food and drink
+rezanec puding pečivo pagáčik venček veterník laskonka indiánok rakvička šamróla
+krémeš punč grog koňak likér slivovica pálenka medovina vínko malinovka sóda kefír
+šľahačka margarín ementál parmezán nugát marcipán karamel praclík tyčinka hrozienko
+
+# household and workshop
+lavór kýbeľ črep podšálka džezva téglik rajnica kastról pekáč rošt ražeň udiareň
+špajza petlica závora kachle kachlička obkladačka dlaždica parketa linoleum tapeta
+lišta štafle lešenie miešačka tačky kosačka kladka zverák kovadlina výheň páčidlo
+skoba matica podložka pružina páka kľuka náprava ložisko ventil sifón odtok výlevka
+drez bojler radiátor
+
+# people
+tetka ujček bratček vnúča pravnuk pravnučka synovec svadobník družba družička starejší
+pastorok pastorkyňa otčim poručník dozorca žandár detektív špión kúzelník klaun
+akrobat žonglér krotiteľ artista dobrodruh objaviteľ vynálezca bádateľ mudrc prorok
+čarodejnica strašidlo škriatok upír príšera netvor darebák lotor huncút lump fičúr
+frajer trúba lenivec spáč jedák pijan fajčiar chodec bežec letec šermiar boxer
+zápasník brankár obranca útočník kormidelník lodník prievozník pltník drevorubač
+uhliar debnár kolár povrazník kožušník garbiar mydlár pernikár cukrár kuchtík paholok
+zvonár kostolník mníška rehoľník kaplán pustovník
+
+# feminine forms
+poštárka policajtka vodička sudkyňa lekárnička novinárka maliarka záhradníčka umelkyňa
+vedkyňa susedka cudzinka pekárka cisárovná cisár grófka gróf kňažná panovník panovníčka
+
+# diminutives
+domček psíček zajačik myška rybka kvietok jabĺčko slniečko mesiačik hviezdička
+srdiečko nosík zúbok ručička nôžka bruško hlávka vlások kabátik košieľka sukienka
+mliečko okienko dvierka izbička postieľka vankúšik perinka dečka lampička chodníček
+potôčik kopček dedinka mostík mamička tatko

@@ -1,0 +1,59 @@
+# Answer words, nouns: people, family, the body, health, clothing.
+# Hand-written for this list (CC0 1.0). Base forms: nominative singular; plural-only nouns in the plural.
+
+# family and people
+muž žena dieťa chlapec dievča otec matka mama mamka tato ocko syn dcéra brat sestra
+strýko teta ujo babka dedko vnuk vnučka bratranec sesternica švagor švagriná
+svokra svokor zať nevesta ženích manžel manželka snúbenec snúbenica rodina rodič
+sused suseda kamarát kamarátka priateľ priateľka chlap pani pán slečna dáma človek
+osoba hosť dav občan cudzinec hrdina hrdinka obor trpaslík víla čarodejník bosorka
+kráľ kráľovná princ princezná rytier zbojník pirát vojak strážnik sudca kňaz mních
+farár biskup pápež dvojča batoľa bábätko mláďa sirota vdova vdovec starec starenka
+starček dôchodca mládenec panna chlapček dievčatko synček dcérka
+kmotor kmotra pradedo prababka predok potomok dedič dedička
+
+# work and roles
+kuchár kuchárka čašník čašníčka lekár lekárka zubár zubárka učiteľ učiteľka žiak
+žiačka študent študentka riaditeľ riaditeľka šéf predavač predavačka pekár mäsiar
+krajčír krajčírka obuvník kováč stolár tesár murár maliar herec herečka spevák
+speváčka tanečník tanečnica básnik spisovateľ autor autorka pilot vodič šofér hasič
+policajt poštár baník roľník gazda gazdiná pastier ovčiar rybár poľovník lovec
+záhradník vedec lekárnik inžinier technik robotník úradník novinár fotograf umelec
+hudobník sochár architekt kominár vrátnik sluha slúžka pacient hráč hráčka tréner
+víťaz súper nepriateľ zradca zlodej vrah väzeň svedok advokát kupec zákazník turista
+pútnik cestovateľ námorník kapitán generál veliteľ starosta prezident minister
+poslanec vodca otrok bubeník huslista klavirista dirigent skladateľ režisér kaderník
+kaderníčka holič pisár sekretárka účtovník bankár obchodník podnikateľ majster
+učeň tovariš sprievodca horár hájnik vinár včelár mlynár pastierka dojička kočiš
+kurič strojník mechanik elektrikár inštalatér zvárač pokrývač sklár hrnčiar tkáč
+priadka čipkárka rezbár zlatník hodinár knihár tlačiar redaktor hlásateľ moderátor
+spravodajca kritik vedúci predseda tajomník pokladník strážca ochranca záchranár
+zdravotník ošetrovateľ veterinár psychológ profesor docent vychovávateľ
+pestúnka opatrovateľka upratovačka
+herečka
+
+# the body
+telo hlava vlas tvár čelo oko ucho nos ústa pera zub jazyk líce brada krk plece rameno
+ruka dlaň prst palec noha koleno lýtko päta chodidlo členok stehno bok brucho chrbát
+hruď srdce pľúca žalúdok pečeň oblička krv kosť sval koža necht pupok lebka mozog
+nerv žila tepna obočie mihalnica viečko zrenica lakeť zápästie päsť pazucha zadok
+hrdlo hlas dych pot slza slina kĺb rebro chrbtica lopatka temeno tylo šija spánok
+ďasno kostra pás črevo hrtan mandľa ucho bedro sluch zrak čuch chuť hmat úsmev
+peha pleť vráska fúz brada bradavica mozoľ pľuzgier chrasta
+
+# health
+zdravie choroba chrípka kašeľ nádcha horúčka teplota bolesť rana jazva modrina
+zlomenina tabletka liek injekcia očkovanie nemocnica ambulancia lekáreň obväz náplasť
+masť sirup kvapka alergia vírus baktéria infekcia operácia diagnóza recept sanitka
+vitamín pulz tlak únava spánok cvičenie strava kúpeľ masáž sadra barla vozík
+okuliare šošovka teplomer stetoskop mdloba závrat zápal angína
+plomba korunka
+
+# clothing and things we wear
+šaty sukňa košeľa blúzka sveter mikina bunda kabát plášť sako oblek kravata motýlik
+vesta tričko nohavice džínsy rifle šortky pyžamo župan ponožka pančucha topánka čižma
+sandál papuča teniska čiapka klobúk šál šatka rukavica opasok remeň gombík zips
+vrecko golier rukáv lem podšívka kapucňa dáždnik hodinky náramok prsteň retiazka
+náhrdelník náušnica brošňa kabelka taška peňaženka batoh kufor plavky uniforma kroj
+zástera plienka bielizeň čelenka spona sponka mašľa stuha šnúrka podrážka opätok
+vreckovka okuliare čiapočka palčiak kožuch overal kombinéza tielko legíny

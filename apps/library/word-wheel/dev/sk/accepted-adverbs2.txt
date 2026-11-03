@@ -1,0 +1,22 @@
+# Accepted words: adverbs, particles, interjections, numeral words and pronouns.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+# adverbs
+novo staro mlado chorobne bolestne duševne telesne písomne ústne pešo peňažne obchodne
+vojensky súdne právne zákonne umelecky výtvarne športovo hudobne mrzuto nevrlo sebecky
+šetrne nežne trvalo dočasne hojne rovnako podobne odlišne rôzne umelo božsky pekelne
+kúzelne čarovne povinne nutne vhodne chybne výhodne úspešne zdatne učene skúsene bratsky
+prašno hlučne nervózne zlostne smutne zábavne vtipne nudne zložito prudko mierne voľne
+tesne bežne denne ročne mesačne večne špinavo zdravo plno prázdno pusto tupo drsne tučne
+bohato šťastne lenivo pilne ospalo unavene živo silne pyšne úžasne odporne hnusne lahodne
+výdatne nejasne tajne verejne osobne priamo ihneď osamote zväčša sčasti vôbec vlani
+doobeda poobede naveky navždy nadlho napokon napred vpred vzad nabok zboku spredu zozadu
+zvnútra zvonku dokiaľ pokiaľ dokedy odkedy načo onak päťkrát
+
+# particles and interjections
+veru vraj akože predsa zrovna dokonca skrátka proste juj auvej ajaj beda hija mňau haf
+kukuk cink bim bam plesk šuch ťuk buch šup
+
+# numeral words and pronouns
+dvoje troje štvoro pätoro oboje trojka štvorka päťka šestka stovka tisícka pätica šestica
+štvrtka trojitý toľko onen takýto inakší ktorýsi dakto dačo daktorý ničí niečí čísi

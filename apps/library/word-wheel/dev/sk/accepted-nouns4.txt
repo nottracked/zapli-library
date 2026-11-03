@@ -1,0 +1,27 @@
+# Accepted words: verbal nouns, nouns of qualities, possessive adjectives, and words of sport, music, writing
+# and everyday life. Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+# verbal nouns
+hranie mytie krytie rytie liatie siatie žatie tkanie oranie česanie kopanie písanie čítanie
+rátanie meranie váženie varenie pečenie sadenie kosenie sušenie solenie údenie lepenie učenie
+hasenie holenie plnenie ťahanie nosenie vozenie vodenie hádanie čakanie volanie behanie
+chodenie sedenie ležanie státie kúpanie fúkanie dýchanie kýchanie trhanie rezanie sekanie
+rúbanie pílenie vŕtanie kovanie
+
+# qualities
+milosť hojnosť smelosť hrdosť drzosť bdelosť čistota hlúposť chytrosť vernosť hrúbka
+mladosť staroba detstvo zloba dobrota ľahkosť ťažkosť vlhkosť hodnosť istota
+
+# possessive adjectives
+otcov matkin mamin bratov sestrin dedkov babkin tetin ujov susedov kráľov pánov synov dcérin
+
+# short words
+dóm rev hvizd obuch útecha dej rola vid
+
+# sport, music, writing
+džudo biliard slalom biatlon aerobik joga trofej diplom šampión kurt helma prilba rock pop
+rap blues folk metal duet trio opereta muzikál rumba samba pointa epos sonet novela komédia
+fraška satira paródia fejtón kritika glosa úvaha úvod záver motív citát výrok rébus kvíz
+
+# everyday life
+robota drina námaha piknik návrat príchod odchod odjazd príjazd prílet odlet oddych

@@ -1,0 +1,22 @@
+# Accepted words, nouns: machines and vehicles, the road and travel, house and garden, food, animals.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+# machines, vehicles, technology
+piest spojka radenie náboj špica ráfik pedál blatník odrazka hever spínač páčka skener kurzor
+web server dron laser radar sonar družica sonda vrtuľa kokpit letuška pristáť
+
+# the road and travel
+vozovka prechod podchod nadchod objazd servis výhybka rušeň vozeň kupé ruksak kemping
+spacák táborák tábor skaut
+
+# house, garden, animals at home
+toaleta vstup vchod trávnik skleník altánok pergola drevník voliéra krmítko obojok vôdzka
+náhubok postroj podkova ostroha kočiar
+
+# food
+slanček nanuk burger
+
+# animals
+chrček pásavec tapír jaguár panter hyena šakal kojot alpaka gazela mula poník andulka
+sojka škorec kosec roztoč koral hubka ježovka ustrica homár kreveta sépia kalmár vyza
+plotica

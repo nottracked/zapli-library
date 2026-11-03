@@ -1,0 +1,64 @@
+# Answer words, nouns: home, furniture, objects, tools, school things, toys, food and drink.
+# Hand-written for this list (CC0 1.0). Base forms: nominative singular; plural-only nouns in the plural.
+
+# the home
+dom domov byt izba kuchyňa spálňa obývačka kúpeľňa záchod chodba predsieň pivnica povala
+podkrovie balkón terasa dvor záhrada plot brána bránka dvere okno stena strop podlaha
+strecha komín schod schodisko výťah zábradlie kľučka zámok kľúč zvonček poschodie
+prízemie garáž dielňa kôlňa chata chalupa chalúpka búda maštaľ chliev stodola stajňa
+kurín holubník studňa pec kozub krb parapet rímsa dlažba tehla omietka škridla tráva
+
+# furniture and household things
+stôl stolík stolička kreslo gauč pohovka posteľ skriňa šatník polica regál komoda
+zásuvka lampa luster svietnik sviečka koberec záclona záves roleta vankúš paplón
+perina deka prikrývka plachta matrac obliečka uterák osuška zrkadlo obraz rám váza
+kvetináč hodiny budík telefón mobil počítač televízor rádio kamera fotoaparát
+klávesnica myš obrazovka tlačiareň kábel vypínač žiarovka batéria nabíjačka
+kolíska lavica lavička taburetka vešiak stolček rohožka kôš kľúčik
+
+# kitchen
+sporák rúra chladnička mraznička umývačka práčka sušička mikrovlnka hrniec panvica
+pokrievka tanier miska šálka hrnček pohár fľaša krčah kanvica čajník lyžica lyžička
+vidlička nôž naberačka varecha metlička strúhadlo sitko cedník doska valček forma
+plech misa podnos tácka obrúsok utierka špongia vedro džbán hrnčiar dóza pohárik
+slánka cukornička mlynček otvárač vývrtka
+
+# tools and things around the house
+kladivo klinec skrutka skrutkovač kliešte píla sekera hoblík dláto vrták vŕtačka
+meter pravítko lopata rýľ hrable motyka fúrik kosa kosák vidly krompáč rebrík lano
+reťaz drôt hák kotva klbko ihla niť nožnice šnúra povraz vrece krabica škatuľa debna
+sud krhla hadica kefa metla lopatka handra vysávač žehlička kolík štipec
+pílka sekerka pilník brúska lepidlo páska kolok špagát vosk mydlo šampón
+pasta hrebeň kefka žiletka fén vata vatička
+
+# school and paper
+kniha knižka zošit pero ceruzka guma pastelka farbička štetec papier list obálka
+známka pohľadnica noviny časopis kalendár mapa glóbus aktovka peračník tabuľa krieda
+zošívačka kalkulačka slovník atlas učebnica šlabikár čítanka rozvrh úloha písanka
+strana stránka riadok kapitola obrázok nápis výkres farba
+
+# money and shopping
+peniaze minca bankovka cena účet pokladňa košík zľava tovar obchod predajňa trh
+jarmok stánok zmena poklad mešec
+
+# toys and music
+hračka bábika lopta medvedík kocka stavebnica šarkan švihadlo kolobežka korčule sane
+lyža bicykel hojdačka šmykľavka pieskovisko loptička autíčko vláčik bubon píšťalka
+trúbka gitara husle klavír flauta harmonika akordeón hra karta kartička
+domino šach dáma figúrka puk palica raketa
+
+# food
+chlieb rožok žemľa koláč torta buchta piroh haluška knedľa rezeň guľáš polievka
+vývar omáčka šalát kaša ryža cestoviny špagety pizza syr maslo mlieko smotana tvaroh
+jogurt bryndza vajce vajíčko šunka saláma slanina klobása párok mäso kura kurča
+hydina ryba pstruh kapor losos tuniak sardinka zelenina ovocie jablko hruška slivka
+čerešňa višňa marhuľa broskyňa jahoda malina čučoriedka ríbezľa egreš hrozno banán
+pomaranč citrón mandarínka melón ananás figa datľa orech mandľa gaštan arašid zemiak
+mrkva petržlen zeler cibuľa cesnak pór kapusta kel karfiol brokolica uhorka paradajka
+paprika tekvica cuketa baklažán reďkovka cvikla hrach fazuľa šošovica kukurica
+šampiňón huba hríb korenie soľ cukor med olej ocot horčica kečup majonéza múka
+krupica droždie prášok škorica vanilka mak čokoláda cukrík bonbón lízanka zmrzlina
+keks sušienka oblátka perník lievanec palacinka šiška závin štrúdľa chlebíček sendvič
+hranolky voda čaj káva kakao džús limonáda minerálka pivo víno mušt kompót džem
+lekvár marmeláda raňajky obed večera desiata olovrant jedlo nápoj pokrm hlad smäd
+kôrka striedka krajec plátok kúsok omrvinka

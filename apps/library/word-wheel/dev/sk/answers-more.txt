@@ -1,0 +1,38 @@
+# Answer words: more common words, gathered letter by letter (nouns, verbs, adjectives).
+# Hand-written for this list (CC0 1.0). Base forms as in the other answer files.
+
+autor akcia adresa alej album anjel aréna atóm astra aula aspoň
+baňa bič bob bod boh brko bronz bábka babička bager bál bárka bašta bazár belasý bez blana
+blúdiť bludisko bodka bodnúť bomba brašna brečtan bremeno brúsiť bubnovať budúci burza
+bydlisko bytosť bývať drak dráha dráma drúk
+cirkus clo cvok cyklus cyklista cela cep cesto cievka cieva citlivý cop cucať cúvať
+čaro čert čin článok čerpať česť čata číhať činka čipka čížik čľapkať čudo čuchať
+dielo diera divý dojem dotyk druh duch dusiť duša dýka dyňa dávka diaľka doktor dosah
+dovoz dvojka dvorec dusno
+elektrina euro epocha esej etapa etiketa emócia
+fajka fakt fanúšik fond fakľa farma fáza festival finále fixka fľak fólia front fujara
+gúľať gajdy gáza gesto graf gram gril
+hala hrana hasiť hlavný hlupák hnoj hrudka hýbať chovať chobot chov chrumkavý chudoba
+chumáč chlebík chládok chmúrny chytrý
+ilúzia inzerát
+jama jadro jalovec jas jazdec jed jedáleň jednota jemný
+kočík krém kryt kahan kartón kaz kázať knieža kokos komora kord kostým kotol krivda
+krúžok krysa kúzlo kvočka kyselina kytica
+lieh lov lupa lak lampáš lečo lekno lep lesk liga lis lodička lom lono lôžko lúpež
+lupič lúštiť lýko ľadový ľudový ľúto
+meno mlyn macocha mágia mág majetok maska mazať mech miera mína model modlitba mol
+mreža mýliť mys
+náklad nálepka náruč neter norma notes nováčik nožík
+obrus obal obeh obeť oblúk obruč obuv odev odmena odpad ochota okolie okruh omyl
+oriešok ozdoba ozvena
+prah pult pas pestovať plocha plž posol postava postoj pozor pruh prút pumpa
+riad rakva ruch
+sála seno slama srna stan stav sauna sebec sezóna silo sito skrinka skrýša sláva sok
+spev spis spoj spolok stavba strela struna stĺp svätec
+šek šepot šev škvrna šľacha šperk špina šum šašo šelma šibal šitie šľapaj špendlík
+šťava
+téma tuk tyč tabak takt ťah tlač trasa trúbka truhla trup tunel
+úroda uzol úlomok úraz útulok umývadlo ústav
+vak vôňa valec vaňa veko veniec vrstva vzťah
+zvon zámer zápalka zátka zväzok
+želé žeriav žiara žľab žĺtok žobrák žuvačka

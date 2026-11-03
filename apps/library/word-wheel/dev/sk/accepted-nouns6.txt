@@ -1,0 +1,7 @@
+# Accepted words, nouns: kitchen and cleaning, things we wear, the house, the garden and farm, the body.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+slamka uzáver konvica sáčok alobal saponát čistič korálik gumička traky schodík odkvap
+lodžia veranda pavlač salón žalúzia garniža behúň truhlík črepník hriadka pareník kompost
+hnojivo postrek pletivo včelín strapec bobuľa kôstka šupka dužina stopka šúľok otruby plevel
+stavec mechúr zátylok

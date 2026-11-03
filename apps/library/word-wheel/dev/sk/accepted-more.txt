@@ -1,0 +1,26 @@
+# Accepted words: more short and everyday words, so that a wheel's extra words are many.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+# short nouns
+akt cár čap des hit kyj jód ión jen mím tuš bor aloe báza bója cifra clona cmar črta
+duel fjord fúra harfa hnis hrot hrdza huňa chór kmeť kráter kríza kŕč kúra láva lemúr móda
+mólo mora muzika nálet nárek óda osada otava pika pluk plyš póza próza púť riasa rota ruja
+sága sója suma šeď šifra tabu tóga trus vada vrava vred zóna foto video menu hobby kimono
+tango polka valčík salsa disko džez pitie bitie pranie spanie jedenie kanoe pianíno
+
+# verbs
+lkať plieť vrieť žrať stonať hojiť kojiť rojiť strojiť brojiť jačať kvíliť chrápať
+driemať hľadieť žmurkať mrkať sadať stávať líhať schnúť moknúť kysnúť hynúť kľaknúť
+zívnuť kýchnuť tĺcť vliecť obliecť cválať klusať zápasiť trúbiť brnkať hrkať cinkať
+šuškať šumieť hučať bzučať pišťať vrčať mručať syčať erdžať hýkať kotkodákať
+
+# adjectives
+bujný dravý hravý ľúby pochmúrny sivastý šedivý vratký zlatistý žltkastý belavý modrastý
+zelenkavý nazelenalý červenkastý hnedastý šedý plavý hrdzavý strakatý číry kalný mútny
+trpký kyslastý nasladlý tesný plochý útly zavalitý bdelý naivný krutý tvrdohlavý
+svojhlavý plačlivý ufňukaný opustený osamelý spoločný rodný
+
+# adverbs
+dolu von preč inde skôr neskôr najskôr radšej lepšie horšie viac menej najviac najmenej
+celkom úplne práve zase zasa znovu občas odrazu spoločne naokolo dookola naopak
+napríklad pravdaže samozrejme snáď nanešťastie našťastie bohužiaľ žiaľ

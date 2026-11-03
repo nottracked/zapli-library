@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="color-scheme" content="light dark" />
+        <title>Word Wheel</title>
+        <link rel="stylesheet" href="css/app.css" />
+        <script type="module" src="js/main.mjs"></script>
+    </head>
+    <body>
+        <svg class="sprite" aria-hidden="true">
+            <symbol id="i-daily" viewBox="0 0 24 24">
+                <rect x="4" y="5" width="16" height="15" rx="2" />
+                <path d="M4 10h16M9 3v4M15 3v4" />
+                <path d="m9.5 15 2 2 3.5-4" />
+            </symbol>
+            <symbol id="i-book" viewBox="0 0 24 24">
+                <path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5Z" />
+                <path d="M12 6.5v13" />
+            </symbol>
+            <symbol id="i-stats" viewBox="0 0 24 24">
+                <path d="M5 20V11M12 20V5M19 20v-6" />
+            </symbol>
+            <symbol id="i-help" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6" />
+                <path d="M12 17.2v.1" />
+            </symbol>
+            <symbol id="i-settings" viewBox="0 0 24 24">
+                <path d="M4 7h9M17 7h3M4 17h3M11 17h9" />
+                <circle cx="15" cy="7" r="2" />
+                <circle cx="9" cy="17" r="2" />
+            </symbol>
+            <symbol id="i-shuffle" viewBox="0 0 24 24">
+                <path d="M4 7h3.5c4.5 0 4.5 10 9 10H20M4 17h3.5c1.6 0 2.6-1.3 3.4-3M13.1 10c.8-1.7 1.8-3 3.4-3H20" />
+                <path d="m17.5 4.5 2.5 2.5-2.5 2.5M17.5 14.5l2.5 2.5-2.5 2.5" />
+            </symbol>
+            <symbol id="i-hint" viewBox="0 0 24 24">
+                <path d="M9 18h6M10 21h4" />
+                <path d="M12 3a6 6 0 0 0-3.5 10.9c.7.5 1 1.2 1 2.1h5c0-.9.3-1.6 1-2.1A6 6 0 0 0 12 3Z" />
+            </symbol>
+            <symbol id="i-clear" viewBox="0 0 24 24">
+                <path d="M9 5h11v14H9l-6-7 6-7Z" />
+                <path d="m12 9 5 6M17 9l-5 6" />
+            </symbol>
+            <symbol id="i-enter" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></symbol>
+            <symbol id="i-prev" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7" /></symbol>
+            <symbol id="i-next" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></symbol>
+        </svg>
+        <span id="tz-probe" aria-hidden="true">M</span>
+
+        <div class="app">
+            <header class="band top">
+                <h1 class="brand" data-t="appName">Word Wheel</h1>
+                <button type="button" class="lang-btn" id="btn-lang"><span id="lang-code">EN</span></button>
+                <div class="tools">
+                    <button type="button" class="icon-btn" id="btn-daily" data-t-label="daily">
+                        <svg class="ico" aria-hidden="true"><use href="#i-daily" /></svg>
+                    </button>
+                    <button type="button" class="icon-btn" id="btn-book" data-t-label="wordBook">
+                        <svg class="ico" aria-hidden="true"><use href="#i-book" /></svg>
+                    </button>
+                    <button type="button" class="icon-btn" id="btn-stats" data-t-label="statistics">
+                        <svg class="ico" aria-hidden="true"><use href="#i-stats" /></svg>
+                    </button>
+                    <button type="button" class="icon-btn" id="btn-help" data-t-label="howToPlay">
+                        <svg class="ico" aria-hidden="true"><use href="#i-help" /></svg>
+                    </button>
+                    <button type="button" class="icon-btn" id="btn-settings" data-t-label="settings">
+                        <svg class="ico" aria-hidden="true"><use href="#i-settings" /></svg>
+                    </button>
+                </div>
+            </header>
+
+            <main class="play" id="play">
+                <div class="status">
+                    <span id="mode-label" class="mode"></span>
+                    <span id="progress" class="progress"></span>
+                    <button type="button" class="chip" id="btn-switch"></button>
+                </div>
+
+                <section class="grid" id="grid" role="group">
+                    <div class="board"></div>
+                    <ul class="grid-words sr-only"></ul>
+                </section>
+
+                <div class="feedback">
+                    <p id="notice" class="notice" role="status" aria-live="polite"></p>
+                    <div id="ask" class="ask" hidden>
+                        <span data-t="revealAsk">Show this letter with a hint?</span>
+                        <span class="ask-buttons">
+                            <button type="button" class="btn small" id="ask-no" data-t="cancel">Cancel</button>
+                            <button type="button" class="btn small primary" id="ask-yes" data-t="reveal">Show</button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="word-row">
+                    <button type="button" class="icon-btn quiet" id="btn-clear" data-t-label="clear">
+                        <svg class="ico" aria-hidden="true"><use href="#i-clear" /></svg>
+                    </button>
+                    <output id="current" class="current"></output>
+                    <button type="button" class="icon-btn quiet" id="btn-enter" data-t-label="enter">
+                        <svg class="ico" aria-hidden="true"><use href="#i-enter" /></svg>
+                    </button>
+                </div>
+
+                <div class="wheel-wrap" id="wheel-wrap">
+                    <div class="wheel" id="wheel" role="group">
+                        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polyline points="" /></svg>
+                    </div>
+                </div>
+
+                <div id="loading" class="loading" role="status">
+                    <p id="loading-text">Getting the wheel ready…</p>
+                    <button type="button" class="btn primary" id="btn-retry" hidden data-t="tryAgain">Try again</button>
+                </div>
+            </main>
+
+            <nav class="band bottom toolbar" data-t-label="toolbar">
+                <button type="button" class="tool" id="btn-shuffle">
+                    <svg class="ico" aria-hidden="true"><use href="#i-shuffle" /></svg
+                    ><span data-t="shuffle">Shuffle</span>
+                </button>
+                <button type="button" class="tool" id="btn-hint">
+                    <span class="ico-wrap"
+                        ><svg class="ico" aria-hidden="true"><use href="#i-hint" /></svg
+                        ><span class="badge" id="hint-count" aria-hidden="true">3</span></span
+                    ><span data-t="hint">Hint</span>
+                </button>
+                <button type="button" class="tool" id="btn-extras">
+                    <span class="ico-wrap"
+                        ><svg class="ico" aria-hidden="true"><use href="#i-book" /></svg
+                        ><span class="badge" id="extra-count" aria-hidden="true">0</span></span
+                    ><span data-t="extraWords">Extra words</span>
+                </button>
+            </nav>
+        </div>
+
+        <dialog id="dlg-daily" aria-labelledby="daily-title">
+            <div class="dlg-head"><h2 id="daily-title" data-t="daily">Daily wheel</h2></div>
+            <div class="dlg-body">
+                <p class="muted" data-t="dailyIntro"></p>
+                <div class="cal-head">
+                    <button type="button" class="icon-btn cal-nav" id="cal-prev" data-t-label="prevMonth">
+                        <svg class="ico" aria-hidden="true"><use href="#i-prev" /></svg>
+                    </button>
+                    <h3 id="cal-month" aria-live="polite"></h3>
+                    <button type="button" class="icon-btn cal-nav" id="cal-next" data-t-label="nextMonth">
+                        <svg class="ico" aria-hidden="true"><use href="#i-next" /></svg>
+                    </button>
+                </div>
+                <div class="cal" id="cal"></div>
+                <p class="note" id="cal-count"></p>
+            </div>
+            <div class="dlg-foot">
+                <button type="button" class="btn" id="daily-close" data-t="close">Close</button>
+                <button type="button" class="btn primary" id="daily-play" data-t="playToday">Play today's wheel</button>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-book" class="sheet" aria-labelledby="book-title">
+            <div class="sheet-head">
+                <h2 id="book-title">
+                    <span data-t="wordBook">Word book</span> <span class="count" id="book-count"></span>
+                </h2>
+                <button type="button" class="btn primary" id="book-done" data-t="done">Done</button>
+            </div>
+            <div class="sheet-body">
+                <p class="muted" data-t="bookIntro"></p>
+                <section id="book-wheel-section">
+                    <h3 data-t="bookThisWheel">Found on this wheel</h3>
+                    <ul class="words" id="book-wheel"></ul>
+                </section>
+                <h3 data-t="bookAll">All words</h3>
+                <div class="book-tools">
+                    <label class="search">
+                        <span class="sr-only" data-t="bookSearch">Find a word in your book</span>
+                        <input type="search" id="book-search" autocomplete="off" spellcheck="false" />
+                    </label>
+                    <div class="seg" role="radiogroup" id="book-sort" data-t-label="sortLabel">
+                        <label
+                            ><input type="radio" name="book-sort" value="az" checked /><span data-t="sortAZ"
+                                >A to Z</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="book-sort" value="new" /><span data-t="sortNew"
+                                >Newest</span
+                            ></label
+                        >
+                    </div>
+                </div>
+                <ul class="words" id="book-list"></ul>
+                <p class="empty" id="book-empty" hidden></p>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-stats" aria-labelledby="stats-title">
+            <div class="dlg-head"><h2 id="stats-title" data-t="statistics">Statistics</h2></div>
+            <div class="dlg-body">
+                <table class="stats">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <th scope="col" data-t="colSk">Slovak</th>
+                            <th scope="col" data-t="colEn">English</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stats-body"></tbody>
+                </table>
+                <p class="muted" data-t="statsNote"></p>
+            </div>
+            <div class="dlg-foot">
+                <button type="button" class="btn primary" id="stats-done" data-t="done">Done</button>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-help" aria-labelledby="help-title">
+            <div class="dlg-head"><h2 id="help-title" data-t="howToPlay">How to play</h2></div>
+            <div class="dlg-body">
+                <p data-t="helpGoal"></p>
+                <h3 data-t="helpMaking"></h3>
+                <p data-t="helpMaking1"></p>
+                <p data-t="helpMaking2"></p>
+                <h3 data-t="helpExtras"></h3>
+                <p data-t="helpExtras1"></p>
+                <h3 data-t="helpHints"></h3>
+                <p data-t="helpHints1"></p>
+                <p data-t="helpHints2"></p>
+                <h3 data-t="helpDaily"></h3>
+                <p data-t="helpDaily1"></p>
+                <h3 data-t="helpWordsSk"></h3>
+                <p data-t="helpWordsSk1"></p>
+                <h3 data-t="helpWordsEn"></h3>
+                <p data-t="helpWordsEn1"></p>
+                <h3 data-t="helpKeys"></h3>
+                <p data-t="helpKeys1"></p>
+                <p class="muted" data-t="storageNote"></p>
+            </div>
+            <div class="dlg-foot">
+                <button type="button" class="btn primary" id="help-done" data-t="done">Done</button>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-settings" class="sheet" aria-labelledby="settings-title">
+            <div class="sheet-head">
+                <h2 id="settings-title" data-t="settings">Settings</h2>
+                <button type="button" class="btn primary" id="settings-done" data-t="done">Done</button>
+            </div>
+            <div class="sheet-body">
+                <fieldset>
+                    <legend data-t="wordsLang">Language of the words</legend>
+                    <div class="seg">
+                        <label><input type="radio" name="words" value="sk" /><span>Slovenčina</span></label>
+                        <label><input type="radio" name="words" value="en" /><span>English</span></label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend data-t="wheelSize">Letters on the wheel</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="size" value="grow" /><span data-t="sizeGrow"
+                                >Growing</span
+                            ></label
+                        >
+                        <label><input type="radio" name="size" value="5" /><span>5</span></label>
+                        <label><input type="radio" name="size" value="6" /><span>6</span></label>
+                        <label><input type="radio" name="size" value="7" /><span>7</span></label>
+                    </div>
+                    <p class="note" data-t="wheelSizeNote"></p>
+                </fieldset>
+                <fieldset>
+                    <legend data-t="letterSize">Letter size</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="letters" value="normal" /><span data-t="sizeNormal"
+                                >Normal</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="letters" value="large" /><span data-t="sizeLarge"
+                                >Large</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="letters" value="largest" /><span data-t="sizeLargest"
+                                >Largest</span
+                            ></label
+                        >
+                    </div>
+                    <p class="note" id="letters-note" data-t="sizeAuto"></p>
+                </fieldset>
+                <label class="opt">
+                    <span
+                        ><span class="opt-title" data-t="contrast">High contrast</span
+                        ><span class="note" data-t="contrastNote"></span
+                    ></span>
+                    <input type="checkbox" class="switch" id="opt-contrast" />
+                </label>
+                <fieldset>
+                    <legend data-t="theme">Light or dark</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="theme" value="device" /><span data-t="themeDevice"
+                                >Like the phone</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="theme" value="light" /><span data-t="themeLight"
+                                >Light</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="theme" value="dark" /><span data-t="themeDark">Dark</span></label
+                        >
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend data-t="language">Language of the game</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="ui" value="auto" /><span data-t="langAuto"
+                                >Automatic</span
+                            ></label
+                        >
+                        <label><input type="radio" name="ui" value="sk" /><span>Slovenčina</span></label>
+                        <label><input type="radio" name="ui" value="en" /><span>English</span></label>
+                    </div>
+                </fieldset>
+                <p class="muted" data-t="storageNote"></p>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-solved" aria-labelledby="solved-title">
+            <div class="dlg-head"><h2 id="solved-title"></h2></div>
+            <div class="dlg-body">
+                <ul class="summary" id="solved-lines"></ul>
+                <p class="muted" id="solved-left"></p>
+            </div>
+            <div class="dlg-foot">
+                <button type="button" class="btn" id="solved-stay" data-t="keepLooking">Keep looking</button>
+                <button type="button" class="btn" id="solved-calendar" data-t="calendar">Calendar</button>
+                <button type="button" class="btn primary" id="solved-next" data-t="nextWheel">Next wheel</button>
+            </div>
+        </dialog>
+
+        <div id="sr" class="sr-only" aria-live="polite"></div>
+    </body>
+</html>

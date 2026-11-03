@@ -1,0 +1,13 @@
+# Accepted words: diminutives, people, rulers and beings of tales, and more adjectives.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+# diminutives
+balíček braček dvorček jazýček kocúrik košíček pásik vežička múrik plôtik stĺpik kolíček zrnko
+vetrík hájik
+
+# people
+milenka poetka fešák barón vojvoda sultán kalif faraón šaman furman
+
+# adjectives
+aktívny akútny atómový bábkový banálny bojový dychový fyzický gotický hodný jedlý kladný
+konečný krvavý márny nápadný prostý rajský statný strmý šikmý tlstý úbohý účinný vrelý zúfalý

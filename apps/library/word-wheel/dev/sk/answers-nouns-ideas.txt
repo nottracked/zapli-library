@@ -1,0 +1,39 @@
+# Answer words, nouns: sport and games, time, feelings, shapes, ideas.
+# Hand-written for this list (CC0 1.0). Base forms: nominative singular; plural-only nouns in the plural.
+
+# sport and games
+šport futbal hokej tenis volejbal basketbal hádzaná lyžovanie plávanie beh skok hod gól
+sieť zápas turnaj súťaž pretek medaila víťaz prehra remíza bod skóre rekord tím
+družstvo mužstvo klub tréning rozhodca kopačka dres sieťka korčuľa sánkovanie
+korčuľovanie cieľ štart kolo hra hráč kocka
+
+# time
+čas chvíľa chvíľka okamih sekunda minúta hodina hodinka deň týždeň mesiac rok storočie
+tisícročie obdobie doba vek éra ráno dopoludnie doobedie poludnie popoludnie podvečer
+večer noc polnoc svitanie jar leto jeseň zima pondelok utorok streda štvrtok piatok
+sobota nedeľa január február marec apríl máj jún júl august september október november
+december víkend sviatok prázdniny narodeniny meniny výročie dátum budúcnosť minulosť
+prítomnosť začiatok koniec stred polovica štvrť termín lehota
+
+# feelings and the mind
+láska nenávisť radosť smútok strach hnev zlosť hanba pýcha žiarlivosť závisť nádej
+viera dôvera pokoj šťastie nešťastie pravda lož klam sen túžba vôľa slabosť odvaha
+múdrosť rozum myseľ pamäť cit pocit nálada humor vtip žart smiech plač krik hluk
+ticho zvuk tón rytmus melódia úcta vďaka ľútosť súcit nuda obava starosť úzkosť
+
+# shapes, sizes and amounts
+tvar veľkosť výška šírka dĺžka hĺbka váha hmotnosť rýchlosť miesto priestor čiara
+kruh štvorec trojuholník obdĺžnik guľa okraj kraj spodok počet číslo číslica súčet
+rozdiel tretina štvrtina percento kus diel časť celok skupina rad poradie zoznam
+výber vec tvor kopa hromada kôpka dvojica trojica tucet pár
+
+# life, ideas and events
+život smrť osud náhoda šanca nebezpečenstvo pomoc záujem zvyk povaha charakter
+správanie vina hriech dobro zlo krása škoda hodnota kvalita poriadok neporiadok systém
+spôsob metóda účel dôvod príčina následok vplyv rozvoj pokrok rast pád pohyb krok
+chôdza energia informácia údaj znalosť vedomosť veda umenie kultúra história dejiny
+tradícia reč rozhovor hádka spor dohoda sľub prísaha tajomstvo záhada hádanka záľuba
+koníček zbierka dobrodružstvo príhoda udalosť novinka zážitok spomienka obraz rada
+príležitosť možnosť povinnosť práca služba úsilie snaha pokus skúsenosť zručnosť
+talent dar nápad vynález objav pravidlo hranica kontrola skúška varovanie výstraha
+signál znamenie znak symbol obrázok značka vzor

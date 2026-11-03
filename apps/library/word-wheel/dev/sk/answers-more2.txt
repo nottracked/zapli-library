@@ -1,0 +1,21 @@
+# Answer words: short words and longer words whose letters make good wheels.
+# Hand-written for this list (CC0 1.0). Base forms as in the other answer files.
+
+# short nouns
+sob mach chov duch mor val vír ráj roj loj jak kat kôš lep niť pór rum tok úd voz pluh
+bača dóza luna mena múza nota pena prak puma tuba vatra sólo salto osol oslík somár
+mat skalka kotlík kostol atlas sálať stopa vrah dych
+
+# longer nouns
+rastlina kvetina polička slepica kotlina krčmár kufrík minerál nádoba ochrana plavec
+poleno potrava prekážka rozhlas rýchlik siréna skladba sprcha strelec večierok
+vedierko vodník zástava sestrička školák trieska krajec pamiatka papierik potraviny
+oblečenie stretnutie snehuliak hniezdo
+
+# verbs whose letters make good wheels
+budovať stretnúť ochutnať zabaliť zametať utierať otvoriť zapáliť zhasnúť kvitnúť
+opraviť pokaziť strážiť pomáhať hvízdať zbierať počítať spievať maľovať kresliť
+pozerať vysávať hľadať plávať lietať skákať stavať
+
+# adjectives whose letters make good wheels
+tajomný záhadný nádherný výborný skvelý úžasný príjemný

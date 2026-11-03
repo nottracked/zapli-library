@@ -1,0 +1,12 @@
+# Accepted words: adjectives of materials and places, and more nouns and verbs.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+gumový medený oceľový hliníkový betónový tehlový mramorový porcelánový slamený pieskový
+ohnivý jazerný lúčny skalný jaskynný púštny stepný tropický polárny severný južný
+východný západný
+
+# short verbs with prefixes
+vypiť napiť opiť upiť zjesť ožiť užiť ušiť vyšiť zbiť ubiť umyť omyť zmyť ukryť
+vyryť zliať udať zdať vzdať ubrať zísť ujsť uspať ustáť uviesť zviesť stočiť stlačiť
+vliezť zliezť skočiť upiecť uvariť zvolať opísať spísať urezať zrezať zlepiť poučiť
+vyučiť dočkať vyčkať zhodiť otočiť
