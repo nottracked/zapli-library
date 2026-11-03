@@ -81,8 +81,8 @@ new icon to every installed copy. It refuses a PNG over the format's limit of 32
 19,731 bytes.
 
 The embed sets `app.iconData` (plain base64, no `data:` prefix) as the last member of the tool's `app` block, the one
-whose first member is `"id": "library/<tool>"`, in `app.json` or in the `index.html` manifest; an existing
-`iconData` line is replaced. CoreSVG reads paths, rects, circles, ellipses, groups with transforms, opacity and linear
+whose first member is `"id": "library/<tool>"`, in `app.json`, in the `index.html` manifest or in a package app's
+`package/manifest.json` (which its `web.files` does not list); an existing `iconData` line is replaced. CoreSVG reads paths, rects, circles, ellipses, groups with transforms, opacity and linear
 or radial gradients; keep to those (no filters, masks or text). The script refuses an SVG that could reach outside
 itself (`href`, `<image>`, `<script>`, `<foreignObject>`, `@import`, a `url()` other than the file's own `#id`) or
 declares a document type or an entity (`<!DOCTYPE`, `<!ENTITY`: an external entity reads another file, an internal one

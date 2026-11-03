@@ -13,9 +13,10 @@ check flags any other. `README.md` has the rules for people; this file is the sh
   and `dev/` (scripts and sources that are not shipped).
 - A package app's folder: `listing.json`, `screenshots/` and `dev/` beside `package/`, and in `package/` only the
   app's files: `manifest.json` (the definition, with `app.kind: "web"`, `web.entry` and `web.files`), the entry page
-  and its scripts, workers, pictures, sounds and data. Prefer one HTML file whenever the app fits in one; choose a
-  package for pictures, sounds, fonts, WebGL assets, modules or workers. Phones download a package app's files only
-  when it is installed or updated, and Zapli never ships one built in.
+  and its scripts, workers, pictures, sounds and data. Prefer one HTML file for a small app; choose a package when
+  modules, workers or data files make the code clearer or easier to extend, or for pictures, sounds, fonts and WebGL
+  assets. Phones download a package app's files only when it is installed or updated, and Zapli never ships one built
+  in.
 - `icons/`: the apps' own icons (`svg/` sources, `render.swift`, `png/`, `contact-sheet.png`).
 
 ## Hard rules
@@ -36,8 +37,8 @@ check flags any other. `README.md` has the rules for people; this file is the sh
 - **Users keep their data.** Never rename or remove a stored field or entity without a migration.
 - **Package apps:**
   - `web.files` lists every file of `package/` except `manifest.json`, each with its SHA-256 and size. Never edit it
-    by hand: run `zapli library inventory --write` (the command is coming in Zapli's command-line tool) after every
-    change to a file of the package; the check refuses any difference.
+    by hand: run `zapli library inventory <app folder> --write` (Zapli's command-line tool) after every change to a
+    file of the package; the check refuses any difference.
   - Path rules for every file and folder in `package/`: ASCII letters, digits, `.`, `_` and `-` only, at most 128
     characters a name, never starting or ending with `.`; at most 12 names deep and 255 characters; no hidden files
     (delete `.DS_Store`), no symbolic links, nothing under `_zapli/` or `_anyapp/` in any case, no Windows device

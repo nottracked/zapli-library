@@ -168,10 +168,11 @@ Mines' head, shortened:
 ## 4. A package app (`package/`)
 
 A package app is a web app whose files are in a folder: an entry page, its JavaScript modules, workers, pictures,
-sounds, fonts and data. Choose one HTML file whenever the app fits in one: it opens anywhere, Zapli ships it built in
-and every Zapli version installs it. Choose a package when the app needs pictures, sounds, music or fonts (one file
-would carry them as base64), WebGL shaders and textures, level data, code split into modules, or a worker (a worker
-always starts from a script file of its own). Zapli never ships a package app built in: a phone downloads its files
+sounds, fonts and data. Prefer one HTML file for a small app: it opens anywhere, Zapli ships it built in and every
+Zapli version installs it. Choose a package when modules, workers or data files make the code clearer or easier to
+extend (shared modules other apps of the same family reuse, a solver or generator in a worker, a word list), or when
+the app needs pictures, sounds, music or fonts (one file would carry them as base64), WebGL shaders and textures or
+level data (a worker always starts from a script file of its own). Zapli never ships a package app built in: a phone downloads its files
 when someone installs it from the library (Zapli says how much first), and an update downloads only the files that
 changed.
 
@@ -215,8 +216,8 @@ files. The HTML pages carry no embedded manifest.
 ```
 
 - **`web.files` lists every file of `package/` except `manifest.json`**, each with its SHA-256 and size in bytes.
-  Never write it by hand: run `zapli library inventory --write` (coming in Zapli's command-line tool) after every
-  change to a file of the package. The library check refuses a package whose list and files differ in any way, and
+  Never write it by hand: run `zapli library inventory apps/library/<name> --write` (Zapli's command-line tool)
+  after every change to a file of the package. The library check refuses a package whose list and files differ in any way, and
   phones refuse a file whose bytes do not match.
 - **Path rules** for every file and folder in `package/`:
   - only ASCII letters, digits, `.`, `_` and `-`; a name at most 128 characters, not starting or ending with `.`;
@@ -267,7 +268,7 @@ files. The HTML pages carry no embedded manifest.
   `zapli pack apps/library/<name>/package` and import the `.zapli` file (Import, then From a file; an imported file may
   have at most 20 MB, and no file in it more than 10 MB).
 - **Its own icon:** draw `icons/svg/<name>.svg` as for any app (section 6); the render script writes the icon into
-  `app.json` and `index.html` only, so for a package app a maintainer adds it.
+  `package/manifest.json`, which `web.files` does not list, so the file list stays as it is.
 
 ## 5. `listing.json`
 

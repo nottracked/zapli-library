@@ -7,7 +7,8 @@
 role-playing game installed from GitHub.</sub></p>
 
 This repository holds the apps of **Zapli**: everyday ones such as an expense tracker, a water
-reminder, a to-do list, flashcards, a document scanner and a few games. Zapli ships with these apps built in, and later
+reminder, a to-do list, flashcards, a document scanner, and games such as Solitaire, Free Cells, Spider and Word
+Wheel (in English and Slovak, with a Slovak word list of its own). Zapli ships with the single-file apps built in, and later
 versions of Zapli will install and update them from this repository, so a fix merged here can reach phones without a
 new release of Zapli. Package apps (apps made of many files, below) are never built in: Zapli downloads them from
 here when someone installs one.
@@ -51,28 +52,30 @@ app.json | index.html | package/   the app: a declarative definition, a web app,
 listing.json               how the library presents it: title, summary, description, licence, sample data, sources
 import-samples/            small fictional files in the formats the app can import
 screenshots/               screenshots taken with the sample data
-dev/                       development scripts and sources that are not shipped (Solitaire's deal solver and its checks)
+dev/                       scripts and sources that are not shipped: solvers, word-list sources, build scripts, checks
 ```
 
 There are two kinds of app, and every app is one or the other:
 
 - A **declarative app** (`app.json`) is one JSON document: the data, screens, actions, reminders and the permissions
-  it needs. Zapli draws native screens for it. Most data apps (Expenses, Water, To-do) are this kind.
+  it needs. Zapli draws native screens for it. Most data apps (Water, To-do, Flashcards) are this kind.
 - A **web app** (`index.html`) is one HTML file with its manifest embedded in a
   `<script type="application/zapli+json">` block. Zapli runs it in a locked-down web view of its own; the same file
   also opens in a plain browser. Games and other apps that draw their own screens (Solitaire, Mines, Gridfire, Pocket
   Scan) are this kind.
 
 A web app that needs more than one file is a **package app**: its files are in a `package/` folder, described below.
+Free Cells, Spider and Word Wheel are package apps, and so is Expenses: its screens are web pages, while its manifest
+declares its records, imports, reminders and widgets, so they work as in a declarative app.
 
 ## Package apps
 
-Most web apps fit in one HTML file, and one file is the better choice whenever it fits: it opens anywhere with a double
-click, Zapli ships it built in, and Zapli versions that know nothing of packages install it too. Make a package app
-instead when the app needs
-what one file cannot hold well: pictures, sounds, music or fonts (which one file would carry as base64, a third
-larger), WebGL shaders and textures, levels or other data, JavaScript split into modules, or a worker (a worker
-always starts from a script file of its own).
+For a small app, one HTML file is the better choice: it opens anywhere with a double click, Zapli ships it built in,
+and Zapli versions that know nothing of packages install it too. Make a package app instead when modules, workers or
+data files make the code clearer or easier to extend, or when the app needs what one file cannot hold well: pictures,
+sounds, music or fonts (which one file would carry as base64, a third larger), WebGL shaders and textures, levels,
+word lists or other data, JavaScript split into modules that other apps can reuse, or a worker (a worker always starts
+from a script file of its own).
 
 ```
 apps/library/<name>/
@@ -89,9 +92,9 @@ apps/library/<name>/
 - **`manifest.json`** is the app's definition (`"spec": "zapli/0.2"`, `app.kind: "web"`), the same as the manifest a
   single-file web app embeds, with two more members in `web`: `entry`, the page the app opens with, and `files`, the
   list of every other file of `package/` with its SHA-256 and size. The HTML pages carry no embedded manifest.
-- **`web.files` is written by a tool**, never by hand: `zapli library inventory --write` (Zapli's command-line tool;
-  the command is on its way) lists the files, and the library check refuses a package whose list and files differ in
-  any way: a file it does not list, a listed file that is missing, another size or another SHA-256.
+- **`web.files` is written by a tool**, never by hand: `zapli library inventory <app folder> --write` (Zapli's
+  command-line tool) lists the files, and the library check refuses a package whose list and files differ in any way:
+  a file it does not list, a listed file that is missing, another size or another SHA-256.
 - **Path rules.** Every file name and folder name in `package/` is plain ASCII: letters, digits, `.`, `_` and `-`,
   at most 128 characters, not starting with `.` and not ending with `.`. A path is at most 12 names deep (folders and
   the file) and 255 characters long. No hidden files (delete the `.DS_Store` files macOS leaves behind), no symbolic links, nothing under a folder
