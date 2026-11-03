@@ -1,0 +1,1122 @@
+{
+  "spec": "zapli/0.2",
+  "app": {
+    "id": "library/notes",
+    "kind": "web",
+    "name": "Notes",
+    "version": "1.0.0",
+    "icon": "edit_note",
+    "category": "productivity",
+    "ageRating": "everyone",
+    "license": "GPL-3.0-or-later",
+    "iconData": "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"
+  },
+  "theme": {
+    "seedColor": "#A85D0B",
+    "shape": "rounded"
+  },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "lockPurpose": {
+        "en": "Keep your notes behind your fingerprint, face or screen lock if you turn the lock on",
+        "sk": "Chrániť vaše poznámky odtlačkom prsta, tvárou alebo zámkou obrazovky, ak zámku zapnete"
+      },
+      "notifyPurpose": {
+        "en": "Remind you of a note at the date and time you choose",
+        "sk": "Pripomenúť vám poznámku v deň a čas, ktorý si vyberiete"
+      },
+      "filesPurpose": {
+        "en": "Save your notes as a file, or add notes from a file you pick",
+        "sk": "Uložiť poznámky do súboru alebo pridať poznámky zo súboru, ktorý vyberiete"
+      },
+      "widgetPurpose": {
+        "en": "Show your pinned and recent notes on the home screen",
+        "sk": "Zobraziť pripnuté a nedávne poznámky na ploche"
+      },
+      "sharePurpose": {
+        "en": "Send a note’s text and photos to another app when you tap Share",
+        "sk": "Poslať text a fotky poznámky do inej aplikácie, keď ťuknete na Zdieľať"
+      },
+      "cameraPurpose": {
+        "en": "Take a photo to keep in a note",
+        "sk": "Odfotiť niečo a uložiť fotku do poznámky"
+      },
+      "pickPurpose": {
+        "en": "Add pictures from your photos to a note",
+        "sk": "Pridať do poznámky obrázky z vašich fotiek"
+      },
+      "uxPurpose": {
+        "en": "Give a short vibration when you tick an item or select notes",
+        "sk": "Krátko zavibrovať, keď odškrtnete položku alebo označíte poznámky"
+      },
+      "filesFlow": {
+        "en": "Your notes, saved as a file in a place you choose",
+        "sk": "Vaše poznámky sa uložia do súboru na miesto, ktoré vyberiete"
+      },
+      "shareFlow": {
+        "en": "The text and photos of the note you share, sent to the app you pick",
+        "sk": "Text a fotky zdieľanej poznámky sa pošlú do aplikácie, ktorú vyberiete"
+      },
+      "note": {
+        "en": "Note",
+        "sk": "Poznámka"
+      },
+      "notes": {
+        "en": "Notes",
+        "sk": "Poznámky"
+      },
+      "title": {
+        "en": "Title",
+        "sk": "Nadpis"
+      },
+      "text": {
+        "en": "Text",
+        "sk": "Text"
+      },
+      "kind": {
+        "en": "Kind",
+        "sk": "Druh"
+      },
+      "textKind": {
+        "en": "Text",
+        "sk": "Text"
+      },
+      "listKind": {
+        "en": "Checklist",
+        "sk": "Zoznam"
+      },
+      "colour": {
+        "en": "Colour",
+        "sk": "Farba"
+      },
+      "colourNone": {
+        "en": "No colour",
+        "sk": "Bez farby"
+      },
+      "red": {
+        "en": "Red",
+        "sk": "Červená"
+      },
+      "orange": {
+        "en": "Orange",
+        "sk": "Oranžová"
+      },
+      "yellow": {
+        "en": "Yellow",
+        "sk": "Žltá"
+      },
+      "green": {
+        "en": "Green",
+        "sk": "Zelená"
+      },
+      "teal": {
+        "en": "Teal",
+        "sk": "Tyrkysová"
+      },
+      "blue": {
+        "en": "Blue",
+        "sk": "Modrá"
+      },
+      "purple": {
+        "en": "Purple",
+        "sk": "Fialová"
+      },
+      "pink": {
+        "en": "Pink",
+        "sk": "Ružová"
+      },
+      "brown": {
+        "en": "Brown",
+        "sk": "Hnedá"
+      },
+      "grey": {
+        "en": "Grey",
+        "sk": "Sivá"
+      },
+      "pinned": {
+        "en": "Pinned",
+        "sk": "Pripnutá"
+      },
+      "archived": {
+        "en": "Archived",
+        "sk": "Archivovaná"
+      },
+      "trashedAt": {
+        "en": "Moved to the trash",
+        "sk": "Presunutá do koša"
+      },
+      "labels": {
+        "en": "Labels",
+        "sk": "Štítky"
+      },
+      "photos": {
+        "en": "Photos",
+        "sk": "Fotky"
+      },
+      "created": {
+        "en": "Created",
+        "sk": "Vytvorená"
+      },
+      "edited": {
+        "en": "Edited",
+        "sk": "Upravená"
+      },
+      "remindAt": {
+        "en": "Reminder",
+        "sk": "Pripomienka"
+      },
+      "repeat": {
+        "en": "Repeats",
+        "sk": "Opakuje sa"
+      },
+      "reminded": {
+        "en": "Last reminded",
+        "sk": "Naposledy pripomenutá"
+      },
+      "imported": {
+        "en": "Just imported",
+        "sk": "Práve importovaná"
+      },
+      "importBatch": {
+        "en": "Import",
+        "sk": "Import"
+      },
+      "label": {
+        "en": "Label",
+        "sk": "Štítok"
+      },
+      "labelName": {
+        "en": "Name",
+        "sk": "Názov"
+      },
+      "prefs": {
+        "en": "Preferences",
+        "sk": "Nastavenia"
+      },
+      "privateReminders": {
+        "en": "Hide note text in reminders",
+        "sk": "Skryť text poznámky v pripomienkach"
+      },
+      "untitled": {
+        "en": "Untitled note",
+        "sk": "Poznámka bez nadpisu"
+      },
+      "reminderTitle": {
+        "en": "Note reminder",
+        "sk": "Pripomienka poznámky"
+      },
+      "reminderPrivateBody": {
+        "en": "Open Notes to see it",
+        "sk": "Otvorte Notes a pozrite si ju"
+      },
+      "doneButton": {
+        "en": "Done",
+        "sk": "Hotovo"
+      },
+      "pinnedWidget": {
+        "en": "Pinned notes",
+        "sk": "Pripnuté poznámky"
+      },
+      "recentWidget": {
+        "en": "Recent notes",
+        "sk": "Nedávne poznámky"
+      },
+      "importLog": {
+        "en": "Import",
+        "sk": "Import"
+      },
+      "importLogs": {
+        "en": "Imports",
+        "sk": "Importy"
+      },
+      "skippedRows": {
+        "en": "Rows left out",
+        "sk": "Vynechané riadky"
+      },
+      "problems": {
+        "en": "Why",
+        "sk": "Prečo"
+      },
+      "problemLine": {
+        "en": "Row {row}: {reason}",
+        "sk": "Riadok {row}: {reason}"
+      }
+    }
+  },
+  "web": {
+    "entry": "index.html",
+    "routes": {
+      "home": "#/",
+      "newNote": "#/new",
+      "newList": "#/new/list",
+      "search": "#/search",
+      "reminders": "#/reminders",
+      "archive": "#/archive",
+      "trash": "#/trash",
+      "labels": "#/labels",
+      "settings": "#/settings"
+    },
+    "orientation": "any",
+    "files": {
+      "css/app.css": { "sha256": "7ba39e0d2cb7167e27676c28cd97959987ccd8c27ffd878ed71784faffdab4e9", "size": 46640 },
+      "index.html": { "sha256": "1fc4fbd9bd682f2a697701f9073ce25c3cdd079050c6100d3cc76a8d8aec729b", "size": 704 },
+      "js/actions.mjs": { "sha256": "8e5bec17ba7b97aa9e00adda5a77ed7545345c337a28423b8c1ef3c1d5af5d9c", "size": 15586 },
+      "js/app.mjs": { "sha256": "af7f6395dd268c8360d1d42ae3430f1eb6de82f3963989b8c3ddb3056768ec63", "size": 8718 },
+      "js/cards.mjs": { "sha256": "97109451e4bf8f1ad1bada8a3f0ab7018a73eeb7469faf106162ed8ed691d90c", "size": 11159 },
+      "js/drawer.mjs": { "sha256": "435696fe40e33c225ff033007e057734499960c600426c60d445568fa1c31ab5", "size": 3200 },
+      "js/i18n.mjs": { "sha256": "e762456a75aa09f94d8e328f67da61a1efa0fdca3873b15b5f58990253773cff", "size": 29278 },
+      "js/icons.mjs": { "sha256": "0e1c4722936541e6669aa5b4d70bf30357501a24bd8def1aa3d164d3cbdc95ae", "size": 6392 },
+      "js/illus.mjs": { "sha256": "fd05b34668a04ece83e5da3cad42307dc013a90debb20d051d8b5a2c3159f414", "size": 3392 },
+      "js/model.mjs": { "sha256": "b2dc96ee5575ada963ddac13bb142304bcd6f60c4b9a8c8c7940bb5b48d920da", "size": 18930 },
+      "js/photos.mjs": { "sha256": "5ad7c2cbe693ecd226d55414cf92a832dc53fdf0018b6fbaff9c06ef67e400fe", "size": 4437 },
+      "js/sample.mjs": { "sha256": "ce0f54e0ee8cda4daf14c3e6b600ed964cb11650cedd73292b3b31bba20b9d2d", "size": 8502 },
+      "js/screens/editor.mjs": {
+        "sha256": "7aa2f81180518bed6345825478bb0a8bf137a2033aebc007ace078b8d3b63f7d",
+        "size": 40762
+      },
+      "js/screens/home.mjs": {
+        "sha256": "8eced918264625f51319ccb2d9cf432b2dd6988ca7b9efa6f7258aae552a8b92",
+        "size": 18505
+      },
+      "js/screens/labels.mjs": {
+        "sha256": "d8ff8c4cff3d169170068c7a7d564a4153171912bf4e1e36b8fe7c798a7ab86b",
+        "size": 3692
+      },
+      "js/screens/search.mjs": {
+        "sha256": "a963104d2a9c52b862a8d45fc3f9db39737cd8f1e5492ac7b48d749e0ee117d0",
+        "size": 7441
+      },
+      "js/screens/settings.mjs": {
+        "sha256": "23e75c809492e8f1dd0a1520da047008b5603aff24bf897c4f98b4dca94c4756",
+        "size": 11472
+      },
+      "js/store.mjs": { "sha256": "e587da6c0bf1a68908aff5f3b8b958e4cc18d11f266da953f1f7197059515c8c", "size": 17181 },
+      "js/ui.mjs": { "sha256": "fe03b7a0d3d54541556ad49d4fb79247dd2f14003eb33bc0cf8b146755c46fea", "size": 15975 }
+    }
+  },
+  "permissions": {
+    "auth.lock": {
+      "purpose": "@lockPurpose",
+      "default": "off"
+    },
+    "notify.local": {
+      "purpose": "@notifyPurpose",
+      "maxPerDay": 20
+    },
+    "files.io": {
+      "purpose": "@filesPurpose",
+      "modes": ["import", "export"]
+    },
+    "widget.home": {
+      "purpose": "@widgetPurpose"
+    },
+    "share": {
+      "purpose": "@sharePurpose"
+    },
+    "camera.photo": {
+      "purpose": "@cameraPurpose",
+      "optional": true
+    },
+    "media.pick": {
+      "purpose": "@pickPurpose",
+      "optional": true
+    },
+    "device.ux": {
+      "purpose": "@uxPurpose",
+      "optional": true
+    }
+  },
+  "dataFlows": [
+    {
+      "from": ["*"],
+      "to": "files.io",
+      "purpose": "@filesFlow"
+    },
+    {
+      "from": ["*"],
+      "to": "share",
+      "purpose": "@shareFlow"
+    }
+  ],
+  "entities": {
+    "note": {
+      "label": "@note",
+      "labelPlural": "@notes",
+      "sensitivity": "personal",
+      "sort": ["-pinned", "-edited"],
+      "display": {
+        "title": "=trim(coalesce(item.title, '')) != '' ? item.title : (trim(coalesce(item.body, '')) != '' ? substring(coalesce(first(split(trim(replace(replace(coalesce(item.body, ''), '- [ ] ', ''), '- [x] ', '')), '\\n')), ''), 0, 80) : t('untitled'))",
+        "icon": "=item.kind == 'list' ? 'checklist' : 'notes'"
+      },
+      "fields": {
+        "title": {
+          "label": "@title",
+          "type": "text",
+          "maxLength": 1000
+        },
+        "body": {
+          "label": "@text",
+          "type": "longText",
+          "maxLength": 100000
+        },
+        "kind": {
+          "label": "@kind",
+          "type": "choice",
+          "default": "text",
+          "options": [
+            {
+              "value": "text",
+              "label": "@textKind",
+              "icon": "notes"
+            },
+            {
+              "value": "list",
+              "label": "@listKind",
+              "icon": "checklist"
+            }
+          ]
+        },
+        "color": {
+          "label": "@colour",
+          "type": "choice",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "@colourNone"
+            },
+            {
+              "value": "red",
+              "label": "@red",
+              "hue": "red"
+            },
+            {
+              "value": "orange",
+              "label": "@orange",
+              "hue": "orange"
+            },
+            {
+              "value": "yellow",
+              "label": "@yellow",
+              "hue": "amber"
+            },
+            {
+              "value": "green",
+              "label": "@green",
+              "hue": "green"
+            },
+            {
+              "value": "teal",
+              "label": "@teal",
+              "hue": "teal"
+            },
+            {
+              "value": "blue",
+              "label": "@blue",
+              "hue": "blue"
+            },
+            {
+              "value": "purple",
+              "label": "@purple",
+              "hue": "violet"
+            },
+            {
+              "value": "pink",
+              "label": "@pink",
+              "hue": "pink"
+            },
+            {
+              "value": "brown",
+              "label": "@brown",
+              "hue": "brown"
+            },
+            {
+              "value": "grey",
+              "label": "@grey",
+              "hue": "grey"
+            }
+          ]
+        },
+        "pinned": {
+          "label": "@pinned",
+          "type": "boolean",
+          "default": false
+        },
+        "archived": {
+          "label": "@archived",
+          "type": "boolean",
+          "default": false
+        },
+        "trashedAt": {
+          "label": "@trashedAt",
+          "type": "datetime"
+        },
+        "labels": {
+          "label": "@labels",
+          "type": "text",
+          "maxLength": 2000
+        },
+        "photos": {
+          "label": "@photos",
+          "type": "text",
+          "maxLength": 2000,
+          "visible": false
+        },
+        "created": {
+          "label": "@created",
+          "type": "datetime"
+        },
+        "edited": {
+          "label": "@edited",
+          "type": "datetime"
+        },
+        "remindAt": {
+          "label": "@remindAt",
+          "type": "datetime"
+        },
+        "repeat": {
+          "label": "@repeat",
+          "type": "recurrence"
+        },
+        "reminded": {
+          "label": "@reminded",
+          "type": "datetime",
+          "visible": false
+        },
+        "fresh": {
+          "label": "@imported",
+          "type": "boolean",
+          "default": false,
+          "visible": false
+        },
+        "importId": {
+          "label": "@importBatch",
+          "type": "text",
+          "maxLength": 40,
+          "visible": false
+        }
+      }
+    },
+    "label": {
+      "label": "@label",
+      "labelPlural": "@labels",
+      "sensitivity": "personal",
+      "sort": ["name"],
+      "display": {
+        "title": "=item.name",
+        "icon": "label"
+      },
+      "fields": {
+        "name": {
+          "label": "@labelName",
+          "type": "text",
+          "required": true,
+          "unique": true,
+          "maxLength": 50
+        }
+      }
+    },
+    "prefs": {
+      "label": "@prefs",
+      "labelPlural": "@prefs",
+      "singleton": true,
+      "fields": {
+        "privateReminders": {
+          "label": "@privateReminders",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "importLog": {
+      "label": "@importLog",
+      "labelPlural": "@importLogs",
+      "sort": ["-createdAt"],
+      "display": {
+        "title": "=item.stamp"
+      },
+      "fields": {
+        "stamp": {
+          "label": "@importBatch",
+          "type": "text",
+          "required": true,
+          "maxLength": 40
+        },
+        "skipped": {
+          "label": "@skippedRows",
+          "type": "integer",
+          "default": 0
+        },
+        "problems": {
+          "label": "@problems",
+          "type": "longText",
+          "maxLength": 5000
+        }
+      }
+    }
+  },
+  "queries": {
+    "prefsAll": {
+      "entity": "prefs",
+      "limit": 1
+    },
+    "pinnedNotes": {
+      "entity": "note",
+      "where": "=item.pinned && !item.archived && item.trashedAt == null",
+      "sort": ["-edited"],
+      "limit": 8
+    },
+    "recentNotes": {
+      "entity": "note",
+      "where": "=!item.archived && item.trashedAt == null",
+      "sort": ["-edited"],
+      "limit": 8
+    },
+    "freshNotes": {
+      "entity": "note",
+      "where": "=item.fresh",
+      "limit": 1000
+    },
+    "labelled": {
+      "entity": "note",
+      "args": {
+        "name": {
+          "type": "text",
+          "maxLength": 50
+        }
+      },
+      "where": "=contains(', ' + coalesce(item.labels, '') + ', ', ', ' + coalesce(args.name, '') + ', ')",
+      "limit": 1000
+    }
+  },
+  "actions": {
+    "remindOnce": {
+      "args": {
+        "note": {
+          "type": "ref",
+          "to": "note"
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=coalesce(first(q.prefsAll).privateReminders, false) || trim(coalesce(args.note.title, '')) == '' ? t('reminderTitle') : substring(args.note.title, 0, 90)",
+            "body": "=coalesce(first(q.prefsAll).privateReminders, false) ? t('reminderPrivateBody') : substring(replace(replace(replace(trim(coalesce(args.note.body, '')), '- [ ] ', '○ '), '- [x] ', '✓ '), '\\n', '  '), 0, 240)",
+            "open": {
+              "route": "home"
+            },
+            "buttons": [
+              {
+                "id": "done",
+                "label": "@doneButton",
+                "action": "reminderDone"
+              }
+            ],
+            "snooze": true,
+            "data": {
+              "note": "=string(args.note.id)"
+            },
+            "tag": "='note-' + string(args.note.id)",
+            "channel": "reminders"
+          }
+        },
+        {
+          "type": "updateRecord",
+          "record": "=args.note",
+          "set": {
+            "reminded": "=now()"
+          }
+        }
+      ]
+    },
+    "remindRepeat": {
+      "args": {
+        "note": {
+          "type": "ref",
+          "to": "note"
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=coalesce(first(q.prefsAll).privateReminders, false) || trim(coalesce(args.note.title, '')) == '' ? t('reminderTitle') : substring(args.note.title, 0, 90)",
+            "body": "=coalesce(first(q.prefsAll).privateReminders, false) ? t('reminderPrivateBody') : substring(replace(replace(replace(trim(coalesce(args.note.body, '')), '- [ ] ', '○ '), '- [x] ', '✓ '), '\\n', '  '), 0, 240)",
+            "open": {
+              "route": "home"
+            },
+            "snooze": true,
+            "tag": "='note-' + string(args.note.id)",
+            "channel": "reminders"
+          }
+        },
+        {
+          "type": "updateRecord",
+          "record": "=args.note",
+          "set": {
+            "reminded": "=now()"
+          }
+        }
+      ]
+    },
+    "reminderDone": {
+      "args": {
+        "note": {
+          "type": "ref",
+          "to": "note"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "when": "=args.note.repeat == null",
+          "record": "=args.note",
+          "set": {
+            "remindAt": "=null"
+          }
+        }
+      ]
+    },
+    "purgeTrash": {
+      "steps": [
+        {
+          "type": "deleteRecords",
+          "entity": "note",
+          "where": "=item.trashedAt != null && item.trashedAt < now() - duration('P30D')"
+        }
+      ]
+    },
+    "emptyTrash": {
+      "steps": [
+        {
+          "type": "deleteRecords",
+          "entity": "note",
+          "where": "=item.trashedAt != null"
+        }
+      ]
+    },
+    "importNotes": {
+      "args": {
+        "format": {
+          "type": "text",
+          "maxLength": 10
+        },
+        "stamp": {
+          "type": "text",
+          "maxLength": 40,
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "importCsv",
+          "args": {
+            "entity": "note",
+            "format": "=args.format == 'json' ? 'json' : 'csv'",
+            "rowsAt": "/notes",
+            "set": {
+              "fresh": true
+            },
+            "onlyRows": [
+              {
+                "from": ["trashed", "isTrashed", "In trash", "Deleted", "V koši"],
+                "except": ["true", "yes", "1", "áno"]
+              }
+            ],
+            "fields": {
+              "title": {
+                "from": ["title", "Title", "Name", "Subject", "Heading", "Názov", "Nadpis", "Titulok", "Titel"],
+                "values": {
+                  "*": ""
+                }
+              },
+              "body": {
+                "from": [
+                  "text",
+                  "Text",
+                  "Body",
+                  "Content",
+                  "Contents",
+                  "textContent",
+                  "Note",
+                  "Notes",
+                  "Description",
+                  "Obsah",
+                  "Poznámka",
+                  "Poznámky",
+                  "Telo"
+                ],
+                "values": {
+                  "*": ""
+                }
+              },
+              "kind": {
+                "from": ["kind", "Type", "Note type", "Druh", "Typ"],
+                "values": {
+                  "text": "text",
+                  "note": "text",
+                  "plain": "text",
+                  "list": "list",
+                  "checklist": "list",
+                  "todo": "list",
+                  "zoznam": "list",
+                  "*": ""
+                }
+              },
+              "color": {
+                "from": ["color", "Colour", "Color name", "Farba"],
+                "values": {
+                  "default": "none",
+                  "white": "none",
+                  "red": "red",
+                  "orange": "orange",
+                  "yellow": "yellow",
+                  "green": "green",
+                  "teal": "teal",
+                  "cyan": "teal",
+                  "blue": "blue",
+                  "cerulean": "blue",
+                  "dark blue": "blue",
+                  "purple": "purple",
+                  "violet": "purple",
+                  "pink": "pink",
+                  "brown": "brown",
+                  "gray": "grey",
+                  "grey": "grey",
+                  "bez farby": "none",
+                  "červená": "red",
+                  "oranžová": "orange",
+                  "žltá": "yellow",
+                  "zelená": "green",
+                  "tyrkysová": "teal",
+                  "modrá": "blue",
+                  "fialová": "purple",
+                  "ružová": "pink",
+                  "hnedá": "brown",
+                  "sivá": "grey",
+                  "*": "none"
+                }
+              },
+              "pinned": {
+                "from": ["pinned", "isPinned", "Pinned", "Starred", "Favourite", "Favorite", "Pripnutá", "Pripnuté"],
+                "values": {
+                  "*": ""
+                }
+              },
+              "archived": {
+                "from": ["archived", "isArchived", "Archived", "Archivovaná", "Archivované"],
+                "values": {
+                  "*": ""
+                }
+              },
+              "labels": {
+                "from": [
+                  "labels",
+                  "Labels",
+                  "Label",
+                  "Tags",
+                  "Tag",
+                  "Category",
+                  "Categories",
+                  "Folder",
+                  "Notebook",
+                  "Štítky",
+                  "Štítok",
+                  "Kategória"
+                ],
+                "values": {
+                  "*": ""
+                }
+              },
+              "created": {
+                "from": [
+                  "created",
+                  "Created",
+                  "Created at",
+                  "Creation date",
+                  "Date created",
+                  "createdAt",
+                  "creationDate",
+                  "Date",
+                  "Vytvorená",
+                  "Vytvorené",
+                  "Dátum"
+                ],
+                "values": {
+                  "*": ""
+                }
+              },
+              "edited": {
+                "from": [
+                  "edited",
+                  "Edited",
+                  "Modified",
+                  "Last modified",
+                  "Date modified",
+                  "Updated",
+                  "Updated at",
+                  "lastModified",
+                  "modifiedAt",
+                  "Upravená",
+                  "Upravené",
+                  "Zmenené"
+                ],
+                "values": {
+                  "*": ""
+                }
+              },
+              "remindAt": {
+                "from": ["remindAt", "Reminder", "Remind at", "Pripomienka"],
+                "values": {
+                  "*": ""
+                }
+              },
+              "repeat": {
+                "from": ["repeat", "Repeat", "Repeats", "Opakuje sa"],
+                "values": {
+                  "*": ""
+                }
+              }
+            },
+            "onError": "skip"
+          },
+          "as": "imported"
+        },
+        {
+          "type": "runAction",
+          "action": "settleImport",
+          "args": {
+            "stamp": "=args.stamp"
+          }
+        },
+        {
+          "type": "createRecord",
+          "entity": "importLog",
+          "values": {
+            "stamp": "=args.stamp",
+            "skipped": "=coalesce(vars.imported.skipped, 0)",
+            "problems": "=join(take(vars.imported.problems, 8).map(p, t('problemLine', {'row': p.row, 'reason': p.reason})), '\\n')"
+          }
+        }
+      ]
+    },
+    "settleImport": {
+      "args": {
+        "stamp": {
+          "type": "text",
+          "maxLength": 40,
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "forEach",
+          "query": "freshNotes",
+          "do": "settleNote",
+          "args": {
+            "note": "=item.id",
+            "stamp": "=args.stamp"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "freshNotes",
+          "do": "settleNote",
+          "args": {
+            "note": "=item.id",
+            "stamp": "=args.stamp"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "freshNotes",
+          "do": "settleNote",
+          "args": {
+            "note": "=item.id",
+            "stamp": "=args.stamp"
+          },
+          "max": 1000
+        }
+      ]
+    },
+    "settleNote": {
+      "args": {
+        "note": {
+          "type": "ref",
+          "to": "note"
+        },
+        "stamp": {
+          "type": "text",
+          "maxLength": 40,
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.note",
+          "set": {
+            "fresh": false,
+            "importId": "=args.stamp",
+            "kind": "=args.note.kind == 'list' || matches(coalesce(args.note.body, ''), '^\\\\s*([-*+] )?\\\\[[ xX]\\\\] ') ? 'list' : 'text'",
+            "labels": "=replaceAll(trim(coalesce(args.note.labels, '')), '\\\\s*[;|]\\\\s*', ', ')",
+            "created": "=coalesce(args.note.created, args.note.edited, now())",
+            "edited": "=coalesce(args.note.edited, args.note.created, now())"
+          }
+        }
+      ]
+    },
+    "undoImport": {
+      "args": {
+        "stamp": {
+          "type": "text",
+          "maxLength": 40,
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "deleteRecords",
+          "entity": "note",
+          "where": "=item.importId == args.stamp"
+        }
+      ]
+    },
+    "renameLabel": {
+      "args": {
+        "from": {
+          "type": "text",
+          "maxLength": 50,
+          "required": true
+        },
+        "to": {
+          "type": "text",
+          "maxLength": 50
+        }
+      },
+      "steps": [
+        {
+          "type": "forEach",
+          "query": "labelled",
+          "queryArgs": {
+            "name": "=args.from"
+          },
+          "do": "relabel",
+          "args": {
+            "note": "=item.id",
+            "from": "=args.from",
+            "to": "=coalesce(args.to, '')"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "labelled",
+          "queryArgs": {
+            "name": "=args.from"
+          },
+          "do": "relabel",
+          "args": {
+            "note": "=item.id",
+            "from": "=args.from",
+            "to": "=coalesce(args.to, '')"
+          },
+          "max": 1000
+        }
+      ]
+    },
+    "relabel": {
+      "args": {
+        "note": {
+          "type": "ref",
+          "to": "note"
+        },
+        "from": {
+          "type": "text",
+          "maxLength": 50,
+          "required": true
+        },
+        "to": {
+          "type": "text",
+          "maxLength": 50
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.note",
+          "set": {
+            "labels": "=replaceAll(replace(', ' + coalesce(args.note.labels, '') + ', ', ', ' + args.from + ', ', coalesce(args.to, '') == '' ? ', ' : ', ' + coalesce(args.to, '') + ', '), '^(, )+|(, )+$', '')"
+          }
+        }
+      ]
+    }
+  },
+  "triggers": {
+    "onceReminder": {
+      "type": "recordTime",
+      "entity": "note",
+      "at": "=item.remindAt",
+      "when": "=item.repeat == null && item.trashedAt == null",
+      "do": "remindOnce",
+      "args": {
+        "note": "=item.id"
+      },
+      "maxPerDay": 10
+    },
+    "repeatReminder": {
+      "type": "recordSchedule",
+      "entity": "note",
+      "rrule": "=item.repeat",
+      "time": "=item.remindAt != null ? time(item.remindAt) : time('09:00')",
+      "when": "=item.repeat != null && item.remindAt != null && item.trashedAt == null && item.remindAt <= now() + duration('PT5M')",
+      "do": "remindRepeat",
+      "args": {
+        "note": "=item.id"
+      },
+      "maxPerDay": 10
+    },
+    "nightlyTrash": {
+      "type": "schedule",
+      "rrule": "FREQ=DAILY",
+      "times": ["03:30"],
+      "do": "purgeTrash",
+      "maxPerDay": 1
+    },
+    "openTrash": {
+      "type": "app",
+      "on": "open",
+      "do": "purgeTrash"
+    }
+  },
+  "widgets": {
+    "pinned": {
+      "template": "list",
+      "title": "@pinnedWidget",
+      "query": "pinnedNotes",
+      "caption": "=trim(coalesce(item.title, '')) != '' ? substring(replace(replace(replace(trim(coalesce(item.body, '')), '- [ ] ', '○ '), '- [x] ', '✓ '), '\\n', '  '), 0, 120) : ''",
+      "icon": "=item.kind == 'list' ? 'checklist' : 'push_pin'",
+      "sizes": ["small", "medium", "large"],
+      "open": "home"
+    },
+    "recent": {
+      "template": "list",
+      "title": "@recentWidget",
+      "query": "recentNotes",
+      "caption": "=trim(coalesce(item.title, '')) != '' ? substring(replace(replace(replace(trim(coalesce(item.body, '')), '- [ ] ', '○ '), '- [x] ', '✓ '), '\\n', '  '), 0, 120) : ''",
+      "icon": "=item.kind == 'list' ? 'checklist' : 'notes'",
+      "sizes": ["small", "medium", "large"],
+      "open": "home"
+    }
+  }
+}

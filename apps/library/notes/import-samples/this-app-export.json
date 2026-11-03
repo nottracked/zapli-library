@@ -1,0 +1,53 @@
+{
+  "format": "notes",
+  "version": 1,
+  "exported": "2026-11-03T12:00:00+01:00",
+  "notes": [
+    {
+      "title": "Bike service, spring",
+      "text": "New chain and brakes; keep the receipt.",
+      "kind": "text",
+      "color": "none",
+      "pinned": false,
+      "archived": true,
+      "labels": "",
+      "created": "2026-03-10T12:00:00+01:00",
+      "edited": "2026-04-02T12:00:00+02:00"
+    },
+    {
+      "title": "Water the plants",
+      "text": "Balcony first, then the kitchen herbs.",
+      "kind": "text",
+      "color": "teal",
+      "pinned": false,
+      "archived": false,
+      "labels": "",
+      "created": "2026-09-01T07:00:00+02:00",
+      "edited": "2026-09-01T07:00:00+02:00",
+      "remindAt": "2026-11-08T19:00:00+01:00",
+      "repeat": "FREQ=WEEKLY;BYDAY=SU;DTSTART=20261108"
+    },
+    {
+      "title": "Gift ideas for Ana",
+      "text": "A pottery class for two.\nThe green scarf from the market.",
+      "kind": "text",
+      "color": "pink",
+      "pinned": false,
+      "archived": false,
+      "labels": "Ideas, Family",
+      "created": "2026-10-12T20:05:00+02:00",
+      "edited": "2026-10-30T21:10:00+01:00"
+    },
+    {
+      "title": "Groceries",
+      "text": "- [ ] Oat milk\n- [ ] Rye bread\n- [x] Coffee beans",
+      "kind": "list",
+      "color": "yellow",
+      "pinned": true,
+      "archived": false,
+      "labels": "Home",
+      "created": "2026-10-28T08:15:00+01:00",
+      "edited": "2026-11-02T18:40:00+01:00"
+    }
+  ]
+}

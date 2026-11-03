@@ -1,0 +1,244 @@
+{
+  "id": "library/notes",
+  "category": "productivity",
+  "replaces": "notes and checklists app",
+  "title": "Notes",
+  "summary": "Notes, checklists, photos and reminders: quick, private and ad-free.",
+  "description": "**Notes** keeps your notes, checklists and photos on your phone: quick to write, easy to find, and without an account, ads or a subscription.\n\n### Write\n- **A new note in one tap**, with the keyboard already up. A checklist or a note with a photo is one tap too.\n- **Checklists** you can tick in the shop: ticked items fold away at the bottom, drag the handle to reorder, untick everything for next week, and paste a few lines to get one item a line.\n- **Photos** from the camera or your pictures, in any note.\n- Undo and redo while you type, a word count, and every change saved by itself.\n\n### Organise\n- **Pin** what matters to the top, give notes a **colour**, and group them with **labels**.\n- **Archive** what you want to keep but not see every day: a sideways swipe does it.\n- **The trash** keeps deleted notes for 30 days, says on each note how long it has left, and lets you restore it. Undo after every delete.\n- A grid or a list, sorted by last edited, date created or title.\n\n### Find\n- **Search everything**: titles, text, checklist items and labels, with or without accents. Filters for checklists, reminders, photos, pinned notes, labels and colours. Archived notes are searched too.\n\n### Remember\n- **Reminders** on any note at the date and time you choose: once, or every day, on weekdays, every week, month or year, with Snooze and Done. They ring while the app is closed.\n- **Home-screen widgets** with your pinned notes or your most recent ones.\n\n### Your data\n- **Bring your notes**: imports this app's own notes file and the CSV most notes apps and spreadsheets save, with a title and a text column and, when they are there, labels, colours, pins and dates. Lines that start with \"- [ ]\" become a checklist.\n- **Save everything** as a notes file the app reads back, or as a CSV for spreadsheets. Share a note's text and photos with any app.\n- Everything stays on this phone and in Zapli's backup of your apps.\n- **In English and Slovak.**\n\n### What it never does\n- No ads, no tracking, no analytics, no account, no sign-in, no upsells.\n- It cannot connect to the internet: nothing leaves your phone unless you share or save it.\n\n### Privacy\nNotes are marked as personal data. An optional app lock keeps them behind your fingerprint, face or screen lock: turn it on in the app's permissions. Reminders can hide the note's text.",
+  "license": "GPL-3.0-or-later",
+  "tags": ["notes", "checklist", "notepad", "reminders", "labels", "photos", "widget", "offline", "csv", "slovak"],
+  "screenshots": [],
+  "sampleData": {
+    "note": [
+      {
+        "id": "sample-groceries",
+        "title": "Groceries",
+        "body": "- [ ] Oat milk\n- [ ] Sourdough bread\n- [ ] Tomatoes\n- [ ] Basil\n- [ ] Greek yogurt\n- [x] Coffee beans\n- [x] Lemons",
+        "kind": "list",
+        "color": "yellow",
+        "pinned": true,
+        "archived": false,
+        "created": "2026-11-02T10:00:00+01:00",
+        "edited": "2026-11-03T10:00:00+01:00",
+        "labels": "Home"
+      },
+      {
+        "id": "sample-pancakes",
+        "title": "Pancakes for six",
+        "body": "250 g flour\n3 eggs\n500 ml milk\nA pinch of salt\n\nWhisk the eggs and milk, add the flour slowly and let it rest for 20 minutes. Thin layer, medium heat, flip once.",
+        "kind": "text",
+        "color": "orange",
+        "pinned": true,
+        "archived": false,
+        "created": "2026-10-31T06:00:00+01:00",
+        "edited": "2026-11-02T06:00:00+01:00",
+        "labels": "Recipes"
+      },
+      {
+        "id": "sample-mountains",
+        "title": "Weekend in the mountains",
+        "body": "- [ ] Hiking boots\n- [ ] Map of the trails\n- [ ] Snacks for the hut\n- [ ] Sun cream\n- [x] Rain jacket\n- [x] Power bank",
+        "kind": "list",
+        "color": "blue",
+        "pinned": false,
+        "archived": false,
+        "created": "2026-10-31T07:00:00+01:00",
+        "edited": "2026-11-03T07:00:00+01:00",
+        "labels": "Travel",
+        "remindAt": "2026-11-06T08:00:00+01:00"
+      },
+      {
+        "id": "sample-vet",
+        "title": "Call the vet",
+        "body": "Booster shot for Pepper. Ask about the new food.",
+        "kind": "text",
+        "color": "none",
+        "pinned": false,
+        "archived": false,
+        "created": "2026-10-30T03:00:00+01:00",
+        "edited": "2026-11-03T03:00:00+01:00",
+        "remindAt": "2026-11-04T09:00:00+01:00"
+      },
+      {
+        "id": "sample-garden",
+        "title": "Garden ideas",
+        "body": "Raised bed by the fence for herbs.\nTry climbing beans on the old ladder.\nAsk Mira about her tomato seeds.",
+        "kind": "text",
+        "color": "green",
+        "pinned": false,
+        "archived": false,
+        "created": "2026-10-27T10:00:00+01:00",
+        "edited": "2026-11-01T10:00:00+01:00",
+        "labels": "Home, Ideas"
+      },
+      {
+        "id": "sample-bookclub",
+        "title": "Book club – November",
+        "body": "The Quiet Lighthouse, chapters 1–9.\n\nQuestions: why does the keeper stay? What changes after the storm?",
+        "kind": "text",
+        "color": "purple",
+        "pinned": false,
+        "archived": false,
+        "created": "2026-10-25T10:00:00+01:00",
+        "edited": "2026-10-31T10:00:00+01:00",
+        "labels": "Books"
+      },
+      {
+        "id": "sample-meeting",
+        "title": "Team meeting",
+        "body": "Launch moves to week 48.\nDesign review on Thursday.\nSend the draft to Theo by Wednesday.",
+        "kind": "text",
+        "color": "none",
+        "pinned": false,
+        "archived": false,
+        "created": "2026-10-26T10:00:00+01:00",
+        "edited": "2026-11-02T10:00:00+01:00",
+        "labels": "Work"
+      },
+      {
+        "id": "sample-gifts",
+        "title": "Gift ideas",
+        "body": "- [ ] Pottery class for two\n- [ ] Star map print\n- [x] Board game evening",
+        "kind": "list",
+        "color": "pink",
+        "pinned": false,
+        "archived": false,
+        "created": "2026-10-21T13:00:00+02:00",
+        "edited": "2026-10-29T12:00:00+01:00",
+        "labels": "Ideas"
+      },
+      {
+        "id": "sample-water",
+        "body": "Water the plants every Sunday evening.",
+        "kind": "text",
+        "color": "teal",
+        "pinned": false,
+        "archived": false,
+        "created": "2026-10-19T17:00:00+02:00",
+        "edited": "2026-10-28T16:00:00+01:00",
+        "remindAt": "2026-11-08T19:00:00+01:00",
+        "repeat": "FREQ=WEEKLY;BYDAY=SU;DTSTART=20261108"
+      },
+      {
+        "id": "sample-films",
+        "title": "Films to watch",
+        "body": "- [ ] The Night Garden\n- [ ] Paper Boats\n- [x] Winter Line",
+        "kind": "list",
+        "color": "brown",
+        "pinned": false,
+        "archived": false,
+        "created": "2026-10-16T05:00:00+02:00",
+        "edited": "2026-10-26T04:00:00+01:00",
+        "labels": "Ideas"
+      },
+      {
+        "id": "sample-words",
+        "title": "Words to keep",
+        "body": "“Small steps, every day.”\n“Write it down, then let it go.”",
+        "kind": "text",
+        "color": "grey",
+        "pinned": false,
+        "archived": false,
+        "created": "2026-10-11T01:00:00+02:00",
+        "edited": "2026-10-22T01:00:00+02:00"
+      },
+      {
+        "id": "sample-bike",
+        "title": "Bike service",
+        "body": "Chain, brakes and the back tyre. The shop closes at 18:00 on Saturdays.",
+        "kind": "text",
+        "color": "teal",
+        "pinned": false,
+        "archived": true,
+        "created": "2026-10-05T21:00:00+02:00",
+        "edited": "2026-10-17T21:00:00+02:00"
+      },
+      {
+        "id": "sample-parking",
+        "title": "Old parking spot",
+        "body": "Level 2, row C.",
+        "kind": "text",
+        "color": "none",
+        "pinned": false,
+        "archived": false,
+        "created": "2026-09-30T17:00:00+02:00",
+        "edited": "2026-10-13T17:00:00+02:00",
+        "trashedAt": "2026-10-29T12:00:00+01:00"
+      }
+    ],
+    "label": [
+      {
+        "id": "label-0",
+        "name": "Home"
+      },
+      {
+        "id": "label-1",
+        "name": "Recipes"
+      },
+      {
+        "id": "label-2",
+        "name": "Travel"
+      },
+      {
+        "id": "label-3",
+        "name": "Ideas"
+      },
+      {
+        "id": "label-4",
+        "name": "Books"
+      },
+      {
+        "id": "label-5",
+        "name": "Work"
+      }
+    ]
+  },
+  "migration": {
+    "formats": ["json", "csv"],
+    "summary": "Imports this app's own notes file and the CSV most notes apps and spreadsheets save: titles, text, checklists, labels, colours, pins and dates.",
+    "samples": [
+      {
+        "file": "import-samples/this-app-export.json",
+        "about": "This app's notes file: a checklist, two notes with labels and colours, a weekly reminder and an archived note"
+      },
+      {
+        "file": "import-samples/this-app-export.csv",
+        "about": "This app's CSV: the same four notes, with the reminder's repeat rule"
+      },
+      {
+        "file": "import-samples/title-text-labels.csv",
+        "about": "The simplest CSV: Title, Text and Labels, with a checklist in \"- [ ]\" lines and a note without a title"
+      },
+      {
+        "file": "import-samples/title-content-tags.csv",
+        "about": "A notes app's CSV: Content, Tags separated by semicolons, created and modified times, pins and colour names"
+      },
+      {
+        "file": "import-samples/slovak-semicolon.csv",
+        "about": "Slovak headers separated by semicolons, day-first dates and a checklist"
+      }
+    ]
+  },
+  "research": [
+    {
+      "source": "https://support.google.com/keep/answer/6358550",
+      "used_for": "List settings people expect: ticked items moved to the bottom, and new items added at the top or the bottom."
+    },
+    {
+      "source": "https://thewindowsclub.com/how-to-delete-checked-items-from-notes-in-google-keep",
+      "used_for": "A checklist's menu: untick all items and delete the ticked ones."
+    },
+    {
+      "source": "https://gist.github.com/john-hix/c47a4b98e9c5eba8869ff6d097c646d5",
+      "used_for": "Google Keep's Takeout export: one JSON file a note, with textContent or listContent (text and isChecked), isPinned, isArchived, isTrashed, labels, color and times in microseconds."
+    },
+    {
+      "source": "https://www.technobezz.com/how-to-use-google-keep-to-organize-notes-and-lists",
+      "used_for": "The everyday features of a notes app: labels, colours, pins, reminders, the archive and search by type."
+    },
+    {
+      "source": "https://chrome-stats.com/d/com.emobile.easynote",
+      "used_for": "Review themes of an ad-funded notepad: intrusive ads and no way to pay to remove them."
+    }
+  ]
+}
