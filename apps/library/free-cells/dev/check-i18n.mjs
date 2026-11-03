@@ -48,7 +48,32 @@ check(en.appName === sk.appName, "the app's name is the same in both languages")
 
 const pkg = new URL("../package/", import.meta.url);
 const html = readFileSync(new URL("index.html", pkg), "utf8");
-for (const m of html.matchAll(/data-t(?:-label|-keys)?="([^"]+)"/g)) check(m[1] in en, `index.html names "${m[1]}"`);
+for (const m of html.matchAll(/data-t(?:-label|-keys|-rich)?="([^"]+)"/g))
+  check(m[1] in en, `index.html names "${m[1]}"`);
+
+// The guide's short start: the goal, each rule the page shows and the tip, short, with balanced *key words*; the
+// first start's line names the game.
+const rules = [...html.matchAll(/data-t-rich="(tldr\d)"/g)].map((m) => m[1]);
+check(rules.length >= 3 && rules.length <= 5, `the short start has ${rules.length} rules`);
+for (const lang of [en, sk])
+  for (const k of [
+    "tldrTitle",
+    "goalLabel",
+    "tipLabel",
+    "moreRules",
+    "tldrGoal",
+    "tldrTip",
+    "tldrTip2",
+    "turnTip",
+    "sidewaysNote",
+    ...rules,
+  ]) {
+    const v = lang[k];
+    check(typeof v === "string" && v.length > 0 && v.length <= 110, `"${k}" is one short line (${v && v.length})`);
+    check(typeof v === "string" && (v.match(/\*/g) || []).length % 2 === 0, `"${k}" has balanced key words`);
+  }
+for (const lang of [en, sk])
+  check(String(lang.firstHelp).includes(en.appName), "the first start's line names the game");
 
 const js = readdirSync(new URL("js/", pkg)).filter((f) => f.endsWith(".js"));
 const uses = new Map();
@@ -102,4 +127,4 @@ if (problems.length) {
   console.log(problems.join("\n"));
   process.exit(1);
 }
-console.log(`i18n ok: ${Object.keys(en).length} keys in English and Slovak`);
+console.log(`i18n ok: ${Object.keys(en).length} keys in English and Slovak, a short start of ${rules.length} rules`);

@@ -365,7 +365,10 @@ export function install(html, tableSize = [360, 560]) {
     },
     setInterval: () => 0,
     clearInterval: () => {},
-    addEventListener() {},
+    listeners: {},
+    addEventListener(type, fn) {
+      (this.listeners[type] = this.listeners[type] || []).push(fn);
+    },
     innerWidth: tableSize[0],
     innerHeight: tableSize[1] + 120,
     crypto: globalThis.crypto,
@@ -398,5 +401,12 @@ export function install(html, tableSize = [360, 560]) {
     }
     now = end;
   };
-  return { document, store, advance };
+  // A turn of the phone: the table gets another size, and the page hears "resize".
+  const resize = (w, h) => {
+    document.tableSize = [w, h];
+    win.innerWidth = w;
+    win.innerHeight = h + 120;
+    (win.listeners.resize || []).forEach((fn) => fn());
+  };
+  return { document, store, advance, resize };
 }

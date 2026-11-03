@@ -279,8 +279,13 @@ export function cardGeo(cw, tier, shape, gap, look) {
   const D = DECKS[id];
   const ch = Math.round(cw * 1.4);
   const pad = Math.max(2, Math.round(cw * 0.06));
-  const gh = Math.round(cw * D.gh[tier]);
   const sg = Math.round(cw * D.sg[tier]);
+  // At the largest size the corner's rank and suit take all the width a card has: the rank grows until a common
+  // rank (most are about 0.62 of their height wide) and the suit fill the band, at most three quarters of the card's
+  // width high. The 10, the widest, is narrowed to fit (it is drawn to stretch). Narrow cards (ten columns on a phone
+  // held upright) gain the most.
+  const fill = Math.floor((cw - 2 * pad - sg - 2) / 0.62);
+  const gh = Math.max(Math.round(cw * D.gh[tier]), tier === 2 ? Math.min(fill, Math.round(cw * 0.75)) : 0);
   const g = {
     tier,
     gap,
@@ -436,19 +441,31 @@ export function paintTable(el, id, dark) {
 }
 
 // A small table with cards on it, drawn with geometry g: `cards` is a list of [suit, rank, faceDown, x, y]; `look`
-// is {back, deck, table, dark}.
-export function previewBox(g, cards, look) {
+// is {back, deck, table, dark}. `extra` may add empty places ([x, y, mark rank or 0]) and arrows ([x1, y1, x2, y2]),
+// as the guide's pictures of the rules use them.
+export function previewBox(g, cards, look, extra = {}) {
   const pad = 6;
   const pv = document.createElement("div");
   pv.className = `pv bk-${look.back} deck-${look.deck}`;
   let w = 0;
   let h = 0;
+  const grow = (x, y, ww, hh) => {
+    w = Math.max(w, x + ww);
+    h = Math.max(h, y + hh);
+  };
+  (extra.slots || []).forEach(([x, y, mark]) => {
+    const slot = document.createElement("div");
+    slot.className = "slot";
+    if (mark) slot.appendChild(svgUse(`rank-${mark}`, `r${mark}`));
+    setPos(slot, pad + x, pad + y);
+    grow(x, y, g.cw, g.ch);
+    pv.appendChild(slot);
+  });
   const els = cards.map(([suit, rank, down, x, y]) => {
     const c = buildCard(suit, rank);
     c.classList.toggle("down", !!down);
     setPos(c, pad + x, pad + y);
-    w = Math.max(w, x + g.cw);
-    h = Math.max(h, y + g.ch);
+    grow(x, y, g.cw, g.ch);
     pv.appendChild(c);
     return c;
   });
@@ -456,5 +473,25 @@ export function previewBox(g, cards, look) {
   paintTable(pv, look.table, look.dark);
   pv.style.width = `${w + 2 * pad}px`;
   pv.style.height = `${h + 2 * pad}px`;
+  if (extra.arrows && extra.arrows.length) {
+    // Each arrow twice: a dark outline under a bright line, so it reads on every table.
+    const svg = document.createElementNS(SVG_NS, "svg");
+    svg.setAttribute("class", "arrows");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("width", String(w + 2 * pad));
+    svg.setAttribute("height", String(h + 2 * pad));
+    for (const [x1, y1, x2, y2] of extra.arrows) {
+      const a = Math.atan2(y2 - y1, x2 - x1);
+      const head = (turn) => `${pad + x2 + 9 * Math.cos(a + turn)} ${pad + y2 + 9 * Math.sin(a + turn)}`;
+      const d = `M${pad + x1} ${pad + y1}L${pad + x2} ${pad + y2}M${head(2.5)}L${pad + x2} ${pad + y2}L${head(-2.5)}`;
+      for (const cls of ["o", "a"]) {
+        const path = document.createElementNS(SVG_NS, "path");
+        path.setAttribute("class", cls);
+        path.setAttribute("d", d);
+        svg.appendChild(path);
+      }
+    }
+    pv.appendChild(svg);
+  }
   return pv;
 }

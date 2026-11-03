@@ -16,16 +16,16 @@
     "entry": "index.html",
     "orientation": "any",
     "files": {
-      "css/styles.css": { "sha256": "340c6c3a6d3241a5a81ab3abfc02ced1305eb6461f4e2d967a77aadd527dd5f3", "size": 41748 },
-      "index.html": { "sha256": "1a88ed68cd39fa1f8e90cd7d485bfa8dd695b1b1480f29dcfc55cd02b2a40c80", "size": 30183 },
-      "js/cards.js": { "sha256": "23e1790cd41664cf5a73f766977893c3729c6d1ffc62c6e609782a8db62b73f3", "size": 18165 },
+      "css/styles.css": { "sha256": "d7f983998b0c2a1e2f1bdf40e37d88fd4170b8ab914bace47b00f122d89cbb76", "size": 43605 },
+      "index.html": { "sha256": "ef1f9b7b2c7880990194fba49ade225b6e93fb16e9b3c48e21314b89e2318c35", "size": 32546 },
+      "js/cards.js": { "sha256": "16edc853589d8b567ed7d4f4c3d2ab0df55c210de1d41764199002d8f3311ded", "size": 20131 },
       "js/deals.js": { "sha256": "1587b93c395aec43c7cf00d15a5b39edb17ef4d87e8abcfcd8b78e64c8283638", "size": 5983 },
       "js/dialogs.js": { "sha256": "a02c7945ac1ef635608560ac2ca890d661659c67f0ddea300178fee6635d3221", "size": 7768 },
-      "js/i18n.js": { "sha256": "27ff46feba2e1b71f5dfa415720447ff286de3ab189701920ff4c219cf7e6f97", "size": 23068 },
+      "js/i18n.js": { "sha256": "5b722dde314e51746b035777fbe91b04ed9790a241059ab2fcdcc3ee3414f749", "size": 25558 },
       "js/rules.js": { "sha256": "3d1ebc46d4ec37d9de60b262aa87c6012b01a1a288d9f0d7a19a3232afc67256", "size": 9232 },
       "js/solver.js": { "sha256": "077995c9a1cabb417946c43e60cc6474d68a8f390dd50302d2adce053206640f", "size": 12876 },
       "js/store.js": { "sha256": "86d55055a6f4860327863a67e1bf861b5144078dba415c5e16b061fb77dc77fa", "size": 4175 },
-      "js/ui.js": { "sha256": "7e17217d683ba5a28d2efca23124b4f98c588627b6d54b7dd9df7dae03393b10", "size": 62839 },
+      "js/ui.js": { "sha256": "61856f4bf4d618b68fabd6780042ebacd6b34c541353e9fdfc664b4352f28948", "size": 66043 },
       "js/worker.js": { "sha256": "a76cfdc35f20bf9476a956bf452e6e7b6268618a8b4e114a7110fe35a692bfc4", "size": 1992 }
     }
   }

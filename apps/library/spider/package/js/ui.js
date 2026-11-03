@@ -958,6 +958,7 @@ function dailySeed(day, suits) {
 
 // ---- playing
 function markStarted() {
+  if (!$("first-help").hidden) dismissFirstHelp();
   if (game.started) return;
   game.started = true;
   stats[game.deal.suits].played += 1;
@@ -979,6 +980,7 @@ function afterChange() {
   else hideNotice("stuck");
   persist();
   checkPosition();
+  updateTurnTip();
 }
 
 // What else a step did: a card turned over, a run put away.
@@ -1641,7 +1643,101 @@ on("reset-yes", () => {
   announce(t("statsCleared"));
 });
 
-on("btn-help", () => openDialog($("dlg-help")));
+// The guide's pictures, one per rule of the short start: [cards, extra] in previewBox's terms, for a card of width
+// cw with bands of fu.
+const examples = (cw, fu, ch) => [
+  // Any 7 goes on any 8.
+  [
+    [
+      [0, 8, false, 0, 0],
+      [1, 7, false, cw + 30, fu],
+    ],
+    { arrows: [[cw + 24, fu + 14, cw - 6, fu + 6]] },
+  ],
+  // A run of one suit moves together.
+  [
+    [
+      [1, 10, false, 0, 0],
+      [0, 9, false, cw + 30, fu],
+      [0, 8, false, cw + 30, 2 * fu],
+      [0, 7, false, cw + 30, 3 * fu],
+    ],
+    { arrows: [[cw + 24, fu + 14, cw - 6, fu + 6]] },
+  ],
+  // An empty column takes any card.
+  [[[3, 5, false, cw + 30, 0]], { slots: [[0, 0, 0]], arrows: [[cw + 24, ch / 2, cw - 8, ch / 2]] }],
+  // A tap on the stock deals a row.
+  [
+    [
+      [0, 1, true, 0, 0],
+      [2, 3, false, cw + 30, 0],
+      [1, 9, false, cw + 30 + Math.round(cw * 0.55), 0],
+      [0, 12, false, cw + 30 + Math.round(cw * 1.1), 0],
+    ],
+    { arrows: [[cw + 4, ch / 2, cw + 24, ch / 2]] },
+  ],
+  // A run from king to ace goes away by itself.
+  [
+    [
+      [0, 13, false, 0, 0],
+      [0, 12, false, 0, fu],
+      [0, 11, false, 0, 2 * fu],
+      [0, 13, false, cw + 30, 0],
+    ],
+    { slots: [[cw + 30, 0, 13]], arrows: [[cw + 4, fu + 20, cw + 24, ch / 2]] },
+  ],
+];
+
+// How to play opens at its short start, with each rule's picture drawn in the cards and table chosen now.
+function showHelp(back) {
+  dismissFirstHelp();
+  const g = cardGeo(40, 2, "rect", 4, look());
+  examples(g.cw, g.fu, g.ch).forEach(([cards, extra], i) => {
+    const box = $(`ex-${i + 1}`);
+    box.textContent = "";
+    box.appendChild(previewBox(g, cards, look(), extra));
+  });
+  $("dlg-help").querySelector(".dlg-body").scrollTop = 0;
+  openDialog($("dlg-help"), back);
+}
+
+// The first start's line on the table: it opens the guide, and goes for good after a tap or the first move.
+function dismissFirstHelp() {
+  $("first-help").hidden = true;
+  if (progress.firstHelp) return;
+  progress.firstHelp = true;
+  saveProgress();
+}
+
+// The sideways tip: on a phone held upright, once the first start's line has gone (a few moves into the first
+// game, or from the second game on), and only while the cards are narrow (ten columns leave narrow cards on every phone held upright).
+// It goes when the phone turns or on a tap, for good.
+function updateTurnTip() {
+  const el = $("turn-tip");
+  if (progress.turnTip || !game || !geo) {
+    el.hidden = true;
+    return;
+  }
+  const upright = table.clientHeight > table.clientWidth;
+  if (!upright) {
+    if (!el.hidden) dismissTurnTip();
+    return;
+  }
+  const ready =
+    $("first-help").hidden &&
+    (game.history.length >= 3 || (!game.started && SUITS.reduce((n, k) => n + stats[k].played, 0) >= 1));
+  el.hidden = !(ready && true);
+}
+
+function dismissTurnTip() {
+  $("turn-tip").hidden = true;
+  progress.turnTip = true;
+  saveProgress();
+}
+
+on("btn-help", () => showHelp());
+on("turn-tip", dismissTurnTip);
+on("first-help", () => showHelp($("btn-help")));
 on("help-done", () => closeDialog($("dlg-help")));
 
 on("win-close", () => closeDialog($("dlg-win")));
@@ -1791,6 +1887,7 @@ function relayout() {
   cancelDrag();
   applyLayout();
   render({ animate: false, keepMarks: true });
+  updateTurnTip();
 }
 
 // After a change of look: the table, and the sheet's pictures when it is open.
@@ -1963,6 +2060,9 @@ function boot() {
   } else {
     newGame({ quiet: true });
   }
+  // Only on the very first game, before its first move.
+  $("first-help").hidden = !!progress.firstHelp || game.history.length > 0;
+  updateTurnTip();
   if (typeof ResizeObserver === "function") new ResizeObserver(relayout).observe(table);
   else window.addEventListener("resize", relayout);
 }

@@ -58,6 +58,8 @@ check(n0 >= 1 && n0 <= Rules.MAX_DEAL, `deal number shown: ${$("deal-no").textCo
 check(Rules.isValid(shown()), "the table shows a valid position");
 check($("moves").textContent === "0", "no moves at the start");
 check(document.documentElement.lang === "en", "English by default");
+check(!$("first-help").hidden, "the very first game shows the line for new players");
+check($("turn-tip").hidden, "the sideways tip waits");
 
 // ---- 2. a numbered deal from the deal dialog, then the light says it can be won
 $("btn-deal").click();
@@ -79,6 +81,12 @@ for (const m of path) {
   play(m);
   await env.advance(10);
   i += 1;
+  if (i === 1) check($("first-help").hidden, "the first move puts the line for new players away");
+  if (i === 3) {
+    check(!$("turn-tip").hidden, "three moves in, upright, the sideways tip shows");
+    $("turn-tip").click();
+    check($("turn-tip").hidden, "a tap puts the sideways tip away");
+  }
   if (i === 5) {
     check($("moves").textContent === "5", `five moves counted (${$("moves").textContent})`);
     $("btn-undo").click();
@@ -112,6 +120,7 @@ const kept = new Map(env.store);
 env = await boot(kept);
 check($("deal-no").textContent === deal2, "the restarted page keeps the deal");
 check(Rules.key(shown()) === before, "the restarted page keeps the position");
+check($("first-help").hidden && $("turn-tip").hidden, "after a restart neither line comes back");
 check($("moves").textContent === movesBefore, "the restarted page keeps the move count");
 $("btn-undo").click();
 await env.advance(10);
@@ -259,6 +268,59 @@ const keysLeft = document.documentElement
   .filter((e) => e.dataset && e.dataset.t)
   .filter((e) => e.textContent === e.dataset.t);
 check(!keysLeft.length, `every text has words: ${keysLeft.map((e) => e.dataset.t).join(", ")}`);
+
+// ---- the guide and the first start's lines: How to play opens at its short start with a picture per rule; the
+// line inviting a new player shows on the very first game only and goes for good after a tap; the sideways tip
+// shows on a phone held upright a few moves in, goes when the phone turns, and never comes back.
+env = await boot();
+check(!$("first-help").hidden && $("turn-tip").hidden, "a fresh start shows the line for new players only");
+$("first-help").click();
+check($("dlg-help").open, "the line opens How to play");
+check($("first-help").hidden, "the line goes after a tap");
+const rulesShown = document.querySelectorAll(".ex").length;
+for (let k = 1; k <= rulesShown; k++)
+  check($(`ex-${k}`).querySelectorAll(".card").length >= 1, `rule ${k} of the short start has its picture`);
+check($("ex-1").querySelectorAll(".o").length >= 1, "the pictures have arrows");
+check(
+  document.querySelectorAll("[data-t-rich]").every((el) => el.children.some((c) => c.tagName === "B")),
+  "every line of the short start has its key words in bold",
+);
+$("help-done").click();
+$("dlg-help").querySelector(".dlg-body").scrollTop = 400;
+$("btn-help").click();
+check($("dlg-help").querySelector(".dlg-body").scrollTop === 0, "? opens How to play at its short start");
+$("help-done").click();
+{
+  const p4 = solve(shown(), 20000).path;
+  for (const m of p4.slice(0, 3)) {
+    play(m);
+    await env.advance(10);
+  }
+}
+await env.advance(10);
+check(!$("turn-tip").hidden, "three moves in, upright, the sideways tip shows");
+env.resize(740, 300);
+check($("turn-tip").hidden, "the tip goes when the phone turns");
+env.resize(360, 560);
+check($("turn-tip").hidden, "and does not come back upright");
+env = await boot(new Map(env.store));
+check($("first-help").hidden && $("turn-tip").hidden, "after a restart neither line comes back");
+
+// ---- the corner index at the largest size fills the card's width: a common rank (0.62 of its height wide), the
+// suit, the margins and the gap take the width, unless the rank would pass three quarters of the card's width.
+{
+  const { cardGeo, DECKS } = await import("../package/js/cards.js");
+  for (const deck of ["bold", "crisp"])
+    for (const cw of [30, 32, 34, 38, 42, 54]) {
+      const g = cardGeo(cw, 2, "rect", 2, { deck, contrast: false });
+      const used = Math.ceil(g.gh * 0.62) + g.sg + 2 * g.pad + 2;
+      check(g.gh <= Math.round(cw * 0.75), `${deck} ${cw}px: the rank stays within three quarters of the width`);
+      check(used >= cw - 2 || g.gh === Math.round(cw * 0.75), `${deck} ${cw}px: the corner fills the width (${used})`);
+      check(g.rkmax >= Math.round(g.gh * 0.6), `${deck} ${cw}px: a 10 keeps most of its width`);
+      const normal = cardGeo(cw, 0, "rect", 2, { deck, contrast: false });
+      check(normal.gh === Math.round(cw * DECKS[deck].gh[0]), `${deck} ${cw}px: Normal keeps its proportions`);
+    }
+}
 
 if (problems.length) {
   console.log(problems.join("\n"));

@@ -139,6 +139,14 @@ const COMMON = {
     hintLost: "No move wins from here any more.",
     keepLooking: "Keep looking",
     noMovesLeft: "No moves are left. Undo a few moves, or start a new game.",
+    // The guide's short start.
+    tldrTitle: "In 15 seconds",
+    goalLabel: "Goal:",
+    tipLabel: "Tip:",
+    moreRules: "More about the rules",
+    tldrTip2: "Turn your phone *sideways* for bigger cards.",
+    turnTip: "Turn your phone sideways for bigger cards",
+    sidewaysNote: "For the biggest cards, turn your phone sideways.",
   },
   sk: {
     moves: "Ťahy",
@@ -305,6 +313,13 @@ const COMMON = {
     hintLost: "Odtiaľto už k výhre nevedie žiadny ťah.",
     keepLooking: "Hľadať ďalej",
     noMovesLeft: "Už nie sú žiadne ťahy. Vráťte niekoľko ťahov alebo začnite novú hru.",
+    tldrTitle: "Za 15 sekúnd",
+    goalLabel: "Cieľ:",
+    tipLabel: "Tip:",
+    moreRules: "Viac o pravidlách",
+    tldrTip2: "Otočte telefón *na šírku* a karty budú väčšie.",
+    turnTip: "Otočte telefón na šírku a karty budú väčšie",
+    sidewaysNote: "Najväčšie karty budú, keď telefón otočíte na šírku.",
   },
 };
 
@@ -312,6 +327,14 @@ const COMMON = {
 const GAME = {
   en: {
     appName: "Spider",
+    tldrGoal: "Put away all 104 cards as *8 runs*, each from the king down to the ace in one suit.",
+    tldr1: "Move a card onto any card *one higher*: a 7 on an 8, whatever the suit.",
+    tldr2: "Only a *run of one suit* moves together.",
+    tldr3: "Any card can go into an *empty column*.",
+    tldr4: "Stuck? *Tap the stock* to deal a row. No column may be empty then.",
+    tldr5: "A full run from *king to ace* in one suit goes away by itself.",
+    tldrTip: "Start with *one suit* (Settings, then Game): it is the gentlest game.",
+    firstHelp: "New to Spider? How to play in 15 seconds",
     fourSub: "Clubs green and diamonds blue, so every suit has a colour of its own.",
     suitsLabel: "Suits",
     suits1: "One",
@@ -373,6 +396,14 @@ const GAME = {
   },
   sk: {
     appName: "Spider",
+    tldrGoal: "Odložte všetkých 104 kariet ako *8 postupiek*, každú od kráľa po eso v jednej farbe.",
+    tldr1: "Kartu položte na akúkoľvek kartu *o jedno vyššiu*: sedmičku na osmičku, nech je farba akákoľvek.",
+    tldr2: "Spolu sa presúva len *postupka jednej farby*.",
+    tldr3: "Do *prázdneho stĺpca* môže ísť akákoľvek karta.",
+    tldr4: "Neviete ďalej? *Klepnite na balíček* a rozdajte rad. Žiadny stĺpec vtedy nesmie byť prázdny.",
+    tldr5: "Celá postupka od *kráľa po eso* v jednej farbe sa odloží sama.",
+    tldrTip: "Začnite s *jednou farbou* (Nastavenia, potom Hra): to je najľahšia hra.",
+    firstHelp: "Spider hráte prvýkrát? Ako hrať za 15 sekúnd",
     four: "Farebné kríže a kára",
     fourSub: "Kríže zelené a kára modré, takže každá farba kariet má vlastnú farbu.",
     suitsLabel: "Farby v hre",
@@ -476,6 +507,19 @@ export function translatePage() {
     const text = t(el.dataset.tLabel);
     el.setAttribute("aria-label", text);
     if (el.tagName === "BUTTON") el.title = text;
+  });
+  // Lines with key words: "a *free cell* holds" becomes a <b>free cell</b> holds.
+  document.querySelectorAll("[data-t-rich]").forEach((el) => {
+    el.textContent = "";
+    t(el.dataset.tRich)
+      .split(/(\*[^*]+\*)/)
+      .forEach((part) => {
+        if (/^\*.+\*$/.test(part)) {
+          const b = document.createElement("b");
+          b.textContent = part.slice(1, -1);
+          el.appendChild(b);
+        } else if (part) el.appendChild(document.createTextNode(part));
+      });
   });
   // Lines with keys: "[Tab] to a card" becomes <kbd>Tab</kbd> to a card.
   document.querySelectorAll("[data-t-keys]").forEach((el) => {

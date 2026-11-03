@@ -88,15 +88,23 @@ check(s.cols.every((c) => c.up.length === 1) && s.stock.length === 50, "54 cards
 check(Rules.key(s) === Rules.key(fromSave()), "the page shows the saved deal");
 check(saved().deal.kind === "winnable" && saved().deal.suits === 1, "a winnable one-suit deal by default");
 check($("light").dataset.v === "win", `the light says winnable (${$("light").dataset.v})`);
+check(!$("first-help").hidden, "the very first game shows the line for new players");
+check($("turn-tip").hidden, "the sideways tip waits");
 
 // ---- 2. play the solver's path with clicks to the win
-const path = solve(shown(), 20000).path;
+const path = solve(shown(), 30000, { maxNodes: 200000 }).path;
 check(path && path.length > 20, "the solver finds a path");
 let n = 0;
 for (const m of path) {
   play(m);
   await env.advance(5);
   n += 1;
+  if (n === 1) check($("first-help").hidden, "the first move puts the line for new players away");
+  if (n === 3) {
+    check(!$("turn-tip").hidden, "three moves in, upright, the sideways tip shows");
+    $("turn-tip").click();
+    check($("turn-tip").hidden, "a tap puts the sideways tip away");
+  }
   if (n === 6) {
     check($("moves").textContent === "6", `six moves counted (${$("moves").textContent})`);
     $("btn-undo").click();
@@ -117,7 +125,7 @@ $("stats-done").click();
 // ---- 3. a new game, a few moves, and the game comes back after a restart
 $("btn-new").click();
 await settle();
-const p2 = solve(shown(), 20000).path;
+const p2 = solve(shown(), 30000, { maxNodes: 200000 }).path;
 for (const m of p2.slice(0, 8)) {
   play(m);
   await env.advance(5);
@@ -127,6 +135,7 @@ const movesBefore = $("moves").textContent;
 await boot(new Map(env.store));
 await settle();
 check(Rules.key(shown()) === before, "the restarted page keeps the position");
+check($("first-help").hidden && $("turn-tip").hidden, "after a restart neither line comes back");
 check($("moves").textContent === movesBefore, "the restarted page keeps the move count");
 $("btn-undo").click();
 await env.advance(10);
@@ -157,7 +166,7 @@ $("btn-hint").click();
 for (let w = 0; w < 400 && $("notice").hidden; w++) await env.advance(20);
 check(!$("notice").hidden, "the hint shows again");
 {
-  const m5 = solve(shown(), 20000).path[0];
+  const m5 = solve(shown(), 30000, { maxNodes: 200000 }).path[0];
   play(m5);
   await env.advance(10);
 }
@@ -307,6 +316,59 @@ const keysLeft = document.documentElement
   .filter((e) => e.dataset && e.dataset.t)
   .filter((e) => e.textContent === e.dataset.t);
 check(!keysLeft.length, `every text has words: ${keysLeft.map((e) => e.dataset.t).join(", ")}`);
+
+// ---- the guide and the first start's lines: How to play opens at its short start with a picture per rule; the
+// line inviting a new player shows on the very first game only and goes for good after a tap; the sideways tip
+// shows on a phone held upright a few moves in, goes when the phone turns, and never comes back.
+await boot();
+check(!$("first-help").hidden && $("turn-tip").hidden, "a fresh start shows the line for new players only");
+$("first-help").click();
+check($("dlg-help").open, "the line opens How to play");
+check($("first-help").hidden, "the line goes after a tap");
+const rulesShown = document.querySelectorAll(".ex").length;
+for (let k = 1; k <= rulesShown; k++)
+  check($(`ex-${k}`).querySelectorAll(".card").length >= 1, `rule ${k} of the short start has its picture`);
+check($("ex-1").querySelectorAll(".o").length >= 1, "the pictures have arrows");
+check(
+  document.querySelectorAll("[data-t-rich]").every((el) => el.children.some((c) => c.tagName === "B")),
+  "every line of the short start has its key words in bold",
+);
+$("help-done").click();
+$("dlg-help").querySelector(".dlg-body").scrollTop = 400;
+$("btn-help").click();
+check($("dlg-help").querySelector(".dlg-body").scrollTop === 0, "? opens How to play at its short start");
+$("help-done").click();
+{
+  const p4 = solve(shown(), 30000, { maxNodes: 200000 }).path.filter((m) => !m.deal);
+  for (const m of p4.slice(0, 3)) {
+    play(m);
+    await env.advance(5);
+  }
+}
+await env.advance(10);
+check(!$("turn-tip").hidden, "three moves in, upright, the sideways tip shows");
+env.resize(740, 300);
+check($("turn-tip").hidden, "the tip goes when the phone turns");
+env.resize(360, 560);
+check($("turn-tip").hidden, "and does not come back upright");
+await boot(new Map(env.store));
+check($("first-help").hidden && $("turn-tip").hidden, "after a restart neither line comes back");
+
+// ---- the corner index at the largest size fills the card's width: a common rank (0.62 of its height wide), the
+// suit, the margins and the gap take the width, unless the rank would pass three quarters of the card's width.
+{
+  const { cardGeo, DECKS } = await import("../package/js/cards.js");
+  for (const deck of ["bold", "crisp"])
+    for (const cw of [30, 32, 34, 38, 42, 54]) {
+      const g = cardGeo(cw, 2, "rect", 2, { deck, contrast: false });
+      const used = Math.ceil(g.gh * 0.62) + g.sg + 2 * g.pad + 2;
+      check(g.gh <= Math.round(cw * 0.75), `${deck} ${cw}px: the rank stays within three quarters of the width`);
+      check(used >= cw - 2 || g.gh === Math.round(cw * 0.75), `${deck} ${cw}px: the corner fills the width (${used})`);
+      check(g.rkmax >= Math.round(g.gh * 0.6), `${deck} ${cw}px: a 10 keeps most of its width`);
+      const normal = cardGeo(cw, 0, "rect", 2, { deck, contrast: false });
+      check(normal.gh === Math.round(cw * DECKS[deck].gh[0]), `${deck} ${cw}px: Normal keeps its proportions`);
+    }
+}
 
 if (problems.length) {
   console.log(problems.join("\n"));

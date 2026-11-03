@@ -1069,6 +1069,94 @@ dialog::backdrop {
 .dlg-body li {
     margin: 0.25rem 0;
 }
+/* How to play: a short start (the goal, a few rules each with a small picture, a tip), then the details. */
+.tldr {
+    margin: 0.25rem 0 0.5rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 14px;
+    background: var(--paper-raised);
+}
+.dlg-body .tldr h3 {
+    margin-top: 0;
+}
+.tldr p {
+    margin: 0.4rem 0;
+}
+ul.tldr-rules {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0.6rem 0;
+    padding: 0;
+    list-style: none;
+}
+.dlg-body .tldr-rules li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    margin: 0;
+}
+.tldr-rules li > span {
+    flex: 1 1 9rem;
+}
+.tldr-rules .ex {
+    flex: none;
+}
+.dlg-body h3.more {
+    margin-top: 1.25rem;
+}
+.dlg-body h4 {
+    margin: 0.9rem 0 0.25rem;
+    font-size: 1rem;
+}
+/* A picture's arrows: a bright line on a dark outline, over the cards. */
+.pv .arrows {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: visible;
+    pointer-events: none;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.arrows .o {
+    stroke: rgba(0, 0, 0, 0.65);
+    stroke-width: 7;
+}
+.arrows .a {
+    stroke: var(--ring);
+    stroke-width: 3.5;
+}
+/* The first start's line on the table: small, over the empty bottom of the table, never in the way of a tap on a
+   card above it. */
+.first-help {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: max-content;
+    max-width: calc(100% - 24px);
+    min-height: 48px;
+    padding: 0.4rem 1rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--paper-ink);
+    box-shadow: 0 4px 14px var(--shadow);
+    font-weight: 700;
+    text-align: start;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+.first-help .ico {
+    flex: none;
+    width: 22px;
+    height: 22px;
+}
 .muted {
     color: var(--paper-muted);
     font-size: 0.95rem;

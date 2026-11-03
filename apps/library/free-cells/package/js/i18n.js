@@ -139,6 +139,14 @@ const COMMON = {
     hintLost: "No move wins from here any more.",
     keepLooking: "Keep looking",
     noMovesLeft: "No moves are left. Undo a few moves, or start a new game.",
+    // The guide's short start.
+    tldrTitle: "In 15 seconds",
+    goalLabel: "Goal:",
+    tipLabel: "Tip:",
+    moreRules: "More about the rules",
+    tldrTip2: "Turn your phone *sideways* for bigger cards.",
+    turnTip: "Turn your phone sideways for bigger cards",
+    sidewaysNote: "For the biggest cards, turn your phone sideways.",
   },
   sk: {
     moves: "Ťahy",
@@ -305,6 +313,13 @@ const COMMON = {
     hintLost: "Odtiaľto už k výhre nevedie žiadny ťah.",
     keepLooking: "Hľadať ďalej",
     noMovesLeft: "Už nie sú žiadne ťahy. Vráťte niekoľko ťahov alebo začnite novú hru.",
+    tldrTitle: "Za 15 sekúnd",
+    goalLabel: "Cieľ:",
+    tipLabel: "Tip:",
+    moreRules: "Viac o pravidlách",
+    tldrTip2: "Otočte telefón *na šírku* a karty budú väčšie.",
+    turnTip: "Otočte telefón na šírku a karty budú väčšie",
+    sidewaysNote: "Najväčšie karty budú, keď telefón otočíte na šírku.",
   },
 };
 
@@ -315,6 +330,12 @@ const GAME = {
     placeFound: "a foundation",
     wentUp: (a) => `${a.Cards} went up.`,
     appName: "Free Cells",
+    tldrGoal: "Bring all cards to the *four foundations*, one suit each, from the ace up to the king.",
+    tldr1: "Build the columns *down in alternating colours*: a red 7 on a black 8.",
+    tldr2: "A *free cell* holds any one card.",
+    tldr3: "An *empty column* takes any card.",
+    tldrTip: "Keep the *free cells empty* as long as you can.",
+    firstHelp: "New to Free Cells? How to play in 15 seconds",
     dealLabel: "Deal",
     dealButton: (a) => `Deal ${a.n}. Choose a deal number`,
     dealTitle: "Deal number",
@@ -372,6 +393,12 @@ const GAME = {
     placeFound: "základňu",
     wentUp: (a) => `Na základne išli: ${a.cards}.`,
     appName: "Free Cells",
+    tldrGoal: "Dajte všetky karty na *štyri základne*, každú farbu zvlášť, od esa po kráľa.",
+    tldr1: "V stĺpcoch kladte karty *zostupne a striedajte farby*: červenú sedmičku na čiernu osmičku.",
+    tldr2: "Na *voľné políčko* sa zmestí jedna ľubovoľná karta.",
+    tldr3: "Do *prázdneho stĺpca* môže ísť akákoľvek karta.",
+    tldrTip: "Nechajte *voľné políčka prázdne*, kým sa dá.",
+    firstHelp: "Free Cells hráte prvýkrát? Ako hrať za 15 sekúnd",
     dealLabel: "Rozdanie",
     dealButton: (a) => `Rozdanie ${a.n}. Vybrať číslo rozdania`,
     dealTitle: "Číslo rozdania",
@@ -469,6 +496,19 @@ export function translatePage() {
     const text = t(el.dataset.tLabel);
     el.setAttribute("aria-label", text);
     if (el.tagName === "BUTTON") el.title = text;
+  });
+  // Lines with key words: "a *free cell* holds" becomes a <b>free cell</b> holds.
+  document.querySelectorAll("[data-t-rich]").forEach((el) => {
+    el.textContent = "";
+    t(el.dataset.tRich)
+      .split(/(\*[^*]+\*)/)
+      .forEach((part) => {
+        if (/^\*.+\*$/.test(part)) {
+          const b = document.createElement("b");
+          b.textContent = part.slice(1, -1);
+          el.appendChild(b);
+        } else if (part) el.appendChild(document.createTextNode(part));
+      });
   });
   // Lines with keys: "[Tab] to a card" becomes <kbd>Tab</kbd> to a card.
   document.querySelectorAll("[data-t-keys]").forEach((el) => {
