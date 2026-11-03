@@ -1,0 +1,1670 @@
+/* Layout: a one-screen card table. A header band, the table with its columns sized from the width (and
+   capped by the height), and a toolbar band in thumb reach at the bottom. The card faces carry no text:
+   ranks, suits and court emblems are drawn shapes, so the phone's text size never pushes them out of a
+   card; the Card size setting (and, until it is chosen, the phone's text size) sets how big they are. */
+:root {
+    color-scheme: light;
+    --tz: 1;
+    --font-ui: var(--zapli-font-family, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif);
+    /* bands */
+    --band: #0f1513;
+    --band-hover: #24312c;
+    --on-band: #f5f7f6;
+    --on-band-dim: #b9c5bf;
+    /* the table */
+    --felt: #2c6b57;
+    --felt-shade: rgba(0, 0, 0, 0.3);
+    --slot: rgba(255, 255, 255, 0.78);
+    /* the cards (faces and inks: the deck style's class below) */
+    --c-spade: var(--ink-s);
+    --c-heart: var(--ink-h);
+    --c-club: var(--ink-s);
+    --c-diamond: var(--ink-h);
+    --back-a: #1f5c4c;
+    --back-b: #ffffff;
+    --back-rim-stripes: #bfe0d4;
+    /* highlights and panels */
+    --ring: #ffd60a;
+    --target: rgba(255, 214, 10, 0.2);
+    --on-ring: #1a1600;
+    --paper: #fbfaf6;
+    --paper-ink: #17201c;
+    --paper-muted: #4f5a55;
+    --paper-line: #d6d2c6;
+    --paper-raised: #ecebe4;
+    --primary-bg: #1f5c4c;
+    --primary-ink: #ffffff;
+    --danger: #a3172e;
+    --scrim: rgba(6, 14, 11, 0.6);
+    --shadow: rgba(8, 18, 14, 0.35);
+    /* the winnable light */
+    --light-win: #6fcf8f;
+    --light-lost: #ffb020;
+    --light-lost-ring: rgba(255, 176, 32, 0.35);
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --band: #000000;
+        --band-hover: #1a2420;
+        --felt: #163a2f;
+        --felt-shade: rgba(0, 0, 0, 0.45);
+        --slot: rgba(255, 255, 255, 0.62);
+        --back-a: #1b4a3d;
+        --back-b: #cfd8d4;
+        --back-rim-stripes: #8fb9aa;
+        --paper: #18211e;
+        --paper-ink: #e8eeeb;
+        --paper-muted: #aebbb5;
+        --paper-line: #34433d;
+        --paper-raised: #23302b;
+        --primary-bg: #ffd60a;
+        --primary-ink: #1a1600;
+        --danger: #ff8d9c;
+        --scrim: rgba(0, 0, 0, 0.66);
+        --shadow: rgba(0, 0, 0, 0.6);
+    }
+}
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --band: #000000;
+    --band-hover: #1a2420;
+    --felt: #163a2f;
+    --felt-shade: rgba(0, 0, 0, 0.45);
+    --slot: rgba(255, 255, 255, 0.62);
+    --back-a: #1b4a3d;
+    --back-b: #cfd8d4;
+    --back-rim-stripes: #8fb9aa;
+    --paper: #18211e;
+    --paper-ink: #e8eeeb;
+    --paper-muted: #aebbb5;
+    --paper-line: #34433d;
+    --paper-raised: #23302b;
+    --primary-bg: #ffd60a;
+    --primary-ink: #1a1600;
+    --danger: #ff8d9c;
+    --scrim: rgba(0, 0, 0, 0.66);
+    --shadow: rgba(0, 0, 0, 0.6);
+}
+:root.four {
+    --c-club: var(--ink-c);
+    --c-diamond: var(--ink-d);
+}
+/* Deck styles: the page and each preview carry one of these classes, so a preview can show another style.
+   Bold: white faces (warm white in dark mode), a dark outline. Crisp: a hairline edge and a soft shadow,
+   dark faces with light inks in dark mode. */
+.deck-bold,
+.deck-crisp {
+    --face: #ffffff;
+    --line: #141414;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+    --ink-s: #000000;
+    --ink-h: #c8102e;
+    --ink-c: #08793a;
+    --ink-d: #0a4bd6;
+    --sel-face: #fff3b8;
+}
+.deck-crisp {
+    --line: rgba(20, 26, 23, 0.42);
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]).deck-bold,
+    :root:not([data-theme="light"]) .deck-bold {
+        --face: #f4f4f0;
+        --card-shadow: 0 0 0 1px rgba(255, 255, 255, 0.32);
+        --sel-face: #f7e7a1;
+    }
+    :root:not([data-theme="light"]).deck-crisp,
+    :root:not([data-theme="light"]) .deck-crisp {
+        --face: #232b28;
+        --line: rgba(255, 255, 255, 0.3);
+        --card-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
+        --ink-s: #eef3f0;
+        --ink-h: #ff7a8a;
+        --ink-c: #66d394;
+        --ink-d: #8db0ff;
+        --sel-face: #4d4520;
+    }
+}
+:root[data-theme="dark"].deck-bold,
+:root[data-theme="dark"] .deck-bold {
+    --face: #f4f4f0;
+    --card-shadow: 0 0 0 1px rgba(255, 255, 255, 0.32);
+    --sel-face: #f7e7a1;
+}
+:root[data-theme="dark"].deck-crisp,
+:root[data-theme="dark"] .deck-crisp {
+    --face: #232b28;
+    --line: rgba(255, 255, 255, 0.3);
+    --card-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
+    --ink-s: #eef3f0;
+    --ink-h: #ff7a8a;
+    --ink-c: #66d394;
+    --ink-d: #8db0ff;
+    --sel-face: #4d4520;
+}
+/* High contrast: pure white faces, thicker black outlines, darker inks, solid marks (any style). */
+:root.hc {
+    --slot: #ffffff;
+    --paper-muted: var(--paper-ink);
+}
+:root.hc.deck-bold,
+:root.hc.deck-crisp,
+:root.hc .deck-bold,
+:root.hc .deck-crisp {
+    --face: #ffffff;
+    --line: #000000;
+    --ink-s: #000000;
+    --ink-h: #b0001e;
+    --ink-c: #00662a;
+    --ink-d: #0039b5;
+    --sel-face: #fff3b8;
+    --card-shadow: 0 0 0 1px rgba(255, 255, 255, 0.55);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+:root {
+    height: 100%;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: var(--band);
+}
+body {
+    height: 100%;
+    margin: 0;
+    background: var(--felt);
+    color: var(--on-band);
+    font: 1rem/1.4 var(--font-ui);
+    -webkit-tap-highlight-color: transparent;
+}
+[hidden] {
+    display: none !important;
+}
+.sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+/* Measures the phone's text size: a 100 px line that text zoom makes taller. */
+#tz-probe {
+    position: absolute;
+    left: -1000px;
+    top: 0;
+    display: block;
+    width: max-content;
+    margin: 0;
+    font: 100px/1 sans-serif;
+    visibility: hidden;
+    pointer-events: none;
+}
+button {
+    font: inherit;
+    color: inherit;
+}
+:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+}
+
+/* ---- frame ---- */
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.band {
+    background: var(--band);
+    color: var(--on-band);
+    padding-left: max(12px, env(safe-area-inset-left, 0px));
+    padding-right: max(12px, env(safe-area-inset-right, 0px));
+}
+.top {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    min-height: 52px;
+    padding-block: 0.125rem;
+}
+.brand {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 800;
+    font-size: calc(1rem * min(1, 1.3 / var(--tz)));
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+.brand .pips {
+    display: inline-flex;
+    gap: 3px;
+    color: var(--on-band-dim);
+}
+.brand svg {
+    width: 0.7rem;
+    height: 0.7rem;
+    fill: currentColor;
+}
+.status {
+    display: flex;
+    gap: 1rem;
+    margin-inline-end: auto;
+    font-variant-numeric: tabular-nums;
+}
+.stat {
+    display: flex;
+    flex-direction: column;
+    min-width: 3rem;
+}
+.stat .lbl {
+    font-size: calc(0.7rem * min(1, 1.3 / var(--tz)));
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--on-band-dim);
+}
+.stat b {
+    font-size: calc(1.2rem * min(1, 1.3 / var(--tz)));
+    font-weight: 800;
+    line-height: 1.15;
+}
+.tools {
+    display: flex;
+    gap: 2px;
+}
+.icon-btn {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    cursor: pointer;
+}
+.icon-btn:hover,
+.tool:hover:not(:disabled) {
+    background: var(--band-hover);
+}
+.ico {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+@media (max-width: 34rem) {
+    .brand {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
+}
+
+.felt-area {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    padding: 10px max(0px, env(safe-area-inset-right, 0px)) 6px max(0px, env(safe-area-inset-left, 0px));
+    background-color: var(--felt);
+    background-image: radial-gradient(ellipse at 50% 35%, transparent 50%, var(--felt-shade) 100%);
+}
+.table {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.table,
+.pv {
+    --cw: 44px;
+    --ch: 62px;
+    --r: 4px;
+    --gh: 18px;
+    --sg: 13px;
+    --bt: 3px;
+    --bl: 3px;
+    --br: 3px;
+    --rkmax: 30px;
+    --bodyT: 26px;
+    --bodyH: 30px;
+    --bs: 24px;
+    --bsA: 30px;
+    --bsE: 28px;
+    --stroke: 18;
+    --edge-w: 2px;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    padding-block: 0.25rem;
+}
+.toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+}
+.tool {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 8rem;
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 0.25rem;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    font-size: calc(0.85rem * min(1, 1.35 / var(--tz)));
+    font-weight: 700;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+}
+.tool:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+.tool.accent {
+    background: var(--ring);
+    color: var(--on-ring);
+}
+.tool.accent:hover:not(:disabled) {
+    background: var(--ring);
+}
+/* Messages sit in the bottom band, above the buttons, so they never cover a card. */
+.notice {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem 0.75rem;
+    margin: 0.25rem 0 0.125rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    background: var(--paper);
+    color: var(--paper-ink);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+}
+.notice {
+    cursor: pointer;
+}
+.notice-x {
+    flex: none;
+    margin-block: -0.4rem;
+    margin-inline-start: auto;
+    color: var(--paper-ink);
+}
+.notice-x:hover {
+    background: var(--paper-raised);
+}
+.notice-btn,
+.verdict-btn {
+    min-height: 44px;
+    padding: 0.25rem 0.9rem;
+    font-size: 0.95rem;
+}
+/* The verdict bar: the game can no longer be won from here, and the way back. Calm: paper, an amber light, no
+   motion. */
+.verdict {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.75rem;
+    margin: 0.25rem 0 0.125rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    background: var(--paper);
+    color: var(--paper-ink);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+.verdict-text {
+    flex: 1 1 12rem;
+}
+.verdict-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-color: var(--primary-bg);
+}
+.verdict-btn .ico {
+    width: 22px;
+    height: 22px;
+}
+/* The light: a small dot beside the moves. Green while the game can be won, amber once it cannot, a hollow ring
+   while it is being checked or when the answer is not sure. */
+.light {
+    display: inline-block;
+    flex: none;
+    width: 0.62em;
+    height: 0.62em;
+    margin-inline-end: 0.35em;
+    border-radius: 50%;
+    vertical-align: 0.05em;
+    box-sizing: border-box;
+}
+.light[data-v="win"] {
+    background: var(--light-win);
+}
+.light[data-v="lost"] {
+    background: var(--light-lost);
+    box-shadow: 0 0 0 2px var(--light-lost-ring);
+}
+.light[data-v="unsure"] {
+    border: 2px solid var(--on-band-dim);
+}
+.light[data-v="checking"] {
+    border: 2px dotted var(--on-band-dim);
+}
+.verdict .light {
+    width: 0.9rem;
+    height: 0.9rem;
+    margin: 0;
+}
+.light[hidden] {
+    display: none;
+}
+/* The deal number in the header is a button: it opens the deal dialog. */
+.stat-btn {
+    min-height: 48px;
+    padding: 0 0.25rem;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    text-align: start;
+    cursor: pointer;
+}
+.stat-btn b {
+    font-size: calc(0.95rem * min(1, 1.3 / var(--tz)));
+}
+/* Free Cells' header holds the deal number too: a little less space between the numbers, so a 360 px phone keeps
+   all of them. */
+.free-cells .status {
+    gap: 0.75rem;
+}
+.stat-btn:hover {
+    background: var(--band-hover);
+}
+/* A header too narrow for the deal number (large text, the clock on): it steps aside. */
+.tight #btn-deal {
+    display: none;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+    font-weight: 700;
+}
+.field input {
+    min-height: 52px;
+    padding: 0.4rem 0.75rem;
+    border: 2px solid var(--paper-muted);
+    border-radius: 12px;
+    background: var(--paper);
+    color: var(--paper-ink);
+    font: 700 1.3rem/1.2 var(--font-ui);
+    font-variant-numeric: tabular-nums;
+}
+.field input:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+}
+.note.warn {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+/* ---- piles ---- */
+.pile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--cw);
+    height: var(--ch);
+    border-radius: var(--r);
+}
+.pile.moving {
+    z-index: 30;
+}
+.pile.raised {
+    z-index: 40;
+}
+.pile.stock {
+    cursor: pointer;
+}
+.slot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--cw);
+    height: var(--ch);
+    border: max(2px, calc(var(--cw) * 0.05)) dashed var(--slot);
+    border-radius: var(--r);
+    color: var(--slot);
+}
+.slot svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: calc(var(--cw) * 0.48);
+    width: calc(var(--cw) * 0.48 * var(--rw, 0.6));
+    transform: translate(-50%, -50%);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: var(--stroke);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.pile:not(.empty) > .slot {
+    visibility: hidden;
+}
+/* Side rails: each foundation (and each free cell) lies over the band of the one above it, so an empty one but
+   the last outlines only its band, never under the next one. */
+.rails .pile.found:not([data-i="3"]) > .slot,
+.rails .pile.cell:not([data-i="3"]) > .slot,
+.rails .pile.done:not([data-i="7"]) > .slot {
+    height: var(--fu);
+}
+.rails .pile.found:not([data-i="3"]) > .slot svg,
+.rails .pile.done:not([data-i="7"]) > .slot svg {
+    height: calc(var(--fu) * 0.6);
+    width: calc(var(--fu) * 0.6 * var(--rw, 0.6));
+}
+/* A foundation's slot shows the suit it takes. */
+.slot svg.mark-suit {
+    --rw: 1;
+    fill: currentColor;
+    stroke: none;
+    opacity: 0.85;
+}
+.pile.found {
+    cursor: default;
+}
+.stock.can-recycle > .slot {
+    visibility: visible;
+}
+.slot .ico {
+    width: 52%;
+    height: 52%;
+    stroke-width: 2.4;
+    visibility: hidden;
+}
+.stock.can-recycle .slot .ico {
+    visibility: visible;
+}
+.pile.hint-target > :last-child {
+    outline: 4px solid var(--ring);
+    outline-offset: 2px;
+}
+
+/* ---- cards ---- */
+.card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--cw);
+    height: var(--ch);
+    overflow: hidden;
+    border-radius: var(--r);
+    background: var(--face);
+    color: var(--suit);
+    box-shadow:
+        inset 0 0 0 var(--edge-w) var(--line),
+        var(--card-shadow);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+.card[role="button"] {
+    cursor: grab;
+}
+.card.s0,
+.card.s2 {
+    --suit: var(--ink-s);
+}
+.card.s1,
+.card.s3 {
+    --suit: var(--ink-h);
+}
+.four .card.s2 {
+    --suit: var(--ink-c);
+}
+.four .card.s3 {
+    --suit: var(--ink-d);
+}
+/* Crisp: a tinted tile behind a court card's emblem. */
+.deck-crisp .card.court::before {
+    content: "";
+    position: absolute;
+    left: 16%;
+    right: 16%;
+    top: var(--bodyT);
+    height: var(--bodyH);
+    border-radius: calc(var(--r) * 0.7);
+    background: currentColor;
+    opacity: 0.13;
+}
+.deck-crisp .card.court.down::before {
+    display: none;
+}
+.card > svg {
+    position: absolute;
+    overflow: visible;
+    pointer-events: none;
+}
+/* The index band: a drawn rank at the left, its suit at the right; a fanned card shows exactly this. */
+.card .rk {
+    height: var(--gh);
+    width: min(calc(var(--gh) * var(--rw)), var(--rkmax));
+}
+.card .rk {
+    left: var(--bl);
+    top: var(--bt);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: var(--stroke);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.card .sg {
+    right: var(--br);
+    top: var(--bt);
+    width: var(--sg);
+    height: var(--sg);
+    fill: currentColor;
+}
+.card .bd {
+    --bs-now: var(--bs);
+    left: calc(50% - var(--bs-now) / 2);
+    top: calc(var(--bodyT) + (var(--bodyH) - var(--bs-now)) / 2);
+    width: var(--bs-now);
+    height: var(--bs-now);
+    fill: currentColor;
+}
+.card.ace .bd {
+    --bs-now: var(--bsA);
+}
+.card.court .bd {
+    --bs-now: var(--bsE);
+}
+.r1 {
+    --rw: 0.7;
+}
+.r2,
+.r3,
+.r5,
+.r6,
+.r7,
+.r8,
+.r9 {
+    --rw: 0.6;
+}
+.r4 {
+    --rw: 0.62;
+}
+.r10 {
+    --rw: 0.82;
+}
+.r11 {
+    --rw: 0.52;
+}
+.r12 {
+    --rw: 0.66;
+}
+.r13 {
+    --rw: 0.62;
+}
+/* Card backs: a saturated pattern with a rim in its own tint and a black outline, so a face-down card
+   never reads as a face, also as a 3 px strip. The table (or a preview) carries the back's class. */
+.card.down {
+    --rim-w: max(2px, calc(var(--cw) * 0.05));
+    --back-rim: var(--back-rim-stripes);
+    background: repeating-linear-gradient(
+        45deg,
+        var(--back-a) 0 calc(var(--cw) * 0.1),
+        var(--back-b) calc(var(--cw) * 0.1) calc(var(--cw) * 0.16)
+    );
+    box-shadow:
+        inset 0 0 0 var(--rim-w) var(--back-rim),
+        inset 0 0 0 calc(var(--rim-w) + 1px) rgba(0, 0, 0, 0.55),
+        0 0 0 1.5px #000;
+    cursor: default;
+}
+.bk-hearts .card.down {
+    --back-rim: #f4c3cc;
+    background:
+        url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M10%2016C5%2012%203%2010%203%207.5%203%205.6%204.5%204%206.4%204c1.5%200%202.8.9%203.6%202.2C10.8%204.9%2012.1%204%2013.6%204%2015.5%204%2017%205.6%2017%207.5%2017%2010%2015%2012%2010%2016z%27%20fill%3D%27%23ffd9df%27%2F%3E%3C%2Fsvg%3E")
+            0 0 / calc(var(--cw) * 0.34) calc(var(--cw) * 0.34),
+        url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M10%2016C5%2012%203%2010%203%207.5%203%205.6%204.5%204%206.4%204c1.5%200%202.8.9%203.6%202.2C10.8%204.9%2012.1%204%2013.6%204%2015.5%204%2017%205.6%2017%207.5%2017%2010%2015%2012%2010%2016z%27%20fill%3D%27%23ff9fb0%27%2F%3E%3C%2Fsvg%3E")
+            calc(var(--cw) * 0.17) calc(var(--cw) * 0.17) / calc(var(--cw) * 0.34) calc(var(--cw) * 0.34),
+        #a8122c;
+}
+.bk-flowers .card.down {
+    --back-rim: #c4c9f2;
+    background:
+        url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cg%20fill%3D%27%23fff3c4%27%3E%3Ccircle%20cx%3D%2710%27%20cy%3D%277%27%20r%3D%272.2%27%2F%3E%3Ccircle%20cx%3D%2712.9%27%20cy%3D%279.1%27%20r%3D%272.2%27%2F%3E%3Ccircle%20cx%3D%2711.8%27%20cy%3D%2712.5%27%20r%3D%272.2%27%2F%3E%3Ccircle%20cx%3D%278.2%27%20cy%3D%2712.5%27%20r%3D%272.2%27%2F%3E%3Ccircle%20cx%3D%277.1%27%20cy%3D%279.1%27%20r%3D%272.2%27%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2710%27%20cy%3D%2710.2%27%20r%3D%271.7%27%20fill%3D%27%23e3a21a%27%2F%3E%3C%2Fsvg%3E")
+            0 0 / calc(var(--cw) * 0.36) calc(var(--cw) * 0.36),
+        url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cg%20fill%3D%27%23fff3c4%27%3E%3Ccircle%20cx%3D%2710%27%20cy%3D%277%27%20r%3D%272.2%27%2F%3E%3Ccircle%20cx%3D%2712.9%27%20cy%3D%279.1%27%20r%3D%272.2%27%2F%3E%3Ccircle%20cx%3D%2711.8%27%20cy%3D%2712.5%27%20r%3D%272.2%27%2F%3E%3Ccircle%20cx%3D%278.2%27%20cy%3D%2712.5%27%20r%3D%272.2%27%2F%3E%3Ccircle%20cx%3D%277.1%27%20cy%3D%279.1%27%20r%3D%272.2%27%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2710%27%20cy%3D%2710.2%27%20r%3D%271.7%27%20fill%3D%27%23e3a21a%27%2F%3E%3C%2Fsvg%3E")
+            calc(var(--cw) * 0.18) calc(var(--cw) * 0.18) / calc(var(--cw) * 0.36) calc(var(--cw) * 0.36),
+        #3a46a3;
+}
+.bk-stars .card.down {
+    --back-rim: #c3cdea;
+    background:
+        url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M10%202.5l2.2%204.6%205%20.6-3.7%203.4%201%205-4.5-2.5-4.5%202.5%201-5L2.8%207.7l5-.6z%27%20fill%3D%27%23ffd34d%27%2F%3E%3C%2Fsvg%3E")
+            0 0 / calc(var(--cw) * 0.3) calc(var(--cw) * 0.3),
+        url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M10%202.5l2.2%204.6%205%20.6-3.7%203.4%201%205-4.5-2.5-4.5%202.5%201-5L2.8%207.7l5-.6z%27%20fill%3D%27%23fff%27%20opacity%3D%27.75%27%2F%3E%3C%2Fsvg%3E")
+            calc(var(--cw) * 0.15) calc(var(--cw) * 0.15) / calc(var(--cw) * 0.3) calc(var(--cw) * 0.3),
+        #15295e;
+}
+.bk-checks .card.down {
+    --back-rim: #c8e6d6;
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.38) 50%, transparent 50%) 0 0 / calc(var(--cw) * 0.22)
+            calc(var(--cw) * 0.22),
+        linear-gradient(rgba(255, 255, 255, 0.38) 50%, transparent 50%) 0 0 / calc(var(--cw) * 0.22)
+            calc(var(--cw) * 0.22),
+        #1d6a47;
+}
+.bk-waves .card.down {
+    --back-rim: #bfe5ea;
+    background:
+        radial-gradient(circle at 50% 0, transparent 0 42%, #6cc6cf 43% 58%, transparent 59%) 0 0 /
+            calc(var(--cw) * 0.26) calc(var(--cw) * 0.16),
+        radial-gradient(circle at 50% 0, transparent 0 42%, #6cc6cf 43% 58%, transparent 59%) calc(var(--cw) * 0.13)
+            calc(var(--cw) * 0.08) / calc(var(--cw) * 0.26) calc(var(--cw) * 0.16),
+        #0d4b5a;
+}
+.bk-zigzag .card.down {
+    --back-rim: #dcc3e8;
+    background:
+        linear-gradient(135deg, #8a4aa0 25%, transparent 25%) calc(var(--cw) * -0.12) 0 / calc(var(--cw) * 0.24)
+            calc(var(--cw) * 0.24),
+        linear-gradient(225deg, #8a4aa0 25%, transparent 25%) calc(var(--cw) * -0.12) 0 / calc(var(--cw) * 0.24)
+            calc(var(--cw) * 0.24),
+        linear-gradient(315deg, #8a4aa0 25%, transparent 25%) 0 0 / calc(var(--cw) * 0.24) calc(var(--cw) * 0.24),
+        linear-gradient(45deg, #8a4aa0 25%, transparent 25%) 0 0 / calc(var(--cw) * 0.24) calc(var(--cw) * 0.24),
+        #4a1f5c;
+}
+.bk-contrast .card.down {
+    --back-rim: #ffffff;
+    background:
+        radial-gradient(
+            circle,
+            transparent 0 calc(var(--cw) * 0.16),
+            #fff calc(var(--cw) * 0.16) calc(var(--cw) * 0.24),
+            transparent calc(var(--cw) * 0.24)
+        ),
+        #111;
+}
+
+.card.down > svg:not(.edge) {
+    visibility: hidden;
+}
+.card.lifted {
+    box-shadow:
+        inset 0 0 0 var(--edge-w) var(--line),
+        0 10px 24px rgba(0, 0, 0, 0.45);
+    cursor: grabbing;
+}
+.card:focus-visible {
+    outline: 4px solid var(--ring);
+    outline-offset: 1px;
+}
+.card.hinted {
+    outline: 4px solid var(--ring);
+    outline-offset: 1px;
+    animation: glow 0.9s ease-in-out 3;
+}
+@keyframes glow {
+    50% {
+        outline-offset: 4px;
+    }
+}
+/* A selected card (and the cards on it): a pale yellow face, a black and yellow ring, lifted a little. */
+/* A run's ring is drawn at the sides of each card, with a top on the first card and a bottom on the
+   last, so it never covers the band of a card above it in the run. */
+.card.sel {
+    background: var(--sel-face);
+    box-shadow:
+        inset 0 0 0 var(--edge-w) var(--line),
+        -3px 0 0 0 #000,
+        3px 0 0 0 #000,
+        -7px 0 0 0 var(--ring),
+        7px 0 0 0 var(--ring);
+}
+.card.sel.sel-first {
+    box-shadow:
+        inset 0 0 0 var(--edge-w) var(--line),
+        0 0 0 3px #000,
+        0 0 0 7px var(--ring);
+}
+.card.sel.sel-last:not(.sel-first) {
+    box-shadow:
+        inset 0 0 0 var(--edge-w) var(--line),
+        -3px 0 0 0 #000,
+        3px 0 0 0 #000,
+        -3px 3px 0 0 #000,
+        3px 3px 0 0 #000,
+        -7px 0 0 0 var(--ring),
+        7px 0 0 0 var(--ring),
+        -7px 7px 0 0 var(--ring),
+        7px 7px 0 0 var(--ring);
+}
+.card.sel.sel-one {
+    transform: translateY(-3px);
+}
+/* Where the selected or dragged card can go: the whole column (or the foundation) framed and tinted. */
+.marks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+.target {
+    position: absolute;
+    border: 3px dashed var(--ring);
+    border-radius: calc(var(--r) + 4px);
+    background: var(--target);
+}
+.target.hover {
+    border-style: solid;
+    border-width: 5px;
+}
+
+/* Card shapes: the outline is a path (one per size) that clips the card; a stroke inside the clip draws the
+   edge, the back's rim and the selection ring, so they follow the shape. Taps still use the rectangle. */
+.card > .edge {
+    display: none;
+    left: 0;
+    top: 0;
+    width: var(--cw);
+    height: var(--ch);
+    fill: none;
+    stroke-linejoin: round;
+}
+.shaped .card {
+    clip-path: var(--clip);
+    border-radius: 0;
+}
+.shaped .card,
+.shaped .card.down,
+.shaped .card.sel,
+.shaped .card.lifted {
+    box-shadow: none;
+}
+.shaped .card > .edge {
+    display: block;
+}
+.edge .e1 {
+    stroke: none;
+}
+.edge .e2 {
+    stroke: var(--line);
+    stroke-width: calc(var(--edge-w) * 2);
+}
+.shaped .card.down .edge .e1 {
+    stroke: var(--back-rim);
+    stroke-width: calc((var(--rim-w) + 1.5px) * 2);
+}
+.shaped .card.down .edge .e2 {
+    stroke: #000;
+    stroke-width: 3px;
+}
+.shaped .card.sel .edge .e1,
+.shaped .card.hinted .edge .e1,
+.shaped .pile.hint-target > .card:last-child .edge .e1,
+.shaped .card:focus-visible .edge .e1 {
+    stroke: var(--ring);
+    stroke-width: calc((var(--edge-w) + 5px) * 2);
+}
+.shaped .card.sel .edge .e2,
+.shaped .card.hinted .edge .e2 {
+    stroke: #000;
+    stroke-width: calc((var(--edge-w) + 1px) * 2);
+}
+
+/* ---- win ---- */
+.celebrate {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    overflow: hidden;
+    pointer-events: none;
+}
+.toss {
+    position: absolute;
+    width: 30px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 4px;
+    background: var(--face);
+    color: var(--suit);
+    box-shadow:
+        inset 0 0 0 2px var(--line),
+        0 2px 6px var(--shadow);
+    opacity: 0;
+    animation: toss 1.5s cubic-bezier(0.2, 0.6, 0.4, 1) forwards;
+}
+.toss svg {
+    width: 62%;
+    height: 62%;
+    fill: currentColor;
+}
+@keyframes toss {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) rotate(0deg);
+    }
+    8% {
+        opacity: 1;
+    }
+    45% {
+        transform: translate(calc(var(--dx) * 0.55), var(--up)) rotate(calc(var(--rot) * 0.5));
+    }
+    85% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+    }
+}
+
+/* ---- dialogs ---- */
+/* Every dialog stays inside the safe area, clear of the status bar, the gesture bar and a camera cutout, also at
+   the largest text: its head and its buttons stay in view, and only its body scrolls. */
+dialog {
+    --safe-t: env(safe-area-inset-top, 0px);
+    --safe-b: env(safe-area-inset-bottom, 0px);
+    --safe-l: env(safe-area-inset-left, 0px);
+    --safe-r: env(safe-area-inset-right, 0px);
+    top: var(--safe-t);
+    bottom: var(--safe-b);
+    left: var(--safe-l);
+    right: var(--safe-r);
+    width: min(30rem, calc(100vw - 32px - var(--safe-l) - var(--safe-r)));
+    max-width: none;
+    max-height: calc(100vh - 48px - var(--safe-t) - var(--safe-b));
+    max-height: calc(100dvh - 48px - var(--safe-t) - var(--safe-b));
+    padding: 0;
+    border: 0;
+    border-radius: 16px;
+    background: var(--paper);
+    color: var(--paper-ink);
+    box-shadow: 0 24px 60px var(--shadow);
+    overflow: hidden;
+}
+dialog[open] {
+    display: flex;
+    flex-direction: column;
+}
+.dlg-head,
+.dlg-foot {
+    flex: none;
+}
+dialog::backdrop {
+    background: var(--scrim, rgba(6, 14, 11, 0.6));
+}
+.dlg-head {
+    padding: 1.1rem 1.25rem 0.25rem;
+}
+.dlg-head h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-wrap: balance;
+}
+.dlg-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 0.25rem 1.25rem 1rem;
+}
+.dlg-body p {
+    margin: 0.5rem 0;
+    max-width: 60ch;
+}
+.dlg-body h3 {
+    margin: 1rem 0 0.25rem;
+    font-size: 1.05rem;
+}
+.dlg-body ul {
+    margin: 0.25rem 0;
+    padding-left: 1.2rem;
+}
+.dlg-body li {
+    margin: 0.25rem 0;
+}
+.muted {
+    color: var(--paper-muted);
+    font-size: 0.95rem;
+}
+kbd {
+    display: inline-block;
+    min-width: 1.5em;
+    padding: 0 0.35em;
+    border: 1px solid var(--paper-line);
+    border-radius: 4px;
+    font: 600 0.85em/1.5 var(--font-ui);
+    text-align: center;
+}
+.dlg-foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem 1.1rem;
+    border-top: 1px solid var(--paper-line);
+}
+.btn {
+    min-height: 48px;
+    padding: 0.4rem 1.1rem;
+    border: 2px solid var(--paper-line);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--paper-ink);
+    font-weight: 700;
+    cursor: pointer;
+}
+.btn.primary {
+    border-color: var(--primary-bg);
+    background: var(--primary-bg);
+    color: var(--primary-ink);
+}
+.btn.danger {
+    color: var(--danger);
+}
+
+/* The settings sheet: one full-height dialog with tabs; Back closes it. It clips but never scrolls (only
+   its body does): a scroll of the sheet itself (focus, scrollIntoView) would move its head away or, when
+   large text makes the tab labels wider than the sheet, shift everything sideways and cut the first
+   column's tiles off at the left, with no way to scroll back. `hidden` for engines without `clip`. */
+dialog.sheet {
+    width: min(36rem, calc(100vw - var(--safe-l) - var(--safe-r)));
+    height: calc(100vh - var(--safe-t) - var(--safe-b));
+    height: calc(100dvh - var(--safe-t) - var(--safe-b));
+    max-height: none;
+    margin: 0 auto;
+    border-radius: 0;
+    overflow: hidden;
+    overflow: clip;
+}
+@media (min-width: 40rem) and (min-height: 30rem) {
+    dialog.sheet {
+        height: calc(100vh - 32px - var(--safe-t) - var(--safe-b));
+        height: calc(100dvh - 32px - var(--safe-t) - var(--safe-b));
+        margin: auto;
+        border-radius: 16px;
+    }
+}
+.sheet-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem 0.375rem 1.25rem;
+}
+.sheet-head h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+.sheet-head .btn {
+    border-radius: 999px;
+    padding-inline: 1.4rem;
+}
+.tabs {
+    display: flex;
+    gap: 4px;
+    margin: 0 0.75rem 0.25rem;
+    padding: 4px;
+    border-radius: 14px;
+    background: var(--paper-raised);
+}
+.tabs [role="tab"] {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 52px;
+    padding: 0.25rem 0.5rem;
+    border: 0;
+    border-radius: 11px;
+    background: transparent;
+    font-weight: 700;
+    cursor: pointer;
+}
+/* Tab labels that do not fit side by side (large text) wrap onto a second row instead of running out of
+   the sheet (fitSegs()). */
+.tabs.wrap {
+    flex-wrap: wrap;
+}
+.tabs.wrap [role="tab"] {
+    flex-basis: auto;
+}
+.tabs [role="tab"][aria-selected="true"] {
+    background: var(--paper);
+    box-shadow:
+        inset 0 -4px 0 var(--primary-bg),
+        0 1px 3px var(--shadow);
+}
+.sheet-body {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding: 0 1.25rem 1.5rem;
+    overscroll-behavior: contain;
+}
+.sheet-body h3,
+.sheet-body legend {
+    margin: 1.25rem 0 0.5rem;
+    padding: 0;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper-muted);
+}
+fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+}
+.seg {
+    display: flex;
+    overflow: hidden;
+    border: 2px solid var(--paper-muted);
+    border-radius: 14px;
+}
+.seg label {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+}
+.seg label + label {
+    border-left: 2px solid var(--paper-muted);
+}
+.seg input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.seg span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    height: 100%;
+    padding: 0.25rem 0.4rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+.seg.measure span {
+    white-space: nowrap;
+    overflow-wrap: normal;
+}
+/* Labels that do not fit side by side (large text, longer words) stack. */
+.seg.stack {
+    flex-direction: column;
+}
+.seg.stack label + label {
+    border-left: 0;
+    border-top: 2px solid var(--paper-muted);
+}
+.seg input:checked + span {
+    background: var(--primary-bg);
+    color: var(--primary-ink);
+}
+.seg input:focus-visible + span {
+    outline: 3px solid var(--ring);
+    outline-offset: -5px;
+}
+.opt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 64px;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--paper-line);
+    cursor: pointer;
+}
+.opt b {
+    display: block;
+    font-weight: 700;
+}
+.opt small {
+    display: block;
+    color: var(--paper-muted);
+    font-size: 0.9rem;
+}
+/* A switch: 58 × 34 with a 48 px tall row around it. */
+input.sw {
+    flex: none;
+    position: relative;
+    width: 58px;
+    height: 34px;
+    margin: 0;
+    border: 2px solid var(--paper-muted);
+    border-radius: 17px;
+    background: var(--paper-raised);
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+input.sw::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--paper-muted);
+    transition: transform 0.15s;
+}
+input.sw:checked {
+    border-color: var(--primary-bg);
+    background: var(--primary-bg);
+}
+input.sw:checked::before {
+    transform: translateX(24px);
+    background: var(--primary-ink);
+}
+input.sw:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+}
+.note {
+    margin: 0.5rem 0 0;
+    color: var(--paper-muted);
+    font-size: 0.95rem;
+}
+.previews {
+    display: flex;
+    margin-top: 0.75rem;
+}
+.previews > div {
+    flex: 1 1 0;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.pv {
+    position: relative;
+    flex: none;
+    border-radius: 10px;
+    background: var(--felt);
+}
+/* A tile is at least as wide as its picture and the longest word of its name need (--tile-min, measured
+   by fitTiles()), so a name never runs over its tile's border or out of the sheet; a grid whose names
+   need more takes fewer columns. */
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(min(100%, max(calc(5.25rem * max(1, var(--tz) * 0.8)), var(--tile-min, 0px))), 1fr)
+    );
+    gap: 0.5rem;
+}
+.tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.3rem;
+    min-height: 56px;
+    padding: 0.4rem 0.25rem 0.5rem;
+    border: 3px solid transparent;
+    border-radius: 14px;
+    font-weight: 600;
+    line-height: 1.15;
+    text-align: center;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+    cursor: pointer;
+}
+.tile > span {
+    max-width: 100%;
+}
+/* While fitTiles() measures: a name as narrow as its longest word. */
+.tiles.measure .tile > span {
+    width: min-content;
+    max-width: none;
+    overflow-wrap: normal;
+    hyphens: manual;
+}
+.tile input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.tile.on {
+    border-color: var(--primary-bg);
+    background: var(--paper-raised);
+}
+.tile:focus-within {
+    outline: 3px solid var(--ring);
+    outline-offset: 1px;
+}
+.tile .pv {
+    pointer-events: none;
+}
+/* Not at this card size: the picture and the name fade. */
+.tile.off > .pv,
+.tile.off > span:not(.sr-only) {
+    opacity: 0.5;
+}
+.swatch {
+    width: 100%;
+    height: 2.75rem;
+    border-radius: 10px;
+    background: var(--felt);
+    box-shadow: inset 0 0 0 1px rgba(127, 127, 127, 0.5);
+}
+.cal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+.cal-head h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    text-align: center;
+}
+.cal-nav:disabled {
+    opacity: 0.3;
+}
+.cal {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+    margin-top: 0.25rem;
+    text-align: center;
+}
+.cal .wd {
+    padding: 0.25rem 0;
+    color: var(--paper-muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.cal .d {
+    position: relative;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: var(--paper-raised);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+}
+.cal .d.won {
+    background: var(--primary-bg);
+    color: var(--primary-ink);
+}
+.cal .d.won::after {
+    content: "✓";
+    position: absolute;
+    top: 1px;
+    right: 4px;
+    font-size: 0.75em;
+    line-height: 1;
+}
+.cal .d.today {
+    border-color: var(--paper-ink);
+}
+.cal .d:disabled {
+    background: transparent;
+    color: var(--paper-muted);
+    opacity: 0.5;
+    cursor: default;
+}
+.btn.wide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: 56px;
+    margin-top: 0.75rem;
+}
+table.stats {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+}
+.stats th,
+.stats td {
+    padding: 0.5rem 0.25rem;
+    border-bottom: 1px solid var(--paper-line);
+    text-align: right;
+}
+.stats th[scope="row"] {
+    text-align: left;
+    font-weight: 500;
+}
+.stats thead th {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper-muted);
+}
+.confirm-row {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    border: 2px solid var(--paper-line);
+    border-radius: 12px;
+}
+.confirm-row p {
+    margin: 0 0 0.5rem;
+}
+.confirm-row .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.result {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin: 0.75rem 0;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+.result b {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+.result span {
+    color: var(--paper-muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+}
+.badge {
+    padding: 0.2rem 0.75rem;
+    border-radius: 999px;
+    background: var(--ring);
+    color: var(--on-ring);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+.win-pips {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+.win-pips svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: currentColor;
+}
+.win-pips .s0 {
+    color: var(--c-spade);
+}
+.win-pips .s1 {
+    color: var(--c-heart);
+}
+.win-pips .s2 {
+    color: var(--c-club);
+}
+.win-pips .s3 {
+    color: var(--c-diamond);
+}
+:root[data-theme="dark"] .win-pips .s0,
+:root:not([data-theme="light"]) .win-pips .s0 {
+    color: var(--paper-ink);
+}
+#dlg-win .dlg-head {
+    text-align: center;
+}
+@media (max-width: 30rem) {
+    .dlg-foot.stack {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+}
+
+/* Landscape on a phone: one slim band on top (status, the game's buttons, the dialogs), the table under
+   it; the verdict and messages sit between them. */
+@media (orientation: landscape) and (max-height: 540px) {
+    .app {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: auto auto auto minmax(0, 1fr);
+        grid-template-areas:
+            "top tools"
+            "verdict verdict"
+            "notice notice"
+            "felt felt";
+    }
+    .verdict {
+        grid-area: verdict;
+        margin: 0;
+        border-radius: 0;
+    }
+    .top {
+        grid-area: top;
+        min-height: 48px;
+    }
+    .bottom {
+        display: contents;
+    }
+    .toolbar {
+        grid-area: tools;
+        align-items: center;
+        padding: 0 max(8px, env(safe-area-inset-right, 0px)) 0 0;
+        background: var(--band);
+    }
+    .notice {
+        grid-area: notice;
+        margin: 0;
+        border-radius: 0;
+    }
+    .felt-area {
+        grid-area: felt;
+        padding-top: 6px;
+    }
+    .tool {
+        flex-direction: row;
+        min-height: 48px;
+        max-width: none;
+        padding: 0 0.6rem;
+        gap: 6px;
+    }
+    .stat {
+        flex-direction: row;
+        align-items: baseline;
+        gap: 0.4rem;
+        min-width: 0;
+    }
+    .status {
+        gap: 0.9rem;
+    }
+    .brand {
+        display: none;
+    }
+    /* When the band is too narrow for the buttons' words, the buttons show their icons only (their
+       words stay for screen readers). */
+    .compact .tool > span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+    }
+    .compact .tool {
+        min-width: 48px;
+        padding: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
