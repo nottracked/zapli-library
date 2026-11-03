@@ -1,0 +1,5 @@
+﻿"Date","Type","Amount","Currency","Category","Account","To account","Amount received","In main currency","Rate","Payee","Note","Tags"
+"2026-10-01","Income","2450.00","EUR","Salary","Bank account","","","2450.00","","Example Works","October salary",""
+"2026-10-02","Expense","58.40","EUR","Groceries","Bank account","","","58.40","","Fresh Corner","Weekly shop",""
+"2026-10-03","Transfer","200.00","EUR","","Bank account","Savings","","200.00","","","To savings",""
+"2026-10-04","Expense","45.00","USD","Shopping","Bank account","","","41.40","0.920000","","Souvenirs","trip"

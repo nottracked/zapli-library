@@ -1,386 +1,840 @@
 {
   "id": "library/expenses",
   "category": "finance",
-  "replaces": "Expense tracker",
+  "replaces": "Expense tracker and budget planner",
   "title": "Expenses",
-  "summary": "Log spending in seconds, set budgets and see where your money goes.",
-  "description": "**Expenses** helps you see where your money goes, without an account, ads or a subscription.\n\n### What it does\n- **Log an expense in seconds:** amount, category, a short note, the date (today by default) and how you paid. \"Add again today\" repeats a regular purchase, and an optional home-screen button opens the form straight away.\n- **Categories with icons and colours**, ready to use from the first start (groceries, eating out, transport, rent, bills and more), and as many of your own as you like. Each icon brings its own colour; pick another one if you like.\n- **Budgets:** an optional monthly budget for each category and one for all your spending. Progress bars show how much is left, and a notification warns you when a budget is nearly used up (you choose the level, 80% by default) or goes over. A category that is almost used up or over budget says so on its row.\n- **This month at a glance:** what you spent, how that compares with the same days of last month, the daily average, what each category cost with a ring chart around the month’s total, and a bar chart of the last 7 days.\n- **Month by month:** step back through earlier months for totals per category, a ring chart, the last 12 months as bars (with your monthly budget as a line when you set one) and the full list.\n- **Recurring expenses** such as rent, phone bills and subscriptions: add them once with their schedule. They are added for you when due, or, if you prefer, you get a notification with Add and Skip buttons. Each one shows what it costs per year.\n- **Search and filter:** search notes, categories and amounts; find expenses by period, payment method and minimum amount; open a category to see all its expenses.\n- **Bring your history with you:** imports the CSV file most expense and budget apps export. Columns are recognised by their usual names, with commas or semicolons, day-first or month-first dates, decimal commas or points and currency signs. Income and transfers are left out when the file marks them (a type, income or transfer column, separate income amounts, To and From transfer rows, or positive amounts in a file of signed amounts with an account column), and missing categories are created for you.\n- **Your data, your files:** export everything, a month or any period to a CSV file for a spreadsheet.\n- **One currency for the whole app**, picked in Settings. Amounts are stored as exact decimals, never rounded floating-point numbers.\n- Optional receipt photos and an optional daily reminder, at a time you pick, to log the day’s spending.\n- **In English or Slovak**, following your phone's language.\n\n### What it never does\n- No ads, no tracking, no analytics, no account and no sign-in.\n- It cannot connect to the internet. Nothing leaves your phone unless you export a file yourself.\n- No bank connection: you stay in control of what is recorded.\n\n### Privacy\nExpenses are marked as financial data. Budget notifications don’t show amounts on a locked screen. An optional app lock keeps your expenses behind your fingerprint, face or screen lock; turn it on in the app’s Permissions. The app needs no permissions beyond notifications (for budget and recurring reminders), saving and opening the files you choose, the home-screen widget and that lock; the camera is only used for receipt photos when you ask for one.",
+  "summary": "Spending, income, accounts, budgets and subscriptions, offline and ad-free.",
+  "description": "**Expenses** keeps your spending, income, accounts and budgets on your phone, without an account, ads or a subscription.\n\n### Everyday\n- **Add an entry in a few taps:** the amount on a calculator keypad (12,40 + 3,10 works), a category, the account and the date are already picked, so most entries are the amount and Save. Quick-add buttons for the categories you use most, \"Add again today\", notes, payees and tags with suggestions.\n- **Spending, income and transfers** between your accounts: cash, bank accounts, cards and savings, each with its balance, a running balance per account, and the total of everything.\n- **Safe to spend today:** what is left of this month's budget shared out over the days left, minus what you spent today. On the home screen and on a home-screen widget; it updates at midnight.\n- **Budgets** for the whole month and for any category (subcategories count toward their category), with a warning when one is nearly used up or over.\n- **Categories with icons and colours, and subcategories.** Hide what you no longer use; deleting one moves its entries first.\n- **Recurring entries** such as rent, salary and bills: added for you on their date, or a notification with Add and Skip, or only tracked.\n- **Subscription finder:** spots payments that repeat with the same amount (in imported history too) and shows what they cost a month and a year. Confirm, edit or dismiss each one.\n\n### See where it goes\n- The month at a glance, month by month and year by year, a ring chart by category, spending day by day, the last 12 months of spending and income, and a calendar with each day's total.\n- Search notes, payees, categories, tags and amounts; filter by period, type, category, account, tag and amount; export what you found.\n\n### Your data\n- **Bring your history:** imports the CSV file most money and budget apps export, and spreadsheets: comma, semicolon or tab; day-first or month-first dates; decimal commas or points. Spending, income and transfers are all kept (a type, income or transfer column, separate income amounts, signed amounts, or the two halves of a transfer); missing categories, subcategories and accounts are created; you see which rows could not be read, and one tap undoes the import.\n- **Several currencies** with rates you type yourself: each entry keeps its own amount and rate, and totals are shown in your main currency. Nothing is fetched from the internet.\n- Export everything, a period or a search to CSV. Receipt photos from the camera or your pictures. Everything is in Zapli's backup of your apps.\n- **In English and Slovak**, euro first, with each language's number and date formats.\n\n### What it never does\n- No ads, no tracking, no analytics, no account, no sign-in, no upsells.\n- It cannot connect to the internet, and there is no bank connection: nothing leaves your phone unless you export a file.\n\n### Privacy\nAmounts are marked as financial data, so notifications and the widget hide them on a locked screen. An optional app lock keeps everything behind your fingerprint, face or screen lock; turn it on in the app's permissions.",
   "license": "MIT",
-  "tags": ["expenses", "budget", "spending", "money", "recurring", "subscriptions", "csv", "offline", "slovak"],
+  "tags": ["expenses", "budget", "income", "accounts", "subscriptions", "money", "csv", "offline", "slovak", "widget"],
   "screenshots": [
     {
-      "file": "screenshots/01-this-month-light.png",
-      "caption": "This month at a glance: spent, per day and where the money went",
+      "file": "screenshots/01-home-light.png",
+      "caption": "Home: what is safe to spend today, the month so far and quick add",
       "theme": "light"
     },
     {
-      "file": "screenshots/02-expenses-light.png",
-      "caption": "Every expense by day, with search",
+      "file": "screenshots/02-stats-light.png",
+      "caption": "Stats by month or year: spent, income and where the money went",
       "theme": "light"
     },
     {
-      "file": "screenshots/03-add-expense-light.png",
-      "caption": "Add an expense in a few taps: amount, category, note, how you paid",
+      "file": "screenshots/03-subscriptions-light.png",
+      "caption": "The subscription finder: payments that repeat, with their monthly and yearly cost",
       "theme": "light"
     },
     {
-      "file": "screenshots/04-month-stats-light.png",
-      "caption": "Any month: total, per day, spending by category and the last 12 months",
+      "file": "screenshots/04-entries-light.png",
+      "caption": "Every entry by day, with search and filters",
       "theme": "light"
     },
     {
-      "file": "screenshots/05-this-month-dark.png",
-      "caption": "This month in the dark theme",
-      "theme": "dark"
+      "file": "screenshots/05-budgets-light.png",
+      "caption": "A monthly budget and one for each category",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/06-accounts-light.png",
+      "caption": "Accounts with their balances, and transfers between them",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/07-calendar-light.png",
+      "caption": "The month as a calendar: what each day cost",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/08-add-light.png",
+      "caption": "Add an entry with the calculator keypad: amount, category, account, date",
+      "theme": "light"
     }
   ],
   "sampleData": {
+    "prefs": [
+      {
+        "id": "prefs",
+        "currency": "EUR",
+        "monthlyBudget": "1600.00",
+        "budgetAlerts": true,
+        "warnAt": 80,
+        "addedNotice": true,
+        "remindDaily": false,
+        "remindAt": "20:00",
+        "defaultAccount": "acc-bank"
+      }
+    ],
+    "account": [
+      {
+        "id": "acc-bank",
+        "name": "Bank account",
+        "type": "bank",
+        "opening": "1240.00",
+        "position": 0,
+        "includeInTotal": true,
+        "archived": false
+      },
+      {
+        "id": "acc-cash",
+        "name": "Cash",
+        "type": "cash",
+        "opening": "80.00",
+        "position": 1,
+        "includeInTotal": true,
+        "archived": false
+      },
+      {
+        "id": "acc-savings",
+        "name": "Savings",
+        "type": "savings",
+        "opening": "3500.00",
+        "position": 2,
+        "includeInTotal": true,
+        "archived": false
+      }
+    ],
     "category": [
       {
         "id": "cat-groceries",
         "name": "Groceries",
         "icon": "shopping_cart",
-        "budget": "400.00"
+        "kind": "expense",
+        "archived": false,
+        "budget": "450.00"
       },
       {
         "id": "cat-eating-out",
         "name": "Eating out",
         "icon": "restaurant",
-        "budget": "120.00"
+        "kind": "expense",
+        "archived": false,
+        "budget": "160.00"
+      },
+      {
+        "id": "cat-coffee",
+        "name": "Coffee",
+        "icon": "local_cafe",
+        "kind": "expense",
+        "archived": false,
+        "parent": "cat-eating-out"
       },
       {
         "id": "cat-transport",
         "name": "Transport",
         "icon": "directions_car",
+        "kind": "expense",
+        "archived": false,
         "budget": "120.00"
       },
       {
-        "id": "cat-home-and-rent",
+        "id": "cat-home",
         "name": "Home and rent",
-        "icon": "home"
+        "icon": "home",
+        "kind": "expense",
+        "archived": false
       },
       {
         "id": "cat-bills",
         "name": "Bills",
         "icon": "receipt_long",
-        "budget": "150.00"
+        "kind": "expense",
+        "archived": false,
+        "budget": "140.00"
       },
       {
         "id": "cat-subscriptions",
         "name": "Subscriptions",
         "icon": "autorenew",
-        "budget": "40.00"
+        "kind": "expense",
+        "archived": false,
+        "budget": "45.00"
       },
       {
         "id": "cat-health",
         "name": "Health",
-        "icon": "medical_services"
+        "icon": "medical_services",
+        "kind": "expense",
+        "archived": false
+      },
+      {
+        "id": "cat-shopping",
+        "name": "Shopping",
+        "icon": "shopping_bag",
+        "kind": "expense",
+        "archived": false
       },
       {
         "id": "cat-going-out",
         "name": "Going out",
         "icon": "movie",
+        "kind": "expense",
+        "archived": false,
         "budget": "80.00"
       },
       {
         "id": "cat-other",
         "name": "Other",
-        "icon": "category"
+        "icon": "category",
+        "kind": "expense",
+        "archived": false
+      },
+      {
+        "id": "cat-salary",
+        "name": "Salary",
+        "icon": "work",
+        "kind": "income",
+        "archived": false
+      },
+      {
+        "id": "cat-gifts-in",
+        "name": "Gifts and refunds",
+        "icon": "cake",
+        "kind": "income",
+        "archived": false
       }
     ],
     "expense": [
       {
-        "date": "2026-09-01",
-        "amount": "850.00",
-        "category": "cat-home-and-rent",
-        "note": "Rent",
-        "payment": "transfer"
+        "id": "ent-017",
+        "baseAmount": "34.90",
+        "date": "2026-11-03",
+        "kind": "expense",
+        "amount": "34.90",
+        "category": "cat-bills",
+        "note": "Phone and internet",
+        "payee": "Northline Mobile",
+        "account": "acc-bank"
       },
       {
-        "date": "2026-09-01",
-        "amount": "12.99",
-        "category": "cat-subscriptions",
-        "note": "Streaming",
-        "payment": "card"
-      },
-      {
-        "date": "2026-09-02",
-        "amount": "68.40",
-        "category": "cat-groceries",
-        "note": "Weekly shop",
-        "payment": "card"
-      },
-      {
-        "date": "2026-09-03",
-        "amount": "24.60",
-        "category": "cat-health",
-        "note": "Pharmacy",
-        "payment": "cash"
-      },
-      {
-        "date": "2026-09-04",
+        "id": "ent-045",
+        "baseAmount": "21.30",
+        "date": "2026-11-02",
+        "kind": "expense",
         "amount": "21.30",
         "category": "cat-eating-out",
         "note": "Lunch with the team",
-        "payment": "card"
+        "account": "acc-bank",
+        "tags": "work"
       },
       {
-        "date": "2026-09-06",
-        "amount": "52.00",
-        "category": "cat-transport",
-        "note": "Fuel",
-        "payment": "card"
-      },
-      {
-        "date": "2026-09-07",
-        "amount": "28.00",
-        "category": "cat-other",
-        "note": "Haircut",
-        "payment": "cash"
-      },
-      {
-        "date": "2026-09-08",
-        "amount": "59.90",
-        "category": "cat-bills",
-        "note": "Phone and internet",
-        "payment": "transfer"
-      },
-      {
-        "date": "2026-09-09",
-        "amount": "74.85",
-        "category": "cat-groceries",
-        "note": "Weekly shop",
-        "payment": "card"
-      },
-      {
-        "date": "2026-09-11",
-        "amount": "58.00",
-        "category": "cat-going-out",
-        "note": "Concert tickets",
-        "payment": "mobile"
-      },
-      {
-        "date": "2026-09-13",
-        "amount": "46.20",
-        "category": "cat-eating-out",
-        "note": "Dinner with friends",
-        "payment": "card"
-      },
-      {
-        "date": "2026-09-15",
-        "amount": "2.99",
-        "category": "cat-subscriptions",
-        "note": "Cloud storage",
-        "payment": "card"
-      },
-      {
-        "date": "2026-09-16",
-        "amount": "69.10",
-        "category": "cat-groceries",
-        "note": "Weekly shop",
-        "payment": "card"
-      },
-      {
-        "date": "2026-09-20",
-        "amount": "29.00",
-        "category": "cat-health",
-        "note": "Gym membership",
-        "payment": "card"
-      },
-      {
-        "date": "2026-09-23",
-        "amount": "72.35",
-        "category": "cat-groceries",
-        "note": "Weekly shop",
-        "payment": "card"
-      },
-      {
-        "date": "2026-09-26",
-        "amount": "48.50",
-        "category": "cat-transport",
-        "note": "Fuel",
-        "payment": "card"
-      },
-      {
-        "date": "2026-09-28",
-        "amount": "27.60",
-        "category": "cat-eating-out",
-        "note": "Brunch",
-        "payment": "mobile"
-      },
-      {
-        "date": "2026-09-30",
-        "amount": "63.80",
-        "category": "cat-groceries",
-        "note": "Weekly shop",
-        "payment": "card"
-      },
-      {
-        "date": "2026-10-01",
-        "amount": "850.00",
-        "category": "cat-home-and-rent",
-        "note": "Rent",
-        "payment": "transfer"
-      },
-      {
-        "date": "2026-10-01",
+        "id": "ent-016",
+        "baseAmount": "12.99",
+        "date": "2026-11-01",
+        "kind": "expense",
         "amount": "12.99",
         "category": "cat-subscriptions",
         "note": "Streaming",
-        "payment": "card"
+        "payee": "Film Club Online",
+        "account": "acc-bank"
       },
       {
-        "date": "2026-10-02",
+        "id": "ent-015",
+        "baseAmount": "850.00",
+        "date": "2026-11-01",
+        "kind": "expense",
+        "amount": "850.00",
+        "category": "cat-home",
+        "note": "Rent",
+        "payee": "Lindenhof Flats",
+        "account": "acc-bank",
+        "recurring": "rec-rent"
+      },
+      {
+        "id": "ent-018",
+        "baseAmount": "71.85",
+        "date": "2026-10-31",
+        "kind": "expense",
+        "amount": "71.85",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payee": "Fresh Corner",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-046",
+        "baseAmount": "39.99",
+        "date": "2026-10-30",
+        "kind": "expense",
+        "amount": "39.99",
+        "category": "cat-shopping",
+        "note": "New shoes",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-020",
+        "baseAmount": "52.30",
+        "date": "2026-10-30",
+        "kind": "expense",
+        "amount": "52.30",
+        "category": "cat-transport",
+        "note": "Fuel",
+        "payee": "Fuel Stop",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-019",
+        "baseAmount": "3.60",
+        "date": "2026-10-28",
+        "kind": "expense",
+        "amount": "3.60",
+        "category": "cat-coffee",
+        "note": "Coffee",
+        "payee": "Corner Café",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-014",
+        "baseAmount": "200.00",
+        "date": "2026-10-26",
+        "kind": "transfer",
+        "amount": "200.00",
+        "account": "acc-bank",
+        "toAccount": "acc-savings",
+        "note": "To savings"
+      },
+      {
+        "id": "ent-047",
+        "baseAmount": "24.00",
+        "date": "2026-10-25",
+        "kind": "expense",
+        "amount": "24.00",
+        "category": "cat-going-out",
+        "note": "Cinema",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-013",
+        "baseAmount": "2450.00",
+        "date": "2026-10-25",
+        "kind": "income",
+        "amount": "2450.00",
+        "category": "cat-salary",
+        "note": "Salary",
+        "payee": "Example Works",
+        "account": "acc-bank",
+        "recurring": "rec-salary"
+      },
+      {
+        "id": "ent-021",
+        "baseAmount": "58.40",
+        "date": "2026-10-24",
+        "kind": "expense",
+        "amount": "58.40",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payee": "Fresh Corner",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-023",
+        "baseAmount": "45.10",
+        "date": "2026-10-23",
+        "kind": "expense",
+        "amount": "45.10",
+        "category": "cat-transport",
+        "note": "Fuel",
+        "payee": "Fuel Stop",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-048",
+        "baseAmount": "46.20",
+        "date": "2026-10-22",
+        "kind": "expense",
+        "amount": "46.20",
+        "category": "cat-eating-out",
+        "note": "Dinner with friends",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-022",
+        "baseAmount": "2.90",
+        "date": "2026-10-21",
+        "kind": "expense",
+        "amount": "2.90",
+        "category": "cat-coffee",
+        "note": "Coffee",
+        "payee": "Corner Café",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-024",
+        "baseAmount": "69.10",
+        "date": "2026-10-17",
+        "kind": "expense",
+        "amount": "69.10",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payee": "Fresh Corner",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-049",
+        "baseAmount": "18.90",
+        "date": "2026-10-16",
+        "kind": "expense",
+        "amount": "18.90",
+        "category": "cat-health",
+        "note": "Pharmacy",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-026",
+        "baseAmount": "48.00",
+        "date": "2026-10-16",
+        "kind": "expense",
+        "amount": "48.00",
+        "category": "cat-transport",
+        "note": "Fuel",
+        "payee": "Fuel Stop",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-012",
+        "baseAmount": "2.99",
+        "date": "2026-10-15",
+        "kind": "expense",
+        "amount": "2.99",
+        "category": "cat-subscriptions",
+        "note": "Cloud storage",
+        "payee": "Cloud Locker",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-057",
+        "baseAmount": "41.40",
+        "date": "2026-10-14",
+        "kind": "expense",
+        "amount": "45.00",
+        "currency": "USD",
+        "rate": "0.920000",
+        "category": "cat-shopping",
+        "note": "Souvenirs",
+        "account": "acc-bank",
+        "tags": "trip"
+      },
+      {
+        "id": "ent-025",
+        "baseAmount": "3.20",
+        "date": "2026-10-14",
+        "kind": "expense",
+        "amount": "3.20",
+        "category": "cat-coffee",
+        "note": "Coffee",
+        "payee": "Corner Café",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-050",
+        "baseAmount": "28.00",
+        "date": "2026-10-11",
+        "kind": "expense",
+        "amount": "28.00",
+        "category": "cat-other",
+        "note": "Haircut",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-027",
+        "baseAmount": "64.30",
+        "date": "2026-10-10",
+        "kind": "expense",
         "amount": "64.30",
         "category": "cat-groceries",
         "note": "Weekly shop",
-        "payment": "card"
+        "payee": "Fresh Corner",
+        "account": "acc-bank"
       },
       {
-        "date": "2026-10-03",
-        "amount": "18.50",
-        "category": "cat-eating-out",
-        "note": "Lunch with the team",
-        "payment": "card"
-      },
-      {
-        "date": "2026-10-04",
-        "amount": "45.00",
+        "id": "ent-029",
+        "baseAmount": "52.30",
+        "date": "2026-10-09",
+        "kind": "expense",
+        "amount": "52.30",
         "category": "cat-transport",
         "note": "Fuel",
-        "payment": "card"
+        "payee": "Fuel Stop",
+        "account": "acc-bank"
       },
       {
-        "date": "2026-10-05",
-        "amount": "9.80",
-        "category": "cat-groceries",
-        "note": "Bakery and fruit",
-        "payment": "cash"
-      },
-      {
-        "date": "2026-10-07",
-        "amount": "32.40",
-        "category": "cat-eating-out",
-        "note": "Pizza night",
-        "payment": "mobile"
-      },
-      {
+        "id": "ent-011",
+        "baseAmount": "29.00",
         "date": "2026-10-08",
-        "amount": "59.90",
+        "kind": "expense",
+        "amount": "29.00",
+        "category": "cat-health",
+        "note": "Gym",
+        "payee": "Riverside Gym",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-051",
+        "baseAmount": "58.00",
+        "date": "2026-10-07",
+        "kind": "expense",
+        "amount": "58.00",
+        "category": "cat-going-out",
+        "note": "Concert tickets",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-028",
+        "baseAmount": "3.60",
+        "date": "2026-10-07",
+        "kind": "expense",
+        "amount": "3.60",
+        "category": "cat-coffee",
+        "note": "Coffee",
+        "payee": "Corner Café",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-030",
+        "baseAmount": "71.85",
+        "date": "2026-10-03",
+        "kind": "expense",
+        "amount": "71.85",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payee": "Fresh Corner",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-010",
+        "baseAmount": "34.90",
+        "date": "2026-10-03",
+        "kind": "expense",
+        "amount": "34.90",
         "category": "cat-bills",
         "note": "Phone and internet",
-        "payment": "transfer"
+        "payee": "Northline Mobile",
+        "account": "acc-bank"
       },
       {
-        "date": "2026-10-09",
-        "amount": "71.15",
-        "category": "cat-groceries",
-        "note": "Weekly shop",
-        "payment": "card"
+        "id": "ent-032",
+        "baseAmount": "45.10",
+        "date": "2026-10-02",
+        "kind": "expense",
+        "amount": "45.10",
+        "category": "cat-transport",
+        "note": "Fuel",
+        "payee": "Fuel Stop",
+        "account": "acc-bank"
       },
       {
-        "date": "2026-10-10",
-        "amount": "24.00",
-        "category": "cat-going-out",
-        "note": "Cinema tickets",
-        "payment": "mobile"
+        "id": "ent-052",
+        "baseAmount": "40.00",
+        "date": "2026-10-01",
+        "kind": "income",
+        "amount": "40.00",
+        "category": "cat-gifts-in",
+        "note": "Birthday present from Gran",
+        "account": "acc-cash"
       },
       {
-        "date": "2026-10-11",
-        "amount": "38.60",
-        "category": "cat-eating-out",
-        "note": "Birthday dinner",
-        "payment": "card"
+        "id": "ent-009",
+        "baseAmount": "12.99",
+        "date": "2026-10-01",
+        "kind": "expense",
+        "amount": "12.99",
+        "category": "cat-subscriptions",
+        "note": "Streaming",
+        "payee": "Film Club Online",
+        "account": "acc-bank"
       },
       {
-        "date": "2026-10-12",
-        "amount": "15.20",
-        "category": "cat-health",
-        "note": "Pharmacy",
-        "payment": "cash"
+        "id": "ent-008",
+        "baseAmount": "850.00",
+        "date": "2026-10-01",
+        "kind": "expense",
+        "amount": "850.00",
+        "category": "cat-home",
+        "note": "Rent",
+        "payee": "Lindenhof Flats",
+        "account": "acc-bank",
+        "recurring": "rec-rent"
       },
       {
-        "date": "2026-10-13",
-        "amount": "3.40",
-        "category": "cat-eating-out",
+        "id": "ent-031",
+        "baseAmount": "2.90",
+        "date": "2026-09-30",
+        "kind": "expense",
+        "amount": "2.90",
+        "category": "cat-coffee",
         "note": "Coffee",
-        "payment": "mobile"
+        "payee": "Corner Café",
+        "account": "acc-cash"
       },
       {
-        "date": "2026-10-14",
-        "amount": "58.75",
+        "id": "ent-033",
+        "baseAmount": "58.40",
+        "date": "2026-09-26",
+        "kind": "expense",
+        "amount": "58.40",
         "category": "cat-groceries",
         "note": "Weekly shop",
-        "payment": "card"
+        "payee": "Fresh Corner",
+        "account": "acc-bank"
       },
       {
-        "date": "2026-10-15",
-        "amount": "14.50",
+        "id": "ent-007",
+        "baseAmount": "200.00",
+        "date": "2026-09-26",
+        "kind": "transfer",
+        "amount": "200.00",
+        "account": "acc-bank",
+        "toAccount": "acc-savings",
+        "note": "To savings"
+      },
+      {
+        "id": "ent-035",
+        "baseAmount": "48.00",
+        "date": "2026-09-25",
+        "kind": "expense",
+        "amount": "48.00",
+        "category": "cat-transport",
+        "note": "Fuel",
+        "payee": "Fuel Stop",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-006",
+        "baseAmount": "2450.00",
+        "date": "2026-09-25",
+        "kind": "income",
+        "amount": "2450.00",
+        "category": "cat-salary",
+        "note": "Salary",
+        "payee": "Example Works",
+        "account": "acc-bank",
+        "recurring": "rec-salary"
+      },
+      {
+        "id": "ent-053",
+        "baseAmount": "89.00",
+        "date": "2026-09-23",
+        "kind": "expense",
+        "amount": "89.00",
+        "category": "cat-shopping",
+        "note": "Winter jacket",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-034",
+        "baseAmount": "3.20",
+        "date": "2026-09-23",
+        "kind": "expense",
+        "amount": "3.20",
+        "category": "cat-coffee",
+        "note": "Coffee",
+        "payee": "Corner Café",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-036",
+        "baseAmount": "69.10",
+        "date": "2026-09-19",
+        "kind": "expense",
+        "amount": "69.10",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payee": "Fresh Corner",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-038",
+        "baseAmount": "52.30",
+        "date": "2026-09-18",
+        "kind": "expense",
+        "amount": "52.30",
+        "category": "cat-transport",
+        "note": "Fuel",
+        "payee": "Fuel Stop",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-054",
+        "baseAmount": "32.60",
+        "date": "2026-09-17",
+        "kind": "expense",
+        "amount": "32.60",
         "category": "cat-eating-out",
-        "note": "Sushi takeaway",
-        "payment": "card"
+        "note": "Pizza night",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-037",
+        "baseAmount": "3.60",
+        "date": "2026-09-16",
+        "kind": "expense",
+        "amount": "3.60",
+        "category": "cat-coffee",
+        "note": "Coffee",
+        "payee": "Corner Café",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-005",
+        "baseAmount": "2.99",
+        "date": "2026-09-15",
+        "kind": "expense",
+        "amount": "2.99",
+        "category": "cat-subscriptions",
+        "note": "Cloud storage",
+        "payee": "Cloud Locker",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-039",
+        "baseAmount": "64.30",
+        "date": "2026-09-12",
+        "kind": "expense",
+        "amount": "64.30",
+        "category": "cat-groceries",
+        "note": "Weekly shop",
+        "payee": "Fresh Corner",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-041",
+        "baseAmount": "45.10",
+        "date": "2026-09-11",
+        "kind": "expense",
+        "amount": "45.10",
+        "category": "cat-transport",
+        "note": "Fuel",
+        "payee": "Fuel Stop",
+        "account": "acc-bank"
+      },
+      {
+        "id": "ent-055",
+        "baseAmount": "15.00",
+        "date": "2026-09-09",
+        "kind": "expense",
+        "amount": "15.00",
+        "category": "cat-other",
+        "note": "Library fine and copies",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-040",
+        "baseAmount": "2.90",
+        "date": "2026-09-09",
+        "kind": "expense",
+        "amount": "2.90",
+        "category": "cat-coffee",
+        "note": "Coffee",
+        "payee": "Corner Café",
+        "account": "acc-cash"
+      },
+      {
+        "id": "ent-004",
+        "baseAmount": "29.00",
+        "date": "2026-09-08",
+        "kind": "expense",
+        "amount": "29.00",
+        "category": "cat-health",
+        "note": "Gym",
+        "payee": "Riverside Gym",
+        "account": "acc-bank"
       }
     ],
     "recurring": [
       {
+        "id": "rec-rent",
         "name": "Rent",
         "amount": "850.00",
-        "category": "cat-home-and-rent",
+        "kind": "expense",
+        "category": "cat-home",
+        "account": "acc-bank",
+        "payee": "Lindenhof Flats",
         "schedule": "FREQ=MONTHLY;BYMONTHDAY=1",
-        "nextDue": "2026-11-01",
+        "nextDue": "2026-12-01",
         "mode": "auto",
-        "payment": "transfer",
-        "active": true
+        "active": true,
+        "isSubscription": false
       },
       {
-        "name": "Streaming",
-        "amount": "12.99",
-        "category": "cat-subscriptions",
-        "schedule": "FREQ=MONTHLY;BYMONTHDAY=1",
-        "nextDue": "2026-11-01",
-        "mode": "auto",
-        "payment": "card",
-        "active": true
-      },
-      {
-        "name": "Phone and internet",
-        "amount": "59.90",
-        "category": "cat-bills",
-        "schedule": "FREQ=MONTHLY;BYMONTHDAY=8",
-        "nextDue": "2026-11-08",
-        "mode": "ask",
-        "payment": "transfer",
-        "active": true
-      },
-      {
-        "name": "Gym membership",
+        "id": "rec-gym",
+        "name": "Gym",
         "amount": "29.00",
+        "kind": "expense",
         "category": "cat-health",
-        "schedule": "FREQ=MONTHLY;BYMONTHDAY=20",
-        "nextDue": "2026-10-20",
+        "account": "acc-bank",
+        "payee": "Riverside Gym",
+        "schedule": "FREQ=MONTHLY;BYMONTHDAY=8",
+        "nextDue": "2026-11-03",
+        "mode": "ask",
+        "active": true,
+        "isSubscription": true,
+        "matchKey": "riverside gym"
+      },
+      {
+        "id": "rec-salary",
+        "name": "Salary",
+        "amount": "2450.00",
+        "kind": "income",
+        "category": "cat-salary",
+        "account": "acc-bank",
+        "payee": "Example Works",
+        "schedule": "FREQ=MONTHLY;BYMONTHDAY=25",
+        "nextDue": "2026-11-25",
         "mode": "auto",
-        "payment": "card",
-        "active": true
+        "active": true,
+        "isSubscription": false
+      }
+    ],
+    "rate": [
+      {
+        "id": "rate-usd",
+        "currency": "USD",
+        "perMain": "0.920000",
+        "updated": "2026-10-14"
+      }
+    ]
+  },
+  "migration": {
+    "formats": ["csv"],
+    "summary": "Imports the CSV most money and budget apps and spreadsheets export: spending, income, transfers, accounts, categories, tags and currencies.",
+    "samples": [
+      {
+        "file": "import-samples/this-app-export-v4.csv",
+        "about": "This app's export: 1 expense, 1 income, 1 transfer between two accounts and 1 expense in US dollars with its rate"
       },
       {
-        "name": "Cloud storage",
-        "amount": "2.99",
-        "category": "cat-subscriptions",
-        "schedule": "FREQ=MONTHLY;BYMONTHDAY=15",
-        "nextDue": "2026-10-15",
-        "mode": "ask",
-        "payment": "card",
-        "active": true
+        "file": "import-samples/this-app-export-v4-sk.csv",
+        "about": "This app's export in Slovak: 1 expense, 1 income and 1 transfer from the bank account to cash"
       },
       {
-        "name": "Car insurance",
-        "amount": "384.00",
-        "category": "cat-transport",
-        "schedule": "FREQ=YEARLY;BYMONTH=3;BYMONTHDAY=1",
-        "nextDue": "2027-03-01",
-        "mode": "ask",
-        "payment": "transfer",
-        "active": true
+        "file": "import-samples/this-app-export.csv",
+        "about": "This app's earlier export: 3 expenses"
+      },
+      {
+        "file": "import-samples/signed-amounts-day-first.csv",
+        "about": "Signed amounts, an account column, day-first dates, To/From rows: 4 expenses, 1 income, 1 transfer from its halves"
+      },
+      {
+        "file": "import-samples/type-column-semicolon.csv",
+        "about": "Semicolons, a Type and a transfer column, a payee: 3 expenses, 1 income and 1 transfer out of the account"
+      },
+      {
+        "file": "import-samples/wallets-iso-dates.csv",
+        "about": "Wallet and Type columns, ISO dates with offsets, signed amounts: 3 expenses, 1 income, 1 transfer out"
+      },
+      {
+        "file": "import-samples/income-flag.csv",
+        "about": "Lower-case headers, an income true/false column, a subcategory: 3 expenses and 1 income"
+      },
+      {
+        "file": "import-samples/separate-expense-income-month-first.csv",
+        "about": "Separate expense and income amounts, month-first dates, US dollars: 3 expenses and 1 income, waiting for a rate"
+      },
+      {
+        "file": "import-samples/decimal-comma-semicolon.csv",
+        "about": "Spreadsheet style: semicolons, decimal commas, currency signs, dotted dates: 5 expenses"
+      },
+      {
+        "file": "import-samples/transfer-in-out-subcategories.csv",
+        "about": "An income/expense column with transfer-out and transfer-in rows and subcategories: 2 expenses, 1 income and 1 transfer"
       }
     ]
   },
@@ -444,40 +898,10 @@
     {
       "source": "https://note.moneylover.me/how-to-export-transaction-list-in-money-lover-to-csv-or-excel/",
       "used_for": "Money Lover exports transactions as CSV with a chosen separator (comma, semicolon or tab), which is why the import detects the separator."
+    },
+    {
+      "source": "https://glama.ai/mcp/servers/@shahlaukik/money-manager-mcp/blob/164ddfe40b238d5001f2d41721fd4c1ebd723c62/docs/technical/API_DOCUMENTATION.md",
+      "used_for": "Money Manager (Realbyte) keeps transfers as two typed halves, transfer out and transfer in, beside expense and income: read as a Type column with Transfer-Out and Transfer-In values, merged into one transfer when both halves are in the file."
     }
-  ],
-  "migration": {
-    "formats": ["csv"],
-    "summary": "Imports the CSV file most expense and budget apps export: comma, semicolon or tab separated, any common date style, decimal commas or points; income and transfers the file marks are left out.",
-    "samples": [
-      {
-        "file": "import-samples/this-app-export.csv",
-        "about": "This app’s own export: adds 3 expenses"
-      },
-      {
-        "file": "import-samples/signed-amounts-day-first.csv",
-        "about": "Signed amounts, an account but no type column, day-first dates, To/From transfers: adds 4, leaves out 3"
-      },
-      {
-        "file": "import-samples/type-column-semicolon.csv",
-        "about": "Semicolons, a Type column, payment types, ISO and day-first dates: adds 3, leaves out 2"
-      },
-      {
-        "file": "import-samples/wallets-iso-dates.csv",
-        "about": "Wallet and Type columns, ISO dates with offsets, signed amounts: adds 3, leaves out 2"
-      },
-      {
-        "file": "import-samples/income-flag.csv",
-        "about": "Lower-case headers, title and note, an income true/false column: adds 3, leaves out 1"
-      },
-      {
-        "file": "import-samples/separate-expense-income-month-first.csv",
-        "about": "Separate expense and income amounts, month-first dates read as such from the file: adds 3, leaves out 1"
-      },
-      {
-        "file": "import-samples/decimal-comma-semicolon.csv",
-        "about": "Spreadsheet style: semicolons, decimal commas, currency signs, dotted dates: adds 5 expenses"
-      }
-    ]
-  }
+  ]
 }
