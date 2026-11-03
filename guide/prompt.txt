@@ -41,8 +41,7 @@ picked and why.
 - **Declarative:** one JSON file (`books.json`). **Web:** one self-contained HTML file (<= 10 MiB) with the manifest
   embedded. Images, sounds and many files (never big assets as base64): a `.zapli` package, a zip of the folder's
   contents with `manifest.json` at its root (not a zip of the folder).
-- Always `"spec": "zapli/0.2"`. Files with the older names (`anyapp/0.2`, `application/anyapp+json`, `window.anyapp`,
-  `--anyapp-*`, `.anyapp`) still work, but write the new ones. `app.id` is `owner/name` (`me/books`); `app.version` is
+- Always `"spec": "zapli/0.2"`. `app.id` is `owner/name` (`me/books`); `app.version` is
   semver; raise it on every change and keep the id, so the import offers an update that keeps the user's data. Strict
   JSON everywhere: no comments, no trailing commas. Never start `app.id` with `library/`, which belongs to the Zapli
   library's own apps.
@@ -66,7 +65,7 @@ picked and why.
 
 1. **Declared permissions and hosts only.** Every phone feature: a `permissions` entry with a `purpose` of 10-140
    characters, in the user's words, on one line (an `"@key"` message too) and without host words such as
-   "Allow", "Android", "Zapli" or "anyApp". Never use the install screen's own words in any name, label or text: "Unreviewed",
+   "Allow", "Android" or "Zapli". Never use the install screen's own words in any name, label or text: "Unreviewed",
    "Reviewed", "Verified publisher", "Publisher says", "Contains its own code", "Cannot connect to the internet"
    (AA-SEC-101; Zapli may drop such text). Every host: `permissions["net.http"].hosts` as `{host, purpose}`, exact
    lowercase hostnames, https only, at most 10, no IPs, wildcards or `localhost`.
@@ -250,7 +249,7 @@ precise:
 }
 ```
 
-- `code` is exactly one synchronous `function <id>(...)` (never `async`). No I/O, `fetch`, `zapli`, `anyapp`, `console`,
+- `code` is exactly one synchronous `function <id>(...)` (never `async`). No I/O, `fetch`, `zapli`, `console`,
   `Date.now()`, `new Date()` without an argument, `Math.random`, `Intl` or `eval`; pass `today` in as a parameter.
   Nothing survives between calls.
 - Values cross as JSON: dates and durations as ISO strings, refs as ids, decimals as strings both ways (return
@@ -264,15 +263,15 @@ precise:
 "renumber": {
   "lang": "js",
   "timeout": "PT10S",
-  "code": "async function renumber(args, { anyapp, signal }) { const { items } = await anyapp.data.query('task', { sort: ['due'], limit: 500 }); await anyapp.data.transaction(async (tx) => { let n = 1; for (const t of items) { if (signal.aborted) break; await tx.update('task', t.id, { position: n++ }); } }); return { count: items.length }; }"
+  "code": "async function renumber(args, { zapli, signal }) { const { items } = await zapli.data.query('task', { sort: ['due'], limit: 500 }); await zapli.data.transaction(async (tx) => { let n = 1; for (const t of items) { if (signal.aborted) break; await tx.update('task', t.id, { position: n++ }); } }); return { count: items.length }; }"
 }
 ```
 
-- The context's `anyapp` is the API pages call `zapli`. `anyapp.data` needs no `uses`, so this action adds no sink;
+- The context's `zapli` is the same API pages call `window.zapli`. `zapli.data` needs no `uses`, so this action adds no sink;
   every other module must be in `uses`, a subset of `permissions`. Sinks in `uses` (network, share, export, clipboard,
   links) make the install screen coarse for them.
 - Start it from a tap (`{"event": {"name": "renumber"}}`): file pickers, share and copy fail without one. Inside
-  `anyapp.data.transaction` only `tx` record calls; check `signal.aborted` in loops. Some phones can't run JS actions
+  `zapli.data.transaction` only `tx` record calls; check `signal.aborted` in loops. Some phones can't run JS actions
   yet (`UNSUPPORTED`); keep the app useful without them. Import another app's CSV with files.io `importCsv` and a
   column mapping, not a JS action.
 
