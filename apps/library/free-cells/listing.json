@@ -1,0 +1,64 @@
+{
+  "id": "library/free-cells",
+  "category": "game_card",
+  "replaces": "free cell solitaire",
+  "title": "Free Cells",
+  "summary": "Free cell patience with big cards, numbered deals and an honest winnable light",
+  "description": "**Free Cells** is the patience game where every card lies face up from the start: eight columns, four free cells, four foundations and a plan in your head. No ads between games, no account, no tracking.\n\n**Know where you stand**\n\n- A calm light beside the move count stays green while the game can still be won. When a move makes a win impossible, it turns amber, and one tap takes you back to the last position that can still be won.\n- The answer comes from a solver that tries every way to play from where you are, so \"can no longer be won\" is exact, not a guess. If a position ever needs more time than the solver has, the light says it is not sure instead.\n- Honest hints: Hint shows the next move of a real way to win from where you are, never just any move that happens to fit.\n- The solver works beside the game, so the cards never wait for it, and it needs no internet.\n\n**Deals**\n\n- Deal numbers from 1 to 1,000,000, numbered the classic way, so a number always gives the same deal. Type one, or let the game pick.\n- Random deals can always be won. The handful of numbers that cannot be won are still there when you ask for them by number, and the light says so at once.\n- A daily deal, the same on every phone, with a calendar of the days you solved. Missed days can still be played, and nothing nags you about streaks.\n\n**Easy to play**\n\n- Tap a card to pick it up, then tap where it should go: a column, a free cell or a foundation. Cards in order move together when there is room to move them one by one: one card, plus one for every empty free cell, doubled for every empty column. When a run is too long, the game says why.\n- Undo as many moves as you like. Safe cards go up to the foundations by themselves, and once every column is in order the rest plays out; both can be switched off. One-tap moves, dragging and the keyboard work too.\n\n**Cards you can read**\n\n- Three card sizes. Until you choose, the game picks the size that matches your phone's text size, and your choice stays.\n- Bold, drawn ranks and suits that a large text setting never cuts off, a four-colour deck and a high-contrast switch.\n- Free cells on the left or on the right. Turn the phone sideways and the free cells and the foundations move to the sides, so the columns get the whole height.\n- Two card styles, six card shapes, eight card backs and six tables, all open from the start.\n\n**Your game and your numbers**\n\n- The game in progress, your settings and your statistics are saved after every move, Undo included, so you can close the app and carry on later. Inside the app they are part of the app's own data.\n- Statistics: games played and won, win rate, best time, fewest moves, and your current and longest winning streak.\n\n**Easy to use**\n\n- Light and dark, English or Slovak, and screen-reader labels for every card and every place. The win celebration is short and stays still when your phone asks for reduced motion.\n\n**What it never does**\n\n- No ads, no in-app purchases, no coins and no hints to buy.\n- No account and no sign-in.\n- No internet access: the game works offline and cannot connect anywhere.\n- No analytics or tracking of any kind.",
+  "license": "MIT",
+  "tags": [
+    "solitaire",
+    "free cell",
+    "patience",
+    "card game",
+    "large cards",
+    "numbered deals",
+    "daily deal",
+    "slovak",
+    "offline",
+    "no ads"
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/01-deal-light.png",
+      "caption": "A numbered deal with big cards; the green light says it can be won",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/02-hint-light.png",
+      "caption": "An honest hint: always a move from a real winning path",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/03-not-winnable-light.png",
+      "caption": "When the game can no longer be won, one tap goes back to where it could",
+      "theme": "light"
+    }
+  ],
+  "research": [
+    {
+      "source": "https://en.wikipedia.org/wiki/FreeCell",
+      "used_for": "The rules (eight columns dealt face up, four free cells, four foundations, building down in alternating colours, moving several cards when there is room to move them one by one) and the numbered deals"
+    },
+    {
+      "source": "https://rosettacode.org/wiki/Deal_cards_for_FreeCell",
+      "used_for": "The public description of the classic deal numbering (the generator, the deck order, the shuffle and the order of dealing) and two example deals, numbers 1 and 617, which the development check compares against"
+    },
+    {
+      "source": "https://www.solitairelaboratory.com/fcfaq.html",
+      "used_for": "That deal 11982 is the only one of the first 32,000 that cannot be won, and that eight of the first million cannot; how runs move as a unit only when they could move one card at a time"
+    },
+    {
+      "source": "https://mail.goodsol.com/pgshelp/freecell.htm",
+      "used_for": "Read through a search summary: the eight deal numbers of the first million that cannot be won with four free cells (the game's own solver proves each of them lost)"
+    },
+    {
+      "source": "https://apps.apple.com/app/id945996633",
+      "used_for": "Read through a search summary: features expected of the type, such as hints that show a card and a place, unlimited undo, auto-moves to the foundations, daily challenges and statistics with streaks"
+    },
+    {
+      "source": "https://apps.appfollow.io/ios/solitaire-card-game/594007249?country=us",
+      "used_for": "Read through a search summary: the most common complaints about card patience apps are intrusive ads during and after games, crashes, and hints or undo held back for payment"
+    }
+  ]
+}
