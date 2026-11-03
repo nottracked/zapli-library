@@ -1,0 +1,330 @@
+// Deals the solver won, for "Winnable" games and the daily deals: seeds of deal() in base 36, by game and set
+// of rules. Written by dev/deals.mjs and checked by dev/check-deals.mjs; do not edit by hand.
+export const DEALS = {
+  pyramid: {
+    p3:
+      "1oo198z xjaz0k 6ekos5 n686af 1v2ly14 13xvnsp ct5dka 1kpj5az tksv2k 2g2ku5 1acgcku j7q2cf 1r43u34 " +
+      "zzdjup 8un9ma 1gr11cz pmar4k 1xioiv9 f97yef w0vfwp 4w55oa 1csixez 1tk6ex9 12fg4ou xn1qa 18u0tgz " +
+      "1ploaz9 ygy0qu o3v80p 1w08zre dqsfak 1ln6719 3dpmkf k5d42p 10x0lkz 1hoo339 qjxsuu 1ygbklj 17blad4 " +
+      "wyihmz 5ts7ek 1dq5z59 mlfowu 1uhtgnj 13d36f4 c8cw6p t00doz 1va3gk 1qjbcpj 89us8p 1wxw1ho 15t5r99 " +
+      "eofh0u 1mkt8rj 4bcoap 1szdxjo 11unnb9 apxd2u 1imb4tj rhkul4 1898c3e h4i1uz 6rf94u 1ent0vj nj2qn4 " +
+      "1vfgidt 14aq85e d5zxwz txnff9 2sx56u 1apawxj jkkmp4 1rgyeft 10c847e 97htyz 1xvj37y fm2ir4 1tx0z9y " +
+      "1jjy6jt sf7wbe i253l9 1pyivby ytsl3j 1wd3k43 e3mzn9 1m00rdy ki7ofe 1selg63 119v5xo 1i1infy qwsd7j " +
+      "1og3c83 xbd1zo 66mrr9 1e30jhy mya99j 13pxqrt 284nt9 1qw5x28 8mpcle 1gj34c3 pecu3o f1a1dj 1mxnt48 " +
+      "vsxivt 1ckl0e3 127i7ny b2rxfj rufext 18m2wg3 hhcm7o y903py nvxazt diui9o 1lf8a0d 1b25ha8 jxf71t " +
+      "1rtsysi 10p2ok3 9kcebo 1hgq62d qbzvty 173ndc8 fyx33t 5luado 1u9vjmn 13559e8 c0ez5t 1jwsqwi 1nc6fo " +
+      "19jpy6d ieznxy 81wv7t 1fyamyi otkcq3 eghjzy 1mcvbqn 43er9t 1bzsj0i 1srg0is 11mpqad 1ied7sn gwk4u3 " +
+      "6jhc3y 1efv3un nb4tm8 1v7ilcx 142sb4i cy20w3 1kufsms tppied 2kz85y 1ahczwn jcmpo8 104a76i 8zjwy3 " +
+      "1gvxoos pr7egd fe4lq8 w5s38i 511t03 1cxfkqs lspaid 12kcs0n 1jc09ix 18yxgss hu76kd 1pqkyb2 7h4du8 " +
+      "1fdi5kx o8rvci 1w55n37 150fcus 1bf01mx ka9rei 1s6nj57 111x8ws 1htkqf2 qoug6n 1yl87xc 17ghxox 1o85f77 " +
+      "5youqd 1dv2mh2 1umq3zc 13hztqx cd9jii 206qsd 19wkij2 iru8an 1qo801c zjhpsx 1gb57b7 1x2soth etc4cn " +
+      "1mppw3c vkzlux 4g9bmi 1ccn3d7 l7wt4s auu0en 1ir7s5c rmhhwx hr7oi 18e4zf7 h9ep6s 1p5sgxh 6wbwgn " +
+      "1vkd5pm 14fmvh7 1l7aczh u2k2r2 2xtsin 1au7k9c jpha0x q41yt2 1y0fqjr 1nncxtm wimnl7 5dwdcs 1daa53h " +
+      "m5juv2 1u1xmlr 1joutvm 1fe9es 19bs15h i71qx2 1q3finr yyp8fc 1fqcpxm 1wi07fw 15d9x7h 3vgu8x 1brulzm " +
+      "1sji3hw aa1j12 1i6farr r1p0jc 1yy2sa1 gom7t7 1okzzjw 6bjf32 1e7x6tr n36wlc cq43v7 2d1b52 j4osnc " +
+      "zwca5m 8rlzx7 1gnzrnw 1xfn966 1n2kgg1 4t3vz7 1cphnpw 1th5586 1j42ci1 rzc29m 18qzjrw 1pin1a6 796gtc " +
+      "1f5k8k1 o0tybm 1vx7q2b 14shftw dnr5lh 1lk4xc6 ufen3r 3aocvc 1b724m1 k2budm 1rypm4b 9p91nh 1hlmte6 " +
+      "qgwj5r 178k0o1 1o07i6b 1dn4pg6 mief7r 1ues6yg 13a1wq1 c5bmhm ijwb9r 86tijm 1g37aab 1mhrz2g vd1ou1 " +
+      "48belm 1c4p6cb kzyw3w 11rmdm6 rejkw1 18672eb 1oxujwl 6odzfr 1ekrr6g ng1gy1 147oygb d2yo7w 1kzcfyl " +
+      "tum5q6 jhjd01 1rdx4qq 94gk9w 1h0uc0l pw41s6 1xshtiv 16nrjag fj1921 1nff0sq waoqkb 1d2c82l 1ttzpkv " +
+      "12p9fcg bkj541 1jgwwuq 17gcdw 193u44l hz3tw6 yqrbeg 1fieswq odoiob 1wa2af0 1lwzhov 3nix81 1bjwoyq " +
+      "1sbk6h0 a23m06 1hyhdqv qtr3ig 1yq4v95 ggoasb x8bsal 1dzz9sv mv8zkg 1urmrb5 ci66ub 1kejyl0 t9tocl " +
+      "253e46 1a1h5uv iwqvmg 1qt4nd5 zoed4q 8jo2wb 1gg1un0 pbbkel 1x7pc5a 162z1wv ey8rog 1mumjf5 1chjqp0 " +
+      "1t9787a 124gxyv azqnqg 1iw4fh5 mnv0b 18j1mr0 hebcil 1pap49a 718jsg 1exmbj5 u7gq2v judxcq 1rqrp3f " +
+      "9hb4ml 1hdowda 1y5cdvk 170m3n5 1ns9l5f wnjax0 1df6sfa magi6v 1u6u9xk bxdpgq 1jtrh7f sp16z0 1kawql " +
+      "19gooha ibye8v 1q8c5zk 1fv9d9f oqj310 15i6kja 1m9u21k v53rt5 1bwr9bf ks0z30 1soeqtp 11jogla 1ibby3k " +
+      "1vdmq 17y95df gtiv50 1opwmvp 6gg2ev 1ectu5k 1v4hbnu 1kreixp tmo8pa 1aebq7k 1r5z7pu 1018xhf 1xkjwhz " +
+      "fb3c15 1n7h3ru w2qtjf 4y0jb0 1cueb1p lpo0ta 1tm1sjz 12hbibk bcl835 1j8yztu s48plf zifd0 18vw73p " +
+      "hr5wva yitedk 7e3455 1w24de4 14xe35p dsnsxa 1lp1knz ukbafk 3fl075 1bbyrxu 9u5oza 1hqjgpz qlt6hk " +
+      "1yi6y89 g8qdrf x0dv9p 1ujoua9 13eyk1u 1k6m1k4 t1vrbp 1x5h3a 19tj8tz iosylk 1ql6qc9 zggg3u 8bq5vf " +
+      "1g83xm4 p3dndp 1wzrf4e 15v14vz eqaunk 1mmome9 4d81xf l4vjfp 1t19b6e arsqpk 1io6ig9 rjg87u epxzf " +
+      "h6dfhp 1p2r78e xy0wzz 6tamrk nky49u 1vhbw0j 14clls4 d7vbjp tzit1z 1ar6ak9 jmg0bu 10e3hu4 99d7lp " +
+      "1h5qzce fnxwdu 1nkbo4j wfldw4 5av3np 1d78vee m2il5z 12u62o9 bpfsfu 198qrge i40h7z 1q0e8yo yvnyq9 " +
+      "7qxohu oil604 1weyxqt 15a8nie e5id9z ux5us9 3sfkju kk3224 1sggtst a709bz 1i3e12o 1yv1iky 17qb8cj " +
+      "glky44 1ohyput 68i5dz n05mw9 13rt4ej cn2u64 ",
+    p1:
+      "1ent0vj 1selg63 qwsd7j fyx33t 6jhc3y 1kufsms 18yxgss 1bf01mx 111x8ws iru8an 1vkd5pm wimnl7 1sji3hw " +
+      "r1p0jc cq43v7 rzc29m 1pin1a6 ufen3r 1hlmte6 86tijm bkj541 1lwzhov 1qt4nd5 8jo2wb 1exmbj5 1rqrp3f " +
+      "1u6u9xk 1vdmq fb3c15 bcl835 1t19b6e i40h7z 17qb8cj 13rt4ej 2a01fz 18nya2t 1jyo4j8 rbib6y 1bgvf9n " +
+      "5frqzi onhtbx 1abagih 8thdjx 1j5xq4r ho4n67 4a6s8c jjeqmr wck471 65gvow mx4d76 y7u7nl 1rsn2q5 pq1ie0 " +
+      "18xrkqf 8dlji5 6v60ea 1d94914 1n1ekdo yplfc3 1uqgv8s 4k02vy 1s2gddr riac5h xc2jk1 1pefviq 5mjry1 " +
+      "11nf7uq 1egklf0 nbub6l 16jkdj0 ltes2q avjhz0 n3we5p mj3ws4 1d31pmy oee08o 17m42l3 1odrk3d 1ci989d " +
+      "1256fj8 5jii8y 2kv73 1yiwfsm t2l8w2 6u04bx 1h6ggwr fondy7 1wfofb6 a7pqwc 1pgb95g ej2f71 vapwpb " +
+      "1kc86ga evwzjq 12255u5 z1a3mf 14v2b0z 1y7x92n 1jwccei z66qy8 111gues 1gaost7 u23o92 q3lkb2 fqirkx " +
+      "wi6937 1whjsxw 6b30l2 8r5lf7 16agkfr 1nzr3ob oy0ljw fikuk1 55i1tw urssyg 1ex5x15 aehruv 1opg8dp " +
+      "1r5it7u famxj5 16s7s49 1tyfyeo qy7cc9 zsulyj ubwywo 1y9smpd sthfst 1ifs6xd czh00t 1kvurri 105p6b8 " +
+      "1lthths 1avmje2 1wjf6km 1aau20h 1xh28aw ilbaeh 16p6if6 lz0wyw 1qujmhv 1q9r54a ktfy7q ga5cw5 cbn8y5 " +
+      "1tfiunt 1ph0qpt 176xq3o 184krty l1kfy 3145a3 adbvsi d690zc txwihm 10ch79r 1pyryeb 1e39mkb qc8ywb " +
+      "1dih56q 1nl9i1 v8e4kl 1eg46x0 51aw2g o90yev 1ccw6fk 1fnch5 1i6odu4 11rvgoj 1el0u8t yr0egt 17lno33 " +
+      "1ggaxpd 9hk7oy af79f8 18w5a62 1xek5n 1ioflim 1rj2v4w 1gl7l16 b4we4m g11jsw 841bww ovotf6 1ws2l5v " +
+      "14o5r6 y36ne5 1vmhmep yg17qu 1ugwnnj im0ryu p0lgqz 96l0yz mxdg9j fy0a3t 5kxhdo 1348ge8 osnjq3 " +
+      "1cwirqs 13txl3m 18q2qrw 1phq8a6 789ntc nf4ny1 2oz2hr 1oc59j0 1kdn5l0 vozg6q lr20b ecjhav 18uze3p " +
+      "wzh29p 19smftz 1xwhnuo f28m09 174lxyy 11noax3 ltnv53 12lbcnd 3jkuiy zkgafn 1olyk6m jihxmr 1revpdg " +
+      "17md5ng pca51b 1x8nws0 vquttg y6xenl 1tzuxje e6gxwp 1glx2lj 1j1znfo 773rqz k095b9 6mbade 1ptewki " +
+      "kd3pny rpbg6d 1vn73z2 wlglun 1ac9157 1plgzjm 1b9w2vh k55sn2 1wxoq21 1mklxbw rhdj5h gji91r din6u1 " +
+      "1qb6490 1wpqt15 nns2ja 1kmak69 thk9xu 8reohk 1gnsg89 3ah1fp k24ixz 10ts0g9 mi73s4 qtjs2t 1vp2hls " +
+      "1oppbg2 vhr0q7 eimjs rw3h4w 1f2bnfb stqiv6 jearvb 1gxlqvv ffsnxb hvv8rg cexlpl 1kbbdga hb2rdv q5q105 " +
+      "abpl85 n4uysf 1ko5xsz 1pkb3h9 5sezwk 49zgsp 2rjxou sduote 1utati8 1id00an 1cw2d8s 1jan20x x21xgs " +
+      "1x1fhbh 1rkhu9m 1u0kf3r 19aetnh 19n9e06 iij3rr 31d8cg 1sn1jbp 1hp697z 1vs9la 1qjtiu9 1wye7me 4buuff " +
+      "14b8ea4 1d5vnwe 1wdlq8t a5n1tz xbv84e 28mtxz pev08e 1vst8v8 fzf98j c0x5aj egzq4o 1v80rhn bg4nwy " +
+      "mquidd 9cwnfi 6c1l7s 1f62eor c5tsmc 15qmnow 1oycq1b 1dfoyk0 19h6um0 xlois0 tn6eu0 1gtel4f 16gbsea " +
+      "18wed8f 1g8m3qu 2vaoya i4incp 7rfumk 1ux1kro 1f314zo 84aez9 kxfsjj 1ovbgc8 106nqxy 12mqbs3 612eht " +
+      "dda508 13x7xv2 j72ces ba24is ap9n57 e2z9pm pdp461 1gv9yr5 x2rf15 9bqrd5 1eqjh5 e7vx1f 1phzbcj " +
+      "1b6eeoe ij8lc4 11qynoj 1iim56t 6nq9i4 sbiwoo urlhit panugy 123t818 u6t058 9gneoy gsv57d zfsq67 " +
+      "wexnyh 1y9lb9q v9cp7b raul9b 1aiknlq 105huvl psf25g 7ic1jb gczb5l ceh77l j5wgcf g51e4p yryz3j sq8uo3 " +
+      "7faru8 1cathd7 1t2gyvh 1d0im2l sad0mb 1ob8gj0 jskbcq 8up190 xw7azz 12scgo9 35th69 1di9tr3 15l9lv3 " +
+      "181c6p8 208if3 1mprnq2 1m4z6ch 1go1jam hmb167 o0vpyc 3aq4i2 16ntax6 1u6w1ka nkzvwk 1vhdnn9 1sgilfj " +
+      "1yv3a7o 1kjidjj 129fcxe b4p2oz kwze1j 6lehde 17if2yd 1uon98s 1eumtgs syw99c zdgy1h p0e5bc 18847nr " +
+      "jjgi9h lzj33m oflnxr 65inbm 9j89w1 1hfm1mq 13414yl 1id93d0 1ktbo75 1ag8vh0 ganj0v vjvhfa atpvz0 " +
+      "12baqk4 zafoce 1neawd3 w9km4o 192pzoy pa7fyy 123ctj8 k64d9s 1h4muwr fmtry7 xc4b6r j0jeim djlrgr " +
+      "1kv71tv x46e5v 6x35nq 15e16ek aass85 1aa6c2u ug5wau 19pdup9 zcb1z4 ngsq54 1use0i8 v5v108 tnfhwd " +
+      "10206oi fop5kx m39ud2 1dkuoy6 17j4kiq evyr6g 1mscix5 kduib 1vmzsjf j7bfh5 12f1htk o3gl5f 1lmrk5z " +
+      "szlqtp 1wxheme rh67pu bn5rxu ua3cwo 1o7qsbx ccuwn8 t4ie5i 11z5nrs 1rlgewc 16vatg2 7tkbbn zvxnac " +
+      "12c084h 1nzsvb1 139n9ur waa3p1 lx7ayw 1w9nnjq kerrv1 muucp6 znzq9g 1x7apa0 rqzidg 1707grv aejjhl " +
+      "1ecf7aa bc6l7v cmo7au ",
+    p0:
+      "1oo198z xjaz0k 6ekos5 n686af 1v2ly14 13xvnsp ct5dka 1kpj5az tksv2k 2g2ku5 1acgcku j7q2cf 1r43u34 " +
+      "zzdjup 8un9ma 1gr11cz pmar4k 1xioiv9 f97yef w0vfwp 4w55oa 1csixez 1tk6ex9 12fg4ou xn1qa 18u0tgz " +
+      "1ploaz9 ygy0qu o3v80p 1w08zre dqsfak 1ln6719 3dpmkf k5d42p 10x0lkz 1hoo339 qjxsuu 1ygbklj 17blad4 " +
+      "wyihmz 5ts7ek 1dq5z59 mlfowu 1uhtgnj 13d36f4 c8cw6p t00doz 1va3gk 1qjbcpj 89us8p 1wxw1ho 15t5r99 " +
+      "eofh0u 1mkt8rj 4bcoap 1szdxjo 11unnb9 apxd2u 1imb4tj rhkul4 1898c3e h4i1uz xw5jd9 6rf94u 1ent0vj " +
+      "nj2qn4 1vfgidt 14aq85e d5zxwz txnff9 2sx56u 1apawxj jkkmp4 1rgyeft 10c847e 97htyz 1xvj37y fm2ir4 " +
+      "1tx0z9y bnket4 1jjy6jt sf7wbe i253l9 1pyivby ytsl3j 1wd3k43 e3mzn9 1m00rdy ki7ofe 1selg63 119v5xo " +
+      "1i1infy qwsd7j 1og3c83 xbd1zo 66mrr9 1e30jhy mya99j 13pxqrt 284nt9 1qw5x28 8mpcle 1gj34c3 pecu3o " +
+      "f1a1dj 1mxnt48 vsxivt 1ckl0e3 127i7ny b2rxfj rufext 18m2wg3 hhcm7o y903py nvxazt diui9o 1lf8a0d " +
+      "1b25ha8 jxf71t 1rtsysi 10p2ok3 9kcebo 1hgq62d qbzvty 173ndc8 fyx33t 5luado 1u9vjmn 13559e8 c0ez5t " +
+      "1jwsqwi 1nc6fo 19jpy6d ieznxy 81wv7t 1fyamyi otkcq3 eghjzy 1mcvbqn 43er9t 1bzsj0i 1srg0is 11mpqad " +
+      "1ied7sn gwk4u3 6jhc3y 1efv3un nb4tm8 1v7ilcx 142sb4i cy20w3 1kufsms tppied 2kz85y 1ahczwn jcmpo8 " +
+      "104a76i 8zjwy3 1gvxoos pr7egd fe4lq8 w5s38i 511t03 1cxfkqs lspaid 12kcs0n 1jc09ix 18yxgss hu76kd " +
+      "1pqkyb2 7h4du8 1fdi5kx o8rvci 1w55n37 150fcus 1bf01mx ka9rei 1s6nj57 111x8ws 1htkqf2 qoug6n 1yl87xc " +
+      "17ghxox 1o85f77 5youqd 1dv2mh2 1umq3zc 13hztqx cd9jii 206qsd 19wkij2 iru8an 1qo801c zjhpsx 1gb57b7 " +
+      "1x2soth etc4cn 1mppw3c vkzlux 4g9bmi 1ccn3d7 l7wt4s auu0en 1ir7s5c rmhhwx hr7oi 18e4zf7 h9ep6s " +
+      "1p5sgxh 6wbwgn 1vkd5pm 14fmvh7 1l7aczh u2k2r2 2xtsin 1au7k9c jpha0x q41yt2 1y0fqjr 1nncxtm wimnl7 " +
+      "5dwdcs 1daa53h m5juv2 1u1xmlr 1joutvm 1fe9es 19bs15h i71qx2 1q3finr yyp8fc 1fqcpxm 1wi07fw 15d9x7h " +
+      "3vgu8x 1brulzm 1sji3hw aa1j12 1i6farr r1p0jc 1yy2sa1 gom7t7 1okzzjw 6bjf32 1e7x6tr n36wlc cq43v7 " +
+      "2d1b52 j4osnc zwca5m 8rlzx7 1gnzrnw 1xfn966 1n2kgg1 4t3vz7 1cphnpw 1th5586 1j42ci1 rzc29m 18qzjrw " +
+      "1pin1a6 796gtc 1f5k8k1 o0tybm 1vx7q2b 14shftw dnr5lh 1lk4xc6 ufen3r 3aocvc 1b724m1 k2budm 1rypm4b " +
+      "9p91nh 1hlmte6 qgwj5r 178k0o1 1o07i6b 1dn4pg6 mief7r 1ues6yg 13a1wq1 c5bmhm ijwb9r 86tijm 1g37aab " +
+      "1mhrz2g vd1ou1 48belm 1c4p6cb kzyw3w 11rmdm6 rejkw1 18672eb 1oxujwl 6odzfr 1ekrr6g ng1gy1 147oygb " +
+      "d2yo7w 1kzcfyl tum5q6 jhjd01 1rdx4qq 94gk9w 1h0uc0l pw41s6 1xshtiv 16nrjag fj1921 1nff0sq waoqkb " +
+      "1d2c82l 1ttzpkv 12p9fcg bkj541 1jgwwuq 17gcdw 193u44l hz3tw6 yqrbeg 1fieswq odoiob 1wa2af0 1lwzhov " +
+      "3nix81 1bjwoyq 1sbk6h0 a23m06 1hyhdqv qtr3ig 1yq4v95 ggoasb x8bsal 1dzz9sv mv8zkg 1urmrb5 ci66ub " +
+      "1kejyl0 t9tocl 253e46 1a1h5uv iwqvmg 1qt4nd5 zoed4q 8jo2wb 1gg1un0 pbbkel 1x7pc5a 162z1wv ey8rog " +
+      "1mumjf5 1chjqp0 1t9787a 124gxyv azqnqg 1iw4fh5 mnv0b 18j1mr0 hebcil 1pap49a 718jsg 1exmbj5 u7gq2v " +
+      "judxcq 1rqrp3f 9hb4ml 1hdowda 1y5cdvk 170m3n5 fvvteq 1ns9l5f wnjax0 1df6sfa magi6v 1u6u9xk 1323zp5 " +
+      "bxdpgq 1jtrh7f sp16z0 1kawql 19gooha ibye8v 1q8c5zk 1fv9d9f oqj310 1wmwurp 15i6kja 1m9u21k v53rt5 " +
+      "1bwr9bf ks0z30 1soeqtp 11jogla 1ibby3k 1vdmq 17y95df gtiv50 1opwmvp 6gg2ev 1ectu5k 1v4hbnu 1kreixp " +
+      "tmo8pa 1aebq7k 1r5z7pu 1018xhf 1xkjwhz fb3c15 1n7h3ru w2qtjf 4y0jb0 1cueb1p lpo0ta 1tm1sjz 12hbibk " +
+      "bcl835 1j8yztu s48plf zifd0 18vw73p hr5wva yitedk 7e3455 1w24de4 14xe35p dsnsxa 1lp1knz ukbafk " +
+      "3fl075 1bbyrxu k78hpf 9u5oza 1hqjgpz qlt6hk 1yi6y89 g8qdrf x0dv9p 1ujoua9 13eyk1u 1k6m1k4 t1vrbp " +
+      "1x5h3a 19tj8tz iosylk 1ql6qc9 zggg3u 8bq5vf 1g83xm4 p3dndp 1wzrf4e 15v14vz eqaunk 1mmome9 4d81xf " +
+      "l4vjfp 1t19b6e arsqpk 1io6ig9 rjg87u epxzf h6dfhp 1p2r78e xy0wzz 6tamrk nky49u 1vhbw0j 14clls4 " +
+      "d7vbjp tzit1z 1ar6ak9 jmg0bu 10e3hu4 99d7lp 1h5qzce fnxwdu 1nkbo4j wfldw4 5av3np 1d78vee m2il5z " +
+      "12u62o9 bpfsfu 198qrge i40h7z 1q0e8yo yvnyq9 7qxohu oil604 1weyxqt 15a8nie e5id9z ux5us9 3sfkju " +
+      "kk3224 1sggtst a709bz 1i3e12o 1yv1iky 17qb8cj ",
+  },
+  golf: {
+    none:
+      "grnhia 1oo198z 6ekos5 1v2ly14 tksv2k zzdjup 1gr11cz 16dy8mu f97yef 12fg4ou bapugf 1j73m74 18u0tgz " +
+      "1hoo339 13d36f4 t00doz apxd2u h4i1uz nj2qn4 14aq85e jkkmp4 97htyz pz5bh9 wdq09e 1d5dhro 1tx0z9y " +
+      "12sap1j 1jjy6jt sf7wbe 1ahm2z 196vdto 7p2av4 1m00rdy 119v5xo 1yt64y8 1gj34c3 1660bly f1a1dj rufext " +
+      "18m2wg3 nvxazt 1vsb2qi diui9o 1lf8a0d 35rpjj 173ndc8 1di824d 1nc6fo 19jpy6d 81wv7t xo7mcd tppied " +
+      "1ahczwn 1naidgx w5s38i 1pqkyb2 yluo2n 1fdi5kx o8rvci 1w55n37 gbrngi 1o85f77 13hztqx cd9jii iru8an " +
+      "1x2soth etc4cn 1mppw3c l7wt4s hr7oi 2xtsin 1h8s91h 1y0fqjr m5juv2 12x7cdc yyp8fc e8jmz2 1m4xepr " +
+      "n36wlc 1uzkoc1 1kmhvlw 2d1b52 j4osnc 8rlzx7 1xfn966 f66opc vxu67m lkrdhh 1j42ci1 1vx7q2b ufen3r " +
+      "k2budm 1rypm4b qgwj5r 178k0o1 wvh7xw 13a1wq1 86tijm 48belm 11rmdm6 rejkw1 1oxujwl 147oygb 1xshtiv " +
+      "fj1921 waoqkb odoiob 1lwzhov 3nix81 kf6eqb 116tw8l qtr3ig ggoasb 1od22j0 x8bsal 1urmrb5 ci66ub " +
+      "253e46 pbbkel vpw96q 4l5yyb lctggl azqnqg mnv0b 18j1mr0 1exmbj5 1vp9t1f dft8kl 1rqrp3f 9hb4ml " +
+      "170m3n5 1df6sfa 1kawql 19gooha z3lvr5 1wmwurp 15i6kja 1m9u21k v53rt5 1bwr9bf 1soeqtp aey6cv r6lnv5 " +
+      "1vdmq gtiv50 xl6cna 1ectu5k 1v4hbnu 1kreixp w2qtjf lpo0ta bcl835 zifd0 1fagvvu o5qlnf k78hpf 17dgnzu " +
+      "1ds1crz mnb2jk 1k6m1k4 iosylk 1mmome9 vhyc5u xy0wzz 1vhbw0j 1ar6ak9 99d7lp 1h5qzce 5av3np bpfsfu " +
+      "sh39y4 15a8nie ux5us9 1botcaj kk3224 1sggtst qynqu9 1ohyput xd8fme 68i5dz 1uwjemy 13rt4ej cn2u64 " +
+      "1xclzh3 1cmge0t lhq3se 18nya2t dkpvwe jzakoj 9m7rye 175iqyy wsfy8t 5npo0e 1dk3fr3 mfd5io 1g060l8 " +
+      "eicxmo 45a4wj xq2zz3 6lcpqo trkw13 jei3ay 1065kt8 pt2s33 1ncdr3n bhhvey 1jdvn5n 1psgbxs ynq1pd " +
+      "oan8z8 dxkg93 3khniy 1bgvf9n x5aili 1dwy03s 13jv7dn 1qq3do2 15zxs7s 1mrl9q2 4i4p98 1ceigzx 121fo9s " +
+      "14hi93x 1aw2xw2 1rnqfec 10j055x 9e9uxi fsujpn 12z2q02 bucfrn slzx9x 1m6ssch n52a82 1kod98m 1abagih " +
+      "1pkieww 1vz33p1 dpmj87 1lm0ayw k4780c 1s0kzr1 10vupim 19qhz4w p0cdom vex2gr 1c6kjz1 1ozpxjb nhwukr " +
+      "d4u1um twhjcw 2rr94h 10b2851 fkwmor wck471 lzhbgw ysmp16 ofjwb1 1wbxo1q 1lyuvbl uu4l36 118p9vb " +
+      "17n9yng 1e1unfl mx4d76 13orupg 1kgfc7q 1qv00zv 8ljgj1 1mwhx1v vrrmtg rt9ivg 1pckhw0 1b0zl7v qatzrl " +
+      "mcbvtl 1jvmuu5 1qa7jma efbnxl v6z5fv 428v7g 1bymmy5 1804j05 1ors0if 1eep7sa 1v6cpak cww4tq 2jtc3l " +
+      "1ag73ua 1034b45 1gursmf 16hozwa 1n9chek w4m765 12j6vya beglpv 11dszq ht1ai0 o7lza5 duj6k0 3hgdtv " +
+      "9w12m0 qnok4a 5xiyo0 1z0uq0 19vemgp iqoc8a 1qn23yz 8dlji5 vjtpsk 4f3fk5 l6qx2f rlbluk 18cz3cu h88t4f " +
+      "u1e6op 1at1o6z q2w2qp fpta0k 5cqhaf siynku i5vuup 11dlx74 1ywww7o 17s6lz9 1oju3hj 1e6rare n210iz " +
+      "13toi19 2bvf2p j3iwkz zv6e39 169r2ve 1n1ekdo 4rxzwu ry6679 1phh57t 1vw1tzy 1liz19t 10stftj qfqn3e " +
+      "5pl1n4 1dlytdt 1r2xp4 19ngpft zadwpo 1wtovq8 15oylht 475ij9 1sv6rs8 11qghjt 1owonu8 xrydlt nevkvo " +
+      "d1ss5j 2opzfe 93ao7j 1gzofy8 16mln83 54sk9j bjd91o 7kv53o ocimly 1w8wecn 1546448 3md15o 115o068 " +
+      "a0xpxt 1yoyz6s 62flzt 1uqgv8s t8nsa8 ivkzk3 1qryras ex2vm3 voqd4d 1cgdumn 1t81c4x 123b1wi aykro3 " +
+      "lhyxy y4sxyi 1lb148x u6au0i 9g58k8 16zg7ks 1nr3p32 5hn4m8 1j50o8 1q769x7 1fu3h72 15h0ogx ecae8i " +
+      "v3xvqs 3z7lid 11iikix adsaai phkd xk0gkx 6fa6ci 1v3bflh tlicmx 10031f2 pn08ox 1xje0fm 16enq77 w1kxh2 " +
+      "1ct8ezc 1j7t3rh ycjan 1pmdsjm yhnib7 7cx82s uj5ed7 10xq35c 9szswx wz7z7c 5uhoyx 1vzl0x zfak1h " +
+      "1g6y1jr aqmun7 dk1x2 1p1lb61 njs87h 1vg5zy6 d6pfhc 1l33781 10cxlrr 987bjc 1h4l3a1 1xw8ksb 16riajw " +
+      "1nj5s26 1jkno46 sfxdvr 1pz8cwb uvzypw kix5zr 1sfaxqg 1ytvmil gkf21r 1e3q12b 1uvdikl 1a57x4b pf2bo1 " +
+      "f1zixw 1f1d2sl djjzu1 jy4om6 1ruigcv 1hhfnmq 174cuwl 135uqyl 1jxi8gv z7cn0l ou9uag eh71kb 1c0i0kv " +
+      "aioxmb 1if2pd0 nbub6l 2lopqb 104zoqv 1gwn695 16jkdj0 51rakg bgbzcl huwo4q ymk5n0 1w5v4nk dwek6q " +
+      "3jbrgl 1bfpj7a 112mqh5 9xwg8q qpjxr0 17h7f9a gch50v x44mj5 5zecaq cdz12v 1qoxhlp zk77da 1x3i6du " +
+      "eu1lx0 y1ro9f noovja 1l7zuju 1rmkjbz 10hu93k 1u2n464 12xwtxp sku17k 1g3qz5 ombx9k 1m5mwa4 v0wm1p " +
+      "3w6bta knttbk aar0lf ",
+    queen:
+      "grnhia 1oo198z xjaz0k 6ekos5 1v2ly14 tksv2k zzdjup 1gr11cz pmar4k 1xioiv9 16dy8mu f97yef 4w55oa " +
+      "12fg4ou bapugf 1j73m74 18u0tgz dqsfak 1hoo339 qjxsuu 5ts7ek 13d36f4 1k4qnxe t00doz imxkyu 89us8p " +
+      "p1i9qz 1mkt8rj apxd2u 1imb4tj h4i1uz 1p0vtlo nj2qn4 1vfgidt 14aq85e 1l2dpno txnff9 1apawxj jkkmp4 " +
+      "97htyz pz5bh9 1xvj37y wdq09e 1d5dhro m0n7j9 1tx0z9y 12sap1j 1jjy6jt sf7wbe 1ahm2z 196vdto 7p2av4 " +
+      "1wd3k43 1m00rdy 119v5xo a54vp9 1yt64y8 66mrr9 1e30jhy mya99j 13pxqrt 1khl8a3 1qw5x28 1gj34c3 1660bly " +
+      "f1a1dj 4o78ne b2rxfj rufext pp4pe 18m2wg3 1pdqdyd 749thj nvxazt 1vsb2qi 14nksi3 diui9o 1lf8a0d " +
+      "35rpjj 1y8dnkn 173ndc8 1nvauui 1di824d 13559e8 1jwsqwi 1nc6fo 19jpy6d z6n5g8 81wv7t 1mcvbqn 43er9t " +
+      "1bzsj0i r9mxk8 xo7mcd 1efv3un 142sb4i cy20w3 tppied 2kz85y 1ahczwn 8zjwy3 1naidgx w5s38i 12kcs0n " +
+      "bfmhs8 18yxgss 1pqkyb2 yluo2n 1fdi5kx o8rvci 1w55n37 ka9rei 9x6yod gbrngi 1o85f77 1dv2mh2 mqcc8n " +
+      "1umq3zc 13hztqx cd9jii 1k9nb97 iru8an 1qo801c 1x2soth etc4cn 1mppw3c 4g9bmi l7wt4s 1ir7s5c rmhhwx " +
+      "hr7oi h9ep6s y126p2 1espo7c 1vkd5pm 1l7aczh 2xtsin 1au7k9c jpha0x 1rlv1rm 1h8s91h 1y0fqjr 1nncxtm " +
+      "m5juv2 12x7cdc i71qx2 1q3finr yyp8fc e8jmz2 1m4xepr kn4br7 1sji3hw xg9pbh n36wlc 1uzkoc1 1kmhvlw " +
+      "thrldh 2d1b52 j4osnc 8rlzx7 1gnzrnw pj9hfh 1xfn966 f66opc vxu67m lkrdhh 12ceuzr 1j42ci1 796gtc " +
+      "1f5k8k1 1vx7q2b ufen3r 3aocvc k2budm 1rypm4b qgwj5r 178k0o1 g3tqfm 1o07i6b wvh7xw 13a1wq1 c5bmhm " +
+      "1k1pe8b zbjss1 86tijm oyh01w 48belm 11rmdm6 amw3dr rejkw1 18672eb 1oxujwl 1ekrr6g ng1gy1 147oygb " +
+      "94gk9w 1xshtiv fj1921 1nff0sq waoqkb 1ttzpkv bkj541 sc6mmb 17gcdw hz3tw6 odoiob 155c06l 1lwzhov " +
+      "us97gg 3nix81 kf6eqb 116tw8l a23m06 qtr3ig 17lel0q ggoasb 1od22j0 x8bsal 1urmrb5 ci66ub 253e46 " +
+      "8jo2wb 1gg1un0 pbbkel vpw96q 4l5yyb lctggl azqnqg rre58q mnv0b 18j1mr0 1exmbj5 nsw1aq 1vp9t1f dft8kl " +
+      "1rqrp3f 9hb4ml 170m3n5 wnjax0 5it0ol 1df6sfa magi6v bxdpgq sp16z0 1kawql 19gooha z3lvr5 oqj310 " +
+      "1wmwurp 15i6kja edgaav 1m9u21k v53rt5 1bwr9bf 1soeqtp 11jogla aey6cv r6lnv5 1vdmq gtiv50 xl6cna " +
+      "1ectu5k 1v4hbnu cv0r70 1kreixp 1r5z7pu 1gswezp w2qtjf lpo0ta bcl835 zifd0 1fagvvu o5qlnf 14xe35p " +
+      "1lp1knz k78hpf 17dgnzu x0dv9p 1ds1crz mnb2jk 1k6m1k4 1x5h3a iosylk 8bq5vf p3dndp 1mmome9 vhyc5u " +
+      "rjg87u epxzf xy0wzz nky49u 1vhbw0j 14clls4 1ar6ak9 jmg0bu 1rits2j 99d7lp 1h5qzce q10p3z fnxwdu " +
+      "5av3np bpfsfu sh39y4 1q0e8yo 15a8nie e5id9z ux5us9 3sfkju 1botcaj kk3224 1sggtst 11bqjke qynqu9 " +
+      "1ohyput xd8fme 68i5dz 1e4vx4o 1uwjemy 13rt4ej cn2u64 teqboe j1niy9 1gkyhyt 1xclzh3 1cmge0t lhq3se " +
+      "1te3vj3 129dlao 18nya2t hj7zue 1f2iyuy 14pg64t dkpvwe jzakoj 10qy26t 9m7rye 175iqyy wsfy8t 5npo0e " +
+      "1dk3fr3 mfd5io 1ubqx9d c2acsj 19llbt3 1qd8tbd 83s8uj 1g060l8 ovfqct 1wrti3i 15n37v3 eicxmo 45a4wj " +
+      "kwxmet 1stbe5i rbib6y xq2zz3 6lcpqo czxeit trkw13 jei3ay 1065kt8 pt2s33 1ncdr3n 12m85nd bhhvey " +
+      "1jdvn5n 1psgbxs ynq1pd 1ffdj7n oan8z8 1w710px 152aqhi dxkg93 3khniy 1bgvf9n 1hvg41s 1oa0stx x5aili " +
+      "60k8d3 1dwy03s 13jv7dn t6seni 1qq3do2 zld3fn 8gmt78 p8aapi 15zxs7s ev7hzd 1mrl9q2 4i4p98 1ceigzx " +
+      "121fo9s jmlb8 1eul1u2 npurln 14hi93x dcryvi 1aw2xw2 1rnqfec 10j055x 9e9uxi 1hanmo7 fsujpn wki17x " +
+      "1dc5iq7 12z2q02 bucfrn slzx9x z0km22 1wjvl2m 1m6ssch 3xc7vn 1yzy5wr 1omvd6m n52a82 1kod98m tjmz07 " +
+      "1abagih 1r2xy0r 1gpv5am vzpjuc 12ea8mh 1j5xq4r 1pkieww 1vz33p1 dpmj87 1lm0ayw 3cjqi2 k4780c 1s0kzr1 " +
+      "10vupim 9r4fa7 1hni70w wxclkm 1dp032w 19qhz4w ilrowh 88ow6c 1g52nx1 p0cdom 15rzv6w 1mjncp6 vex2gr " +
+      "1c6kjz1 1il58r6 1ozpxjb nhwukr d4u1um twhjcw 2rr94h jjeqmr 1rfsidg 10b2851 1h2ppnb fkwmor wck471 " +
+      "57ttym 1d47lpb lzhbgw 1tvv37l 19bq0m ysmp16 ofjwb1 1wbxo1q 1lyuvbl uu4l36 1sdfk3q 118p9vb 17n9yng " +
+      "1e1unfl mx4d76 13orupg 1kgfc7q tbp1zb 26yrqw 1qv00zv 8ljgj1 1mwhx1v vrrmtg 4n1cl1 rt9ivg oj8n1 " +
+      "1pckhw0 nurexg 1le2dy0 1b0zl7v jw9azg 1rsn2q5 1hfka00 qatzrl fxr71g 5koebb 1dh2620 mcbvtl 133zdbv " +
+      "bz933g 1jvmuu5 1m6adb 1qa7jma efbnxl ",
+    wrap:
+      "17wdrqp grnhia 1oo198z xjaz0k 6ekos5 1eaygiu n686af 1v2ly14 13xvnsp ct5dka 1kpj5az tksv2k 2g2ku5 " +
+      "1acgcku j7q2cf 1r43u34 zzdjup 8un9ma 1gr11cz pmar4k 1xioiv9 16dy8mu f97yef 1n5lq54 4w55oa 1csixez " +
+      "lnsn6k 1tk6ex9 12fg4ou bapugf 1j73m74 xn1qa 18u0tgz hpaj8k 1ploaz9 ygy0qu 7c7qif 1f8li94 o3v80p " +
+      "1w08zre 14vipiz dqsfak 1ln6719 uifwsu 3dpmkf 1ba3eb4 k5d42p 1s1qvte 10x0lkz 9sabck 1hoo339 qjxsuu " +
+      "1ygbklj 17blad4 g6v04p 1o38rve wyihmz 5ts7ek 1dq5z59 mlfowu 1uhtgnj 13d36f4 c8cw6p 1k4qnxe t00doz " +
+      "1va3gk imxkyu zel2h4 89us8p p1i9qz 1wxw1ho 15t5r99 eofh0u 1mkt8rj vg2yj4 4bcoap 1c7qg1e l305sz " +
+      "1szdxjo 11unnb9 apxd2u 1imb4tj rhkul4 cukcp h4i1uz 1p0vtlo xw5jd9 6rf94u 1ent0vj nj2qn4 1vfgidt " +
+      "14aq85e d5zxwz 1l2dpno txnff9 2sx56u 1apawxj jkkmp4 1rgyeft 97htyz 1h3vlpo pz5bh9 1xvj37y 16qsszj " +
+      "fm2ir4 1nigaht wdq09e 58zq0z 1d5dhro m0n7j9 1tx0z9y 12sap1j bnket4 1jjy6jt sf7wbe 1ahm2z 196vdto " +
+      "i253l9 1pyivby 7p2av4 1flg2lt ogpsde 1wd3k43 158d9vo e3mzn9 1m00rdy 3qk6x4 1bmxynt ki7ofe 1selg63 " +
+      "119v5xo a54vp9 1i1infy 1yt64y8 17ofupt gjpkhe 1og3c83 xbd1zo 66mrr9 1e30jhy mya99j 1uuo108 13pxqrt " +
+      "cl7gje 1khl8a3 tcuy1o 284nt9 1a4ifjy izs5bj 1qw5x28 zrfmtt 8mpcle 1gj34c3 pecu3o 1xaqlud 1660bly " +
+      "f1a1dj 1mxnt48 4o78ne 1ckl0e3 lfuq5o 1tc8hwd 127i7ny b2rxfj 1iz5p68 rufext pp4pe 18m2wg3 hhcm7o " +
+      "1pdqdyd y903py 749thj 1f0nl88 nvxazt 1vsb2qi 14nksi3 diui9o 1lf8a0d uahzry 35rpjj 1b25ha8 jxf71t " +
+      "10p2ok3 9kcebo 1hgq62d qbzvty 1y8dnkn 173ndc8 fyx33t 1nvauui wqkkm3 5luado 1di824d mdhrvy 1u9vjmn " +
+      "13559e8 c0ez5t 1jwsqwi ss2go3 1nc6fo 19jpy6d ieznxy 1qbdfon z6n5g8 81wv7t 1fyamyi otkcq3 1wpy4gs " +
+      "15l7u8d eghjzy 1mcvbqn v851i8 43er9t 1bzsj0i kv28s3 1srg0is 11mpqad ahzg1y r9mxk8 181af2i gwk4u3 " +
+      "1osxwks xo7mcd 1efv3un nb4tm8 1v7ilcx 142sb4i cy20w3 1kufsms tppied 2kz85y 1ahczwn jcmpo8 104a76i " +
+      "8zjwy3 1gvxoos pr7egd 1xnl672 16iuvyn fe4lq8 1naidgx w5s38i 511t03 1cxfkqs lspaid 1tp3292 12kcs0n " +
+      "bfmhs8 1jc09ix s79zai 18yxgss 1pqkyb2 yluo2n 7h4du8 1fdi5kx o8rvci 1w55n37 150fcus dvp2md 1ls2ud2 " +
+      "unck4n 3im9w8 1bf01mx ka9rei 1s6nj57 111x8ws 9x6yod 1htkqf2 qoug6n 1yl87xc 17ghxox gbrngi 1o85f77 " +
+      "5youqd 1dv2mh2 mqcc8n 1umq3zc 13hztqx cd9jii 1k9nb97 t4x10s 206qsd 19wkij2 iru8an 1qo801c zjhpsx " +
+      "8erfki p6ex2s 1x2soth 15y2el2 etc4cn 1mppw3c vkzlux 4g9bmi 1ccn3d7 l7wt4s 1t4akvh 11zkan2 auu0en " +
+      "1ir7s5c rmhhwx hr7oi h9ep6s 1p5sgxh y126p2 6wbwgn 1espo7c nnzdyx 1vkd5pm dawl8s 1l7aczh u2k2r2 " +
+      "2xtsin 1au7k9c jpha0x 1rlv1rm 10h4rj7 9cehas 1h8s91h q41yt2 1y0fqjr 16vpgbc fqz62x 1nncxtm wimnl7 " +
+      "5dwdcs 1daa53h m5juv2 1u1xmlr 12x7cdc bsh24x 1joutvm sk4jn7 1fe9es 19bs15h i71qx2 1q3finr yyp8fc " +
+      "7tyy6x 1fqcpxm olmfp7 1wi07fw 15d9x7h e8jmz2 1m4xepr v074hc 3vgu8x 1brulzm kn4br7 1sji3hw 11ert9h " +
+      "aa1j12 1i6farr r1p0jc 1yy2sa1 17tci1m gom7t7 xg9pbh 6bjf32 1e7x6tr n36wlc 1uzkoc1 13uue3m cq43v7 " +
+      "1kmhvlw thrldh 2d1b52 1a9f2vr j4osnc 1r12ke1 8rlzx7 1gnzrnw pj9hfh 1xfn966 f66opc 1n2kgg1 vxu67m " +
+      "4t3vz7 1cphnpw lkrdhh 1th5586 12ceuzr b7okrc 1j42ci1 rzc29m uls17 18qzjrw hm99jh 1pin1a6 ydwr1r " +
+      "796gtc 1f5k8k1 o0tybm 1vx7q2b 14shftw dnr5lh 1lk4xc6 ufen3r 3aocvc 1b724m1 k2budm 1rypm4b 10tzbvw " +
+      "9p91nh 1hlmte6 qgwj5r 178k0o1 g3tqfm 1o07i6b wvh7xw 5qqxph 1dn4pg6 mief7r 1ues6yg 13a1wq1 c5bmhm " +
+      "1k1pe8b 1s8trh 19omli6 ijwb9r 1qga30g zbjss1 86tijm 1g37aab oyh01w 1wuursl 15q4hk6 ele7br 1mhrz2g " +
+      "vd1ou1 48belm 1c4p6cb kzyw3w 1swcnul 11rmdm6 amw3dr 1ij9v4g rejkw1 18672eb h1gs5w 1oxujwl xt49o6 " +
+      "6odzfr 1ekrr6g ng1gy1 1vcf8oq 147oygb d2yo7w tum5q6 2pvvhr 1am9n8g 1rdx4qq 1096uib 94gk9w 1h0uc0l " +
+      "pw41s6 1xshtiv 16nrjag fj1921 1nff0sq waoqkb 55ygbw 1d2c82l lxlxu6 1ttzpkv 12p9fcg bkj541 1jgwwuq " +
+      "sc6mmb 17gcdw hz3tw6 1pvhlmv yqrbeg 7m1161 1fieswq odoiob 1wa2af0 155c06l e0lpy6 1lwzhov us97gg " +
+      "3nix81 kf6eqb 1sbk6h0 116tw8l a23m06 1hyhdqv qtr3ig 1yq4v95 17lel0q ggoasb 1od22j0 x8bsal 63li26 " +
+      "1dzz9sv 1urmrb5 13mwh2q ci66ub 1kejyl0 253e46 ",
+  },
+  peaks: {
+    wrap:
+      "17wdrqp grnhia 1oo198z xjaz0k 1eaygiu n686af 1v2ly14 13xvnsp ct5dka 1kpj5az tksv2k 2g2ku5 1acgcku " +
+      "j7q2cf 1r43u34 zzdjup 8un9ma pmar4k 1xioiv9 16dy8mu f97yef 1n5lq54 w0vfwp 4w55oa 1csixez lnsn6k " +
+      "1tk6ex9 12fg4ou bapugf 1j73m74 s2dbyp xn1qa 18u0tgz hpaj8k 1ploaz9 ygy0qu 7c7qif 1f8li94 o3v80p " +
+      "1w08zre 14vipiz dqsfak 1ln6719 uifwsu 3dpmkf 1ba3eb4 k5d42p 1s1qvte 10x0lkz 9sabck 1hoo339 qjxsuu " +
+      "1ygbklj 17blad4 g6v04p wyihmz 1dq5z59 mlfowu 1uhtgnj 13d36f4 c8cw6p 1k4qnxe t00doz 1va3gk 19rnv79 " +
+      "imxkyu 1qjbcpj zel2h4 89us8p 1g68jze p1i9qz 1wxw1ho 15t5r99 eofh0u 1mkt8rj vg2yj4 4bcoap 1c7qg1e " +
+      "l305sz 1szdxjo 11unnb9 apxd2u 1imb4tj rhkul4 cukcp 1898c3e h4i1uz 1p0vtlo xw5jd9 6rf94u 1ent0vj " +
+      "nj2qn4 1vfgidt 14aq85e d5zxwz 1l2dpno txnff9 2sx56u 1apawxj jkkmp4 1rgyeft 10c847e 97htyz 1h3vlpo " +
+      "pz5bh9 1xvj37y 16qsszj fm2ir4 1nigaht wdq09e 58zq0z 1d5dhro m0n7j9 1tx0z9y bnket4 1jjy6jt 1ahm2z " +
+      "i253l9 1pyivby ytsl3j 7p2av4 1flg2lt ogpsde 1wd3k43 158d9vo e3mzn9 1m00rdy uvah5j 3qk6x4 1bmxynt " +
+      "ki7ofe 1selg63 119v5xo a54vp9 1i1infy qwsd7j 1yt64y8 17ofupt gjpkhe 1og3c83 xbd1zo 66mrr9 1e30jhy " +
+      "mya99j 1uuo108 13pxqrt cl7gje 1khl8a3 tcuy1o 284nt9 1a4ifjy izs5bj 1qw5x28 zrfmtt 8mpcle 1gj34c3 " +
+      "pecu3o 1xaqlud 1660bly f1a1dj 1mxnt48 vsxivt 4o78ne 1ckl0e3 lfuq5o 1tc8hwd 127i7ny b2rxfj 1iz5p68 " +
+      "rufext pp4pe 18m2wg3 hhcm7o 1pdqdyd y903py 749thj 1f0nl88 nvxazt 1vsb2qi 14nksi3 diui9o 1lf8a0d " +
+      "uahzry 35rpjj 1b25ha8 jxf71t 1rtsysi 10p2ok3 9kcebo 1hgq62d qbzvty 1y8dnkn 173ndc8 fyx33t 1nvauui " +
+      "wqkkm3 5luado 1di824d mdhrvy 1u9vjmn 13559e8 c0ez5t 1jwsqwi ss2go3 1nc6fo 19jpy6d ieznxy z6n5g8 " +
+      "81wv7t 1fyamyi otkcq3 1wpy4gs 15l7u8d eghjzy 1mcvbqn v851i8 43er9t 1bzsj0i 1srg0is 11mpqad ahzg1y " +
+      "1ied7sn r9mxk8 4wnbt 181af2i gwk4u3 1osxwks xo7mcd 6jhc3y 1efv3un nb4tm8 1v7ilcx 142sb4i cy20w3 " +
+      "1kufsms tppied 2kz85y 1ahczwn jcmpo8 1r90hex 104a76i 1gvxoos pr7egd 1xnl672 16iuvyn fe4lq8 1naidgx " +
+      "w5s38i 511t03 1cxfkqs lspaid 1tp3292 12kcs0n bfmhs8 1jc09ix s79zai 12jp23 18yxgss hu76kd 1pqkyb2 " +
+      "yluo2n 7h4du8 1fdi5kx o8rvci 1w55n37 150fcus dvp2md 1ls2ud2 unck4n 3im9w8 1bf01mx ka9rei 1s6nj57 " +
+      "111x8ws 9x6yod 1htkqf2 qoug6n 1yl87xc 17ghxox gbrngi 1o85f77 x3f4ys 5youqd 1dv2mh2 mqcc8n 1umq3zc " +
+      "13hztqx cd9jii 1k9nb97 t4x10s 206qsd 19wkij2 iru8an 1qo801c zjhpsx 8erfki 1gb57b7 p6ex2s 1x2soth " +
+      "15y2el2 etc4cn 1mppw3c vkzlux 4g9bmi 1ccn3d7 l7wt4s 1t4akvh 11zkan2 auu0en 1ir7s5c rmhhwx hr7oi " +
+      "18e4zf7 h9ep6s 1p5sgxh y126p2 6wbwgn 1espo7c nnzdyx 1vkd5pm 14fmvh7 dawl8s 1l7aczh u2k2r2 2xtsin " +
+      "1au7k9c jpha0x 1rlv1rm 10h4rj7 9cehas 1h8s91h q41yt2 1y0fqjr 16vpgbc fqz62x 1nncxtm wimnl7 5dwdcs " +
+      "1daa53h m5juv2 1u1xmlr 12x7cdc bsh24x 1joutvm sk4jn7 1fe9es 19bs15h i71qx2 1q3finr yyp8fc 7tyy6x " +
+      "1fqcpxm olmfp7 15d9x7h e8jmz2 1m4xepr v074hc 3vgu8x 1brulzm kn4br7 1sji3hw 11ert9h aa1j12 1i6farr " +
+      "r1p0jc 1yy2sa1 17tci1m gom7t7 1okzzjw xg9pbh 6bjf32 1e7x6tr n36wlc 1uzkoc1 13uue3m cq43v7 1kmhvlw " +
+      "thrldh 2d1b52 1a9f2vr j4osnc 1r12ke1 zwca5m 8rlzx7 1gnzrnw pj9hfh 1xfn966 16awyxr f66opc 1n2kgg1 " +
+      "vxu67m 1cphnpw lkrdhh 1th5586 12ceuzr b7okrc 1j42ci1 rzc29m uls17 18qzjrw hm99jh 1pin1a6 ydwr1r " +
+      "796gtc 1f5k8k1 o0tybm 1vx7q2b 14shftw 1lk4xc6 ufen3r 3aocvc 1b724m1 k2budm 1rypm4b 10tzbvw 9p91nh " +
+      "1hlmte6 qgwj5r 1ydaawg 178k0o1 g3tqfm 1o07i6b wvh7xw 5qqxph mief7r 1ues6yg 13a1wq1 c5bmhm 1k1pe8b " +
+      "swz3zw 1s8trh 19omli6 ijwb9r 1qga30g zbjss1 86tijm 1g37aab oyh01w 1wuursl 15q4hk6 ele7br 1mhrz2g " +
+      "vd1ou1 48belm 1c4p6cb kzyw3w 1swcnul 11rmdm6 amw3dr 1ij9v4g rejkw1 9tanm 18672eb h1gs5w 1oxujwl " +
+      "xt49o6 6odzfr 1ekrr6g ng1gy1 1vcf8oq 147oygb d2yo7w 1kzcfyl tum5q6 2pvvhr 1am9n8g jhjd01 1rdx4qq " +
+      "1096uib 94gk9w 1h0uc0l pw41s6 1xshtiv 16nrjag 1nff0sq waoqkb 55ygbw 1d2c82l 1ttzpkv 12p9fcg bkj541 " +
+      "1jgwwuq sc6mmb 17gcdw 193u44l hz3tw6 1pvhlmv yqrbeg 7m1161 1fieswq odoiob 1wa2af0 155c06l e0lpy6 " +
+      "1lwzhov us97gg 3nix81 1bjwoyq kf6eqb 1sbk6h0 ",
+    nowrap:
+      "17wdrqp 1oo198z xjaz0k 1eaygiu 1v2ly14 13xvnsp 2g2ku5 j7q2cf 1r43u34 pmar4k f97yef w0vfwp 4w55oa " +
+      "1csixez lnsn6k 1tk6ex9 1j73m74 s2dbyp xn1qa 18u0tgz hpaj8k 1ploaz9 ygy0qu 7c7qif o3v80p 1w08zre " +
+      "14vipiz 1ln6719 uifwsu 3dpmkf k5d42p 1s1qvte 9sabck 1hoo339 qjxsuu 17blad4 g6v04p wyihmz 1dq5z59 " +
+      "1uhtgnj 13d36f4 c8cw6p 1k4qnxe t00doz 19rnv79 imxkyu 1qjbcpj zel2h4 89us8p 1g68jze p1i9qz 15t5r99 " +
+      "eofh0u 1mkt8rj vg2yj4 4bcoap 1c7qg1e 11unnb9 apxd2u 1imb4tj rhkul4 h4i1uz 1p0vtlo xw5jd9 nj2qn4 " +
+      "14aq85e d5zxwz 1l2dpno txnff9 1apawxj 1rgyeft 97htyz 1h3vlpo pz5bh9 1xvj37y 16qsszj fm2ir4 1nigaht " +
+      "wdq09e 58zq0z 1d5dhro m0n7j9 bnket4 1jjy6jt 1ahm2z i253l9 1pyivby 7p2av4 1flg2lt ogpsde 1wd3k43 " +
+      "158d9vo e3mzn9 1m00rdy uvah5j 3qk6x4 1bmxynt ki7ofe 1selg63 119v5xo a54vp9 1i1infy qwsd7j 1yt64y8 " +
+      "gjpkhe 1og3c83 66mrr9 1e30jhy mya99j 1uuo108 13pxqrt cl7gje 1khl8a3 tcuy1o 1a4ifjy izs5bj 1qw5x28 " +
+      "8mpcle 1gj34c3 pecu3o 1660bly 1mxnt48 vsxivt 1ckl0e3 lfuq5o 1tc8hwd b2rxfj rufext pp4pe 18m2wg3 " +
+      "1pdqdyd y903py 1f0nl88 nvxazt 1vsb2qi 14nksi3 diui9o uahzry 35rpjj 1b25ha8 jxf71t 10p2ok3 9kcebo " +
+      "qbzvty 1y8dnkn fyx33t wqkkm3 5luado 1di824d mdhrvy 1u9vjmn 13559e8 c0ez5t 1jwsqwi ss2go3 1nc6fo " +
+      "19jpy6d ieznxy 81wv7t 1fyamyi otkcq3 1mcvbqn v851i8 43er9t 11mpqad 1ied7sn r9mxk8 4wnbt 181af2i " +
+      "gwk4u3 1osxwks xo7mcd 6jhc3y 1efv3un nb4tm8 1v7ilcx cy20w3 tppied 2kz85y 1ahczwn 104a76i 1gvxoos " +
+      "pr7egd 1naidgx 511t03 1cxfkqs 1tp3292 12kcs0n bfmhs8 s79zai 18yxgss hu76kd 1pqkyb2 yluo2n 7h4du8 " +
+      "1fdi5kx o8rvci 1w55n37 150fcus dvp2md 1ls2ud2 unck4n 3im9w8 1bf01mx ka9rei 1s6nj57 9x6yod 1htkqf2 " +
+      "qoug6n 1yl87xc 17ghxox gbrngi x3f4ys 1dv2mh2 mqcc8n 1umq3zc 13hztqx cd9jii 1k9nb97 t4x10s 206qsd " +
+      "iru8an 1qo801c zjhpsx 8erfki 1gb57b7 p6ex2s 1x2soth 15y2el2 etc4cn 1mppw3c l7wt4s 1t4akvh auu0en " +
+      "1ir7s5c hr7oi 18e4zf7 h9ep6s 1p5sgxh y126p2 6wbwgn 1espo7c nnzdyx 14fmvh7 dawl8s u2k2r2 2xtsin " +
+      "1au7k9c jpha0x 1rlv1rm 10h4rj7 1y0fqjr 16vpgbc fqz62x wimnl7 m5juv2 1u1xmlr 12x7cdc bsh24x 1joutvm " +
+      "sk4jn7 1fe9es 19bs15h i71qx2 1q3finr 7tyy6x olmfp7 e8jmz2 1m4xepr v074hc 3vgu8x 1brulzm kn4br7 " +
+      "1sji3hw aa1j12 r1p0jc 1okzzjw xg9pbh 6bjf32 1e7x6tr cq43v7 1kmhvlw 2d1b52 1a9f2vr j4osnc 1r12ke1 " +
+      "8rlzx7 1gnzrnw pj9hfh 1xfn966 16awyxr f66opc 1n2kgg1 vxu67m lkrdhh 12ceuzr b7okrc 1j42ci1 rzc29m " +
+      "uls17 18qzjrw hm99jh 1pin1a6 ydwr1r 796gtc 1f5k8k1 o0tybm 1vx7q2b 14shftw 1lk4xc6 ufen3r 1b724m1 " +
+      "k2budm 1rypm4b 10tzbvw 1hlmte6 qgwj5r g3tqfm 1o07i6b wvh7xw 5qqxph 1ues6yg 13a1wq1 c5bmhm 1k1pe8b " +
+      "swz3zw 1s8trh ijwb9r zbjss1 86tijm 1g37aab oyh01w 1wuursl ele7br 1mhrz2g vd1ou1 48belm 1c4p6cb " +
+      "1swcnul 11rmdm6 amw3dr 1ij9v4g 9tanm 18672eb h1gs5w 1oxujwl xt49o6 1ekrr6g ng1gy1 1vcf8oq 147oygb " +
+      "d2yo7w tum5q6 2pvvhr 1am9n8g jhjd01 94gk9w 1xshtiv 16nrjag 1nff0sq waoqkb 55ygbw 1ttzpkv bkj541 " +
+      "1jgwwuq sc6mmb 17gcdw 7m1161 1fieswq odoiob 155c06l 1lwzhov us97gg 1bjwoyq kf6eqb 1sbk6h0 116tw8l " +
+      "a23m06 1hyhdqv qtr3ig ggoasb 1od22j0 x8bsal 63li26 1dzz9sv mv8zkg ci66ub 1kejyl0 t9tocl 253e46 " +
+      "1a1h5uv 1qt4nd5 zoed4q 8jo2wb 1gg1un0 pbbkel 162z1wv ey8rog 1mumjf5 vpw96q 4l5yyb 1chjqp0 lctggl " +
+      "azqnqg rre58q 18j1mr0 hebcil 1pap49a y5yu0v 718jsg 1exmbj5 nsw1aq 14kjit0 dft8kl 32qfug 1az47l5 " +
+      "judxcq 1rqrp3f 9hb4ml 1hdowda 170m3n5 fvvteq 5it0ol 1df6sfa magi6v 1u6u9xk 1323zp5 bxdpgq sp16z0 " +
+      "1kawql 19gooha 1q8c5zk z3lvr5 1fv9d9f oqj310 15i6kja 1m9u21k v53rt5 40dhkq 1bwr9bf ks0z30 1soeqtp " +
+      "11jogla aey6cv 1ibby3k r6lnv5 gtiv50 1opwmvp 6gg2ev n83jx5 1v4hbnu 13zr1ff 1kreixp tmo8pa 1aebq7k " +
+      "1r5z7pu 1018xhf 1gswezp 1xkjwhz fb3c15 1n7h3ru 4y0jb0 1tm1sjz 12hbibk bcl835 1j8yztu s48plf zifd0 " +
+      "18vw73p hr5wva 1pnjolz yitedk 7e3455 1fagvvu o5qlnf dsnsxa 1lp1knz ukbafk 3fl075 1bbyrxu 1s3m9g4 " +
+      "10yvz7p 9u5oza qlt6hk 1yi6y89 17dgnzu g8qdrf 5vnl1a mnb2jk 1ujoua9 ca89tf 1k6m1k4 t1vrbp 1x5h3a " +
+      "19tj8tz iosylk 1ql6qc9 zggg3u 8bq5vf p3dndp ",
+  },
+};

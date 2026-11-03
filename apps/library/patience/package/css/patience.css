@@ -1,0 +1,369 @@
+/* Patience's own parts, on top of the card games' shared styles.css: the picker with a small live table for each
+   game, the stock with its count and passes, Peaks' run, the "no moves left" bar and the guide's game tabs. */
+
+/* ---- the picker ---- */
+.app[data-view="picker"] .felt-area {
+    padding: 0;
+}
+/* On the picker the name always shows, also on a narrow phone. */
+.app[data-view="picker"] .brand {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    margin-inline-end: auto;
+}
+.picker {
+    position: absolute;
+    inset: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 12px max(12px, env(safe-area-inset-right, 0px)) 20px max(12px, env(safe-area-inset-left, 0px));
+}
+.games {
+    display: grid;
+    gap: 12px;
+    max-width: 34rem;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+.game-tile {
+    display: flex;
+    flex-direction: column;
+    border-radius: 22px;
+    background: var(--paper);
+    color: var(--paper-ink);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.22),
+        0 12px 30px -10px var(--shadow);
+    overflow: hidden;
+}
+.tile-open {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 12px 12px 10px;
+    border: 0;
+    border-radius: 22px 22px 0 0;
+    background: transparent;
+    color: inherit;
+    text-align: start;
+    cursor: pointer;
+    transition: transform 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tile-open:active {
+    transform: scale(0.985);
+}
+.tile-open:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: -3px;
+}
+/* The game's table as it stands, drawn small on its own piece of felt. */
+.mini {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 7 / 5;
+    border-radius: 15px;
+    background-color: var(--felt);
+    background-image:
+        radial-gradient(ellipse at 50% 22%, rgba(255, 255, 255, 0.1), transparent 62%),
+        radial-gradient(ellipse at 50% 40%, transparent 52%, var(--felt-shade) 100%);
+    box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.32),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.14);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease-out;
+}
+.tile-open:hover .mini {
+    box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.32),
+        inset 0 0 0 2px var(--ring);
+}
+.mini .pv {
+    background: transparent;
+}
+.tile-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+}
+.tile-text > span {
+    display: block;
+    min-width: 0;
+    overflow-wrap: normal;
+}
+.tile-name {
+    font-size: calc(1.55rem * min(1, 1.6 / var(--tz)));
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.012em;
+}
+.tile-tag {
+    color: var(--paper-muted);
+    font-size: 0.95rem;
+    line-height: 1.3;
+    text-wrap: pretty;
+}
+.tile-text > .tile-state {
+    display: flex;
+    align-items: baseline;
+    gap: 0.1rem;
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.25;
+    font-variant-numeric: tabular-nums;
+}
+.tile-state .light[data-v="unsure"],
+.tile-state .light[data-v="checking"] {
+    border-color: var(--paper-muted);
+}
+.tile-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    padding: 0 12px 12px 14px;
+}
+.tile-wins {
+    color: var(--paper-muted);
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+}
+.tile-wins:empty {
+    display: none;
+}
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    margin-inline-start: auto;
+    padding: 0.3rem 1rem 0.3rem 0.8rem;
+    border: 2px solid var(--paper-line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--paper-ink);
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: start;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease-out,
+        border-color 0.15s ease-out;
+}
+.chip:hover {
+    border-color: var(--primary-bg);
+}
+.chip .ico {
+    flex: none;
+    width: 20px;
+    height: 20px;
+}
+.chip.done {
+    border-color: var(--primary-bg);
+    background: var(--primary-bg);
+    color: var(--primary-ink);
+}
+/* Large text: the small table goes above the words, so no word is ever broken or cut. */
+.games.stack .tile-open {
+    grid-template-columns: minmax(0, 1fr);
+}
+.games.stack .mini {
+    aspect-ratio: 16 / 9;
+}
+/* Wide or sideways: the three tiles side by side, each table above its words. */
+@media (min-width: 44rem), (orientation: landscape) and (min-width: 34rem) {
+    .games {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 66rem;
+        align-items: start;
+    }
+    .tile-open {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+@media (orientation: landscape) and (max-height: 540px) {
+    .picker {
+        padding-top: 10px;
+    }
+    .mini,
+    .games.stack .mini {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/* A game's header too narrow for every tool: statistics step aside first, then the daily deal (fitBands()). */
+.tight .app[data-view="game"] #btn-stats,
+.tighter .app[data-view="game"] #btn-daily {
+    display: none;
+}
+
+/* ---- the table ---- */
+.table {
+    transform-origin: 50% 50%;
+}
+.table > .slot {
+    z-index: 1;
+}
+.table > .col-slot,
+.table > .out-slot {
+    opacity: 0.55;
+}
+.table > .stock-slot.can-recycle .ico {
+    visibility: visible;
+}
+/* The stock: a button over its cards, with the cards left and (Pyramid) the passes. */
+.stock-hit {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--cw);
+    height: var(--ch);
+    border-radius: var(--r);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.stock-hit:focus-visible,
+.stock-hit.hint-target {
+    outline: 4px solid var(--ring);
+    outline-offset: 2px;
+}
+.stock-hit.hint-target {
+    animation: glow 0.9s ease-in-out 3;
+}
+.stock-badge {
+    position: absolute;
+    right: -7px;
+    bottom: -7px;
+    min-width: 1.7em;
+    padding: 0.12em 0.45em;
+    border-radius: 999px;
+    background: var(--band);
+    color: var(--on-band);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    font-size: calc(0.78rem * min(1, 1.3 / var(--tz)));
+    font-weight: 800;
+    line-height: 1.3;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+}
+.out-badge {
+    right: auto;
+    bottom: auto;
+    transform: translate(calc(var(--cw) - 70%), calc(var(--ch) - 70%));
+}
+.pass-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 6px;
+    display: flex;
+    gap: 4px;
+    padding: 3px 5px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.62);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+.pass-dots i {
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid #fff;
+    border-radius: 50%;
+}
+.pass-dots i.on {
+    background: #fff;
+}
+/* Cards that can be played now ("Show where a card can go"), and the partners of a picked-up Pyramid card. */
+.card.free.can {
+    outline: 3px solid var(--ring);
+    outline-offset: 1px;
+}
+.card.partner {
+    outline: 4px dashed var(--ring);
+    outline-offset: 2px;
+}
+/* A covered face-up card sits a shade back, so the free ones read at a glance. */
+:root:not(.hc) .table[data-game="pyramid"] .card:not(.free):not(.down),
+:root:not(.hc) .table[data-game="golf"] .card:not(.free):not(.down) {
+    filter: brightness(0.93) saturate(0.92);
+}
+/* Peaks' run: a chip beside the waste that grows with every card, bright from a run of five. */
+.run-chip {
+    position: absolute;
+    z-index: 470;
+    display: flex;
+    align-items: baseline;
+    gap: 0.35em;
+    padding: 0.28em 0.75em;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.42);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
+    font-size: calc(0.85rem * min(1, 1.3 / var(--tz)));
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: nowrap;
+    transform: translate(-100%, -50%);
+    pointer-events: none;
+    transition:
+        background-color 0.2s ease-out,
+        color 0.2s ease-out;
+}
+.run-chip[data-side="right"] {
+    transform: translate(0, -50%);
+}
+.run-chip[data-side="below"] {
+    transform: translate(-50%, 0);
+}
+.run-chip b {
+    font-size: 1.3em;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+.run-chip.hot {
+    background: var(--ring);
+    color: var(--on-ring);
+}
+
+/* ---- the bar above the buttons: no moves left, or no longer winnable ---- */
+.verdict-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-inline-start: auto;
+}
+.verdict.stuck .verdict-text {
+    flex-basis: 100%;
+}
+.verdict.stuck .verdict-actions {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+}
+.verdict-btn.primary {
+    border-color: var(--primary-bg);
+}
+
+/* ---- dialogs ---- */
+.dlg-sub {
+    margin: 0.15rem 0 0;
+    color: var(--paper-muted);
+    font-weight: 700;
+}
+.help-tabs {
+    flex: none;
+    margin: 0.5rem 1.25rem 0.25rem;
+}
+.dlg-body .streak-line {
+    color: var(--paper-ink);
+    font-weight: 700;
+}
+#dlg-win .dlg-sub {
+    text-align: center;
+}
