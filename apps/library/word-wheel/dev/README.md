@@ -32,7 +32,8 @@ It was not copied from, filtered through or checked against any other word list.
 `package/data/words-sk.txt`) is dedicated to the public domain under
 [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/): to the extent possible under law, its
 authors have waived all copyright and related or neighbouring rights to it. Anyone may copy, change and use it, for
-any purpose, without asking. The game's code is MIT, as the rest of the library.
+any purpose, without asking. The game's code and its other files are under the GNU General Public License, version 3 or later
+(`LICENSES/GPL-3.0-or-later.txt`); the English lists keep their public-domain status.
 
 **What a Slovak word is here:**
 

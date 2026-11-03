@@ -47,7 +47,7 @@ screen by default.
     "icon": "menu_book",
     "category": "books_and_reference",
     "ageRating": "everyone",
-    "license": "MIT"
+    "license": "GPL-3.0-or-later"
   },
   "theme": { "seedColor": "#6D4C41", "shape": "rounded" },
   "entities": {
@@ -129,7 +129,7 @@ Mines' head, shortened:
           "icon": "flag",
           "category": "game_puzzle",
           "ageRating": "everyone",
-          "license": "MIT"
+          "license": "GPL-3.0-or-later"
         },
         "theme": { "seedColor": "#3F6B47" },
         "web": { "routes": { "play": "#/", "stats": "#/stats" }, "orientation": "any" }
@@ -201,7 +201,7 @@ files. The HTML pages carry no embedded manifest.
     "icon": "sports_esports",
     "category": "game_arcade",
     "ageRating": "everyone",
-    "license": "MIT"
+    "license": "GPL-3.0-or-later"
   },
   "theme": { "seedColor": "#3F6B47" },
   "web": {
@@ -280,7 +280,7 @@ files. The HTML pages carry no embedded manifest.
 | `title`       | yes      | The app's name in the library, at most 30 characters, usually `app.name`                                                                    |
 | `summary`     | yes      | One line, at most 80 characters: what it does for its user                                                                                  |
 | `description` | yes      | Markdown, at most 4,000 characters: what it does, what it never does (ads, tracking, accounts) and where the data stays                     |
-| `license`     | yes      | `MIT` (or `Apache-2.0`, `MIT-0`, `0BSD`, `CC0-1.0`); the same as `app.license`                                                              |
+| `license`     | yes      | `GPL-3.0-or-later` for a new app and for every app from its next version; the same as `app.license`                                         |
 | `tags`        | no       | At most 10 lowercase search tags (`budget`, `meal planning`)                                                                                |
 | `screenshots` | no       | At most 8 `{file, caption, theme}` (`theme` is `light` or `dark`; the caption is also the image's text alternative)                         |
 | `sampleData`  | no       | Fictional records by entity id (at most 50 each) that fill the screenshots                                                                  |

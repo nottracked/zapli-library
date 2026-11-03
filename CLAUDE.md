@@ -32,6 +32,9 @@ check flags any other. `README.md` has the rules for people; this file is the sh
   comments, listings or commit messages.
 - **Original work.** Never copy another app's name, text, icons, colours or screenshots, and never name another app in
   user-facing text ("alternative to …", "like …").
+- **Licence:** a new app, and every app from its next version, is `GPL-3.0-or-later` in `listing.json` and in
+  `app.license` (text in `LICENSES/`); data written for an app may carry its own licence, said where it lives. The
+  rest of the repository is MIT (`LICENSE`).
 - **Keep `listing.json` and the version in step.** A change users should get raises `app.version` (patch for fixes,
   minor for features) and updates the listing's description when the app's features change.
 - **Users keep their data.** Never rename or remove a stored field or entity without a migration.

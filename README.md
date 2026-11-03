@@ -150,9 +150,20 @@ Each app's version is `app.version` (in `app.json`, in the manifest inside `inde
 
 ## Licence
 
-Each app's `listing.json` declares its licence: MIT for every app today (Apache-2.0, MIT-0, 0BSD and CC0-1.0 are
-allowed too; non-commercial and no-derivatives licences are not). When a definition sets `app.license`, the listing
-names the same one. The whole repository is under the MIT licence in `LICENSE`.
+Each app declares its licence in its `listing.json` and, when the definition sets `app.license`, there too; both name
+the same one.
+
+- **The apps:** the GNU General Public License, version 3 or later (`GPL-3.0-or-later`, the text is in
+  `LICENSES/GPL-3.0-or-later.txt`) for Expenses 4.0, Free Cells, Spider and Word Wheel, and for every other app from
+  its next version. Anyone may use, study, change and share them, also in apps of their own, as long as what they
+  share is under the same licence with its whole source. Versions published earlier stay under the MIT licence for
+  those who have them.
+- **Data written for an app** says its own licence where it lives: Word Wheel's Slovak word list is dedicated to the
+  public domain (CC0 1.0), and its English lists come from public-domain sources (`apps/library/word-wheel/dev/`).
+- **Everything else** in this repository (the gallery, the guide, the icons' sources and the render script, these
+  documents) is under the MIT licence in `LICENSE`.
+- Other licences an app may declare: MIT, Apache-2.0, MIT-0, 0BSD and CC0-1.0. Non-commercial and no-derivatives
+  licences are not allowed.
 
 ## Contributing
 
@@ -171,8 +182,8 @@ Contributions come as pull requests. Fixes, better wording, accessibility improv
 4. Open a pull request that says what you changed and why. For a translation, say which language and that you are a
    native speaker.
 
-By opening a pull request you agree that your contribution is licensed under this repository's MIT licence, and that
-you have the right to license it so.
+By opening a pull request you agree that your contribution is licensed under the MIT licence, so that it can be part
+of an app under the app's own licence, and that you have the right to license it so.
 
 A maintainer reviews every pull request and runs the library checks before merging: every definition validates with
 no errors and no warnings; every listing fits its schema and names the same id and licence as its definition; the
