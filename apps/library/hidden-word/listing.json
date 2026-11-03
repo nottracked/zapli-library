@@ -1,0 +1,33 @@
+{
+  "id": "library/hidden-word",
+  "category": "game_word",
+  "replaces": "word guessing game: find a hidden word in a few tries",
+  "title": "Hidden Word",
+  "summary": "Find the hidden word in a few guesses, in Slovak or English, 4 to 7 letters",
+  "description": "**Hidden Word** is a calm word game: guess the hidden word, and every guess tells you which of its letters are in the right place, which are in the word somewhere else, and which are not in it at all. No ads, no coins, no lives, no account.\n\n**How it plays**\n\n- Type a guess into the lock and tap Try. Your guesses stack up above it as cards, newest next to the lock.\n- Every letter gets a mark: filled with a dot when it is in its place, outlined with a ring when it is in the word elsewhere, faded with a dash when it is not in the word. The keyboard shows the same marks.\n- The marks are shapes first and colours second, so they read the same in high contrast and for colour-blind players.\n- Tap a place in the lock to change one letter without deleting the rest.\n- A word that is not in the word list never costs a guess, and neither does a word you tried already.\n- Find the word and the lock opens.\n\n**Your game, your rules**\n\n- Words of 4, 5, 6 or 7 letters, one tap away.\n- As many guesses as you like: as many as the word has letters, one more, three more, or no limit at all.\n- An optional hard mode: letters you found must be used again, and a letter found in its place stays there.\n- One free hint for each word, which shows a letter in its place. Switch it off if you prefer.\n\n**Real Slovak, and English too**\n\n- Slovak words come with the whole Slovak alphabet: letters with accents are letters of their own (á, ä, č, ď, ľ, ô, ň, š, ť, ž and the rest), and CH is one letter.\n- The keyboard holds them all: hold a key for its accented letters, or tap the accent that shows right after you type a letter. A Slovak keyboard on a tablet types them directly.\n- Slovak words are base forms, as in a dictionary. Type another form and it costs no guess: the game tells you why, and names the base form when it knows it.\n- English words come from public-domain lists: common words to find, and a large list of valid guesses.\n- Switch between Slovak and English words with one tap; each language keeps its own games and statistics.\n\n**Daily word and practice**\n\n- A new daily word every day for each length, the same for everyone who plays in the same language.\n- A calendar of every day since the first, so missed days can still be played, at no cost.\n- Practice gives a new word whenever you want one.\n- Statistics for each language and length: games played, how many found, the daily streak, and how many guesses each word took.\n- Share your result in words, such as found in 4 of 6 guesses, never the word or your letters.\n\n**Easy to use**\n\n- Light and dark, high contrast, and large text that never breaks a word.\n- A light tap on each key and a buzz when you find the word (switch it off in Settings).\n- In English or Slovak, following your phone, or chosen in the game.\n\n**What it never does**\n\n- No ads, no in-app purchases, no coins, no lives and no waiting.\n- No account and no sign-in.\n- No internet access: the game works offline and cannot connect anywhere.\n- No analytics or tracking of any kind.\n\nYour games, statistics and settings are saved after every guess and stay on your phone, in the app's own data.",
+  "license": "GPL-3.0-or-later",
+  "tags": ["word game", "word puzzle", "guess the word", "daily puzzle", "slovak", "brain game", "offline", "no ads"],
+  "screenshots": [],
+  "research": [
+    {
+      "source": "https://apps.apple.com/app/id1614862514",
+      "used_for": "What the type offers every day: a daily word, unlimited play, 4 to 6 letters, six guesses, sharing, word meanings, and ads removed only by a purchase"
+    },
+    {
+      "source": "https://apps.apple.com/bs/app/lettery/id1609779709",
+      "used_for": "Read through a search summary: words of 4 to 7 letters and colours a player can change, which the type offers for colour-blind players"
+    },
+    {
+      "source": "https://skich.app/games/wordie-daily-unlimited",
+      "used_for": "Read through a search summary: daily and unlimited words of 4 to 8 letters, with a choice of length and of the number of tries"
+    },
+    {
+      "source": "https://sources.debian.org/src/scowl/6-2/r/enable/README",
+      "used_for": "The licence of the ENABLE word list (\"formally released into the Public Domain\"), the source of the English valid guesses"
+    },
+    {
+      "source": "https://wordlist.aspell.net/12dicts-readme/",
+      "used_for": "The licence of the 12dicts lists (released to the public domain by their author) and what the 3esl and 2of5core lists hold: the common words the English hidden words come from"
+    }
+  ]
+}
