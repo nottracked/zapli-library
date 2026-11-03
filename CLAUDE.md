@@ -1,9 +1,8 @@
 # The Zapli library
 
-This repository holds the apps of Zapli (formerly anyApp): original, offline and ad-free, shipped with Zapli and
-updated from here. The file formats use the Zapli names (`"spec": "zapli/0.2"`, `window.zapli`,
-`--zapli-*`, `.zapli`); the old anyApp names still work, but the library check flags them, so never add them. `README.md` has the rules for people; this file is the short version
-for AI-assisted work.
+This repository holds the apps of Zapli: original, offline and ad-free, shipped with Zapli and updated from here.
+Use only the Zapli file format names (`"spec": "zapli/0.2"`, `window.zapli`, `--zapli-*`, `.zapli`); the library
+check flags any other. `README.md` has the rules for people; this file is the short version for AI-assisted work.
 
 ## Layout
 

@@ -5,8 +5,7 @@ description: Write a new app or improve an existing one in the Zapli library (th
 
 # Writing an app for the Zapli library
 
-The library is a set of original, offline, ad-free apps that Zapli (formerly anyApp) ships and updates from
-this repository. An app is one of two kinds, never both:
+The library is a set of original, offline, ad-free apps that Zapli ships and updates from this repository. An app is one of two kinds, never both:
 
 | The app                                                                       | Kind                                  | File         |
 | ----------------------------------------------------------------------------- | ------------------------------------- | ------------ |
@@ -16,8 +15,8 @@ this repository. An app is one of two kinds, never both:
 | Keeps records but needs one drawn screen (a heatmap, a board)                 | Declarative app with one HTML screen  | `app.json`   |
 
 Declarative apps get native screens, automatic light and dark, accessibility and the most precise install review, so
-prefer them for data. Use the Zapli format names (`"spec": "zapli/0.2"`, `window.zapli`, `--zapli-*`); files with the old anyApp
-names still work, but the library check flags them.
+prefer them for data. Use only the Zapli format names (`"spec": "zapli/0.2"`, `window.zapli`, `--zapli-*`); the library check flags any
+other.
 
 ## 1. Where things go
 

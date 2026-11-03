@@ -6,7 +6,7 @@
 <p align="center"><sub>Zapli on a phone: a racing game an AI made, Pocket Scan from this library, and Gloamreach, a
 role-playing game installed from GitHub.</sub></p>
 
-This repository holds the apps of **Zapli** (formerly anyApp): everyday ones such as an expense tracker, a water
+This repository holds the apps of **Zapli**: everyday ones such as an expense tracker, a water
 reminder, a to-do list, flashcards, a document scanner and a few games. Zapli ships with these apps built in, and later
 versions of Zapli will install and update them from this repository, so a fix merged here can reach phones without a
 new release of Zapli. Package apps (apps made of many files, below) are never built in: Zapli downloads them from
@@ -18,8 +18,8 @@ copy and remix under its licence. Each one works offline and keeps its data on t
 Want an app of your own? [Make your own app for Zapli with your AI](https://nottracked.github.io/zapli-library/guide/)
 (`guide/`) shows how, step by step, with a prompt to paste into any AI chat.
 
-The file formats use the Zapli names (`"spec": "zapli/0.2"`, `window.zapli`, the `--zapli-*` CSS properties, `.zapli`
-packages). Files with the old anyApp names keep working, but every app here uses the new ones.
+Every app here uses the Zapli file format names: `"spec": "zapli/0.2"`, `window.zapli`, the `--zapli-*` CSS properties
+and `.zapli` packages.
 
 ## Browse the apps
 
