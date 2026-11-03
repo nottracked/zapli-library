@@ -182,13 +182,26 @@ export async function setBudget() {
     parse: parseTypedAmount,
   });
   if (cents === undefined) return;
+  const value = cents === null || cents === 0 ? null : fromCents(cents);
+  if (value === (current || null)) return;
   try {
-    await store.updatePrefs({ monthlyBudget: cents === null ? null : fromCents(cents) });
+    await store.updatePrefs({ monthlyBudget: value });
+    budgetSnack(t("monthlyBudget"), value, () => store.updatePrefs({ monthlyBudget: current || null }));
   } catch (error) {
     failed(error);
   }
 }
 
+/** Says what a budget is now ("Shopping budget: €100.00"), with Undo. */
+export function budgetSnack(name, value, undo) {
+  const text = value ? t("budgetNow", { name, amount: money(toCents(value)) }) : t("budgetRemoved", { name });
+  snack(text, { label: t("undo"), run: () => undo().catch(failed) });
+}
+
+/**
+ * Safe to spend today: the day's share of what is left of the month's budget (it changes at midnight), and below it,
+ * calmly, how today is going against that share.
+ */
 function safeCard(model, today) {
   const s = budgetToday(model, today);
   if (s.budget === null) {
@@ -204,26 +217,29 @@ function safeCard(model, today) {
       ),
     );
   }
-  const over = s.safe < 0;
+  const share = Math.max(0, s.daily);
+  let todayLine;
+  if (s.daily <= 0) todayLine = t("monthUsedUp");
+  else if (!s.spentToday) todayLine = t("todayNothing");
+  else if (s.spentToday <= s.daily)
+    todayLine = t("todayFree", { spent: money(s.spentToday), free: money(s.daily - s.spentToday) });
+  else todayLine = t("todayOver", { spent: money(s.spentToday), over: money(s.spentToday - s.daily) });
   const monthState = s.spent > s.budget ? "over" : s.pct >= (model.warnAt || 80) ? "near" : "ok";
   return h(
     "section",
     { class: "card hero", "aria-labelledby": "safe-label" },
     h("p", { class: "hero-label", id: "safe-label", text: t("safeToday") }),
-    h("p", { class: "hero-amount" + (over ? " negative" : ""), text: money(Math.max(0, s.safe)) }),
-    h("p", {
-      class: "hero-hint",
-      text: over
-        ? t("overToday", { amount: money(-s.safe) })
-        : t("safeHint", { daily: money(s.daily), days: s.daysLeft }),
-    }),
+    h("p", { class: "hero-amount", text: money(share) }),
+    h("p", { class: "hero-hint", text: todayLine }),
     progress(s.pct, monthState, t("monthBudgetUsed", { pct: s.pct })),
     h(
       "p",
       { class: "hero-foot" },
-      s.left >= 0
+      (s.left >= 0
         ? t("leftOfBudget", { left: money(s.left), budget: money(s.budget) })
-        : t("overBudgetBy", { over: money(-s.left), budget: money(s.budget) }),
+        : t("overBudgetBy", { over: money(-s.left), budget: money(s.budget) })) +
+        " · " +
+        t("daysLeft", { n: s.daysLeft }),
       s.source === "categories" ? " " + t("budgetFromCategories") : "",
     ),
   );
@@ -275,26 +291,36 @@ function quickAdd(model, today) {
     const c = store.categories.find((x) => x.id === id);
     return h(
       "button",
-      { class: "quick", type: "button", onClick: () => ctx.go("#/add?cat=" + encodeURIComponent(id)) },
+      {
+        class: "quick",
+        type: "button",
+        "aria-label": t("addIn", { name: c.name }),
+        onClick: () => ctx.go("#/add?cat=" + encodeURIComponent(id)),
+      },
       disc(c, "small"),
-      h("span", { text: c.name }),
+      h("span", { class: "quick-label", text: c.name }),
     );
   });
   chips.push(
     h(
       "button",
-      { class: "quick", type: "button", onClick: () => ctx.go("#/add?kind=income") },
+      { class: "quick", type: "button", "aria-label": t("addIncome"), onClick: () => ctx.go("#/add?kind=income") },
       h("span", { class: "disc small hue-green", "aria-hidden": "true" }, icon("income")),
-      h("span", { text: t("incomeKind") }),
+      h("span", { class: "quick-label", text: t("incomeKind") }),
     ),
   );
   if (store.accounts.filter((a) => !a.archived).length > 1) {
     chips.push(
       h(
         "button",
-        { class: "quick", type: "button", onClick: () => ctx.go("#/add?kind=transfer") },
+        {
+          class: "quick",
+          type: "button",
+          "aria-label": t("addTransfer"),
+          onClick: () => ctx.go("#/add?kind=transfer"),
+        },
         h("span", { class: "disc small hue-teal", "aria-hidden": "true" }, icon("swap")),
-        h("span", { text: t("transferKind") }),
+        h("span", { class: "quick-label", text: t("transferKind") }),
       ),
     );
   }
@@ -481,4 +507,20 @@ function recentCard(model) {
       recent.map((e) => entryRow(e, { showDate: true })),
     ),
   );
+}
+
+/**
+ * Quick-add tiles never cut a category's name: when a name does not fit, the tiles go two to a row, and if it still
+ * does not fit, one to a row with the picture beside the name. Runs after the screen is drawn and when it is resized.
+ */
+export function fit(root) {
+  const row = root.querySelector(".quick-row");
+  if (!row) return;
+  row.classList.remove("two", "one");
+  const cut = () => [...row.querySelectorAll(".quick-label")].some((l) => l.scrollWidth > l.clientWidth + 1);
+  if (cut()) row.classList.add("two");
+  if (cut()) {
+    row.classList.remove("two");
+    row.classList.add("one");
+  }
 }

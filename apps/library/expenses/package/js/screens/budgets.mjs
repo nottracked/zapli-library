@@ -22,7 +22,7 @@ import {
 import { budgetToday, categoryBudgets, averageMonthly } from "../ledger.mjs";
 import { parseTypedAmount, fromCents, toCents } from "../money.mjs";
 import { describe, timesPerYear } from "../rrule.mjs";
-import { setBudget } from "./home.mjs";
+import { setBudget, budgetSnack } from "./home.mjs";
 
 export function render() {
   const store = ctx.store;
@@ -207,8 +207,12 @@ async function editCategoryBudget(category) {
     parse: parseTypedAmount,
   });
   if (cents === undefined) return;
+  const value = cents === null || cents === 0 ? null : fromCents(cents);
+  const before = category.budget || null;
+  if (value === before) return;
   try {
-    await store.update("category", category.id, { budget: cents === null || cents === 0 ? null : fromCents(cents) });
+    await store.update("category", category.id, { budget: value });
+    budgetSnack(category.name, value, () => store.update("category", category.id, { budget: before }));
   } catch (error) {
     failed(error);
   }

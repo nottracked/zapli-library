@@ -7,6 +7,7 @@
 
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+let ui = null;
 import { pathToFileURL } from "node:url";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -105,11 +106,18 @@ class Node {
   }
   // Sizes for the tab bar check: a label's text is about 0.55 em a letter of a 12 px font, times the text size.
   get scrollWidth() {
+    if (this.classList.contains("quick-label")) return Math.ceil(this.textContent.length * 7 * FONT);
     if (!this.classList.contains("tab-label")) return 0;
     const scale = this.style.fontSize ? parseFloat(this.style.fontSize) : 1;
     return Math.ceil(this.textContent.length * 6.6 * FONT * scale);
   }
   get clientWidth() {
+    if (this.classList.contains("quick-label")) {
+      // A tile's width: about 100 px with three or more to a row, 160 px with two, 300 px with one.
+      let row = this.parent;
+      while (row && !row.classList.contains("quick-row")) row = row.parent;
+      return row && row.classList.contains("one") ? 300 : row && row.classList.contains("two") ? 160 : 100;
+    }
     return this.classList.contains("tab-label") ? 68 : 0;
   }
   get offsetHeight() {
@@ -141,6 +149,7 @@ class Node {
     return e;
   }
   click() {
+    activated = true;
     this.dispatch("click");
   }
   focus() {
@@ -156,6 +165,10 @@ class Node {
   close() {
     this.open = false;
     this.dispatch("close");
+  }
+  contains(node) {
+    for (let n = node; n; n = n.parent) if (n === this) return true;
+    return false;
   }
   getContext() {
     return { drawImage() {} };
@@ -212,7 +225,18 @@ globalThis.document = {
   getElementById: byId,
   querySelector: (s) => documentElement.querySelector(s),
   querySelectorAll: (s) => documentElement.querySelectorAll(s),
+  listeners: {},
+  addEventListener(type, fn) {
+    (this.listeners[type] ||= []).push(fn);
+  },
 };
+/** A pointer event on the document, as a finger on `target` would start it (capture listeners see it first). */
+function pointer(type, target, extra = {}) {
+  activated = true;
+  const e = { type, target, clientX: 0, preventDefault() {}, ...extra };
+  for (const fn of document.listeners[type] || []) fn(e);
+  target.dispatch(type, extra);
+}
 
 const windowListeners = {};
 let hash = "#/";
@@ -222,8 +246,10 @@ globalThis.location = {
   get hash() {
     return hash;
   },
+  // A hash set from outside the app's own navigation: the current entry changes and hashchange fires.
   set hash(v) {
-    globalThis.history.pushState(null, "", v);
+    states[index] = { state: states[index].state, hash: v };
+    hash = v;
     fire("hashchange");
   },
   reload() {},
@@ -231,28 +257,65 @@ globalThis.location = {
 function fire(type) {
   for (const fn of windowListeners[type] || []) fn({ type });
 }
+// The page's history as Android's WebView keeps it. An entry the page adds without a tap since the last navigation
+// makes the browser skip the entry it was added on, as Chromium's history intervention does, so the phone's Back
+// cannot land there (and leaves the app when nothing else is below).
+let activated = false;
+function move(to) {
+  index = to;
+  hash = states[index].hash;
+  activated = false;
+  setTimeout(() => fire("popstate"), 0);
+}
 globalThis.history = {
+  get length() {
+    return states.length;
+  },
   get state() {
     return states[index].state;
   },
   pushState(state, title, url) {
+    if (!activated) states[index].skippable = true;
     states.splice(index + 1);
     states.push({ state, hash: url });
     index++;
     hash = url;
+    activated = false;
   },
   replaceState(state, title, url) {
-    states[index] = { state, hash: url };
+    states[index] = { ...states[index], state, hash: url };
     hash = url;
   },
   back() {
-    if (index > 0) {
-      index--;
-      hash = states[index].hash;
-      fire("popstate");
-    }
+    this.go(-1);
+  },
+  go(n) {
+    const to = index + n;
+    if (n !== 0 && to >= 0 && to < states.length) move(to);
   },
 };
+let exited = false;
+/** The phone's Back: the page's history first; with nothing left in it, the app is left. */
+/**
+ * The phone's Back as Zapli's runner sends it: an open dialog closes first; else the WebView goes back while it can
+ * (skipping entries the browser skips); else the app is left.
+ */
+async function systemBack() {
+  const dialogs = [...documentElement.walk()].filter((n) => n.tagName === "dialog" && n.open);
+  let to = index - 1;
+  while (to >= 0 && states[to].skippable) to--;
+  if (dialogs.length) dialogs[dialogs.length - 1].close();
+  else if (to >= 0) move(to);
+  else exited = true;
+  await sleep(20);
+}
+
+/** Opens a screen as a tap on a link to it does. */
+async function open(route) {
+  activated = true;
+  ui.ctx.go(route);
+  await sleep(20);
+}
 const memory = new Map();
 const storage = {
   getItem: (k) => (memory.has(k) ? memory.get(k) : null),
@@ -437,6 +500,12 @@ function checkLayout(label) {
     );
   }
   assert.ok(String(documentElement.style["--tabs-h"]).endsWith("px"), label + ": the tab bar's height is measured");
+  for (const l of main().querySelectorAll(".quick-label")) {
+    assert.ok(
+      l.scrollWidth <= l.clientWidth + 1,
+      label + ": quick-add tile '" + l.textContent + "' shows its whole name",
+    );
+  }
   const snack = byId("snackbar");
   assert.ok(!snack.classList.contains("show") && snack.textContent === "", label + ": the snackbar is idle and empty");
   const css = readFileSync(resolve(here, "../package/css/app.css"), "utf8");
@@ -477,8 +546,7 @@ function tapLabel(label) {
 }
 
 async function go(route) {
-  globalThis.history.pushState({ depth: 1 }, "", route);
-  fire("popstate");
+  location.hash = route;
   await sleep();
 }
 
@@ -516,7 +584,7 @@ async function visitAll(label) {
 
 async function flows(label, store) {
   // Add an expense with the keypad: 12,50 + 3 = 15.50.
-  await go("#/add");
+  await open("#/add");
   for (const key of ["1", "2"]) tapText(key);
   tapLabel(store.lang === "sk" ? "Desatinná čiarka" : "Decimal point");
   for (const key of ["5"]) tapText(key);
@@ -531,7 +599,7 @@ async function flows(label, store) {
   assert.equal(added.baseAmount, "15.50");
   checkScreen(label + " after saving");
   // Open it, delete it, and bring it back with Undo.
-  await go("#/edit/" + added.id);
+  await open("#/edit/" + added.id);
   checkScreen(label + " edit");
   tapText(store.lang === "sk" ? "Odstrániť" : "Delete");
   await sleep(20);
@@ -545,7 +613,7 @@ async function flows(label, store) {
     label + ": Undo brought it back",
   );
   // A transfer between two accounts.
-  await go("#/add?kind=transfer");
+  await open("#/add?kind=transfer");
   tapText("5");
   tapText("0");
   tapText(store.lang === "sk" ? "Uložiť" : "Save");
@@ -561,7 +629,7 @@ async function flows(label, store) {
   };
   const inputs = () => [...main().walk()].filter((n) => n.tagName === "input");
   // A new category, a new account and a new recurring entry.
-  await go("#/category/new");
+  await open("#/category/new");
   type(inputs()[0], "Books and papers");
   tapText(sk ? "Uložiť" : "Save");
   await sleep(20);
@@ -569,7 +637,7 @@ async function flows(label, store) {
     store.categories.some((c) => c.name === "Books and papers"),
     label + ": category saved",
   );
-  await go("#/account-edit/new");
+  await open("#/account-edit/new");
   type(inputs()[0], "Travel card");
   tapText(sk ? "Uložiť" : "Save");
   await sleep(20);
@@ -577,7 +645,7 @@ async function flows(label, store) {
     store.accounts.some((a) => a.name === "Travel card"),
     label + ": account saved",
   );
-  await go("#/rule/new");
+  await open("#/rule/new");
   type(inputs()[0], "Water bill");
   type(inputs()[1], "18,40");
   tapText(sk ? "Uložiť" : "Save");
@@ -586,12 +654,12 @@ async function flows(label, store) {
   assert.ok(rule && rule.amount === "18.40" && rule.schedule.startsWith("FREQ=MONTHLY"), label + ": rule saved");
   // A payment due with "Ask me first": Skip it from the home screen.
   if (store.rules.some((r) => r.mode === "ask" && r.nextDue <= todayIso())) {
-    await go("#/");
+    await open("#/");
     tapText(sk ? "Vynechať" : "Skip");
     await sleep(20);
   }
   // The subscription finder: confirm one, dismiss one and undo that.
-  await go("#/subscriptions");
+  await open("#/subscriptions");
   checkScreen(label + " subscriptions");
   const rulesBefore = store.rules.length;
   const confirmText = sk ? "Je to predplatné" : "It’s a subscription";
@@ -616,7 +684,7 @@ async function flows(label, store) {
     assert.equal((store.ui.dismissed || []).length, 0, label + ": dismissal undone");
   }
   // The filter sheet opens and applies.
-  await go("#/entries");
+  await open("#/entries");
   tapLabel(store.lang === "sk" ? "Filtre" : "Filters");
   await sleep();
   tapText(store.lang === "sk" ? "Tento mesiac" : "This month");
@@ -626,9 +694,196 @@ async function flows(label, store) {
   checkScreen(label + " filtered");
 }
 
+function tapRow(title) {
+  const t = [...main().walk()].find((n) => n.classList && n.classList.contains("row-title") && n.textContent === title);
+  assert.ok(t, "no row '" + title + "' on " + location.hash);
+  let b = t;
+  while (b && b.tagName !== "button") b = b.parent;
+  b.click();
+}
+
+const sk = (store) => store.lang === "sk";
+const amountShown = () => main().querySelector(".amount-expr").textContent;
+
+/** Back follows the app's depth, a half-typed entry is kept, the snackbar's time and dismissal, the keypad. */
+async function flows2(label, store) {
+  const sk = store.lang === "sk";
+  const T = (en, skText) => (sk ? skText : en);
+  // Back: a tab goes Home, Home leaves the app; a detail goes to its list, then Home.
+  await open("#/");
+  assert.equal(index, 0, label + ": Home holds one history entry");
+  tapText(T("Stats", "Štatistiky"));
+  await sleep(20);
+  assert.equal(location.hash, "#/stats");
+  await systemBack();
+  assert.equal(location.hash, "#/", label + ": Back from a tab goes Home");
+  assert.ok(!exited, label + ": Back from a tab stays in the app");
+  await systemBack();
+  assert.ok(exited, label + ": Back on Home leaves the app");
+  exited = false;
+  tapText(T("Accounts", "Účty"));
+  await sleep(20);
+  tapRow(store.accounts[0].name);
+  await sleep(20);
+  assert.ok(location.hash.startsWith("#/account/"), label + ": an account opened");
+  await systemBack();
+  assert.equal(location.hash, "#/accounts", label + ": Back from a detail goes to its tab");
+  await systemBack();
+  assert.equal(location.hash, "#/", label + ": then Home");
+  assert.ok(!exited);
+  await systemBack();
+  assert.ok(exited, label + ": then out of the app");
+  exited = false;
+  tapLabel(T("Settings", "Nastavenia"));
+  await sleep(20);
+  tapRow(T("Categories", "Kategórie"));
+  await sleep(20);
+  assert.equal(location.hash, "#/categories");
+  tapRow(store.categories.find((c) => !c.parent && c.kind !== "income").name);
+  await sleep(20);
+  assert.ok(location.hash.startsWith("#/category/"), label + ": a category opened");
+  await systemBack();
+  assert.equal(location.hash, "#/categories", label + ": Back from a category goes to the list");
+  await systemBack();
+  assert.equal(location.hash, "#/settings", label + ": Back from categories goes to settings");
+  await systemBack();
+  assert.equal(location.hash, "#/");
+  assert.ok(!exited);
+  await systemBack();
+  assert.ok(exited, label + ": and out from Home");
+  exited = false;
+  // Add from Home, then Back: Home, then out.
+  tapLabel(T("Add an entry", "Pridať záznam"));
+  await sleep(20);
+  assert.equal(location.hash, "#/add");
+  await systemBack();
+  assert.equal(location.hash, "#/", label + ": Back from Add goes Home");
+  await systemBack();
+  assert.ok(exited, label + ": Back on Home leaves");
+  exited = false;
+  // A sheet closes first: Entries → filters → Back closes the sheet, the next Back goes Home.
+  tapText(T("Entries", "Záznamy"));
+  await sleep(20);
+  tapLabel(T("Filters", "Filtre"));
+  await sleep(20);
+  await systemBack();
+  assert.equal(location.hash, "#/entries", label + ": Back closes the sheet first");
+  await systemBack();
+  assert.equal(location.hash, "#/", label + ": then goes Home");
+  assert.ok(!exited);
+  // The app's own back arrow takes the same step.
+  tapText(T("Accounts", "Účty"));
+  await sleep(20);
+  tapRow(store.accounts[0].name);
+  await sleep(20);
+  tapLabel(T("Back", "Späť"));
+  await sleep(20);
+  assert.equal(location.hash, "#/accounts", label + ": the arrow goes back one screen");
+  tapText(T("Home", "Prehľad"));
+  await sleep(20);
+  assert.equal(location.hash, "#/", label + ": the Home tab goes Home");
+  await systemBack();
+  assert.ok(exited, label + ": with nothing left below Home");
+  exited = false;
+
+  // A half-typed entry survives Back and comes back with a Discard.
+  await open("#/add");
+  const earlier = [...main().walk()].find(
+    (n) => n.tagName === "button" && n.textContent.trim() === T("Discard", "Zahodiť"),
+  );
+  if (earlier) {
+    // A draft kept from an earlier step of this test (a transfer that could not be saved) goes first.
+    earlier.click();
+    await sleep(50);
+  }
+  tapText("4");
+  tapText("2");
+  await systemBack();
+  assert.equal(location.hash, "#/", label + ": Back leaves the form");
+  assert.ok(byId("snackbar").textContent.includes(T("kept", "odložený")), label + ": the draft is said to be kept");
+  await sleep(700);
+  assert.equal(store.ui.drafts.new.expr, "42", label + ": the draft is in the app's store (also across a reload)");
+  // A reload onto the form (a rotation re-creates the page at its address) carries on without the banner.
+  const hasBanner = () =>
+    [...main().walk()].some((n) => n.tagName === "button" && n.textContent.trim() === T("Discard", "Zahodiť"));
+  ui.ctx.startHash = "#/add";
+  location.hash = "#/add";
+  await sleep(20);
+  assert.equal(amountShown(), "42", label + ": the draft is back after a reload");
+  assert.ok(!hasBanner(), label + ": no banner after a reload");
+  tapLabel(T("Back", "Späť"));
+  await sleep(20);
+  assert.equal(location.hash, "#/", label + ": the arrow leaves a form opened by a reload for its parent");
+  await open("#/add");
+  assert.equal(amountShown(), "42", label + ": reopening Add brings the draft back");
+  assert.ok(hasBanner(), label + ": with the banner when Add is opened again");
+  tapText(T("Discard", "Zahodiť"));
+  await sleep(50);
+  assert.equal(amountShown(), "0", label + ": Discard starts again");
+  assert.ok(!store.ui.drafts.new, label + ": and forgets the draft");
+
+  // The keypad: holding the delete key clears the amount; a tap deletes one digit.
+  for (const key of ["1", "2", "3"]) tapText(key);
+  const back = main().querySelector(".back");
+  back.dispatch("pointerdown");
+  await sleep(650);
+  back.dispatch("pointerup");
+  back.click();
+  assert.equal(amountShown(), "0", label + ": holding delete clears the amount");
+  tapText("5");
+  tapText("6");
+  main().querySelector(".amount-back").click();
+  assert.equal(amountShown(), "5", label + ": the delete key in the amount field removes one digit");
+
+  // Editing a saved amount: the first digit replaces it.
+  const saved = [...store.entries.values()].find((e) => e.amount === "15.50");
+  await open("#/edit/" + saved.id);
+  main().querySelector(".amount-display").click();
+  tapText("2");
+  assert.equal(amountShown(), "2", label + ": the first digit replaces a saved amount");
+  tapText("1");
+  assert.equal(amountShown(), "21", label + ": later digits add to it");
+  await systemBack();
+  await open("#/edit/" + saved.id);
+  assert.equal(amountShown(), "21", label + ": unsaved changes to an entry come back too");
+  tapText(T("Discard", "Zahodiť"));
+  await sleep(50);
+  assert.equal(amountShown(), "15" + store.mark + "5", label + ": Discard shows the saved amount again");
+  await systemBack();
+
+  // The snackbar: about four seconds, gone on a tap elsewhere, a swipe or its close button; it names what was saved.
+  const addOne = async (digit) => {
+    await open("#/add");
+    tapText(digit);
+    tapText(T("Save", "Uložiť"));
+    await sleep(30);
+  };
+  const box = byId("snackbar");
+  await addOne("7");
+  assert.ok(box.classList.contains("show"), label + ": saved");
+  assert.match(box.textContent, /7/, label + ": the message names the amount");
+  await sleep(4300);
+  assert.ok(!box.classList.contains("show"), label + ": the snackbar goes after about four seconds");
+  await addOne("8");
+  pointer("pointerdown", main());
+  assert.ok(!box.classList.contains("show"), label + ": a tap elsewhere dismisses it");
+  await addOne("9");
+  pointer("pointerdown", box, { clientX: 10 });
+  pointer("pointerup", box, { clientX: 120 });
+  assert.ok(!box.classList.contains("show"), label + ": a swipe dismisses it");
+  await addOne("6");
+  box.querySelector(".snack-close").click();
+  assert.ok(!box.classList.contains("show"), label + ": its close button dismisses it");
+  await addOne("5");
+  tapText(T("Stats", "Štatistiky"));
+  await sleep(20);
+  assert.ok(!box.classList.contains("show"), label + ": a new screen dismisses it");
+}
+
 async function run(label, setup) {
   setup();
   await import(pathToFileURL(resolve(here, "../package/js/app.mjs")).href);
+  ui = await import(pathToFileURL(resolve(here, "../package/js/ui.mjs")).href);
   await sleep(50);
   const { store } = await import(pathToFileURL(resolve(here, "../package/js/store.mjs")).href);
   store.lang = (process.env.SMOKE_LANG || "en").slice(0, 2);
@@ -636,6 +891,8 @@ async function run(label, setup) {
   checkLayout(label);
   await visitAll(label);
   await flows(label, store);
+  store.mark = sk(store) ? "," : ".";
+  await flows2(label, store);
   console.log("ok: " + label + " (" + store.lang + ")");
   return store;
 }

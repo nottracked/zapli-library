@@ -167,8 +167,11 @@ function candidateRow(f) {
   const category = store.categories.find((c) => c.id === f.category);
   const confirm = async () => {
     try {
-      await store.add("recurring", ruleValues(f));
-      snack(t("subscriptionKept", { name: f.name }));
+      const rule = await store.add("recurring", ruleValues(f));
+      snack(t("subscriptionKept", { name: f.name }), {
+        label: t("undo"),
+        run: () => store.remove("recurring", rule.id).catch(failed),
+      });
     } catch (error) {
       failed(error);
     }

@@ -195,7 +195,8 @@ button {
     font-size: 1.375rem;
     font-weight: 650;
     line-height: 1.2;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    hyphens: manual;
 }
 
 .bar-actions {
@@ -287,7 +288,8 @@ details.card > summary {
     font-weight: 750;
     line-height: 1.1;
     letter-spacing: -0.01em;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    hyphens: manual;
 }
 
 .hero-amount.negative {
@@ -321,7 +323,7 @@ details.card > summary {
 
 .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(max(7.5rem, 7em), 1fr));
     gap: 0.5rem;
 }
 
@@ -346,7 +348,8 @@ details.card > summary {
 .stat-value {
     font-size: 1.25rem;
     font-weight: 700;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    hyphens: manual;
 }
 
 /* ------------------------------------------------------------------ buttons, chips, fields */
@@ -459,7 +462,6 @@ details.card > summary {
 }
 
 .chips.small .chip {
-    min-height: 2.5rem;
     font-size: 0.875rem;
 }
 
@@ -470,29 +472,30 @@ details.card > summary {
 
 .segmented {
     display: flex;
-    border: 1px solid var(--outline);
-    border-radius: 999px;
-    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 0.375rem;
     margin: 0.25rem 0 0.75rem;
 }
 
 .segmented button {
-    flex: 1;
+    flex: 1 1 auto;
     min-height: var(--touch);
-    padding: 0.25rem 0.5rem;
-    border: 0;
-    border-right: 1px solid var(--outline);
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--outline);
+    border-radius: 999px;
     background: transparent;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .segmented button:last-child {
-    border-right: 0;
+    border-right: 1px solid var(--outline);
 }
 
 .segmented button.on {
     background: var(--container);
     color: var(--on-container);
+    border-color: transparent;
 }
 
 .field {
@@ -617,8 +620,9 @@ input:focus {
 
 .row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.25rem 0.75rem;
     width: 100%;
     min-height: 3.5rem;
     padding: 0.5rem 0.25rem;
@@ -640,20 +644,22 @@ button.row:active {
 .row-text {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 1 1 8em;
     min-width: 0;
     gap: 0.125rem;
 }
 
 .row-title {
     font-weight: 600;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    hyphens: manual;
 }
 
 .row-sub {
     color: var(--muted);
     font-size: 0.875rem;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    hyphens: manual;
 }
 
 .row-sub.over {
@@ -673,7 +679,7 @@ button.row:active {
     text-align: right;
     gap: 0.125rem;
     flex: none;
-    max-width: 50%;
+    margin-left: auto;
 }
 
 .row-chevron {
@@ -705,6 +711,14 @@ button.row:active {
 .amount {
     font-weight: 650;
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.stat-value,
+.hero-amount,
+.day-total,
+.cal-amount,
+.big {
     white-space: nowrap;
 }
 
@@ -897,8 +911,9 @@ button.row:active {
 
 .quick-row {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(max(5.5rem, 6.25em), 1fr));
     gap: 0.5rem;
+    font-size: 0.875rem;
 }
 
 .quick {
@@ -906,15 +921,44 @@ button.row:active {
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
+    min-width: 0;
     min-height: 4.5rem;
     padding: 0.5rem 0.25rem;
     border: 0;
     border-radius: var(--radius-s);
     background: var(--surface);
-    font-size: 0.875rem;
+    font-size: inherit;
     font-weight: 500;
     text-align: center;
-    overflow-wrap: anywhere;
+}
+
+.quick-label {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.quick-row.two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.quick-row.one {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.quick-row.one .quick {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    min-height: var(--touch);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+}
+
+.quick-row.one .quick-label {
+    overflow: visible;
+    white-space: normal;
 }
 
 .due .row-sub {
@@ -1023,10 +1067,10 @@ body.with-tabs .fab {
 }
 
 .search-icon {
+    display: grid;
+    place-items: center;
     flex: none;
-    font-size: 1rem;
-    line-height: 1;
-    opacity: 0.7;
+    color: var(--muted);
 }
 
 .search-input {
@@ -1110,7 +1154,8 @@ body.with-tabs .fab {
 .cal-amount {
     font-size: 0.6875rem;
     font-variant-numeric: tabular-nums;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    hyphens: manual;
 }
 
 .cal-dot {
@@ -1281,17 +1326,45 @@ body.with-tabs .fab {
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
+    min-width: 0;
     min-height: 4.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border: 0;
+    background: transparent;
+    text-align: right;
+}
+
+.amount-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-width: 0;
     border: 2px solid var(--line);
     border-radius: var(--radius);
     background: var(--card);
-    text-align: right;
-    min-width: 0;
 }
 
-.amount-display.active {
+.amount-box.active {
     border-color: var(--primary);
+}
+
+.amount-back {
+    display: grid;
+    place-items: center;
+    flex: none;
+    min-width: var(--touch);
+    min-height: var(--touch);
+    margin-right: 0.25rem;
+    border: 0;
+    border-radius: 50%;
+    background: var(--container);
+    color: var(--on-container);
+    font-size: 1.25rem;
+}
+
+.amount-back .icon {
+    width: 1.2em;
+    height: 1.2em;
 }
 
 .amount-expr {
@@ -1299,7 +1372,8 @@ body.with-tabs .fab {
     font-weight: 700;
     line-height: 1.15;
     font-variant-numeric: tabular-nums;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .amount-result {
@@ -1358,7 +1432,7 @@ body.with-tabs .fab {
 }
 
 .date-chip input {
-    min-height: 2.5rem;
+    min-height: var(--touch);
     border: 0;
     background: transparent;
     width: auto;
@@ -1417,22 +1491,45 @@ body.with-tabs .fab {
 }
 
 .keypad-on .keypad-space {
-    height: calc(4 * (48px + 0.5rem) + 3 * 0.375rem + 1.25rem);
+    height: calc(5 * (48px + 0.5rem) + 4 * 0.375rem + 1.25rem);
 }
 
-.keypad {
+.dock {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 8;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.375rem;
     padding: 0.5rem calc(0.5rem + env(safe-area-inset-right)) calc(0.5rem + env(safe-area-inset-bottom))
         calc(0.5rem + env(safe-area-inset-left));
     background: color-mix(in srgb, var(--variant) 70%, var(--surface));
     box-shadow: 0 -2px 10px rgb(0 0 0 / 12%);
+}
+
+.dock-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-bottom: 0.375rem;
+}
+
+.dock-chip {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+    background: var(--surface);
+}
+
+.dock-chip span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.375rem;
 }
 
 .key {
@@ -1449,6 +1546,16 @@ body.with-tabs .fab {
 .key.op {
     background: var(--container);
     color: var(--on-container);
+}
+
+.key .icon {
+    width: 1.15em;
+    height: 1.15em;
+}
+
+.key.back {
+    background: var(--primary);
+    color: var(--on-primary);
 }
 
 .key:active {
@@ -1625,11 +1732,40 @@ body.with-tabs .snackbar {
 }
 
 @media (min-width: 40rem) {
-    .keypad {
+    .dock {
         left: 50%;
         max-width: 30rem;
         transform: translateX(-50%);
         border-radius: 1.25rem 1.25rem 0 0;
+    }
+}
+
+/* Landscape on a phone: the form on the left, the date, account and keypad on the right, side by side. */
+@media (orientation: landscape) and (max-height: 34rem) {
+    .editor.keypad-on {
+        margin-right: 46%;
+    }
+
+    .editor.keypad-on .keypad-space {
+        height: 0 !important;
+    }
+
+    .dock {
+        top: 0;
+        left: auto;
+        right: 0;
+        width: 46%;
+        max-width: none;
+        transform: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        overflow-y: auto;
+        border-radius: 0;
+    }
+
+    .key {
+        min-height: 40px;
     }
 }
 
@@ -1638,4 +1774,30 @@ body.with-tabs .snackbar {
         transition: none !important;
         animation: none !important;
     }
+}
+
+.snack-close {
+    display: grid;
+    place-items: center;
+    min-width: var(--touch);
+    min-height: var(--touch);
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+}
+
+.menu-icon {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    color: var(--primary);
+}
+
+input::placeholder {
+    text-overflow: ellipsis;
+}
+
+input {
+    text-overflow: ellipsis;
 }

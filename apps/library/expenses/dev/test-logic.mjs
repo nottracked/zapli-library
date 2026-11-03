@@ -369,7 +369,7 @@ test("CSV for spreadsheets", () => {
   ]);
   assert.equal(
     text,
-    '﻿"Date","Note","Amount"\r\n"2026-11-03","He said ""hi"", twice","12.50"\r\n"2026-11-04","\'=SUM(A1)","-3.00"\r\n',
+    '\ufeff"Date","Note","Amount"\r\n"2026-11-03","He said ""hi"", twice","12.50"\r\n"2026-11-04","\'=SUM(A1)","-3.00"\r\n',
   );
 });
 

@@ -1,11 +1,14 @@
 // Adding and editing an entry: spending, income or a transfer. The amount comes from the calculator keypad, so
 // "12,40 + 3,10" works; the category, account and date are one tap each, and the usual ones are already picked.
+// The date and the account sit right above the keypad, so the everyday entry needs no scrolling. A half-typed entry
+// is kept (Back, a rotation, closing the app) until it is saved or discarded.
 
 import {
   ctx,
   h,
   t,
   money,
+  date,
   bar,
   button,
   chip,
@@ -17,6 +20,8 @@ import {
   failed,
   dialog,
   categoryName,
+  keepFocus,
+  blurActive,
 } from "../ui.mjs";
 import * as calc from "../calc.mjs";
 import {
@@ -36,9 +41,12 @@ import { icon } from "../icons.mjs";
 import { pickCurrency } from "./settings.mjs";
 
 export const keep = true;
-const DRAFT_KEY = "expenses-draft";
+const LONG_PRESS_MS = 550;
 
 let state = null;
+let persistTimer = null;
+
+// ---------------------------------------------------------------- drafts
 
 /** The values of a new entry: the route's hints, else the usual account and the most used category. */
 function newDraft(route) {
@@ -61,8 +69,7 @@ function newDraft(route) {
     note: copy ? copy.note || "" : "",
     payee: copy ? copy.payee || "" : "",
     tags: copy ? copy.tags || "" : "",
-    receipt: null,
-    receiptChanged: false,
+    dirty: false,
   };
   if (!draft.category && kind !== "transfer") draft.category = frequentCategories(model, ctx.today, kind, 1)[0] || null;
   if (kind === "transfer" && !draft.toAccount) {
@@ -90,67 +97,116 @@ function editDraft(entry) {
     payee: entry.payee || "",
     tags: entry.tags || "",
     recurring: entry.recurring || null,
-    receipt: null,
-    receiptChanged: false,
+    dirty: false,
   };
 }
 
-function saveDraft() {
-  try {
-    const { receipt, ...rest } = state.draft;
-    sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ path: state.path, draft: rest }));
-  } catch {
-    // Without session storage a reload starts the form again.
-  }
+/** Kept drafts by slot: "new" for a new entry, an entry's id for unsaved changes to it. */
+function kept() {
+  return ctx.store.ui.drafts || {};
 }
 
-function dropDraft() {
-  try {
-    sessionStorage.removeItem(DRAFT_KEY);
-  } catch {
-    // Nothing kept.
-  }
+const pending = new Map();
+
+/** Writes the drafts to the app's store (in its backups), half a second after the last change. */
+function persist(now = false) {
+  if (state && state.draft.dirty) pending.set(state.slot, { ...state.draft });
+  clearTimeout(persistTimer);
+  const write = () => {
+    const drafts = { ...kept() };
+    for (const [slot, draft] of pending) drafts[slot] = draft;
+    pending.clear();
+    ctx.store.saveUi({ drafts }).catch(() => {});
+  };
+  if (now) write();
+  else persistTimer = setTimeout(write, 500);
 }
 
-function restoredDraft(path) {
-  try {
-    const saved = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || "null");
-    return saved && saved.path === path ? saved.draft : null;
-  } catch {
-    return null;
-  }
+function forget(slot) {
+  pending.delete(slot);
+  const drafts = { ...kept() };
+  delete drafts[slot];
+  return ctx.store.saveUi({ drafts }).catch(() => {});
+}
+
+/** Something was typed or picked: the draft is now worth keeping. */
+function changed(...regions) {
+  state.draft.dirty = true;
+  state.fresh = false;
+  persist();
+  for (const r of regions) paint(r);
 }
 
 export function render(route) {
   const store = ctx.store;
+  const slot = route.id || "new";
   const path = route.path + "?" + route.params.toString();
-  if (!state || state.path !== path) {
-    let draft = restoredDraft(path);
-    if (!draft) {
-      if (route.id) {
-        const entry = store.entries.get(route.id);
-        if (!entry) {
-          return h(
-            "div",
-            { class: "screen" },
-            bar(t("entry"), { back: true }),
-            h("div", { class: "empty" }, h("h2", { text: t("entryGone") }), h("p", { text: t("entryGoneText") })),
-          );
-        }
-        draft = editDraft(entry);
-      } else draft = newDraft(route);
+  if (state && state.slot !== slot && state.draft.dirty) persist(true);
+  if (state && state.away) {
+    state.away = false;
+    // Coming back to the form from a screen opened from it: carry on. Opened anew instead: show it as kept.
+    if (state.slot === slot && state.path !== path && state.draft.dirty) {
+      state.restored = true;
+      state.path = path;
     }
-    state = { path, draft, keypad: !route.id, regions: {} };
+  }
+  if (!state || state.slot !== slot || (state.path !== path && !state.draft.dirty)) {
+    const old = kept()[slot];
+    let draft;
+    let restored = false;
+    if (old && old.dirty) {
+      draft = { ...old };
+      // After a rotation or a reload (the page starts again on this form) it simply carries on; opened again
+      // later, it says the draft is back.
+      restored = location.hash !== ctx.startHash;
+    } else if (route.id) {
+      const entry = store.entries.get(route.id);
+      if (!entry) {
+        return h(
+          "div",
+          { class: "screen" },
+          bar(t("entry"), { back: true }),
+          h("div", { class: "empty" }, h("h2", { text: t("entryGone") }), h("p", { text: t("entryGoneText") })),
+        );
+      }
+      draft = editDraft(entry);
+    } else draft = newDraft(route);
+    const replaces = Boolean(draft.id || route.params.get("copy")) && !restored;
+    state = { slot, path, draft, restored, fresh: replaces, keypad: !route.id || restored, regions: {}, receipt: null };
     if (draft.id && store.receipts.has(draft.id)) {
       store.receipt(draft.id).then((picture) => {
-        if (state && state.draft.id === draft.id && !state.draft.receiptChanged) {
-          state.draft.receipt = picture;
+        if (state && state.draft.id === draft.id && !state.receiptChanged) {
+          state.receipt = picture;
           paint("receipt");
         }
       });
     }
   }
   return build();
+}
+
+/** Leaving the form: for a screen opened from it (a new category) it stays as it is; otherwise a draft is kept. */
+export function leave({ deeper }) {
+  if (!state) return;
+  if (deeper) {
+    // Off to a screen opened from the form (a new category): the form waits as it is.
+    state.away = true;
+    if (state.draft.dirty) persist(true);
+    return;
+  }
+  const slot = state.slot;
+  if (state.draft.dirty) {
+    persist(true);
+    snack(t("draftKept"), { label: t("discard"), run: () => forget(slot) });
+  }
+  state = null;
+}
+
+/** Drops the kept draft and starts the form again from the route's values. */
+function discard() {
+  const slot = state.slot;
+  state = null;
+  forget(slot).then(() => ctx.go(location.hash, { replace: true }));
 }
 
 function title(draft) {
@@ -168,40 +224,44 @@ function build() {
       back: true,
       actions: [button(t("save"), save, "filled", { class: "bar-save" })],
     }),
+    state.restored
+      ? h(
+          "p",
+          { class: "banner", role: "status" },
+          icon("undo"),
+          h("span", { text: draft.id ? t("changesBack") : t("draftBack") }),
+          button(t("discard"), discard, "text"),
+        )
+      : null,
     region("kind"),
     region("amount"),
     region("pickers"),
-    region("date"),
     details(),
+    region("inline"),
     region("receipt"),
     draft.id ? actionsForSaved(draft) : null,
     h("div", { class: "keypad-space" }),
     region("keypad"),
   );
   state.screen = screen;
-  for (const name of ["kind", "amount", "pickers", "date", "receipt", "keypad"]) paint(name);
+  for (const name of ["kind", "amount", "pickers", "inline", "receipt", "keypad"]) paint(name);
   return screen;
 }
 
 function paint(name) {
-  const box = state.regions[name];
+  const box = state && state.regions[name];
   if (!box) return;
   box.textContent = "";
   const draw = {
     kind: kindRegion,
     amount: amountRegion,
     pickers: pickersRegion,
-    date: dateRegion,
+    inline: inlineRegion,
     receipt: receiptRegion,
     keypad: keypadRegion,
   }[name];
   const content = draw();
   if (content) box.append(...[].concat(content).filter(Boolean));
-}
-
-function changed(...regions) {
-  saveDraft();
-  for (const r of regions) paint(r);
 }
 
 // ---------------------------------------------------------------- kind and amount
@@ -230,8 +290,8 @@ function kindRegion() {
         const other = store.accounts.find((a) => !a.archived && a.id !== draft.account);
         draft.toAccount = other ? other.id : null;
       }
-      document.querySelector(".editor .bar-title").textContent = title(draft);
-      changed("kind", "pickers", "amount");
+      state.screen.querySelector(".bar-title").textContent = title(draft);
+      changed("kind", "pickers", "amount", "inline", "keypad");
     },
     t("kind"),
   );
@@ -240,6 +300,36 @@ function kindRegion() {
 function rateOf(currency) {
   const rate = ctx.store.rates.find((r) => r.currency === currency);
   return rate ? toMicros(rate.perMain) : null;
+}
+
+/** A button that deletes the last digit, and clears the whole amount when held. */
+function backspace(cls, label) {
+  const el = h(
+    "button",
+    { type: "button", class: cls, "aria-label": label, onPointerdown: keepFocus },
+    icon("backspace"),
+  );
+  let timer = null;
+  let cleared = false;
+  const stop = () => clearTimeout(timer);
+  el.addEventListener("pointerdown", () => {
+    cleared = false;
+    stop();
+    timer = setTimeout(() => {
+      cleared = true;
+      state.draft.expr = "";
+      changed("amount");
+    }, LONG_PRESS_MS);
+  });
+  for (const type of ["pointerup", "pointerleave", "pointercancel"]) el.addEventListener(type, stop);
+  el.addEventListener("click", () => {
+    if (cleared) {
+      cleared = false;
+      return;
+    }
+    press("back");
+  });
+  return el;
 }
 
 function amountRegion() {
@@ -252,7 +342,7 @@ function amountRegion() {
     "button",
     {
       type: "button",
-      class: "amount-display" + (state.keypad ? " active" : ""),
+      class: "amount-display",
       "aria-label": t("amountLabel", { amount: result.cents ? money(result.cents, currency) : "0" }),
       onClick: () => showKeypad(true),
     },
@@ -278,7 +368,13 @@ function amountRegion() {
     h("span", { text: currency }),
     icon("chevronDown"),
   );
-  const parts = [h("div", { class: "amount-line" }, amount, currencyButton)];
+  const box = h(
+    "div",
+    { class: "amount-box" + (state.keypad ? " active" : "") },
+    amount,
+    draft.expr ? backspace("amount-back", t("deleteDigit")) : null,
+  );
+  const parts = [h("div", { class: "amount-line" }, box, currencyButton)];
   if (result.error === "divideByZero") parts.push(h("p", { class: "error", role: "alert", text: t("divideByZero") }));
   if (draft.currency) parts.push(rateLine(draft, result.cents));
   return parts;
@@ -294,6 +390,7 @@ function rateLine(draft, cents) {
     value: micros ? formatNumber(micros / 1e6, ctx.locale, 2, 6) : "",
     placeholder: "0" + ctx.mark + "00",
     "aria-label": t("rateFor", { from: draft.currency, to: store.main }),
+    onFocus: () => showKeypad(false),
     onChange: (e) => {
       const m = parseTypedRate(e.target.value);
       draft.rate = m ? fromMicros(m) : null;
@@ -323,11 +420,11 @@ function rateLine(draft, cents) {
   );
 }
 
-// ---------------------------------------------------------------- category and accounts
+// ---------------------------------------------------------------- category, accounts and date
 
 function pickersRegion() {
   const draft = state.draft;
-  return draft.kind === "transfer" ? transferPickers(draft) : [categoryPicker(draft), accountPicker(draft)];
+  return draft.kind === "transfer" ? transferPickers(draft) : categoryPicker(draft);
 }
 
 function categoryPicker(draft) {
@@ -356,7 +453,7 @@ function categoryPicker(draft) {
   chips.push(
     h(
       "button",
-      { type: "button", class: "chip more", onClick: () => chooseCategory(draft) },
+      { type: "button", class: "chip more", onClick: () => chooseCategory(draft), onPointerdown: keepFocus },
       icon("more"),
       h("span", { text: t("allCategories") }),
     ),
@@ -440,28 +537,21 @@ function accountChips(selected, onPick, exclude) {
     .map((a) => chip(a.name, a.id === selected, () => onPick(a.id), accountDisc(a, "tiny")));
 }
 
-function accountPicker(draft) {
+function pickAccount(id) {
+  const draft = state.draft;
   const store = ctx.store;
-  if (store.accounts.filter((a) => !a.archived).length < 2) return null;
-  return h(
-    "div",
-    { class: "picker" },
-    h("h2", { class: "picker-label", text: t("account") }),
-    h(
-      "div",
-      { class: "chips" },
-      accountChips(draft.account, (id) => {
-        draft.account = id;
-        const account = store.accounts.find((a) => a.id === id);
-        if (!draft.id && account && account.currency && account.currency !== (draft.currency || store.main)) {
-          draft.currency = account.currency === store.main ? null : account.currency;
-          draft.rate = draft.currency && rateOf(draft.currency) ? fromMicros(rateOf(draft.currency)) : null;
-          paint("amount");
-        }
-        changed("pickers");
-      }),
-    ),
-  );
+  draft.account = id;
+  const account = store.accounts.find((a) => a.id === id);
+  if (!draft.id && account && account.currency && account.currency !== (draft.currency || store.main)) {
+    draft.currency = account.currency === store.main ? null : account.currency;
+    draft.rate = draft.currency && rateOf(draft.currency) ? fromMicros(rateOf(draft.currency)) : null;
+  }
+  changed("amount", "inline", "keypad");
+}
+
+function pickDate(iso) {
+  state.draft.date = iso;
+  changed("inline", "keypad");
 }
 
 function transferPickers(draft) {
@@ -514,10 +604,12 @@ function transferPickers(draft) {
       type: "text",
       inputmode: "decimal",
       value: draft.toAmount ? draft.toAmount.replace(".", ctx.mark) : "",
-      onChange: (e) => {
+      onFocus: () => showKeypad(false),
+      onInput: (e) => {
         const cents = parseTypedAmount(e.target.value);
         draft.toAmount = cents && cents > 0 ? fromCents(cents) : "";
-        saveDraft();
+        draft.dirty = true;
+        persist();
       },
     });
     parts.push(field(t("amountReceived", { currency: toCurrency }), input, t("amountReceivedHelp")));
@@ -525,47 +617,131 @@ function transferPickers(draft) {
   return parts;
 }
 
-// ---------------------------------------------------------------- date, details, receipt
+/** The date's name on its chip: Today, Yesterday or the date. */
+function dateName(iso) {
+  if (iso === ctx.today) return t("today");
+  if (iso === addDays(ctx.today, -1)) return t("yesterday");
+  return date(iso, "day");
+}
 
-function dateRegion() {
-  const draft = state.draft;
-  const yesterday = addDays(ctx.today, -1);
-  const input = h("input", {
+function dateInput() {
+  return h("input", {
     type: "date",
-    value: draft.date,
+    class: "date-input",
+    value: state.draft.date,
     max: addDays(ctx.today, 3650),
     "aria-label": t("pickDate"),
     onChange: (e) => {
-      if (isIsoDate(e.target.value)) {
-        draft.date = e.target.value;
-        changed("date");
-      }
+      if (isIsoDate(e.target.value)) pickDate(e.target.value);
     },
   });
-  return h(
-    "div",
-    { class: "picker" },
-    h("h2", { class: "picker-label", text: t("date") }),
+}
+
+/** Date and account in the form, shown while the keypad is put away (with the keypad they sit on top of it). */
+function inlineRegion() {
+  if (state.keypad) return null;
+  const draft = state.draft;
+  const store = ctx.store;
+  const yesterday = addDays(ctx.today, -1);
+  const parts = [
     h(
       "div",
-      { class: "chips" },
-      chip(t("today"), draft.date === ctx.today, () => {
-        draft.date = ctx.today;
-        changed("date");
-      }),
-      chip(t("yesterday"), draft.date === yesterday, () => {
-        draft.date = yesterday;
-        changed("date");
-      }),
+      { class: "picker" },
+      h("h2", { class: "picker-label", text: t("date") }),
       h(
-        "label",
-        { class: "chip date-chip" + (draft.date !== ctx.today && draft.date !== yesterday ? " on" : "") },
-        icon("calendar"),
-        input,
+        "div",
+        { class: "chips" },
+        chip(t("today"), draft.date === ctx.today, () => pickDate(ctx.today)),
+        chip(t("yesterday"), draft.date === yesterday, () => pickDate(yesterday)),
+        h(
+          "label",
+          { class: "chip date-chip" + (draft.date !== ctx.today && draft.date !== yesterday ? " on" : "") },
+          icon("calendar"),
+          dateInput(),
+        ),
       ),
     ),
-  );
+  ];
+  if (draft.kind !== "transfer" && store.accounts.filter((a) => !a.archived).length > 1) {
+    parts.push(
+      h(
+        "div",
+        { class: "picker" },
+        h("h2", { class: "picker-label", text: t("account") }),
+        h("div", { class: "chips" }, accountChips(draft.account, pickAccount)),
+      ),
+    );
+  }
+  return parts;
 }
+
+async function chooseDate() {
+  const draft = state.draft;
+  const yesterday = addDays(ctx.today, -1);
+  const picked = await dialog(
+    (close) => {
+      const input = dateInput();
+      input.addEventListener("change", () => isIsoDate(input.value) && close(input.value));
+      return [
+        h("h2", { class: "dialog-title", text: t("date") }),
+        h(
+          "div",
+          { class: "chips" },
+          chip(t("today"), draft.date === ctx.today, () => close(ctx.today)),
+          chip(t("yesterday"), draft.date === yesterday, () => close(yesterday)),
+        ),
+        field(t("pickDate"), input),
+        h(
+          "div",
+          { class: "dialog-actions" },
+          button(t("cancel"), () => close(null), "text"),
+        ),
+      ];
+    },
+    { sheet: true, label: t("date") },
+  );
+  if (picked) pickDate(picked);
+}
+
+async function chooseAccount() {
+  const store = ctx.store;
+  const id = await dialog(
+    (close) => [
+      h("h2", { class: "dialog-title", text: t("account") }),
+      h(
+        "ul",
+        { class: "list" },
+        store.accounts
+          .filter((a) => !a.archived || a.id === state.draft.account)
+          .map((a) =>
+            h(
+              "li",
+              {},
+              h(
+                "button",
+                {
+                  type: "button",
+                  class: "row" + (a.id === state.draft.account ? " selected" : ""),
+                  onClick: () => close(a.id),
+                },
+                accountDisc(a),
+                h("span", { class: "row-text" }, h("span", { class: "row-title", text: a.name })),
+              ),
+            ),
+          ),
+      ),
+      h(
+        "div",
+        { class: "dialog-actions" },
+        button(t("cancel"), () => close(null), "text"),
+      ),
+    ],
+    { sheet: true, label: t("account") },
+  );
+  if (id) pickAccount(id);
+}
+
+// ---------------------------------------------------------------- details and receipt
 
 function details() {
   const draft = state.draft;
@@ -587,7 +763,8 @@ function details() {
       autocomplete: "off",
       onInput: (e) => {
         draft[key] = e.target.value;
-        saveDraft();
+        draft.dirty = true;
+        persist();
       },
       onFocus: () => showKeypad(false),
       ...extra,
@@ -596,14 +773,15 @@ function details() {
   const known = allTags(store.entries.values()).slice(0, 12);
   const tagChips = h(
     "div",
-    { class: "chips small" },
+    { class: "chips" },
     known.map((tag) =>
       chip("#" + tag, tagsOf(draft).includes(tag), () => {
         const now = tagsOf(draft);
         const next = now.includes(tag) ? now.filter((x) => x !== tag) : [...now, tag];
         draft.tags = next.join(", ");
         tagsInput.value = draft.tags;
-        saveDraft();
+        draft.dirty = true;
+        persist();
         tagChips.querySelectorAll(".chip").forEach((c) => {
           const on = tagsOf(draft).includes(c.textContent.slice(1));
           c.classList.toggle("on", on);
@@ -633,9 +811,9 @@ function receiptRegion() {
   const canPick = Boolean(zapli && zapli.supports && zapli.supports("media.pick"));
   const browser = !ctx.store.live;
   if (!canPhoto && !canPick && !browser) return null;
-  if (draft.kind === "transfer" && !draft.receipt) return null;
-  if (draft.receipt) {
-    const src = "data:" + draft.receipt.type + ";base64," + draft.receipt.b64;
+  if (draft.kind === "transfer" && !state.receipt) return null;
+  if (state.receipt) {
+    const src = "data:" + state.receipt.type + ";base64," + state.receipt.b64;
     return h(
       "div",
       { class: "picker" },
@@ -651,8 +829,8 @@ function receiptRegion() {
         button(
           t("remove"),
           () => {
-            draft.receipt = null;
-            draft.receiptChanged = true;
+            state.receipt = null;
+            state.receiptChanged = true;
             paint("receipt");
           },
           "text",
@@ -668,8 +846,9 @@ function receiptRegion() {
       else if (how === "pick") file = (await zapli.media.pick({ multiple: false }))[0];
       else file = await pickInBrowser();
       if (!file) return;
-      draft.receipt = await shrink(file);
-      draft.receiptChanged = true;
+      state.receipt = await shrink(file);
+      state.receiptChanged = true;
+      state.draft.dirty = true;
       paint("receipt");
     } catch (error) {
       if (error && error.code === "PERMISSION_DENIED") snack(t("cameraDenied"));
@@ -750,49 +929,97 @@ function showKeypad(on) {
   if (on && document.activeElement && document.activeElement.blur) document.activeElement.blur();
   paint("keypad");
   paint("amount");
+  paint("inline");
 }
 
+/** The keypad, docked at the bottom with the date and the account right above it. */
 function keypadRegion() {
   if (state.screen) state.screen.classList.toggle("keypad-on", state.keypad);
   const spacer = state.screen && state.screen.querySelector(".keypad-space");
   if (spacer) spacer.style.height = "";
   if (!state.keypad) return null;
-  // The space under the form matches the keypad's real height, which grows with the phone's text size.
+  const draft = state.draft;
+  const store = ctx.store;
+  // The space under the form matches the dock's real height, which grows with the phone's text size.
   requestAnimationFrame(() => {
-    const keypad = state && state.screen && state.screen.querySelector(".keypad");
+    const dock = state && state.screen && state.screen.querySelector(".dock");
     const space = state && state.screen && state.screen.querySelector(".keypad-space");
-    if (keypad && space && keypad.offsetHeight > 0) space.style.height = keypad.offsetHeight + 16 + "px";
+    if (dock && space && dock.offsetHeight > 0) space.style.height = dock.offsetHeight + 16 + "px";
   });
   const key = (value, label, aria, cls = "") =>
     h(
       "button",
-      { type: "button", class: "key " + cls, "aria-label": aria || null, onClick: () => press(value) },
+      {
+        type: "button",
+        class: "key " + cls,
+        "aria-label": aria || null,
+        onClick: () => press(value),
+        onPointerdown: keepFocus,
+      },
       label,
     );
+  const account = store.accounts.find((a) => a.id === draft.account);
+  const showAccount = draft.kind !== "transfer" && store.accounts.filter((a) => !a.archived).length > 1;
   return h(
     "div",
-    { class: "keypad", role: "group", "aria-label": t("keypad") },
-    key("7", "7"),
-    key("8", "8"),
-    key("9", "9"),
-    key("÷", "÷", t("divide"), "op"),
-    key("4", "4"),
-    key("5", "5"),
-    key("6", "6"),
-    key("×", "×", t("multiply"), "op"),
-    key("1", "1"),
-    key("2", "2"),
-    key("3", "3"),
-    key("−", "−", t("minus"), "op"),
-    key(".", ctx.mark, t("decimalMark")),
-    key("0", "0"),
-    key("back", icon("backspace"), t("deleteDigit")),
-    key("+", "+", t("plus"), "op"),
+    { class: "dock" },
+    h(
+      "div",
+      { class: "dock-row" },
+      h(
+        "button",
+        {
+          type: "button",
+          class: "chip dock-chip",
+          onClick: chooseDate,
+          onPointerdown: keepFocus,
+          "aria-label": t("dateIs", { date: dateName(draft.date) }),
+        },
+        icon("calendar"),
+        h("span", { text: dateName(draft.date) }),
+      ),
+      showAccount
+        ? h(
+            "button",
+            {
+              type: "button",
+              class: "chip dock-chip",
+              onClick: chooseAccount,
+              onPointerdown: keepFocus,
+              "aria-label": t("accountIs", { name: account ? account.name : "" }),
+            },
+            accountDisc(account, "tiny"),
+            h("span", { text: account ? account.name : t("account") }),
+          )
+        : null,
+    ),
+    h(
+      "div",
+      { class: "keypad", role: "group", "aria-label": t("keypad") },
+      key("7", "7"),
+      key("8", "8"),
+      key("9", "9"),
+      backspace("key op back", t("deleteDigitHold")),
+      key("4", "4"),
+      key("5", "5"),
+      key("6", "6"),
+      key("÷", "÷", t("divide"), "op"),
+      key("1", "1"),
+      key("2", "2"),
+      key("3", "3"),
+      key("×", "×", t("multiply"), "op"),
+      key(".", ctx.mark, t("decimalMark")),
+      key("0", "0"),
+      key("−", "−", t("minus"), "op"),
+      key("+", "+", t("plus"), "op"),
+    ),
   );
 }
 
+/** A key: the first digit typed into a saved amount replaces it; an operator goes on from it. */
 function press(value) {
   const draft = state.draft;
+  if (state.fresh && (/^\d$/.test(value) || value === ".")) draft.expr = "";
   draft.expr = calc.press(draft.expr, value);
   changed("amount");
 }
@@ -845,7 +1072,20 @@ function valuesOf(draft) {
   };
 }
 
+/** How a saved entry is named in messages: "Groceries €21.50". */
+export function entryLabel(values) {
+  const store = ctx.store;
+  const what =
+    values.kind === "transfer"
+      ? t("transferKind")
+      : values.category
+        ? (store.categories.find((c) => c.id === values.category) || {}).name || t("noCategory")
+        : values.note || t("noCategory");
+  return t("entryLabel", { what, amount: money(toCents(values.amount), values.currency || store.main) });
+}
+
 async function save() {
+  blurActive();
   const store = ctx.store;
   const draft = state.draft;
   const { values, error } = valuesOf(draft);
@@ -859,22 +1099,23 @@ async function save() {
     const before = draft.id ? store.entries.get(draft.id) : null;
     if (draft.id) saved = await store.update("expense", draft.id, values);
     else saved = await store.add("expense", values);
-    if (draft.receiptChanged) {
-      if (draft.receipt) await store.setReceipt(saved.id, draft.receipt);
+    if (state.receiptChanged) {
+      if (state.receipt) await store.setReceipt(saved.id, state.receipt);
       else if (store.receipts.has(saved.id)) await store.deleteReceipt(saved.id);
     }
     await rememberRate(values);
-    dropDraft();
+    const slot = state.slot;
     state = null;
+    await forget(slot);
     ctx.back();
     if (before) {
       const old = restorable(before);
-      snack(t("savedChanges"), { label: t("undo"), run: () => store.update("expense", before.id, old).catch(failed) });
-    } else {
-      snack(t("savedEntry", { amount: money(toCents(values.amount), values.currency || store.main) }), {
+      snack(t("updatedWhat", { what: entryLabel(values) }), {
         label: t("undo"),
-        run: () => undoAdd(saved.id),
+        run: () => store.update("expense", before.id, old).catch(failed),
       });
+    } else {
+      snack(t("savedWhat", { what: entryLabel(values) }), { label: t("undo"), run: () => undoAdd(saved.id) });
     }
   } catch (error2) {
     failed(error2);
@@ -930,17 +1171,17 @@ async function undoAdd(id) {
 
 async function remove() {
   const store = ctx.store;
-  const draft = state.draft;
-  const entry = store.entries.get(draft.id);
+  const entry = store.entries.get(state.draft.id);
   if (!entry) return;
   const picture = store.receipts.has(entry.id) ? await store.receipt(entry.id) : null;
   try {
     await store.remove("expense", entry.id);
     if (picture) await store.deleteReceipt(entry.id);
-    dropDraft();
+    const slot = state.slot;
     state = null;
+    await forget(slot);
     ctx.back();
-    snack(t("deletedEntry"), {
+    snack(t("deletedWhat", { what: entryLabel(entry) }), {
       label: t("undo"),
       run: async () => {
         try {
@@ -956,11 +1197,4 @@ async function remove() {
   } catch (error) {
     failed(error);
   }
-}
-
-/** Leaving the form for a screen opened from it keeps the typed values; any other way drops them. */
-export function leave({ deeper }) {
-  if (deeper) return;
-  dropDraft();
-  state = null;
 }

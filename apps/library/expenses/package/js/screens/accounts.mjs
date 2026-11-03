@@ -23,6 +23,7 @@ import {
   askAmount,
   entryRow,
   dialog,
+  blurActive,
 } from "../ui.mjs";
 import { balances, netWorth, accountHistory } from "../ledger.mjs";
 import { parseTypedAmount, fromCents } from "../money.mjs";
@@ -177,9 +178,13 @@ async function setBalance(account, balance) {
     parse: parseTypedAmount,
   });
   if (cents === undefined || cents === null) return;
+  const before = account.opening || "0.00";
   try {
     await store.update("account", account.id, { opening: fromCents((account.openingCents || 0) + (cents - balance)) });
-    snack(t("balanceSet"));
+    snack(t("balanceSetTo", { name: account.name, amount: money(cents, account.currency || store.main) }), {
+      label: t("undo"),
+      run: () => store.update("account", account.id, { opening: before }).catch(failed),
+    });
   } catch (error) {
     failed(error);
   }
@@ -242,6 +247,7 @@ function form(id) {
   const error = h("p", { class: "error", role: "alert" });
 
   const save = async () => {
+    blurActive();
     const cleanName = draft.name.trim();
     if (!cleanName) return (error.textContent = t("nameNeeded"));
     if (store.accounts.some((a) => a.id !== id && a.name.toLowerCase() === cleanName.toLowerCase()))
@@ -281,7 +287,7 @@ function form(id) {
         return;
       try {
         await store.remove("account", existing.id);
-        ctx.go("#/accounts", { replace: true });
+        ctx.go("#/accounts");
       } catch (e) {
         failed(e);
       }
@@ -312,7 +318,7 @@ function form(id) {
       await store.run("moveAccount", { from: existing.id, to: target });
       await store.remove("account", existing.id);
       snack(t("accountDeleted"));
-      ctx.go("#/accounts", { replace: true });
+      ctx.go("#/accounts");
     } catch (e) {
       failed(e);
     }

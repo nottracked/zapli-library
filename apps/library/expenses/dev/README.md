@@ -34,11 +34,13 @@ node apps/library/expenses/dev/smoke-render.mjs live    # every screen and the m
 node apps/library/expenses/dev/smoke-render.mjs fresh   # a first start: the app sets itself up
 node apps/library/expenses/dev/smoke-render.mjs preview # the browser preview
 SMOKE_LANG=sk-SK node apps/library/expenses/dev/smoke-render.mjs live
+node apps/library/expenses/dev/check-characters.mjs   # no literal invisible or direction characters
 node apps/library/expenses/dev/make-sample-data.mjs     # prints the listing's sampleData
 ```
 
-The smoke test runs the page's code on a small stand-in for the DOM: it finds thrown errors and untranslated texts,
-not how a screen looks. Try the look in a browser from a local web server (`python3 -m http.server`, then open
+The smoke test runs the page's code on a small stand-in for the DOM and for the phone's Back (which goes back in the
+WebView while it can, skipping entries added without a tap, and otherwise leaves the app): it finds thrown errors,
+untranslated texts and wrong Back steps, not how a screen looks. Try the look in a browser from a local web server (`python3 -m http.server`, then open
 `apps/library/expenses/package/index.html`), and on a phone by importing the packed `.zapli`.
 
 After any change to a file in `package/`, write the file list again with `zapli library inventory

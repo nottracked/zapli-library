@@ -84,10 +84,25 @@ export function iconButton(name, label, onClick, extra = {}) {
       "aria-label": label,
       title: label,
       onClick,
+      onPointerdown: keepFocus,
       ...extra.attrs,
     },
     icon(name),
   );
+}
+
+/**
+ * Stops a tap from taking the focus away from a text field: the keyboard then stays until the button's own action,
+ * so the layout does not jump under the finger and the first tap counts.
+ */
+export function keepFocus(e) {
+  if (document.activeElement && document.activeElement.tagName === "INPUT") e.preventDefault();
+}
+
+/** Ends typing in a text field, so its last value is read (its change event runs) before a save. */
+export function blurActive() {
+  const el = document.activeElement;
+  if (el && el.blur && el !== document.body) el.blur();
 }
 
 /** The top bar of a screen: a back arrow on pushed screens, the title, and actions on the right. */
@@ -238,6 +253,7 @@ export function button(text, onClick, kind = "filled", extra = {}) {
       class: "btn " + kind + " " + (extra.class || ""),
       type: extra.type || "button",
       onClick,
+      onPointerdown: keepFocus,
       disabled: extra.disabled || null,
       ...(extra.attrs || {}),
     },
@@ -325,12 +341,49 @@ export function section(title, ...children) {
 
 // ---------------------------------------------------------------- snackbar
 
+export const SNACK_MS = 4000;
 let snackTimer = null;
+let snackShownAt = 0;
+let snackWired = false;
 
-/** A short message at the bottom; with `action` it offers a button such as Undo for about seven seconds. */
+/** Hides the snackbar (on a tap elsewhere, a scroll, a swipe, its close button, its time or a new screen). */
+export function hideSnack() {
+  const box = document.getElementById("snackbar");
+  clearTimeout(snackTimer);
+  if (box) box.classList.remove("show");
+}
+
+/** Listens once for what dismisses the snackbar: a tap outside it, a scroll, or a sideways swipe on it. */
+function wireSnack(box) {
+  if (snackWired) return;
+  snackWired = true;
+  document.addEventListener(
+    "pointerdown",
+    (e) => {
+      if (box.classList.contains("show") && !(e.target && box.contains && box.contains(e.target))) hideSnack();
+    },
+    true,
+  );
+  // The redraw after saving scrolls the page by itself, so a scroll counts only a moment after the message shows.
+  window.addEventListener("scroll", () => {
+    if (box.classList.contains("show") && Date.now() - snackShownAt > 600) hideSnack();
+  });
+  let startX = null;
+  box.addEventListener("pointerdown", (e) => (startX = e.clientX));
+  box.addEventListener("pointerup", (e) => {
+    if (startX !== null && Math.abs((e.clientX || 0) - startX) > 40) hideSnack();
+    startX = null;
+  });
+}
+
+/**
+ * A short message at the bottom for about four seconds; with `action` it offers a button such as Undo. A close
+ * button, a tap elsewhere, a scroll, a swipe or the next screen dismisses it.
+ */
 export function snack(text, action) {
   const box = document.getElementById("snackbar");
   if (!box) return;
+  wireSnack(box);
   clearTimeout(snackTimer);
   box.textContent = "";
   box.appendChild(h("span", { text }));
@@ -341,14 +394,18 @@ export function snack(text, action) {
         class: "snack-action",
         text: action.label,
         onClick: () => {
-          box.classList.remove("show");
+          hideSnack();
           action.run();
         },
       }),
     );
   }
+  box.appendChild(
+    h("button", { type: "button", class: "snack-close", "aria-label": t("close"), onClick: hideSnack }, icon("close")),
+  );
   box.classList.add("show");
-  snackTimer = setTimeout(() => box.classList.remove("show"), action ? 7000 : 3500);
+  snackShownAt = Date.now();
+  snackTimer = setTimeout(hideSnack, SNACK_MS);
 }
 
 /** A message for a failed write, in words. */
@@ -387,6 +444,37 @@ export function dialog(build, { sheet = false, label } = {}) {
     document.body.appendChild(d);
     d.showModal();
   });
+}
+
+/** A short menu of actions (the ⋮ button): items [{id, label, icon}]; resolves with the id picked, or null. */
+export function menu(title, items) {
+  return dialog(
+    (close) => [
+      h("h2", { class: "dialog-title", text: title }),
+      h(
+        "ul",
+        { class: "list" },
+        items.map((item) =>
+          h(
+            "li",
+            {},
+            h(
+              "button",
+              { type: "button", class: "row", onClick: () => close(item.id) },
+              h("span", { class: "menu-icon" }, icon(item.icon)),
+              h("span", { class: "row-text" }, h("span", { class: "row-title", text: item.label })),
+            ),
+          ),
+        ),
+      ),
+      h(
+        "div",
+        { class: "dialog-actions" },
+        button(t("cancel"), () => close(null), "text"),
+      ),
+    ],
+    { sheet: true, label: title },
+  );
 }
 
 /** Asks before something that cannot be taken back. Resolves true for yes. */

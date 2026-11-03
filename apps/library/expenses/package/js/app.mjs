@@ -2,7 +2,7 @@
 // Back, a reload after rotation and links from notifications all land where they should.
 
 import { store } from "./store.mjs";
-import { ctx, h, t } from "./ui.mjs";
+import { ctx, h, t, hideSnack } from "./ui.mjs";
 import { translator, pickLanguage, localeFor } from "./i18n.mjs";
 import { decimalMark } from "./money.mjs";
 import { today } from "./dates.mjs";
@@ -93,34 +93,116 @@ export function parseRoute(hash) {
   return { path: "", id: null, params: new URLSearchParams(), name: "", screen: home, tab: true };
 }
 
+// ---------------------------------------------------------------- Back
+//
+// Each screen opened by a tap gets a history entry of its own, holding the app's path to it (`stack`): Home, then a
+// tab, then what was opened from there. The phone's Back pops one entry, so it goes from a detail to the list or tab
+// it came from, from a tab to Home, and from Home out of the app (Home is the first entry). A tab opened from another
+// tab takes that tab's place, so Back from any tab is Home. Entries are only ever added during a tap: an entry added
+// without one would make the browser skip the entry below it, and Back would leave the app.
+
+/** Home, the parents of a screen and the screen: the path of a screen opened without one (after a reload). */
+function chainFor(hash) {
+  const route = parseRoute(hash);
+  if (route.path === "") return ["#/"];
+  if (route.tab) return ["#/", hash];
+  const parent = PARENTS[route.name];
+  return parent === undefined || parent === route.path ? ["#/", hash] : [...chainFor("#/" + parent), hash];
+}
+
+// A step back the app takes itself (the arrow, Home from a tab) keeps a message it shows right after (Saved · Undo).
+let ownStep = false;
+
+/** The path to the screen on show. */
+function currentStack() {
+  return (history.state && history.state.stack) || chainFor(location.hash || "#/");
+}
+
+/** How many entries of the app lie below the screen on show (0 on the first one: Back there leaves the app). */
 function depth() {
   return (history.state && history.state.depth) || 0;
 }
 
-/**
- * Opens a route. Other screens are pushed, so Back returns; tabs replace each other, except that leaving Home pushes
- * (Back from a tab goes Home first) and opening Home goes back to it.
- */
+// Home asked for while the first entry of the app holds another screen (after a reload deep inside the app).
+let homeWanted = false;
+
+/** Steps back to the screen at position `i` of the path when it has its entry; false when it has none. */
+function stepBackTo(i, stack) {
+  const steps = stack.length - 1 - i;
+  if (steps <= 0 || steps > depth()) return false;
+  ownStep = true;
+  history.go(-steps);
+  return true;
+}
+
+/** Opens a route: on top of this screen, or (`replace`) in its place. Tabs and Home keep the path short. */
 function go(hash, { replace = false } = {}) {
   const target = parseRoute(hash);
   const here = current;
+  const stack = currentStack();
   if (here) scrolls.set(here.path, window.scrollY);
-  const deeper = !replace && !(target.tab && here && here.tab);
-  if (here && here.screen !== target.screen && here.screen.leave) here.screen.leave({ deeper });
-  if (!replace && target.tab && target.path === "" && here && here.tab && depth() > 0) {
-    history.back();
+  hideSnack();
+  let next;
+  let push = !replace;
+  if (target.path === "") {
+    // Home: back to the first entry (Home itself, unless the app was reloaded deeper), else in this screen's place.
+    if (depth() > 0) {
+      homeWanted = true;
+      ownStep = true;
+      history.go(-depth());
+      return;
+    }
+    next = ["#/"];
+    push = false;
+  } else if (replace) next = [...stack.slice(0, -1), hash];
+  else if (target.tab && stack.length === 2 && parseRoute(stack[1]).tab) {
+    // From one tab to another: the new tab takes the old one's place.
+    next = ["#/", hash];
+    push = false;
+  } else if (target.tab && stack.includes(hash) && stepBackTo(stack.indexOf(hash), stack)) {
+    // Back to a tab further down the path (after deleting what was opened from it).
     return;
-  }
-  const push = !replace && (!target.tab || !here || !here.tab || here.path === "");
-  if (push) history.pushState({ depth: depth() + 1 }, "", hash);
-  else history.replaceState({ depth: depth() }, "", hash);
+  } else next = [...stack, hash];
+  if (here && here.screen !== target.screen && here.screen.leave) here.screen.leave({ deeper: push && !target.tab });
+  if (push) history.pushState({ stack: next, depth: depth() + 1 }, "", hash);
+  else history.replaceState({ stack: next, depth: depth() }, "", hash);
   render(false, true);
 }
 
-/** Back from a pushed screen: through the page's history, else to the screen it belongs to. */
+/** The back arrow: the same step as the phone's Back; without an entry below, the screen's parent takes its place. */
 function back() {
-  if (depth() > 0) history.back();
-  else go("#/" + (PARENTS[current ? current.name : ""] || ""), { replace: true });
+  hideSnack();
+  const stack = currentStack();
+  if (depth() > 0) {
+    ownStep = true;
+    history.back();
+    return;
+  }
+  const next = stack.length > 1 ? stack.slice(0, -1) : ["#/"];
+  const here = current;
+  const target = parseRoute(next[next.length - 1]);
+  if (here && here.screen !== target.screen && here.screen.leave) here.screen.leave({ deeper: false });
+  history.replaceState({ stack: next, depth: 0 }, "", next[next.length - 1]);
+  render(false, true);
+}
+
+/** The phone's Back (or the arrow) went back in the history: draw that screen. */
+function onPopState() {
+  if (ownStep) ownStep = false;
+  else hideSnack();
+  if (homeWanted) {
+    homeWanted = false;
+    if (location.hash !== "#/" && location.hash !== "") history.replaceState({ stack: ["#/"], depth: 0 }, "", "#/");
+  }
+  render();
+}
+
+/** At start: the entry gets the path to its screen, without adding entries (none may be added without a tap). */
+function startHistory() {
+  if (!history.state || !history.state.stack) {
+    history.replaceState({ stack: chainFor(location.hash || "#/"), depth: 0 }, "", location.hash || "#/");
+  }
+  ctx.startHash = location.hash || "#/";
 }
 
 function renderNav(route) {
@@ -187,9 +269,11 @@ function render(again = false, viaGo = false) {
   const route = parseRoute(location.hash);
   const same = Boolean(current && current.path === route.path && again);
   if (same && keeps(route)) return;
-  // Back (or a link from outside) leaves a screen without go(): its typed values are dropped.
-  if (!again && !viaGo && current && current.screen !== route.screen && current.screen.leave)
+
+  // Left by Back: a form's typed values are kept as a draft (see the editor).
+  if (!again && !viaGo && current && current.screen !== route.screen && current.screen.leave) {
     current.screen.leave({ deeper: false });
+  }
   const y = same ? window.scrollY : scrolls.get(route.path) || 0;
   current = route;
   let node;
@@ -206,10 +290,13 @@ function render(again = false, viaGo = false) {
   }
   main.textContent = "";
   main.appendChild(node);
+  // Only the first screen drawn after the page started counts as the one a reload came back to.
+  ctx.startHash = null;
   document.body.classList.toggle("with-tabs", route.tab);
   renderNav(route);
   fitTabs();
   measureFab();
+  if (route.screen.fit) route.screen.fit(main);
   document.title = t("appName");
   window.scrollTo(0, y);
   if (!same) main.focus({ preventScroll: true });
@@ -277,17 +364,23 @@ async function start() {
     return;
   }
   applyLanguage();
-  if (!history.state) history.replaceState({ depth: 0 }, "", location.hash || "#/");
+  startHistory();
   store.on(() => {
     applyLanguage();
     render(true);
   });
-  window.addEventListener("popstate", () => render());
+  window.addEventListener("popstate", onPopState);
   window.addEventListener("resize", () => {
     fitTabs();
     measureFab();
+    if (current && current.screen.fit) current.screen.fit(main);
   });
-  window.addEventListener("hashchange", () => render());
+  // A hash set from outside the page's own navigation (a typed address in a browser) shows that screen in place of
+  // this one: without a tap no entry may be added.
+  window.addEventListener("hashchange", () => {
+    const stack = currentStack();
+    if (location.hash !== stack[stack.length - 1]) go(location.hash || "#/", { replace: true });
+  });
   render();
   await setUpWhenNeeded();
   await postDueRules();

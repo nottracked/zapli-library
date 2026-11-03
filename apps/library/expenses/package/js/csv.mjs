@@ -12,5 +12,5 @@ function cell(value) {
 
 /** The rows (arrays of cells, the first one the header) as CSV text. */
 export function toCsv(rows) {
-  return "﻿" + rows.map((row) => row.map(cell).join(",") + "\r\n").join("");
+  return "\ufeff" + rows.map((row) => row.map(cell).join(",") + "\r\n").join("");
 }

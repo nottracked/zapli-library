@@ -615,8 +615,8 @@
         "sk": "Dnes môžete minúť"
       },
       "safeLeft": {
-        "en": "{daily} a day · {left} left this month",
-        "sk": "{daily} na deň · tento mesiac zostáva {left}"
+        "en": "Today {today} · {left} left this month",
+        "sk": "Dnes {today} · tento mesiac zostáva {left}"
       },
       "safeOver": {
         "en": "{over} over this month’s budget",
@@ -652,54 +652,54 @@
     },
     "orientation": "any",
     "files": {
-      "css/app.css": { "sha256": "7f777441b8c2afc9766e6e0b2e99b3e5698eb90c2ac84e7f91ad8b590be0da92", "size": 29847 },
+      "css/app.css": { "sha256": "c585db1ba95e0b5bb022f3f8097f295b527994687dc95c94428098e776b45d2d", "size": 32714 },
       "index.html": { "sha256": "a16c201412a7da85f3d9fed4de2455aae15f3e5880462c622b910d6f12884632", "size": 707 },
-      "js/app.mjs": { "sha256": "37deab2e8145c3b90507b50a6362f795486836e985e3fd190f592e54c1a30541", "size": 10150 },
+      "js/app.mjs": { "sha256": "4a00ce515188d059a8fb3592a2e4112e0a549679faa3bfaa0d1ae1017d723307", "size": 14074 },
       "js/calc.mjs": { "sha256": "5be33edfedfcdf35b36d5aca1214522ff15be8bf71be08b350eee67fe3027a40", "size": 4969 },
       "js/charts.mjs": { "sha256": "9e40dab044fe12d11673d2d513efef4295882e62087b49a82258ac893ac4115e", "size": 4290 },
-      "js/csv.mjs": { "sha256": "9594015b1a0948f3a661f9cd0d4ea15f6581262c89bd611d7f476d8ff017e0d7", "size": 723 },
+      "js/csv.mjs": { "sha256": "48f5fd1335ac5ac838743a7819ccd8acd775d8e33324f6eb3bafec059dff8b6d", "size": 726 },
       "js/dates.mjs": { "sha256": "555a123a34ad2edef9cbd1c990fa46bfcc587c7ea2a482fb0ec47bd60d728a0b", "size": 3944 },
-      "js/i18n.mjs": { "sha256": "7d5db71d4f9c4d18db5ccf0f9e632729e90758bde37905c997db814c4e05510d", "size": 50670 },
-      "js/icons.mjs": { "sha256": "bb2491f3f26594f39cd5f621b7729616a74b96c9be76bdd90b7604a587c4f0d8", "size": 6439 },
+      "js/i18n.mjs": { "sha256": "eb3e609ab216096b4b142b53b6cbd12937a7d17f95f4eeb0ec7f9ae79f6c7382", "size": 52457 },
+      "js/icons.mjs": { "sha256": "03e4b659c5a13028d82657b77a7dbf7d988f0d0f2383ad020c97963a35a9a372", "size": 6709 },
       "js/ledger.mjs": { "sha256": "bf45661e8c43eb4372162bc0410a52b245c02ba456b0b5900e2ae48a4794a05a", "size": 14063 },
       "js/money.mjs": { "sha256": "8ea8b486a9aee527d183d26fbfe53936db7abaeb4537ec4186e0cf62a856c719", "size": 7412 },
       "js/rrule.mjs": { "sha256": "f70e336b0c2dbb12e7c177d6b7cec08094fffb3106ffa7d8dccdf9a546e5caa4", "size": 8320 },
       "js/sample.mjs": { "sha256": "b3f5230b5d1f437db0d43d26995ce7ee35d7109f51d38ed4c02987a4fe2e056b", "size": 8158 },
       "js/screens/accounts.mjs": {
-        "sha256": "fbdc7204298ae60b963861ae1ef42e5bec369cca43ff5f7eb33a135c27d2ac44",
-        "size": 12158
+        "sha256": "009daccd1b861dbd68fbbccdbf0867ce5424c08758ffd777f5efeade8ee31cdf",
+        "size": 12398
       },
       "js/screens/budgets.mjs": {
-        "sha256": "500e62eaf6bf9e5abdb58538e6a40a7a1654cea866a4e02b59f2b9f1c41439fb",
-        "size": 7702
+        "sha256": "9959f8690da17a74b9645b65e797b7e36121d8a5d4d7a1eb93002749d3f1fc71",
+        "size": 7916
       },
       "js/screens/calendar.mjs": {
         "sha256": "73264e9edf2e302a24762f97d6664f6aeddc1720ac65b7b4734b0869fecf2a02",
         "size": 4263
       },
       "js/screens/categories.mjs": {
-        "sha256": "b5242af90b9a6fc62d869818718b1748e2d63f882da1819407f06ea56a65b938",
-        "size": 11516
+        "sha256": "8608b5c077fad2abe57995b822367c39c84f75d74e869c8328cbc02d7e60f35f",
+        "size": 11517
       },
       "js/screens/editor.mjs": {
-        "sha256": "95bd7a20f2b68c5e431f683dd1b31c16cb4952fe6957bfaecfb6e0b1d2800acd",
-        "size": 30909
+        "sha256": "3c92c93fc2ca58d423abe53e54ed81130e572fd66a1cb2ecae7d8551a130840e",
+        "size": 38769
       },
       "js/screens/entries.mjs": {
-        "sha256": "f523ae08089cb4f3fd75cca6727bb5b186801c17236d94cd25f5cc28fdecbf2d",
-        "size": 15895
+        "sha256": "e6ed980792f349f1e21c33d009b67934e77c7ddcc5fc5535cbe7305f58613841",
+        "size": 16471
       },
       "js/screens/home.mjs": {
-        "sha256": "397acfa346bd89a79aa254b4ea7d44db838aed7025685a63bed2adc1b6649880",
-        "size": 15101
+        "sha256": "31a6b77ccd953572c59ac412d467844ad6e29363a6bce6e3ebabbd19bdecb400",
+        "size": 16906
       },
       "js/screens/importer.mjs": {
-        "sha256": "9db4d1b576f49aa1d6d0666af0fa76e0c7e50861622642aaf3af13c41b49f672",
-        "size": 4550
+        "sha256": "1d82664a5f3218b4f89570563d8236443287f28aa96794c8adb6f472b297b2f1",
+        "size": 5427
       },
       "js/screens/recurring.mjs": {
-        "sha256": "c328804791f87763efb46f146426188223c0a53337cdc406002eed68f3a90482",
-        "size": 15226
+        "sha256": "9c7f495fc35fd1aa8f7b56541dcfc86dc087b01f3adb6b30066f2d84770a34be",
+        "size": 15774
       },
       "js/screens/settings.mjs": {
         "sha256": "b577c6fcb66bcc6397de9530178b318ab773a7008cf5f300ff05ac925db6aadf",
@@ -710,12 +710,12 @@
         "size": 11635
       },
       "js/screens/subscriptions.mjs": {
-        "sha256": "e2e95a8c7665c7912df41f791039ad871ff19c2d9f582f58957ae62f7b6079b8",
-        "size": 7301
+        "sha256": "984a9bbecbeb972e1aead7307ad70fd966648a07fe713a06263ef778a5726f85",
+        "size": 7420
       },
       "js/store.mjs": { "sha256": "6f5ab6093f647fd49a5051ecfa25761a1b4ba6c8c0fd45365ee6a9ed3877f203", "size": 13398 },
       "js/subs.mjs": { "sha256": "764a1cb65a8c8214f1743e30fd3c774abdf387b30bb71d88364b2f1601467d40", "size": 5935 },
-      "js/ui.mjs": { "sha256": "c519ef5a17f0ffeef850aa74237207ea6bb6cc166c48b25372215038edc0116e", "size": 15069 }
+      "js/ui.mjs": { "sha256": "5360f642c11c9910efb6fc94e3f0055a46b47e7235d26e45711caf56f4cf34a6", "size": 18003 }
     }
   },
   "permissions": {
@@ -3536,8 +3536,8 @@
       "template": "stat",
       "title": "@safeToday",
       "sizes": ["small", "medium"],
-      "value": "=coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) <= 0 ? t('safeNone') : formatCurrency(max(round((coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) - coalesce(q.spentOtherDays.total, decimal('0'))) / (daysBetween(today(), endOf(today(), 'month')) + 1), 2) - coalesce(q.spentToday.total, decimal('0')), decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))",
-      "caption": "=coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) <= 0 ? t('safeSetBudget') : (coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) >= coalesce(q.monthSpent.total, decimal('0')) ? t('safeLeft', {'daily': formatCurrency(round((coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) - coalesce(q.spentOtherDays.total, decimal('0'))) / (daysBetween(today(), endOf(today(), 'month')) + 1), 2), coalesce(first(q.prefsAll).currency, 'EUR')), 'left': formatCurrency(coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) - coalesce(q.monthSpent.total, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))}) : t('safeOver', {'over': formatCurrency(coalesce(q.monthSpent.total, decimal('0')) - coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))}))",
+      "value": "=coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) <= 0 ? t('safeNone') : formatCurrency(max(round((coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) - coalesce(q.spentOtherDays.total, decimal('0'))) / (daysBetween(today(), endOf(today(), 'month')) + 1), 2), decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))",
+      "caption": "=coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) <= 0 ? t('safeSetBudget') : (coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) >= coalesce(q.monthSpent.total, decimal('0')) ? t('safeLeft', {'today': formatCurrency(coalesce(q.spentToday.total, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR')), 'left': formatCurrency(coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) - coalesce(q.monthSpent.total, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))}) : t('safeOver', {'over': formatCurrency(coalesce(q.monthSpent.total, decimal('0')) - coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))}))",
       "icon": "savings",
       "open": "home"
     },

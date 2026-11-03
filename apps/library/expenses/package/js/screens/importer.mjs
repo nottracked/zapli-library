@@ -6,6 +6,7 @@ import { ctx, h, t, money, date, bar, button, section, segmented, snack, failed,
 
 let picked = "dmy";
 let lastRun = null;
+let scrollToResult = false;
 
 export function render() {
   const store = ctx.store;
@@ -13,6 +14,7 @@ export function render() {
   const newest = store.importLogs[0];
   const recent = newest && Date.now() - Date.parse(newest.at) < 3600000 ? newest : null;
   const log = lastRun ? store.importLogs.find((l) => Date.parse(l.at) >= Date.parse(lastRun.since)) : recent;
+  const undone = new Set(store.ui.undoneImports || []);
   const content = [
     bar(t("importTitle"), { back: true }),
     section(
@@ -47,8 +49,16 @@ export function render() {
       store.live ? null : h("p", { class: "help", text: t("onlyInApp") }),
     ),
   ];
-  if (log && !(lastRun && lastRun.running)) content.push(result(log));
-  else if (lastRun && lastRun.running) content.push(h("p", { class: "loading", role: "status", text: t("importing") }));
+  if (log && !(lastRun && lastRun.running)) {
+    const card = undone.has(log.id) ? undoneCard(log) : result(log);
+    content.push(card);
+    // Right after an import (or its Undo) the result is what matters: bring it into view.
+    if (scrollToResult) {
+      scrollToResult = false;
+      setTimeout(() => card.scrollIntoView && card.scrollIntoView({ block: "start", behavior: "smooth" }), 80);
+    }
+  } else if (lastRun && lastRun.running)
+    content.push(h("p", { class: "loading", role: "status", text: t("importing") }));
   content.push(h("p", { class: "help pad", text: t("importPrivacy") }));
   return h("div", { class: "screen" }, content);
 }
@@ -62,6 +72,7 @@ async function start() {
     await store.run("importCsv", { order: picked, since });
     lastRun.running = false;
     await store.loadEntries();
+    scrollToResult = true;
     ctx.go(location.hash, { replace: true });
   } catch (error) {
     lastRun = null;
@@ -89,8 +100,9 @@ function result(log) {
       return;
     try {
       await store.run("undoImport", { since: log.since, until: log.at });
+      await store.saveUi({ undoneImports: [...(store.ui.undoneImports || []), log.id].slice(-20) });
       await store.loadEntries();
-      lastRun = null;
+      scrollToResult = true;
       snack(t("importUndone"));
       ctx.go(location.hash, { replace: true });
     } catch (error) {
@@ -125,6 +137,15 @@ function result(log) {
       button(t("findSubscriptions"), () => ctx.go("#/subscriptions"), "tonal"),
       log.added ? button(t("undoImport"), undo, "text danger", { icon: "undo" }) : null,
     ),
+    h("p", { class: "help", text: t("importWhen", { when: date(log.at.slice(0, 10), "medium") }) }),
+  );
+}
+
+/** The result card of an import that was undone: no second Undo. */
+function undoneCard(log) {
+  return section(
+    t("importUndoneTitle"),
+    h("p", { text: t("importUndoneText", { n: log.added || 0 }) }),
     h("p", { class: "help", text: t("importWhen", { when: date(log.at.slice(0, 10), "medium") }) }),
   );
 }

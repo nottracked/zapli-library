@@ -24,6 +24,7 @@ import {
   failed,
   confirm,
   categoryName,
+  blurActive,
 } from "../ui.mjs";
 import { toCents, fromCents, parseTypedAmount } from "../money.mjs";
 import { addDays, addMonths, isIsoDate } from "../dates.mjs";
@@ -404,6 +405,7 @@ function form(route) {
   };
 
   const save = async () => {
+    blurActive();
     const cents = parseTypedAmount(draft.amount);
     if (!draft.name.trim()) return (error.textContent = t("nameNeeded"));
     if (cents === null || cents <= 0) return (error.textContent = t("amountNeeded"));
@@ -432,11 +434,29 @@ function form(route) {
       matchKey: draft.matchKey || keyOf(draft.payee || draft.name) || null,
     };
     try {
-      if (existing) await store.update("recurring", existing.id, values);
-      else await store.add("recurring", values);
+      const before = existing ? { ...existing } : null;
+      const saved = existing
+        ? await store.update("recurring", existing.id, values)
+        : await store.add("recurring", values);
       prefill = null;
       ctx.back();
-      snack(existing ? t("savedChanges") : t("ruleAdded", { date: date(nextDue, "short") }));
+      const undo = before
+        ? () =>
+            store.update(
+              "recurring",
+              before.id,
+              Object.fromEntries(Object.keys(values).map((k) => [k, before[k] ?? null])),
+            )
+        : () => store.remove("recurring", saved.id);
+      snack(
+        before
+          ? t("ruleSaved", { name: values.name })
+          : t("ruleAdded", { name: values.name, date: date(nextDue, "short") }),
+        {
+          label: t("undo"),
+          run: () => undo().catch(failed),
+        },
+      );
     } catch (e) {
       failed(e);
     }

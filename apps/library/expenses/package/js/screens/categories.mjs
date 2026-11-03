@@ -21,6 +21,7 @@ import {
   confirm,
   dialog,
   chip,
+  blurActive,
 } from "../ui.mjs";
 import { ICON_CHOICES, COLOR_CHOICES, emojiOf, hueOf } from "../icons.mjs";
 import { parseTypedAmount, fromCents, toCents } from "../money.mjs";
@@ -269,6 +270,7 @@ function form(route) {
   };
 
   const save = async () => {
+    blurActive();
     const name = draft.name.trim();
     if (!name) return (error.textContent = t("nameNeeded"));
     if (store.categories.some((c) => c.id !== id && c.name.toLowerCase() === name.toLowerCase()))
@@ -343,7 +345,7 @@ function form(route) {
       await store.run("moveCategory", { from: existing.id, to: target });
       await store.remove("category", existing.id);
       if (store.live) await store.loadEntries();
-      ctx.go("#/categories", { replace: true });
+      ctx.back();
       snack(t("categoryMerged", { name: (store.categories.find((c) => c.id === target) || {}).name || "" }));
     } catch (e) {
       failed(e);

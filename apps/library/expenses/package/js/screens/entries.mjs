@@ -20,11 +20,14 @@ import {
   dialog,
   disc,
   accountDisc,
+  blurActive,
+  menu,
 } from "../ui.mjs";
 import { filterEntries, withChildren, allTags } from "../ledger.mjs";
 import { startOfMonth, endOfMonth, addMonths, startOfYear, endOfYear, isIsoDate, addDays } from "../dates.mjs";
 import { parseTypedAmount, fromCents } from "../money.mjs";
 import { toCsv } from "../csv.mjs";
+import { icon } from "../icons.mjs";
 import { fab } from "./home.mjs";
 
 const STEP = 200;
@@ -105,12 +108,21 @@ export function render(route) {
       actions: [
         iconButton("calendar", t("calendar"), () => ctx.go("#/calendar")),
         iconButton("filter", t("filters"), () => openFilters(new URLSearchParams(location.hash.split("?")[1] || ""))),
-        iconButton("exportFile", t("exportThese"), () =>
-          exportThese(filterEntries(store.model, filterOf(new URLSearchParams(location.hash.split("?")[1] || "")))),
-        ),
+        iconButton("more", t("moreActions"), async () => {
+          const picked = await menu(t("moreActions"), [
+            { id: "import", label: t("importCsv"), icon: "importFile" },
+            { id: "export", label: t("exportThese"), icon: "exportFile" },
+            { id: "settings", label: t("settings"), icon: "settings" },
+          ]);
+          const found = () =>
+            filterEntries(store.model, filterOf(new URLSearchParams(location.hash.split("?")[1] || "")));
+          if (picked === "import") ctx.go("#/import");
+          else if (picked === "export") exportThese(found());
+          else if (picked === "settings") ctx.go("#/settings");
+        }),
       ],
     }),
-    h("div", { class: "search" }, h("span", { class: "search-icon", "aria-hidden": "true" }, "🔍"), search),
+    h("div", { class: "search" }, h("span", { class: "search-icon", "aria-hidden": "true" }, icon("search")), search),
   ];
   const chips = activeChips(filter, params);
   if (chips.length)
@@ -261,6 +273,7 @@ function activeChips(filter, params) {
 
 /** The filter sheet: every choice at once, applied with one tap. */
 async function openFilters(params) {
+  blurActive();
   const store = ctx.store;
   const pick = {
     period: params.get("period") || (params.get("from") || params.get("to") ? "custom" : ""),
