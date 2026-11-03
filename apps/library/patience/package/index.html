@@ -162,10 +162,13 @@
                     </span>
                 </h1>
                 <div class="status" id="status" hidden>
-                    <div class="stat">
+                    <button type="button" class="stat stat-btn light-btn" id="btn-light">
                         <span class="lbl" data-t="moves">Moves</span>
-                        <b><span id="light" class="light" role="img" data-v="off"></span><span id="moves">0</span></b>
-                    </div>
+                        <b
+                            ><span id="light" class="light" data-v="off" aria-hidden="true"></span
+                            ><span id="moves">0</span></b
+                        >
+                    </button>
                     <div class="stat" id="stat-time">
                         <span class="lbl" data-t="time">Time</span><b id="time">0:00</b>
                     </div>
@@ -252,14 +255,14 @@
                     </ul>
                 </section>
                 <div id="table" class="table" role="region" data-t-label="cardTable" hidden></div>
+            </main>
+            <div class="band bottom" id="bottom" hidden>
                 <button type="button" class="first-help" id="first-help" hidden>
                     <svg class="ico" aria-hidden="true"><use href="#i-help" /></svg><span id="first-help-text"></span>
                 </button>
                 <button type="button" class="first-help" id="turn-tip" hidden>
-                    <svg class="ico" aria-hidden="true"><use href="#i-turn" /></svg><span data-t="turnTip"></span>
+                    <svg class="ico" aria-hidden="true"><use href="#i-turn" /></svg><span data-t="turnTipShort"></span>
                 </button>
-            </main>
-            <div class="band bottom" id="bottom" hidden>
                 <div id="verdict" class="verdict" hidden>
                     <span class="light" id="verdict-light" data-v="lost" aria-hidden="true"></span>
                     <span id="verdict-text" class="verdict-text"></span>
@@ -770,10 +773,10 @@
                 </div>
                 <p class="muted" id="win-record"></p>
             </div>
-            <div class="dlg-foot stack">
-                <button type="button" class="btn" id="win-close" data-t="close">Close</button>
-                <button type="button" class="btn" id="win-games" data-t="allGames">All games</button>
+            <div class="dlg-foot win-foot">
                 <button type="button" class="btn primary" id="win-new" data-t="newGame">New game</button>
+                <button type="button" class="btn quiet" id="win-games" data-t="allGames">All games</button>
+                <button type="button" class="btn quiet" id="win-close" data-t="close">Close</button>
             </div>
         </dialog>
     </body>

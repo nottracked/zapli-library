@@ -55,6 +55,7 @@ node apps/library/notes/dev/smoke-render.mjs preview             # the browser p
 SMOKE_LANG=sk-SK node apps/library/notes/dev/smoke-render.mjs live
 SMOKE_FONT=2 node apps/library/notes/dev/smoke-render.mjs live   # a doubled text size (the dock's words go)
 node apps/library/notes/dev/make-sample-data.mjs                 # prints the listing's sampleData
+node apps/library/notes/dev/check-characters.mjs                # no literal invisible characters in package/ and dev/
 ```
 
 The smoke test runs the page's code on a small stand-in for the DOM: it finds thrown errors and untranslated texts,

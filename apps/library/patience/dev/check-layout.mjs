@@ -1,7 +1,7 @@
 // Development only (not shipped): lays out each game's table at phone sizes (upright and sideways, each card size)
-// on the stand-in document and checks the geometry: every card inside the table, the stock, the waste and the cards
-// taken away clear of the tableau, and no two cards a tap can reach overlapping. It prints the card width per game
-// and size, the number that matters most for reading the cards.
+// on the stand-in document and checks the geometry: every card inside the table, the stock clear of the cards a tap
+// can reach, and no two of those overlapping (Peaks' rows upright fan out, each card showing at least 60 % of its
+// width). It prints the card width per game and size, the number that matters most for reading the cards.
 //
 //   node apps/library/patience/dev/check-layout.mjs
 //
@@ -63,10 +63,16 @@ for (const game of ["pyramid", "golf", "peaks"])
       const over = (a, b) => a.x < b.x + cw - 1 && b.x < a.x + cw - 1 && a.y < b.y + ch - 1 && b.y < a.y + ch - 1;
       const free = cards.filter((c) => c.free);
       for (const c of free) check(!over(c, { x: sx, y: sy }), `${where}: card ${c.id} is clear of the stock`);
-      // Two free cards may overlap only where one lies over the other in the deal (never in these layouts).
+      // Two free cards never overlap, but for Peaks' fanned rows upright: side by side in one row, each showing at
+      // least 60 % of its width (its rank and more).
       for (let i = 0; i < free.length; i++)
-        for (let j = i + 1; j < free.length; j++)
-          check(!over(free[i], free[j]), `${where}: free cards ${free[i].id} and ${free[j].id} do not overlap`);
+        for (let j = i + 1; j < free.length; j++) {
+          const a = free[i];
+          const b = free[j];
+          if (!over(a, b)) continue;
+          const fan = game === "peaks" && a.y === b.y && Math.abs(a.x - b.x) >= 0.6 * cw;
+          check(fan, `${where}: free cards ${a.id} and ${b.id} overlap only as a fanned row`);
+        }
       const chip = doc.querySelectorAll(".run-chip")[0];
       if (!chip.hidden) check(parseFloat(chip.style.left) >= 0, `${where}: the run chip lies inside`);
       report.push(`${where}: cards ${cw} × ${ch}`);

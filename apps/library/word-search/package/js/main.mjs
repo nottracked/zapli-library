@@ -36,7 +36,7 @@ const host = window.zapli;
 const $ = (id) => document.getElementById(id);
 const root = document.documentElement;
 const LANGS = ["sk", "en"];
-const GLYPH = { normal: 0.56, large: 0.64, largest: 0.72 };
+const GLYPH = { normal: 0.56, large: 0.65, largest: 0.74 };
 const OPEN_DAYS_KEPT = 10;
 const RECENT_MESSAGES = 24;
 
@@ -281,8 +281,15 @@ function notice(text, tone, undoable) {
   el.textContent = text || "";
   el.className = `notice ${tone || ""}`;
   $("btn-undo").hidden = !undoable;
-  $("ask").hidden = true;
+  hideAsk();
   $("first-help").hidden = true;
+}
+
+// The message slot holds two lines of a message at the phone's text size, measured, so a message never moves the
+// grid.
+function measureSlot() {
+  const h = $("notice-probe").getBoundingClientRect().height;
+  if (h > 0) root.style.setProperty("--slot", `${Math.ceil(h + 8)}px`);
 }
 
 function clearFeedback() {
@@ -304,6 +311,37 @@ function announce(text) {
     sr.textContent = text;
   }, 30);
 }
+
+// ---- Back: every open panel (the hint bar, a dialog) has an entry in the page's history, added in the tap that
+// opens it, so the phone's Back closes the panel first instead of leaving the game. An entry carries how many
+// panels were open, and Back closes those above it. A panel closed another way takes its own entry back.
+
+const layers = []; // [{ name, close }], the newest last
+
+function pushLayer(name, close) {
+  layers.push({ name, close });
+  try {
+    window.history.pushState({ wsDepth: layers.length }, "");
+  } catch (e) {
+    // no history in this page: the panel still closes with its own buttons
+  }
+}
+
+function dropLayer(name) {
+  const i = layers.findIndex((x) => x.name === name);
+  if (i < 0) return;
+  layers.splice(i, 1);
+  try {
+    window.history.back();
+  } catch (e) {
+    // as above
+  }
+}
+
+window.addEventListener("popstate", (e) => {
+  const depth = (e.state && Number.isInteger(e.state.wsDepth) && e.state.wsDepth) || 0;
+  while (layers.length > depth) layers.pop().close();
+});
 
 // ---- vibration (Zapli's haptics; a plain browser has none and skips it)
 
@@ -547,6 +585,7 @@ function switchLang(lang) {
   store.set("settings", settings);
   syncSettingsForm();
   openActive(lang);
+  if (game) notice(t(lang === "sk" ? "langNowSk" : "langNowEn"), "good");
 }
 
 // ---- playing
@@ -700,6 +739,7 @@ function renderWords() {
   }
   ul.appendChild(frag);
   strikeWord = null;
+  window.requestAnimationFrame(markMore);
   const msg = $("message-line");
   msg.hidden = !puzzle.message || state.done;
   if (puzzle.message) msg.textContent = tn("messageLine", hiddenMessageCells(puzzle).length);
@@ -710,15 +750,40 @@ $("word-list").addEventListener("click", (e) => {
   if (!btn || !game || game.state.done) return;
   const word = game.puzzle.words.find((x) => x.w === btn.dataset.w);
   if (!word) return;
-  clearFeedback();
   if (game.state.found.includes(word.w)) {
+    clearFeedback();
     board.flashFound(word.w);
     return;
   }
-  askHint(word);
+  // A tap opens the bar (and its history entry); a tap on another word while it is open only changes the word.
+  if ($("ask").hidden) {
+    clearFeedback();
+    pushLayer("ask", () => hideAsk(true));
+  } else $("notice").textContent = "";
+  askHint(word, e.detail === 0);
 });
 
-function askHint(word) {
+// The bar floats over the word list, just above the toolbar, measured each time it opens or the page changes size.
+function placeAsk() {
+  const bar = $("ask");
+  if (bar.hidden) return;
+  const tools = document.querySelector(".bottom").getBoundingClientRect();
+  const side = $("status").getBoundingClientRect();
+  const height = window.innerHeight || document.documentElement.clientHeight;
+  const width = window.innerWidth || document.documentElement.clientWidth;
+  bar.style.bottom = `${Math.max(8, height - tools.top + 8)}px`;
+  bar.style.left = `${Math.max(8, side.left)}px`;
+  bar.style.right = `${Math.max(8, width - side.right)}px`;
+}
+
+// A soft fade at the bottom of the word list while more of it is below.
+function markMore() {
+  const box = $("below");
+  box.classList.toggle("more", box.scrollHeight - box.scrollTop - box.clientHeight > 4);
+}
+$("below").addEventListener("scroll", markMore, { passive: true });
+
+function askHint(word, byKeyboard) {
   pendingWord = word;
   $("ask-word").textContent = game.puzzle.hideList ? t("askHidden", { n: word.n }) : displayWord(word.w);
   $("ask-word").lang = game.lang;
@@ -727,16 +792,20 @@ function askHint(word) {
   $("ask-where").disabled = level >= 2;
   $("first-help").hidden = true;
   $("ask").hidden = false;
+  placeAsk();
   document.querySelectorAll(".pill.picked").forEach((x) => x.classList.remove("picked"));
   const pill = $("word-list").querySelector(`.pill[data-w="${CSS.escape(word.w)}"]`);
   if (pill) pill.classList.add("picked");
-  (level >= 1 ? $("ask-where") : $("ask-first")).focus({ preventScroll: true });
+  // Keyboard users go straight to the choices; a finger's tap leaves the focus where it was.
+  if (byKeyboard) (level >= 1 ? $("ask-where") : $("ask-first")).focus({ preventScroll: true });
 }
 
-function hideAsk() {
+function hideAsk(fromBack) {
+  if ($("ask").hidden) return;
   pendingWord = null;
   $("ask").hidden = true;
   document.querySelectorAll(".pill.picked").forEach((x) => x.classList.remove("picked"));
+  if (!fromBack) dropLayer("ask");
 }
 
 // ---- hints
@@ -808,6 +877,7 @@ function refresh() {
   chip.textContent = game.kind === "daily" ? t("toEndless") : t("toToday");
   $("btn-hint").disabled = state.done;
   $("lang-code").textContent = game.lang.toUpperCase();
+  $("lang-name").textContent = t(game.lang === "sk" ? "wordsSk" : "wordsEn");
   $("btn-lang").setAttribute("aria-label", t(game.lang === "sk" ? "langToggleSk" : "langToggleEn"));
   $("btn-lang").title = $("btn-lang").getAttribute("aria-label");
   $("daily-dot").hidden = todayDone;
@@ -900,9 +970,11 @@ const returnFocus = new WeakMap();
 
 function openDialog(dlg) {
   if (dlg.open) return;
+  hideAsk();
   returnFocus.set(dlg, document.activeElement);
   if (typeof dlg.showModal === "function") dlg.showModal();
   else dlg.setAttribute("open", "");
+  pushLayer(dlg.id, () => closeDialog(dlg));
 }
 
 function closeDialog(dlg) {
@@ -916,6 +988,8 @@ function closeDialog(dlg) {
 
 document.querySelectorAll("dialog").forEach((dlg) => {
   dlg.addEventListener("close", () => {
+    // Closed by a button, the backdrop or the phone itself: take the dialog's history entry back.
+    dropLayer(dlg.id);
     const el = returnFocus.get(dlg);
     returnFocus.delete(dlg);
     if (el && el.isConnected && typeof el.focus === "function" && !document.querySelector("dialog[open]")) {
@@ -1181,6 +1255,7 @@ function onSetting(e) {
   } else return;
   store.set("settings", settings);
   applyLook();
+  measureSlot();
 }
 
 // ---- wiring
@@ -1249,8 +1324,16 @@ on("settings-done", () => closeDialog($("dlg-settings")));
 $("dlg-settings").addEventListener("change", onSetting);
 
 if (darkQuery && typeof darkQuery.addEventListener === "function") darkQuery.addEventListener("change", applyLook);
-if (typeof ResizeObserver === "function") new ResizeObserver(() => board.fit()).observe($("board-wrap"));
-else window.addEventListener("resize", () => board.fit());
+function relayout() {
+  board.fit();
+  placeAsk();
+  markMore();
+}
+if (typeof ResizeObserver === "function") {
+  const watch = new ResizeObserver(relayout);
+  watch.observe($("board-wrap"));
+  watch.observe($("below"));
+} else window.addEventListener("resize", relayout);
 
 // ---- life cycle: save when the app goes to the background
 
@@ -1302,6 +1385,16 @@ async function start() {
   i18n.setLang(uiLang());
   translatePage();
   applyLook();
+  measureSlot();
+  // A reload (rotation, a dark-mode switch) keeps the history entries of panels that were open: step back over them.
+  const stale = window.history && window.history.state && window.history.state.wsDepth;
+  if (Number.isInteger(stale) && stale > 0) {
+    try {
+      window.history.go(-stale);
+    } catch (e) {
+      // nothing to step over
+    }
+  }
   openActive(wordsLang());
 }
 

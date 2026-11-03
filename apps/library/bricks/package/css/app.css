@@ -259,6 +259,12 @@ button {
     gap: 14px;
 }
 
+/* Nothing in a scrolling column may be squeezed below its content: the column scrolls instead. */
+.home-scroll > *,
+.levels-scroll > * {
+    flex-shrink: 0;
+}
+
 .hero {
     position: relative;
     border-radius: var(--r-l);
@@ -271,6 +277,11 @@ button {
     box-shadow:
         var(--shadow-2),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+:root.big-text .hero {
+    /* With large text the picture gives way to the words. */
+    aspect-ratio: 3 / 1;
 }
 
 .hero canvas {
@@ -734,6 +745,10 @@ button {
     background: var(--kiln);
     color: var(--kiln-ink);
     color-scheme: dark;
+    /* A drag anywhere on the play screen moves the paddle; nothing scrolls or zooms under it. */
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .hud {
@@ -863,19 +878,26 @@ button {
 }
 
 @media (orientation: landscape) and (max-height: 560px) {
+    /* Turned sideways: the board takes the full height, centred, with a compact HUD at its left. */
     .play {
         flex-direction: row;
+        justify-content: center;
+        padding-left: var(--safe-l);
+        padding-right: var(--safe-r);
     }
     .hud {
+        flex: 0 1 auto;
         flex-direction: column;
         flex-wrap: nowrap;
-        align-items: stretch;
-        width: clamp(150px, 30vw, 260px);
-        padding: calc(var(--safe-t) + 8px) 10px calc(var(--safe-b) + 8px) max(10px, var(--safe-l));
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+        width: auto;
+        max-width: min(34vw, 15rem);
+        padding: calc(var(--safe-t) + 12px) 12px calc(var(--safe-b) + 12px) 8px;
         border-bottom: 0;
-        border-right: 1px solid rgba(255, 255, 255, 0.06);
+        background: transparent;
         overflow-y: auto;
-        background: #0b0a17;
     }
     .hud-title {
         flex: none;
@@ -884,8 +906,13 @@ button {
         align-items: flex-start;
     }
     .stage {
-        margin-right: var(--safe-r);
+        flex: 0 0 auto;
     }
+}
+
+:root.landscape .hero {
+    aspect-ratio: auto;
+    height: clamp(96px, 34vh, 170px);
 }
 
 /* ---- dialogs */
@@ -918,6 +945,7 @@ dialog.card {
 }
 
 .dlg-head {
+    flex-shrink: 0;
     padding: 22px 22px 6px;
 }
 
@@ -937,6 +965,7 @@ dialog.card {
 }
 
 .dlg-foot {
+    flex-shrink: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -968,6 +997,7 @@ dialog.sheet {
 }
 
 .sheet-head {
+    flex-shrink: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;

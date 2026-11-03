@@ -27,7 +27,7 @@
       "endless": "#/play/endless"
     },
     "files": {
-      "css/app.css": { "sha256": "34d227aed76ffd83cf242c17f5342372dc79850320e72b81448ba390e184f187", "size": 28705 },
+      "css/app.css": { "sha256": "80a04d2d29811f1ce54ba28c86555042d1fc7efe0da6924bdfc59d4414a8a76a", "size": 29525 },
       "index.html": { "sha256": "8336c9208e737ec5a6658cc37a7d6d48fb7626b3a494c504aae816523e75b47f", "size": 21135 },
       "js/audio/sound.mjs": {
         "sha256": "4a4db446f81fa34dd8ebcc3c46afa5813398ecdc5a53eeac8b2bbdc0eda45d28",
@@ -55,31 +55,31 @@
         "size": 1982
       },
       "js/game/game.mjs": {
-        "sha256": "375ab3afe2364766f3931fd5254ffe9f451ceea0182bc49424752426cc8bef73",
-        "size": 24229
+        "sha256": "b8f842079c52e210485c5c307501c0320f77d222a170d08b5166eb1fcbc88b50",
+        "size": 24547
       },
       "js/game/generate.mjs": {
         "sha256": "6d6336912c0d9d32ad229769919017452a08fd32134c0746d2f4d8a5b7b3f4ed",
         "size": 6127
       },
       "js/game/levels.mjs": {
-        "sha256": "5ee90b052ee20ffc7420cbbb4b1771d09ee1904a0afdc88d770b254856a08808",
+        "sha256": "d73af3c056fcf350648097b9adc957f3b6813e37f0a1854ac2549f2f263da422",
         "size": 16717
       },
       "js/game/physics.mjs": {
         "sha256": "c3b09de359751dbc21247ee27b21ba7f34fc6de43fbb8d87b81c472f12ecdb7d",
         "size": 5369
       },
-      "js/main.mjs": { "sha256": "1d36a3267f7cc0372873ff849527e1c728110f93d7d30c18fc734da033a961ec", "size": 55345 },
+      "js/main.mjs": { "sha256": "0bba90ed233ea12702b5002cd87fccecbad6982b7c12ae1d7c24c238219d294d", "size": 56885 },
       "js/render/renderer.mjs": {
         "sha256": "74a45ef923c44fc99c9721d03afc719ca045b7496cb6d307c178736fa3fb845d",
         "size": 23678
       },
       "js/render/sprites.mjs": {
-        "sha256": "61323bb1206b0fb672d5fe3ee83cf947b85decb07f3a75b069b0026de5887beb",
-        "size": 13223
+        "sha256": "20ee6ea6ec095f37e30bd871fa15fc8b1b5040bf40d0af886f8b8da3b338ae2e",
+        "size": 13611
       },
-      "js/ui/logo.mjs": { "sha256": "71ee656d7b41bf5e5a8fed751c5465b8a790be64b48c2765456ec66fab52964e", "size": 5318 },
+      "js/ui/logo.mjs": { "sha256": "818461127d6a3b40e6c5e76d674fda0e766f67a209c692af9d73adef4330f99f", "size": 5634 },
       "js/ui/progress.mjs": {
         "sha256": "12030e40bfa3808d522e54893410a8478706bb7b13849c655999a74cdfac60d7",
         "size": 6717

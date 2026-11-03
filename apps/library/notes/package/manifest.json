@@ -4,7 +4,7 @@
     "id": "library/notes",
     "kind": "web",
     "name": "Notes",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icon": "edit_note",
     "category": "productivity",
     "ageRating": "everyone",
@@ -259,11 +259,11 @@
     },
     "orientation": "any",
     "files": {
-      "css/app.css": { "sha256": "7ba39e0d2cb7167e27676c28cd97959987ccd8c27ffd878ed71784faffdab4e9", "size": 46640 },
+      "css/app.css": { "sha256": "6d37aca3a2d2d14552cc9e013900c0ecb7907c82c5ce709830297e846b91a44a", "size": 47555 },
       "index.html": { "sha256": "1fc4fbd9bd682f2a697701f9073ce25c3cdd079050c6100d3cc76a8d8aec729b", "size": 704 },
       "js/actions.mjs": { "sha256": "8e5bec17ba7b97aa9e00adda5a77ed7545345c337a28423b8c1ef3c1d5af5d9c", "size": 15586 },
       "js/app.mjs": { "sha256": "af7f6395dd268c8360d1d42ae3430f1eb6de82f3963989b8c3ddb3056768ec63", "size": 8718 },
-      "js/cards.mjs": { "sha256": "97109451e4bf8f1ad1bada8a3f0ab7018a73eeb7469faf106162ed8ed691d90c", "size": 11159 },
+      "js/cards.mjs": { "sha256": "fd00e6be2bfed93b2f5f6b3d1f89c6093a7f7a30da8097c361eca58cda9fb470", "size": 11689 },
       "js/drawer.mjs": { "sha256": "435696fe40e33c225ff033007e057734499960c600426c60d445568fa1c31ab5", "size": 3200 },
       "js/i18n.mjs": { "sha256": "e762456a75aa09f94d8e328f67da61a1efa0fdca3873b15b5f58990253773cff", "size": 29278 },
       "js/icons.mjs": { "sha256": "0e1c4722936541e6669aa5b4d70bf30357501a24bd8def1aa3d164d3cbdc95ae", "size": 6392 },
@@ -276,8 +276,8 @@
         "size": 40762
       },
       "js/screens/home.mjs": {
-        "sha256": "8eced918264625f51319ccb2d9cf432b2dd6988ca7b9efa6f7258aae552a8b92",
-        "size": 18505
+        "sha256": "960a152b3f5d0404169ccd330799bf2f983c00c0862e79c80ed0f8e4fadd10ec",
+        "size": 18511
       },
       "js/screens/labels.mjs": {
         "sha256": "d8ff8c4cff3d169170068c7a7d564a4153171912bf4e1e36b8fe7c798a7ab86b",

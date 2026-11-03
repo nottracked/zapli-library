@@ -2,7 +2,7 @@
 // process and fails on any exception:
 //  - every element the code looks up by id exists in index.html, once;
 //  - browser: the start screen, the level picker (a locked level explains itself), a level started, a drag and a lift
-//    that launch, Back that pauses and Back again that saves and leaves, Resume from the start screen;
+//    that launch, Back that pauses and Back again that plays on, Save and leave, Resume from the start screen;
 //  - clear: a saved game one brick from the end, resumed and cleared: three stars, the next level opens, Next level;
 //  - reload: a result on screen when the page reloads (the phone turned) is shown again, and only then;
 //  - over: a saved game on its last ball, lost: Out of balls, Try again starts afresh with three balls;
@@ -232,7 +232,9 @@ await advance(300);
 
 const shown = (name) => !$(`screen-${name}`).hidden;
 const pointer = (type, x, id = 1) =>
-  $("stage").dispatchEvent(new FakeEvent(type, { pointerId: id, clientX: x, clientY: 600, pointerType: "touch" }));
+  $("screen-play").dispatchEvent(
+    new FakeEvent(type, { pointerId: id, clientX: x, clientY: 600, pointerType: "touch" }),
+  );
 
 if (scenario === "browser") {
   check(shown("home") && !shown("play") && !shown("levels"), "the start screen is not the one shown at start");
@@ -276,10 +278,23 @@ if (scenario === "browser") {
   await advance(100);
   check($("dlg-pause").open, "Back during play did not pause");
   check(env.win.location.hash === "#/play/level/1-1", `after the first Back the page is at ${env.win.location.hash}`);
-  // Back again (Zapli closes the open dialog): the game is saved and the page leaves.
+  // Back on the pause card (in Zapli, Back closes the open card): the game plays on.
   $("dlg-pause").close();
   await advance(200);
-  check(shown("levels"), "Back on the pause card did not return to the level picker it came from");
+  check(shown("play") && !$("dlg-pause").open, "Back on the pause card did not play on");
+  check(env.win.location.hash === "#/play/level/1-1", `after Back on the card the page is at ${env.win.location.hash}`);
+  // In a browser Back moves through the history instead: the first pauses, the second plays on too.
+  env.win.history.back();
+  await advance(100);
+  check($("dlg-pause").open, "a second Back during play did not pause");
+  env.win.history.back();
+  await advance(100);
+  check(shown("play") && !$("dlg-pause").open, "a browser's Back on the pause card did not play on");
+  // Leaving is the card's own button: the game is saved and the page returns to the picker it came from.
+  $("btn-pause").click();
+  $("pause-leave").click();
+  await advance(200);
+  check(shown("levels"), "Save and leave did not return to the level picker it came from");
   $("btn-levels-back").click();
   await advance(200);
   check(shown("home"), "Back from the level picker did not return to the start screen");

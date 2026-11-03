@@ -16,6 +16,8 @@ export const DURATION = { wide: 20, slow: 12, sticky: 18, sparks: 10, molten: 8,
 const WEIGHT = { wide: 3, multi: 3, slow: 2, sticky: 2, sparks: 2, molten: 1.5, guard: 1.5, life: 0.6 };
 
 const MAX_BALLS = 12;
+/** At most this many bricks break in a row without a power-up, so every player meets them early and often. */
+const BEAD_EVERY = 8;
 const MAX_BEADS = 3;
 const MAX_LIVES = 5;
 /** A ball that touches neither the paddle nor a breakable tile for this long gets a small turn, so it never loops. */
@@ -78,6 +80,7 @@ export function createGame(opts) {
     lost: 0,
     broken: 0,
     caught: 0,
+    sinceBead: 0,
     sparkT: 0,
     events: [],
   };
@@ -465,7 +468,9 @@ export function damage(game, b, n, by) {
   game.score += points;
   emit(game, "break", { x: cx, y: cy, brick: b.id, glaze: b.glaze, kind: b.kind, points, mult, combo: game.combo, by });
   if (b.kind === "ember") game.embers.push({ at: game.t + 0.09, x: cx, y: cy });
-  if (b.kind === "gift" || (game.beads.length < MAX_BEADS && nextRandom(game) < game.drop)) dropBead(game, cx, cy);
+  game.sinceBead += 1;
+  const lucky = nextRandom(game) < game.drop || game.sinceBead >= BEAD_EVERY;
+  if (game.power.length && (b.kind === "gift" || (game.beads.length < MAX_BEADS && lucky))) dropBead(game, cx, cy);
 }
 
 function burstEmbers(game) {
@@ -502,6 +507,7 @@ function dropBead(game, x, y) {
       break;
     }
   }
+  game.sinceBead = 0;
   game.beads.push({ x, y, type, t: 0 });
   emit(game, "bead", { x, y, power: type });
 }
@@ -681,6 +687,7 @@ export function snapshot(game) {
     lost: game.lost,
     broken: game.broken,
     caught: game.caught,
+    sinceBead: game.sinceBead,
     sparkT: game.sparkT,
   };
 }
@@ -733,7 +740,7 @@ export function restoreGame(opts, snap) {
   game.embers = (snap.embers || []).map((e) => ({ at: num(e.at, 0), x: num(e.x, 0), y: num(e.y, 0) }));
   for (const k of Object.keys(game.timers)) game.timers[k] = Math.max(0, num(snap.timers && snap.timers[k], 0));
   game.slowF = clamp(num(snap.slowF, 1), SLOW, 1);
-  for (const k of ["hits", "combo", "bestCombo", "score", "lost", "broken", "caught", "sparkT"])
+  for (const k of ["hits", "combo", "bestCombo", "score", "lost", "broken", "caught", "sinceBead", "sparkT"])
     game[k] = num(snap[k], 0);
   game.lives = clamp(Math.round(num(snap.lives, 3)), 1, MAX_LIVES);
   placeMoves(game);

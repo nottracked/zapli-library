@@ -148,6 +148,23 @@ for (const lang of ["en", "sk"]) {
   }
 }
 
+// The first puzzles mix their directions: on average no direction holds more than 60 % of a puzzle's words.
+for (const lang of ["en", "sk"]) {
+  let share = 0;
+  let count = 0;
+  for (const theme of library(lang).themes) {
+    for (let k = 1; k <= 3; k++) {
+      const p = generate({ lang, themeId: theme.id, size: 7, dirs: "b", seed: k * 31, withMessage: true });
+      const by = {};
+      for (const x of p.words) by[x.d] = (by[x.d] || 0) + 1;
+      share += Math.max(...Object.values(by)) / p.words.length;
+      count++;
+    }
+  }
+  if (share / count > 0.6)
+    fail(`${lang}: first puzzles lean on one direction (${((100 * share) / count).toFixed(0)} %)`);
+}
+
 // Words not found yet come first.
 {
   const theme = library("en").byId.get("fruit");
@@ -185,8 +202,9 @@ for (const lang of ["en", "sk"]) {
 }
 eq(dailySpec("2026-11-02").size, 8, "Monday's daily puzzle is 8 × 8");
 eq(dailySpec("2026-11-08").size, 12, "Sunday's daily puzzle is 12 × 12");
-eq(endlessSpec(0, "grow"), { size: 6, dirs: "a", hideList: false }, "the first endless puzzle");
+eq(endlessSpec(0, "grow"), { size: 7, dirs: "b", hideList: false }, "the first endless puzzle mixes in a diagonal");
 eq(endlessSpec(45, "grow").size, 12, "endless puzzles grow to 12 × 12");
+eq(endlessSpec(12, "grow").dirs, "e", "all eight directions by the 13th puzzle");
 eq(endlessSpec(0, "hard"), { size: 12, dirs: "e", hideList: true }, "hard puzzles hide the list");
 
 // ---- play: selections and hints

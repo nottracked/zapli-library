@@ -1,6 +1,9 @@
 // The guess being typed: one place per letter of the word, some of them empty, and the place the next letter goes
 // to (the caret). Tapping a place moves the caret there, so a letter in the middle can be changed without deleting
-// the ones after it. No DOM: the page and the checks in dev/ share it.
+// the ones after it. A given letter (the hint's) stays in its place, and neither Delete nor clearing takes it away.
+// The caret stops on it like on an empty place: typing that same letter there moves on (for a player who types the
+// whole word), and typing another letter writes it into the next empty place (for one who types around it). No DOM:
+// the page and the checks in dev/ share it.
 //
 // Slovak CH is one letter: a C followed by an H typed next to it becomes CH, as the spelling always means.
 
@@ -46,6 +49,8 @@ export function createDraft(length, lang) {
   let caret = 0;
   // The place of the letter typed last, while it is the latest change (the accent strip offers its accents).
   let last = -1;
+  // Places whose letter was given (the hint's), with that letter: they stay as they are.
+  const given = new Map();
 
   const firstEmpty = (from) => {
     for (let k = 0; k < length; k++) {
@@ -53,6 +58,11 @@ export function createDraft(length, lang) {
       if (places[i] === null) return i;
     }
     return length;
+  };
+  // The place the caret goes to after `from`: the next one that is empty or given, else the first empty one.
+  const nextSpot = (from) => {
+    for (let i = from; i < length; i++) if (places[i] === null || given.has(i)) return i;
+    return firstEmpty(0);
   };
 
   return {
@@ -79,30 +89,44 @@ export function createDraft(length, lang) {
     get last() {
       return last;
     },
+    /** Whether a place holds a given letter. */
+    isGiven(i) {
+      return given.has(i);
+    },
     /** Puts a letter at the caret; returns false when every place is full and the caret is past the end. */
     type(tile) {
       if (lang === "sk" && tile === "h" && last >= 0 && places[last] === "c") {
         places[last] = "ch";
         return true;
       }
+      if (caret < length && given.has(caret)) {
+        if (tile === given.get(caret)) {
+          last = -1;
+          caret = nextSpot(caret + 1);
+          return true;
+        }
+        caret = firstEmpty(caret);
+      }
       if (caret >= length) return false;
       places[caret] = tile;
       last = caret;
-      caret = firstEmpty(caret + 1);
+      caret = nextSpot(caret + 1);
       return true;
     },
     /** Replaces the letter at a place (an accent picked for the letter just typed). */
     replace(i, tile) {
-      if (i < 0 || i >= length || places[i] === null) return false;
+      if (i < 0 || i >= length || places[i] === null || given.has(i)) return false;
       places[i] = tile;
       return true;
     },
-    /** Puts a letter into an empty place (the hint's letter); a caret on that place moves to the next empty one. */
-    put(i, tile) {
-      if (i < 0 || i >= length || places[i] !== null) return false;
+    /**
+     * Gives a letter (the hint's): it goes into its place at once, over any letter typed there, and stays.
+     */
+    give(i, tile) {
+      if (i < 0 || i >= length) return false;
       places[i] = tile;
+      given.set(i, tile);
       last = -1;
-      if (caret === i) caret = firstEmpty(i + 1);
       return true;
     },
     /**
@@ -111,38 +135,42 @@ export function createDraft(length, lang) {
      */
     back() {
       last = -1;
-      if (caret < length && places[caret] !== null) {
+      if (caret < length && places[caret] !== null && !given.has(caret)) {
         places[caret] = null;
         return true;
       }
       for (let i = Math.min(caret, length) - 1; i >= 0; i--) {
-        if (places[i] !== null) {
+        if (places[i] !== null && !given.has(i)) {
           places[i] = null;
           caret = i;
+          // Given letters just before stay ahead of the caret, so the word can be typed again from them.
+          while (caret > 0 && given.has(caret - 1)) caret--;
           return true;
         }
       }
       return false;
     },
-    /** Moves the caret to a place. */
+    /** Moves the caret to a place (not to a given letter, which stays). */
     select(i) {
-      if (i >= 0 && i < length) {
+      if (i >= 0 && i < length && !given.has(i)) {
         caret = i;
         last = -1;
       }
     },
+    /** Takes back every typed letter; given letters stay. */
     clear() {
-      places = new Array(length).fill(null);
-      caret = 0;
+      places = places.map((p, i) => (given.has(i) ? p : null));
+      caret = nextSpot(0);
       last = -1;
     },
-    /** Fills the draft with a whole word (a suggested base form). */
+    /** Fills the draft with a whole word (a suggested base form); a given letter the word does not keep is let go. */
     fill(tiles) {
       places = new Array(length).fill(null);
       tiles.slice(0, length).forEach((t, i) => {
         places[i] = t;
       });
-      caret = firstEmpty(0);
+      for (const [i, tile] of Array.from(given)) if (places[i] !== tile) given.delete(i);
+      caret = nextSpot(0);
       last = -1;
     },
     /** What the page saves: the places, with "" for an empty one. */
@@ -151,8 +179,11 @@ export function createDraft(length, lang) {
     },
     load(saved) {
       if (!saved || !Array.isArray(saved.p) || saved.p.length !== length) return;
-      places = saved.p.map((p) => (typeof p === "string" && ALPHABETS[lang].includes(p) ? p : null));
-      caret = Number.isInteger(saved.c) && saved.c >= 0 && saved.c <= length ? saved.c : firstEmpty(0);
+      places = saved.p.map((p, i) => {
+        if (given.has(i)) return places[i];
+        return typeof p === "string" && ALPHABETS[lang].includes(p) ? p : null;
+      });
+      caret = Number.isInteger(saved.c) && saved.c >= 0 && saved.c <= length ? saved.c : nextSpot(0);
     },
   };
 }

@@ -56,7 +56,10 @@
         <div class="app" id="app">
             <header class="band top">
                 <h1 class="brand" data-t="appName">Word Search</h1>
-                <button type="button" class="lang-btn" id="btn-lang"><span id="lang-code">EN</span></button>
+                <button type="button" class="lang-btn" id="btn-lang">
+                    <span class="lang-code" id="lang-code" aria-hidden="true">EN</span
+                    ><span class="lang-name" id="lang-name"></span>
+                </button>
                 <div class="tools">
                     <button type="button" class="icon-btn" id="btn-stats" data-t-label="statistics">
                         <svg class="ico" aria-hidden="true"><use href="#i-stats" /></svg>
@@ -77,46 +80,48 @@
                         <p class="mode" id="mode-label"></p>
                     </div>
                     <div class="status-side">
-                        <span class="clock" id="clock" hidden></span>
-                        <span class="progress" id="progress"></span>
+                        <span class="nums"
+                            ><span class="clock" id="clock" hidden></span><span class="progress" id="progress"></span
+                        ></span>
+                        <button type="button" class="chip" id="btn-switch"></button>
                     </div>
-                    <button type="button" class="chip" id="btn-switch"></button>
                 </div>
 
                 <div class="board-wrap" id="board-wrap">
                     <div class="frame">
                         <div class="board" id="board" tabindex="0" role="application">
                             <svg class="caps" aria-hidden="true" focusable="false"></svg>
-                            <div class="letters" aria-hidden="true"></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="feedback" id="feedback">
+                    <p class="notice probe" id="notice-probe" aria-hidden="true">M<br />M</p>
                     <div class="notice-row">
                         <p id="notice" class="notice" role="status" aria-live="polite"></p>
                         <button type="button" class="btn small" id="btn-undo" hidden data-t="undo">Undo</button>
-                    </div>
-                    <div id="ask" class="ask" hidden>
-                        <span class="ask-word" id="ask-word"></span>
-                        <span class="ask-buttons">
-                            <button type="button" class="btn small" id="ask-first">
-                                <svg class="ico" aria-hidden="true"><use href="#i-letter" /></svg
-                                ><span data-t="hintFirstBtn">First letter</span>
-                            </button>
-                            <button type="button" class="btn small" id="ask-where">
-                                <svg class="ico" aria-hidden="true"><use href="#i-where" /></svg
-                                ><span data-t="hintWhereBtn">Show where</span>
-                            </button>
-                            <button type="button" class="icon-btn quiet" id="ask-cancel" data-t-label="cancel">
-                                <svg class="ico" aria-hidden="true"><use href="#i-close" /></svg>
-                            </button>
-                        </span>
                     </div>
                     <button type="button" class="first-help" id="first-help" hidden>
                         <svg class="ico" aria-hidden="true"><use href="#i-help" /></svg
                         ><span data-t="firstHelp">New here? How to play in 15 seconds</span>
                     </button>
+                </div>
+
+                <div id="ask" class="ask" role="group" aria-labelledby="ask-word" hidden>
+                    <span class="ask-word" id="ask-word"></span>
+                    <span class="ask-buttons">
+                        <button type="button" class="btn small" id="ask-first">
+                            <svg class="ico" aria-hidden="true"><use href="#i-letter" /></svg
+                            ><span data-t="hintFirstBtn">First letter</span>
+                        </button>
+                        <button type="button" class="btn small" id="ask-where">
+                            <svg class="ico" aria-hidden="true"><use href="#i-where" /></svg
+                            ><span data-t="hintWhereBtn">Show where</span>
+                        </button>
+                        <button type="button" class="icon-btn quiet" id="ask-cancel" data-t-label="cancel">
+                            <svg class="ico" aria-hidden="true"><use href="#i-close" /></svg>
+                        </button>
+                    </span>
                 </div>
 
                 <div class="below" id="below">

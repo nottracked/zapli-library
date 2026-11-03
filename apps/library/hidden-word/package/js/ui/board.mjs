@@ -98,9 +98,10 @@ export function createBoard(els, { t, onSlot }) {
 
   /**
    * Shows the guess being typed: `places` the letters (null for an empty place), `caret` the place the next letter
-   * goes to, `known` the letters known in their places (from earlier guesses and the hint), `hinted` the hint's place.
+   * goes to, `known` the letters known in their places (from earlier guesses and the hint), `given` the place of the
+   * hint's letter while it stands given in the guess (-1 for none).
    */
-  function setDraft(places, caret, known, hinted, typedAt, editable) {
+  function setDraft(places, caret, known, given, typedAt, editable) {
     const buttons = slots.querySelectorAll(".slot");
     buttons.forEach((b, i) => {
       const tile = places[i];
@@ -109,7 +110,7 @@ export function createBoard(els, { t, onSlot }) {
       ch.textContent = (tile || known[i] || "").toUpperCase();
       b.classList.toggle("filled", Boolean(tile));
       b.classList.toggle("ghost", Boolean(ghost));
-      b.classList.toggle("hinted", i === hinted);
+      b.classList.toggle("given", i === given);
       b.classList.toggle("caret", editable && i === caret);
       b.classList.toggle("typed", i === typedAt);
       b.disabled = !editable;
@@ -118,7 +119,10 @@ export function createBoard(els, { t, onSlot }) {
         : known[i]
           ? t("slotKnown", { letter: known[i].toUpperCase() })
           : t("slotEmpty");
-      b.setAttribute("aria-label", t("slotLabel", { n: i + 1, state }));
+      b.setAttribute(
+        "aria-label",
+        i === given ? t("slotGiven", { n: i + 1, letter: tile.toUpperCase() }) : t("slotLabel", { n: i + 1, state }),
+      );
       if (i === caret && editable) b.setAttribute("aria-current", "true");
       else b.removeAttribute("aria-current");
     });
@@ -148,7 +152,7 @@ export function createBoard(els, { t, onSlot }) {
     buttons.forEach((b, i) => {
       const ch = b.querySelector(".ch");
       ch.textContent = (answerTiles[i] || "").toUpperCase();
-      b.classList.remove("ghost", "caret", "typed", "hinted");
+      b.classList.remove("ghost", "caret", "typed", "given");
       b.classList.add(state === "won" ? "win" : "reveal");
       b.style.animationDelay = still ? "" : `${i * 70}ms`;
       b.disabled = true;

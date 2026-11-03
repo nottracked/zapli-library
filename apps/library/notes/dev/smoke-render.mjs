@@ -692,11 +692,33 @@ await systemBack();
 await sleep(60);
 
 // Selection: long press, then move to the trash, then restore from the trash.
+// A finger's long press as Android sends it: the timer selects and redraws the list, then the late contextmenu and
+// the finger's lift reach the new card, and neither may undo the selection.
 const card = cardFor("plumber").querySelector(".card-hit");
-card.dispatch("contextmenu");
+card.dispatch("pointerdown", { pointerType: "touch" });
+await sleep(470);
+assert.ok(history.state && history.state.select, "a long press selects");
+const redrawn = cardFor("plumber").querySelector(".card-hit");
+assert.notEqual(redrawn, card, "the list was drawn again");
+await sleep(50);
+redrawn.dispatch("contextmenu", { pointerType: "touch" });
+redrawn.dispatch("pointerup", { pointerType: "touch" });
+redrawn.click();
+await sleep(60);
+assert.ok(history.state && history.state.select, "the late contextmenu and the lift keep the selection");
+assert.equal(all(".card.selected").length, 1, "one note is selected");
+// Another tap a moment later selects a second note, and a second tap takes it out again.
+await sleep(600);
+cardFor(lang === "sk" ? "Palacinky" : "Pancakes")
+  .querySelector(".card-hit")
+  .click();
 await sleep(40);
-assert.ok(history.state.select, "a long press selects");
-assert.ok(all(".card.selected").length === 1);
+assert.equal(all(".card.selected").length, 2, "a tap adds a note to the selection");
+cardFor(lang === "sk" ? "Palacinky" : "Pancakes")
+  .querySelector(".card-hit")
+  .click();
+await sleep(40);
+assert.equal(all(".card.selected").length, 1, "a second tap takes it out");
 await tap(T.delete);
 await sleep(80);
 assert.ok(zapli.tables.note.find((n) => n.id === made.id).trashedAt, "the note is in the trash");

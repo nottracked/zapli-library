@@ -72,6 +72,7 @@ for (const [prefix, keys] of Object.entries(SHORT)) {
       "moreRules",
       "tldrTip2",
       "turnTip",
+      "turnTipShort",
       "sidewaysNote",
     ]) {
       const v = lang[k];

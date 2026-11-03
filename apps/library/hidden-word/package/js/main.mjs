@@ -417,6 +417,8 @@ function show(code, g) {
   lang = code;
   game = g;
   draft = createDraft(g.len, code);
+  // The hint's letter is given before the saved guess comes back, so it keeps its place.
+  if (g.hint && !g.done) draft.give(g.hint.pos, g.hint.tile);
   if (g.draft) draft.load(g.draft);
   setLoading(false);
   board.setLength(g.len);
@@ -465,8 +467,7 @@ function render() {
   board.setLeft(
     game.done ? "" : game.max ? tn("guessesLeft", Math.max(0, game.max - used)) : t("guessNumber", { n: used + 1 }),
   );
-  const hinted = game.hint ? game.hint.pos : -1;
-  board.setDraft(draft.places, draft.caret, known.places, hinted, draft.last, !game.done);
+  board.setDraft(draft.places, draft.caret, known.places, givenPlace(), draft.last, !game.done);
   $("lock").setAttribute(
     "aria-label",
     t("lockLabel", {
@@ -658,10 +659,15 @@ function pickSlot(i) {
   afterDraft();
 }
 
+/** The place of the hint's letter while it stands given in the guess being typed, else -1. */
+function givenPlace() {
+  return game && game.hint && draft.isGiven(game.hint.pos) ? game.hint.pos : -1;
+}
+
 function afterDraft() {
   const ans = answerTiles(game);
   const known = knowledge(game.guesses, ans, game.hint);
-  board.setDraft(draft.places, draft.caret, known.places, game.hint ? game.hint.pos : -1, draft.last, true);
+  board.setDraft(draft.places, draft.caret, known.places, givenPlace(), draft.last, true);
   $("lock").setAttribute(
     "aria-label",
     t("lockLabel", {
@@ -813,14 +819,15 @@ function useHint() {
   const pos = hintPlace(game.guesses, ans, null);
   if (pos < 0) return;
   game.hint = { pos, tile: ans[pos] };
-  // The hinted letter goes into its place in the guess being typed, when that place is free.
-  if (draft.places[pos] === null) draft.put(pos, ans[pos]);
+  // The hinted letter goes into its place at once, over any letter typed there, and stays for every later guess.
+  draft.give(pos, ans[pos]);
   buzz("medium");
   render();
   notice(t("hintShown", { n: pos + 1, letter: ans[pos].toUpperCase() }), "good");
-  // The hinted letter drops into its place.
+  // The given letter drops into its place.
   const known = knowledge(game.guesses, ans, game.hint);
   board.setDraft(draft.places, draft.caret, known.places, pos, pos, true);
+  $("btn-try").classList.toggle("ready", draft.full);
   saveGame(true);
 }
 
@@ -864,6 +871,8 @@ async function switchLang(code) {
   const kind = game ? game.kind : "daily";
   if (kind === "practice") await openPractice(code);
   else await openDaily(code, today());
+  // The word list and the keyboard both changed: say so, until the next action.
+  if (game && lang === code) notice(t(code === "sk" ? "switchedSk" : "switchedEn"), "good");
 }
 
 async function switchLength(n) {
@@ -920,26 +929,39 @@ function showShareBox(text) {
 
 // ---- fitting the board to its space
 
+const SIDEWAYS = "(orientation: landscape) and (min-width: 36rem) and (max-height: 34rem)";
+
 function fit() {
   if (!game) return;
   const n = game.len;
   const log = $("log");
   const w = log.clientWidth;
   const h = log.clientHeight;
-  // The log: room for every guess a word gets (at most 8 rows; with no limit, 6) before it scrolls. A card is its
-  // chips plus a padding of about an eighth of a chip above and below; beside them, its number and paddings.
+  // The log: room for every guess a word gets (at most 8 rows; with no limit, 6) before it scrolls. A row is its
+  // chips, the card's padding (5 px above and below) and the gap to the next card (6 px); the log's own padding is
+  // 12 px; beside the chips, the card's number and paddings.
   const rows = game.max ? Math.min(game.max, 8) : 6;
   const byW = (w - 52 - (n - 1) * 6) / n;
-  const byH = (h - (rows - 1) * 6) / (rows * 1.26);
+  const byH = Math.floor((h - 12 - (rows - 1) * 6) / rows) - 10 - 1;
   const chip = Math.max(24, Math.min(52, Math.floor(Math.min(byW, byH))));
   log.style.setProperty("--chip", `${chip}px`);
   // The marks' key under the first word's line shows only where the log has room for it.
   $("start-legend").classList.toggle("squeezed", h < 240);
-  // The lock: as large as its width allows, and smaller on a short screen, so the guesses keep their room.
+  // The lock: as large as its width allows. Upright, a short screen makes it smaller so the guesses keep their room.
+  // Sideways, it shares its column with the keyboard: it takes what is left above keys of at least 38 px, the action
+  // row and the message line, so the column has no empty band.
   const pw = $("slots").parentElement.clientWidth - 24;
   const byWidth = (pw - (n - 1) * 8) / n;
   const tall = window.innerHeight || 700;
-  const slot = Math.max(32, Math.min(64, Math.floor(Math.min(byWidth, tall * 0.07))));
+  const sideways = Boolean(window.matchMedia && window.matchMedia(SIDEWAYS).matches);
+  let byHeight = tall * 0.07;
+  if (sideways) {
+    const column = tall - document.querySelector(".top").offsetHeight;
+    const below = 3 * 38 + 2 * 6 + 40 + 6 + 22 + $("dock").querySelector(".feedback").offsetHeight;
+    // The lock is about 1.7 places high (the shackle's room and the place itself) plus 34 px of plate.
+    byHeight = (column - below - 34 - 8) / 1.7;
+  }
+  const slot = Math.max(32, Math.min(64, Math.floor(Math.min(byWidth, byHeight))));
   $("lock").style.setProperty("--slot", `${slot}px`);
   board.scrollEnd();
 }
@@ -1210,7 +1232,34 @@ on("btn-switch", () => {
   else openPractice(lang);
 });
 on("btn-hint", useHint);
-on("btn-back", backspace);
+// Delete takes back one letter; held, it takes back the whole guess (a given letter stays).
+let backHold = 0;
+let backHeld = false;
+$("btn-back").addEventListener("pointerdown", (e) => {
+  if (e.button > 0) return;
+  backHeld = false;
+  window.clearTimeout(backHold);
+  backHold = window.setTimeout(() => {
+    if (!game || game.done) return;
+    backHeld = true;
+    draft.clear();
+    buzz("medium");
+    clearNotice();
+    afterDraft();
+  }, 450);
+});
+for (const type of ["pointerup", "pointercancel", "pointerleave"]) {
+  $("btn-back").addEventListener(type, () => window.clearTimeout(backHold));
+}
+$("btn-back").addEventListener("contextmenu", (e) => e.preventDefault());
+on("btn-back", () => {
+  // The click that ends a hold has done its work already.
+  if (backHeld) {
+    backHeld = false;
+    return;
+  }
+  backspace();
+});
 on("btn-try", submit);
 on("btn-next", nextWord);
 on("btn-share", shareResult);

@@ -6,6 +6,7 @@
 //    lost are printed, a rough measure of difficulty);
 //  - a year of daily levels and 40 endless waves: each is made, has enough tiles, has nothing walled in, and the bot
 //    clears a sample of them;
+//  - power-ups in the first levels: one drops within the first 8 bricks, and several in each level;
 //  - a saved game restores to the same state and plays on the same way.
 // Run: node dev/check-levels.mjs [--quick]
 import * as A from "../package/js/game/arena.mjs";
@@ -84,6 +85,40 @@ for (const l of LEVELS) {
   );
 }
 console.log(report.join("\n"));
+
+// ---- power-ups in the first levels: a new player meets one within the first few bricks, and several a level
+{
+  const lines = [];
+  for (const id of ["1-1", "1-2", "1-3"]) {
+    const l = LEVELS.find((x) => x.id === id);
+    const world = worldOf(l);
+    let drops = 0;
+    let caught = 0;
+    let worstFirst = 0;
+    const runs = 10;
+    for (let seed = 1; seed <= runs; seed++) {
+      const game = createGame({ def: l, speed: world.speed, power: world.power, drop: world.drop, seed, lives: 99 });
+      play(game, 600);
+      let breaks = 0;
+      let first = null;
+      for (const ev of game.events) {
+        if (ev.type === "break") breaks++;
+        if (ev.type === "bead") {
+          drops++;
+          if (first === null) first = breaks;
+        }
+      }
+      caught += game.caught;
+      if (first === null) fail(`level ${id}, seed ${seed}: no power-up dropped`);
+      else worstFirst = Math.max(worstFirst, first);
+    }
+    if (worstFirst > 8) fail(`level ${id}: the first power-up came only after ${worstFirst} bricks`);
+    lines.push(
+      `${id}: ${(drops / runs).toFixed(1)} power-ups dropped a level (${(caught / runs).toFixed(1)} caught by the bot), the first within ${worstFirst} bricks`,
+    );
+  }
+  console.log(lines.join("\n"));
+}
 
 // ---- made levels
 const start = "2026-11-03";

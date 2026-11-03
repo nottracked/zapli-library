@@ -5,9 +5,10 @@
 // nearest of the eight directions, so a finger a little off the line still selects it. The arrow keys move a
 // cursor over the grid, and Enter or Space works as a tap.
 //
-// Sizes: the grid fills the largest square that fits its box (the page calls fit() when the box changes). The SVG
-// draws in units of 100 a square; letters are HTML, sized from the square's size and divided by the phone's text
-// size (--tz), so a large text setting never pushes a letter out of its square.
+// Sizes: the grid fills the largest square that fits its box (the page calls fit() when the box changes). One SVG
+// draws everything in units of 100 a square: the capsules, the hint marks, the selection and, on top, the letters.
+// SVG text keeps the size it is given whatever the phone's text size, so a letter always fills its square by the
+// same share (the Letter size setting), never more and never less.
 
 import { STEP } from "../search/generator.mjs";
 
@@ -70,13 +71,14 @@ export function snapEnd(size, start, x, y) {
 
 export function createBoard(root, { onSelect, onCursor, labels }) {
   const caps = root.querySelector(".caps");
-  const grid = root.querySelector(".letters");
   const layerFound = svgEl("g", { class: "found" });
   const layerMarks = svgEl("g", { class: "marks" });
+  const layerDots = svgEl("g", { class: "dots" });
+  const grid = svgEl("g", { class: "letters" });
   const sel = svgEl("line", { class: "sel", x1: 0, y1: 0, x2: 0, y2: 0 });
   const anchorMark = svgEl("circle", { class: "anchor", r: U * 0.42, cx: -U, cy: -U });
   const cursorMark = svgEl("rect", { class: "cursor", width: U - 8, height: U - 8, rx: 22, x: -U, y: -U });
-  caps.append(layerFound, layerMarks, sel, anchorMark, cursorMark);
+  caps.append(layerFound, layerMarks, sel, anchorMark, layerDots, grid, cursorMark);
 
   let size = 0;
   let cells = [];
@@ -121,21 +123,21 @@ export function createBoard(root, { onSelect, onCursor, labels }) {
     caps.setAttribute("viewBox", `0 0 ${size * U} ${size * U}`);
     grid.textContent = "";
     cells = puzzle.grid.map((tile, i) => {
-      const span = document.createElement("span");
-      span.className = tile.length > 1 ? "l two" : "l";
-      span.textContent = tile.toUpperCase();
-      span.dataset.i = String(i);
-      grid.appendChild(span);
-      return span;
+      const [x, y] = centre(size, i);
+      const text = svgEl("text", { class: tile.length > 1 ? "l two" : "l", x, y });
+      text.textContent = tile.toUpperCase();
+      grid.appendChild(text);
+      return text;
     });
     layerFound.textContent = "";
     layerMarks.textContent = "";
+    layerDots.textContent = "";
     foundEls = new Map();
     for (const f of found) addFound(f.cells, f.word, f.colour, false);
     anchor = -1;
     cursor = -1;
     locked = false;
-    root.classList.remove("solved", "reveal");
+    root.classList.remove("is-solved", "is-revealing");
     clearSelection();
     showCursor();
   }
@@ -163,7 +165,6 @@ export function createBoard(root, { onSelect, onCursor, labels }) {
     const side = Math.max(0, Math.floor(Math.min(w, h)));
     root.style.width = `${side}px`;
     root.style.height = `${side}px`;
-    root.style.setProperty("--cell", `${(side / size).toFixed(2)}px`);
   }
 
   function addFound(wordCells, word, colour, animate) {
@@ -178,7 +179,8 @@ export function createBoard(root, { onSelect, onCursor, labels }) {
     const el = cells[i];
     if (!el) return;
     el.classList.remove(cls);
-    void el.offsetWidth;
+    // Reading the box applies the removal first, so the effect starts again.
+    void el.getBoundingClientRect();
     el.classList.add(cls);
     window.setTimeout(() => el.classList.remove(cls), 700);
   }
@@ -378,7 +380,7 @@ export function createBoard(root, { onSelect, onCursor, labels }) {
     anchor = -1;
     showAnchor();
     clearSelection();
-    root.classList.add("solved");
+    root.classList.add("is-solved");
     const els = Array.from(foundEls.values());
     let longest = 0;
     els.forEach((el, k) => {
@@ -388,20 +390,21 @@ export function createBoard(root, { onSelect, onCursor, labels }) {
     });
     if (animate) longest = els.length * 55 + 500;
     if (messageCells.length) {
-      root.classList.add("reveal");
+      root.classList.add("is-revealing");
       const set = new Set(messageCells);
       cells.forEach((el, i) => el.classList.toggle("msg", set.has(i)));
+      layerDots.textContent = "";
       messageCells.forEach((i, k) => {
-        cells[i].style.animationDelay = animate ? `${longest + k * 70}ms` : "";
+        const delay = animate ? `${longest + k * 70}ms` : "";
+        const [cx, cy] = centre(size, i);
+        const dot = svgEl("circle", { class: "dot", cx, cy, r: U * 0.42 });
+        dot.style.animationDelay = delay;
+        layerDots.appendChild(dot);
+        cells[i].style.animationDelay = delay;
       });
       if (animate) longest += messageCells.length * 70 + 300;
     }
     return longest;
-  }
-
-  /** Lets the grid take selections again (a solved puzzle stays locked). */
-  function unlock() {
-    locked = false;
   }
 
   function relabel() {
@@ -416,7 +419,6 @@ export function createBoard(root, { onSelect, onCursor, labels }) {
     setHints,
     setNextColour,
     showSolved,
-    unlock,
     relabel,
     clearSelection,
     flashLetter,

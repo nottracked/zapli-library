@@ -221,6 +221,9 @@ const currentSize = () => settings.size || autoSize(textScale);
 // Each game's table for an area of W × H: the card width and every place, upright (the stock row under the
 // tableau) or with side rails (a wide, low area such as a phone held sideways: the stock and the waste beside it).
 // `mini` draws the picker's small tables: no rails, the smallest margins.
+// How much of a card's width shows in Peaks' fanned rows (upright on a phone).
+const PEAKS_FAN = 0.66;
+
 function measure(g, W, H, size, shape, deck, mini, Hs) {
   const tier = mini ? 0 : Math.max(0, SIZES.indexOf(size));
   const lk = look(deck ? { deck } : null);
@@ -240,11 +243,25 @@ function measure(g, W, H, size, shape, deck, mini, Hs) {
         ? Math.max(c.fs, Math.round(c.ch * 0.26))
         : Math.max(c.fu + 2, Math.round(c.ch * 0.5));
   const tight = (c) => (g === "golf" ? 4 : g === "pyramid" ? 6 : 3) * minStep(c) + c.ch;
-  // Upright: the widest card that fits the width, with the stock row under the tableau.
-  let up = null;
-  for (let cw = Math.min(124, Math.floor((W - 2 * side - (across - 1) * gap) / across)); cw >= 10; cw--) {
-    up = geoAt(cw);
-    if (tight(up) + rowGap + up.ch <= H) break;
+  // Upright: the widest card that fits the width, with the stock row under the tableau. Peaks' ten across would
+  // leave small cards on a phone held upright, so there the cards of a row overlap a little, as a hand of cards fans
+  // out: each still shows its rank (in Peaks only ranks count), and the cards grow by about half.
+  const upright = (stepOf, widest) => {
+    let c = null;
+    for (let cw = Math.min(124, widest); cw >= 10; cw--) {
+      c = geoAt(cw);
+      if ((across - 1) * stepOf(c) + c.cw <= W - 2 * side && tight(c) + rowGap + c.ch <= H) break;
+    }
+    return c;
+  };
+  let up = upright((c) => c.cw + gap, Math.floor((W - 2 * side - (across - 1) * gap) / across));
+  let overlap = false;
+  if (g === "peaks" && up.cw < 56) {
+    const fanned = upright((c) => Math.round(c.cw * PEAKS_FAN), Math.floor((W - 2 * side) / (1 + 9 * PEAKS_FAN)));
+    if (fanned.cw > up.cw) {
+      up = fanned;
+      overlap = true;
+    }
   }
   // Sideways: the tableau in the middle and a rail of one card at the stock's side (Pyramid: the cards taken away
   // in a rail at the other side), so the tableau gets the whole height.
@@ -266,10 +283,12 @@ function measure(g, W, H, size, shape, deck, mini, Hs) {
   const c = rail || up;
   const land = !!rail;
   const out = Object.assign(c, { W, H, size, game: g, land, mini: !!mini, right });
-  const col = c.cw + gap;
+  // The step from one card of a row to the next.
+  const col = overlap && !land ? Math.round(c.cw * PEAKS_FAN) : c.cw + gap;
+  out.colStep = col;
   // The tableau: spread out a little where the height allows.
   const roomH = land ? H : H - rowGap - c.ch;
-  let tabW = across * c.cw + (across - 1) * gap;
+  const tabW = (across - 1) * col + c.cw;
   let tabH;
   if (g === "pyramid") {
     out.step = Math.min(Math.round(c.ch * 0.56), Math.max(minStep(c), Math.floor((roomH - c.ch) / 6)));
@@ -303,9 +322,9 @@ function measure(g, W, H, size, shape, deck, mini, Hs) {
   } else {
     const x0 = Math.max(0, Math.round((W - tabW) / 2));
     const total = tabH + rowGap + c.ch;
-    // A little above the middle of the height the table has without messages, so a message or the bar appearing
-    // below does not move the cards (unless the space runs out).
-    const y0 = Math.max(0, Math.min(Math.floor(((Hs || H) - total) * 0.4), H - total));
+    // Centred in the height the table has without the lines in the bottom band, so a message, the bar or a tip
+    // coming or going there does not move the cards (unless the space runs out).
+    const y0 = Math.max(0, Math.min(Math.floor(((Hs || H) - total) / 2), H - total));
     out.tabX = x0;
     out.tabY = y0;
     const rowY = y0 + tabH + rowGap;
@@ -336,7 +355,7 @@ function layoutOf(s, gm) {
     cards[id] = { x: Math.round(x), y: Math.round(y), z, up, free, loc, strip: strip || 0 };
   };
   const g = s.game;
-  const col = gm.cw + gm.gap;
+  const col = gm.colStep;
   // The stock: one pile, the next card on top. The waste: its top card at its place, the two before it fanned out
   // behind it so a run can be followed (Golf and Peaks show three).
   const stockIds = g === "pyramid" ? Rules.stockCards(s) : s.stock.slice(s.sp);
@@ -417,22 +436,14 @@ function applyLayout() {
   textScale = measureTextScale($("tz-probe"));
   root.style.setProperty("--tz", String(textScale));
   if (view === "picker") return;
-  // The first start's line and the sideways tip get their own room at the bottom; the messages and the bar in the
-  // bottom band count for the height the cards are centred in, so they never move the cards.
-  const pill = [$("first-help"), $("turn-tip")].find((el) => !el.hidden);
-  const reserve = pill ? (pill.offsetHeight || 0) + 20 : 0;
-  const band = ["notice", "verdict"].reduce((n, id) => n + ($(id).hidden ? 0 : ($(id).offsetHeight || 0) + 6), 0);
-  const H = table.clientHeight;
-  geo = measure(
-    gid,
-    table.clientWidth,
-    Math.max(120, H - reserve),
-    currentSize(),
-    settings.shape,
-    null,
-    false,
-    H + band,
+  // The lines in the bottom band (a message, the bar, the first start's line, the sideways tip) count for the
+  // height the cards are centred in, so they never move the cards.
+  const band = ["notice", "verdict", "first-help", "turn-tip"].reduce(
+    (n, id) => n + ($(id).hidden ? 0 : ($(id).offsetHeight || 0) + 6),
+    0,
   );
+  const H = table.clientHeight;
+  geo = measure(gid, table.clientWidth, H, currentSize(), settings.shape, null, false, H + band);
   applyGeo(table, geo, cardEls);
   table.classList.toggle("rails", geo.land);
   table.dataset.game = gid;
@@ -461,6 +472,7 @@ function render(opts = {}) {
     el.style.zIndex = String(p.z);
     el.classList.toggle("down", !p.up);
     el.classList.toggle("free", !!p.free);
+    el.classList.toggle("tab", p.loc.pile === "pyr" || p.loc.pile === "col" || p.loc.pile === "peak");
     el.classList.remove("sel", "sel-one", "partner", "can");
     fitBand(el, geo, p.up ? p.strip : 0);
     if (p.free) {
@@ -609,6 +621,7 @@ const elapsedNow = () => game.elapsed + (runningSince !== null ? Date.now() - ru
 function updateStatus() {
   if (!game) return;
   $("moves").textContent = String(game.moves.length);
+  labelLight();
   $("time").textContent = formatTime(elapsedNow());
   $("stat-time").hidden = !settings.clock;
 }
@@ -842,21 +855,49 @@ function planMove(k) {
   return i >= 0 ? plan.moves[i] : null;
 }
 
+function lightWords(v) {
+  return t(
+    { win: "lightWin", lost: "lightLost", unsure: "lightUnsure", checking: "lightChecking", off: "lightOff" }[v],
+  );
+}
+
+// The moves and the light are one button: its words say both, and a tap explains the light.
+function labelLight() {
+  if (!game) return;
+  $("btn-light").setAttribute(
+    "aria-label",
+    `${t("moves")}: ${game.moves.length}. ${lightWords(shownVerdict)}. ${t("lightTap")}`,
+  );
+}
+
+function explainLight() {
+  const v = settings.light ? shownVerdict : "off";
+  const key = { win: "lightTipWin", lost: "lightTipLost", unsure: "lightTipUnsure", checking: "lightTipUnsure" }[v];
+  notice(t(key || "lightTipOff"), "light");
+  if (!progress.lightSeen) {
+    progress.lightSeen = true;
+    saveProgress();
+  }
+}
+
+// The first time the green light shows after a move, one line says what it means (it stays until the next move).
+function introduceLight() {
+  if (progress.lightSeen || !settings.light || shownVerdict !== "win" || !game || !game.moves.length) return;
+  if (!$("notice").hidden) return;
+  progress.lightSeen = true;
+  saveProgress();
+  notice(t("lightIntro"), "light");
+}
+
 function setLight(v) {
   const el = $("light");
   const shown = settings.light ? v : "off";
   shownVerdict = shown;
   el.dataset.v = shown;
-  const label = {
-    win: "lightWin",
-    lost: "lightLost",
-    unsure: "lightUnsure",
-    checking: "lightChecking",
-    off: "lightOff",
-  }[shown];
-  el.setAttribute("aria-label", t(label));
-  el.title = t(label);
+  el.title = lightWords(shown);
   el.hidden = shown === "off";
+  labelLight();
+  if (shown === "win") introduceLight();
   if (game && v !== "off" && v !== "checking") game.verdict = v === "win" || v === "lost" ? v : null;
 }
 
@@ -1971,6 +2012,7 @@ wireDialogs();
 const on = (id, handler) => $(id).addEventListener("click", handler);
 
 on("btn-games", showPicker);
+on("btn-light", explainLight);
 on("btn-new", () => askNewGame());
 on("btn-undo", undo);
 on("btn-hint", showHint);
@@ -1982,11 +2024,6 @@ on("stuck-new", () => newGame());
 on("btn-look", (e) => {
   e.stopPropagation();
   lookLonger();
-});
-on("notice-close", (e) => {
-  e.stopPropagation();
-  if (noticeKind === "hint") clearHint();
-  hideNotice();
 });
 $("notice").addEventListener("click", () => {
   if (noticeKind === "hint") clearHint();
@@ -2226,15 +2263,9 @@ function updateFirstHelp() {
   setPill($("first-help"), view !== "picker" && !!game && !progress.firstHelp[gid] && game.moves.length === 0);
 }
 
-// The lines on the table take room of their own, so the table is laid out again when one comes or goes (a moment
-// later, after the move that caused it has played).
-let pillTimer = null;
+// The first start's line and the sideways tip sit in the bottom band; the table's size follows by itself.
 function setPill(el, show) {
-  if (el.hidden === !show) return;
   el.hidden = !show;
-  if (view === "picker") return;
-  window.clearTimeout(pillTimer);
-  pillTimer = window.setTimeout(relayout, 380);
 }
 
 function dismissFirstHelp() {

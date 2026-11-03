@@ -16,15 +16,15 @@ export const DIRECTION_SETS = {
 
 export const DIFFICULTIES = ["grow", "easy", "medium", "hard"];
 
-// Growing play: the level (0 for the first puzzle) where each step starts.
+// Growing play: the level (0 for the first puzzle) where each step starts. The first puzzles already mix in a
+// diagonal; backwards words come once the player has solved a handful.
 const STEPS = [
-  { from: 0, size: 6, dirs: "a" },
-  { from: 4, size: 7, dirs: "b" },
-  { from: 9, size: 8, dirs: "c" },
-  { from: 15, size: 9, dirs: "d" },
-  { from: 22, size: 10, dirs: "e" },
-  { from: 30, size: 11, dirs: "e" },
-  { from: 40, size: 12, dirs: "e" },
+  { from: 0, size: 7, dirs: "b" },
+  { from: 3, size: 8, dirs: "c" },
+  { from: 7, size: 9, dirs: "d" },
+  { from: 12, size: 10, dirs: "e" },
+  { from: 20, size: 11, dirs: "e" },
+  { from: 30, size: 12, dirs: "e" },
 ];
 
 const FIXED = {

@@ -165,13 +165,22 @@ eq($("notice").textContent, `You tried ${others[0].toUpperCase()} already. It co
 eq(cards().length, 1, "a guess twice costs nothing");
 
 await clearDraft();
+await type(others[1].slice(0, 5));
 $("btn-hint").click();
 await tick();
-check(/^Place \d is [A-Z]\.$/.test($("notice").textContent), `the hint says its letter: ${$("notice").textContent}`);
+check(
+  /^Place \d is [A-Z]\. It stays there for your next guesses\.$/.test($("notice").textContent),
+  `the hint says its letter: ${$("notice").textContent}`,
+);
 check($("btn-hint").disabled, "one hint per word");
 const hintAt = Number($("notice").textContent.match(/Place (\d)/)[1]) - 1;
-eq(slots()[hintAt], answer[hintAt].toUpperCase(), "the hint's letter goes into its place");
-check(doc.querySelectorAll(".slot")[hintAt].classList.contains("hinted"), "the hinted place is marked");
+eq(slots()[hintAt], answer[hintAt].toUpperCase(), "the hint's letter replaces the typed one at once");
+const givenSlot = doc.querySelectorAll(".slot")[hintAt];
+check(givenSlot.classList.contains("given"), "the given place is marked");
+check(givenSlot.getAttribute("aria-label").includes("given by the hint"), "the given place says so");
+await clearDraft();
+eq(slots()[hintAt], answer[hintAt].toUpperCase(), "Delete leaves the given letter");
+eq(doc.querySelectorAll(".slot.filled").length, 1, "Delete took every typed letter");
 
 await guess(answer);
 check($("tray").classList.contains("ended"), "a found word ends the game");
@@ -268,6 +277,20 @@ eq(
 );
 eq(cards().length, 1, "a guess against hard mode costs nothing");
 
+// holding Delete takes back the whole guess
+await type("ab");
+const back = $("btn-back");
+back.dispatchEvent(Object.assign(new StandInEvent("pointerdown"), { button: 0, target: back }));
+await tick(480);
+back.dispatchEvent(Object.assign(new StandInEvent("pointerup"), { target: back }));
+back.click();
+await tick();
+eq(doc.querySelectorAll(".slot.filled").length, 0, "holding Delete clears the guess");
+await type("ab");
+back.click();
+await tick();
+eq(doc.querySelectorAll(".slot.filled").length, 1, "a tap on Delete takes one letter");
+
 // a physical keyboard: letters, Backspace, Enter
 await clearDraft();
 for (const k of ["x", "y", "Backspace", "Escape"]) {
@@ -280,6 +303,8 @@ check(doc.querySelectorAll(".slot.ghost").length >= 1, "a letter found in its pl
 // ---- Slovak
 $("btn-lang").click();
 await until(() => $("lang-code").textContent === "SK", "Slovak words");
+eq($("notice").textContent, "Slovak words now, with the Slovak keyboard.", "switching the words says so");
+eq(doc.querySelector("#btn-lang .lang-cap").textContent, "Words", "the language pill names what it switches");
 eq(
   doc
     .querySelectorAll(".row")[0]

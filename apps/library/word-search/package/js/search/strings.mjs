@@ -15,6 +15,10 @@ export const STRINGS = {
     themes: "Themes",
     langToggleSk: "Slovak words. Tap for English words.",
     langToggleEn: "English words. Tap for Slovak words.",
+    wordsSk: "Slovak words",
+    wordsEn: "English words",
+    langNowSk: "Slovak words now. Your English progress is kept.",
+    langNowEn: "English words now. Your Slovak progress is kept.",
     // the play area
     endlessLabel: "Puzzle {n} · {size}",
     dailyLabel: "Daily · {date} · {size}",
@@ -114,7 +118,7 @@ export const STRINGS = {
     diffMedium: "Medium",
     diffHard: "Hard",
     diffNoteGrow:
-      "Starts at 6 × 6 with words across and down, and grows to 12 × 12 with words in every direction as you play.",
+      "Starts at 7 × 7 with words across, down and diagonally, and grows to 12 × 12 with words in every direction as you play.",
     diffNoteEasy: "8 × 8. Words run across, down and diagonally, never backwards.",
     diffNoteMedium: "10 × 10. Words also run from right to left and from bottom to top.",
     diffNoteHard: "12 × 12. Words run in all eight directions, and the list shows only how long each word is.",
@@ -157,7 +161,7 @@ export const STRINGS = {
       "Or tap the first letter (a ring marks it), then the last. Tap the first letter again to let go of it.",
     helpDirections: "Directions and difficulty",
     helpDirections1:
-      "The first puzzles are 6 × 6, with words only across and down. They grow up to 12 × 12, adding diagonal words and then words that run backwards. In Settings you can keep one difficulty instead: Easy (8 × 8), Medium (10 × 10) or Hard (12 × 12, all eight directions, and the list shows only how long each word is).",
+      "The first puzzles are 7 × 7, with words across, down and diagonally. They grow quickly up to 12 × 12, adding more diagonals and then words that run backwards. In Settings you can keep one difficulty instead: Easy (8 × 8), Medium (10 × 10) or Hard (12 × 12, all eight directions, and the list shows only how long each word is).",
     helpMessage: "The hidden message",
     helpMessage1:
       "Most puzzles hide a message, often an old saying. Once every word is found, the letters left over light up one by one and spell it, read row by row from the top. You can switch hidden messages off in Settings; the daily puzzle always has one.",
@@ -191,6 +195,10 @@ export const STRINGS = {
     themes: "Témy",
     langToggleSk: "Slovenské slová. Klepnutím prepnete na anglické.",
     langToggleEn: "Anglické slová. Klepnutím prepnete na slovenské.",
+    wordsSk: "Slovenské slová",
+    wordsEn: "Anglické slová",
+    langNowSk: "Teraz slovenské slová. Anglický postup zostáva.",
+    langNowEn: "Teraz anglické slová. Slovenský postup zostáva.",
     endlessLabel: "Osemsmerovka {n} · {size}",
     dailyLabel: "Osemsmerovka dňa · {date} · {size}",
     sizeLabel: "{n} × {n}",
@@ -288,7 +296,7 @@ export const STRINGS = {
     diffMedium: "Stredná",
     diffHard: "Ťažká",
     diffNoteGrow:
-      "Začína na 6 × 6 so slovami vodorovne a zvislo a ako hráte, rastie až na 12 × 12 so slovami vo všetkých smeroch.",
+      "Začína na 7 × 7 so slovami vodorovne, zvislo a šikmo a ako hráte, rastie až na 12 × 12 so slovami vo všetkých smeroch.",
     diffNoteEasy: "8 × 8. Slová vedú vodorovne, zvislo a šikmo, nikdy odzadu.",
     diffNoteMedium: "10 × 10. Slová vedú aj sprava doľava a zdola nahor.",
     diffNoteHard: "12 × 12. Slová vedú všetkými ôsmimi smermi a zoznam ukazuje len dĺžky slov.",
@@ -330,7 +338,7 @@ export const STRINGS = {
       "Alebo klepnite na prvé písmeno (označí ho krúžok) a potom na posledné. Ďalším klepnutím na prvé písmeno označenie zrušíte.",
     helpDirections: "Smery a obťažnosť",
     helpDirections1:
-      "Prvé osemsmerovky majú 6 × 6 písmen a slová len vodorovne a zvislo. Postupne narastú až na 12 × 12, pribudnú šikmé slová a potom aj slová odzadu. V Nastaveniach si môžete nechať jednu obťažnosť: Ľahkú (8 × 8), Strednú (10 × 10) alebo Ťažkú (12 × 12, všetkých osem smerov a zoznam ukazuje len dĺžky slov).",
+      "Prvé osemsmerovky majú 7 × 7 písmen a slová vodorovne, zvislo a šikmo. Rýchlo narastú až na 12 × 12, pribudnú ďalšie šikmé slová a potom aj slová odzadu. V Nastaveniach si môžete nechať jednu obťažnosť: Ľahkú (8 × 8), Strednú (10 × 10) alebo Ťažkú (12 × 12, všetkých osem smerov a zoznam ukazuje len dĺžky slov).",
     helpMessage: "Tajnička",
     helpMessage1:
       "Väčšina osemsmeroviek skrýva tajničku, často staré príslovie. Keď nájdete všetky slová, zvyšné písmená sa jedno po druhom rozsvietia a prečítate ju po riadkoch zhora. Tajničky môžete v Nastaveniach vypnúť; osemsmerovka dňa ju má vždy.",

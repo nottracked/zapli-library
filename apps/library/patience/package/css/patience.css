@@ -289,9 +289,9 @@
     outline: 4px dashed var(--ring);
     outline-offset: 2px;
 }
-/* A covered face-up card sits a shade back, so the free ones read at a glance. */
-:root:not(.hc) .table[data-game="pyramid"] .card:not(.free):not(.down),
-:root:not(.hc) .table[data-game="golf"] .card:not(.free):not(.down) {
+/* A covered face-up card of the tableau sits a shade back, so the free ones read at a glance (the waste and the
+   cards taken away keep their full colour). */
+:root:not(.hc) .table .card.tab:not(.free):not(.down) {
     filter: brightness(0.93) saturate(0.92);
 }
 /* Peaks' run: a chip beside the waste that grows with every card, bright from a run of five. */
@@ -348,6 +348,73 @@
 }
 .verdict-btn.primary {
     border-color: var(--primary-bg);
+}
+
+/* ---- the header's moves and light: one button that explains the light ---- */
+.light-btn {
+    min-width: 3.5rem;
+    color: var(--on-band);
+}
+.light-btn:hover {
+    background: var(--band-hover);
+}
+
+/* ---- the first start's line and the sideways tip: one compact line in the bottom band, never over the cards ---- */
+.bottom .first-help {
+    position: static;
+    left: auto;
+    bottom: auto;
+    z-index: auto;
+    align-self: center;
+    width: max-content;
+    max-width: 100%;
+    min-height: 44px;
+    margin: 0.25rem 0 0.125rem;
+    padding: 0.3rem 0.9rem;
+    box-shadow: none;
+    font-size: calc(0.9rem * min(1, 1.1 / var(--tz)));
+    line-height: 1.25;
+    transform: none;
+}
+#turn-tip {
+    background: transparent;
+    color: var(--on-band-dim);
+    font-weight: 600;
+}
+#turn-tip:hover {
+    color: var(--on-band);
+}
+@media (orientation: landscape) and (max-height: 540px) {
+    .app {
+        grid-template-rows: auto auto auto auto minmax(0, 1fr);
+        grid-template-areas:
+            "top tools"
+            "verdict verdict"
+            "notice notice"
+            "tip tip"
+            "felt felt";
+    }
+    .bottom .first-help {
+        grid-area: tip;
+        justify-self: center;
+        margin: 0.125rem 0;
+    }
+}
+
+/* ---- the win: the next game first and largest, the other two quieter side by side ---- */
+.win-foot {
+    flex-wrap: wrap;
+}
+.win-foot .btn.primary {
+    flex: 1 1 100%;
+    min-height: 56px;
+    font-size: 1.1rem;
+}
+.win-foot .btn.quiet {
+    flex: 1 1 0;
+    min-width: max-content;
+    border-color: transparent;
+    background: var(--paper-raised);
 }
 
 /* ---- dialogs ---- */

@@ -6,6 +6,7 @@ on Node 22, from the app's folder (`apps/library/bricks/`):
 ```sh
 node dev/check-physics.mjs   # no tunnelling at up to 4,000 units a second, the paddle's angle rule, the minimum slope
 node dev/check-levels.mjs    # every level: its picture, nothing walled in, and a bot that clears it (--quick: faster)
+node dev/check-sprites.mjs   # every picture drawn at zero, tiny, negative and normal sizes, on a strict canvas
 node dev/check-i18n.mjs      # English and Slovak texts complete, alike and all used
 node dev/check-page.mjs      # the page itself, on a stand-in for the browser (dev/fake-dom.mjs), in ten scenarios
 ```

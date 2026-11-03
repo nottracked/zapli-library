@@ -36,11 +36,18 @@ export function createLogo(canvasEl) {
     canvasEl.width = w;
     canvasEl.height = h;
     const cols = WORD.reduce((n, l) => n + LETTERS[l][0].length, 0) + WORD.length - 1;
-    cw = Math.floor((w * 0.88) / cols);
+    // As large as the width allows, and small enough that the word, the aim line and the paddle fit the height.
+    cw = Math.floor(Math.min((w * 0.88) / cols, (h * 0.5) / (5 * 0.9)));
     ch = Math.floor(cw * 0.9);
+    cells = [];
+    tiles = new Map();
+    if (cw < 3 || ch < 3) {
+      // Too small to draw (a panel mid-resize): nothing until the next layout.
+      ball = null;
+      return;
+    }
     const x0 = Math.round((w - cols * cw) / 2);
     const y0 = Math.round(h * 0.14);
-    cells = [];
     let col = 0;
     WORD.forEach((letter, li) => {
       const rows = LETTERS[letter];
@@ -51,7 +58,6 @@ export function createLogo(canvasEl) {
       });
       col += rows[0].length + 1;
     });
-    tiles = new Map();
     const tw = cw - Math.max(1, Math.round(cw * 0.08));
     const th = ch - Math.max(1, Math.round(ch * 0.1));
     for (const color of COLORS) {
@@ -73,6 +79,7 @@ export function createLogo(canvasEl) {
   function draw(t, calm) {
     if (!w || canvasEl.width !== w) layout();
     ctx.clearRect(0, 0, w, h);
+    if (!ball) return;
     // The paddle and the ball under the word.
     const pw = cw * 7;
     const py = ball.y + ball.r + 2;

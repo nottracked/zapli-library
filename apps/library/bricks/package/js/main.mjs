@@ -39,6 +39,9 @@ const renderer = createRenderer($("arena"));
 const logo = createLogo($("logo"));
 const darkQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
 const motionQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+// A phone turned sideways: the play screen puts its HUD beside the board (css/app.css uses the same query).
+const sidewaysQuery = window.matchMedia ? window.matchMedia("(orientation: landscape) and (max-height: 560px)") : null;
+const sideways = () => Boolean(sidewaysQuery && sidewaysQuery.matches);
 
 // Each world's glaze on the level tiles: light enough to glow, dark enough for the text on it (4.5:1 or more).
 const WORLD_LOOK = {
@@ -145,6 +148,7 @@ function measureTextScale() {
   root.style.setProperty("--tz", textScale.toFixed(3));
   root.classList.toggle("big-text", textScale >= 1.3);
   root.classList.toggle("huge-text", textScale >= 2.4);
+  root.classList.toggle("landscape", sideways());
 }
 
 function applyLook() {
@@ -319,11 +323,16 @@ function onRoute() {
   if (location.hash === shownHash && route.name !== "home") return;
   const next = parseRoute(location.hash);
   if (route.name === "play" && session && next.name !== "play") {
-    if (!session.done && !session.paused && !leaving) {
-      // Back during play: pause first, and stay.
+    if (!session.done && !leaving) {
+      // Back during play pauses, and Back on the pause card plays on: the page stays. Leaving is the card's
+      // "Save and leave".
       history.pushState({ d: depth() + 1, from: session.from }, "", session.hash);
       shownHash = location.hash;
-      pauseGame(true);
+      if (!session.paused) pauseGame(true);
+      else if ($("dlg-pause").open) {
+        pauseAction = "resume";
+        closeDialog($("dlg-pause"));
+      }
       return;
     }
     endSession(true);
@@ -786,9 +795,10 @@ $("dlg-pause").addEventListener("close", () => {
   const action = pauseAction;
   pauseAction = null;
   if (!session || route.name !== "play") return;
-  if (action === "resume") resumeGame();
+  // Back (or Escape) closes the card without a choice: that plays on, as Resume does.
+  if (action === "leave") leavePlay(false);
   else if (action === "restart") restartSession();
-  else leavePlay(false);
+  else resumeGame();
 });
 
 function restartSession() {
@@ -813,10 +823,18 @@ let arenaRect = { left: 0, top: 0, width: 360, height: 600 };
 
 function fitArena() {
   const stage = $("stage");
+  const pad = 6;
+  if (sideways()) {
+    // Sideways the board is as tall as the screen allows, and the stage only as wide as the board, so the HUD and
+    // the board sit together in the middle.
+    const play = $("screen-play");
+    const h = stage.clientHeight || play.clientHeight;
+    const room = Math.max(120, play.clientWidth - ($("hud").offsetWidth || 0) - 16);
+    stage.style.width = `${Math.min(room, Math.floor(((h - pad * 2) * A.W) / A.H) + pad * 2)}px`;
+  } else stage.style.width = "";
   const sw = stage.clientWidth;
   const sh = stage.clientHeight;
   if (!sw || !sh) return;
-  const pad = 6;
   const scale = Math.min((sw - pad * 2) / A.W, (sh - pad * 2) / A.H);
   const w = Math.floor(A.W * scale);
   const h = Math.floor(A.H * scale);
@@ -835,7 +853,9 @@ function fitArena() {
 
 // ---- play: input
 
-const stage = $("stage");
+// The whole play screen takes the drag, beside the board too (when the phone is turned), but not the HUD's buttons.
+const playArea = $("screen-play");
+const onHud = (e) => Boolean(e.target && typeof e.target.closest === "function" && e.target.closest(".hud"));
 let activePointer = null;
 let lastX = 0;
 const keys = new Set();
@@ -854,8 +874,8 @@ function paddleTo(x) {
   G.setPaddle(g, Math.max(half, Math.min(A.W - half, x)));
 }
 
-stage.addEventListener("pointerdown", (e) => {
-  if (!playing()) return;
+playArea.addEventListener("pointerdown", (e) => {
+  if (!playing() || onHud(e)) return;
   if (activePointer !== null && e.pointerId !== activePointer) {
     // A second finger launches.
     sound.unlock();
@@ -866,7 +886,7 @@ stage.addEventListener("pointerdown", (e) => {
   lastX = e.clientX;
   inputKind = e.pointerType === "mouse" ? "mouse" : "touch";
   try {
-    stage.setPointerCapture(e.pointerId);
+    playArea.setPointerCapture(e.pointerId);
   } catch (err) {
     // the pointer is gone already
   }
@@ -874,7 +894,7 @@ stage.addEventListener("pointerdown", (e) => {
   e.preventDefault();
 });
 
-stage.addEventListener("pointermove", (e) => {
+playArea.addEventListener("pointermove", (e) => {
   if (!playing()) return;
   if (e.pointerType === "mouse") {
     inputKind = "mouse";
@@ -895,9 +915,9 @@ function endPointer(e) {
     if (G.launch(session.game)) buzz("light");
   }
 }
-stage.addEventListener("pointerup", endPointer);
-stage.addEventListener("pointercancel", endPointer);
-stage.addEventListener("contextmenu", (e) => e.preventDefault());
+playArea.addEventListener("pointerup", endPointer);
+playArea.addEventListener("pointercancel", endPointer);
+playArea.addEventListener("contextmenu", (e) => e.preventDefault());
 
 window.addEventListener("keydown", (e) => {
   if (route.name !== "play" || !session || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -1649,6 +1669,7 @@ window.addEventListener("hashchange", () => {
 
 function onResize() {
   measureTextScale();
+  if (route.name === "home") renderHome();
   if (route.name === "play") fitArena();
   if (route.name === "home") {
     logo.layout();
@@ -1670,6 +1691,7 @@ window.addEventListener("resize", onResize);
 const onLookChange = () => applyLook();
 if (darkQuery && darkQuery.addEventListener) darkQuery.addEventListener("change", onLookChange);
 if (motionQuery && motionQuery.addEventListener) motionQuery.addEventListener("change", onLookChange);
+if (sidewaysQuery && sidewaysQuery.addEventListener) sidewaysQuery.addEventListener("change", onResize);
 
 async function hostReady() {
   if (!host) return false;

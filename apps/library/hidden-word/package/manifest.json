@@ -4,7 +4,7 @@
     "id": "library/hidden-word",
     "kind": "web",
     "name": "Hidden Word",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icon": "lock",
     "category": "game_word",
     "ageRating": "everyone",
@@ -38,7 +38,7 @@
     "entry": "index.html",
     "orientation": "any",
     "files": {
-      "css/app.css": { "sha256": "109b476bfc44f4679d137dd40503b45334ea2881c261d0ef0ddc16809f6e3622", "size": 40407 },
+      "css/app.css": { "sha256": "21525a4850bfa7d8d1381a8a1eafa672b3980a69f8d3c15d5745e38c3bb4cc65", "size": 41333 },
       "data/words-en.txt": {
         "sha256": "516a06d3a7cf82684d932c294052c6d97d9d219d2912d8a6f2cba64d77b193d1",
         "size": 362549
@@ -47,7 +47,7 @@
         "sha256": "62a1a27623680c005e9dad885fab4cd1e239c54e6b42fb764ef7f371654b3fb5",
         "size": 55786
       },
-      "index.html": { "sha256": "f2c7380e3278053cf533bb6f51499df10cad877a5ad8af9a803639d68a804c9e", "size": 23861 },
+      "index.html": { "sha256": "b14ca1bd5bb6dad9f51d1274c9a5db2f9e9b9f9c5fcd6aa0eeeeef9ecea43579", "size": 23956 },
       "js/core/dates.mjs": {
         "sha256": "738fac189c229c43f61b84e331d289bdc3eb0bcce43ed34b16edeb7454061358",
         "size": 2516
@@ -70,23 +70,23 @@
         "size": 1673
       },
       "js/game/draft.mjs": {
-        "sha256": "1a4ed39b7383adbe43c97e054f2bb9da2bffb68e5afb489495e98ef1f6956fce",
-        "size": 4904
+        "sha256": "dd8853e367b01a25c7553e1da3dbdd0dcfe3cda4c116df21a193383295056ec7",
+        "size": 6463
       },
       "js/game/rules.mjs": {
         "sha256": "6bffb00f6b07135962780ab45ae8188a0f446c6ac4f64d8d2011c7b6754c8f5c",
         "size": 4302
       },
       "js/game/strings.mjs": {
-        "sha256": "649c0778ed8a931679e83214d426d0bb5e3359fcba67b908f6adc5ffee5a3b0a",
-        "size": 21698
+        "sha256": "9e1e44af6bd4366fd367c5c7f0fd65cdd8650405b4de901412192a83fdbbb016",
+        "size": 22205
       },
       "js/game/words.mjs": {
         "sha256": "8384bdb494e3ab2f17360286ca126211f2106ab6a2e077c32eb00ca8139c82a7",
         "size": 6814
       },
-      "js/main.mjs": { "sha256": "9c0126301337ac6b7b3e2d03cd43b66e3ae1c88723de9c5f7e5e28892073d579", "size": 44619 },
-      "js/ui/board.mjs": { "sha256": "6743bc3e2c228584cce71ef17b523c37a5723992057d0d9913f79661a95acdc9", "size": 6111 },
+      "js/main.mjs": { "sha256": "cdc9385b97fa013891da98df95596d33b40e8c043d45b7d09fa9693741c2ac08", "size": 46764 },
+      "js/ui/board.mjs": { "sha256": "b058c67d247acafd60da380e547a1ea098d461da22989e1c082fbe948049f411", "size": 6272 },
       "js/ui/calendar-view.mjs": {
         "sha256": "160d5fa50bbbd731cbc6d7594cd89b801fe39c94c7da125885fd4b6eee5b7db9",
         "size": 2644

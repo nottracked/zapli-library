@@ -56,15 +56,18 @@ function canvas(w, h) {
   return c;
 }
 
+/** A rounded rectangle as the current path. Draws nothing for a box without area (a canvas mid-resize). */
 function roundRect(ctx, x, y, w, h, r) {
-  const rr = Math.min(r, w / 2, h / 2);
   ctx.beginPath();
+  if (!(w > 0 && h > 0)) return false;
+  const rr = Math.max(0, Math.min(r || 0, w / 2, h / 2));
   ctx.moveTo(x + rr, y);
   ctx.arcTo(x + w, y, x + w, y + h, rr);
   ctx.arcTo(x + w, y + h, x, y + h, rr);
   ctx.arcTo(x, y + h, x, y, rr);
   ctx.arcTo(x, y, x + w, y, rr);
   ctx.closePath();
+  return true;
 }
 
 /** The crackle a tile shows once it has been hit: a few branching hairlines, the same for every tile of a size. */
@@ -132,6 +135,7 @@ function glaze(ctx, w, h, rad) {
  * `color` its glaze, `hits` and `max` how tough it is now and was at first.
  */
 export function paintTile(ctx, w, h, s, kind, color, hits, max) {
+  if (!(w >= 2 && h >= 2 && s > 0)) return;
   const rad = Math.min(h * 0.32, 4.2 * s);
   ctx.save();
   if (kind === "iron") {
@@ -266,6 +270,8 @@ export function createTileCache() {
   const cache = new Map();
   return {
     get(kind, glazeKey, hits, max, w, h, s) {
+      w = Math.max(2, Math.round(w) || 2);
+      h = Math.max(2, Math.round(h) || 2);
       const key = `${kind}|${glazeKey}|${hits}|${max}|${w}|${h}`;
       let c = cache.get(key);
       if (!c) {
@@ -283,6 +289,7 @@ export function createTileCache() {
 
 /** A soft round glow of one colour, white at its heart; drawn with "lighter" it adds light. */
 export function glowSprite(color, size = 64) {
+  size = Math.max(4, Math.round(size) || 4);
   const c = canvas(size, size);
   const ctx = c.getContext("2d");
   const [r, g, b] = hexRgb(color);
@@ -379,6 +386,7 @@ export function beadIcon(ctx, type) {
 
 /** Draws a bead (the falling capsule of a power-up), w × h arena units, centred at 0,0 under the current transform. */
 export function paintBead(ctx, type, w, h) {
+  if (!(w > 0 && h > 0)) return;
   const color = BEAD_COLORS[type] || "#FFFFFF";
   const g = ctx.createLinearGradient(0, -h / 2, 0, h / 2);
   g.addColorStop(0, shade(color, 0.45));

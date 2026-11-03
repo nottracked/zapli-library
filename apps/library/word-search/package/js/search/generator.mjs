@@ -103,16 +103,22 @@ function placements(board, word, dirs) {
   return out;
 }
 
-// The best of some placements: crossings first (a word that shares letters ties the grid together), then the
-// directions used least so far, with a little chance so grids differ.
+// The best of some placements: first the direction used least so far that has any (so a grid mixes across, down,
+// diagonal and backwards words), then within it the most crossings (a word that shares letters ties the grid
+// together), with a little chance so grids differ.
 function best(cands, rng, usage) {
-  let min = Infinity;
-  for (const d of Object.keys(usage)) min = Math.min(min, usage[d]);
+  const byDir = new Map();
+  for (const cand of cands) {
+    if (!byDir.has(cand.d)) byDir.set(cand.d, []);
+    byDir.get(cand.d).push(cand);
+  }
+  const dirs = Array.from(byDir.keys())
+    .map((d) => ({ d, key: (usage[d] || 0) + rng() * 0.5 }))
+    .sort((a, b) => a.key - b.key);
   let top = null;
   let topScore = -Infinity;
-  for (const cand of cands) {
-    const crossings = cand.word.t.length - cand.fresh;
-    const score = crossings * 2.5 + (usage[cand.d] === min ? 1.5 : 0) + rng() * 3;
+  for (const cand of byDir.get(dirs[0].d)) {
+    const score = (cand.word.t.length - cand.fresh) * 2.5 + rng() * 2;
     if (score > topScore) {
       top = cand;
       topScore = score;
@@ -243,7 +249,9 @@ export function generate({ lang, themeId, size, dirs, seed, withMessage, prefer,
   const theme = themeById(lang, themeId);
   if (!theme) return null;
   const allowed = DIRECTION_SETS[dirs] || DIRECTION_SETS.a;
-  const words = wordsThatFit(theme, size);
+  // On a small grid a word as long as a whole row leaves no room for words across it, so those grids take words one
+  // letter shorter and keep their directions mixed.
+  const words = wordsThatFit(theme, size <= 8 ? size - 1 : size);
   const { messages } = library(lang);
   const rng = makeRng(seed);
   for (let attempt = 0; attempt < ATTEMPTS; attempt++) {

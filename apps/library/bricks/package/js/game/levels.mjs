@@ -41,12 +41,12 @@ export const LEVELS = [
   {
     id: "1-1",
     name: { en: "First light", sk: "Prvé svetlo" },
-    rows: [".............", ".ooooooooooo.", ".aaaaaaaaaaa.", ".yyyyyyyyyyy.", ".ggggggggggg."],
+    rows: [".............", ".ooooooooooo.", ".aaaaa?aaaaa.", ".yyyyyyyyyyy.", ".ggggggggggg."],
   },
   {
     id: "1-2",
     name: { en: "Valley", sk: "Údolie" },
-    rows: ["c...........c", "cc.........cc", "oco.......oco", "aoco.....ocoa", "yaoco...ocoay", "gyaoco.ocoayg"],
+    rows: ["c...........c", "cc.........cc", "oco.......oco", "aoco.....ocoa", "yaoco...ocoay", "gyaoco?ocoayg"],
   },
   {
     id: "1-3",

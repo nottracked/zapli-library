@@ -216,8 +216,8 @@ textarea {
 }
 
 .icon {
-    width: 24px;
-    height: 24px;
+    width: clamp(24px, 1.5rem, 32px);
+    height: clamp(24px, 1.5rem, 32px);
     flex: none;
     fill: none;
     stroke: currentColor;
@@ -294,8 +294,8 @@ textarea {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: clamp(48px, calc(1.5rem + 22px), 54px);
+    height: clamp(48px, calc(1.5rem + 22px), 54px);
     flex: none;
     border: 0;
     border-radius: 24px;
@@ -402,8 +402,8 @@ textarea {
 }
 
 .chip .icon {
-    width: 18px;
-    height: 18px;
+    width: 1.15em;
+    height: 1.15em;
 }
 
 .chip.on {
@@ -413,8 +413,8 @@ textarea {
 }
 
 .chip.removable .icon:last-child {
-    width: 16px;
-    height: 16px;
+    width: 1em;
+    height: 1em;
     margin-right: -0.25rem;
 }
 
@@ -532,7 +532,7 @@ textarea {
 .hint-line,
 .preview-banner {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.5rem;
     margin: 0.25rem 0.25rem 0.5rem;
     color: var(--ink-2);
@@ -542,8 +542,9 @@ textarea {
 
 .hint-line .icon,
 .preview-banner .icon {
-    width: 18px;
-    height: 18px;
+    width: 1.3em;
+    height: 1.3em;
+    margin-top: 0.025em;
     color: var(--accent);
 }
 
@@ -578,8 +579,8 @@ textarea {
 }
 
 .sort-button .icon {
-    width: 18px;
-    height: 18px;
+    width: 1.35em;
+    height: 1.35em;
 }
 
 .sort-button:hover {
@@ -650,7 +651,8 @@ textarea {
 
 .masonry {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.25rem), 1fr));
+    /* Two columns on a phone held upright, three when it lies sideways or on a tablet; one at a large text size. */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, max(10.25rem, 30%)), 1fr));
     grid-auto-rows: 4px;
     column-gap: 10px;
     row-gap: 0;
@@ -846,27 +848,39 @@ textarea {
     padding: 0.125rem 0;
 }
 
+/* The box sits on the first line of its item (line height 1.4em, box 0.95em), at every text size. */
 .card-items .box {
     flex: none;
-    width: 14px;
-    height: 14px;
-    margin-top: 0.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.95em;
+    height: 0.95em;
+    margin-top: 0.225em;
     border: 1.75px solid color-mix(in srgb, var(--ink) 55%, transparent);
-    border-radius: 4px;
+    border-radius: 0.25em;
 }
 
-.card-items li.done {
+.card-items .box .icon {
+    width: 100%;
+    height: 100%;
+    stroke: var(--tint);
+    stroke-width: 3.4;
+}
+
+.card-item-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-items li.done .card-item-text {
     color: var(--ink-2);
     text-decoration: line-through;
 }
 
 .card-items li.done .box {
-    background: color-mix(in srgb, var(--ink) 45%, transparent);
+    background: color-mix(in srgb, var(--ink) 58%, transparent);
     border-color: transparent;
-}
-
-.item-text {
-    min-width: 0;
 }
 
 .card-more {
@@ -884,7 +898,7 @@ textarea {
 
 .mini-chip {
     display: inline-flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.25rem;
     max-width: 100%;
     padding: 0.25rem 0.5rem;
@@ -897,14 +911,13 @@ textarea {
 }
 
 .mini-chip span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    min-width: 0;
 }
 
 .mini-chip .icon {
-    width: 14px;
-    height: 14px;
+    width: 1.2em;
+    height: 1.2em;
+    margin-top: -0.05em;
     stroke-width: 2;
 }
 
@@ -1703,7 +1716,9 @@ dialog.drawer .dialog-body {
 .item {
     position: relative;
     display: grid;
-    grid-template-columns: 32px 44px minmax(0, 1fr) 44px;
+    /* The controls are as tall as the first line of the item's text, so they sit beside it at every text size. */
+    --row-h: max(48px, calc(1.0625rem * var(--note-scale) * 1.5 + 1.375rem));
+    grid-template-columns: clamp(32px, 2rem, 40px) clamp(44px, 2.75rem, 52px) minmax(0, 1fr) clamp(44px, 2.75rem, 52px);
     align-items: start;
     min-height: 48px;
     border-radius: 12px;
@@ -1730,34 +1745,31 @@ dialog.drawer .dialog-body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 48px;
+    width: 100%;
+    height: var(--row-h);
     border: 0;
     background: transparent;
     color: var(--ink-2);
 }
 
 .grip {
-    width: 32px;
     touch-action: none;
     cursor: grab;
     opacity: 0.55;
 }
 
-.grip .icon {
-    width: 20px;
-    height: 20px;
-}
-
-.check {
-    width: 44px;
+.grip .icon,
+.item .remove .icon {
+    width: clamp(20px, 1.25rem, 28px);
+    height: clamp(20px, 1.25rem, 28px);
 }
 
 .check .box {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
+    width: clamp(22px, 1.375rem, 30px);
+    height: clamp(22px, 1.375rem, 30px);
     border: 2px solid color-mix(in srgb, var(--ink) 60%, transparent);
     border-radius: 7px;
     color: var(--on-accent);
@@ -1768,8 +1780,8 @@ dialog.drawer .dialog-body {
 }
 
 .check .box .icon {
-    width: 16px;
-    height: 16px;
+    width: 72%;
+    height: 72%;
     stroke-width: 2.8;
     stroke-dasharray: 22;
     stroke-dashoffset: 22;
@@ -1803,13 +1815,7 @@ dialog.drawer .dialog-body {
 }
 
 .item .remove {
-    width: 44px;
     opacity: 0.55;
-}
-
-.item .remove .icon {
-    width: 20px;
-    height: 20px;
 }
 
 .item .remove:hover,
@@ -1823,7 +1829,7 @@ dialog.drawer .dialog-body {
     gap: 0.75rem;
     width: 100%;
     min-height: 48px;
-    padding: 0 0 0 40px;
+    padding: 0 0 0 calc(clamp(32px, 2rem, 40px) + 0.5rem);
     border: 0;
     border-radius: 12px;
     background: transparent;
@@ -1843,7 +1849,7 @@ dialog.drawer .dialog-body {
     width: 100%;
     min-height: 48px;
     margin-top: 0.5rem;
-    padding: 0 0 0 40px;
+    padding: 0 0 0 calc(clamp(32px, 2rem, 40px) + 0.5rem);
     border: 0;
     border-top: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
     background: transparent;
@@ -1888,8 +1894,8 @@ dialog.drawer .dialog-body {
 }
 
 .meta-chip .icon {
-    width: 18px;
-    height: 18px;
+    width: 1.25em;
+    height: 1.25em;
 }
 
 .meta-chip.past span {

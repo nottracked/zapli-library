@@ -4,7 +4,7 @@
     "id": "library/word-search",
     "kind": "web",
     "name": "Word Search",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icon": "search",
     "category": "game_word",
     "ageRating": "everyone",
@@ -23,8 +23,8 @@
     "entry": "index.html",
     "orientation": "any",
     "files": {
-      "css/app.css": { "sha256": "3f153bef0597e9057fd63a353447d98a0d6fd9716fcf7da935146e1c3984dee4", "size": 33887 },
-      "index.html": { "sha256": "04a7f5a2c165ac104be34526aa639159ef4593746ac9e85768145e8414a7ef6b", "size": 20264 },
+      "css/app.css": { "sha256": "ca2283c6e03213900c8963c5bb8008a69c4ea4c919c2c37bc5ed29c528d43f42", "size": 35517 },
+      "index.html": { "sha256": "57cdbddf97547f5a4ff268b0af4611388fd868c8b992267a7c2f458fdb521140", "size": 20461 },
       "js/core/dates.mjs": {
         "sha256": "738fac189c229c43f61b84e331d289bdc3eb0bcce43ed34b16edeb7454061358",
         "size": 2516
@@ -50,34 +50,34 @@
         "sha256": "211174a5adef127ea3bcfa50ff3e53cc4bb332b2768afa7ee3010b205f21f0e5",
         "size": 20522
       },
-      "js/main.mjs": { "sha256": "0d02f1e4996867d4979ebf9a35d5a907ff0a598871b1713aef7c728b60cc306b", "size": 42058 },
+      "js/main.mjs": { "sha256": "cf9c979a76678c5bf03327122a7dff16b5e77c1c956873381c7e178a6fb9eb0d", "size": 45609 },
       "js/search/filler.mjs": {
         "sha256": "0ec4103cea5c24d39c43330e78f582409de627ec6ce6e11649837263d8aed1ad",
         "size": 2053
       },
       "js/search/generator.mjs": {
-        "sha256": "773a0032e18b35536060654a339b77374782b1967184316f19035c7831050ed9",
-        "size": 10877
+        "sha256": "fe88edc1366a58242a171984ec2c15e73c99f94c513a47b74d5afd9923b8ea9f",
+        "size": 11305
       },
       "js/search/levels.mjs": {
-        "sha256": "dd3b27cde69c5ada956f53dad857ad54bae04b3e8a815d7241ac4e25a94086d2",
-        "size": 2312
+        "sha256": "bea100ec175f1cdc408026b1cd9ca6583e3dcc6b9ae3f3db4e6b50d7c3abf9e9",
+        "size": 2383
       },
       "js/search/puzzle.mjs": {
         "sha256": "80e7b3c998072bc8d404bf314d572f9bc22fa11bf66630348ae274f4ad166bbe",
         "size": 4571
       },
       "js/search/strings.mjs": {
-        "sha256": "16837c9c4e7df9a0276f6faef7cab144ad02600c4e613de13554adc8548e472d",
-        "size": 19370
+        "sha256": "196fd184bd1712960bd689c632674be0cc60d7c6e0d044b1d21c6746b41dfcb8",
+        "size": 19817
       },
       "js/search/themes.mjs": {
         "sha256": "f22dfe27ab2171be094bafc685ed69ea02a452eba4b345618031d694dfb35086",
         "size": 2919
       },
       "js/ui/board-view.mjs": {
-        "sha256": "403a62ed3f160cc551975654a2de467877cbeecc64a1332b4bcdebd0b5b0e167",
-        "size": 14386
+        "sha256": "596eda64a3727903a11a75fc884b6d17deabe29a6a67de5f78cc9ea6837c49fd",
+        "size": 14732
       },
       "js/ui/calendar-view.mjs": {
         "sha256": "bacdc7ebc30f1e8574bb26aa47e873f26fe638e969ce8c115b2dd37589bc73d3",

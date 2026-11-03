@@ -10,6 +10,12 @@ import { parseItems, highlight, nextReminder, trashDaysLeft, firstLine, editedMs
 const ROW = 4;
 const LONG_PRESS = 450;
 
+/**
+ * When a finger last touched a card. A touch's long press is the timer's (it may redraw the list); Android then also
+ * sends `contextmenu`, to whichever card is under the finger by then, and that one must not count a second time.
+ */
+let lastTouch = 0;
+
 /** Text with the search words marked. */
 export function marked(text, terms) {
   if (!terms || !terms.length) return [document.createTextNode(text)];
@@ -91,8 +97,8 @@ export function noteCard(note, opts = {}) {
             h(
               "li",
               { class: item.done ? "done" : "" },
-              h("span", { class: "box" }),
-              h("span", { class: "item-text" }, marked(item.text, terms)),
+              h("span", { class: "box" }, item.done ? icon("check") : null),
+              h("span", { class: "card-item-text" }, marked(item.text, terms)),
             ),
           ),
         ),
@@ -178,6 +184,7 @@ function wireGestures(card, hit, note, opts) {
   };
 
   hit.addEventListener("pointerdown", (e) => {
+    if (e.pointerType === "touch" || e.pointerType === "pen") lastTouch = Date.now();
     if (dialogOpen() || (e.button !== undefined && e.button !== 0)) return;
     start = { x: e.clientX, y: e.clientY, id: e.pointerId };
     longPressed = false;
@@ -252,9 +259,11 @@ function wireGestures(card, hit, note, opts) {
     else opts.onOpen(note);
   });
 
-  // The keyboard and screen readers: the context-menu key (or Shift+F10) selects, as a long press does.
+  // The keyboard, a mouse and screen readers: the context-menu key (Shift+F10, a right click) selects, as a long
+  // press does. The one Android sends after a finger's long press is left to the timer.
   hit.addEventListener("contextmenu", (e) => {
     e.preventDefault();
+    if (Date.now() - lastTouch < 1500) return;
     if (opts.onLongPress && !longPressed && !moved) opts.onLongPress(note);
   });
 }

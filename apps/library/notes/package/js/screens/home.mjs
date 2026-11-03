@@ -353,7 +353,7 @@ function grid(notes, mode, view, enter) {
         fresh: enter,
         onOpen: (n) => ctx.go("#/note/" + n.id),
         onToggle: (n) => toggleSelect(n, true),
-        onLongPress: (n) => (selecting() ? toggleSelect(n) : startSelect(n)),
+        onLongPress: (n) => (selecting() ? toggleSelect(n, true) : startSelect(n)),
         onSwipe: mode === "notes" || mode === "label" ? (n) => act.archiveNotes([n], true) : null,
       });
       if (enter) card.style.setProperty("--i", String(Math.min(i, 10)));

@@ -6,6 +6,8 @@
 //    them off and colour them; messages stay until the next action;
 //  - hints from the toolbar and from the word list; a solved puzzle, its hidden message and the next puzzle;
 //  - themes, Undo, the daily puzzle, Slovak words and texts, a hard puzzle with a hidden list, the dialogs;
+//  - Back (the page's history, as the phone sends it) closes the hint bar and every dialog first, and history
+//    entries are added only by taps;
 //  - progress survives a reload from the saved values.
 // Run: node dev/check-page.mjs
 import { readFileSync, readdirSync } from "node:fs";
@@ -44,6 +46,7 @@ for (const [id, n] of ids) if (n > 1) fail(`id "${id}" appears ${n} times in ind
 // ---- a stand-in for the parts of the DOM the page uses
 const VOID = new Set(["meta", "link", "input", "br", "img"]);
 let doc = null;
+let inTap = false;
 
 class Node {
   constructor(tag) {
@@ -202,7 +205,12 @@ class Node {
   }
   click() {
     if (this.disabled) return;
-    this.dispatchEvent({ type: "click" });
+    inTap = true;
+    try {
+      this.dispatchEvent({ type: "click", detail: 1 });
+    } finally {
+      inTap = false;
+    }
   }
   focus() {
     doc.activeElement = this;
@@ -306,14 +314,44 @@ function setUpGlobals(storage) {
     addEventListener() {},
   };
   globalThis.document = doc;
+  const winListeners = {};
+  // The page's history as a phone's Back sees it: pushState adds an entry (the check counts those made outside a
+  // tap), back() and go() move after a moment and send popstate.
+  const history = {
+    entries: [{ state: null }],
+    index: 0,
+    get state() {
+      return this.entries[this.index].state;
+    },
+    pushState(state) {
+      if (!inTap) fail("a history entry was added outside a tap");
+      this.entries = this.entries.slice(0, this.index + 1);
+      this.entries.push({ state: JSON.parse(JSON.stringify(state)) });
+      this.index++;
+    },
+    go(n) {
+      setTimeout(() => {
+        const to = Math.max(0, Math.min(this.entries.length - 1, this.index + n));
+        if (to === this.index) return;
+        this.index = to;
+        for (const fn of winListeners.popstate || []) fn({ state: this.state });
+      }, 0);
+    },
+    back() {
+      this.go(-1);
+    },
+  };
   globalThis.window = {
+    history,
+    innerWidth: 360,
+    innerHeight: 760,
     setTimeout: (fn, ms) => setTimeout(fn, ms),
     clearTimeout: (t) => clearTimeout(t),
     setInterval: () => 0,
     clearInterval() {},
     requestAnimationFrame: (fn) => setTimeout(fn, 0),
     matchMedia: () => ({ matches: false, addEventListener() {} }),
-    addEventListener() {},
+    addEventListener: (type, fn) => (winListeners[type] = winListeners[type] || []).push(fn),
     getComputedStyle: () => ({
       paddingLeft: "8px",
       paddingRight: "0px",
@@ -394,6 +432,15 @@ function tap(i, size) {
   board.dispatchEvent({ type: "pointerup", ...p });
 }
 
+// The phone's Back: the page's history goes back when it can; with nowhere to go the app would close.
+async function back() {
+  const h = globalThis.window.history;
+  if (h.index === 0) return "left";
+  h.back();
+  await tick(5);
+  return "stayed";
+}
+
 const pills = () => $("word-list").querySelectorAll(".pill");
 const foundPills = () =>
   $("word-list")
@@ -405,11 +452,12 @@ const storage = new Map();
 await boot(storage);
 let g = current(storage, "en");
 ok(g && g.puzzle, "the first start makes a puzzle");
-eq(g.puzzle.size, 6, "the first puzzle is 6 × 6");
-eq($("board").querySelectorAll(".l").length, 36, "36 letters on the board");
+eq(g.puzzle.size, 7, "the first puzzle is 7 × 7");
+eq($("board").querySelectorAll(".l").length, 49, "49 letters on the board");
 eq(pills().length, g.puzzle.words.length, "a pill for every word");
 ok($("theme-name").textContent.length > 0, "the theme's name shows");
-ok(/^Puzzle 1 · 6 × 6$/.test($("mode-label").textContent), `mode line: ${$("mode-label").textContent}`);
+ok(/^Puzzle 1 · 7 × 7$/.test($("mode-label").textContent), `mode line: ${$("mode-label").textContent}`);
+eq($("lang-name").textContent, "English words", "the language button says which words are in play");
 ok(visible($("first-help")), "the first start shows the line that opens How to play");
 ok(parseFloat($("board").style.width) > 200, `the board is sized (${$("board").style.width})`);
 eq($("progress").textContent, `0/${g.puzzle.words.length}`, "progress at start");
@@ -427,10 +475,10 @@ ok(!visible($("first-help")), "the first-start line is gone after the first word
 // a message stays until the next action
 await tick(50);
 ok($("notice").textContent.length > 0, "the message stays");
-$("board").dispatchEvent({ type: "pointerdown", ...at(0, 6), pointerId: 3, button: 0 });
+$("board").dispatchEvent({ type: "pointerdown", ...at(0, 7), pointerId: 3, button: 0 });
 eq($("notice").textContent, "", "the next touch clears it");
-$("board").dispatchEvent({ type: "pointerup", ...at(0, 6), pointerId: 3, button: 0 });
-tap(0, 6); // let go of the first tap again
+$("board").dispatchEvent({ type: "pointerup", ...at(0, 7), pointerId: 3, button: 0 });
+tap(0, 7); // let go of the first tap again
 
 // backwards
 [a, b] = ends(g.puzzle, g.puzzle.words[1]);
@@ -458,11 +506,22 @@ g = current(storage, "en");
 eq(g.state.used, 1, "a hint is counted");
 ok($("board").querySelectorAll(".ring").length === 1, "the hint rings a first letter");
 ok($("notice").classList.contains("hint"), "the hint says which letter");
-const open = pills().find((x) => !x.classList.contains("found"));
+let open = pills().find((x) => !x.classList.contains("found"));
 open.click();
 ok(visible($("ask")), "a tap on a word offers its hints");
+eq(await back(), "stayed", "Back with the hint bar open stays in the game");
+ok(!visible($("ask")), "Back closes the hint bar");
+eq(globalThis.window.history.index, 0, "and takes its history entry");
+open.click();
+pills()
+  .find((x) => !x.classList.contains("found") && x !== open)
+  .click();
+ok(visible($("ask")), "a tap on another word keeps the bar open for it");
+eq(globalThis.window.history.index, 1, "with one history entry");
 $("ask-where").click();
+await tick(5);
 ok($("board").querySelectorAll(".outline").length === 1, "Show where outlines the word");
+eq(globalThis.window.history.index, 0, "a hint closes the bar and takes its entry");
 eq(current(storage, "en").state.used, 2, "two hints counted");
 
 // solve the rest
@@ -479,7 +538,12 @@ eq(saved(storage, "stats-en").solved, 1, "one puzzle solved in the statistics");
 if (g.puzzle.message) {
   ok(visible($("reveal")), "the hidden message is shown");
   eq($("reveal-text").textContent, g.puzzle.message.toUpperCase(), "the message reads right");
-  ok($("board").classList.contains("reveal"), "the board lights the message's letters");
+  ok($("board").classList.contains("is-revealing"), "the board lights the message's letters");
+  ok($("board").querySelectorAll(".dot").length > 0, "gold dots under the message's letters");
+  ok(
+    !$("board").classList.contains("solved") && !$("board").classList.contains("reveal"),
+    "the board never takes the panel's class names",
+  );
 }
 ok(saved(storage, "collection-en").themes[g.puzzle.theme].w.length >= g.puzzle.words.length, "the words are collected");
 ok($("btn-hint").disabled, "no hints on a solved puzzle");
@@ -523,6 +587,8 @@ $("btn-lang").click();
 g = current(storage, "sk");
 ok(g && g.puzzle.lang === "sk", "the language button makes a Slovak puzzle");
 eq($("lang-code").textContent, "SK", "the button says SK");
+eq($("lang-name").textContent, "Slovak words", "and names the words");
+ok(/^Slovak words now/.test($("notice").textContent), `the switch is confirmed: ${$("notice").textContent}`);
 const skLetters = new Set(
   "a á ä b c č d ď e é f g h ch i í j k l ĺ ľ m n ň o ó ô p q r ŕ s š t ť u ú v w x y ý z ž".split(" "),
 );
@@ -556,17 +622,34 @@ ok(
   "blank pills show the word's length",
 );
 
-// dialogs open and close
+// dialogs open and close, with their button and with Back
 for (const [btn, dlg, done] of [
   ["btn-stats", "dlg-stats", "stats-done"],
   ["btn-help", "dlg-help", "help-done"],
   ["btn-settings", "dlg-settings", "settings-done"],
+  ["btn-daily", "dlg-daily", "daily-close"],
+  ["btn-themes", "dlg-themes", "themes-done"],
 ]) {
   $(btn).click();
   ok($(dlg).open, `${btn} opens ${dlg}`);
   $(done).click();
   ok(!$(dlg).open, `${done} closes ${dlg}`);
+  await tick(5);
+  eq(globalThis.window.history.index, 0, `${done} takes the history entry back`);
+  $(btn).click();
+  eq(await back(), "stayed", `Back with ${dlg} open stays in the game`);
+  ok(!$(dlg).open, `Back closes ${dlg}`);
 }
+// a dialog over the hint bar: Back closes the dialog, then the bar
+open = pills().find((x) => !x.classList.contains("found"));
+open.click();
+$("btn-help").click();
+await tick(5);
+ok(!visible($("ask")), "a dialog closes the hint bar under it");
+ok($("dlg-help").open, "the dialog is open");
+eq(await back(), "stayed", "Back closes the dialog first");
+ok(!$("dlg-help").open, "the dialog is closed");
+eq(await back(), "left", "then Back leaves the game");
 $("btn-stats").click();
 ok($("stats-body").querySelectorAll("tr").length >= 9, "statistics have their rows");
 $("stats-done").click();

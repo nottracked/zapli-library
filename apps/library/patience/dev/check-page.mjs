@@ -144,6 +144,11 @@ check(location.hash === "#/pyramid" && $("app").dataset.view === "game", "the ti
 check(!$("table").hidden && !$("bottom").hidden, "the table and the buttons show");
 check($("light").dataset.v === "win", `Pyramid's light says winnable (${$("light").dataset.v})`);
 check(!$("first-help").hidden && /Pyramid/.test($("first-help-text").textContent), "the line for new players shows");
+check($("first-help").parentNode.id === "bottom", "the line for new players sits in the bottom band, off the cards");
+$("btn-light").click();
+check(/^Green/.test($("notice-text").textContent), `a tap on the light explains it: ${$("notice-text").textContent}`);
+check(/still be won/.test($("btn-light").getAttribute("aria-label")), "the moves button says what the light says");
+$("notice-close").click();
 check(document.querySelectorAll(".card.free").length >= 7, "the bottom row and the stock's card can be played");
 // A covered card says why it cannot go.
 const s0 = fromSave("pyramid");
@@ -437,6 +442,26 @@ check(document.title === "Patience", "the app's name stays");
 click($("open-pyramid"));
 await settle();
 check($("btn-undo").textContent.includes("Späť"), "the buttons speak Slovak");
+
+// ---- 11. a first start, the first move: one line says what the green light means, until the next move
+await boot();
+await settle();
+click($("open-golf"));
+await settle();
+{
+  const s = fromSave("golf");
+  const path = solve(s, 60000, { maxNodes: 4000000 }).path;
+  play(s, path[0]);
+  await settle();
+  check(
+    /green dot/.test($("notice-text").textContent),
+    `the light is introduced once: ${$("notice-text").textContent}`,
+  );
+  play(fromSave("golf"), path[1]);
+  await settle();
+  check(!/green dot/.test($("notice-text").textContent), "the introduction goes with the next move");
+  check(JSON.parse(env.store.get("patience/progress")).lightSeen === true, "and it never comes back");
+}
 
 if (problems.length) {
   console.log(problems.join("\n"));
