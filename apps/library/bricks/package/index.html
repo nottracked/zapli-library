@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#f2f1f7" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0f0c1c" media="(prefers-color-scheme: dark)" />
+        <title>Bricks</title>
+        <link rel="stylesheet" href="css/app.css" />
+        <script type="module" src="js/main.mjs"></script>
+    </head>
+    <body>
+        <svg class="sprite" aria-hidden="true">
+            <symbol id="i-stats" viewBox="0 0 24 24"><path d="M5 20V11M12 20V5M19 20v-6" /></symbol>
+            <symbol id="i-settings" viewBox="0 0 24 24">
+                <path d="M4 7h9M17 7h3M4 17h3M11 17h9" />
+                <circle cx="15" cy="7" r="2" />
+                <circle cx="9" cy="17" r="2" />
+            </symbol>
+            <symbol id="i-help" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6" />
+                <path d="M12 17.2v.1" />
+            </symbol>
+            <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12" /></symbol>
+            <symbol id="i-play" viewBox="0 0 24 24"><path class="fill" d="M8 5.5v13l10.5-6.5z" /></symbol>
+            <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7" /></symbol>
+            <symbol id="i-next" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></symbol>
+            <symbol id="i-lock" viewBox="0 0 24 24">
+                <rect x="5.5" y="10.5" width="13" height="9.5" rx="2" />
+                <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" />
+            </symbol>
+            <symbol id="i-star" viewBox="0 0 24 24">
+                <path class="fill" d="M12 2.8l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.8l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" />
+            </symbol>
+            <symbol id="i-sun" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4" />
+                <path
+                    d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"
+                />
+            </symbol>
+            <symbol id="i-loop" viewBox="0 0 24 24">
+                <path
+                    d="M7.5 8.5C4.5 8.5 3 10.2 3 12s1.5 3.5 4.5 3.5c3.5 0 5.5-7 9-7 3 0 4.5 1.7 4.5 3.5s-1.5 3.5-4.5 3.5c-3.5 0-5.5-7-9-7z"
+                />
+            </symbol>
+            <symbol id="i-restart" viewBox="0 0 24 24">
+                <path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3" />
+                <path d="M4.5 4.5v4h4" />
+            </symbol>
+            <symbol id="i-grid" viewBox="0 0 24 24">
+                <rect x="3.5" y="4" width="7.5" height="4.5" rx="1.2" />
+                <rect x="13" y="4" width="7.5" height="4.5" rx="1.2" />
+                <rect x="3.5" y="10.5" width="7.5" height="4.5" rx="1.2" />
+                <rect x="13" y="10.5" width="7.5" height="4.5" rx="1.2" />
+                <rect x="8.25" y="17" width="7.5" height="4.5" rx="1.2" />
+            </symbol>
+            <symbol id="i-home" viewBox="0 0 24 24">
+                <path d="M4 11 12 4l8 7" />
+                <path d="M6.5 9.5V20h11V9.5" />
+            </symbol>
+        </svg>
+        <span id="tz-probe" aria-hidden="true">M</span>
+
+        <!-- Start screen -->
+        <section class="screen home" id="screen-home" aria-labelledby="home-title" hidden>
+            <header class="bar">
+                <h1 class="sr-only" id="home-title" data-t="appName">Bricks</h1>
+                <span class="bar-fill"></span>
+                <button type="button" class="icon-btn" id="btn-stats" data-t-label="statistics">
+                    <svg class="ico" aria-hidden="true"><use href="#i-stats" /></svg>
+                </button>
+                <button type="button" class="icon-btn" id="btn-settings" data-t-label="settings">
+                    <svg class="ico" aria-hidden="true"><use href="#i-settings" /></svg>
+                </button>
+                <button type="button" class="icon-btn" id="btn-help" data-t-label="howToPlay">
+                    <svg class="ico" aria-hidden="true"><use href="#i-help" /></svg>
+                </button>
+            </header>
+            <div class="home-scroll">
+                <div class="hero" aria-hidden="true"><canvas id="logo"></canvas></div>
+                <button type="button" class="cta" id="btn-play">
+                    <svg class="ico" aria-hidden="true"><use href="#i-play" /></svg>
+                    <span class="cta-text"
+                        ><span class="cta-title" id="play-title">Play</span><span class="cta-sub" id="play-sub"></span
+                    ></span>
+                </button>
+                <p class="first-line" id="first-line" hidden>
+                    <button type="button" class="link" id="btn-first" data-t="firstLine"></button>
+                </p>
+                <div class="modes">
+                    <button type="button" class="mode daily" id="btn-daily">
+                        <span class="mode-ico" aria-hidden="true"
+                            ><svg class="ico"><use href="#i-sun" /></svg
+                        ></span>
+                        <span class="mode-title" data-t="daily">Daily level</span>
+                        <span class="mode-sub" id="daily-date"></span>
+                        <span class="mode-state" id="daily-state"></span>
+                        <span class="week" id="daily-week" aria-hidden="true"></span>
+                        <span class="chip streak" id="daily-streak" hidden></span>
+                    </button>
+                    <button type="button" class="mode endless" id="btn-endless">
+                        <span class="mode-ico" aria-hidden="true"
+                            ><svg class="ico"><use href="#i-loop" /></svg
+                        ></span>
+                        <span class="mode-title" data-t="endless">Endless</span>
+                        <span class="mode-sub" id="endless-sub"></span>
+                    </button>
+                </div>
+                <button type="button" class="levels-row" id="btn-levels">
+                    <span class="mode-ico" aria-hidden="true"
+                        ><svg class="ico"><use href="#i-grid" /></svg
+                    ></span>
+                    <span class="levels-text">
+                        <span class="mode-title" data-t="levels">Levels</span>
+                        <span class="mode-sub" id="levels-sub"></span>
+                    </span>
+                    <span class="world-bars" id="world-bars" aria-hidden="true"></span>
+                    <svg class="ico chev" aria-hidden="true"><use href="#i-next" /></svg>
+                </button>
+                <p class="notice" id="home-notice" role="status" aria-live="polite"></p>
+            </div>
+        </section>
+
+        <!-- Level picker -->
+        <section class="screen levels" id="screen-levels" aria-labelledby="levels-title" hidden>
+            <header class="bar">
+                <button type="button" class="icon-btn" id="btn-levels-back" data-t-label="back">
+                    <svg class="ico" aria-hidden="true"><use href="#i-back" /></svg>
+                </button>
+                <h2 class="bar-title" id="levels-title" data-t="levels">Levels</h2>
+                <span class="bar-fill"></span>
+                <span class="star-total" id="star-total"></span>
+            </header>
+            <div class="levels-scroll" id="levels-scroll">
+                <div class="worlds" role="tablist" id="world-tabs"></div>
+                <div class="world-head" id="world-head" role="tabpanel">
+                    <p class="world-about" id="world-about"></p>
+                    <ol class="level-grid" id="level-grid"></ol>
+                </div>
+                <p class="notice" id="levels-notice" role="status" aria-live="polite"></p>
+            </div>
+        </section>
+
+        <!-- Play -->
+        <section class="screen play" id="screen-play" aria-labelledby="hud-title" hidden>
+            <header class="hud" id="hud">
+                <button type="button" class="icon-btn hud-btn" id="btn-pause" data-t-label="pause">
+                    <svg class="ico" aria-hidden="true"><use href="#i-pause" /></svg>
+                </button>
+                <div class="hud-title">
+                    <h2 id="hud-title"></h2>
+                    <span class="hud-sub" id="hud-sub"></span>
+                </div>
+                <div class="hud-right">
+                    <span class="hud-score" id="hud-score" aria-live="off">0</span>
+                    <span class="hud-lives" id="hud-lives" role="img"></span>
+                </div>
+                <div class="hud-powers" id="hud-powers" aria-hidden="true"></div>
+            </header>
+            <div class="stage" id="stage">
+                <canvas id="arena" aria-hidden="true"></canvas>
+            </div>
+            <p class="sr-only" id="play-sr" aria-live="polite"></p>
+        </section>
+
+        <!-- Pause -->
+        <dialog id="dlg-pause" class="card" aria-labelledby="pause-title">
+            <div class="dlg-head">
+                <h2 id="pause-title" data-t="paused">Paused</h2>
+                <p class="muted" id="pause-sub"></p>
+            </div>
+            <div class="dlg-body">
+                <div class="toggles">
+                    <label class="opt compact"
+                        ><span class="opt-title" data-t="sound">Sound</span
+                        ><input type="checkbox" class="switch" id="pause-sound"
+                    /></label>
+                    <label class="opt compact" id="pause-vibration-row"
+                        ><span class="opt-title" data-t="vibration">Vibration</span
+                        ><input type="checkbox" class="switch" id="pause-vibration"
+                    /></label>
+                </div>
+                <p class="muted small" data-t="pauseNote"></p>
+            </div>
+            <div class="dlg-foot stack">
+                <button type="button" class="btn primary big" id="pause-resume">
+                    <svg class="ico" aria-hidden="true"><use href="#i-play" /></svg><span data-t="resume">Resume</span>
+                </button>
+                <div class="row">
+                    <button type="button" class="btn" id="pause-restart">
+                        <svg class="ico" aria-hidden="true"><use href="#i-restart" /></svg
+                        ><span data-t="restart">Restart</span>
+                    </button>
+                    <button type="button" class="btn" id="pause-leave">
+                        <span data-t="saveLeave">Save and leave</span>
+                    </button>
+                </div>
+            </div>
+        </dialog>
+
+        <!-- Result of a level, a daily level or an endless run -->
+        <dialog id="dlg-result" class="card result" aria-labelledby="result-title">
+            <div class="dlg-head">
+                <h2 id="result-title"></h2>
+                <div class="stars" id="result-stars" role="img"></div>
+            </div>
+            <div class="dlg-body">
+                <dl class="figures" id="result-figures"></dl>
+                <p class="badge" id="result-best" hidden></p>
+                <p class="muted" id="result-note"></p>
+            </div>
+            <div class="dlg-foot stack">
+                <button type="button" class="btn primary big" id="result-main"></button>
+                <div class="row">
+                    <button type="button" class="btn" id="result-second"></button>
+                    <button type="button" class="btn" id="result-third"></button>
+                </div>
+            </div>
+        </dialog>
+
+        <!-- Statistics -->
+        <dialog id="dlg-stats" class="sheet" aria-labelledby="stats-title">
+            <div class="sheet-head">
+                <h2 id="stats-title" data-t="statistics">Statistics</h2>
+                <button type="button" class="btn primary" id="stats-done" data-t="done">Done</button>
+            </div>
+            <div class="sheet-body">
+                <dl class="stats" id="stats-list"></dl>
+                <h3 data-t="stWorlds">Stars by world</h3>
+                <div class="world-stats" id="world-stats"></div>
+                <p class="muted" data-t="statsNote"></p>
+            </div>
+        </dialog>
+
+        <!-- Settings -->
+        <dialog id="dlg-settings" class="sheet" aria-labelledby="settings-title">
+            <div class="sheet-head">
+                <h2 id="settings-title" data-t="settings">Settings</h2>
+                <button type="button" class="btn primary" id="settings-done" data-t="done">Done</button>
+            </div>
+            <div class="sheet-body">
+                <label class="opt"
+                    ><span class="opt-text"
+                        ><span class="opt-title" data-t="sound">Sound</span
+                        ><span class="note" id="sound-note" data-t="soundNote"></span></span
+                    ><input type="checkbox" class="switch" id="opt-sound"
+                /></label>
+                <label class="opt" id="opt-vibration-row"
+                    ><span class="opt-text"
+                        ><span class="opt-title" data-t="vibration">Vibration</span
+                        ><span class="note" data-t="vibrationNote"></span></span
+                    ><input type="checkbox" class="switch" id="opt-vibration"
+                /></label>
+                <fieldset>
+                    <legend data-t="sense">Paddle speed</legend>
+                    <div class="seg">
+                        <label><input type="radio" name="sense" value="1" /><span data-t="sense1">Exact</span></label>
+                        <label
+                            ><input type="radio" name="sense" value="1.5" /><span data-t="sense15">Quick</span></label
+                        >
+                        <label
+                            ><input type="radio" name="sense" value="2" /><span data-t="sense2">Quickest</span></label
+                        >
+                    </div>
+                    <p class="note" data-t="senseNote"></p>
+                </fieldset>
+                <fieldset>
+                    <legend data-t="pace">Ball speed</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="pace" value="0.85" /><span data-t="paceCalm">Calm</span></label
+                        >
+                        <label
+                            ><input type="radio" name="pace" value="1" /><span data-t="paceNormal">Normal</span></label
+                        >
+                        <label
+                            ><input type="radio" name="pace" value="1.15" /><span data-t="paceBrisk">Brisk</span></label
+                        >
+                    </div>
+                    <p class="note" data-t="paceNote"></p>
+                </fieldset>
+                <label class="opt"
+                    ><span class="opt-text"
+                        ><span class="opt-title" data-t="aim">Aim line</span
+                        ><span class="note" data-t="aimNote"></span></span
+                    ><input type="checkbox" class="switch" id="opt-aim"
+                /></label>
+                <fieldset>
+                    <legend data-t="effects">Effects</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="effects" value="auto" /><span data-t="effectsAuto"
+                                >Like the phone</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="effects" value="full" /><span data-t="effectsFull"
+                                >Full</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="effects" value="calm" /><span data-t="effectsCalm"
+                                >Calm</span
+                            ></label
+                        >
+                    </div>
+                    <p class="note" data-t="effectsNote"></p>
+                </fieldset>
+                <label class="opt"
+                    ><span class="opt-text"
+                        ><span class="opt-title" data-t="openAll">Open every level</span
+                        ><span class="note" data-t="openAllNote"></span></span
+                    ><input type="checkbox" class="switch" id="opt-open"
+                /></label>
+                <fieldset>
+                    <legend data-t="theme">Light or dark</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="theme" value="device" /><span data-t="themeDevice"
+                                >Like the phone</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="theme" value="light" /><span data-t="themeLight"
+                                >Light</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="theme" value="dark" /><span data-t="themeDark">Dark</span></label
+                        >
+                    </div>
+                    <p class="note" data-t="themeNote"></p>
+                </fieldset>
+                <fieldset>
+                    <legend data-t="language">Language</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="ui" value="auto" /><span data-t="langAuto"
+                                >Automatic</span
+                            ></label
+                        >
+                        <label><input type="radio" name="ui" value="sk" /><span lang="sk">Slovenčina</span></label>
+                        <label><input type="radio" name="ui" value="en" /><span lang="en">English</span></label>
+                    </div>
+                </fieldset>
+                <div class="danger-zone">
+                    <button type="button" class="btn danger" id="btn-reset" data-t="reset">Erase progress</button>
+                    <p class="note" data-t="resetNote"></p>
+                </div>
+                <p class="muted" data-t="storageNote"></p>
+            </div>
+        </dialog>
+
+        <!-- How to play -->
+        <dialog id="dlg-help" class="sheet" aria-labelledby="help-title">
+            <div class="sheet-head">
+                <h2 id="help-title" data-t="howToPlay">How to play</h2>
+                <button type="button" class="btn primary" id="help-done" data-t="done">Done</button>
+            </div>
+            <div class="sheet-body">
+                <section class="tldr" aria-labelledby="tldr-title">
+                    <h3 id="tldr-title" data-t="tldrTitle">In 15 seconds</h3>
+                    <ul>
+                        <li data-t="tldr1"></li>
+                        <li data-t="tldr2"></li>
+                        <li data-t="tldr3"></li>
+                        <li data-t="tldr4"></li>
+                        <li class="tip" data-t="tldr5"></li>
+                    </ul>
+                </section>
+                <h3 class="details" data-t="helpDetails">The details</h3>
+                <h4 data-t="helpControls"></h4>
+                <p data-t="helpControls1"></p>
+                <h4 data-t="helpAim"></h4>
+                <p data-t="helpAim1"></p>
+                <p data-t="helpSpeed1"></p>
+                <h4 data-t="helpBricks"></h4>
+                <ul class="legend" id="legend-bricks"></ul>
+                <h4 data-t="helpPowers"></h4>
+                <p data-t="helpPowers1"></p>
+                <ul class="legend" id="legend-powers"></ul>
+                <h4 data-t="helpStars"></h4>
+                <p data-t="helpStars1"></p>
+                <h4 data-t="helpLevels"></h4>
+                <p data-t="helpLevels1"></p>
+                <h4 data-t="helpDaily"></h4>
+                <p data-t="helpDaily1"></p>
+                <h4 data-t="helpEndless"></h4>
+                <p data-t="helpEndless1"></p>
+                <h4 data-t="helpScore"></h4>
+                <p data-t="helpScore1"></p>
+                <p class="muted" data-t="storageNote"></p>
+            </div>
+        </dialog>
+
+        <!-- A question before something that cannot be undone -->
+        <dialog id="dlg-confirm" class="card" aria-labelledby="confirm-title">
+            <div class="dlg-head"><h2 id="confirm-title"></h2></div>
+            <div class="dlg-body"><p id="confirm-body"></p></div>
+            <div class="dlg-foot">
+                <button type="button" class="btn" id="confirm-no" data-t="cancel">Cancel</button>
+                <button type="button" class="btn primary" id="confirm-yes"></button>
+            </div>
+        </dialog>
+    </body>
+</html>
