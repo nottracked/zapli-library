@@ -1,5 +1,11 @@
 # The Zapli library
 
+<p align="center">
+  <img src="media/zapli-in-action.gif" width="360" alt="Zapli on a phone: a racing game, a receipt scanned to PDF and a role-playing game, then the Zapli logo">
+</p>
+<p align="center"><sub>Zapli on a phone: a racing game an AI made, Pocket Scan from this library, and Gloamreach, a
+role-playing game installed from GitHub.</sub></p>
+
 This repository holds the apps of **Zapli** (formerly anyApp): everyday ones such as an expense tracker, a water
 reminder, a to-do list, flashcards, a document scanner and a few games. Zapli ships with these apps built in, and later
 versions of Zapli will install and update them from this repository, so a fix merged here can reach phones without a
@@ -35,6 +41,7 @@ CODEOWNERS                 who reviews which folder
 apps/library/<name>/       the apps Zapli ships; the app id is library/<name>
 apps/samples/<name>/       sample apps that show what the format can do (not shipped with Zapli)
 icons/                     the apps' own icons: SVG sources, the render script, PNGs and a contact sheet
+media/                     the animation at the top of this file
 ```
 
 Each app folder holds:
