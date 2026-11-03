@@ -7,7 +7,23 @@
   "description": "**Notes** keeps your notes, checklists and photos on your phone: quick to write, easy to find, and without an account, ads or a subscription.\n\n### Write\n- **A new note in one tap**, with the keyboard already up. A checklist or a note with a photo is one tap too.\n- **Checklists** you can tick in the shop: ticked items fold away at the bottom, drag the handle to reorder, untick everything for next week, and paste a few lines to get one item a line.\n- **Photos** from the camera or your pictures, in any note.\n- Undo and redo while you type, a word count, and every change saved by itself.\n\n### Organise\n- **Pin** what matters to the top, give notes a **colour**, and group them with **labels**.\n- **Archive** what you want to keep but not see every day: a sideways swipe does it.\n- **The trash** keeps deleted notes for 30 days, says on each note how long it has left, and lets you restore it. Undo after every delete.\n- A grid or a list, sorted by last edited, date created or title.\n\n### Find\n- **Search everything**: titles, text, checklist items and labels, with or without accents. Filters for checklists, reminders, photos, pinned notes, labels and colours. Archived notes are searched too.\n\n### Remember\n- **Reminders** on any note at the date and time you choose: once, or every day, on weekdays, every week, month or year, with Snooze and Done. They ring while the app is closed.\n- **Home-screen widgets** with your pinned notes or your most recent ones.\n\n### Your data\n- **Bring your notes**: imports this app's own notes file and the CSV most notes apps and spreadsheets save, with a title and a text column and, when they are there, labels, colours, pins and dates. Lines that start with \"- [ ]\" become a checklist.\n- **Save everything** as a notes file the app reads back, or as a CSV for spreadsheets. Share a note's text and photos with any app.\n- Everything stays on this phone and in Zapli's backup of your apps.\n- **In English and Slovak.**\n\n### What it never does\n- No ads, no tracking, no analytics, no account, no sign-in, no upsells.\n- It cannot connect to the internet: nothing leaves your phone unless you share or save it.\n\n### Privacy\nNotes are marked as personal data. An optional app lock keeps them behind your fingerprint, face or screen lock: turn it on in the app's permissions. Reminders can hide the note's text.",
   "license": "GPL-3.0-or-later",
   "tags": ["notes", "checklist", "notepad", "reminders", "labels", "photos", "widget", "offline", "csv", "slovak"],
-  "screenshots": [],
+  "screenshots": [
+    {
+      "file": "screenshots/01-notes-light.png",
+      "caption": "Pinned notes, checklists, recipes and labels on one page",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/02-checklist-light.png",
+      "caption": "A checklist: tick an item and it moves down",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/03-notes-dark.png",
+      "caption": "Your notes in dark mode",
+      "theme": "dark"
+    }
+  ],
   "sampleData": {
     "note": [
       {

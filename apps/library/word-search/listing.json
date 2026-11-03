@@ -18,7 +18,23 @@
     "offline",
     "no ads"
   ],
-  "screenshots": [],
+  "screenshots": [
+    {
+      "file": "screenshots/01-daily-light.png",
+      "caption": "Today's puzzle: drag across the letters to find the farm words",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/02-themes-light.png",
+      "caption": "46 themes in each language, each word kept in your collection",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/03-daily-dark.png",
+      "caption": "The daily puzzle in dark mode",
+      "theme": "dark"
+    }
+  ],
   "research": [
     {
       "source": "https://apps.apple.com/us/app/-/id1036709031",

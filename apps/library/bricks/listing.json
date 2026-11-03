@@ -7,7 +7,23 @@
   "description": "**Bricks** is a brick breaker made to feel good: a paddle, a glowing ball and walls of glazed bricks to clear. No ads, no coins, no energy to wait for, no account.\n\n**How it plays**\n\n- Slide your finger anywhere below the paddle: the paddle follows the movement, so your finger never hides the ball. Lift your finger to launch.\n- Where the ball lands on the paddle sets its angle, and a dotted aim line shows where a waiting ball will go.\n- The ball speeds up gently as bricks break, and never slips through a brick, however fast it goes.\n- Every hit is felt: shards and sparks, a light shake, sounds made as you play and a short vibration, each with its own switch. Effects calm down by themselves when the phone asks for less motion.\n\n**48 hand-made levels in four worlds**\n\nTerracotta, Cobalt, Copper and Gold, with pictures made of bricks (a teapot, a whale, a lighthouse, a rocket, an owl and more), bricks fired twice, gold lustre bricks that take three hits, ember bricks that burst and take their neighbours with them, gift bricks, iron that never breaks and rows that slide.\n\n**Eight power-ups**\n\nBroad (a wider paddle), Triple (three balls from one), Chill (a slower ball), Clay (the paddle catches the ball), Sparks (the paddle fires upward), Molten (the ball melts through bricks), Guard (a glowing line that saves every ball) and Spare ball.\n\n**Stars, a daily level and endless play**\n\n- Three balls per level; clear it without losing one for three stars. Run out and simply try again, at once and as often as you like.\n- Stuck? After two tries you may skip a level, or open every level in Settings.\n- A new daily level every day, the same for everyone, gentle on Monday and harder toward Sunday, with a streak.\n- Endless play: wave after wave of new walls, each a little faster.\n- Statistics: levels and stars, bricks broken, the longest run, power-ups caught, the daily streak, the endless record and time played.\n\n**Easy to use**\n\n- The game saves itself when you leave, turn the phone or switch apps, and resumes exactly where you were.\n- A calm, normal or brisk ball, three paddle speeds, an aim line you can turn off, and light or dark menus around the dark arena.\n- Large text that never breaks a word, and labels for screen readers.\n- In English or Slovak, following your phone or chosen in Settings.\n\n**What it never does**\n\n- No ads, no in-app purchases, no coins, no lives or energy to buy and no waiting.\n- No account and no sign-in.\n- No internet access: the game works offline and cannot connect anywhere.\n- No analytics or tracking of any kind.\n\nYour progress, statistics and settings stay on your phone, in the app's own data.",
   "license": "GPL-3.0-or-later",
   "tags": ["brick breaker", "arcade", "paddle", "ball", "levels", "daily challenge", "endless", "offline", "no ads"],
-  "screenshots": [],
+  "screenshots": [
+    {
+      "file": "screenshots/01-home-light.png",
+      "caption": "Play the next level in one tap, or the daily level and endless play",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/02-play-light.png",
+      "caption": "Glazed bricks, a glowing ball and gifts to catch",
+      "theme": "dark"
+    },
+    {
+      "file": "screenshots/03-levels-light.png",
+      "caption": "48 levels in four glazes, three stars each",
+      "theme": "light"
+    }
+  ],
   "research": [
     {
       "source": "https://www.dong.world/2021/01/brick-mania/",

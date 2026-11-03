@@ -47,5 +47,22 @@
       "source": "https://apps.appfollow.io/ios/solitaire-card-game/594007249?country=us",
       "used_for": "Read through a search summary: the most common complaints about card patience apps are intrusive ads during and after games and hints or undo held back for payment"
     }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/01-picker-light.png",
+      "caption": "Pyramid, Golf and Peaks, each with its own daily deal",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/02-pyramid-light.png",
+      "caption": "Pyramid, with the light that tells you the deal can still be won",
+      "theme": "light"
+    },
+    {
+      "file": "screenshots/03-peaks-light.png",
+      "caption": "Peaks on big cards, fanned so they fit an upright phone",
+      "theme": "light"
+    }
   ]
 }
