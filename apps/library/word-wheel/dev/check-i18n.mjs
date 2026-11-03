@@ -15,6 +15,7 @@ const holes = (text) =>
     .join(",");
 const NEEDS = { en: ["one", "other"], sk: ["one", "few", "other"] };
 
+const html = readFileSync(join(pkg, "index.html"), "utf8");
 const en = STRINGS.en;
 const sk = STRINGS.sk;
 for (const key of new Set([...Object.keys(en), ...Object.keys(sk)])) {
@@ -41,9 +42,17 @@ for (const key of new Set([...Object.keys(en), ...Object.keys(sk)])) {
 }
 if (en.appName !== "Word Wheel" || sk.appName !== "Word Wheel") problems.push("the app's name must stay Word Wheel");
 
+// How to play starts with the short version (goal, swipe, crossword, jar, one tip), then the details; the first
+// wheel shows a one-line instruction until the first word.
+const tldr = ["tldrTitle", "tldr1", "tldr2", "tldr3", "tldr4", "tldr5", "helpDetails", "currentEmpty"];
+for (const key of tldr) if (!en[key] || !sk[key]) problems.push(`the short help needs "${key}" in both languages`);
+const helpOrder = Array.from(html.matchAll(/data-t="(tldr\w*|helpDetails|helpGoal)"/g), (m) => m[1]);
+if (helpOrder.join(" ") !== "tldrTitle tldr1 tldr2 tldr3 tldr4 tldr5 helpDetails helpGoal") {
+  problems.push(`How to play must start with the short version, then the details: ${helpOrder.join(" ")}`);
+}
+
 // Keys the page and the code use.
 const used = new Set();
-const html = readFileSync(join(pkg, "index.html"), "utf8");
 for (const m of html.matchAll(/data-t(?:-label)?="(\w+)"/g)) used.add(m[1]);
 function walk(dir) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {

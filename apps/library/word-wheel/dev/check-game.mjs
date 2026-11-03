@@ -18,7 +18,19 @@ import {
   DAILY_SIZE,
 } from "../package/js/wheel/generator.mjs";
 import { gridIsSound } from "../package/js/wheel/layout.mjs";
-import { newState, tryWord, hintCell, showCell, hintsLeft, FREE_HINTS } from "../package/js/wheel/puzzle.mjs";
+import {
+  newState,
+  tryWord,
+  hintCell,
+  showCell,
+  hintsLeft,
+  hiddenOf,
+  hiddenFound,
+  isComplete,
+  jarLevel,
+  FREE_HINTS,
+  EXTRAS_PER_HINT,
+} from "../package/js/wheel/puzzle.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const DAYS = Number(process.argv[2] || 365);
@@ -88,6 +100,18 @@ function checkPuzzle(index, lists, p, what) {
     if (!canMake(w.t, p.letters)) fail(`${what}: grid word ${w.w} cannot be made from ${p.letters.join("")}`);
     eq(w.t, tiles(w.w, index.lang), `${what}: tiles of ${w.w}`);
   }
+  // Hidden words: common answer words the wheel makes and the grid does not use; bonus words are the rest.
+  const common = lists.common && lists.common.length ? new Set(lists.common) : answers;
+  const extra = new Set(p.extra);
+  if (!Array.isArray(p.hidden)) fail(`${what}: no hidden words list`);
+  for (const h of hiddenOf(p)) {
+    if (!common.has(h) || !answers.has(h)) fail(`${what}: hidden word ${h} is not a common answer word`);
+    if (!extra.has(h)) fail(`${what}: hidden word ${h} is not among the extra words`);
+  }
+  const hiddenSet = new Set(hiddenOf(p));
+  for (const x of p.extra) {
+    if (!hiddenSet.has(x) && common.has(x)) fail(`${what}: ${x} is common but counted as a bonus word`);
+  }
   for (const x of p.extra) {
     if (!all.has(x)) fail(`${what}: extra word ${x} is not in the list`);
     if (!canMake(tiles(x, index.lang), p.letters)) fail(`${what}: extra word ${x} cannot be made`);
@@ -140,12 +164,23 @@ function solve(p, what) {
     s = r.state;
   }
   if (!s.done) fail(`${what}: not done after every word`);
-  if (p.extra.length) {
-    const x = p.extra[0];
-    const r = tryWord(p, s, tiles(x, p.lang));
-    if (r.result !== "extra") fail(`${what}: extra word ${x} -> ${r.result}`);
-    if (tryWord(p, r.state, tiles(x, p.lang)).result !== "extraAgain") fail(`${what}: extra word twice`);
+  // Solved, then complete once every hidden word is found; the jar fills by every extra word.
+  if (isComplete(p, s) !== (hiddenOf(p).length === 0)) fail(`${what}: complete before its hidden words`);
+  for (const h of hiddenOf(p)) {
+    const r = tryWord(p, s, tiles(h, p.lang));
+    if (r.result !== "extra" || r.kind !== "hidden") fail(`${what}: hidden word ${h} -> ${r.result}/${r.kind}`);
+    s = r.state;
+    if (tryWord(p, s, tiles(h, p.lang)).result !== "extraAgain") fail(`${what}: hidden word twice`);
   }
+  if (!isComplete(p, s)) fail(`${what}: not complete after every hidden word`);
+  eq(hiddenFound(p, s), hiddenOf(p).length, `${what}: hidden words counted`);
+  const bonus = p.extra.find((x) => !hiddenOf(p).includes(x));
+  if (bonus) {
+    const r = tryWord(p, s, tiles(bonus, p.lang));
+    if (r.result !== "extra" || r.kind !== "bonus") fail(`${what}: bonus word ${bonus} -> ${r.result}/${r.kind}`);
+    s = r.state;
+  }
+  eq(jarLevel(s), s.extras.length % EXTRAS_PER_HINT, `${what}: the jar's level`);
 }
 
 const report = [];
@@ -157,6 +192,8 @@ for (const lang of ["sk", "en"]) {
   const t1 = Date.now();
   const grids = [];
   const extras = [];
+  const hiddens = [];
+  const bonuses = [];
   let worst = 0;
   for (let d = 0; d < DAYS; d++) {
     const day = addDays(FIRST_DAY, d);
@@ -170,6 +207,8 @@ for (const lang of ["sk", "en"]) {
     if (d < 40) solve(p, what);
     grids.push(p.words.length);
     extras.push(p.extra.length);
+    hiddens.push(hiddenOf(p).length);
+    bonuses.push(p.extra.length - hiddenOf(p).length);
     if (d < 10) eq(dailyPuzzle(index, day), p, `${what} is the same when made again`);
   }
   const fresh = buildIndex(lang, readList(lang));
@@ -185,7 +224,9 @@ for (const lang of ["sk", "en"]) {
   report.push(
     `${lang}: ${lists.answers.length} answer + ${lists.accepted.length} accepted words; good wheels by size ` +
       `${JSON.stringify(seeds)} (index ${t1 - t0} ms); ${DAYS} daily wheels: ${avg(grids)} grid words ` +
-      `(min ${Math.min(...grids)}), ${avg(extras)} extra words (min ${Math.min(...extras)}), slowest ${worst} ms`,
+      `(min ${Math.min(...grids)}), ${avg(extras)} extra words (min ${Math.min(...extras)}): ${avg(hiddens)} hidden ` +
+      `(min ${Math.min(...hiddens)}, max ${Math.max(...hiddens)}, none in ${hiddens.filter((n) => n === 0).length}) ` +
+      `and ${avg(bonuses)} bonus; slowest ${worst} ms`,
   );
 }
 

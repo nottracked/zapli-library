@@ -101,7 +101,7 @@ const root = new FakeElement("div");
 root.box = { left: 0, top: 0, width: 300, height: 300 };
 root.svg = new FakeElement("svg");
 root.line = new FakeElement("polyline");
-root.svg.querySelector = () => root.line;
+root.svg.querySelectorAll = () => [root.line];
 const words = [];
 let current = [];
 const wheel = createWheel(root, {

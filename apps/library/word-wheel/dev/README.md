@@ -73,6 +73,12 @@ of the first 30 daily wheels and a random sample of 300 accepted words, numbered
   <https://downloads.sourceforge.net/wordlist/12dicts-6.0.2.zip> (SHA-256
   `64ac1d35acb66b550c7ebc56e080b62e0bad8f5984d72059dc2e05ac48780e52`); the file used is `American/3esl.txt`, SHA-256
   `eb70e6169534511caff9e06971b3fa71981a83f0355b29532b710ea5a9df253b`. With thanks to Alan Beale for 12dicts.
+- **Common words: the 2of5core list of 12dicts** (the same release and public-domain statement), about 4,700 words
+  that at least two learners' dictionaries mark as essential; the file used is `Special/2of5core.txt`, SHA-256
+  `c89531e451a4841da4452618201d7d6ccb88aafee62fa829fdcdc73ed29bdc62`. The English file lists the answer words it has
+  in a third section, `[common]`: they are the hidden words a wheel counts ("Hidden 2 of 6"), so the count stays one a
+  player can finish; every other word a wheel makes is a bonus word. The Slovak list has no such section: every Slovak
+  answer word is common, so every answer word a wheel makes outside its grid is a hidden word.
 - The answer tier is the 3esl words in lower case, of letters a to z only, that ENABLE also has. The accepted tier is
   the rest of ENABLE. Neither download is kept here: the build script checks their SHA-256 and builds the shipped
   file from them.
@@ -86,7 +92,7 @@ From the app's folder (`apps/library/word-wheel/`), with Node 22:
 
 ```sh
 node dev/build-lists.mjs sk                     # writes package/data/words-sk.txt from dev/sk/
-node dev/build-lists.mjs en --enable <enable1.txt> --esl <3esl.txt>
+node dev/build-lists.mjs en --enable <enable1.txt> --esl <3esl.txt> --core <2of5core.txt>
 node dev/build-lists.mjs sk --check             # fails when the shipped file is not what the sources build
 node dev/check-game.mjs                         # letters, dates, a year of daily wheels, endless wheels, hints
 node dev/check-i18n.mjs                         # English and Slovak texts complete and alike

@@ -13,17 +13,33 @@ import { isoDay, isDay, FIRST_DAY, daysBetween, streaks } from "./core/dates.mjs
 import { collator, normalise, tiles as tilesOf } from "./core/letters.mjs";
 import { STRINGS } from "./wheel/strings.mjs";
 import { createSource } from "./wheel/source.mjs";
-import { newState, tryWord, showCell, hintCell, hintsLeft, visibleCells } from "./wheel/puzzle.mjs";
+import {
+  newState,
+  tryWord,
+  showCell,
+  hintCell,
+  hintsLeft,
+  visibleCells,
+  cellsOf,
+  hiddenOf,
+  hiddenFound,
+  isComplete,
+  jarLevel,
+  EXTRAS_PER_HINT,
+} from "./wheel/puzzle.mjs";
 import { SIZES } from "./wheel/generator.mjs";
 import { createWheel } from "./ui/wheel-view.mjs";
 import { createGrid } from "./ui/grid-view.mjs";
 import { createCalendar } from "./ui/calendar-view.mjs";
+import { createFx } from "./ui/fx.mjs";
 
 const host = window.zapli;
 const $ = (id) => document.getElementById(id);
 const root = document.documentElement;
 const LANGS = ["sk", "en"];
 const OPEN_DAYS_KEPT = 10;
+// How long "Wheel complete!" shows before the next wheel comes.
+const NEXT_AFTER_MS = 2600;
 const LETTER_SCALE = { normal: 1, large: 1.25, largest: 1.5 };
 
 const i18n = createI18n(STRINGS);
@@ -43,6 +59,10 @@ let noticeTimer = 0;
 let textScale = 1;
 let loadToken = 0;
 let retry = () => {};
+let canBuzz = false;
+let nextTimer = 0;
+let lastWordLength = 0;
+const fx = createFx(document.getElementById("fx"));
 
 const today = () => {
   const day = isoDay(new Date());
@@ -61,6 +81,7 @@ function normSettings(raw) {
     contrast: Boolean(s.contrast),
     theme: ["device", "light", "dark"].includes(s.theme) ? s.theme : "device",
     taught: Boolean(s.taught),
+    vibration: s.vibration !== false,
   };
 }
 
@@ -211,26 +232,36 @@ function longDate(day) {
   }
 }
 
+// The word being made, one chip per letter (the newest pops in). With no word, the first wheel shows how to make one;
+// after the player's first word the line stays quiet for good.
 function showCurrent(word) {
   const out = $("current");
   const text = word.join("").toUpperCase();
   out.classList.toggle("empty", !text);
-  // The instruction shows until the player has found a word once; then the empty line stays quiet.
-  out.textContent = text || (settings && settings.taught ? "" : t("currentEmpty"));
+  out.textContent = "";
+  if (text) {
+    word.forEach((tile, i) => {
+      const chip = document.createElement("span");
+      chip.className = i === word.length - 1 && word.length > lastWordLength ? "cl new" : "cl";
+      chip.textContent = tile.toUpperCase();
+      out.appendChild(chip);
+    });
+  } else if (!(settings && settings.taught)) out.textContent = t("currentEmpty");
+  lastWordLength = word.length;
   out.setAttribute("aria-label", text ? t("currentWord", { word: text }) : t("currentEmpty"));
   $("btn-clear").hidden = !text;
   $("btn-enter").hidden = !text;
   hideAsk();
 }
 
-function notice(text, tone) {
+function notice(text, tone, ms) {
   const el = $("notice");
   el.textContent = text;
   el.className = `notice ${tone || ""}`;
   window.clearTimeout(noticeTimer);
   noticeTimer = window.setTimeout(() => {
     el.textContent = "";
-  }, 4500);
+  }, ms || 4500);
 }
 
 function refresh() {
@@ -243,16 +274,54 @@ function refresh() {
     game.kind === "daily"
       ? t("dailyLabel", { date: longDate(game.day) })
       : t("endlessLabel", { n: (puzzle.level || 0) + 1 });
+  // Solved: the badge stays in sight and the chip becomes the way on, "Next wheel".
   const chip = $("btn-switch");
-  chip.textContent = game.kind === "daily" ? t("toEndless") : state.done ? t("nextWheel") : t("toToday");
+  chip.textContent = state.done ? t("nextWheel") : game.kind === "daily" ? t("toEndless") : t("toToday");
+  chip.classList.toggle("go", state.done);
+  $("solved-badge").hidden = !state.done;
+  $("progress").hidden = state.done;
+  grid.setSolved(state.done, false);
   const left = hintsLeft(state);
   $("hint-count").textContent = String(left);
+  $("btn-hint").disabled = state.done;
   $("btn-hint").setAttribute("aria-label", `${t("hint")}. ${tn("hintsLeft", left)}`);
-  $("extra-count").textContent = String(state.extras.length);
-  $("btn-extras").setAttribute("aria-label", `${t("extraWords")}: ${state.extras.length}`);
+  showJar();
   $("lang-code").textContent = game.lang.toUpperCase();
   $("btn-lang").setAttribute("aria-label", t(game.lang === "sk" ? "langToggleSk" : "langToggleEn"));
   $("btn-lang").title = $("btn-lang").getAttribute("aria-label");
+}
+
+// The jar: how many of the wheel's hidden words are found, and how full it is toward the next free hint.
+function showJar() {
+  const { puzzle, state } = game;
+  const total = hiddenOf(puzzle).length;
+  const found = hiddenFound(puzzle, state);
+  const level = jarLevel(state);
+  $("jar-fill").setAttribute("y", String(46 - (level / EXTRAS_PER_HINT) * 32));
+  $("jar-fill").setAttribute("height", String((level / EXTRAS_PER_HINT) * 32));
+  $("jar").classList.toggle("all", total > 0 && found >= total);
+  $("jar-label").textContent = total ? t("jarHidden", { found, total }) : t("jarNone");
+  const stateText = total ? t("jarHiddenLong", { found, total }) : t("jarNoneLong");
+  const bonus = state.extras.length - found;
+  $("btn-jar").setAttribute(
+    "aria-label",
+    t("jarAria", { state: stateText, bonus, toHint: tn("jarToHint", EXTRAS_PER_HINT - level) }),
+  );
+}
+
+// ---- vibration (Zapli's haptics; a plain browser has none and skips it)
+
+function buzz(kind) {
+  if (!canBuzz || !settings.vibration) return;
+  try {
+    host.haptics.impact(kind).catch(() => {});
+  } catch (e) {
+    // no haptics on this phone after all
+  }
+}
+
+function buzzPattern(kinds, gap) {
+  kinds.forEach((kind, i) => window.setTimeout(() => buzz(kind), i * gap));
 }
 
 // ---- loading puzzles
@@ -286,6 +355,7 @@ async function load(lang, request) {
 }
 
 function show(g) {
+  window.clearTimeout(nextTimer);
   game = g;
   setLoading(false);
   wheel.set(g.puzzle.letters);
@@ -293,6 +363,25 @@ function show(g) {
   pendingCell = null;
   refresh();
   window.requestAnimationFrame(sizeWheel);
+  if (!Array.isArray(g.puzzle.hidden)) addHiddenWords(g);
+}
+
+// A wheel saved by an earlier version has no list of hidden words: make the same wheel again and take its list
+// (and its extra words) when its grid is the same; otherwise the wheel counts no hidden words.
+async function addHiddenWords(g) {
+  let again = null;
+  try {
+    if (g.kind === "daily") again = await source.daily(g.lang, g.day);
+    else if (Number.isInteger(g.puzzle.level)) again = await source.endless(g.lang, g.puzzle.size, g.puzzle.level);
+  } catch (e) {
+    again = null;
+  }
+  const same = again && JSON.stringify(again.words) === JSON.stringify(g.puzzle.words);
+  g.puzzle.hidden = same ? again.hidden : [];
+  if (same) g.puzzle.extra = again.extra;
+  if (game !== g) return;
+  saveGame();
+  refresh();
 }
 
 /** Opens what a language had on screen last: a daily wheel, or the endless wheel. */
@@ -363,7 +452,9 @@ function pruneOpen(lang, p) {
 
 async function nextWheel() {
   if (!game) return;
+  window.clearTimeout(nextTimer);
   const lang = game.lang;
+  const fromDaily = game.kind === "daily";
   const p = progressOf(lang);
   if (game.kind === "endless" && game.state.done) {
     p.level += 1;
@@ -373,6 +464,7 @@ async function nextWheel() {
   pruneOpen(lang, p);
   saveProgress(lang, p, true);
   await openEndless(lang);
+  if (fromDaily) notice(t("nextAfterDaily"), "good", 5000);
 }
 
 function wordsLang() {
@@ -410,38 +502,48 @@ function bumpStats(lang, change) {
 
 function submitWord(tiles) {
   if (!game) return;
+  // Where the word's letters show now, so they can fly from there.
+  const from = Array.from($("current").querySelectorAll(".cl")).map((c) => c.getBoundingClientRect());
+  const letters = tiles.map((x) => x.toUpperCase());
   const before = game.state;
+  const shownBefore = visibleCells(game.puzzle, before);
   const r = tryWord(game.puzzle, before, tiles);
   const shown = r.word.toUpperCase();
   game.state = r.state;
-  if (r.result === "found" && !settings.taught) {
+  if (!settings.taught) {
     settings.taught = true;
     store.set("settings", settings);
   }
   if (r.result === "found") {
-    grid.flash(
-      game.puzzle.words.find((w) => w.w === r.word),
-      "found",
-    );
+    const word = game.puzzle.words.find((w) => w.w === r.word);
     notice(t("found", { word: shown }), "good");
-  } else if (r.result === "again") {
+    buzz("light");
+    afterChange(before, () => flyToGrid(word, letters, from, shownBefore));
+    return;
+  }
+  if (r.result === "extra") {
+    const book = bookOf(game.lang);
+    if (!book[r.word]) {
+      book[r.word] = isoDay(new Date());
+      store.set(`book-${game.lang}`, { words: book });
+    }
+    const hidden = r.kind === "hidden";
+    const text = t(hidden ? "foundHidden" : "foundBonus", { word: shown });
+    notice(r.earnedHint ? `${text} ${t("earnedHint")}` : text, hidden ? "good hidden" : "good");
+    buzz(hidden ? "medium" : "light");
+    afterChange(before, () => flyToJar(letters, from, !hidden, r.earnedHint));
+    return;
+  }
+  if (r.result === "again") {
+    notice(t("alreadyFound", { word: shown }), "soft");
     grid.flash(
       game.puzzle.words.find((w) => w.w === r.word),
       "again",
     );
-    notice(t("again", { word: shown }), "bad");
-  } else if (r.result === "extra") {
-    const book = bookOf(game.lang);
-    let text;
-    if (book[r.word]) text = t("extraInBook", { word: shown });
-    else {
-      book[r.word] = isoDay(new Date());
-      store.set(`book-${game.lang}`, { words: book });
-      text = t("extraNew", { word: shown });
-    }
-    notice(r.earnedHint ? `${text} ${t("earnedHint")}` : text, "good");
-  } else if (r.result === "extraAgain") notice(t("extraAgain", { word: shown }), "bad");
-  else if (r.result === "short") notice(t("short"), "bad");
+  } else if (r.result === "extraAgain") {
+    notice(t("alreadyFound", { word: shown }), "soft");
+    fx.flash($("jar"), "nudge");
+  } else if (r.result === "short") notice(t("short"), "bad");
   else {
     notice(
       game.lang === "sk" ? `${t("unknown", { word: shown })} ${baseFormsHint()}`.trim() : t("unknown", { word: shown }),
@@ -452,6 +554,51 @@ function submitWord(tiles) {
     window.requestAnimationFrame(() => out.classList.add("shake"));
   }
   afterChange(before);
+}
+
+// A grid word's letters fly from the word into their squares; each square pops as its letter lands. Squares that
+// showed already only pop.
+function flyToGrid(word, letters, from, shownBefore) {
+  if (!word) return;
+  const keys = cellsOf(word);
+  if (fx.still()) {
+    keys.forEach((key) => fx.flash(grid.cellEl(key)));
+    return;
+  }
+  keys.filter((key) => !shownBefore.has(key)).forEach((key) => grid.hold(key));
+  const to = keys.map((key) => {
+    const el = grid.cellEl(key);
+    return el ? el.getBoundingClientRect() : null;
+  });
+  return fx.fly(letters, from, to, { land: (i) => grid.land(keys[i]) });
+}
+
+// A hidden word's letters fly into the jar, which pops; a bonus word's do the same, smaller and fainter.
+function flyToJar(letters, from, light, earnedHint) {
+  const jar = $("jar");
+  const pop = () => {
+    fx.flash(jar, light ? "pop-light" : "pop");
+    if (earnedHint) {
+      const plus = $("jar-plus");
+      plus.hidden = false;
+      fx.flash(plus, "rise", 1300);
+      window.setTimeout(() => {
+        plus.hidden = true;
+      }, 1300);
+    }
+  };
+  if (fx.still()) {
+    pop();
+    return;
+  }
+  let landed = 0;
+  return fx.fly(letters, from, jar.getBoundingClientRect(), {
+    light,
+    land: () => {
+      landed++;
+      if (landed === letters.length) pop();
+    },
+  });
 }
 
 // Slovak counts only base forms. The example is one the wheel's letters cannot make, so it never gives a word away.
@@ -478,27 +625,65 @@ function baseFormsHint() {
   return pair ? t("baseForms", { base: pair[0], form: pair[1] }) : "";
 }
 
-/** Saves the game and, when this change solved the wheel, counts it and says so. */
-function afterChange(before) {
+/**
+ * Saves the game, draws it, runs the find's effect, and celebrates when this change solved the wheel (every grid
+ * word) or completed it (every hidden word too, which then brings the next wheel).
+ */
+function afterChange(before, effect) {
   saveGame();
-  if (game.state.done && !before.done) {
-    const lang = game.lang;
+  const g = game;
+  const solvedNow = g.state.done && !before.done;
+  const completeNow = isComplete(g.puzzle, g.state) && !isComplete(g.puzzle, before);
+  if (solvedNow) {
+    const lang = g.lang;
     bumpStats(lang, {
       solved: 1,
-      words: game.puzzle.words.length,
-      perfect: game.state.hints === 0 ? 1 : 0,
+      words: g.puzzle.words.length,
+      perfect: g.state.hints === 0 ? 1 : 0,
     });
-    if (game.kind === "daily") {
+    if (g.kind === "daily") {
       const days = dailyOf(lang);
-      days[game.day] = { w: game.puzzle.words.length, x: game.state.extras.length, h: game.state.hints };
+      days[g.day] = { w: g.puzzle.words.length, x: g.state.extras.length, h: g.state.hints };
       store.set(`daily-${lang}`, { days }, true);
     }
     store.flush();
-    refresh();
-    window.setTimeout(showSolved, 650);
-    return;
   }
   refresh();
+  // The effect says how long its letters fly; the celebration waits until the last one has landed.
+  const flight = (effect && effect()) || 0;
+  if (solvedNow || completeNow) {
+    window.setTimeout(
+      () => {
+        if (game !== g) return;
+        grid.setSolved(true, true);
+        if (completeNow) {
+          buzzPattern(["heavy", "success", "success"], 150);
+          finishWheel(g);
+          return;
+        }
+        buzzPattern(["success", "medium", "success"], 140);
+        const left = hiddenOf(g.puzzle).length - hiddenFound(g.puzzle, g.state);
+        notice(t("solvedNote", { left: tn("hiddenLeft", left) }), "good big", 7000);
+      },
+      fx.still() ? 0 : flight + 120,
+    );
+  }
+}
+
+// Every word found: say so, light the jar, and bring the next wheel after a moment (not while a panel is open).
+function finishWheel(g) {
+  notice(t(g.kind === "daily" ? "completeDaily" : "completeNote"), "good big", NEXT_AFTER_MS + 800);
+  fx.flash($("jar"), "glow", 1800);
+  window.clearTimeout(nextTimer);
+  const go = () => {
+    if (game !== g) return;
+    if (document.querySelector("dialog[open]")) {
+      nextTimer = window.setTimeout(go, 600);
+      return;
+    }
+    nextWheel();
+  };
+  nextTimer = window.setTimeout(go, NEXT_AFTER_MS);
 }
 
 function useHint(key) {
@@ -516,8 +701,10 @@ function useHint(key) {
   bumpStats(game.lang, { hints: 1 });
   const word = grid.wordAt(cell);
   notice(tn("hintsLeft", hintsLeft(next)), "good");
-  afterChange(before);
-  if (word && next.found.includes(word.w) && !before.found.includes(word.w)) grid.flash(word, "found");
+  afterChange(before, () => {
+    grid.land(cell);
+    if (word && next.found.includes(word.w) && !before.found.includes(word.w)) grid.flash(word, "found");
+  });
 }
 
 function askCell(key, el) {
@@ -572,29 +759,6 @@ document.querySelectorAll("dialog").forEach((dlg) => {
     if (e.target === dlg) closeDialog(dlg);
   });
 });
-
-function showSolved() {
-  if (!game || !game.state.done) return;
-  const { puzzle, state } = game;
-  $("solved-title").textContent = game.kind === "daily" ? t("solvedDailyTitle") : t("solvedTitle");
-  const lines = [
-    tn("solvedWords", puzzle.words.length),
-    tn("solvedExtras", state.extras.length),
-    state.hints ? tn("solvedHints", state.hints) : t("solvedNoHints"),
-  ];
-  const ul = $("solved-lines");
-  ul.textContent = "";
-  for (const line of lines) {
-    const li = document.createElement("li");
-    li.textContent = line;
-    ul.appendChild(li);
-  }
-  const left = puzzle.extra.length - state.extras.length;
-  $("solved-left").textContent = left > 0 ? tn("solvedLeft", left) : "";
-  $("solved-calendar").hidden = game.kind !== "daily";
-  $("solved-next").textContent = game.kind === "daily" ? t("toEndless") : t("nextWheel");
-  openDialog($("dlg-solved"));
-}
 
 // daily calendar
 let calYear = 0;
@@ -653,9 +817,20 @@ function renderBook() {
   const book = bookOf(lang);
   const entries = Object.entries(book);
   $("book-count").textContent = entries.length ? `· ${tn("bookCount", entries.length)}` : "";
-  const here = game ? game.state.extras : [];
-  $("book-wheel-section").hidden = here.length === 0;
-  fillWords($("book-wheel"), here.slice().sort(collator(lang).compare));
+  // This wheel's finds: its hidden words (with the count) and its bonus words.
+  $("book-wheel-section").hidden = !game;
+  if (game) {
+    const hidden = new Set(hiddenOf(game.puzzle));
+    const byName = collator(lang).compare;
+    const found = game.state.extras.filter((w) => hidden.has(w)).sort(byName);
+    const bonus = game.state.extras.filter((w) => !hidden.has(w)).sort(byName);
+    $("book-hidden-title").textContent = hidden.size
+      ? t("bookHidden", { found: found.length, total: hidden.size })
+      : t("jarNoneLong");
+    fillWords($("book-hidden"), found);
+    $("book-bonus-title").hidden = bonus.length === 0;
+    fillWords($("book-bonus"), bonus);
+  }
   const query = normalise($("book-search").value);
   const sortNew = document.querySelector('input[name="book-sort"]:checked').value === "new";
   const cmp = collator(lang).compare;
@@ -726,13 +901,17 @@ function syncSettingsForm() {
   check("theme", settings.theme);
   check("ui", settings.ui);
   $("opt-contrast").checked = settings.contrast;
+  $("opt-vibration").checked = settings.vibration;
 }
 
 function onSetting(e) {
   const input = e.target;
-  if (!input.name && input.id !== "opt-contrast") return;
+  if (!input.name && input.id !== "opt-contrast" && input.id !== "opt-vibration") return;
   if (input.id === "opt-contrast") settings.contrast = input.checked;
-  else if (input.name === "size") settings.size = input.value === "grow" ? "grow" : Number(input.value);
+  else if (input.id === "opt-vibration") {
+    settings.vibration = input.checked;
+    buzz("light");
+  } else if (input.name === "size") settings.size = input.value === "grow" ? "grow" : Number(input.value);
   else if (input.name === "letters") settings.letters = input.value;
   else if (input.name === "theme") settings.theme = input.value;
   else if (input.name === "ui") {
@@ -760,7 +939,7 @@ on("btn-book", () => {
   renderBook();
   openDialog($("dlg-book"));
 });
-on("btn-extras", () => {
+on("btn-jar", () => {
   renderBook();
   openDialog($("dlg-book"));
 });
@@ -800,15 +979,6 @@ on("book-done", () => closeDialog($("dlg-book")));
 on("stats-done", () => closeDialog($("dlg-stats")));
 on("help-done", () => closeDialog($("dlg-help")));
 on("settings-done", () => closeDialog($("dlg-settings")));
-on("solved-stay", () => closeDialog($("dlg-solved")));
-on("solved-calendar", () => {
-  closeDialog($("dlg-solved"));
-  openCalendar();
-});
-on("solved-next", () => {
-  closeDialog($("dlg-solved"));
-  nextWheel();
-});
 $("book-search").addEventListener("input", renderBook);
 $("book-sort").addEventListener("change", renderBook);
 $("dlg-settings").addEventListener("change", onSetting);
@@ -850,10 +1020,29 @@ if (host && host.app && typeof host.app.on === "function") {
   }
 }
 
+// Waits for Zapli's bridge at most a moment; a page outside Zapli has none.
+async function hostReady() {
+  if (!host) return false;
+  try {
+    await Promise.race([host.ready, new Promise((resolve, reject) => window.setTimeout(reject, 2500))]);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 async function start() {
   store.loadLocal();
   if (host) await store.loadKv(host);
   settings = normSettings(store.get("settings"));
+  if (await hostReady()) {
+    try {
+      canBuzz = Boolean(host.haptics && typeof host.supports === "function" && host.supports("haptics.impact"));
+    } catch (e) {
+      canBuzz = false;
+    }
+  }
+  $("opt-vibration-row").hidden = !canBuzz;
   measureTextScale();
   i18n.setLang(uiLang());
   translatePage();

@@ -9,7 +9,8 @@ const GEOMETRY = { 5: [32, 30], 6: [33, 28], 7: [34, 25] };
 
 export function createWheel(root, { onChange, onSubmit, letterLabel }) {
   const svg = root.querySelector("svg");
-  const line = svg.querySelector("polyline");
+  // Two lines on the same points: a wide soft one under a narrow bright one.
+  const lines = Array.from(svg.querySelectorAll("polyline"));
   let tiles = [];
   let slots = []; // slots[i]: where letter i sits on the circle
   let buttons = [];
@@ -38,7 +39,17 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
   function drawLine(extra) {
     const points = path.map((i) => centre(i));
     if (extra && points.length) points.push(extra);
-    line.setAttribute("points", points.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(" "));
+    const text = points.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(" ");
+    for (const line of lines) line.setAttribute("points", text);
+  }
+
+  // The letter just added grows for a moment under the finger.
+  function lift(i) {
+    const b = buttons[i];
+    if (!b) return;
+    b.classList.remove("hot");
+    void b.offsetWidth;
+    b.classList.add("hot");
   }
 
   function changed(extra) {
@@ -85,6 +96,9 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
       }
     }
     slots = next;
+    root.classList.remove("spin");
+    void root.offsetWidth;
+    root.classList.add("spin");
     place();
     drawLine();
   }
@@ -99,12 +113,13 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
     changed();
   }
 
+  // The word is handed over while it still shows, so the page can fly its letters from where they are.
   function submit() {
     if (!path.length) return;
     const word = path.map((i) => tiles[i]);
+    onSubmit(word);
     path = [];
     changed();
-    onSubmit(word);
   }
 
   function add(i) {
@@ -120,6 +135,7 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
     if (i < 0 && k === "c") i = tiles.findIndex((t, n) => t === "ch" && !path.includes(n));
     if (i < 0) return false;
     add(i);
+    lift(i);
     changed();
     return true;
   }
@@ -159,7 +175,10 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
     }
     drag.start = i;
     drag.wasOn = path.includes(i);
-    if (add(i)) drag.added = 1;
+    if (add(i)) {
+      drag.added = 1;
+      lift(i);
+    }
     changed();
   });
 
@@ -175,6 +194,7 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
       } else if (add(i)) {
         drag.added++;
         drag.moved = true;
+        lift(i);
       }
     }
     changed(toPercent(e.clientX, e.clientY));
@@ -207,7 +227,7 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
     if (pointerTap) return;
     const i = Number(b.dataset.i);
     if (path[path.length - 1] === i) path.pop();
-    else add(i);
+    else if (add(i)) lift(i);
     changed();
   });
 

@@ -79,6 +79,38 @@ export function createGrid(root, { onCellTap, t }) {
     root.setAttribute("aria-label", t("gridLabel", { found: state.found.length, total: puzzle.words.length }));
   }
 
+  /** The element of a square, to fly a letter to it. */
+  function cellEl(key) {
+    return cells.get(key) || null;
+  }
+
+  /** Keeps a square's letter out of sight until its flying letter lands, then pops it in. */
+  function hold(key) {
+    const el = cells.get(key);
+    if (el) el.classList.add("incoming");
+  }
+
+  function land(key) {
+    const el = cells.get(key);
+    if (!el) return;
+    el.classList.remove("incoming", "pop");
+    void el.offsetWidth;
+    el.classList.add("pop");
+  }
+
+  /** Marks the grid solved and runs a wave across its squares (the wave only when motion is welcome). */
+  function setSolved(solved, wave) {
+    root.classList.toggle("solved", solved);
+    if (!solved || !wave) return;
+    for (const [key, el] of cells) {
+      const [r, c] = key.split(",").map(Number);
+      el.classList.remove("wave");
+      void el.offsetWidth;
+      el.style.animationDelay = `${(r + c) * 45}ms`;
+      el.classList.add("wave");
+    }
+  }
+
   /** A short highlight of a word's squares: "found" as it fills in, "again" when it was found before. */
   function flash(word, kind) {
     const keys = cellsOf(word);
@@ -101,8 +133,19 @@ export function createGrid(root, { onCellTap, t }) {
   });
 
   board.addEventListener("animationend", (e) => {
-    e.target.classList.remove("pop", "again");
+    e.target.classList.remove("pop", "again", "wave");
+    e.target.style.animationDelay = "";
   });
 
-  return { set, update, flash, fit, wordAt: (key) => puzzle && puzzle.words.find((w) => cellsOf(w).includes(key)) };
+  return {
+    set,
+    update,
+    flash,
+    fit,
+    cellEl,
+    hold,
+    land,
+    setSolved,
+    wordAt: (key) => puzzle && puzzle.words.find((w) => cellsOf(w).includes(key)),
+  };
 }

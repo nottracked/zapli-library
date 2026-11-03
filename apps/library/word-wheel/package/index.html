@@ -77,6 +77,10 @@
                 <div class="status">
                     <span id="mode-label" class="mode"></span>
                     <span id="progress" class="progress"></span>
+                    <span id="solved-badge" class="solved-badge" hidden
+                        ><svg class="ico" aria-hidden="true"><use href="#i-enter" /></svg
+                        ><span data-t="solvedBadge">Solved</span></span
+                    >
                     <button type="button" class="chip" id="btn-switch"></button>
                 </div>
 
@@ -108,7 +112,10 @@
 
                 <div class="wheel-wrap" id="wheel-wrap">
                     <div class="wheel" id="wheel" role="group">
-                        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polyline points="" /></svg>
+                        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                            <polyline class="glow" points="" />
+                            <polyline class="core" points="" />
+                        </svg>
                     </div>
                 </div>
 
@@ -129,11 +136,16 @@
                         ><span class="badge" id="hint-count" aria-hidden="true">3</span></span
                     ><span data-t="hint">Hint</span>
                 </button>
-                <button type="button" class="tool" id="btn-extras">
-                    <span class="ico-wrap"
-                        ><svg class="ico" aria-hidden="true"><use href="#i-book" /></svg
-                        ><span class="badge" id="extra-count" aria-hidden="true">0</span></span
-                    ><span data-t="extraWords">Extra words</span>
+                <button type="button" class="tool" id="btn-jar">
+                    <span class="ico-wrap jar" id="jar"
+                        ><svg class="jar-art" viewBox="0 0 40 48" aria-hidden="true">
+                            <rect class="jar-lid" x="9" y="3" width="22" height="7" rx="2.5" />
+                            <path class="jar-back" d="M10 12h20l2 4v24a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6V16z" />
+                            <rect class="jar-fill" id="jar-fill" x="8" y="46" width="24" height="0" />
+                            <path class="jar-glass" d="M10 12h20l2 4v24a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6V16z" />
+                            <path class="jar-shine" d="M13 19v15" /></svg
+                        ><span class="badge plus" id="jar-plus" aria-hidden="true" hidden>+1</span></span
+                    ><span id="jar-label" class="jar-label">Hidden words</span>
                 </button>
             </nav>
         </div>
@@ -170,8 +182,10 @@
             <div class="sheet-body">
                 <p class="muted" data-t="bookIntro"></p>
                 <section id="book-wheel-section">
-                    <h3 data-t="bookThisWheel">Found on this wheel</h3>
-                    <ul class="words" id="book-wheel"></ul>
+                    <h3 id="book-hidden-title"></h3>
+                    <ul class="words hidden-words" id="book-hidden"></ul>
+                    <h3 id="book-bonus-title" data-t="bookBonus">Bonus words on this wheel</h3>
+                    <ul class="words" id="book-bonus"></ul>
                 </section>
                 <h3 data-t="bookAll">All words</h3>
                 <div class="book-tools">
@@ -220,12 +234,25 @@
         <dialog id="dlg-help" aria-labelledby="help-title">
             <div class="dlg-head"><h2 id="help-title" data-t="howToPlay">How to play</h2></div>
             <div class="dlg-body">
+                <section class="tldr" aria-labelledby="tldr-title">
+                    <h3 id="tldr-title" data-t="tldrTitle">In short</h3>
+                    <ul>
+                        <li data-t="tldr1"></li>
+                        <li data-t="tldr2"></li>
+                        <li data-t="tldr3"></li>
+                        <li data-t="tldr4"></li>
+                        <li class="tip" data-t="tldr5"></li>
+                    </ul>
+                </section>
+                <h3 class="details" data-t="helpDetails">The details</h3>
                 <p data-t="helpGoal"></p>
                 <h3 data-t="helpMaking"></h3>
                 <p data-t="helpMaking1"></p>
                 <p data-t="helpMaking2"></p>
                 <h3 data-t="helpExtras"></h3>
                 <p data-t="helpExtras1"></p>
+                <h3 data-t="helpSolved"></h3>
+                <p data-t="helpSolved1"></p>
                 <h3 data-t="helpHints"></h3>
                 <p data-t="helpHints1"></p>
                 <p data-t="helpHints2"></p>
@@ -292,8 +319,15 @@
                     </div>
                     <p class="note" id="letters-note" data-t="sizeAuto"></p>
                 </fieldset>
-                <label class="opt">
+                <label class="opt" id="opt-vibration-row">
                     <span
+                        ><span class="opt-title" data-t="vibration">Vibration</span
+                        ><span class="note" data-t="vibrationNote"></span
+                    ></span>
+                    <input type="checkbox" class="switch" id="opt-vibration" />
+                </label>
+                <label class="opt"
+                    ><span
                         ><span class="opt-title" data-t="contrast">High contrast</span
                         ><span class="note" data-t="contrastNote"></span
                     ></span>
@@ -333,19 +367,7 @@
             </div>
         </dialog>
 
-        <dialog id="dlg-solved" aria-labelledby="solved-title">
-            <div class="dlg-head"><h2 id="solved-title"></h2></div>
-            <div class="dlg-body">
-                <ul class="summary" id="solved-lines"></ul>
-                <p class="muted" id="solved-left"></p>
-            </div>
-            <div class="dlg-foot">
-                <button type="button" class="btn" id="solved-stay" data-t="keepLooking">Keep looking</button>
-                <button type="button" class="btn" id="solved-calendar" data-t="calendar">Calendar</button>
-                <button type="button" class="btn primary" id="solved-next" data-t="nextWheel">Next wheel</button>
-            </div>
-        </dialog>
-
+        <div id="fx" class="fx" aria-hidden="true"></div>
         <div id="sr" class="sr-only" aria-live="polite"></div>
     </body>
 </html>

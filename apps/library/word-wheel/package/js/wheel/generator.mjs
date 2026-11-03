@@ -1,6 +1,7 @@
 // Makes Word Wheel puzzles from a word list: a wheel of five to seven letters that spell at least one long word, the
 // words a puzzle asks for (from the list's answer tier) laid out as a small crossword, and every other real word the
-// wheel can make (both tiers), which the game counts as extra words.
+// wheel can make (both tiers), which the game counts as extra words. Of those, the common ones (answer tier) are the
+// wheel's hidden words, which the game counts ("hidden 2 of 6"); the rarer ones (accepted tier) are bonus words.
 //
 // Everything here is repeatable: a daily puzzle depends only on the language, the date and the word list, and an
 // endless puzzle only on the language, the wheel size, its number and the word list. The page's worker and the checks
@@ -69,7 +70,9 @@ export function buildIndex(lang, lists) {
       if (answer) answers.push(e);
     }
   }
-  return { lang, answers, all, words: seen, alphabet: ALPHABETS[lang].length, seeds: {}, orders: {} };
+  // Hidden words are the answer words the list marks as common, or every answer word when it marks none.
+  const common = lists.common && lists.common.length ? new Set(lists.common) : null;
+  return { lang, answers, all, common, words: seen, alphabet: ALPHABETS[lang].length, seeds: {}, orders: {} };
 }
 
 function countsOf(index, entry) {
@@ -204,6 +207,10 @@ export function makePuzzle(index, wheel, rng, meta) {
     .map((e) => e.word)
     .filter((w) => !inGrid.has(w))
     .sort();
+  const hidden = candidates
+    .map((e) => e.word)
+    .filter((w) => !inGrid.has(w) && (!index.common || index.common.has(w)))
+    .sort();
   const words = best.words
     .map((w) => ({ w: w.entry.word, t: w.entry.tiles, r: w.r, c: w.c, d: w.d }))
     .sort((a, b) => a.t.length - b.t.length || (a.w < b.w ? -1 : a.w > b.w ? 1 : 0));
@@ -220,6 +227,7 @@ export function makePuzzle(index, wheel, rng, meta) {
     cols: best.cols,
     words,
     extra,
+    hidden,
   };
 }
 

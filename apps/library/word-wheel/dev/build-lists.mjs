@@ -2,9 +2,10 @@
 //
 //   node dev/build-lists.mjs sk
 //       Slovak, from the hand-written sources in dev/sk/ (answers-*.txt and accepted-*.txt).
-//   node dev/build-lists.mjs en --enable <enable1.txt> --esl <3esl.txt>
-//       English, from the public-domain ENABLE list and the 12dicts 3esl list (dev/README.md says where to get them;
-//       their SHA-256 must match the ones recorded below).
+//   node dev/build-lists.mjs en --enable <enable1.txt> --esl <3esl.txt> --core <2of5core.txt>
+//       English, from the public-domain ENABLE list and the 12dicts 3esl and 2of5core lists (dev/README.md says where
+//       to get them; their SHA-256 must match the ones recorded below). 2of5core marks the answer words that count as
+//       common, which are the hidden words a wheel counts; Slovak counts every answer word as common.
 //   --min <n> --max <n>   the shortest and longest words kept, in tiles (default 3 and 7, what a wheel can hold)
 //   --check               build in memory and compare with the shipped file instead of writing it
 //
@@ -25,6 +26,7 @@ const dataDir = join(here, "..", "package", "data");
 // The English sources as downloaded (dev/README.md): a different file means a different list, so it is refused.
 const ENABLE_SHA256 = "3f16130220645692ed49c7134e24a18504c2ca55b3c012f7290e3e77c63b1a89";
 const ESL_SHA256 = "eb70e6169534511caff9e06971b3fa71981a83f0355b29532b710ea5a9df253b";
+const CORE_SHA256 = "c89531e451a4841da4452618201d7d6ccb88aafee62fa829fdcdc73ed29bdc62";
 
 function args(argv) {
   const out = { lang: argv[0], min: 3, max: 7, check: false };
@@ -35,6 +37,7 @@ function args(argv) {
     else if (a === "--max") out.max = Number(argv[++i]);
     else if (a === "--enable") out.enable = argv[++i];
     else if (a === "--esl") out.esl = argv[++i];
+    else if (a === "--core") out.core = argv[++i];
     else throw new Error(`unknown option ${a}`);
   }
   if (out.lang !== "sk" && out.lang !== "en") throw new Error("say which list to build: sk or en");
@@ -100,7 +103,7 @@ function slovakWarnings(word) {
 
 // ---- building
 
-function finish(lang, answersIn, acceptedIn, opt, header) {
+function finish(lang, answersIn, acceptedIn, opt, header, commonIn) {
   const fits = (w) => {
     const t = tiles(w, lang);
     return t && t.length >= opt.min && t.length <= opt.max;
@@ -108,7 +111,9 @@ function finish(lang, answersIn, acceptedIn, opt, header) {
   const answers = Array.from(new Set(answersIn.filter(fits))).sort(byCodePoint);
   const inAnswers = new Set(answers);
   const accepted = Array.from(new Set(acceptedIn.filter((w) => fits(w) && !inAnswers.has(w)))).sort(byCodePoint);
-  const text = formatWordList(header, answers, accepted);
+  const common = commonIn ? answers.filter((w) => commonIn.has(w)) : null;
+  if (common) console.log(`${lang}: ${common.length} of the answer words marked common`);
+  const text = formatWordList(header, answers, accepted, common);
   const file = join(dataDir, `words-${lang}.txt`);
   const byLength = (list) => {
     const counts = {};
@@ -187,7 +192,20 @@ function buildSlovak(opt) {
 }
 
 function buildEnglish(opt) {
-  if (!opt.enable || !opt.esl) throw new Error("English needs --enable <enable1.txt> and --esl <3esl.txt>");
+  if (!opt.enable || !opt.esl || !opt.core) {
+    throw new Error("English needs --enable <enable1.txt>, --esl <3esl.txt> and --core <2of5core.txt>");
+  }
+  const coreBytes = readFileSync(opt.core);
+  if (sha256(coreBytes) !== CORE_SHA256) throw new Error(`${opt.core} is not the recorded 2of5core file`);
+  // Lines may hold two spellings ("center/centre"); each counts.
+  const core = new Set(
+    coreBytes
+      .toString("latin1")
+      .split(/\r?\n/)
+      .flatMap((l) => l.split("/"))
+      .map((w) => w.trim())
+      .filter((w) => /^[a-z]+$/.test(w)),
+  );
   const enableBytes = readFileSync(opt.enable);
   const eslBytes = readFileSync(opt.esl);
   if (sha256(enableBytes) !== ENABLE_SHA256) throw new Error(`${opt.enable} is not the recorded ENABLE file`);
@@ -213,12 +231,20 @@ function buildEnglish(opt) {
     .split(/\r?\n/)
     .map((w) => w.trim())
     .filter((w) => ok(w) && inEnable.has(w) && !notAnswers.has(sha256(w)));
-  finish("en", esl, enable, opt, [
-    "Word Wheel word list: English, from public-domain sources (dev/README.md).",
-    "Answer words: the 3esl list of 12dicts by Alan Beale (public domain), as far as ENABLE has them.",
-    "Accepted words: the ENABLE word list (public domain).",
-    "Built by dev/build-lists.mjs; do not edit by hand. Some offensive words are left out of both tiers.",
-  ]);
+  finish(
+    "en",
+    esl,
+    enable,
+    opt,
+    [
+      "Word Wheel word list: English, from public-domain sources (dev/README.md).",
+      "Answer words: the 3esl list of 12dicts by Alan Beale (public domain), as far as ENABLE has them.",
+      "Accepted words: the ENABLE word list (public domain).",
+      "Common words (hidden words a wheel counts): the 2of5core list of 12dicts (public domain), as far as the answers",
+      "have them. Built by dev/build-lists.mjs; do not edit by hand. Some offensive words are left out of both tiers.",
+    ],
+    core,
+  );
 }
 
 const opt = args(process.argv.slice(2));

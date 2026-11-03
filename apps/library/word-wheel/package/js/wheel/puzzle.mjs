@@ -1,6 +1,9 @@
 // The state of one Word Wheel puzzle as the player solves it: the grid words found, the extra words found, the
 // squares a hint showed and the hints used. Plain data (it is saved as JSON), changed only through these functions,
 // which return a new state and never touch the DOM.
+//
+// A wheel is solved when every grid word is found, and complete when its hidden words (the common words it can make
+// that the grid does not use) are found too. Every extra word, hidden or bonus, fills the jar toward a free hint.
 
 /** Free hints at the start of every puzzle. */
 export const FREE_HINTS = 3;
@@ -38,6 +41,27 @@ export function visibleCells(puzzle, state) {
   return out;
 }
 
+/** The wheel's hidden words: the common words it can make that are not in the grid. */
+export function hiddenOf(puzzle) {
+  return Array.isArray(puzzle.hidden) ? puzzle.hidden : [];
+}
+
+/** How many of the wheel's hidden words the player has found. */
+export function hiddenFound(puzzle, state) {
+  const hidden = new Set(hiddenOf(puzzle));
+  return state.extras.filter((w) => hidden.has(w)).length;
+}
+
+/** Solved and every hidden word found. */
+export function isComplete(puzzle, state) {
+  return state.done && hiddenFound(puzzle, state) >= hiddenOf(puzzle).length;
+}
+
+/** How full the jar is: extra words toward the next free hint (0 to EXTRAS_PER_HINT - 1). */
+export function jarLevel(state) {
+  return state.extras.length % EXTRAS_PER_HINT;
+}
+
 /** Hints the player still has in this puzzle. */
 export function hintsLeft(state) {
   return Math.max(0, FREE_HINTS + Math.floor(state.extras.length / EXTRAS_PER_HINT) - state.hints);
@@ -68,10 +92,13 @@ export function tryWord(puzzle, state, tiles) {
     return { result: "found", word, state: next, cells: cellsOf(grid) };
   }
   if (puzzle.extra.includes(word)) {
-    if (state.extras.includes(word)) return { result: "extraAgain", word, state };
+    if (state.extras.includes(word)) {
+      return { result: "extraAgain", kind: hiddenOf(puzzle).includes(word) ? "hidden" : "bonus", word, state };
+    }
     const before = hintsLeft(state);
     const next = { ...state, extras: [...state.extras, word] };
-    return { result: "extra", word, state: next, earnedHint: hintsLeft(next) > before };
+    const kind = hiddenOf(puzzle).includes(word) ? "hidden" : "bonus";
+    return { result: "extra", kind, word, state: next, earnedHint: hintsLeft(next) > before };
   }
   return { result: "unknown", word, state };
 }
