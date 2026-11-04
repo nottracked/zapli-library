@@ -447,7 +447,15 @@ function dock(label) {
   );
 }
 
-/** Shows the dock's words only while they fit, and tells the page how tall it is (the snackbar sits above it). */
+/** True when an element's content is wider than the element (its words are cut off or spill out). */
+function overflows(el) {
+  return Boolean(el) && typeof el.scrollWidth === "number" && el.scrollWidth > el.clientWidth;
+}
+
+/**
+ * Shows the dock's words only while they fit, in the dock and in its New note button, and tells the page how tall
+ * the dock is (the snackbar sits above it).
+ */
 function fitDock(node) {
   const d = node.querySelector ? node.querySelector(".dock") : null;
   const root = document.documentElement;
@@ -456,8 +464,17 @@ function fitDock(node) {
     return;
   }
   d.classList.remove("compact");
-  if (typeof d.scrollWidth === "number" && d.scrollWidth > (window.innerWidth || 360) - 24) d.classList.add("compact");
+  const wide = typeof d.scrollWidth === "number" && d.scrollWidth > (window.innerWidth || 360) - 24;
+  if (wide || overflows(d.querySelector(".dock-main"))) d.classList.add("compact");
   if (typeof d.offsetHeight === "number") root.style.setProperty("--dock-h", d.offsetHeight + "px");
+}
+
+/** The search bar shows its hint ("Find a note") while it fits, and only "Search" when large text would cut it off. */
+function fitSearchPill(node) {
+  const text = node.querySelector ? node.querySelector(".search-pill-text") : null;
+  if (!text) return;
+  text.textContent = t("searchNotes");
+  if (overflows(text)) text.textContent = t("search");
 }
 
 // ---------------------------------------------------------------- the screen
@@ -517,12 +534,13 @@ export function render(route) {
   return screen;
 }
 
-/** After the screen is on the page: the masonry, the dock's size. */
+/** After the screen is on the page: the masonry, the dock's size, the search bar's words. */
 export function after(node) {
   for (const stop of stopGrids) stop();
   stopGrids = [];
   if (node.querySelectorAll) for (const g of node.querySelectorAll(".masonry")) stopGrids.push(watchGrid(g));
   fitDock(node);
+  fitSearchPill(node);
 }
 
 export function leave() {
@@ -533,4 +551,5 @@ export function leave() {
 
 export function resize(node) {
   fitDock(node);
+  fitSearchPill(node);
 }

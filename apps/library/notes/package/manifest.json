@@ -4,7 +4,7 @@
     "id": "library/notes",
     "kind": "web",
     "name": "Notes",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "icon": "edit_note",
     "category": "productivity",
     "ageRating": "everyone",
@@ -265,7 +265,7 @@
       "js/app.mjs": { "sha256": "af7f6395dd268c8360d1d42ae3430f1eb6de82f3963989b8c3ddb3056768ec63", "size": 8718 },
       "js/cards.mjs": { "sha256": "fd00e6be2bfed93b2f5f6b3d1f89c6093a7f7a30da8097c361eca58cda9fb470", "size": 11689 },
       "js/drawer.mjs": { "sha256": "435696fe40e33c225ff033007e057734499960c600426c60d445568fa1c31ab5", "size": 3200 },
-      "js/i18n.mjs": { "sha256": "e762456a75aa09f94d8e328f67da61a1efa0fdca3873b15b5f58990253773cff", "size": 29278 },
+      "js/i18n.mjs": { "sha256": "3acc4dd2e33e9637241a88edddf8d7a790b905b5bab26766dec3265a442a7e36", "size": 29284 },
       "js/icons.mjs": { "sha256": "0e1c4722936541e6669aa5b4d70bf30357501a24bd8def1aa3d164d3cbdc95ae", "size": 6392 },
       "js/illus.mjs": { "sha256": "fd05b34668a04ece83e5da3cad42307dc013a90debb20d051d8b5a2c3159f414", "size": 3392 },
       "js/model.mjs": { "sha256": "b2dc96ee5575ada963ddac13bb142304bcd6f60c4b9a8c8c7940bb5b48d920da", "size": 18930 },
@@ -276,8 +276,8 @@
         "size": 40762
       },
       "js/screens/home.mjs": {
-        "sha256": "960a152b3f5d0404169ccd330799bf2f983c00c0862e79c80ed0f8e4fadd10ec",
-        "size": 18511
+        "sha256": "fe99e34829a2788b0b4ea0f17c3fef989ec866b3ebe8b50e28bb59a2534ac4e4",
+        "size": 19277
       },
       "js/screens/labels.mjs": {
         "sha256": "d8ff8c4cff3d169170068c7a7d564a4153171912bf4e1e36b8fe7c798a7ab86b",
