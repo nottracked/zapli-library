@@ -32,7 +32,9 @@
                         "levels": "#/levels",
                         "play": "#/play",
                         "settings": "#/settings",
-                        "help": "#/help"
+                        "help": "#/help",
+                        "hangar": "#/hangar",
+                        "talents": "#/talents"
                     },
                     "orientation": "any"
                 },
@@ -272,7 +274,7 @@
                 font: inherit;
                 font-weight: 700;
                 font-size: 1.0625rem;
-                overflow-wrap: anywhere;
+                overflow-wrap: break-word;
                 text-decoration: none;
                 cursor: pointer;
                 text-align: center;
@@ -1290,6 +1292,18 @@
                 stroke-linejoin: round;
                 overflow: visible;
             }
+            .pw-chip.syn {
+                width: 3rem;
+                height: 3rem;
+                background: conic-gradient(
+                    var(--c) 0 calc(var(--p) * 180deg),
+                    var(--c2) 0 calc(var(--p) * 360deg),
+                    var(--line) 0
+                );
+            }
+            .pw-chip.syn svg {
+                stroke: var(--on-surface);
+            }
             .pw-chip.ending {
                 animation: blink 0.5s steps(2) infinite;
             }
@@ -1424,6 +1438,257 @@
                 height: 1.9rem;
             }
 
+            /* ---------- pilot, hangar and talents ---------- */
+            .pilot {
+                display: grid;
+                gap: 0.4rem;
+            }
+            .pilot-head {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 0.1rem 1rem;
+            }
+            .pilot-head span {
+                font-size: 0.875rem;
+                color: var(--soft);
+                font-variant-numeric: tabular-nums;
+            }
+            .home .pilot {
+                text-shadow:
+                    0 0 0.25rem var(--surface),
+                    0 0 0.7rem var(--surface);
+            }
+            .xp-bar {
+                height: 0.45rem;
+                min-height: 6px;
+                border-radius: 1rem;
+                background: var(--line);
+                overflow: hidden;
+            }
+            .xp-bar span {
+                display: block;
+                height: 100%;
+                transform-origin: left center;
+                transform: scaleX(0);
+                background: linear-gradient(90deg, var(--primary), var(--accent));
+                border-radius: inherit;
+                transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1);
+            }
+            .tal-free {
+                margin: 0.2rem 0 0;
+                font-weight: 700;
+                color: var(--primary);
+            }
+            /* Unspent talent points: a count in the button's corner, out of the label's way. */
+            .badge-n {
+                position: absolute;
+                top: -0.45rem;
+                right: -0.3rem;
+                display: inline-grid;
+                place-items: center;
+                min-width: 1.5rem;
+                height: 1.5rem;
+                padding: 0 0.35rem;
+                border-radius: 1rem;
+                background: var(--accent);
+                color: var(--surface);
+                font-size: 0.875rem;
+                font-weight: 800;
+                line-height: 1;
+            }
+            .loadout {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                min-height: 3.5rem;
+                margin: 0 0 1rem;
+                padding: 0.6rem 1rem;
+                border: 1.5px solid var(--line);
+                border-radius: var(--round);
+                background: var(--panel-solid);
+                color: var(--on-surface);
+                text-decoration: none;
+            }
+            .lo-ico .ico {
+                width: min(1.75rem, 32px);
+                height: min(1.75rem, 32px);
+                stroke: var(--primary);
+            }
+            .lo-text {
+                flex: 1;
+                min-width: 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0 0.6rem;
+                align-items: baseline;
+            }
+            .lo-text span {
+                color: var(--soft);
+            }
+            .lo-change {
+                font-weight: 700;
+                color: var(--primary);
+            }
+            .choices {
+                display: grid;
+                gap: 0.65rem;
+                grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+            }
+            .choice,
+            .talent {
+                --tint: var(--primary);
+                display: grid;
+                grid-template-columns: auto minmax(0, 1fr);
+                align-content: start;
+                gap: 0.15rem min(0.85rem, 12px);
+                width: 100%;
+                min-height: 4.5rem;
+                padding: 0.85rem min(1rem, 16px);
+                border: 1.5px solid var(--line);
+                border-radius: var(--round);
+                background: var(--panel-solid);
+                color: var(--on-surface);
+                font: inherit;
+                text-align: left;
+                cursor: pointer;
+                touch-action: manipulation;
+                transition: transform 0.12s ease;
+            }
+            .talent {
+                grid-template-columns: minmax(0, 1fr);
+            }
+            .choice:active,
+            .talent:active {
+                transform: scale(0.98);
+            }
+            .choice.on,
+            .talent.on {
+                border: 2px solid var(--tint);
+                background: color-mix(in srgb, var(--tint) 12%, var(--panel-solid));
+            }
+            .choice[aria-disabled="true"],
+            .talent[aria-disabled="true"] {
+                cursor: default;
+            }
+            .choice[aria-disabled="true"] > *,
+            .talent[aria-disabled="true"] > * {
+                opacity: 0.55;
+            }
+            .ch-ico {
+                grid-row: 1 / span 3;
+                width: min(2.25rem, 34px);
+                height: min(2.25rem, 34px);
+                margin-top: 0.1rem;
+                fill: none;
+                stroke: var(--tint);
+                stroke-width: 2.2;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                overflow: visible;
+            }
+            .ch-name {
+                font-weight: 800;
+                font-size: 1.0625rem;
+                line-height: 1.25;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+            .ch-info {
+                font-size: 0.9375rem;
+                line-height: 1.4;
+                color: var(--soft);
+            }
+            .ch-state {
+                font-size: 0.8125rem;
+                font-weight: 700;
+                color: var(--tint);
+            }
+            .ch-state:empty {
+                display: none;
+            }
+            .tree {
+                --tint: var(--primary);
+                margin: 0 0 1.5rem;
+            }
+            .tree h2 {
+                margin: 0 0 0.5rem;
+                font-size: 1.25rem;
+                font-weight: 800;
+                color: var(--tint);
+            }
+            .trow {
+                margin: 0 0 0.75rem;
+            }
+            .trow-h {
+                margin: 0 0 0.35rem;
+                font-size: 0.8125rem;
+                font-weight: 700;
+                color: var(--soft);
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+            }
+            .topts {
+                display: grid;
+                gap: 0.6rem;
+                grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+            }
+            .xp-box {
+                margin-top: 1rem;
+                padding-top: 0.75rem;
+                border-top: 1.5px solid var(--line);
+            }
+            .xp-head {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 0 1rem;
+                margin-bottom: 0.4rem;
+            }
+            .xp-head h3 {
+                margin: 0;
+                font-size: 1.125rem;
+                font-weight: 800;
+                color: var(--primary);
+            }
+            .xp-head span {
+                font-weight: 700;
+            }
+            .xp-note {
+                font-size: 0.875rem;
+            }
+            .xp-parts {
+                list-style: none;
+                margin: 0.4rem 0 0;
+                padding: 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.1rem 1rem;
+                font-size: 0.875rem;
+                color: var(--soft);
+            }
+            .xp-parts b {
+                color: var(--on-surface);
+                font-variant-numeric: tabular-nums;
+            }
+            .syn-li .pair-ico {
+                display: flex;
+                flex: none;
+                gap: 0.1rem;
+            }
+            .roster .syn-li svg {
+                width: 1.6rem;
+                height: 1.6rem;
+            }
+            .syn-li .pa {
+                stroke: var(--ca);
+            }
+            .syn-li .pb {
+                stroke: var(--cb);
+            }
+
             /* ---------- motion ---------- */
             .enter .stagger > * {
                 animation: rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
@@ -1483,6 +1748,16 @@
             <symbol id="i-lock" viewBox="0 0 24 24"><path d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3" /></symbol>
             <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></symbol>
             <symbol id="i-ship" viewBox="-12 -12 24 24"><path d="M0-10 8 6.2 3.4 9.4 0 3.8-3.4 9.4-8 6.2Z" /></symbol>
+            <symbol id="i-talent" viewBox="0 0 24 24">
+                <circle cx="12" cy="5" r="2.3" />
+                <circle cx="6" cy="18.5" r="2.3" />
+                <circle cx="18" cy="18.5" r="2.3" />
+                <path d="M12 7.3v4.2M12 11.5l-4.6 5M12 11.5l4.6 5" />
+            </symbol>
+            <symbol id="i-hangar" viewBox="0 0 24 24">
+                <path d="M12 3.5 17.5 15.5 12 13 6.5 15.5Z" />
+                <path d="M4 20h16" />
+            </symbol>
             <symbol id="i-nova" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="4.2" />
                 <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" />
@@ -1538,6 +1813,15 @@
                         ></a>
                         <a class="btn primary" id="btn-play" href="#/levels" data-t="play">Play</a>
                         <div class="pair">
+                            <a class="btn" href="#/hangar"
+                                ><svg class="ico"><use href="#i-hangar" /></svg><span data-t="hangar">Hangar</span></a
+                            >
+                            <a class="btn" href="#/talents" id="btn-talents"
+                                ><svg class="ico"><use href="#i-talent" /></svg><span data-t="talents">Talents</span
+                                ><span class="badge-n" id="talent-n" aria-hidden="true" hidden></span
+                            ></a>
+                        </div>
+                        <div class="pair">
                             <a class="btn" href="#/help"
                                 ><svg class="ico"><use href="#i-help" /></svg
                                 ><span data-t="howToPlay">How to play</span></a
@@ -1546,6 +1830,10 @@
                                 ><svg class="ico"><use href="#i-tune" /></svg><span data-t="settings">Settings</span></a
                             >
                         </div>
+                    </div>
+                    <div class="pilot" id="home-pilot">
+                        <div class="pilot-head"><b id="pilot-l"></b><span id="pilot-n"></span></div>
+                        <div class="xp-bar" aria-hidden="true"><span id="pilot-bar"></span></div>
                     </div>
                     <p class="stats" id="home-stats"></p>
                     <p class="hint" data-t="poolHint">Tap the water to send a gust through the reeds.</p>
@@ -1565,7 +1853,66 @@
                         Clear all six waves of a sector to open the next one. Every sector brings something new to
                         fight.
                     </p>
+                    <a class="loadout" href="#/hangar" id="loadout">
+                        <span class="lo-ico" id="lo-ico" aria-hidden="true"></span>
+                        <span class="lo-text"><b id="lo-ship"></b><span id="lo-weapon"></span></span>
+                        <span class="lo-change" data-t="change">Change</span>
+                    </a>
                     <div class="sectors" id="sector-list"></div>
+                </div>
+            </section>
+
+            <!-- ============ HANGAR ============ -->
+            <section id="screen-hangar" class="screen menu" data-route="hangar" aria-labelledby="hangar-h" hidden>
+                <header class="bar">
+                    <button class="icon-btn" type="button" data-back aria-label="Back" data-t-label="back">
+                        <svg class="ico"><use href="#i-back" /></svg>
+                    </button>
+                    <h1 id="hangar-h" tabindex="-1" data-t="hangar">Hangar</h1>
+                </header>
+                <div class="wrap">
+                    <p class="lede" data-t="hangarLede">
+                        Choose the ship and weapon for your next run. More open as your pilot level rises.
+                    </p>
+                    <section class="group" aria-labelledby="hg-ship">
+                        <h2 id="hg-ship" data-t="shipH">Ship</h2>
+                        <div class="choices" id="ship-list"></div>
+                    </section>
+                    <section class="group" aria-labelledby="hg-weapon">
+                        <h2 id="hg-weapon" data-t="weaponH">Weapon</h2>
+                        <div class="choices" id="weapon-list"></div>
+                    </section>
+                    <section class="group" aria-labelledby="hg-opt">
+                        <h2 id="hg-opt" data-t="optionsH">Starting options</h2>
+                        <div id="opt-list"></div>
+                    </section>
+                    <p class="about" id="hangar-note" data-t="nextRunNote" hidden>Changes apply from your next run.</p>
+                </div>
+            </section>
+
+            <!-- ============ TALENTS ============ -->
+            <section id="screen-talents" class="screen menu" data-route="talents" aria-labelledby="talents-h" hidden>
+                <header class="bar">
+                    <button class="icon-btn" type="button" data-back aria-label="Back" data-t-label="back">
+                        <svg class="ico"><use href="#i-back" /></svg>
+                    </button>
+                    <h1 id="talents-h" tabindex="-1" data-t="talents">Talents</h1>
+                </header>
+                <div class="wrap">
+                    <div class="pilot card">
+                        <div class="pilot-head"><b id="tal-level"></b><span id="tal-next"></span></div>
+                        <div class="xp-bar" aria-hidden="true"><span id="tal-bar"></span></div>
+                        <p class="tal-free" id="tal-free" aria-live="polite"></p>
+                    </div>
+                    <p class="lede" data-t="talentsLede">
+                        Each pilot level gives a talent point. Take one talent in each row; a row opens once the row
+                        above has one. Change your mind whenever you like, for free.
+                    </p>
+                    <p class="about" id="talents-note" data-t="nextRunNote" hidden>Changes apply from your next run.</p>
+                    <div id="trees"></div>
+                    <div class="stack">
+                        <button class="btn" type="button" id="btn-respec" data-t="respec">Reset talents</button>
+                    </div>
                 </div>
             </section>
 
@@ -1862,6 +2209,30 @@
                         </p>
                         <ul class="roster compact" id="upgrade-list"></ul>
                     </section>
+                    <section class="card" aria-labelledby="h-syn">
+                        <h2 id="h-syn" data-t="helpSyn">Synergies</h2>
+                        <p data-t="helpSynText">
+                            Two power-ups that work well together become a synergy while both are active. Capsules often
+                            bring a partner for a power-up you hold.
+                        </p>
+                        <ul class="roster" id="syn-list"></ul>
+                    </section>
+                    <section class="card" aria-labelledby="h-gear">
+                        <h2 id="h-gear" data-t="helpGear">Weapons and ships</h2>
+                        <p data-t="helpGearText">
+                            Choose them in the hangar before a run. Each weapon plays differently, and power-ups and
+                            upgrades work with all of them.
+                        </p>
+                        <ul class="roster" id="gear-list"></ul>
+                    </section>
+                    <section class="card" aria-labelledby="h-pilot">
+                        <h2 id="h-pilot" data-t="helpPilot">Pilot level and talents</h2>
+                        <p data-t="helpPilotText">
+                            Every run earns experience, even one that ends early: for your score, each wave cleared and
+                            each sector cleared. Each level brings a talent point, and some levels open a new ship,
+                            weapon or starting option. As you grow stronger, the waves grow a little larger.
+                        </p>
+                    </section>
                     <section class="card" aria-labelledby="h-roster">
                         <h2 id="h-roster" data-t="fieldGuide">Field guide</h2>
                         <p data-t="fieldGuideText">
@@ -1916,6 +2287,16 @@
                 </dl>
                 <p class="build" id="res-build"></p>
                 <p class="unlock" id="res-unlock" hidden></p>
+                <section class="xp-box" id="res-xp" aria-labelledby="res-xp-h" hidden>
+                    <div class="xp-head">
+                        <h3 id="res-xp-h"></h3>
+                        <span id="res-lvl"></span>
+                    </div>
+                    <div class="xp-bar" aria-hidden="true"><span id="res-xp-bar"></span></div>
+                    <p class="xp-note" id="res-xp-note"></p>
+                    <ul class="xp-parts" id="res-xp-parts"></ul>
+                    <p class="unlock" id="res-levelup" hidden></p>
+                </section>
                 <div class="actions">
                     <button
                         class="btn primary"
@@ -1926,6 +2307,9 @@
                         data-t="nextSector"
                     >
                         Next sector
+                    </button>
+                    <button class="btn accent" type="button" data-close="talents" id="res-talents" hidden>
+                        <svg class="ico"><use href="#i-talent" /></svg><span data-t="talents">Talents</span>
                     </button>
                     <button class="btn" type="button" data-close="sectors" data-t="sectors">Sectors</button>
                 </div>
@@ -2143,10 +2527,58 @@
                         chooseUpgradeSay: "Choose an upgrade.",
                         eraseTitle: "Erase progress?",
                         eraseMessage:
-                            "This removes opened sectors, best scores and any saved run. Your settings stay as they are.",
+                            "This removes opened sectors, best scores, your pilot level, talents and hangar, and any saved run. Your settings stay as they are.",
                         eraseOk: "Erase",
                         erased: "Progress erased",
                         fpsLine: (a) => `${a.fps} fps, ${a.w}×${a.h}, ${a.n} particles`,
+                        hangar: "Hangar",
+                        talents: "Talents",
+                        change: "Change",
+                        hangarLede:
+                            "Choose the ship and weapon for your next run. More open as your pilot level rises.",
+                        shipH: "Ship",
+                        weaponH: "Weapon",
+                        optionsH: "Starting options",
+                        nextRunNote: "Changes apply from your next run.",
+                        opensAt: (a) => `Opens at level ${a.n}`,
+                        selected: "Selected",
+                        pilotLevel: (a) => `Pilot level ${a.n}`,
+                        levelShort: (a) => `Level ${a.n}`,
+                        xpToNext: (a) => `${a.n} to level ${a.l}`,
+                        xpTop: "Top level reached",
+                        pointsFree: { one: "# talent point to spend", other: "# talent points to spend" },
+                        noPoints: "All your talent points are in use.",
+                        talentsLede:
+                            "Each pilot level gives a talent point. Take one talent in each row; a row opens once the row above has one. Change your mind whenever you like, for free.",
+                        taken: "Taken",
+                        rowLocked: "Take a talent in the row above first",
+                        needPts: { one: "Needs # point", other: "Needs # points" },
+                        talentOn: (a) => `${a.name} taken.`,
+                        talentOff: (a) => `${a.name} given back.`,
+                        respec: "Reset talents",
+                        respecDone: "Talent points returned",
+                        expGain: (a) => `+${a.n} experience`,
+                        expBanked: (a) => `+${a.n} experience for that run`,
+                        xpEvery: "Every run",
+                        xpScore: "Score",
+                        xpWaves: "Waves cleared",
+                        xpClear: "Sector cleared",
+                        xpTide: "Rising tide",
+                        levelUp: (a) => `Level ${a.n}!`,
+                        unlockedItem: (a) => `${a.name} is in the hangar.`,
+                        unlockedOption: (a) => `New starting option: ${a.name}.`,
+                        openingSub: "Before the first wave.",
+                        synergy: "Synergy",
+                        synergySay: (a) => `Synergy: ${a.name}. ${a.info}`,
+                        helpSyn: "Synergies",
+                        helpSynText:
+                            "Two power-ups that work well together become a synergy while both are active. Capsules often bring a partner for a power-up you hold.",
+                        helpGear: "Weapons and ships",
+                        helpGearText:
+                            "Choose them in the hangar before a run. Each weapon plays differently, and power-ups and upgrades work with all of them.",
+                        helpPilot: "Pilot level and talents",
+                        helpPilotText:
+                            "Every run earns experience, even one that ends early: for your score, each wave cleared and each sector cleared. Each level brings a talent point, and some levels open a new ship, weapon or starting option. As you grow stronger, the waves grow a little larger.",
                     },
                     sk: {
                         appName: "Glowmere",
@@ -2294,6 +2726,12 @@
                                 info: "Nepriatelia sa pohybujú polovičnou rýchlosťou. Vy nie.",
                             },
                             shield: { name: "Štít", info: "Zachytí za vás jeden zásah a odhodí nepriateľov v okolí." },
+                            echo: { name: "Ozvena", info: "Každá dávka sa o polúder zopakuje." },
+                            bounty: {
+                                name: "Odmena",
+                                info: "Zničení nepriatelia nechajú dvakrát viac iskier a ukazovateľ nechladne.",
+                            },
+                            prism: { name: "Hranol", info: "Každý zásah vystrelí ďalšie dve strely." },
                         },
                         upgradeTexts: {
                             side: {
@@ -2419,10 +2857,155 @@
                         chooseUpgradeSay: "Vyberte vylepšenie.",
                         eraseTitle: "Vymazať postup?",
                         eraseMessage:
-                            "Vymažú sa otvorené sektory, najlepšie skóre aj uložená hra. Nastavenia zostanú tak, ako sú.",
+                            "Vymažú sa otvorené sektory, najlepšie skóre, úroveň pilota, talenty a hangár aj uložená hra. Nastavenia zostanú tak, ako sú.",
                         eraseOk: "Vymazať",
                         erased: "Postup je vymazaný",
                         fpsLine: (a) => `${a.fps} snímok/s, ${a.w}×${a.h}, častice: ${a.n}`,
+                        hangar: "Hangár",
+                        talents: "Talenty",
+                        change: "Zmeniť",
+                        hangarLede: "Vyberte loď a zbraň na ďalší pokus. S vyššou úrovňou pilota sa otvoria ďalšie.",
+                        shipH: "Loď",
+                        weaponH: "Zbraň",
+                        optionsH: "Možnosti na štart",
+                        nextRunNote: "Zmeny platia od ďalšieho pokusu.",
+                        opensAt: (a) => `Otvorí sa na úrovni ${a.n}`,
+                        selected: "Vybraté",
+                        pilotLevel: (a) => `Úroveň pilota ${a.n}`,
+                        levelShort: (a) => `Úroveň ${a.n}`,
+                        xpToNext: (a) => `${a.n} do úrovne ${a.l}`,
+                        xpTop: "Najvyššia úroveň",
+                        pointsFree: {
+                            one: "# talentový bod na rozdelenie",
+                            few: "# talentové body na rozdelenie",
+                            many: "# talentového bodu na rozdelenie",
+                            other: "# talentových bodov na rozdelenie",
+                        },
+                        noPoints: "Všetky talentové body sú rozdelené.",
+                        talentsLede:
+                            "Každá úroveň pilota prinesie talentový bod. V každom riadku si vezmite jeden talent; riadok sa otvorí, keď máte talent v riadku nad ním. Rozmyslieť si to môžete kedykoľvek a zadarmo.",
+                        taken: "Vybraté",
+                        rowLocked: "Najprv si vezmite talent v riadku vyššie",
+                        needPts: {
+                            one: "Treba # bod",
+                            few: "Treba # body",
+                            many: "Treba # bodu",
+                            other: "Treba # bodov",
+                        },
+                        talentOn: (a) => `Vybraté: ${a.name}.`,
+                        talentOff: (a) => `Vrátené: ${a.name}.`,
+                        respec: "Vrátiť talenty",
+                        respecDone: "Talentové body sú vrátené",
+                        expGain: (a) => `+${a.n} skúseností`,
+                        expBanked: (a) => `+${a.n} skúseností za ten pokus`,
+                        xpEvery: "Každý pokus",
+                        xpScore: "Skóre",
+                        xpWaves: "Vyčistené vlny",
+                        xpClear: "Vyčistený sektor",
+                        xpTide: "Stúpajúci príliv",
+                        levelUp: (a) => `Úroveň ${a.n}!`,
+                        unlockedItem: (a) => `${a.name}: nové v hangári.`,
+                        unlockedOption: (a) => `Nová možnosť na štart: ${a.name}.`,
+                        openingSub: "Pred prvou vlnou.",
+                        synergy: "Súhra",
+                        synergySay: (a) => `Súhra: ${a.name}. ${a.info}`,
+                        helpSyn: "Súhry",
+                        helpSynText:
+                            "Dve posilnenia, ktoré sa dopĺňajú, vytvoria súhru, kým sú obe aktívne. Kapsuly často prinesú partnera k posilneniu, ktoré práve máte.",
+                        helpGear: "Zbrane a lode",
+                        helpGearText:
+                            "Vyberiete si ich v hangári pred pokusom. Každá zbraň sa hrá inak a posilnenia aj vylepšenia fungujú so všetkými.",
+                        helpPilot: "Úroveň pilota a talenty",
+                        helpPilotText:
+                            "Každý pokus prinesie skúsenosti, aj keď sa skončí skoro: za skóre, každú vyčistenú vlnu a každý vyčistený sektor. Každá úroveň prinesie talentový bod a niektoré otvoria novú loď, zbraň alebo možnosť na štart. Keď silniete, vlny trochu rastú.",
+                        shipTexts: {
+                            skiff: { name: "Čln", info: "Vyvážený: štyri dieliky trupu." },
+                            swallow: {
+                                name: "Lastovička",
+                                info: "Ľahká a rýchla: tri dieliky, o 18\u00a0% rýchlejšia a iskry k nej priletia z väčšej diaľky.",
+                            },
+                            barge: {
+                                name: "Bárka",
+                                info: "Ťažká: šesť dielikov, o niečo pomalšia a každá vyčistená vlna jej opraví dva.",
+                            },
+                        },
+                        weaponTexts: {
+                            twin: {
+                                name: "Dvojprúd",
+                                info: "Dva rýchle prúdy striel, ktoré sa s násobičom rozširujú.",
+                            },
+                            scatter: { name: "Rozptyl", info: "Krátka sprška brokov: priblížte sa a roztrhá všetko." },
+                            beam: {
+                                name: "Lúč",
+                                info: "Stály lúč, ktorý pretne všetko v rade, kým ho nezastaví štít.",
+                            },
+                            pulse: {
+                                name: "Pulz",
+                                info: "Kruhy svetla na každý polúder, ktoré prejdú celým rojom. Drží rytmus, takže rýchlejšia streľba mu namiesto toho pridá silu.",
+                            },
+                        },
+                        optionTexts: {
+                            opening: { name: "Úvodná voľba", info: "Pred prvou vlnou si vyberiete vylepšenie." },
+                            tide: {
+                                name: "Stúpajúci príliv",
+                                info: "Nepriatelia sú o 15\u00a0% rýchlejší a vlny o 20\u00a0% väčšie. Skúseností získate o polovicu viac.",
+                            },
+                            headstart: { name: "Náskok", info: "Každý pokus začnete s násobičom ×3." },
+                        },
+                        treeNames: { offence: "Útok", defence: "Obrana", utility: "Podpora" },
+                        talentTexts: {
+                            quick: { name: "Rýchla spúšť", info: "Strieľate o 12\u00a0% rýchlejšie." },
+                            heavy: {
+                                name: "Ťažké strely",
+                                info: "Zásahy sú o 50\u00a0% silnejšie, ale strieľate o 15\u00a0% pomalšie.",
+                            },
+                            onbeat: { name: "Do rytmu", info: "Výstrely na úder majú dvojnásobnú silu." },
+                            splinter: { name: "Triesky", info: "Každé štvrté zničenie sa rozletí na štyri triesky." },
+                            overcharge: { name: "Prebitie", info: "Od ×5 vaše strely prerazia jedného nepriateľa." },
+                            arcs: { name: "Iskrenie", info: "Jedno zničenie zo štyroch preskočí bleskom na suseda." },
+                            plating: { name: "Pancier", info: "O jeden dielik trupu viac." },
+                            shock: {
+                                name: "Rázová vlna",
+                                info: "Zásah zničí svetlušky a úlomky okolo vás a ostatných odhodí dvakrát ďalej.",
+                            },
+                            skin: { name: "Druhá koža", info: "Každý sektor začnete so štítom." },
+                            steady: {
+                                name: "Pevná ruka",
+                                info: "Zásah vás stojí jeden stupeň násobiča namiesto dvoch.",
+                            },
+                            laststand: {
+                                name: "Posledný odpor",
+                                info: "Na poslednom dieliku sa čas na šesť sekúnd spomalí, raz za vlnu.",
+                            },
+                            reprieve: {
+                                name: "Druhá šanca",
+                                info: "Raz za pokus vám zásah, ktorý by vás zničil, nechá jeden dielik a výboj.",
+                            },
+                            reach: {
+                                name: "Široký dosah",
+                                info: "Iskry a kapsuly k vám priletia až z 50\u00a0% väčšej vzdialenosti.",
+                            },
+                            slowburn: { name: "Pomalé horenie", info: "Posilnenia trvajú o 30\u00a0% dlhšie." },
+                            spare: { name: "Náhradný výboj", info: "Začnete s dvoma výbojmi." },
+                            charger: { name: "Nabíjačka", info: "Výboje sa nabíjajú o 30\u00a0% rýchlejšie." },
+                            matchmaker: {
+                                name: "Dohadzovač",
+                                info: "Kapsuly omnoho častejšie prinesú partnera k posilneniu, ktoré máte.",
+                            },
+                            scout: { name: "Prieskumník", info: "V každej vlne o jedného elitného nepriateľa viac." },
+                        },
+                        synergyTexts: {
+                            needle: { name: "Ihlová búrka", info: "Strely prerazia všetko a trikrát sa odrazia." },
+                            hive: { name: "Úľ", info: "Drony strieľajú dvakrát rýchlejšie a ich strely sa navádzajú." },
+                            gleaners: { name: "Paberkári", info: "Iskry k vám priletia z celého jazierka." },
+                            starburst: { name: "Ohňostroj", info: "Strely sa rozštiepia na päť a aj tie prerážajú." },
+                            haven: {
+                                name: "Útočisko",
+                                info: "Nepriatelia, ktorí narazia do štítu, zhoria a štít vydrží.",
+                            },
+                            stillwater: { name: "Tíšina", info: "Každá dávka sa zopakuje dvakrát." },
+                            chorus: { name: "Zbor", info: "Ozveny sa navádzajú na nepriateľov." },
+                        },
                     },
                 };
                 const lang = (() => {
@@ -2535,6 +3118,17 @@
                         seenHint: false,
                         last: 0,
                     },
+                    // The pilot: experience, talents and the loadout, kept from run to run.
+                    meta: {
+                        v: 0,
+                        xp: 0,
+                        runs: 0,
+                        ship: "skiff",
+                        weapon: "twin",
+                        talents: { offence: [-1, -1, -1], defence: [-1, -1, -1], utility: [-1, -1, -1] },
+                        opts: { opening: false, tide: false, headstart: false },
+                        seenLevel: 1,
+                    },
                     snapshot: null,
                 };
                 const clone = (o) => JSON.parse(JSON.stringify(o));
@@ -2626,7 +3220,35 @@
                     },
                 };
                 let S = Store.data.settings,
-                    P = Store.data.progress;
+                    P = Store.data.progress,
+                    M = Store.data.meta;
+                // Makes the stored pilot sound: talent rows as -1, 0 or 1, no row below an empty one, and never more
+                // points spent than the level gives. A pilot from before the talents gets experience for the play
+                // already done.
+                function settleMeta() {
+                    if (M.v !== 1) {
+                        if (P.games > 0 || P.cleared.length)
+                            M.xp = Math.min(
+                                4500,
+                                150 * P.cleared.length + Math.floor(P.kills / 5) + 20 * Math.min(P.games, 20),
+                            );
+                        M.seenLevel = levelFor(M.xp);
+                        M.v = 1;
+                    }
+                    M.xp = Math.max(0, Math.round(Number(M.xp) || 0));
+                    for (const k of ["offence", "defence", "utility"]) {
+                        const rows = Array.isArray(M.talents[k]) ? M.talents[k] : [];
+                        let open = true;
+                        M.talents[k] = [0, 1, 2].map((r) => {
+                            const c = rows[r];
+                            if (open && (c === 0 || c === 1)) return c;
+                            open = false;
+                            return -1;
+                        });
+                    }
+                    if (pointsSpent(M.talents) > levelFor(M.xp) - 1)
+                        M.talents = { offence: [-1, -1, -1], defence: [-1, -1, -1], utility: [-1, -1, -1] };
+                }
 
                 /* =========================================================
    Game data
@@ -2903,11 +3525,11 @@
                 }
 
                 /* Waves are deterministic per sector so a restored run replays the same wave. */
-                function makeWave(si, w, extra = 0) {
+                function makeWave(si, w, extra = 0, grow = 1) {
                     const def = SECTORS[si];
                     const rnd = rng32(si * 7919 + w * 104729 + extra * 31337 + 17);
                     const last = w === WAVES - 1;
-                    let budget = 5 + si * 2 + w * 2 + (last ? 8 : 0) + extra * 3;
+                    let budget = Math.round((5 + si * 2 + w * 2 + (last ? 8 : 0) + extra * 3) * grow);
                     const groups = [];
                     let wardens = 0;
                     const maxWardens = def.types.includes("warden") ? (last ? 2 : 1) : 0;
@@ -3303,6 +3925,46 @@
                             if (!ready() || !ok("pounce", 0.12)) return;
                             const t = ctx.currentTime;
                             nz(t, 0.14, 0.035, sfxBus, { type: "bandpass", f: 900, f2: 2400, q: 1.4, a: 0.02 });
+                        },
+                        // Scatter's spray: a short low thump under the usual shot.
+                        shoot2() {
+                            if (!ready() || !ok("shoot2", 0.12)) return;
+                            const t = ctx.currentTime;
+                            nz(t, 0.09, 0.07, sfxBus, { f: 1400, f2: 300, q: 0.7 });
+                        },
+                        // The beam hums while it ticks.
+                        beam() {
+                            if (!ready() || !ok("beam", 0.085)) return;
+                            const t = ctx.currentTime;
+                            osc("sawtooth", 196 + Math.random() * 12, t, 0.1, 0.022, sfxBus, { filt: 1600, a: 0.01 });
+                        },
+                        // Each ring of the pulse is a note of the sector's scale, so the weapon plays along.
+                        pulse(k) {
+                            if (!ready() || !ok("pulse", 0.1)) return;
+                            const t = ctx.currentTime,
+                                m = music.root + 12 + PENT[(k * 3) % 6];
+                            osc("triangle", mtof(m), t, 0.22, 0.045, sfxBus, { a: 0.005, send: 0.3, to: sfxVerb });
+                        },
+                        synergy() {
+                            if (!ready()) return;
+                            const t = ctx.currentTime;
+                            [0, 7, 12, 16, 19].forEach((iv, i) =>
+                                osc("triangle", mtof(67 + iv), t + i * 0.04, 0.5, 0.05, sfxBus, {
+                                    send: 0.5,
+                                    to: sfxVerb,
+                                }),
+                            );
+                            osc("sine", mtof(55), t, 0.8, 0.08, sfxBus, { a: 0.03 });
+                        },
+                        levelUp() {
+                            if (!ready()) return;
+                            const t = ctx.currentTime;
+                            [0, 4, 7, 12, 7, 12, 16].forEach((iv, i) =>
+                                osc("triangle", mtof(69 + iv), t + i * 0.08, 0.35, 0.055, sfxBus, {
+                                    send: 0.45,
+                                    to: sfxVerb,
+                                }),
+                            );
                         },
                         drop() {
                             if (!ready() || !ok("drop", 0.1)) return;
@@ -5077,7 +5739,7 @@ void main(){
                     c: false,
                 });
 
-                const TIMED = ["ricochet", "pierce", "homing", "drones", "warp"];
+                const TIMED = ["ricochet", "pierce", "homing", "drones", "warp", "echo", "bounty", "prism"];
                 const POWERS = {
                     ricochet: {
                         name: "Ricochet",
@@ -5121,6 +5783,27 @@ void main(){
                         dur: 0,
                         w: 0.9,
                     },
+                    echo: {
+                        name: "Echo",
+                        info: "Every volley repeats half a beat later.",
+                        col: [0.8, 1.0, 0.42],
+                        dur: 9,
+                        w: 0.9,
+                    },
+                    bounty: {
+                        name: "Bounty",
+                        info: "Kills leave twice the sparks, and the meter stops cooling.",
+                        col: [1.0, 0.58, 0.28],
+                        dur: 10,
+                        w: 0.9,
+                    },
+                    prism: {
+                        name: "Prism",
+                        info: "Every hit throws off two more shots.",
+                        col: [0.92, 0.84, 1.0],
+                        dur: 9,
+                        w: 0.9,
+                    },
                 };
                 const POWER_IDS = Object.keys(POWERS);
                 const POWER_GLYPHS = {
@@ -5137,6 +5820,22 @@ void main(){
                     ],
                     warp: [{ p: [-0.62, -0.85, 0.62, -0.85, -0.62, 0.85, 0.62, 0.85], c: true }],
                     shield: [{ p: circlePts(0.88, 6), c: true }],
+                    echo: [
+                        { p: circlePts(0.16, 8, -0.62, 0), c: true },
+                        { p: arcPts(0.5, -0.9, 0.9, 8, -0.45, 0), c: false },
+                        { p: arcPts(0.95, -0.75, 0.75, 10, -0.45, 0), c: false },
+                    ],
+                    bounty: [
+                        { p: [-0.95, 0, 0.95, 0], c: false },
+                        { p: [0, -0.95, 0, 0.95], c: false },
+                        { p: circlePts(0.38, 10), c: true },
+                    ],
+                    prism: [
+                        { p: [-0.55, -0.75, 0.35, 0, -0.55, 0.75], c: true },
+                        { p: [0.35, 0, 0.95, -0.45], c: false },
+                        { p: [0.35, 0, 0.95, 0], c: false },
+                        { p: [0.35, 0, 0.95, 0.45], c: false },
+                    ],
                 };
                 const UPGRADES = [
                     {
@@ -5322,18 +6021,315 @@ void main(){
                 }
 
                 /* =========================================================
+   Ships, weapons, talents and the pilot's progress: data
+   ========================================================= */
+                // Ships: hull segments, speed, how far sparks come from, and segments mended per cleared wave.
+                const SWALLOW_SHAPE = [{ p: [1, 0, -1, 0.95, -0.5, 0, -1, -0.95], c: true }];
+                const BARGE_SHAPE = [
+                    {
+                        p: [1, 0, 0.55, 0.62, -0.75, 0.78, -0.98, 0.32, -0.98, -0.32, -0.75, -0.78, 0.55, -0.62],
+                        c: true,
+                    },
+                ];
+                const SHIPS = {
+                    skiff: {
+                        name: "Skiff",
+                        info: "Balanced: four hull segments.",
+                        hull: 4,
+                        speed: 1,
+                        magnet: 1,
+                        mend: 1,
+                        level: 1,
+                        shape: SHAPES.player,
+                    },
+                    swallow: {
+                        name: "Swallow",
+                        info: "Light and quick: three segments, 18% faster, and sparks come to it from farther away.",
+                        hull: 3,
+                        speed: 1.18,
+                        magnet: 1.4,
+                        mend: 1,
+                        level: 5,
+                        shape: SWALLOW_SHAPE,
+                    },
+                    barge: {
+                        name: "Barge",
+                        info: "Heavy: six segments and a little slower, and every cleared wave mends two.",
+                        hull: 6,
+                        speed: 0.88,
+                        magnet: 1,
+                        mend: 2,
+                        level: 8,
+                        shape: BARGE_SHAPE,
+                    },
+                };
+                const WEAPONS = {
+                    twin: {
+                        name: "Twin stream",
+                        info: "Two fast streams that widen as your multiplier rises.",
+                        level: 1,
+                    },
+                    scatter: {
+                        name: "Scatter",
+                        info: "A short spray of pellets: fly in close and it shreds.",
+                        level: 3,
+                    },
+                    beam: {
+                        name: "Beam",
+                        info: "A steady beam that cuts through everything in a line until a shield stops it.",
+                        level: 6,
+                    },
+                    pulse: {
+                        name: "Pulse",
+                        info: "Rings of light on every half beat that pass through a whole swarm. It keeps the beat, so faster fire makes it stronger instead.",
+                        level: 10,
+                    },
+                };
+                const WEAPON_GLYPHS = {
+                    twin: [
+                        { p: [-0.9, -0.3, 0.6, -0.3], c: false },
+                        { p: [-0.9, 0.3, 0.6, 0.3], c: false },
+                        { p: [0.35, -0.6, 0.95, 0, 0.35, 0.6], c: false },
+                    ],
+                    scatter: [-0.5, -0.25, 0, 0.25, 0.5].map((a) => ({
+                        p: [-0.95, 0, -0.95 + Math.cos(a) * 1.9, Math.sin(a) * 1.9],
+                        c: false,
+                    })),
+                    beam: [
+                        { p: [-0.95, 0, 0.95, 0], c: false },
+                        { p: [-0.95, -0.22, 0.95, -0.22], c: false },
+                        { p: [-0.95, 0.22, 0.95, 0.22], c: false },
+                    ],
+                    pulse: [
+                        { p: arcPts(0.35, -0.8, 0.8, 8, -0.6, 0), c: false },
+                        { p: arcPts(0.8, -0.8, 0.8, 10, -0.6, 0), c: false },
+                        { p: arcPts(1.25, -0.7, 0.7, 12, -0.6, 0), c: false },
+                    ],
+                };
+                const OPTIONS = {
+                    opening: { name: "Opening pick", info: "Choose an upgrade before the first wave.", level: 4 },
+                    tide: {
+                        name: "Rising tide",
+                        info: "Enemies are 15% faster and waves 20% larger. You earn half as much experience again.",
+                        level: 7,
+                    },
+                    headstart: { name: "Head start", info: "Begin every run at ×3.", level: 9 },
+                };
+                // Talent trees: one talent per row, a row opens once the row above has one, a row costs ROW_COST.
+                const ROW_COST = [1, 2, 3];
+                const TREES = {
+                    offence: {
+                        name: "Offence",
+                        cat: "weapon",
+                        rows: [
+                            ["quick", "heavy"],
+                            ["onbeat", "splinter"],
+                            ["overcharge", "arcs"],
+                        ],
+                    },
+                    defence: {
+                        name: "Defence",
+                        cat: "utility",
+                        rows: [
+                            ["plating", "shock"],
+                            ["skin", "steady"],
+                            ["laststand", "reprieve"],
+                        ],
+                    },
+                    utility: {
+                        name: "Utility",
+                        cat: "supply",
+                        rows: [
+                            ["reach", "slowburn"],
+                            ["spare", "charger"],
+                            ["matchmaker", "scout"],
+                        ],
+                    },
+                };
+                const TREE_IDS = Object.keys(TREES);
+                const TALENTS = {
+                    quick: { name: "Quick trigger", info: "Fire 12% faster." },
+                    heavy: { name: "Heavy rounds", info: "Hits deal 50% more damage, but you fire 15% slower." },
+                    onbeat: { name: "On the beat", info: "Shots fired on the beat deal double damage." },
+                    splinter: { name: "Splinters", info: "Every fourth kill bursts into four splinters." },
+                    overcharge: { name: "Overcharge", info: "From ×5 up, your shots pierce one enemy." },
+                    arcs: { name: "Arcing", info: "One kill in four jumps lightning to a neighbour." },
+                    plating: { name: "Plating", info: "One more hull segment." },
+                    shock: {
+                        name: "Shockwave",
+                        info: "A hit destroys fireflies and fragments near you and throws the rest twice as far.",
+                    },
+                    skin: { name: "Second skin", info: "Start every sector with a shield." },
+                    steady: { name: "Steady", info: "A hit costs one step of multiplier instead of two." },
+                    laststand: {
+                        name: "Last stand",
+                        info: "On your last segment, time slows for six seconds, once a wave.",
+                    },
+                    reprieve: {
+                        name: "Reprieve",
+                        info: "Once a run, the hit that would end it leaves you one segment and a nova.",
+                    },
+                    reach: { name: "Wide pull", info: "Sparks and capsules come to you from 50% farther." },
+                    slowburn: { name: "Slow burn", info: "Power-ups last 30% longer." },
+                    spare: { name: "Spare charge", info: "Start with two nova charges." },
+                    charger: { name: "Charger", info: "Nova charges fill 30% faster." },
+                    matchmaker: {
+                        name: "Matchmaker",
+                        info: "Capsules far more often bring a partner for a power-up you hold.",
+                    },
+                    scout: { name: "Scout", info: "One more elite in every wave." },
+                };
+                // Two power-ups active at once turn into a synergy (shield counts while you have one).
+                const SYNERGIES = {
+                    needle: {
+                        a: "pierce",
+                        b: "ricochet",
+                        name: "Needle storm",
+                        info: "Shots pierce everything and bounce three times.",
+                    },
+                    hive: {
+                        a: "homing",
+                        b: "drones",
+                        name: "Hive",
+                        info: "Drones fire twice as fast, and their shots home.",
+                    },
+                    gleaners: {
+                        a: "bounty",
+                        b: "drones",
+                        name: "Gleaners",
+                        info: "Sparks fly to you from all over the pool.",
+                    },
+                    starburst: {
+                        a: "prism",
+                        b: "pierce",
+                        name: "Starburst",
+                        info: "Shots split into five, and the splits pierce too.",
+                    },
+                    haven: {
+                        a: "shield",
+                        b: "warp",
+                        name: "Haven",
+                        info: "Enemies that touch your shield burn up, and the shield holds.",
+                    },
+                    stillwater: { a: "warp", b: "echo", name: "Stillwater", info: "Every volley echoes twice." },
+                    chorus: { a: "homing", b: "echo", name: "Chorus", info: "Echoes home in on enemies." },
+                };
+                const SYN_IDS = Object.keys(SYNERGIES);
+                const PARTNERS = {};
+                for (const s of Object.values(SYNERGIES)) {
+                    (PARTNERS[s.a] = PARTNERS[s.a] || []).push(s.b);
+                    (PARTNERS[s.b] = PARTNERS[s.b] || []).push(s.a);
+                }
+                const SYN_GLYPH = [
+                    { p: circlePts(0.5, 12, -0.32, 0), c: true },
+                    { p: circlePts(0.5, 12, 0.32, 0), c: true },
+                ];
+                // Experience: a pilot level needs 100 more than the one before (100, 300, 600, 1,000, …); every
+                // level brings a talent point, up to the 18 points that fill all three trees.
+                const LEVEL_CAP = 19;
+                const xpForLevel = (l) => 50 * (l - 1) * l;
+                function levelFor(xp) {
+                    let l = 1;
+                    while (l < LEVEL_CAP && xp >= xpForLevel(l + 1)) l++;
+                    return l;
+                }
+                // What a run earns: something for taking part, its score, each wave cleared and a cleared sector.
+                function xpFor(o) {
+                    const parts = [
+                        ["xpEvery", 20],
+                        ["xpScore", Math.round(o.score / 60)],
+                        ["xpWaves", 25 * o.waves],
+                    ];
+                    if (o.clear) parts.push(["xpClear", 150 + 40 * o.si]);
+                    let total = parts.reduce((a, p) => a + p[1], 0);
+                    if (o.tide) {
+                        parts.push(["xpTide", Math.round(total * 0.5)]);
+                        total += Math.round(total * 0.5);
+                    }
+                    return { total, parts };
+                }
+                // Everything that opens with a level, in the order it opens.
+                const UNLOCKS = [
+                    ...Object.entries(WEAPONS).map(([id, d]) => ({ kind: "weapon", id, level: d.level })),
+                    ...Object.entries(SHIPS).map(([id, d]) => ({ kind: "ship", id, level: d.level })),
+                    ...Object.entries(OPTIONS).map(([id, d]) => ({ kind: "option", id, level: d.level })),
+                ]
+                    .filter((u) => u.level > 1)
+                    .sort((a, b) => a.level - b.level);
+                // The names and descriptions above in the player's language.
+                for (const [key, table] of [
+                    ["shipTexts", SHIPS],
+                    ["weaponTexts", WEAPONS],
+                    ["optionTexts", OPTIONS],
+                    ["talentTexts", TALENTS],
+                    ["synergyTexts", SYNERGIES],
+                ])
+                    if (words[key]) for (const k of Object.keys(words[key])) Object.assign(table[k], words[key][k]);
+                if (words.treeNames) for (const k of TREE_IDS) TREES[k].name = words.treeNames[k];
+
+                /* =========================================================
    Game rules
    ========================================================= */
                 let run = null;
                 let pendingStart = null;
-                const HULL = 4, // hull segments at the start of a run
-                    HULL_MAX = 7,
+                const HULL_MAX = 9,
                     CHARGES_MAX = 3,
                     CHARGE_NEED = 24, // the enemies' `charge` that fills one nova
                     MULT_MAX = 8,
                     NOVA_R = 1250, // a nova reaches across the whole pool from anywhere in it
                     NOVA_SPEED = 1500,
                     LEAP = 430; // a pouncer's speed as it leaves the ground
+                // The pilot's level, talents and loadout, from the progress kept between runs.
+                const pilotLevel = () => levelFor(M.xp);
+                // The talents taken, tree by tree and row by row; a row counts only below a taken row.
+                function talentIds(tal) {
+                    const out = [];
+                    for (const k of TREE_IDS) {
+                        const rows = (tal && tal[k]) || [];
+                        for (let r = 0; r < ROW_COST.length; r++) {
+                            const c = rows[r];
+                            if (c !== 0 && c !== 1) break;
+                            out.push(TREES[k].rows[r][c]);
+                        }
+                    }
+                    return out;
+                }
+                function pointsSpent(tal) {
+                    let n = 0;
+                    for (const k of TREE_IDS) {
+                        const rows = (tal && tal[k]) || [];
+                        for (let r = 0; r < ROW_COST.length; r++) {
+                            if (rows[r] !== 0 && rows[r] !== 1) break;
+                            n += ROW_COST[r];
+                        }
+                    }
+                    return n;
+                }
+                const pointsFree = () => Math.max(0, pilotLevel() - 1 - pointsSpent(M.talents));
+                const isOpen = (d) => pilotLevel() >= d.level;
+                function currentLoadout() {
+                    const o = {};
+                    for (const k of Object.keys(OPTIONS)) o[k] = Boolean(M.opts[k]) && isOpen(OPTIONS[k]);
+                    return {
+                        ship: SHIPS[M.ship] && isOpen(SHIPS[M.ship]) ? M.ship : "skiff",
+                        weapon: WEAPONS[M.weapon] && isOpen(WEAPONS[M.weapon]) ? M.weapon : "twin",
+                        talents: talentIds(M.talents),
+                        points: pointsSpent(M.talents),
+                        opts: o,
+                    };
+                }
+                // A loadout read back from a saved run, with anything unknown dropped.
+                function cleanLoadout(l) {
+                    const o = {};
+                    for (const k of Object.keys(OPTIONS)) o[k] = Boolean(l.opts && l.opts[k]);
+                    return {
+                        ship: SHIPS[l.ship] ? l.ship : "skiff",
+                        weapon: WEAPONS[l.weapon] ? l.weapon : "twin",
+                        talents: Array.isArray(l.talents) ? l.talents.filter((id) => TALENTS[id]) : [],
+                        points: typeof l.points === "number" ? clamp(l.points | 0, 0, 18) : 0,
+                        opts: o,
+                    };
+                }
                 const intensityFor = (r) =>
                     r.endless ? Math.min(3, 1 + Math.floor(r.wave / 3)) : r.wave < 2 ? 1 : r.wave < 4 ? 2 : 3;
                 // Sparks that fill the meter at a multiplier, and how fast the meter cools there (share per second).
@@ -5357,7 +6353,35 @@ void main(){
                 }
                 function startRun(si, snap) {
                     const endless = si === ENDLESS;
+                    // A run keeps the loadout and talents it began with; changes in the hangar apply to the next one.
+                    const ld =
+                            snap && snap.ld && typeof snap.ld === "object" ? cleanLoadout(snap.ld) : currentLoadout(),
+                        tal = new Set(ld.talents),
+                        ship = SHIPS[ld.ship],
+                        hull = ship.hull + (tal.has("plating") ? 1 : 0),
+                        // Stronger pilots meet slightly larger and quicker waves; the rising tide adds more.
+                        grow = (1 + 0.015 * ld.points) * (ld.opts.tide ? 1.2 : 1),
+                        pace = (1 + 0.005 * ld.points) * (ld.opts.tide ? 1.15 : 1);
                     run = {
+                        ld,
+                        tal,
+                        ship,
+                        weapon: ld.weapon,
+                        grow,
+                        pace,
+                        rate: (tal.has("quick") ? 0.88 : 1) * (tal.has("heavy") ? 1.15 : 1),
+                        dmg: tal.has("heavy") ? 1.5 : 1,
+                        reprieve: tal.has("reprieve") ? 1 : 0,
+                        lsWave: -1,
+                        kill4: 0,
+                        opening: false,
+                        echoes: [],
+                        arcs: [],
+                        beamOn: false,
+                        beamRays: [],
+                        lastHB: null,
+                        synOn: new Set(),
+                        xp: null,
                         si,
                         endless,
                         wave: 0,
@@ -5365,13 +6389,13 @@ void main(){
                         waveT: 0,
                         gap: 0,
                         score: 0,
-                        mult: 1,
-                        heat: 0,
+                        mult: ld.opts.headstart ? 3 : 1,
+                        heat: ld.opts.headstart ? 0.3 : 0,
                         chain: 0,
                         chainT: 0,
-                        hull: HULL,
-                        hullMax: HULL,
-                        charges: 1,
+                        hull,
+                        hullMax: hull,
+                        charges: tal.has("spare") ? 2 : 1,
                         chargeFill: 0,
                         kills: 0,
                         maxMult: 1,
@@ -5385,14 +6409,14 @@ void main(){
                         exT: 0,
                         snapT: 0,
                         celebT: 0,
-                        speed: 1 + (endless ? 0 : si * 0.055),
+                        speed: (1 + (endless ? 0 : si * 0.055)) * pace,
                         vsi: endless ? 0 : si,
                         newBest: false,
                         unlockedNew: -1,
                         up: {},
                         pw: newPowers(),
                         pwMax: {},
-                        shield: 0,
+                        shield: !snap && tal.has("skin") ? 1 : 0,
                         aegisT: 0,
                         owed: 0,
                         offer: null,
@@ -5416,14 +6440,18 @@ void main(){
                             "time",
                             "owed",
                             "aegisT",
+                            "reprieve",
+                            "kill4",
+                            "lsWave",
                         ])
                             if (typeof snap[k] === "number") run[k] = snap[k];
+                        run.opening = Boolean(snap.opening);
                         // A run saved by the version before counted ships and bombs: it goes on with a whole hull
                         // and keeps its bombs as nova charges.
                         if (typeof snap.hull !== "number" && typeof snap.bombs === "number") run.charges = snap.bombs;
                         run.mult = clamp(Math.round(run.mult), 1, MULT_MAX);
                         run.heat = clamp(run.heat, 0, 1);
-                        run.hullMax = clamp(Math.round(run.hullMax), HULL, HULL_MAX);
+                        run.hullMax = clamp(Math.round(run.hullMax), 1, HULL_MAX);
                         run.hull = clamp(Math.round(run.hull), 1, run.hullMax);
                         run.charges = clamp(Math.round(run.charges), 0, CHARGES_MAX);
                         run.chargeFill = clamp(run.chargeFill, 0, 0.99);
@@ -5458,7 +6486,7 @@ void main(){
                     world.cam.z = zoomFor();
                     if (endless) {
                         run.vsi = Math.floor(run.wave / 4) % NSECT;
-                        run.speed = 1 + Math.min(0.55, run.wave * 0.025);
+                        run.speed = (1 + Math.min(0.55, run.wave * 0.025)) * pace;
                     }
                     setTint(run.vsi, true);
                     Sound.setSong(run.vsi, intensityFor(run));
@@ -5476,6 +6504,15 @@ void main(){
                     if (run.offer) {
                         run.state = "pick";
                         run.owed = Math.max(1, run.owed);
+                    } else if (!snap && ld.opts.opening) {
+                        // The opening pick: an upgrade before the first wave.
+                        run.opening = true;
+                        run.owed = 1;
+                        showBanner(
+                            endless ? t("endless") : t("sectorN", { n: si + 1 }),
+                            endless ? t("lastHow") : SECTORS[si].name,
+                        );
+                        beginPick();
                     } else startWave(run.wave, snap ? "resume" : "first");
                     showCoach();
                 }
@@ -5486,12 +6523,17 @@ void main(){
                     run.waveDone = false;
                     let groups;
                     if (run.endless) {
-                        groups = makeWave(Math.min(NSECT - 1, Math.floor(w / 3)), w % WAVES, Math.floor(w / WAVES));
+                        groups = makeWave(
+                            Math.min(NSECT - 1, Math.floor(w / 3)),
+                            w % WAVES,
+                            Math.floor(w / WAVES),
+                            run.grow,
+                        );
                         run.vsi = Math.floor(w / 4) % NSECT;
-                        run.speed = 1 + Math.min(0.55, w * 0.025);
+                        run.speed = (1 + Math.min(0.55, w * 0.025)) * run.pace;
                         if (run.pw.warp <= 0) setTint(run.vsi, false);
                         if (w % 4 === 0) Sound.setSong(run.vsi, intensityFor(run));
-                    } else groups = makeWave(run.si, w);
+                    } else groups = makeWave(run.si, w, 0, run.grow);
                     const q = [];
                     let at = 0.6;
                     for (const g of groups) {
@@ -5513,7 +6555,10 @@ void main(){
                     q.sort((a, b) => a.t - b.t);
                     // Fireflies flee and wardens are guarded already, so neither is ever an elite.
                     const eligible = q.filter((it) => it.type !== "firefly" && it.type !== "warden");
-                    let elites = Math.min(eligible.length, 1 + (w >= 2 ? 1 : 0) + (run.up.scav || 0));
+                    let elites = Math.min(
+                        eligible.length,
+                        1 + (w >= 2 ? 1 : 0) + (run.up.scav || 0) + (run.tal.has("scout") ? 1 : 0),
+                    );
                     while (elites-- > 0) {
                         const k = (Math.random() * eligible.length) | 0;
                         eligible[k].elite = true;
@@ -5696,7 +6741,7 @@ void main(){
                 }
                 // While enemies are about the meter cools; when it runs dry the multiplier drops a step.
                 function coolHeat(dt) {
-                    if (!world.enemies.length) return;
+                    if (!world.enemies.length || run.pw.bounty > 0) return;
                     run.heat -= coolFor(run.mult) * dt;
                     if (run.heat > 0) return;
                     if (run.mult > 1) {
@@ -5711,7 +6756,8 @@ void main(){
                         run.chargeFill = 0;
                         return;
                     }
-                    run.chargeFill += (x * (1 + 0.4 * (run.up.recharge || 0))) / CHARGE_NEED;
+                    run.chargeFill +=
+                        (x * (1 + 0.4 * (run.up.recharge || 0)) * (run.tal.has("charger") ? 1.3 : 1)) / CHARGE_NEED;
                     if (run.chargeFill < 1) return;
                     run.chargeFill = run.charges + 1 >= CHARGES_MAX ? 0 : run.chargeFill - 1;
                     run.charges++;
@@ -5981,7 +7027,7 @@ void main(){
                     Field.gust(e.x, e.y, big ? 560 : small ? 150 : 230, big ? 3.2 : 1.4);
                     if (big) addRing(e.x, e.y, spec.col, 420, 0.8, 4);
                     if (!o.silent) {
-                        const n = spec.shards + (e.elite ? 2 : 0);
+                        const n = (spec.shards + (e.elite ? 2 : 0)) * (run.pw.bounty > 0 ? 2 : 1);
                         for (let k = 0; k < n && world.shards.length < 140; k++) {
                             const a = Math.random() * TAU,
                                 s = 40 + Math.random() * 140;
@@ -6005,6 +7051,8 @@ void main(){
                     if (!o.silent && !o.noFx) {
                         if (run.up.shrapnel) shrapnel(e, run.up.shrapnel >= 2 ? 7 : 4);
                         if (run.up.chain && !o.chained) chainFrom(e, run.up.chain);
+                        if (run.tal.has("splinter") && ++run.kill4 % 4 === 0) shrapnel(e, 4);
+                        if (run.tal.has("arcs") && !o.chained && Math.random() < 0.25) chainFrom(e, 1);
                     }
                     Sound.sfx.boom(big ? 1.6 : small ? 0.5 : 1);
                     world.shake = Math.min(16, world.shake + (big ? 10 : 2.2));
@@ -6023,6 +7071,9 @@ void main(){
                         tgt: null,
                         rt: 0,
                         last: null,
+                        dmg: 1,
+                        prism: false,
+                        child: false,
                     };
                 }
                 function shrapnel(e, n) {
@@ -6078,12 +7129,66 @@ void main(){
                     }
                     if (any) Sound.sfx.zap();
                 }
-                function fire(p, ax, ay) {
+                /* ---------- weapons ---------- */
+                const tierFor = (m) => (m >= 7 ? 4 : m >= 5 ? 3 : m >= 3 ? 2 : 1);
+                const ON_BEAT_COL = [1, 0.88, 0.55];
+                // Within an eighth of a beat of the beat itself.
+                const onTheBeat = () => {
+                    const f = Beat.frac(1, 0);
+                    return Math.min(f, 1 - f) < 0.12;
+                };
+                const active = (k) => (k === "shield" ? run.shield > 0 : run.pw[k] > 0);
+                const syn = (id) => active(SYNERGIES[id].a) && active(SYNERGIES[id].b);
+                // The power-ups a shot carries, its damage and its colour.
+                function arm(b, boost, echo) {
+                    const pw = run.pw,
+                        needle = syn("needle");
+                    b.pierce = needle ? 99 : pw.pierce > 0 ? 3 : 0;
+                    if (run.tal.has("overcharge") && run.mult >= 5) b.pierce = Math.max(b.pierce, 1);
+                    b.homing = pw.homing > 0 || (echo && syn("chorus"));
+                    b.bounces = needle ? -1 : pw.ricochet > 0 ? 0 : 2;
+                    b.prism = pw.prism > 0;
+                    b.dmg *= run.dmg * boost;
+                    if (!b.col)
+                        b.col =
+                            pw.pierce > 0
+                                ? POWERS.pierce.col
+                                : pw.homing > 0
+                                  ? POWERS.homing.col
+                                  : pw.ricochet > 0
+                                    ? POWERS.ricochet.col
+                                    : boost > 1
+                                      ? ON_BEAT_COL
+                                      : null;
+                    return b;
+                }
+                // One volley of the run's weapon; an echo repeats it half a beat later (twice in Stillwater).
+                function volley(p, ax, ay, echo) {
+                    const boost = run.tal.has("onbeat") && onTheBeat() ? 2 : 1;
+                    if (run.weapon === "scatter") fireScatter(p, ax, ay, boost, echo);
+                    else if (run.weapon === "pulse") firePulse(p, ax, ay, boost, echo);
+                    else fireTwin(p, ax, ay, boost, echo);
+                    if (!echo && run.pw.echo > 0) {
+                        run.echoes.push({ at: Beat.pos + 0.5, ax, ay });
+                        if (syn("stillwater")) run.echoes.push({ at: Beat.pos + 1, ax, ay });
+                    }
+                }
+                function updateEchoes() {
+                    const E = run.echoes;
+                    for (let i = E.length - 1; i >= 0; i--)
+                        if (Beat.pos >= E[i].at) {
+                            const e = E[i];
+                            E.splice(i, 1);
+                            if (world.p.alive && run.state === "play") volley(world.p, e.ax, e.ay, true);
+                        }
+                    if (E.length > 24) E.splice(0, E.length - 24);
+                }
+                // Twin stream: parallel streams that fan wider as the multiplier rises.
+                function fireTwin(p, ax, ay, boost, echo) {
                     const m = run.mult,
-                        tier = m >= 7 ? 4 : m >= 5 ? 3 : m >= 3 ? 2 : 1,
-                        U = run.up,
-                        pw = run.pw;
-                    run.fireT += (tier === 4 ? 0.078 : 0.098) * Math.pow(0.86, U.rapid || 0);
+                        tier = tierFor(m),
+                        U = run.up;
+                    if (!echo) run.fireT += (tier === 4 ? 0.078 : 0.098) * Math.pow(0.86, U.rapid || 0) * run.rate;
                     const a = Math.atan2(ay, ax),
                         ps = -Math.sin(a),
                         pc = Math.cos(a);
@@ -6118,35 +7223,236 @@ void main(){
                         shots.push([da, 0], [-da, 0]);
                     }
                     if (U.tail) shots.push([Math.PI, 0]);
-                    const col =
-                        pw.pierce > 0
-                            ? POWERS.pierce.col
-                            : pw.homing > 0
-                              ? POWERS.homing.col
-                              : pw.ricochet > 0
-                                ? POWERS.ricochet.col
-                                : null;
                     for (const [da, off] of shots) {
-                        const aa = a + da,
-                            b = mkBullet(
-                                p.x + Math.cos(aa) * 18 + ps * off,
-                                p.y + Math.sin(aa) * 18 + pc * off,
-                                Math.cos(aa) * 980,
-                                Math.sin(aa) * 980,
-                                pw.ricochet > 0 ? 1.7 : 1.0,
-                                col,
-                            );
-                        b.pierce = pw.pierce > 0 ? 3 : 0;
-                        b.homing = pw.homing > 0;
-                        b.bounces = pw.ricochet > 0 ? 0 : 2;
-                        world.bullets.push(b);
+                        const aa = a + da;
+                        world.bullets.push(
+                            arm(
+                                mkBullet(
+                                    p.x + Math.cos(aa) * 18 + ps * off,
+                                    p.y + Math.sin(aa) * 18 + pc * off,
+                                    Math.cos(aa) * 980,
+                                    Math.sin(aa) * 980,
+                                    run.pw.ricochet > 0 ? 1.7 : 1.0,
+                                    null,
+                                ),
+                                boost,
+                                echo,
+                            ),
+                        );
                     }
                     Sound.sfx.shoot();
+                }
+                // Scatter: a short spray of pellets, more of them as the multiplier rises.
+                function fireScatter(p, ax, ay, boost, echo) {
+                    const tier = tierFor(run.mult),
+                        U = run.up;
+                    if (!echo) run.fireT += 0.3 * Math.pow(0.86, U.rapid || 0) * run.rate;
+                    const a = Math.atan2(ay, ax),
+                        n = 5 + tier,
+                        half = 0.34 + 0.03 * tier,
+                        angles = [];
+                    for (let k = 0; k < n; k++) angles.push(lerp(-half, half, k / (n - 1)));
+                    for (let k = 1; k <= (U.side || 0); k++) {
+                        const da = 0.62 + (k - 1) * 0.14;
+                        angles.push(da, -da);
+                    }
+                    if (U.tail) angles.push(Math.PI - 0.1, Math.PI + 0.1);
+                    for (const da of angles) {
+                        const aa = a + da + (Math.random() - 0.5) * 0.06,
+                            sp = 720 + Math.random() * 120,
+                            b = mkBullet(
+                                p.x + Math.cos(aa) * 16,
+                                p.y + Math.sin(aa) * 16,
+                                Math.cos(aa) * sp,
+                                Math.sin(aa) * sp,
+                                run.pw.ricochet > 0 ? 0.7 : 0.42,
+                                null,
+                            );
+                        b.dmg = 0.75;
+                        world.bullets.push(arm(b, boost, echo));
+                    }
+                    Sound.sfx.shoot();
+                    Sound.sfx.shoot2();
+                }
+                // Pulse: a ring of light on every half beat; faster fire adds damage, since it keeps the beat.
+                function firePulse(p, ax, ay, boost, echo) {
+                    const tier = tierFor(run.mult),
+                        U = run.up,
+                        pw = run.pw,
+                        a = Math.atan2(ay, ax),
+                        dmg =
+                            2.2 *
+                            (1 + 0.2 * (tier - 1)) *
+                            (1 + 0.15 * (U.rapid || 0)) *
+                            (run.tal.has("quick") ? 1.12 : 1) *
+                            run.dmg *
+                            boost,
+                        max = 380 * (pw.ricochet > 0 ? 1.35 : 1) * (syn("needle") ? 1.15 : 1),
+                        col = pw.pierce > 0 ? POWERS.pierce.col : boost > 1 ? ON_BEAT_COL : null,
+                        arc = (da, half) =>
+                            run.arcs.push({
+                                x: p.x,
+                                y: p.y,
+                                a: a + da,
+                                half,
+                                r: 14,
+                                max,
+                                dmg,
+                                hit: new Set(),
+                                pierce: pw.pierce > 0,
+                                prism: pw.prism > 0,
+                                col,
+                            });
+                    arc(0, 0.42 + 0.05 * tier + (pw.homing > 0 || (echo && syn("chorus")) ? 0.25 : 0));
+                    for (let k = 1; k <= (U.side || 0); k++) {
+                        const da = 0.85 + (k - 1) * 0.2;
+                        arc(da, 0.22);
+                        arc(-da, 0.22);
+                    }
+                    if (U.tail) arc(Math.PI, 0.3);
+                    if (run.arcs.length > 40) run.arcs.splice(0, run.arcs.length - 40);
+                    Sound.sfx.pulse(Beat.n);
+                }
+                function updateArcs(dt) {
+                    const A = run.arcs;
+                    for (let i = A.length - 1; i >= 0; i--) {
+                        const c = A[i];
+                        c.r += 760 * dt;
+                        if (c.r >= c.max) {
+                            A.splice(i, 1);
+                            continue;
+                        }
+                        // The ring combs the reeds outward as it passes.
+                        Field.comb(
+                            c.x + Math.cos(c.a) * c.r,
+                            c.y + Math.sin(c.a) * c.r,
+                            Math.cos(c.a),
+                            Math.sin(c.a),
+                            40,
+                            5 * dt,
+                        );
+                        for (const e of world.enemies) {
+                            if (e.dead || e.spawn > 0 || c.hit.has(e)) continue;
+                            const dx = e.x - c.x,
+                                dy = e.y - c.y,
+                                d = Math.hypot(dx, dy) || 1;
+                            if (Math.abs(d - c.r) > e.r + 9) continue;
+                            if (Math.abs(wrapAngle(Math.atan2(dy, dx) - c.a)) > c.half + e.r / d) continue;
+                            c.hit.add(e);
+                            if (!c.pierce && deflects(e, c.x, c.y)) {
+                                e.ping = 1;
+                                Sound.sfx.deflect();
+                                continue;
+                            }
+                            Parts.burst(e.x, e.y, ENEMY[e.type].col, 3, 160, { life: 0.3, w: 1.5, white: 0.5 });
+                            hurt(e, c.dmg, c.x, c.y, c.prism);
+                        }
+                    }
+                }
+                // Beam: while you aim it ticks, hurting everything along its line up to the first shield in the way.
+                function beamTick(p, ax, ay) {
+                    const tier = tierFor(run.mult),
+                        U = run.up,
+                        pw = run.pw,
+                        boost = run.tal.has("onbeat") && onTheBeat() ? 2 : 1,
+                        len = (300 + 40 * tier) * (pw.ricochet > 0 ? 1.4 : 1) * (syn("needle") ? 1.15 : 1),
+                        width = 10 + 3 * tier,
+                        dmg = 0.85 * (1 + 0.15 * (tier - 1)) * run.dmg * boost * (pw.echo > 0 ? 1.5 : 1);
+                    let a = Math.atan2(ay, ax);
+                    if (pw.homing > 0) {
+                        // Homing bends the beam onto a target close to where you aim.
+                        const tg = aimTarget(p.x, p.y, len);
+                        if (tg) {
+                            const d = wrapAngle(Math.atan2(tg.y - p.y, tg.x - p.x) - a);
+                            if (Math.abs(d) < 0.45) a += d;
+                        }
+                    }
+                    const rays = [[0, len]];
+                    for (let k = 1; k <= (U.side || 0); k++) {
+                        const da = 0.4 + (k - 1) * 0.2;
+                        rays.push([da, len * 0.6], [-da, len * 0.6]);
+                    }
+                    if (U.tail) rays.push([Math.PI, len * 0.5]);
+                    // Drawn along the current aim each frame; only the homing nudge is kept from the tick.
+                    run.beamNudge = wrapAngle(a - Math.atan2(ay, ax));
+                    run.beamBoost = boost;
+                    run.beamRays = rays.map(([da, L]) => [da, cutBeam(p, a + da, L, width, dmg, pw.pierce > 0)]);
+                    Sound.sfx.beam();
+                }
+                // How far a ray from (x, y) along (dx, dy) runs before it meets the shore.
+                function shoreDist(x, y, dx, dy) {
+                    const b = x * dx + y * dy,
+                        c = x * x + y * y - POOL * POOL;
+                    return -b + Math.sqrt(Math.max(0, b * b - c));
+                }
+                function cutBeam(p, a, L, width, dmg, pass) {
+                    const dx = Math.cos(a),
+                        dy = Math.sin(a),
+                        hits = [];
+                    let len = Math.min(L, shoreDist(p.x, p.y, dx, dy));
+                    for (const e of world.enemies) {
+                        if (e.dead || e.spawn > 0) continue;
+                        const rx = e.x - p.x,
+                            ry = e.y - p.y,
+                            t = rx * dx + ry * dy;
+                        if (t < 0 || t > len + e.r) continue;
+                        if (Math.abs(rx * dy - ry * dx) < e.r + width / 2) hits.push([t, e]);
+                    }
+                    hits.sort((m, n) => m[0] - n[0]);
+                    for (const [t, e] of hits) {
+                        if (!pass && deflects(e, p.x, p.y)) {
+                            e.ping = 1;
+                            Sound.sfx.deflect();
+                            len = Math.max(0, t - e.r * 0.6);
+                            break;
+                        }
+                        Parts.burst(e.x - dx * e.r, e.y - dy * e.r, ENEMY[e.type].col, 2, 160, {
+                            life: 0.25,
+                            w: 1.5,
+                            white: 0.5,
+                        });
+                        hurt(e, dmg, p.x, p.y, run.pw.prism > 0);
+                    }
+                    for (let s = 50; s < len; s += 90) Field.comb(p.x + dx * s, p.y + dy * s, dx, dy, 30, 0.35);
+                    return len;
+                }
+                // Damage from any weapon: petals fall off sowers, prisms throw off shards, and the dead are counted.
+                function hurt(e, dmg, fx, fy, prism) {
+                    if (e.dead) return;
+                    const before = Math.ceil(e.hp);
+                    e.hp -= dmg;
+                    e.flash = 0.07;
+                    if (e.type === "sower" && e.hp > 0 && Math.ceil(e.hp) < before) {
+                        Parts.burst(e.x, e.y, ENEMY.sower.col, 10, 240, { life: 0.5, w: 1.8 });
+                        e.ang += TAU / Math.max(1, Math.ceil(e.hp) + 1);
+                    }
+                    if (e.hp > 0) Sound.sfx.hit();
+                    if (prism && world.time - (e.prAt || -9) > 0.35) {
+                        e.prAt = world.time;
+                        prismShards(e.x, e.y, Math.atan2(e.y - fy, e.x - fx), 640, 0.6 * dmg, e);
+                    }
+                    if (e.hp <= 0) killEnemy(e);
+                }
+                // A prism's split: two shots fanning on (five that pierce in a starburst).
+                function prismShards(x, y, a, speed, dmg, last) {
+                    if (world.bullets.length > 600) return;
+                    const star = syn("starburst"),
+                        n = star ? 5 : 2,
+                        spread = star ? 0.9 : 0.5;
+                    for (let k = 0; k < n; k++) {
+                        const aa = a + (n === 1 ? 0 : lerp(-spread, spread, k / (n - 1))),
+                            b = mkBullet(x, y, Math.cos(aa) * speed, Math.sin(aa) * speed, 0.35, POWERS.prism.col);
+                        b.dmg = dmg;
+                        b.child = true;
+                        b.last = last;
+                        b.pierce = star ? 2 : 0;
+                        world.bullets.push(b);
+                    }
                 }
                 function updatePlayer(dt) {
                     const p = world.p,
                         mv = Input.move(),
-                        MAXS = 330 * (1 + 0.12 * (run.up.thrust || 0)),
+                        MAXS = 330 * (1 + 0.12 * (run.up.thrust || 0)) * run.ship.speed,
                         k = 1 - Math.exp(-dt * 14);
                     p.vx += (mv.x * MAXS - p.vx) * k;
                     p.vy += (mv.y * MAXS - p.vy) * k;
@@ -6190,10 +7496,25 @@ void main(){
                         // The ship lays the reeds down in its wake.
                         Field.comb(p.x - ux * 10, p.y - uy * 10, ux, uy, 62, 14 * dt * (sp / MAXS));
                     }
-                    run.fireT -= dt;
-                    if (aim.fire) {
-                        if (run.fireT <= 0) fire(p, aim.x, aim.y);
-                    } else if (run.fireT < 0) run.fireT = 0;
+                    run.beamOn = aim.fire && run.weapon === "beam";
+                    if (run.weapon === "pulse") {
+                        // The pulse keeps the beat: a ring on every half beat while you aim.
+                        const hb = Math.floor(Beat.pos * 2);
+                        if (aim.fire && hb !== run.lastHB) volley(p, aim.x, aim.y, false);
+                        run.lastHB = hb;
+                        return;
+                    }
+                    run.fireT = Math.max(run.fireT - dt, -0.2);
+                    if (!aim.fire) {
+                        if (run.fireT < 0) run.fireT = 0;
+                        return;
+                    }
+                    if (run.weapon === "beam") {
+                        while (run.fireT <= 0) {
+                            run.fireT += 0.09 * Math.pow(0.86, run.up.rapid || 0) * run.rate;
+                            beamTick(p, aim.x, aim.y);
+                        }
+                    } else if (run.fireT <= 0) volley(p, aim.x, aim.y, false);
                 }
                 function updateBullets(dt) {
                     const B = world.bullets,
@@ -6270,16 +7591,17 @@ void main(){
                                     Sound.sfx.deflect();
                                     break;
                                 }
-                                e.hp--;
-                                e.flash = 0.07;
                                 Parts.burst(b.x, b.y, col, 4, 180, { life: 0.3, w: 1.6, white: 0.5 });
-                                if (e.type === "sower" && e.hp > 0) {
-                                    // The hit knocks a petal off.
-                                    Parts.burst(e.x, e.y, col, 10, 240, { life: 0.5, w: 1.8 });
-                                    e.ang += TAU / Math.max(1, e.hp + 1);
-                                }
-                                if (e.hp > 0) Sound.sfx.hit();
-                                if (e.hp <= 0) killEnemy(e);
+                                if (b.prism && !b.child)
+                                    prismShards(
+                                        b.x,
+                                        b.y,
+                                        Math.atan2(b.vy, b.vx),
+                                        Math.hypot(b.vx, b.vy) * 0.85,
+                                        0.6 * b.dmg,
+                                        e,
+                                    );
+                                hurt(e, b.dmg, b.x - b.vx * dt, b.y - b.vy * dt, false);
                                 if (b.pierce > 0) {
                                     b.pierce--;
                                     b.last = e;
@@ -6299,7 +7621,9 @@ void main(){
                     const p = world.p,
                         Sh = world.shards,
                         collect = p.alive && run.state === "play",
-                        mr = 130 * (1 + 0.6 * (run.up.magnet || 0));
+                        mr =
+                            130 * (1 + 0.6 * (run.up.magnet || 0)) * run.ship.magnet * (run.tal.has("reach") ? 1.5 : 1),
+                        glean = collect && syn("gleaners");
                     if (run.chainT > 0) {
                         run.chainT -= dt;
                         if (run.chainT <= 0) run.chain = 0;
@@ -6321,6 +7645,11 @@ void main(){
                                 f = 2600 * (1 - d / mr) + 600;
                             s.vx += (dx / d) * f * dt;
                             s.vy += (dy / d) * f * dt;
+                        } else if (glean) {
+                            // Gleaners: sparks drift in from anywhere in the pool.
+                            const d = Math.sqrt(d2) || 1;
+                            s.vx += (dx / d) * 900 * dt;
+                            s.vy += (dy / d) * 900 * dt;
                         }
                         const k = Math.exp(-dt * 2.2);
                         s.vx *= k;
@@ -6341,6 +7670,12 @@ void main(){
 
                 /* ---------- capsules, power-ups, drones ---------- */
                 function dropCapsule(x, y, type) {
+                    if (!type && Math.random() < (run.tal.has("matchmaker") ? 0.75 : 0.35)) {
+                        // A partner for a power-up you hold, so synergies come along.
+                        const held = POWER_IDS.filter(active),
+                            partners = [...new Set(held.flatMap((k) => PARTNERS[k] || []))].filter((k) => !active(k));
+                        if (partners.length) type = partners[(Math.random() * partners.length) | 0];
+                    }
                     if (!type) {
                         let tot = 0;
                         const ws = POWER_IDS.map((k) => {
@@ -6368,7 +7703,7 @@ void main(){
                     let dur = 0;
                     if (type === "shield") run.shield = 1;
                     else {
-                        dur = def.dur * (1 + 0.5 * (run.up.fuse || 0));
+                        dur = def.dur * (1 + 0.5 * (run.up.fuse || 0)) * (run.tal.has("slowburn") ? 1.3 : 1);
                         run.pw[type] = Math.max(run.pw[type], dur);
                         run.pwMax[type] = run.pw[type];
                     }
@@ -6393,6 +7728,22 @@ void main(){
                     }
                     Sound.sfx.powerEnd();
                     announce(t("powerEnded", { name: POWERS[k].name }));
+                }
+                // A synergy starts when its two power-ups are active together.
+                function updateSynergies() {
+                    const now = SYN_IDS.filter(syn);
+                    for (const id of now)
+                        if (!run.synOn.has(id)) {
+                            const s = SYNERGIES[id],
+                                p = world.p;
+                            addRing(p.x, p.y, POWERS[s.a].col, 260, 0.7, 3);
+                            addRing(p.x, p.y, POWERS[s.b].col, 200, 0.6, 3);
+                            Field.gust(p.x, p.y, 420, 2);
+                            Sound.sfx.synergy();
+                            showBanner(s.name, `${t("synergy")}: ${POWERS[s.a].name} + ${POWERS[s.b].name}`);
+                            announce(t("synergySay", { name: s.name, info: s.info }));
+                        }
+                    run.synOn = new Set(now);
                 }
                 function updatePowers(dt) {
                     const pw = run.pw;
@@ -6424,8 +7775,9 @@ void main(){
                     if (run.pw.drones <= 0) return;
                     run.droneA += dt * 3.4;
                     run.droneT -= dt;
-                    const fireNow = run.droneT <= 0;
-                    if (fireNow) run.droneT = 0.2;
+                    const fireNow = run.droneT <= 0,
+                        hive = syn("hive");
+                    if (fireNow) run.droneT = hive ? 0.1 : 0.2;
                     for (let k = 0; k < 2; k++) {
                         const [x, y] = dronePos(k);
                         for (const e of world.enemies) {
@@ -6436,12 +7788,8 @@ void main(){
                             if (dx * dx + dy * dy < rr * rr) {
                                 const d = Math.hypot(dx, dy) || 1;
                                 if (!deflects(e, x, y)) {
-                                    e.hp -= 1;
-                                    e.flash = 0.08;
-                                    if (e.hp <= 0) {
-                                        killEnemy(e);
-                                        continue;
-                                    }
+                                    hurt(e, 1, x, y, false);
+                                    if (e.dead) continue;
                                 } else e.ping = 1;
                                 if (e.type !== "warden" && e.type !== "guard") {
                                     e.vx += (dx / d) * 300;
@@ -6453,16 +7801,16 @@ void main(){
                             const t = aimTarget(x, y, 480);
                             if (t) {
                                 const d = Math.hypot(t.x - x, t.y - y) || 1;
-                                world.bullets.push(
-                                    mkBullet(
-                                        x,
-                                        y,
-                                        ((t.x - x) / d) * 900,
-                                        ((t.y - y) / d) * 900,
-                                        0.8,
-                                        POWERS.drones.col,
-                                    ),
+                                const b = mkBullet(
+                                    x,
+                                    y,
+                                    ((t.x - x) / d) * 900,
+                                    ((t.y - y) / d) * 900,
+                                    0.8,
+                                    POWERS.drones.col,
                                 );
+                                b.homing = hive;
+                                world.bullets.push(b);
                             }
                         }
                     }
@@ -6471,7 +7819,8 @@ void main(){
                     const p = world.p,
                         L = world.pickups,
                         collect = p.alive && run.state === "play";
-                    const mr = 110 * (1 + 0.6 * (run.up.magnet || 0));
+                    const mr =
+                        110 * (1 + 0.6 * (run.up.magnet || 0)) * run.ship.magnet * (run.tal.has("reach") ? 1.5 : 1);
                     for (let i = L.length - 1; i >= 0; i--) {
                         const c = L[i];
                         c.life -= dt;
@@ -6627,7 +7976,10 @@ void main(){
                     }
                     run.state = "play";
                     lastNow = 0;
-                    startWave(run.wave + 1);
+                    if (run.opening) {
+                        run.opening = false;
+                        startWave(0, "resume");
+                    } else startWave(run.wave + 1);
                 }
                 function buildText() {
                     const parts = [];
@@ -6649,6 +8001,10 @@ void main(){
                             dx = e.x - p.x,
                             dy = e.y - p.y;
                         if (dx * dx + dy * dy < rr * rr) {
+                            if (run.shield && e.type !== "warden" && syn("haven")) {
+                                killEnemy(e);
+                                continue;
+                            }
                             if (run.shield) breakShield();
                             else hurtHull();
                             return;
@@ -6680,24 +8036,38 @@ void main(){
                 }
                 // A hit costs a hull segment and two steps of multiplier, and throws nearby enemies back.
                 function hurtHull() {
+                    if (run.state !== "play") return;
                     const p = world.p,
                         c = pal();
                     run.hull -= 1;
+                    let spared = false;
                     if (run.hull <= 0) {
-                        wreck();
-                        return;
+                        if (!run.reprieve) {
+                            wreck();
+                            return;
+                        }
+                        // Reprieve: once a run, the last hit leaves one segment and a nova.
+                        run.reprieve = 0;
+                        run.hull = 1;
+                        run.charges = Math.min(CHARGES_MAX, run.charges + 1);
+                        spared = true;
                     }
                     p.inv = 1.6;
-                    run.mult = Math.max(1, run.mult - 2);
+                    run.mult = Math.max(1, run.mult - (run.tal.has("steady") ? 1 : 2));
                     run.heat = Math.min(run.heat, 0.5);
                     bumpMult();
+                    const shock = run.tal.has("shock");
                     for (const e of world.enemies) {
                         if (e.dead || e.spawn > 0 || e.type === "warden" || e.type === "guard") continue;
                         const dx = e.x - p.x,
                             dy = e.y - p.y,
                             d = Math.hypot(dx, dy) || 1;
                         if (d < 220) {
-                            const f = (1 - d / 220) * 700;
+                            if (shock && (e.type === "firefly" || e.type === "fragment")) {
+                                killEnemy(e);
+                                continue;
+                            }
+                            const f = (1 - d / 220) * 700 * (shock ? 2 : 1);
                             e.vx += (dx / d) * f;
                             e.vy += (dy / d) * f;
                             e.grace = Math.max(e.grace, 0.3);
@@ -6714,6 +8084,19 @@ void main(){
                     Sound.sfx.hurt();
                     buzz([60, 40, 90]);
                     announce(`${t("hullHit")} ${t("hullLeft", { n: run.hull, m: run.hullMax })}`);
+                    if (spared) {
+                        showBanner(TALENTS.reprieve.name, t("hullLeft", { n: run.hull, m: run.hullMax }));
+                        announce(`${TALENTS.reprieve.name}. ${t("hullLeft", { n: run.hull, m: run.hullMax })}`);
+                    } else if (run.hull === 1 && run.tal.has("laststand") && run.lsWave !== run.wave) {
+                        // Last stand: time slows on the last segment, once a wave.
+                        run.lsWave = run.wave;
+                        run.pw.warp = Math.max(run.pw.warp, 6);
+                        run.pwMax.warp = Math.max(run.pwMax.warp || 0, run.pw.warp);
+                        Sound.warp(true);
+                        world.tintTo = [0.95, 0.82, 0.45];
+                        showBanner(TALENTS.laststand.name, tn("nSeconds", 6));
+                        announce(TALENTS.laststand.name);
+                    }
                     saveSnapshot();
                 }
                 // The last segment is gone: the ship breaks up and the run ends.
@@ -6749,7 +8132,7 @@ void main(){
                 }
                 function mendHull() {
                     if (run.hull >= run.hullMax) return;
-                    run.hull++;
+                    run.hull = Math.min(run.hullMax, run.hull + run.ship.mend);
                     const p = world.p;
                     addRing(p.x, p.y, ENEMY.warden.col, 180, 0.6, 3);
                     Sound.sfx.mend();
@@ -6787,6 +8170,34 @@ void main(){
                     }
                     if (nv.r >= NOVA_R) run.nova = null;
                 }
+                // Experience for a run: kept at once, so even a run that ends early moves the pilot on.
+                function bankRun(clear) {
+                    const before = pilotLevel(),
+                        xp = xpFor({
+                            score: run.score,
+                            waves: run.endless || !clear ? run.wave : WAVES,
+                            clear: clear && !run.endless,
+                            si: run.si,
+                            tide: run.ld.opts.tide,
+                        });
+                    M.xp += xp.total;
+                    M.runs++;
+                    Store.save();
+                    return Object.assign(xp, { before, after: pilotLevel() });
+                }
+                // A run saved earlier and given up for a new one still counts.
+                function bankSnapshot(snap) {
+                    const xp = xpFor({
+                        score: Number(snap.score) || 0,
+                        waves: Number(snap.wave) || 0,
+                        clear: false,
+                        si: snap.si | 0,
+                        tide: Boolean(snap.ld && snap.ld.opts && snap.ld.opts.tide),
+                    });
+                    M.xp += xp.total;
+                    M.runs++;
+                    return xp.total;
+                }
                 function endRun(kind) {
                     run.state = kind;
                     run.endT = kind === "clear" ? 2.6 : 1.9;
@@ -6813,7 +8224,7 @@ void main(){
                     }
                     P.kills += run.kills;
                     Store.data.snapshot = null;
-                    Store.save();
+                    run.xp = bankRun(kind === "clear");
                     Sound.setLevel(0);
                     if (kind === "clear") {
                         Sound.sfx.clear();
@@ -6890,6 +8301,11 @@ void main(){
                         offer: run.offer ? run.offer.slice() : null,
                         shield: run.shield,
                         aegisT: Math.round(run.aegisT),
+                        ld: run.ld,
+                        reprieve: run.reprieve,
+                        kill4: run.kill4,
+                        lsWave: run.lsWave,
+                        opening: run.opening,
                         at: Date.now(),
                     };
                     Store.save();
@@ -6910,6 +8326,8 @@ void main(){
                         run.waveT += dt;
                         while (run.queue.length && run.queue[0].t <= run.waveT) spawnFromQueue(run.queue.shift());
                         updatePowers(dt);
+                        updateSynergies();
+                        updateEchoes();
                         updateNova(dt);
                         coolHeat(dt);
                     } else if (run.state === "clear" || run.state === "over") {
@@ -6933,6 +8351,7 @@ void main(){
                     }
                     updateEnemies(edt);
                     updateBullets(dt);
+                    updateArcs(dt);
                     if (run.state === "play" && p.alive) collidePlayer();
                     updateShards(dt);
                     updatePickups(dt);
@@ -7286,6 +8705,23 @@ void main(){
                             R.line(b.x - b.vx * k, b.y - b.vy * k, b.x, b.y, 3.4, bc[0], bc[1], bc[2], 1);
                         }
                         for (const bo of world.bolts) drawBolt(bo);
+                        // Pulse rings: arcs that fade as they widen.
+                        for (const ar of run.arcs) {
+                            const k = 1 - ar.r / ar.max,
+                                ac = ar.col || c.bullet,
+                                n = 12,
+                                a0 = ar.a - ar.half,
+                                st = (2 * ar.half) / n;
+                            let px = ar.x + Math.cos(a0) * ar.r,
+                                py = ar.y + Math.sin(a0) * ar.r;
+                            for (let i = 1; i <= n; i++) {
+                                const qx = ar.x + Math.cos(a0 + st * i) * ar.r,
+                                    qy = ar.y + Math.sin(a0 + st * i) * ar.r;
+                                R.line(px, py, qx, qy, 3.2, ac[0], ac[1], ac[2], 0.15 + 0.8 * k, 0.15);
+                                px = qx;
+                                py = qy;
+                            }
+                        }
                         for (const e of world.enemies)
                             if (e.x > v.x0 - 80 && e.x < v.x1 + 80 && e.y > v.y0 - 80 && e.y < v.y1 + 80) drawEnemy(e);
                         const nv = run.nova;
@@ -7295,10 +8731,47 @@ void main(){
                             circle(nv.x, nv.y, Math.max(0, nv.r - 18), 2.5, COL.white, 0.5 * k, 120, 0);
                         }
                         const p = world.p;
+                        if (p.alive && run.beamOn && run.state === "play") {
+                            // The beam: a soft wide band with a bright core, cut short where something stopped it.
+                            const tier = tierFor(run.mult),
+                                pw = run.pw,
+                                bc =
+                                    pw.pierce > 0
+                                        ? POWERS.pierce.col
+                                        : pw.homing > 0
+                                          ? POWERS.homing.col
+                                          : run.beamBoost > 1
+                                            ? ON_BEAT_COL
+                                            : c.bullet,
+                                fl = reducedMotion ? 1 : 0.85 + 0.15 * Math.sin(world.time * 47);
+                            for (const [da, len] of run.beamRays) {
+                                const a = Math.atan2(p.ay, p.ax) + (run.beamNudge || 0) + da,
+                                    dx = Math.cos(a),
+                                    dy = Math.sin(a),
+                                    x1 = p.x + dx * 14,
+                                    y1 = p.y + dy * 14,
+                                    x2 = p.x + dx * Math.max(14, len),
+                                    y2 = p.y + dy * Math.max(14, len);
+                                R.line(x1, y1, x2, y2, 10 + 3 * tier, bc[0], bc[1], bc[2], 0.3 * fl);
+                                R.line(
+                                    x1,
+                                    y1,
+                                    x2,
+                                    y2,
+                                    2.6,
+                                    light ? bc[0] : 1,
+                                    light ? bc[1] : 1,
+                                    light ? bc[2] : 1,
+                                    0.95,
+                                );
+                                R.glow(x2, y2, 26, bc[0], bc[1], bc[2], 0.5 * fl);
+                            }
+                        }
                         if (p.alive) {
-                            const a = p.inv > 0 ? (reducedMotion ? 0.7 : Math.sin(world.time * 26) > 0 ? 1 : 0.4) : 1;
-                            fillFan(SHAPES.player[0].p, p.x, p.y, p.ang, 17, c.player, 0.16 * a);
-                            drawShape(SHAPES.player, p.x, p.y, p.ang, 17, 2.8, c.player, a);
+                            const a = p.inv > 0 ? (reducedMotion ? 0.7 : Math.sin(world.time * 26) > 0 ? 1 : 0.4) : 1,
+                                hullShape = run.ship.shape;
+                            fillFan(hullShape[0].p, p.x, p.y, p.ang, 17, c.player, 0.16 * a);
+                            drawShape(hullShape, p.x, p.y, p.ang, 17, 2.8, c.player, a);
                             R.glow(p.x, p.y, 46, 1, 0.85, 0.6, 0.2);
                             if (p.inv > 0)
                                 circle(p.x, p.y, 28, 1.6, c.shard, 0.45 * Math.min(1, p.inv), 32, world.time * 2);
@@ -7506,19 +8979,79 @@ void main(){
                         btn.textContent = t("playAgain");
                     }
                     if (run.newBest) toast(t("newBest"));
+                    showXp(run.xp);
                     openDialog(d);
+                }
+                // The experience a run earned, the pilot's level and what the new level opened.
+                function showXp(xp) {
+                    const box = $("#res-xp");
+                    box.hidden = !xp;
+                    $("#res-talents").hidden = !xp || pointsFree() <= 0;
+                    if (!xp) return;
+                    const lvl = xp.after;
+                    $("#res-xp-h").textContent = t("expGain", { n: fmt(xp.total) });
+                    $("#res-lvl").textContent = t("levelShort", { n: lvl });
+                    const parts = $("#res-xp-parts");
+                    parts.textContent = "";
+                    for (const [key, n] of xp.parts) {
+                        if (!n) continue;
+                        const li = document.createElement("li"),
+                            b = document.createElement("b");
+                        li.append(t(key) + " ");
+                        b.textContent = "+" + fmt(n);
+                        li.append(b);
+                        parts.append(li);
+                    }
+                    const bar = $("#res-xp-bar"),
+                        frac = levelFrac(M.xp),
+                        from = lvl > xp.before ? 0 : levelFrac(M.xp - xp.total);
+                    bar.style.transition = "none";
+                    bar.style.transform = `scaleX(${from})`;
+                    void bar.offsetWidth;
+                    bar.style.transition = "";
+                    bar.style.transform = `scaleX(${frac})`;
+                    $("#res-xp-note").textContent =
+                        lvl < LEVEL_CAP
+                            ? t("xpToNext", { n: fmt(xpForLevel(lvl + 1) - M.xp), l: lvl + 1 })
+                            : t("xpTop");
+                    const up = $("#res-levelup"),
+                        lines = [];
+                    if (lvl > xp.before) {
+                        lines.push(t("levelUp", { n: lvl }));
+                        for (const u of UNLOCKS) if (u.level > xp.before && u.level <= lvl) lines.push(unlockLine(u));
+                        if (pointsFree() > 0) lines.push(tn("pointsFree", pointsFree()));
+                        Sound.sfx.levelUp();
+                        M.seenLevel = lvl;
+                        Store.save();
+                    }
+                    up.textContent = lines.join(" ");
+                    up.hidden = !lines.length;
+                }
+                // How far into the current level a pilot with this much experience is, from 0 to 1.
+                function levelFrac(xp) {
+                    const l = levelFor(xp);
+                    if (l >= LEVEL_CAP) return 1;
+                    return clamp((xp - xpForLevel(l)) / (xpForLevel(l + 1) - xpForLevel(l)), 0, 1);
+                }
+                function unlockLine(u) {
+                    const d = u.kind === "ship" ? SHIPS[u.id] : u.kind === "weapon" ? WEAPONS[u.id] : OPTIONS[u.id];
+                    return u.kind === "option"
+                        ? t("unlockedOption", { name: d.name })
+                        : t("unlockedItem", { name: d.name });
                 }
 
                 /* =========================================================
    Routing
    ========================================================= */
-                const ROUTES = ["", "levels", "play", "settings", "help"];
+                const ROUTES = ["", "levels", "play", "settings", "help", "hangar", "talents"];
                 const TITLES = {
                     "": "appName",
                     levels: "sectors",
                     play: "playing",
                     settings: "settings",
                     help: "howToPlay",
+                    hangar: "hangar",
+                    talents: "talents",
                 };
                 const screens = {
                     "": $("#screen-home"),
@@ -7526,6 +9059,8 @@ void main(){
                     play: $("#screen-play"),
                     settings: $("#screen-settings"),
                     help: $("#screen-help"),
+                    hangar: $("#screen-hangar"),
+                    talents: $("#screen-talents"),
                 };
                 let route = null;
                 const navStack = [];
@@ -7609,6 +9144,8 @@ void main(){
                     if (r === "") renderHome();
                     if (r === "levels") renderLevels();
                     if (r === "settings") renderSettings();
+                    if (r === "hangar") renderHangar();
+                    if (r === "talents") renderTalents();
                     if (r === "play") enterPlay();
                     else {
                         Sound.menuSong();
@@ -7629,8 +9166,16 @@ void main(){
                     Input.reset();
                     for (const k in hudCache) delete hudCache[k];
                     if (pendingStart !== null) {
-                        const si = pendingStart;
+                        const si = pendingStart,
+                            snap = Store.data.snapshot;
                         pendingStart = null;
+                        // A saved run given up for a new one still earns its experience.
+                        if (snap && typeof snap.si === "number") {
+                            const n = bankSnapshot(snap);
+                            Store.data.snapshot = null;
+                            Store.save();
+                            toast(t("expBanked", { n: fmt(n) }));
+                        }
                         startRun(si);
                     } else if (run && !run.done) pauseGame();
                     else if (Store.data.snapshot && typeof Store.data.snapshot.si === "number") {
@@ -7700,6 +9245,8 @@ void main(){
                         s.append(b);
                         st.append(s);
                     };
+                    renderPilot($("#pilot-l"), $("#pilot-n"), $("#pilot-bar"));
+                    renderTalentBadge();
                     add(t("sectorsCleared"), t("nOfM", { n: P.cleared.length, m: NSECT }));
                     if (best) add(t("best"), fmt(best));
                     if (P.endlessBest) add(t("endless"), fmt(P.endlessBest));
@@ -7715,6 +9262,7 @@ void main(){
                     "guard",
                 ];
                 function renderLevels() {
+                    renderLoadout();
                     const list = $("#sector-list");
                     list.textContent = "";
                     for (let i = 0; i <= NSECT; i++) {
@@ -7771,6 +9319,199 @@ void main(){
                         });
                         list.append(b);
                     }
+                }
+                // The pilot's level and the way to the next one, on the home screen and the talents screen.
+                function renderPilot(lEl, nEl, barEl) {
+                    const lvl = pilotLevel();
+                    lEl.textContent = t("pilotLevel", { n: lvl });
+                    nEl.textContent =
+                        lvl < LEVEL_CAP
+                            ? t("xpToNext", { n: fmt(xpForLevel(lvl + 1) - M.xp), l: lvl + 1 })
+                            : t("xpTop");
+                    barEl.style.transform = `scaleX(${levelFrac(M.xp)})`;
+                }
+                function renderTalentBadge() {
+                    const free = pointsFree(),
+                        n = $("#talent-n");
+                    n.hidden = !free;
+                    n.textContent = String(free);
+                    $("#btn-talents").setAttribute(
+                        "aria-label",
+                        free ? `${t("talents")}, ${tn("pointsFree", free)}` : t("talents"),
+                    );
+                }
+                const shipSVG = (id, cls) =>
+                    `<svg class="${cls}" viewBox="-1.25 -1.25 2.5 2.5" aria-hidden="true"><path vector-effect="non-scaling-stroke" transform="rotate(-90)" d="${polysPath(SHIPS[id].shape)}"/></svg>`;
+                function renderLoadout() {
+                    const ld = currentLoadout();
+                    $("#lo-ico").innerHTML = shipSVG(ld.ship, "ico");
+                    $("#lo-ship").textContent = SHIPS[ld.ship].name;
+                    $("#lo-weapon").textContent = WEAPONS[ld.weapon].name;
+                    $("#loadout").setAttribute(
+                        "aria-label",
+                        `${t("hangar")}: ${SHIPS[ld.ship].name}, ${WEAPONS[ld.weapon].name}. ${t("change")}`,
+                    );
+                }
+                // A card for a ship or weapon in the hangar: chosen, open, or opening at a later level.
+                function choiceCard(kind, id, d, glyph) {
+                    const open = isOpen(d),
+                        chosen = (kind === "ship" ? currentLoadout().ship : currentLoadout().weapon) === id,
+                        b = document.createElement("button");
+                    b.type = "button";
+                    b.dataset.card = kind + "-" + id;
+                    b.className = "choice" + (chosen ? " on" : "");
+                    b.setAttribute("aria-pressed", String(chosen));
+                    if (!open) b.setAttribute("aria-disabled", "true");
+                    b.innerHTML = `${glyph}<span class="ch-name"></span><span class="ch-info"></span><span class="ch-state"></span>`;
+                    $(".ch-name", b).textContent = d.name;
+                    $(".ch-info", b).textContent = d.info;
+                    $(".ch-state", b).textContent = !open ? t("opensAt", { n: d.level }) : chosen ? t("selected") : "";
+                    b.addEventListener("click", () => {
+                        Sound.sfx.ui();
+                        if (!open) {
+                            toast(t("opensAt", { n: d.level }));
+                            return;
+                        }
+                        if (kind === "ship") M.ship = id;
+                        else M.weapon = id;
+                        Store.save();
+                        const y = $("#screen-hangar").scrollTop;
+                        renderHangar();
+                        $("#screen-hangar").scrollTop = y;
+                        refocus(`[data-card="${kind}-${id}"]`);
+                        announce(`${d.name}. ${t("selected")}.`);
+                    });
+                    return b;
+                }
+                function renderHangar() {
+                    const ships = $("#ship-list"),
+                        weapons = $("#weapon-list"),
+                        opts = $("#opt-list");
+                    ships.textContent = "";
+                    weapons.textContent = "";
+                    opts.textContent = "";
+                    for (const id of Object.keys(SHIPS))
+                        ships.append(choiceCard("ship", id, SHIPS[id], shipSVG(id, "ch-ico")));
+                    for (const id of Object.keys(WEAPONS))
+                        weapons.append(choiceCard("weapon", id, WEAPONS[id], glyphSVG(WEAPON_GLYPHS[id], "ch-ico")));
+                    for (const id of Object.keys(OPTIONS)) {
+                        const d = OPTIONS[id],
+                            open = isOpen(d),
+                            l = document.createElement("label");
+                        l.className = "setting";
+                        l.innerHTML =
+                            '<span class="s-text"><span class="s-label"></span><span class="s-desc"></span></span><input type="checkbox" class="switch" role="switch">';
+                        $(".s-label", l).textContent = d.name;
+                        $(".s-desc", l).textContent = open ? d.info : `${d.info} ${t("opensAt", { n: d.level })}.`;
+                        const box = $("input", l);
+                        box.checked = open && Boolean(M.opts[id]);
+                        box.disabled = !open;
+                        box.addEventListener("change", () => {
+                            M.opts[id] = box.checked;
+                            Store.save();
+                            Sound.sfx.ui();
+                        });
+                        opts.append(l);
+                    }
+                    $("#hangar-note").hidden = !(run && !run.done) && !Store.data.snapshot;
+                }
+                // The talent trees: one card per talent, row by row.
+                function renderTalents() {
+                    renderPilot($("#tal-level"), $("#tal-next"), $("#tal-bar"));
+                    const free = pointsFree();
+                    $("#tal-free").textContent = free ? tn("pointsFree", free) : t("noPoints");
+                    $("#talents-note").hidden = !(run && !run.done) && !Store.data.snapshot;
+                    $("#btn-respec").disabled = pointsSpent(M.talents) === 0;
+                    const box = $("#trees");
+                    box.textContent = "";
+                    for (const k of TREE_IDS) {
+                        const tree = TREES[k],
+                            rows = M.talents[k],
+                            sec = document.createElement("section");
+                        sec.className = "tree";
+                        sec.style.setProperty("--tint", `var(--c-${tree.cat})`);
+                        const h = document.createElement("h2");
+                        h.textContent = tree.name;
+                        sec.append(h);
+                        tree.rows.forEach((pair, r) => {
+                            const row = document.createElement("div"),
+                                cost = ROW_COST[r],
+                                rowOpen = r === 0 || rows[r - 1] === 0 || rows[r - 1] === 1,
+                                taken = rows[r] === 0 || rows[r] === 1;
+                            row.className = "trow" + (rowOpen ? "" : " shut");
+                            const head = document.createElement("p");
+                            head.className = "trow-h";
+                            head.textContent = tn("nPoints", cost);
+                            row.append(head);
+                            const opts = document.createElement("div");
+                            opts.className = "topts";
+                            pair.forEach((id, c) => {
+                                const d = TALENTS[id],
+                                    on = rows[r] === c,
+                                    can = rowOpen && (taken || free >= cost),
+                                    b = document.createElement("button");
+                                b.type = "button";
+                                b.dataset.card = `${k}-${r}-${c}`;
+                                b.className = "talent" + (on ? " on" : "");
+                                b.setAttribute("aria-pressed", String(on));
+                                if (!on && !can) b.setAttribute("aria-disabled", "true");
+                                b.innerHTML =
+                                    '<span class="ch-name"></span><span class="ch-info"></span><span class="ch-state"></span>';
+                                $(".ch-name", b).textContent = d.name;
+                                $(".ch-info", b).textContent = d.info;
+                                $(".ch-state", b).textContent = on
+                                    ? t("taken")
+                                    : !rowOpen
+                                      ? t("rowLocked")
+                                      : !can
+                                        ? tn("needPts", cost)
+                                        : "";
+                                b.addEventListener("click", () => tapTalent(k, r, c));
+                                opts.append(b);
+                            });
+                            row.append(opts);
+                            sec.append(row);
+                        });
+                        box.append(sec);
+                    }
+                    renderTalentBadge();
+                }
+                // Taking, swapping (free) and giving back a talent; giving one back returns the rows below it too.
+                function tapTalent(k, r, c) {
+                    const rows = M.talents[k],
+                        id = TREES[k].rows[r][c];
+                    Sound.sfx.ui();
+                    if (rows[r] === c) {
+                        for (let i = r; i < rows.length; i++) rows[i] = -1;
+                        announce(t("talentOff", { name: TALENTS[id].name }));
+                    } else if (rows[r] === 0 || rows[r] === 1) {
+                        rows[r] = c;
+                        announce(t("talentOn", { name: TALENTS[id].name }));
+                    } else if (r > 0 && rows[r - 1] !== 0 && rows[r - 1] !== 1) {
+                        toast(t("rowLocked"));
+                        return;
+                    } else if (pointsFree() < ROW_COST[r]) {
+                        toast(tn("needPts", ROW_COST[r]));
+                        return;
+                    } else {
+                        rows[r] = c;
+                        announce(t("talentOn", { name: TALENTS[id].name }));
+                    }
+                    Store.save();
+                    const y = $("#screen-talents").scrollTop;
+                    renderTalents();
+                    $("#screen-talents").scrollTop = y;
+                    refocus(`[data-card="${k}-${r}-${c}"]`);
+                }
+                // After a screen is drawn again, keyboard focus goes back to the card that was used.
+                function refocus(sel) {
+                    const el = $(sel);
+                    if (el)
+                        try {
+                            el.focus({ preventScroll: true });
+                        } catch (e) {
+                            /* focus refused */
+                        }
                 }
                 function renderSettings() {
                     for (const el of $$("[data-setting]")) {
@@ -7830,6 +9571,31 @@ void main(){
                         $("span", li).textContent = d.info + (d.dur ? " " + t("lasts", { n: d.dur }) : "");
                         pl.append(li);
                     }
+                    // Synergies: both partners' glyphs, the name and what it does.
+                    const sl = $("#syn-list");
+                    for (const id of SYN_IDS) {
+                        const s = SYNERGIES[id],
+                            li = document.createElement("li");
+                        li.className = "syn-li";
+                        li.dataset.syn = id;
+                        li.innerHTML = `<span class="pair-ico">${glyphSVG(POWER_GLYPHS[s.a], "pa")}${glyphSVG(POWER_GLYPHS[s.b], "pb")}</span><div><b></b><span></span></div>`;
+                        $("b", li).textContent = s.name;
+                        $("div span", li).textContent = `${POWERS[s.a].name} + ${POWERS[s.b].name}. ${s.info}`;
+                        sl.append(li);
+                    }
+                    // Weapons and ships, with the level that opens each.
+                    const gl = $("#gear-list");
+                    const gear = (svg, d) => {
+                        const li = document.createElement("li");
+                        li.style.setProperty("--ec", "var(--primary)");
+                        li.innerHTML = `${svg}<div><b></b><span></span></div>`;
+                        $("b", li).textContent = d.name;
+                        $("span", li).textContent =
+                            d.info + (d.level > 1 ? " " + t("opensAt", { n: d.level }) + "." : "");
+                        gl.append(li);
+                    };
+                    for (const id of Object.keys(WEAPONS)) gear(glyphSVG(WEAPON_GLYPHS[id], ""), WEAPONS[id]);
+                    for (const id of Object.keys(SHIPS)) gear(shipSVG(id, ""), SHIPS[id]);
                     const ul2 = $("#upgrade-list");
                     for (const u of UPGRADES) {
                         const li = document.createElement("li");
@@ -7840,6 +9606,11 @@ void main(){
                         ul2.append(li);
                     }
                     const syncRoster = () => {
+                        for (const li of sl.children) {
+                            const s = SYNERGIES[li.dataset.syn];
+                            li.style.setProperty("--ca", inkCss(POWERS[s.a].col));
+                            li.style.setProperty("--cb", inkCss(POWERS[s.b].col));
+                        }
                         for (const li of ul.children)
                             li.style.setProperty(
                                 "--ec",
@@ -7907,9 +9678,11 @@ void main(){
                         );
                         list.append(b);
                     });
-                    $("#up-sub").textContent = run.endless
-                        ? t("waveCleared", { n: run.wave + 1 })
-                        : t("waveOfCleared", { n: run.wave + 1, m: WAVES });
+                    $("#up-sub").textContent = run.opening
+                        ? t("openingSub")
+                        : run.endless
+                          ? t("waveCleared", { n: run.wave + 1 })
+                          : t("waveOfCleared", { n: run.wave + 1, m: WAVES });
                     $("#up-keys").hidden = !(window.matchMedia && matchMedia("(pointer: fine)").matches);
                     $("#btn-pick").hidden = true;
                     Sound.duck(true);
@@ -7924,7 +9697,29 @@ void main(){
                         want = [];
                     for (const k of TIMED) if (run.pw[k] > 0) want.push(k);
                     if (run.shield) want.push("shield");
+                    // An active synergy gets a chip of its own, ringed in both partners' colours.
+                    for (const id of run.synOn) {
+                        const s = SYNERGIES[id],
+                            k = "syn-" + id,
+                            frac = (q) => (q === "shield" ? 1 : clamp(run.pw[q] / (run.pwMax[q] || 1), 0, 1));
+                        want.push(k);
+                        let el = chipEls[k];
+                        if (!el) {
+                            el = document.createElement("span");
+                            el.className = "pw-chip syn";
+                            el.innerHTML = glyphSVG(SYN_GLYPH, "");
+                            row.prepend(el);
+                            chipEls[k] = el;
+                        }
+                        el.style.setProperty("--p", String(Math.round(Math.min(frac(s.a), frac(s.b)) * 60) / 60));
+                        if (el.gfL !== light) {
+                            el.gfL = light;
+                            el.style.setProperty("--c", inkCss(POWERS[s.a].col));
+                            el.style.setProperty("--c2", inkCss(POWERS[s.b].col));
+                        }
+                    }
                     for (const k of want) {
+                        if (k.startsWith("syn-")) continue;
                         let el = chipEls[k];
                         if (!el) {
                             el = document.createElement("span");
@@ -8014,8 +9809,13 @@ void main(){
                         const v = dp.returnValue;
                         needsRender = true;
                         if (v === "route" || !run) return;
-                        if (v === "restart") startRun(run.si);
-                        else if (v === "settings") go("#/settings");
+                        if (v === "restart") {
+                            // A restarted run still earns its experience.
+                            P.kills += run.kills;
+                            const xp = bankRun(false);
+                            toast(t("expBanked", { n: fmt(xp.total) }));
+                            startRun(run.si);
+                        } else if (v === "settings") go("#/settings");
                         else if (v === "exit") goBackTo("levels");
                         else resumeGame();
                     });
@@ -8025,7 +9825,10 @@ void main(){
                         if (v === "route" || !run) return;
                         if (v === "next") startRun(run.si + 1);
                         else if (v === "retry") startRun(run.si);
-                        else {
+                        else if (v === "talents") {
+                            run = null;
+                            go("#/talents");
+                        } else {
                             run = null;
                             goBackTo("levels");
                         }
@@ -8056,6 +9859,14 @@ void main(){
                             Sound.sfx.ui();
                         });
                     }
+                    $("#btn-respec").addEventListener("click", () => {
+                        // Free at any time: every talent point comes back.
+                        M.talents = { offence: [-1, -1, -1], defence: [-1, -1, -1], utility: [-1, -1, -1] };
+                        Store.save();
+                        Sound.sfx.ui();
+                        renderTalents();
+                        toast(t("respecDone"));
+                    });
                     $("#btn-reset").addEventListener("click", async () => {
                         const ok = await confirmBox({
                             title: t("eraseTitle"),
@@ -8067,6 +9878,9 @@ void main(){
                         const fresh = clone(DEFAULTS.progress);
                         for (const k of Object.keys(P)) delete P[k];
                         Object.assign(P, fresh);
+                        const pilot = clone(DEFAULTS.meta);
+                        for (const k of Object.keys(M)) delete M[k];
+                        Object.assign(M, pilot, { v: 1 });
                         Store.data.snapshot = null;
                         run = null;
                         Store.save();
@@ -8213,6 +10027,9 @@ void main(){
                     await Store.init();
                     S = Store.data.settings;
                     P = Store.data.progress;
+                    M = Store.data.meta;
+                    settleMeta();
+                    Store.save();
                     applyTheme();
                     setupRenderer();
                     applyMotion();

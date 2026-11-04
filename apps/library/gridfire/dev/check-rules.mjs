@@ -19,7 +19,8 @@ const marker = "                boot();\n";
 if (source.split(marker).length !== 2) throw new Error("index.html: expected exactly one boot() call");
 const hook =
   "window.__gf = { get run() { return run; }, world, makeEnemy, addGuard, guardsOf, killEnemy, useBomb, hurtHull, " +
-  "mkBullet, updateGame, startRun, choosePick, POOL };\n";
+  "mkBullet, updateGame, startRun, choosePick, POOL, Beat, volley, beamTick, syn, dropCapsule, bankRun, tapTalent, " +
+  "currentLoadout, pointsFree, pointsSpent, levelFor, xpForLevel, get M() { return M; } };\n";
 const dir = mkdtempSync(join(tmpdir(), "glowmere-"));
 const file = join(dir, "index.html");
 writeFileSync(file, source.replace(marker, "                " + hook + marker));
@@ -212,6 +213,241 @@ const quiet = { sfx: false, music: false };
       r.charges === 3 &&
       r.best === 52010 &&
       r.theme === "light",
+    r,
+  );
+  await ctx.close();
+}
+
+// The pilot's progress, talents, weapons, power-ups and synergies.
+{
+  const fresh = { v: 1, settings: { ...quiet, autoAim: false }, progress: { unlocked: 8, seenHint: true } };
+  const { ctx, p } = await page(fresh);
+  await p.goto("file://" + file + "#/");
+  await p.waitForTimeout(500);
+  const r = await p.evaluate(() => {
+    const g = window.__gf,
+      w = g.world,
+      M = g.M,
+      out = {};
+    const steps = (n) => {
+      for (let i = 0; i < n; i++) g.updateGame(1 / 60);
+    };
+    const setTalents = (o) => {
+      M.talents = Object.assign({ offence: [-1, -1, -1], defence: [-1, -1, -1], utility: [-1, -1, -1] }, o);
+    };
+    const reset = (si = 0) => {
+      g.startRun(si);
+      g.run.queue.length = 0;
+      w.enemies.length = 0;
+      w.bullets.length = 0;
+      w.shards.length = 0;
+      w.p.x = 0;
+      w.p.y = 0;
+      w.p.inv = 99;
+    };
+    // A first run: level 1, nothing open but the Skiff and the Twin stream, no talent points.
+    out.first = { level: g.levelFor(M.xp), free: g.pointsFree(), ld: g.currentLoadout() };
+    // A short failed run still earns experience, enough for level 2 and a talent point.
+    reset();
+    g.run.score = 4200;
+    g.run.wave = 2;
+    const xp1 = g.bankRun(false);
+    out.afterRun1 = { total: xp1.total, level: g.levelFor(M.xp), free: g.pointsFree() };
+    // A cleared sector earns much more; levels 3 and 4 open the Scatter and the opening pick.
+    reset();
+    g.run.score = 11000;
+    const xp2 = g.bankRun(true);
+    out.afterRun2 = { total: xp2.total, level: g.levelFor(M.xp), before: xp2.before, after: xp2.after };
+    // Locked gear falls back to the defaults; open gear is used.
+    M.ship = "barge";
+    M.weapon = "scatter";
+    out.loadout = g.currentLoadout();
+    // Talent rules: a row needs the one above, points are limited, a swap is free, giving one back refunds.
+    M.xp = g.xpForLevel(4);
+    setTalents({});
+    g.tapTalent("offence", 1, 0);
+    const lockedRow = g.pointsSpent(M.talents);
+    g.tapTalent("offence", 0, 0);
+    g.tapTalent("offence", 1, 0);
+    const two = g.pointsSpent(M.talents);
+    g.tapTalent("offence", 1, 1);
+    const swapped = M.talents.offence.slice();
+    g.tapTalent("defence", 0, 0);
+    g.tapTalent("offence", 2, 0);
+    const tooDear = M.talents.offence[2];
+    g.tapTalent("offence", 0, 0);
+    out.talents = { lockedRow, two, swapped, tooDear, afterGiveBack: M.talents.offence.slice(), free: g.pointsFree() };
+    // Defence talents and starting options take effect at the start of a run.
+    M.xp = g.xpForLevel(19);
+    setTalents({ defence: [0, 0, 1], utility: [-1, -1, -1] });
+    M.opts = { opening: false, tide: false, headstart: true };
+    M.ship = "skiff";
+    M.weapon = "twin";
+    reset();
+    const start = { hull: g.run.hull, shield: g.run.shield, mult: g.run.mult, charges: g.run.charges };
+    g.run.mult = 5;
+    g.hurtHull();
+    const steady = g.run.mult;
+    g.run.hull = 1;
+    g.hurtHull();
+    out.defence = { start, steady, spared: { hull: g.run.hull, state: g.run.state, reprieve: g.run.reprieve } };
+    setTalents({ defence: [1, 1, 0], utility: [0, 0, -1] });
+    M.opts = { opening: false, tide: false, headstart: false };
+    reset();
+    w.enemies.push(g.makeEnemy("firefly", 60, 0, { spawn: 0 }), g.makeEnemy("pouncer", -80, 0, { spawn: 0 }));
+    g.run.hull = 2;
+    g.run.mult = 5;
+    g.hurtHull();
+    out.shock = {
+      steady: g.run.mult,
+      fireflies: w.enemies.filter((e) => e.type === "firefly" && !e.dead).length,
+      pouncerSpeed: Math.round(Math.hypot(w.enemies[1].vx, w.enemies[1].vy)),
+      warp: Math.round(g.run.pw.warp),
+      charges: g.run.charges,
+    };
+    // Weapons. Scatter sprays many short pellets.
+    setTalents({});
+    M.weapon = "scatter";
+    reset();
+    g.volley(w.p, 0, -1, false);
+    out.scatter = { pellets: w.bullets.length, life: Math.round(w.bullets[0].life * 100) / 100 };
+    // The beam hurts every enemy along its line and stops at a shield turned toward it.
+    M.weapon = "beam";
+    reset();
+    g.run.speed = 0.0001;
+    const a = g.makeEnemy("pouncer", 0, -100, { spawn: 0, hp: 9 }),
+      b = g.makeEnemy("pouncer", 0, -200, { spawn: 0, hp: 9 }),
+      s = g.makeEnemy("shieldback", 0, -280, { spawn: 0, ang: Math.PI / 2, hp: 9 }),
+      c = g.makeEnemy("pouncer", 0, -360, { spawn: 0, hp: 9 });
+    w.enemies.push(a, b, s, c);
+    g.beamTick(w.p, 0, -1);
+    out.beam = { a: a.hp < 9, b: b.hp < 9, shield: s.hp, behind: c.hp, len: Math.round(g.run.beamRays[0][1]) };
+    // The pulse sends a ring on each half beat that passes through a whole swarm.
+    M.weapon = "pulse";
+    reset();
+    g.run.speed = 0.0001;
+    for (let k = 0; k < 5; k++) w.enemies.push(g.makeEnemy("firefly", (k - 2) * 40, -150, { spawn: 0, hp: 9 }));
+    g.volley(w.p, 0, -1, false);
+    steps(30);
+    out.pulse = { hit: w.enemies.filter((e) => e.hp < 9).length };
+    // Echo repeats a volley half a beat later; Prism splits a shot on its first hit.
+    M.weapon = "twin";
+    reset();
+    g.run.pw.echo = 9;
+    g.volley(w.p, 0, -1, false);
+    const first = w.bullets.length;
+    steps(40);
+    out.echo = { first, later: w.bullets.length > 0 && g.run.echoes.length === 0 };
+    reset();
+    g.run.speed = 0.0001;
+    g.run.pw.prism = 9;
+    w.enemies.push(g.makeEnemy("lancer", 0, -120, { spawn: 0, hp: 9, vx: 0, vy: 0 }));
+    g.volley(w.p, 0, -1, false);
+    steps(12);
+    out.prism = { children: w.bullets.filter((x) => x.child).length };
+    // Bounty: twice the sparks, and the meter holds while enemies are about.
+    reset();
+    g.run.pw.bounty = 9;
+    const k1 = g.makeEnemy("pouncer", 300, 0, { spawn: 0 });
+    w.enemies.push(k1, g.makeEnemy("pouncer", -300, 0, { spawn: 0 }));
+    g.killEnemy(k1);
+    g.run.heat = 0.5;
+    g.run.speed = 0.0001;
+    steps(60);
+    out.bounty = { sparks: w.shards.length, heat: Math.round(g.run.heat * 100) / 100 };
+    // Synergy: Pierce and Ricochet together make Needle storm; capsules lean toward a partner.
+    reset();
+    g.run.pw.pierce = 9;
+    g.run.pw.ricochet = 9;
+    steps(1);
+    g.volley(w.p, 0, -1, false);
+    out.needle = { on: g.run.synOn.has("needle"), pierce: w.bullets[0].pierce, bounces: w.bullets[0].bounces };
+    reset();
+    g.run.pw.pierce = 9;
+    M.talents = { offence: [-1, -1, -1], defence: [-1, -1, -1], utility: [0, 0, 0] };
+    g.startRun(0);
+    g.run.pw.pierce = 9;
+    const kinds = {};
+    for (let i = 0; i < 400; i++) {
+      w.pickups.length = 0;
+      g.dropCapsule(0, 0);
+      const k = w.pickups[0].type;
+      kinds[k] = (kinds[k] || 0) + 1;
+    }
+    out.matchmaker = { partners: (kinds.ricochet || 0) + (kinds.prism || 0), of: 400 };
+    return out;
+  });
+  check(
+    "first run: level 1, default loadout",
+    r.first.level === 1 && r.first.free === 0 && r.first.ld.ship === "skiff" && r.first.ld.weapon === "twin",
+    r.first,
+  );
+  check("a failed run reaches level 2", r.afterRun1.level === 2 && r.afterRun1.free === 1, r.afterRun1);
+  check("a cleared sector opens the Scatter", r.afterRun2.level >= 3, r.afterRun2);
+  check("locked gear falls back", r.loadout.ship === "skiff" && r.loadout.weapon === "scatter", r.loadout);
+  check(
+    "talent rows, costs, free swaps and refunds",
+    r.talents.lockedRow === 0 &&
+      r.talents.two === 3 &&
+      r.talents.swapped[1] === 1 &&
+      r.talents.tooDear === -1 &&
+      r.talents.afterGiveBack.join() === "-1,-1,-1" &&
+      r.talents.free === 3,
+    r.talents,
+  );
+  check(
+    "plating, second skin, head start and reprieve",
+    r.defence.start.hull === 5 &&
+      r.defence.start.shield === 1 &&
+      r.defence.start.mult === 3 &&
+      r.defence.steady === 3 &&
+      r.defence.spared.hull === 1 &&
+      r.defence.spared.state === "play" &&
+      r.defence.spared.reprieve === 0,
+    r.defence,
+  );
+  check(
+    "shockwave, steady, last stand and spare charge",
+    r.shock.fireflies === 0 &&
+      r.shock.pouncerSpeed > 700 &&
+      r.shock.steady === 4 &&
+      r.shock.warp === 6 &&
+      r.shock.charges === 2,
+    r.shock,
+  );
+  check("scatter sprays short pellets", r.scatter.pellets >= 6 && r.scatter.life < 0.5, r.scatter);
+  check(
+    "beam cuts a line and stops at a shield",
+    r.beam.a && r.beam.b && r.beam.shield === 9 && r.beam.behind === 9 && r.beam.len < 280,
+    r.beam,
+  );
+  check("pulse ring passes through a swarm", r.pulse.hit >= 4, r.pulse);
+  check("echo repeats the volley", r.echo.first > 0 && r.echo.later, r.echo);
+  check("prism splits a shot", r.prism.children >= 2, r.prism);
+  check("bounty doubles sparks and holds the meter", r.bounty.sparks === 2 && r.bounty.heat === 0.5, r.bounty);
+  check("needle storm", r.needle.on && r.needle.pierce === 99 && r.needle.bounces === -1, r.needle);
+  check("matchmaker brings partners", r.matchmaker.partners > 240, r.matchmaker);
+  await ctx.close();
+}
+
+// A save from before the talents: the play already done becomes experience.
+{
+  const before = {
+    v: 1,
+    settings: { ...quiet },
+    progress: { unlocked: 5, cleared: [0, 1, 2, 3], best: { 3: 60000 }, kills: 1500, games: 14, seenHint: true },
+  };
+  const { ctx, p } = await page(before);
+  await p.goto("file://" + file + "#/");
+  await p.waitForTimeout(600);
+  const r = await p.evaluate(() => {
+    const g = window.__gf,
+      s = JSON.parse(localStorage.getItem("gridfire.save"));
+    return { xp: g.M.xp, level: g.levelFor(g.M.xp), stored: s.meta && s.meta.v, best: s.progress.best["3"] };
+  });
+  check(
+    "play before the talents becomes experience",
+    r.xp === 1180 && r.level === 5 && r.stored === 1 && r.best === 60000,
     r,
   );
   await ctx.close();
