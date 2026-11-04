@@ -4,7 +4,7 @@
     "id": "library/word-wheel",
     "kind": "web",
     "name": "Word Wheel",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "icon": "menu_book",
     "category": "game_word",
     "ageRating": "everyone",
@@ -32,7 +32,7 @@
         "sha256": "934bbde7a44c69d193bd072ec03178ad46656af383bef8304bbb188d6812065d",
         "size": 43203
       },
-      "index.html": { "sha256": "0e034760a4e194966c5b69b7cb7e36a9b4f51e4eb9e56df1cc235f5a4dcf6656", "size": 21154 },
+      "index.html": { "sha256": "ae75cefa9aa91520bdc6081f9b0109508add9625f1ecaf1774554e9691222a0f", "size": 21200 },
       "js/core/dates.mjs": {
         "sha256": "738fac189c229c43f61b84e331d289bdc3eb0bcce43ed34b16edeb7454061358",
         "size": 2516
@@ -85,8 +85,8 @@
         "size": 3080
       },
       "js/wheel/strings.mjs": {
-        "sha256": "b15cf4104154f6d36916fab9d6cf6992f1c2103383c06b797fb22ee0e79c0686",
-        "size": 17718
+        "sha256": "bfcff6a795d9829f8b880d848e2524cb4bafa4dfd21edf5c23e3533360b7d4df",
+        "size": 17982
       },
       "js/wheel/taps.mjs": {
         "sha256": "af205e6221ffc2345bc28f8a8263ccb65d4c22090249bdcbc26ba7ee18fe79d5",

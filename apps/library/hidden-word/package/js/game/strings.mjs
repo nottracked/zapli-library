@@ -203,6 +203,7 @@ export const STRINGS = {
     helpKeys: "A keyboard",
     helpKeys1:
       "Type letters, Backspace takes one back, Enter tries the word. A Slovak keyboard types the accented letters directly.",
+    wordsCredit: "English words come from 12dicts by Alan Beale and the ENABLE list, both in the public domain.",
   },
   sk: {
     appName: "Hidden Word",
@@ -435,5 +436,7 @@ export const STRINGS = {
     helpKeys: "Klávesnica",
     helpKeys1:
       "Písaním vyberáte písmená, Backspace jedno vráti, Enter slovo vyskúša. Na slovenskej klávesnici píšete písmená s diakritikou priamo.",
+    wordsCredit:
+      "Anglické slová pochádzajú zo zbierky 12dicts, ktorú zostavil Alan Beale, a zo zoznamu ENABLE. Oba zdroje sú voľne použiteľné.",
   },
 };

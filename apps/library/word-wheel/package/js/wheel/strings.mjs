@@ -118,6 +118,7 @@ export const STRINGS = {
     helpHints2: "There is nothing to buy and nothing to wait for: no coins, no lives, no timers.",
     helpWordsEn: "English words",
     helpWordsEn1: "Plurals and other forms count as extra words (cats, walked). The crossword asks for common words.",
+    helpWordsEn2: "The words come from 12dicts by Alan Beale and the ENABLE list, both in the public domain.",
     helpWordsSk: "Slovak words",
     helpWordsSk1:
       "Only base forms count, as in a dictionary: nouns in the nominative (stôl, not stoly), verbs in the infinitive (robiť, not robím) and adjectives in the masculine (pekný, not pekná). Letters with accents are letters of their own, and CH is one letter.",
@@ -277,6 +278,8 @@ export const STRINGS = {
     helpWordsEn: "Anglické slová",
     helpWordsEn1:
       "Množné číslo a iné tvary sa počítajú ako slová navyše (cats, walked). Krížovka sa pýta na bežné slová.",
+    helpWordsEn2:
+      "Slová pochádzajú zo zbierky 12dicts, ktorú zostavil Alan Beale, a zo zoznamu ENABLE. Oba zdroje sú voľne použiteľné.",
     helpWordsSk: "Slovenské slová",
     helpWordsSk1:
       "Platia len základné tvary ako v slovníku: podstatné mená v nominatíve (stôl, nie stoly), slovesá v neurčitku (robiť, nie robím) a prídavné mená v mužskom rode (pekný, nie pekná). Písmená s dĺžňom, mäkčeňom, vokáňom či dvoma bodkami sú samostatné písmená a CH je jedno písmeno.",
