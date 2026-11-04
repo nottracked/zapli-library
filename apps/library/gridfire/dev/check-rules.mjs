@@ -1,4 +1,4 @@
-// Checks of Glowmere's game rules in a headless browser.
+// Checks of Litadlo's game rules in a headless browser.
 //
 //   npm install --no-save playwright-core
 //   CHROME=/path/to/chrome node apps/library/gridfire/dev/check-rules.mjs
@@ -21,7 +21,7 @@ const hook =
   "window.__gf = { get run() { return run; }, world, makeEnemy, addGuard, guardsOf, killEnemy, useBomb, hurtHull, " +
   "mkBullet, updateGame, startRun, choosePick, POOL, Beat, volley, beamTick, syn, dropCapsule, bankRun, tapTalent, " +
   "currentLoadout, pointsFree, pointsSpent, levelFor, xpForLevel, get M() { return M; } };\n";
-const dir = mkdtempSync(join(tmpdir(), "glowmere-"));
+const dir = mkdtempSync(join(tmpdir(), "litadlo-"));
 const file = join(dir, "index.html");
 writeFileSync(file, source.replace(marker, "                " + hook + marker));
 

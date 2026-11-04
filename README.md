@@ -61,7 +61,7 @@ There are two kinds of app, and every app is one or the other:
   it needs. Zapli draws native screens for it. Most data apps (Water, To-do, Flashcards) are this kind.
 - A **web app** (`index.html`) is one HTML file with its manifest embedded in a
   `<script type="application/zapli+json">` block. Zapli runs it in a locked-down web view of its own; the same file
-  also opens in a plain browser. Games and other apps that draw their own screens (Solitaire, Mines, Glowmere, Pocket
+  also opens in a plain browser. Games and other apps that draw their own screens (Solitaire, Mines, Litadlo, Pocket
   Scan) are this kind.
 
 A web app that needs more than one file is a **package app**: its files are in a `package/` folder, described below.

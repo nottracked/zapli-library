@@ -8,17 +8,17 @@
         <meta name="theme-color" content="#06131a" media="(prefers-color-scheme: dark)" />
         <meta
             name="description"
-            content="Glowmere: a twin-stick shooter in a round pool of light reeds, with enemies that move to the beat, eight sectors and a soundtrack synthesised as you play."
+            content="Litadlo: a twin-stick shooter in a round pool of light reeds, with enemies that move to the beat, eight sectors and a soundtrack synthesised as you play."
         />
-        <title>Glowmere</title>
+        <title>Litadlo</title>
         <script type="application/zapli+json" id="zapli-manifest">
             {
                 "spec": "zapli/0.2",
                 "app": {
                     "id": "library/gridfire",
                     "kind": "web",
-                    "name": "Glowmere",
-                    "version": "2.0.0",
+                    "name": "Litadlo",
+                    "version": "2.0.1",
                     "icon": "my_location",
                     "category": "game_arcade",
                     "ageRating": "everyone",
@@ -1771,9 +1771,9 @@
                     <h1 id="home-h" class="logo-h" tabindex="-1">
                         <svg
                             class="logo"
-                            viewBox="-1.2 -1.2 47.5 8.4"
+                            viewBox="-1.2 -1.2 42 8.4"
                             role="img"
-                            aria-label="Glowmere"
+                            aria-label="Litadlo"
                             xmlns="http://www.w3.org/2000/svg"
                         >
                             <defs>
@@ -1790,15 +1790,15 @@
                                 <filter id="blur" x="-10%" y="-60%" width="120%" height="220%">
                                     <feGaussianBlur stdDeviation=".5" />
                                 </filter>
-                                <!-- GLOWMERE in rounded strokes; the O is the round pool. -->
+                                <!-- LITADLO in rounded strokes; the final O is the round pool. -->
                                 <path
                                     id="word"
-                                    d="M3.29 0.7A2 3 0 1 0 3.98 3.42H2.3M5.5 0V6H9.1M10.6 3A3 3 0 1 0 16.6 3A3 3 0 1 0 10.6 3M18.1 0L19.2 6L20.6 2.2L22 6L23.1 0M24.6 6V0L27.1 4L29.6 0V6M34.7 0H31.1V6H34.7M31.1 3H34.1M36.2 6V0H38.4A1.6 1.6 0 0 1 38.4 3.2H36.2M38.1 3.2L40 6M45.1 0H41.5V6H45.1M41.5 3H44.5"
+                                    d="M0 0V6H3.6M5.1 0V6M6.6 0H10.6M8.6 0V6M12.1 6L14.3 0L16.5 6M12.87 3.9H15.73M18 0H19.4A2.6 3 0 0 1 19.4 6H18ZM23.5 0V6H27.1M28.6 3A3 3 0 1 0 34.6 3A3 3 0 1 0 28.6 3"
                                 />
                             </defs>
                             <use href="#word" class="lw lw-glow" />
                             <use href="#word" class="lw lw-main" />
-                            <circle class="lw-dot" cx="13.6" cy="3" r="0.75" />
+                            <circle class="lw-dot" cx="31.6" cy="3" r="0.75" />
                         </svg>
                     </h1>
                     <p class="tag" data-t="tagline">
@@ -2104,7 +2104,7 @@
                         </div>
                     </section>
                     <p class="about" id="about" data-t="about">
-                        Glowmere 2.0.0, one HTML file that runs entirely offline.
+                        Litadlo 2.0.1, one HTML file that runs entirely offline.
                     </p>
                 </div>
             </section>
@@ -2367,7 +2367,7 @@
                 // its arguments, or the plural forms of a count. Slovak also renames the game's own things below.
                 const STRINGS = {
                     en: {
-                        appName: "Glowmere",
+                        appName: "Litadlo",
                         tagline:
                             "Steer with one thumb, shoot with the other, and comb a pool of light reeds while everything moves to the beat.",
                         continue: "Continue",
@@ -2413,7 +2413,7 @@
                         oneThumbSub: "Your ship aims and fires at the nearest enemy by itself.",
                         progress: "Progress",
                         erase: "Erase progress…",
-                        about: (a) => `Glowmere ${a.version || "2.0.0"}, one HTML file that runs entirely offline.`,
+                        about: (a) => `Litadlo ${a.version || "2.0.1"}, one HTML file that runs entirely offline.`,
                         twoThumbs: "Two thumbs",
                         help1: "Put a thumb down anywhere on the **left half** and drag to fly.",
                         help2: "Drag on the **right half** to aim. Your ship fires for as long as that thumb is down.",
@@ -2581,7 +2581,7 @@
                             "Every run earns experience, even one that ends early: for your score, each wave cleared and each sector cleared. Each level brings a talent point, and some levels open a new ship, weapon or starting option. As you grow stronger, the waves grow a little larger.",
                     },
                     sk: {
-                        appName: "Glowmere",
+                        appName: "Litadlo",
                         tagline:
                             "Jedným palcom riaďte, druhým strieľajte a rozvlňte jazierko svetelných stebiel, kde sa všetko hýbe do rytmu.",
                         continue: "Pokračovať",
@@ -2628,7 +2628,7 @@
                         progress: "Postup",
                         erase: "Vymazať postup…",
                         about: (a) =>
-                            `Glowmere ${a.version || "2.0.0"}, jeden súbor HTML, ktorý funguje úplne bez internetu.`,
+                            `Litadlo ${a.version || "2.0.1"}, jeden súbor HTML, ktorý funguje úplne bez internetu.`,
                         twoThumbs: "Dva palce",
                         help1: "Položte palec kdekoľvek na **ľavú polovicu** a ťahaním leťte.",
                         help2: "Ťahaním na **pravej polovici** mierite. Loď strieľa, kým tento palec držíte na obrazovke.",
