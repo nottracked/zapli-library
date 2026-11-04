@@ -4,7 +4,7 @@
     "id": "library/hidden-word",
     "kind": "web",
     "name": "Hidden Word",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "icon": "lock",
     "category": "game_word",
     "ageRating": "everyone",
@@ -38,7 +38,7 @@
     "entry": "index.html",
     "orientation": "any",
     "files": {
-      "css/app.css": { "sha256": "21525a4850bfa7d8d1381a8a1eafa672b3980a69f8d3c15d5745e38c3bb4cc65", "size": 41333 },
+      "css/app.css": { "sha256": "95abd5ac50b200822bdab22fe385eb3e0fdd4dc23ee510325e10dfe847aaee9a", "size": 43740 },
       "data/words-en.txt": {
         "sha256": "516a06d3a7cf82684d932c294052c6d97d9d219d2912d8a6f2cba64d77b193d1",
         "size": 362549
@@ -47,7 +47,7 @@
         "sha256": "62a1a27623680c005e9dad885fab4cd1e239c54e6b42fb764ef7f371654b3fb5",
         "size": 55786
       },
-      "index.html": { "sha256": "b14ca1bd5bb6dad9f51d1274c9a5db2f9e9b9f9c5fcd6aa0eeeeef9ecea43579", "size": 23956 },
+      "index.html": { "sha256": "74874c009f02e0e9cc5c8e1101955fa87b08e675041ebb1ac4376cf29d82bc36", "size": 25425 },
       "js/core/dates.mjs": {
         "sha256": "738fac189c229c43f61b84e331d289bdc3eb0bcce43ed34b16edeb7454061358",
         "size": 2516
@@ -78,14 +78,14 @@
         "size": 4302
       },
       "js/game/strings.mjs": {
-        "sha256": "9e1e44af6bd4366fd367c5c7f0fd65cdd8650405b4de901412192a83fdbbb016",
-        "size": 22205
+        "sha256": "5608bd25e5f245846458b793e831dc5d159a73647762947d5d061d03064fb6a5",
+        "size": 22404
       },
       "js/game/words.mjs": {
         "sha256": "8384bdb494e3ab2f17360286ca126211f2106ab6a2e077c32eb00ca8139c82a7",
         "size": 6814
       },
-      "js/main.mjs": { "sha256": "cdc9385b97fa013891da98df95596d33b40e8c043d45b7d09fa9693741c2ac08", "size": 46764 },
+      "js/main.mjs": { "sha256": "f6564e5cbfcc1f3aead41ba685555090ddea9c4a4e45c9eb9aa4c74808735bc3", "size": 48887 },
       "js/ui/board.mjs": { "sha256": "b058c67d247acafd60da380e547a1ea098d461da22989e1c082fbe948049f411", "size": 6272 },
       "js/ui/calendar-view.mjs": {
         "sha256": "160d5fa50bbbd731cbc6d7594cd89b801fe39c94c7da125885fd4b6eee5b7db9",

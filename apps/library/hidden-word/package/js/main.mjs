@@ -200,6 +200,10 @@ function measureTextScale() {
 }
 
 // ---- vibration (Zapli's haptics; a plain browser has none and skips it)
+//
+// "light" is the faintest tick a phone has, which some phones barely play: it is kept for the keys alone. Whatever the
+// player should feel uses a firmer kind: "medium" or "success" for a guess, a hint, a held key or a held Delete,
+// "warning" for a refused guess, and "heavy" when a word ends, followed by "success" when it was found.
 
 function buzz(kind) {
   if (!canBuzz || !settings.vibration) return;
@@ -223,7 +227,7 @@ const board = createBoard(
 
 const keyboard = createKeyboard($("keys"), {
   onKey: (tile, fromPointer) => typeTile(tile, fromPointer),
-  onHoldStart: () => buzz("light"),
+  onHoldStart: () => buzz("medium"),
   label: (letter, mark, more) => {
     const L = letter.toUpperCase();
     let text = mark === "hit" ? t("keyHit", { letter: L }) : mark === "near" ? t("keyNear", { letter: L }) : null;
@@ -452,7 +456,7 @@ function render() {
   const toToday = game.kind === "practice" || game.day !== today();
   $("btn-switch").textContent = toToday ? t("toToday") : t("toPractice");
   $("lang-code").textContent = lang.toUpperCase();
-  $("btn-lang").setAttribute("aria-label", t(lang === "sk" ? "langToggleSk" : "langToggleEn"));
+  $("btn-lang").setAttribute("aria-label", t(lang === "sk" ? "langPillSk" : "langPillEn"));
   $("btn-lang").title = $("btn-lang").getAttribute("aria-label");
   // the log's empty state, with the first-start line until the player has played or read the help
   const empty = game.guesses.length === 0 && !game.done;
@@ -745,15 +749,16 @@ function submit() {
   }
   saveGame(true);
   if (won || lost) store.flush();
-  // The marks land first; then the keyboard and the lock catch up, and a found word opens the lock.
+  // The marks land first; then the keyboard and the lock catch up, and a found word opens the lock. A guess that ends
+  // the word is felt when the lock opens or closes, so its two buzzes never run into each other.
   const hits = marks.filter((m) => m === "hit").length;
-  buzz(hits ? "medium" : "light");
+  if (!won && !lost) buzz(hits ? "success" : "medium");
   window.setTimeout(
     () => {
       render();
       if (won) {
         board.finish("won", ans, still());
-        buzzPattern(["success", "medium", "success"], 140);
+        buzzPattern(["heavy", "success"], 120);
       } else if (lost) {
         board.finish("lost", ans, still());
         buzz("heavy");
@@ -863,14 +868,13 @@ async function nextWord() {
   await openPractice(lang);
 }
 
+// Each language keeps its own games: switching brings back the word that language had on screen, as it was left.
 async function switchLang(code) {
   if (!LANGS.includes(code) || code === lang) return;
   saveGame(true);
   settings.words = code;
   saveSettings();
-  const kind = game ? game.kind : "daily";
-  if (kind === "practice") await openPractice(code);
-  else await openDaily(code, today());
+  await openActive(code);
   // The word list and the keyboard both changed: say so, until the next action.
   if (game && lang === code) notice(t(code === "sk" ? "switchedSk" : "switchedEn"), "good");
 }
@@ -998,6 +1002,49 @@ document.querySelectorAll("dialog").forEach((dlg) => {
     if (e.target === dlg) closeDialog(dlg);
   });
 });
+
+// The word-language picker: a small card under the language pill, with a row for each language in its own name. A row
+// switches and closes it; a tap outside it, Escape or the phone's Back close it as they close every dialog.
+function placePicker() {
+  const dlg = $("dlg-lang");
+  if (!dlg.open) return;
+  const pill = $("btn-lang").getBoundingClientRect();
+  const vw = window.innerWidth || root.clientWidth || 360;
+  const vh = window.innerHeight || root.clientHeight || 640;
+  const w = dlg.offsetWidth || 0;
+  const h = dlg.offsetHeight || 0;
+  const left = Math.max(12, Math.min(pill.left, vw - w - 12));
+  // Under the pill where it fits; on a short screen (sideways, large text) as low as it fits, over the pill if need be.
+  const top = Math.max(12, Math.min(pill.bottom + 8, vh - h - 12));
+  dlg.style.left = `${Math.round(left)}px`;
+  dlg.style.top = `${Math.round(top)}px`;
+}
+
+function openPicker() {
+  const dlg = $("dlg-lang");
+  let current = null;
+  dlg.querySelectorAll(".lang-row").forEach((row) => {
+    const on = row.dataset.lang === lang;
+    row.classList.toggle("on", on);
+    if (on) {
+      row.setAttribute("aria-current", "true");
+      current = row;
+    } else row.removeAttribute("aria-current");
+  });
+  openDialog(dlg);
+  // Closed, the focus goes back to the pill, also where a tap does not focus a button.
+  returnFocus.set(dlg, $("btn-lang"));
+  placePicker();
+  if (current) current.focus({ preventScroll: true });
+}
+
+$("lang-rows").addEventListener("click", (e) => {
+  const row = e.target.closest(".lang-row");
+  if (!row) return;
+  closeDialog($("dlg-lang"));
+  switchLang(row.dataset.lang);
+});
+window.addEventListener("resize", placePicker);
 
 // daily calendar
 let calYear = 0;
@@ -1176,7 +1223,7 @@ function onSetting(e) {
   else if (input.id === "opt-contrast") settings.contrast = input.checked;
   else if (input.id === "opt-vibration") {
     settings.vibration = input.checked;
-    buzz("light");
+    buzz("success");
   } else if (input.name === "guesses") {
     settings.guesses = input.value;
     if (game && !game.done && game.guesses.length === 0) game.max = maxGuesses(game.len, settings.guesses);
@@ -1203,7 +1250,7 @@ function onSetting(e) {
 
 const on = (id, fn) => $(id).addEventListener("click", fn);
 
-on("btn-lang", () => switchLang(lang === "sk" ? "en" : "sk"));
+on("btn-lang", openPicker);
 on("btn-daily", openCalendar);
 on("btn-stats", openStats);
 on("btn-help", () => {

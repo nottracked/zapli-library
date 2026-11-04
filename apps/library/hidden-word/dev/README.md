@@ -77,7 +77,8 @@ node dev/build-lists.mjs en --enable <enable1.txt> --esl <3esl.txt> --core <2of5
 node dev/build-lists.mjs sk --check             # fails when the shipped file is not what the sources build
 node dev/check-game.mjs                         # marks, hard mode, hints, typing, the lists, a year of daily words
 node dev/check-i18n.mjs                         # English and Slovak texts complete and alike
-node dev/check-page.mjs                         # the page on a stand-in DOM: a whole game in both languages
+node dev/check-page.mjs                         # the page on a stand-in DOM: a whole game in both languages,
+                                                # the word-language picker and the vibration
 ```
 
 `dev/check-page.mjs` runs the real page code on `dev/stand-in-dom.mjs`, a small stand-in for the browser's DOM with

@@ -3,6 +3,10 @@
 //  - a whole game in English: the first-start line, a short guess and a word not in the list refused without costing
 //    a guess, a guess with its marks on the chips and the keyboard, the hint, the word found, the result tray, the
 //    statistics, the calendar, sharing as words, the next word, another length, a word not found, hard mode;
+//  - the word-language picker: the pill opens it, a tap outside or the ticked row closes it and changes nothing, a row
+//    switches, and each language's game comes back as it was left;
+//  - vibration through a stand-in for Zapli's haptics: the faintest kind only for keys, a firmer one for every guess
+//    and the hint, and a found word felt as "heavy" then "success";
 //  - Slovak: the Slovak keyboard, C and H typed as CH, the accent strip, a held key's accent, another form of a word
 //    refused with its base form offered, and the game's texts in Slovak.
 // Run: node dev/check-page.mjs
@@ -42,6 +46,18 @@ walk(join(pkg, "js"));
 // ---- the page on the stand-in DOM
 const doc = parseDocument(html);
 const storage = new Map();
+// Zapli's bridge as far as the game uses it here: ready at once, haptics only, and every buzz recorded.
+const buzzes = [];
+const zapli = {
+  ready: Promise.resolve(),
+  supports: (feature) => feature === "haptics.impact",
+  haptics: {
+    impact: (kind) => {
+      buzzes.push(kind);
+      return Promise.resolve();
+    },
+  },
+};
 globalThis.document = doc;
 globalThis.Event = StandInEvent;
 globalThis.window = {
@@ -55,6 +71,7 @@ globalThis.window = {
   addEventListener() {},
   innerHeight: 760,
   innerWidth: 360,
+  zapli,
   localStorage: {
     getItem: (k) => (storage.has(k) ? storage.get(k) : null),
     setItem: (k, v) => storage.set(k, String(v)),
@@ -124,15 +141,19 @@ eq(
 check(!$("btn-first").hidden, "the first-start line shows before the first guess");
 eq($("empty-text").textContent, "The hidden word has 5 letters. You have 6 guesses.", "the empty log");
 eq($("left").textContent, "6 guesses left", "the lock's count");
+check(!$("opt-vibration-row").hidden, "the vibration switch shows where the phone can vibrate");
 
 const answer = dailyWord(words.en, 5, today);
 const others = ["about", "dream", "plant", "stone", "might", "lucky", "brick", "chair"].filter(
   (w) => w !== answer && words.en.isValid(w),
 );
 
+let mark = buzzes.length;
 await type("ab");
+eq(buzzes.slice(mark), ["light", "light"], "keys are felt as the faintest tick");
 $("btn-try").click();
 await tick();
+eq(buzzes.at(-1), "warning", "a refused guess is felt firmly");
 eq($("notice").textContent, "Fill in 3 more letters first.", "a short guess");
 eq(cards().length, 0, "a short guess costs nothing");
 await clearDraft();
@@ -145,6 +166,7 @@ eq(cards().length, 0, "a word not in the list costs nothing");
 await guess(others[0]);
 eq(cards().length, 1, "a guess adds a card");
 const marks = score(Array.from(others[0]), Array.from(answer));
+eq(buzzes.at(-1), marks.includes("hit") ? "success" : "medium", "a guess is felt, firmer than a key");
 eq(
   cards()[0]
     .querySelectorAll(".chip")
@@ -173,6 +195,7 @@ check(
   `the hint says its letter: ${$("notice").textContent}`,
 );
 check($("btn-hint").disabled, "one hint per word");
+eq(buzzes.at(-1), "medium", "the hint is felt");
 const hintAt = Number($("notice").textContent.match(/Place (\d)/)[1]) - 1;
 eq(slots()[hintAt], answer[hintAt].toUpperCase(), "the hint's letter replaces the typed one at once");
 const givenSlot = doc.querySelectorAll(".slot")[hintAt];
@@ -182,7 +205,12 @@ await clearDraft();
 eq(slots()[hintAt], answer[hintAt].toUpperCase(), "Delete leaves the given letter");
 eq(doc.querySelectorAll(".slot.filled").length, 1, "Delete took every typed letter");
 
-await guess(answer);
+await clearDraft();
+await type(answer);
+mark = buzzes.length;
+$("btn-try").click();
+await tick(160);
+eq(buzzes.slice(mark), ["heavy", "success"], "a found word is felt as heavy, then success, and nothing else");
 check($("tray").classList.contains("ended"), "a found word ends the game");
 check(!$("result").hidden, "the result shows");
 eq($("r-head").textContent, "Found in 2 guesses!", "the result's line");
@@ -251,7 +279,13 @@ const answer4 = practiceWord(words.en, 4, 0, today).word;
 const wrong4 = ["able", "baby", "cake", "dark", "earn", "fame", "gate"].filter(
   (w) => w !== answer4 && words.en.isValid(w),
 );
-for (const w of wrong4.slice(0, 4)) await guess(w);
+for (const w of wrong4.slice(0, 3)) await guess(w);
+await clearDraft();
+await type(wrong4[3]);
+mark = buzzes.length;
+$("btn-try").click();
+await tick(20);
+eq(buzzes.slice(mark), ["heavy"], "a word not found is felt once, as heavy");
 eq($("r-head").textContent, "Not this time", "a word not found");
 eq($("r-word").textContent, `The word was ${answer4.toUpperCase()}.`, "the word is shown");
 check($("lock").classList.contains("failed"), "the lock shows the word in outline");
@@ -300,11 +334,70 @@ await tick();
 eq(doc.querySelectorAll(".slot.filled").length, 0, "Escape clears the guess");
 check(doc.querySelectorAll(".slot.ghost").length >= 1, "a letter found in its place shows faintly in an empty place");
 
-// ---- Slovak
+// ---- the word-language picker
+const picker = $("dlg-lang");
+const rows = () => picker.querySelectorAll(".lang-row");
+const row = (code) => picker.querySelector(`.lang-row[data-lang="${code}"]`);
+eq($("btn-lang").getAttribute("aria-label"), "Word language: English. Tap to change.", "the pill says what it is");
+eq($("btn-lang").getAttribute("aria-haspopup"), "dialog", "the pill says it opens a choice");
 $("btn-lang").click();
+await tick();
+check(picker.open, "the language pill opens the picker");
+eq($("lang-code").textContent, "EN", "opening the picker changes nothing");
+eq($("lang-title").textContent, "Word language", "the picker's title");
+eq(
+  rows().map((r) => r.textContent.trim()),
+  ["Slovenčina", "English"],
+  "a row for each language, in its own name",
+);
+eq(
+  rows().map((r) => r.querySelector("span").lang),
+  ["sk", "en"],
+  "each name is marked with its language",
+);
+eq(
+  rows().map((r) => [r.classList.contains("on"), r.getAttribute("aria-current")]),
+  [
+    [false, null],
+    [true, "true"],
+  ],
+  "the language in play is ticked and current",
+);
+check(doc.activeElement === row("en"), "the ticked row has the focus");
+eq(picker.querySelector(".pop-note").textContent, "Your game in each language is kept.", "the line about the game");
+picker.dispatchEvent(new StandInEvent("click", { target: picker }));
+check(!picker.open, "a tap outside the card closes the picker");
+eq($("lang-code").textContent, "EN", "and keeps the language");
+check(doc.activeElement === $("btn-lang"), "the focus goes back to the pill");
+$("btn-lang").click();
+row("en").click();
+await tick();
+check(!picker.open && $("lang-code").textContent === "EN", "the ticked row closes the picker and keeps the language");
+
+// ---- Slovak, and back: each language keeps its game
+const enMode = mode();
+const enCards = cards().length;
+$("btn-lang").click();
+row("sk").click();
+check(!picker.open, "a row closes the picker");
 await until(() => $("lang-code").textContent === "SK", "Slovak words");
+check(mode().startsWith("Daily word · "), `a language never played starts with its daily word: ${mode()}`);
+eq(cards().length, 0, "the Slovak word has no guesses yet");
+$("btn-lang").click();
+eq(
+  rows().map((r) => r.classList.contains("on")),
+  [true, false],
+  "the picker ticks Slovak now",
+);
+row("en").click();
+await until(() => $("lang-code").textContent === "EN", "English words again");
+eq(mode(), enMode, "English brings back the word it had on screen");
+eq(cards().length, enCards, "with its guesses");
+$("btn-lang").click();
+row("sk").click();
+await until(() => $("lang-code").textContent === "SK", "Slovak words again");
 eq($("notice").textContent, "Slovak words now, with the Slovak keyboard.", "switching the words says so");
-eq(doc.querySelector("#btn-lang .lang-cap").textContent, "Words", "the language pill names what it switches");
+eq($("btn-lang").getAttribute("aria-label"), "Word language: Slovak. Tap to change.", "the pill names Slovak");
 eq(
   doc
     .querySelectorAll(".row")[0]
@@ -373,6 +466,21 @@ $("settings-done").click();
 eq(doc.querySelector("#btn-try span").textContent, "Skúsiť", "the game's texts in Slovak");
 check(mode().startsWith("Slovo dňa · ") || mode().startsWith("Voľná hra"), `the mode in Slovak: ${mode()}`);
 eq($("btn-length").textContent, "5 písmen", "Slovak plural of letters");
+$("btn-lang").click();
+eq($("lang-title").textContent, "Jazyk slov", "the picker's title in Slovak");
+eq(
+  picker.querySelector(".pop-note").textContent,
+  "Rozohraná hra v každom jazyku zostane uložená.",
+  "the line about the game in Slovak",
+);
+eq(
+  rows().map((r) => r.textContent.trim()),
+  ["Slovenčina", "English"],
+  "the languages' names stay as they are",
+);
+eq($("btn-lang").getAttribute("aria-label"), "Jazyk slov: slovenčina. Klepnutím ho zmeníte.", "the pill in Slovak");
+picker.dispatchEvent(new StandInEvent("click", { target: picker }));
+check(!picker.open, "the picker closes in Slovak too");
 
 // saved values
 const saved = JSON.parse(storage.get("hidden-word/settings"));
