@@ -4,7 +4,7 @@
     "id": "library/word-wheel",
     "kind": "web",
     "name": "Word Wheel",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "icon": "menu_book",
     "category": "game_word",
     "ageRating": "everyone",
@@ -23,7 +23,7 @@
     "entry": "index.html",
     "orientation": "any",
     "files": {
-      "css/app.css": { "sha256": "1c363b5dcfe1a0e3f197f34214713bdb485cd2152d202da3f4bfb6bbf3456f8a", "size": 28003 },
+      "css/app.css": { "sha256": "7d2a4f40051543537714a9bde1a2d48c7c3c5e1eab68a190e654856d1a00d6e8", "size": 36830 },
       "data/words-en.txt": {
         "sha256": "7f9f60887a9cf010ead752bd3ba1b16377ff646dc1f8f0c44b3c51d8de5009e0",
         "size": 385540
@@ -32,7 +32,7 @@
         "sha256": "934bbde7a44c69d193bd072ec03178ad46656af383bef8304bbb188d6812065d",
         "size": 43203
       },
-      "index.html": { "sha256": "c3b3cf2502b8300ff6d3d807de1f2ec6444995a0b0f66494c087cacccb943060", "size": 19279 },
+      "index.html": { "sha256": "0e034760a4e194966c5b69b7cb7e36a9b4f51e4eb9e56df1cc235f5a4dcf6656", "size": 21154 },
       "js/core/dates.mjs": {
         "sha256": "738fac189c229c43f61b84e331d289bdc3eb0bcce43ed34b16edeb7454061358",
         "size": 2516
@@ -54,7 +54,7 @@
         "sha256": "f221e9f90ffdd35172306acdbc6fdcf0a1026aa622f3abb711fab488da0c0892",
         "size": 1673
       },
-      "js/main.mjs": { "sha256": "277a20dc99c494ddf62132d1e76954f2d558b6acc16c219bc4b50c6955027561", "size": 34563 },
+      "js/main.mjs": { "sha256": "24c679c68c3e7fe18b84e1689307331d00c40aa0590bba6d69a95b17ad43ddb5", "size": 42646 },
       "js/ui/calendar-view.mjs": {
         "sha256": "bacdc7ebc30f1e8574bb26aa47e873f26fe638e969ce8c115b2dd37589bc73d3",
         "size": 2535
@@ -65,8 +65,8 @@
         "size": 5303
       },
       "js/ui/wheel-view.mjs": {
-        "sha256": "2131c300f3820ee2d5cafedac9f6f9eb8f8d1ad81f9fe7360716e2ece6e4c6c6",
-        "size": 7309
+        "sha256": "30d1f176bde928231399a58f12ab74447767ee9e9d84692ef8361d0bf393a367",
+        "size": 10925
       },
       "js/wheel/generator.mjs": {
         "sha256": "fbf6705f091efb6381848a16affa718a28bb8a44b69327b13f4aeae119bb8372",
@@ -85,8 +85,12 @@
         "size": 3080
       },
       "js/wheel/strings.mjs": {
-        "sha256": "eb9f07f13f53bd58b73a975e1e38d2199abadfff583885ec4ab7a0917c50e757",
-        "size": 17129
+        "sha256": "b15cf4104154f6d36916fab9d6cf6992f1c2103383c06b797fb22ee0e79c0686",
+        "size": 17718
+      },
+      "js/wheel/taps.mjs": {
+        "sha256": "af205e6221ffc2345bc28f8a8263ccb65d4c22090249bdcbc26ba7ee18fe79d5",
+        "size": 4156
       },
       "workers/puzzles.mjs": {
         "sha256": "2cbd24f37f4309c1cbe1d061a70ab8c9f40bdc9ff873e0e2b8c23b6987aad787",

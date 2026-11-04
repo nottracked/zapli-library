@@ -45,6 +45,12 @@
                 <path d="m12 9 5 6M17 9l-5 6" />
             </symbol>
             <symbol id="i-enter" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></symbol>
+            <symbol id="i-globe" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8.5" />
+                <path d="M3.5 12h17" />
+                <path d="M12 3.5c2.3 2.4 3.4 5.2 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.2-3.4-8.5S9.7 5.9 12 3.5Z" />
+            </symbol>
+            <symbol id="i-down" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></symbol>
             <symbol id="i-prev" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7" /></symbol>
             <symbol id="i-next" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></symbol>
         </svg>
@@ -53,7 +59,11 @@
         <div class="app">
             <header class="band top">
                 <h1 class="brand" data-t="appName">Word Wheel</h1>
-                <button type="button" class="lang-btn" id="btn-lang"><span id="lang-code">EN</span></button>
+                <button type="button" class="lang-btn" id="btn-lang" aria-haspopup="dialog" aria-expanded="false">
+                    <svg class="ico globe" aria-hidden="true"><use href="#i-globe" /></svg
+                    ><span id="lang-code" aria-hidden="true">EN</span
+                    ><svg class="ico chev" aria-hidden="true"><use href="#i-down" /></svg>
+                </button>
                 <div class="tools">
                     <button type="button" class="icon-btn" id="btn-daily" data-t-label="daily">
                         <svg class="ico" aria-hidden="true"><use href="#i-daily" /></svg>
@@ -89,33 +99,30 @@
                     <ul class="grid-words sr-only"></ul>
                 </section>
 
-                <div class="feedback">
-                    <p id="notice" class="notice" role="status" aria-live="polite"></p>
-                    <div id="ask" class="ask" hidden>
-                        <span data-t="revealAsk">Show this letter with a hint?</span>
-                        <span class="ask-buttons">
-                            <button type="button" class="btn small" id="ask-no" data-t="cancel">Cancel</button>
-                            <button type="button" class="btn small primary" id="ask-yes" data-t="reveal">Show</button>
-                        </span>
+                <div class="pad">
+                    <div class="word-row" id="word-row">
+                        <button type="button" class="word-btn" id="btn-clear" data-t-label="clear" disabled>
+                            <svg class="ico" aria-hidden="true"><use href="#i-clear" /></svg>
+                        </button>
+                        <div class="word-field" id="word-field">
+                            <output id="current" class="current"></output>
+                            <p id="notice" class="notice" role="status" aria-live="polite"></p>
+                        </div>
+                        <button type="button" class="word-btn go" id="btn-enter" data-t-label="enter" disabled>
+                            <svg class="ico" aria-hidden="true"><use href="#i-enter" /></svg>
+                        </button>
                     </div>
-                </div>
 
-                <div class="word-row">
-                    <button type="button" class="icon-btn quiet" id="btn-clear" data-t-label="clear">
-                        <svg class="ico" aria-hidden="true"><use href="#i-clear" /></svg>
-                    </button>
-                    <output id="current" class="current"></output>
-                    <button type="button" class="icon-btn quiet" id="btn-enter" data-t-label="enter">
-                        <svg class="ico" aria-hidden="true"><use href="#i-enter" /></svg>
-                    </button>
-                </div>
-
-                <div class="wheel-wrap" id="wheel-wrap">
-                    <div class="wheel" id="wheel" role="group">
-                        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-                            <polyline class="glow" points="" />
-                            <polyline class="core" points="" />
-                        </svg>
+                    <div class="wheel-wrap" id="wheel-wrap">
+                        <div class="wheel" id="wheel" role="group">
+                            <button type="button" class="hub" id="btn-shuffle" data-t-label="shuffle">
+                                <svg class="ico" aria-hidden="true"><use href="#i-shuffle" /></svg>
+                            </button>
+                            <svg class="lines" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                                <polyline class="glow" points="" />
+                                <polyline class="core" points="" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
 
@@ -126,10 +133,6 @@
             </main>
 
             <nav class="band bottom toolbar" data-t-label="toolbar">
-                <button type="button" class="tool" id="btn-shuffle">
-                    <svg class="ico" aria-hidden="true"><use href="#i-shuffle" /></svg
-                    ><span data-t="shuffle">Shuffle</span>
-                </button>
                 <button type="button" class="tool" id="btn-hint">
                     <span class="ico-wrap"
                         ><svg class="ico" aria-hidden="true"><use href="#i-hint" /></svg
@@ -149,6 +152,34 @@
                 </button>
             </nav>
         </div>
+
+        <dialog id="dlg-lang" class="pop" aria-labelledby="lang-title">
+            <div class="pop-in">
+                <h2 class="pop-title" id="lang-title" data-t="langTitle">Word language</h2>
+                <div class="lang-rows" id="lang-rows">
+                    <button type="button" class="lang-row" data-lang="sk">
+                        <span lang="sk">Slovenčina</span>
+                        <svg class="ico tick" aria-hidden="true"><use href="#i-enter" /></svg>
+                    </button>
+                    <button type="button" class="lang-row" data-lang="en">
+                        <span lang="en">English</span>
+                        <svg class="ico tick" aria-hidden="true"><use href="#i-enter" /></svg>
+                    </button>
+                </div>
+                <p class="pop-note" data-t="langKept">Your wheels in each language are kept.</p>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-ask" class="pop" aria-labelledby="ask-text">
+            <div class="pop-in">
+                <p class="pop-title" id="ask-text" data-t="revealAsk">Show this letter with a hint?</p>
+                <p class="pop-note" id="ask-left"></p>
+                <div class="pop-actions">
+                    <button type="button" class="btn" id="ask-no" data-t="cancel">Cancel</button>
+                    <button type="button" class="btn primary" id="ask-yes" data-t="reveal">Show</button>
+                </div>
+            </div>
+        </dialog>
 
         <dialog id="dlg-daily" aria-labelledby="daily-title">
             <div class="dlg-head"><h2 id="daily-title" data-t="daily">Daily wheel</h2></div>

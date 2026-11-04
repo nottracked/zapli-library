@@ -26,6 +26,7 @@ import {
   isComplete,
   jarLevel,
   EXTRAS_PER_HINT,
+  MIN_WORD,
 } from "./wheel/puzzle.mjs";
 import { SIZES } from "./wheel/generator.mjs";
 import { createWheel } from "./ui/wheel-view.mjs";
@@ -41,6 +42,10 @@ const OPEN_DAYS_KEPT = 10;
 // How long "Wheel complete!" shows before the next wheel comes.
 const NEXT_AFTER_MS = 2600;
 const LETTER_SCALE = { normal: 1, large: 1.25, largest: 1.5 };
+// Turned sideways on a phone: the crossword on the left, the word and the wheel on the right (css/app.css).
+const SIDEWAYS = "(orientation: landscape) and (min-width: 36rem) and (max-height: 34rem)";
+// Holding the delete button this long clears the whole word.
+const HOLD_MS = 450;
 
 const i18n = createI18n(STRINGS);
 const t = (key, args) => i18n.t(key, args);
@@ -55,7 +60,6 @@ const source = createSource();
 let settings = null;
 let game = null; // { lang, kind: "endless" | "daily", day, puzzle, state }
 let pendingCell = null;
-let noticeTimer = 0;
 let textScale = 1;
 let loadToken = 0;
 let retry = () => {};
@@ -174,30 +178,57 @@ function lettersChoice() {
   return "normal";
 }
 
-// The wheel takes what the crossword leaves: the crossword first gets about 30 px a row, the wheel the rest, between
-// 180 px and half the play area (more with larger letters), never wider than the screen.
+// The crossword gets the room it can use, the wheel a comfortable size. The crossword's need is the height of its
+// squares at the largest size the width allows; what is left beyond that goes to the wheel, up to a little more than
+// its comfortable size (letters of about 60 to 75 px, more with larger letters). When room is short, the crossword's
+// squares shrink first (down to 28 px), then the wheel (down to 200 px, where seven letters are still 50 px wide).
+const CELL_MAX = 64;
+const CELL_MIN = 28;
+const CELL_GAP = 3;
+const WHEEL_MIN = 200;
+// On a short screen the wheel may be smaller still, so the crossword keeps squares that can be read.
+const WHEEL_MIN_SHORT = 180;
+
 function sizeWheel() {
   const play = $("play");
-  const w = play.clientWidth - 24;
-  const h = play.clientHeight;
-  const sideways =
-    window.matchMedia &&
-    window.matchMedia("(orientation: landscape) and (min-width: 36rem) and (max-height: 34rem)").matches;
-  const ls = LETTER_SCALE[lettersChoice()];
+  const style = window.getComputedStyle(play);
+  const w = play.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+  const h = play.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+  const row = $("word-row").offsetHeight;
+  const ls = Math.min(LETTER_SCALE[lettersChoice()], 1.15);
   let size;
-  if (sideways) size = Math.min(h - 120, w * 0.45);
-  else {
-    const fixed = ["status", "feedback", "word-row"].reduce(
-      (sum, c) => sum + play.querySelector(`.${c}`).offsetHeight,
-      24,
-    );
+  if (window.matchMedia && window.matchMedia(SIDEWAYS).matches) {
+    size = Math.min(h - row - 12, w * 0.46, 360);
+  } else {
+    const status = play.querySelector(".status").offsetHeight;
+    const both = h - status - row - 14;
+    const want = Math.min(w, Math.min(300, Math.max(236, 0.38 * both)) * ls);
     const rows = game ? game.puzzle.rows : 7;
-    const room = h - fixed - (rows * 30 + (rows - 1) * 3);
-    size = Math.min(w, Math.max(room, h * 0.3), h * 0.5 * Math.min(ls, 1.2));
+    const cols = game ? game.puzzle.cols : 7;
+    const across = Math.min(CELL_MAX, (w - (cols - 1) * CELL_GAP) / cols);
+    const gaps = (rows - 1) * CELL_GAP + 8;
+    const need = rows * across + gaps;
+    const least = rows * Math.min(across, CELL_MIN) + gaps;
+    if (both - need >= want) size = Math.min(both - need, w, want * 1.12);
+    else if (both - least >= want) size = want;
+    else size = both - least;
   }
-  size = Math.max(180, Math.min(420, Math.floor(size)));
-  $("wheel").style.setProperty("--size", `${size}px`);
+  size = Math.max(h < 560 ? WHEEL_MIN_SHORT : WHEEL_MIN, Math.min(420, Math.floor(size)));
+  // On the play area, so the sideways layout can size the wheel's column from it too (css/app.css).
+  play.style.setProperty("--size", `${size}px`);
   grid.fit();
+  fitHeader();
+}
+
+// The top bar holds the word-language pill and five buttons. Where they do not fit (a narrow screen, a large text
+// size), the pill drops its chevron, then its globe; the code and its label for screen readers stay.
+function fitHeader() {
+  const top = document.querySelector(".top");
+  const pill = $("btn-lang");
+  const over = () => pill.scrollWidth > pill.clientWidth + 1 || top.scrollWidth > top.clientWidth + 1;
+  top.classList.remove("tight", "tighter");
+  if (over()) top.classList.add("tight");
+  if (over()) top.classList.add("tighter");
 }
 
 // ---- the views
@@ -206,7 +237,24 @@ const wheel = createWheel($("wheel"), {
   letterLabel: (letter) => t("letterLabel", { letter }),
   onChange: showCurrent,
   onSubmit: submitWord,
+  onLetter: () => buzz("light"),
+  answers: openAnswers,
 });
+
+// What the wheel needs to take a tapped word by itself: the answers not found yet (crossword and jar words).
+function openAnswers() {
+  if (!game || !Array.isArray(game.puzzle.extra)) return { leadsOn: () => false, isNew: () => false };
+  const { puzzle, state } = game;
+  const done = new Set([...state.found, ...state.extras]);
+  const open = [...puzzle.words.map((w) => w.w), ...puzzle.extra].filter((w) => !done.has(w));
+  return {
+    isNew: (tiles) => tiles.length >= MIN_WORD && open.includes(tiles.join("")),
+    leadsOn: (tiles) => {
+      const start = tiles.join("");
+      return open.some((w) => w.startsWith(start));
+    },
+  };
+}
 
 const grid = createGrid($("grid"), { onCellTap: askCell, t });
 
@@ -232,12 +280,16 @@ function longDate(day) {
   }
 }
 
-// The word being made, one chip per letter (the newest pops in). With no word, the first wheel shows how to make one;
-// after the player's first word the line stays quiet for good.
-function showCurrent(word) {
+// The word row: the delete button, the word being made (one chip per letter, the newest pops in) and the tick. Where
+// no word is being made, the field shows the last message until the next letter; on a fresh field, until the player
+// has found a word, a line says how to make one. The buttons keep their place and dim while there is no word.
+let wordLit = false;
+let lastLit = false;
+
+function showCurrent(word, how) {
   const out = $("current");
   const text = word.join("").toUpperCase();
-  out.classList.toggle("empty", !text);
+  wordLit = Boolean(how && how.lit);
   out.textContent = "";
   if (text) {
     word.forEach((tile, i) => {
@@ -246,22 +298,51 @@ function showCurrent(word) {
       chip.textContent = tile.toUpperCase();
       out.appendChild(chip);
     });
+    // A new word makes the last message old news.
+    if (!wordLit && (lastWordLength === 0 || lastLit)) setNotice("", "");
   } else if (!(settings && settings.taught)) out.textContent = t("currentEmpty");
   lastWordLength = word.length;
+  lastLit = wordLit;
   out.setAttribute("aria-label", text ? t("currentWord", { word: text }) : t("currentEmpty"));
-  $("btn-clear").hidden = !text;
-  $("btn-enter").hidden = !text;
-  hideAsk();
+  $("btn-clear").disabled = !text;
+  $("btn-enter").disabled = !text;
+  showField();
 }
 
-function notice(text, tone, ms) {
+// The field shows the word while one is being made, else the message, else the first-start line (or nothing).
+function showField() {
+  const field = $("word-field");
+  const hasWord = $("current").querySelector(".cl") !== null && !wordLit;
+  const hasNotice = $("notice").textContent !== "";
+  field.dataset.show = hasWord ? "word" : hasNotice ? "notice" : "empty";
+  $("current").classList.toggle("empty", !$("current").querySelector(".cl"));
+  $("word-row").classList.toggle("lit", wordLit);
+  fitField();
+}
+
+function setNotice(text, tone) {
   const el = $("notice");
   el.textContent = text;
   el.className = `notice ${tone || ""}`;
-  window.clearTimeout(noticeTimer);
-  noticeTimer = window.setTimeout(() => {
-    el.textContent = "";
-  }, ms || 4500);
+}
+
+function notice(text, tone) {
+  setNotice(text, tone);
+  showField();
+}
+
+// A long message (or the first-start line) at a large text size gets a little smaller rather than spill out of the
+// field. The size is set in em: a size in px would be enlarged by the phone's text size once more.
+function fitField() {
+  const field = $("word-field");
+  const show = field.dataset.show;
+  for (const el of [$("notice"), $("current")]) el.style.fontSize = "";
+  const el = show === "notice" ? $("notice") : show === "empty" ? $("current") : null;
+  if (!el || !el.textContent) return;
+  const room = field.clientHeight;
+  for (let scale = 0.9; scale >= 0.6 && el.getBoundingClientRect().height > room + 1; scale -= 0.06) {
+    el.style.fontSize = `${scale.toFixed(2)}em`;
+  }
 }
 
 function refresh() {
@@ -286,9 +367,18 @@ function refresh() {
   $("btn-hint").disabled = state.done;
   $("btn-hint").setAttribute("aria-label", `${t("hint")}. ${tn("hintsLeft", left)}`);
   showJar();
-  $("lang-code").textContent = game.lang.toUpperCase();
-  $("btn-lang").setAttribute("aria-label", t(game.lang === "sk" ? "langToggleSk" : "langToggleEn"));
+  showLang();
+}
+
+function showLang() {
+  const lang = game ? game.lang : wordsLang();
+  $("lang-code").textContent = lang.toUpperCase();
+  $("btn-lang").setAttribute("aria-label", t(lang === "sk" ? "langPillSk" : "langPillEn"));
   $("btn-lang").title = $("btn-lang").getAttribute("aria-label");
+  document.querySelectorAll(".lang-row").forEach((row) => {
+    if (row.dataset.lang === lang) row.setAttribute("aria-current", "true");
+    else row.removeAttribute("aria-current");
+  });
 }
 
 // The jar: how many of the wheel's hidden words are found, and how full it is toward the next free hint.
@@ -358,6 +448,7 @@ function show(g) {
   window.clearTimeout(nextTimer);
   game = g;
   setLoading(false);
+  setNotice("", "");
   wheel.set(g.puzzle.letters);
   grid.set(g.puzzle);
   pendingCell = null;
@@ -464,7 +555,7 @@ async function nextWheel() {
   pruneOpen(lang, p);
   saveProgress(lang, p, true);
   await openEndless(lang);
-  if (fromDaily) notice(t("nextAfterDaily"), "good", 5000);
+  if (fromDaily) notice(t("nextAfterDaily"), "good");
 }
 
 function wordsLang() {
@@ -500,24 +591,30 @@ function bumpStats(lang, change) {
   store.set(`stats-${lang}`, s);
 }
 
-function submitWord(tiles) {
+// A word to try: from a swipe or the tick (`how.auto` false), or taken by taps (`how.auto`), which only ever hands
+// over answers not found yet, so it never says "already found" or "not in the list" while the player taps.
+function submitWord(tiles, how) {
   if (!game) return;
+  const auto = Boolean(how && how.auto);
   // Where the word's letters show now, so they can fly from there.
   const from = Array.from($("current").querySelectorAll(".cl")).map((c) => c.getBoundingClientRect());
   const letters = tiles.map((x) => x.toUpperCase());
   const before = game.state;
   const shownBefore = visibleCells(game.puzzle, before);
   const r = tryWord(game.puzzle, before, tiles);
+  if (auto && r.result !== "found" && r.result !== "extra") return;
   const shown = r.word.toUpperCase();
   game.state = r.state;
-  if (!settings.taught) {
+  // The first-start line stays until the player has found a word.
+  if (!settings.taught && (r.result === "found" || r.result === "extra")) {
     settings.taught = true;
     store.set("settings", settings);
   }
+  if (auto) fx.flash($("btn-enter"), "took", 700);
   if (r.result === "found") {
     const word = game.puzzle.words.find((w) => w.w === r.word);
     notice(t("found", { word: shown }), "good");
-    buzz("light");
+    buzz("success");
     afterChange(before, () => flyToGrid(word, letters, from, shownBefore));
     return;
   }
@@ -530,7 +627,7 @@ function submitWord(tiles) {
     const hidden = r.kind === "hidden";
     const text = t(hidden ? "foundHidden" : "foundBonus", { word: shown });
     notice(r.earnedHint ? `${text} ${t("earnedHint")}` : text, hidden ? "good hidden" : "good");
-    buzz(hidden ? "medium" : "light");
+    buzz("heavy");
     afterChange(before, () => flyToJar(letters, from, !hidden, r.earnedHint));
     return;
   }
@@ -549,9 +646,8 @@ function submitWord(tiles) {
       game.lang === "sk" ? `${t("unknown", { word: shown })} ${baseFormsHint()}`.trim() : t("unknown", { word: shown }),
       "bad",
     );
-    const out = $("current");
-    out.classList.remove("shake");
-    window.requestAnimationFrame(() => out.classList.add("shake"));
+    // The field shakes once, like a head saying no.
+    fx.flash($("word-field"), "shake", 320);
   }
   afterChange(before);
 }
@@ -657,13 +753,13 @@ function afterChange(before, effect) {
         if (game !== g) return;
         grid.setSolved(true, true);
         if (completeNow) {
-          buzzPattern(["heavy", "success", "success"], 150);
+          buzzPattern(["heavy", "success", "heavy"], 130);
           finishWheel(g);
           return;
         }
-        buzzPattern(["success", "medium", "success"], 140);
+        buzzPattern(["heavy", "success"], 120);
         const left = hiddenOf(g.puzzle).length - hiddenFound(g.puzzle, g.state);
-        notice(t("solvedNote", { left: tn("hiddenLeft", left) }), "good big", 7000);
+        notice(t("solvedNote", { left: tn("hiddenLeft", left) }), "good big");
       },
       fx.still() ? 0 : flight + 120,
     );
@@ -672,7 +768,7 @@ function afterChange(before, effect) {
 
 // Every word found: say so, light the jar, and bring the next wheel after a moment (not while a panel is open).
 function finishWheel(g) {
-  notice(t(g.kind === "daily" ? "completeDaily" : "completeNote"), "good big", NEXT_AFTER_MS + 800);
+  notice(t(g.kind === "daily" ? "completeDaily" : "completeNote"), "good big");
   fx.flash($("jar"), "glow", 1800);
   window.clearTimeout(nextTimer);
   const go = () => {
@@ -707,6 +803,7 @@ function useHint(key) {
   });
 }
 
+// A tap on a hidden square asks, in a small card beside it, whether to show its letter with a hint.
 function askCell(key, el) {
   if (!game || game.state.done) return;
   if (hintsLeft(game.state) <= 0) {
@@ -716,14 +813,14 @@ function askCell(key, el) {
   hideAsk();
   pendingCell = key;
   el.classList.add("pick");
-  $("notice").textContent = "";
-  $("ask").hidden = false;
+  $("ask-left").textContent = tn("hintsLeft", hintsLeft(game.state));
+  openPop($("dlg-ask"), el, "cell");
   $("ask-yes").focus({ preventScroll: true });
 }
 
 function hideAsk() {
   pendingCell = null;
-  $("ask").hidden = true;
+  closeDialog($("dlg-ask"));
   document.querySelectorAll(".cell.pick").forEach((c) => c.classList.remove("pick"));
 }
 
@@ -747,8 +844,42 @@ function closeDialog(dlg) {
   }
 }
 
+// Small cards (the word-language picker, the hint question) open beside what opened them: under it when there is
+// room, else above it, and always inside the screen (on a short screen they move up).
+const popAnchors = new Map();
+
+function openPop(dlg, anchor, where) {
+  openDialog(dlg);
+  returnFocus.set(dlg, anchor);
+  popAnchors.set(dlg, { anchor, where });
+  placePop(dlg);
+}
+
+function placePop(dlg) {
+  const at = popAnchors.get(dlg);
+  if (!at || !dlg.open) return;
+  const a = at.anchor.getBoundingClientRect();
+  const margin = 8;
+  const vw = document.documentElement.clientWidth || window.innerWidth;
+  const vh = window.innerHeight;
+  // The layout size: the opening animation scales the card for a moment.
+  const width = dlg.offsetWidth;
+  const height = dlg.offsetHeight;
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const left = clamp(at.where === "cell" ? a.left + a.width / 2 - width / 2 : a.left, margin, vw - width - margin);
+  let top = a.bottom + 6;
+  if (top + height > vh - margin && a.top - 6 - height >= margin) top = a.top - 6 - height;
+  top = clamp(top, margin, Math.max(margin, vh - height - margin));
+  dlg.style.left = `${Math.round(left)}px`;
+  dlg.style.top = `${Math.round(top)}px`;
+  dlg.style.transformOrigin = top < a.top ? "50% 100%" : at.where === "cell" ? "50% 0" : "0 0";
+}
+
+window.addEventListener("resize", () => popAnchors.forEach((_, dlg) => placePop(dlg)));
+
 document.querySelectorAll("dialog").forEach((dlg) => {
   dlg.addEventListener("close", () => {
+    popAnchors.delete(dlg);
     const el = returnFocus.get(dlg);
     returnFocus.delete(dlg);
     if (el && el.isConnected && typeof el.focus === "function" && !document.querySelector("dialog[open]")) {
@@ -910,7 +1041,7 @@ function onSetting(e) {
   if (input.id === "opt-contrast") settings.contrast = input.checked;
   else if (input.id === "opt-vibration") {
     settings.vibration = input.checked;
-    buzz("light");
+    buzz("success");
   } else if (input.name === "size") settings.size = input.value === "grow" ? "grow" : Number(input.value);
   else if (input.name === "letters") settings.letters = input.value;
   else if (input.name === "theme") settings.theme = input.value;
@@ -933,7 +1064,25 @@ function onSetting(e) {
 
 const on = (id, fn) => $(id).addEventListener("click", fn);
 
-on("btn-lang", () => switchLang(game && game.lang === "sk" ? "en" : "sk"));
+// The word-language pill opens the picker; a row switches and closes it, the ticked row only closes it.
+on("btn-lang", () => {
+  showLang();
+  openPop($("dlg-lang"), $("btn-lang"), "pill");
+  $("btn-lang").setAttribute("aria-expanded", "true");
+  const current = document.querySelector('.lang-row[aria-current="true"]');
+  if (current) current.focus({ preventScroll: true });
+});
+$("dlg-lang").addEventListener("close", () => $("btn-lang").setAttribute("aria-expanded", "false"));
+document.querySelectorAll(".lang-row").forEach((row) =>
+  row.addEventListener("click", () => {
+    closeDialog($("dlg-lang"));
+    switchLang(row.dataset.lang);
+  }),
+);
+$("dlg-ask").addEventListener("close", () => {
+  pendingCell = null;
+  document.querySelectorAll(".cell.pick").forEach((c) => c.classList.remove("pick"));
+});
 on("btn-daily", openCalendar);
 on("btn-book", () => {
   renderBook();
@@ -957,10 +1106,42 @@ on("btn-switch", () => {
   if (game.kind === "daily" || game.state.done) nextWheel();
   else openDaily(today());
 });
-on("btn-shuffle", () => wheel.shuffle());
+on("btn-shuffle", () => {
+  wheel.shuffle();
+  fx.flash($("btn-shuffle"), "turn", 520);
+});
 on("btn-hint", () => useHint(null));
-on("btn-clear", () => wheel.clear());
 on("btn-enter", () => wheel.submit());
+
+// The delete button: a tap takes the last letter back; holding it clears the whole word.
+let holdTimer = 0;
+let held = false;
+const clearBtn = $("btn-clear");
+clearBtn.addEventListener("pointerdown", (e) => {
+  if (e.button !== undefined && e.button > 0) return;
+  held = false;
+  window.clearTimeout(holdTimer);
+  holdTimer = window.setTimeout(() => {
+    held = true;
+    wheel.clear();
+    buzz("medium");
+  }, HOLD_MS);
+});
+for (const type of ["pointerup", "pointercancel", "pointerleave"]) {
+  clearBtn.addEventListener(type, () => {
+    window.clearTimeout(holdTimer);
+    // The click after a hold must not take a letter of nothing; a later click (a key) counts again.
+    if (held) window.setTimeout(() => (held = false), 0);
+  });
+}
+clearBtn.addEventListener("contextmenu", (e) => e.preventDefault());
+on("btn-clear", () => {
+  if (held) {
+    held = false;
+    return;
+  }
+  wheel.pop();
+});
 on("ask-yes", () => {
   const key = pendingCell;
   hideAsk();

@@ -98,6 +98,7 @@ node dev/build-lists.mjs sk --check             # fails when the shipped file is
 node dev/check-game.mjs                         # letters, dates, a year of daily wheels, endless wheels, hints
 node dev/check-i18n.mjs                         # English and Slovak texts complete and alike
 node dev/check-page.mjs                         # ids the code looks up, and the wheel's swipe and taps
+node dev/check-taps.mjs                         # when a tapped word counts by itself, and what the next tap does
 node dev/review-sheet.mjs <file.md>             # the review sheet for a native speaker
 ```
 
@@ -111,7 +112,8 @@ The game is split so that the next word games can reuse its parts:
   (`wordlist.mjs`), repeatable randomness (`rng.mjs`), days and streaks (`dates.mjs`), saved values in Zapli's store
   with a local copy (`store.mjs`) and texts in two languages (`i18n.mjs`).
 - `package/js/wheel/`: this game: the generator (`generator.mjs`) and the crossword layout (`layout.mjs`), the state
-  of a puzzle (`puzzle.mjs`), the puzzle source (`source.mjs`) and the texts (`strings.mjs`).
+  of a puzzle (`puzzle.mjs`), the word made by tapping letters and when it counts by itself (`taps.mjs`), the puzzle
+  source (`source.mjs`) and the texts (`strings.mjs`).
 - `package/js/ui/`: views: the wheel, the crossword and a month calendar for daily puzzles.
 - `package/workers/puzzles.mjs`: reads a word list once and makes puzzles off the page's thread.
 

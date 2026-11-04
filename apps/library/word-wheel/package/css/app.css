@@ -1,6 +1,7 @@
-/* Word Wheel: a warm paper page between two dark bands. The crossword fills the space above, the letter wheel sits
-   in thumb reach above the toolbar. Turned sideways, the crossword and the wheel stand side by side. Letter sizes
-   follow the Letter size setting (--ls), which starts from the phone's text size. */
+/* Word Wheel: a warm paper page between two dark bands. The crossword takes the room above; the word row (delete,
+   the word, the tick) and the letter wheel sit together in thumb reach above the toolbar. Turned sideways, the
+   crossword stands beside the word and the wheel, and the toolbar becomes a rail at the side. Letter sizes follow the
+   Letter size setting (--ls), which starts from the phone's text size. */
 
 :root {
     color-scheme: light;
@@ -235,10 +236,14 @@ input:focus-visible + span,
     text-transform: uppercase;
     white-space: nowrap;
 }
+/* The word language: a globe, the language's code and a chevron, so it reads as a choice that opens. */
 .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
     min-width: 48px;
     height: 40px;
-    padding: 0 0.6rem;
+    padding: 0 0.6rem 0 0.55rem;
     border: 2px solid var(--on-band-dim);
     border-radius: 999px;
     background: transparent;
@@ -246,10 +251,41 @@ input:focus-visible + span,
     font-size: calc(1rem * var(--cap));
     font-weight: 800;
     letter-spacing: 0.08em;
+    line-height: 1;
     cursor: pointer;
 }
-.lang-btn:hover {
+.lang-btn .globe {
+    flex: none;
+    width: calc(1.3rem * var(--cap) * var(--tz));
+    height: calc(1.3rem * var(--cap) * var(--tz));
+    color: var(--on-band-dim);
+    stroke-width: 1.8;
+}
+.lang-btn .chev {
+    flex: none;
+    width: calc(1.05rem * var(--cap) * var(--tz));
+    height: calc(1.05rem * var(--cap) * var(--tz));
+    margin-left: -0.15rem;
+    color: var(--on-band-dim);
+}
+.lang-btn:hover,
+.lang-btn[aria-expanded="true"] {
     background: var(--band-hover);
+}
+.top .lang-btn {
+    flex: none;
+}
+.top.tight {
+    padding-left: max(6px, env(safe-area-inset-left, 0px));
+    padding-right: max(6px, env(safe-area-inset-right, 0px));
+    column-gap: 0.25rem;
+}
+.top.tight .lang-btn {
+    padding: 0 0.5rem;
+}
+.top.tight .lang-btn .chev,
+.top.tighter .lang-btn .globe {
+    display: none;
 }
 .tools {
     display: flex;
@@ -294,6 +330,7 @@ input:focus-visible + span,
 
 /* ---- the play area ---- */
 .play {
+    --size: 260px;
     position: relative;
     flex: 1;
     min-height: 0;
@@ -303,11 +340,13 @@ input:focus-visible + span,
     padding: 0.25rem max(12px, env(safe-area-inset-right, 0px)) 0.25rem max(12px, env(safe-area-inset-left, 0px));
 }
 .status {
+    flex: none;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.25rem 0.75rem;
     min-height: 48px;
+    padding: 0.2rem 0;
 }
 .status {
     font-size: calc(1rem * var(--cap));
@@ -360,7 +399,7 @@ input:focus-visible + span,
     display: none;
 }
 .grid {
-    flex: 1 1 40%;
+    flex: 1 1 0;
     min-height: 4rem;
     display: flex;
     align-items: center;
@@ -463,85 +502,124 @@ input:focus-visible + span,
     }
 }
 
-.feedback {
-    min-height: calc(2.5rem * var(--cap));
+/* ---- the word row and the wheel ---- */
+.pad {
+    flex: none;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
-.notice {
-    margin: 0.25rem 0;
-    padding: 0.3rem 0.8rem;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: 600;
-    font-size: calc(0.95rem * var(--cap));
-}
-.notice:empty {
-    display: none;
-}
-.notice.good {
-    background: var(--paper-raised);
-    color: var(--accent-ink);
-}
-.notice.bad,
-.notice.soft {
-    color: var(--paper-muted);
-}
-.notice.hidden {
-    background: var(--ring);
-    color: #1a1400;
-}
-.notice.big {
-    font-size: calc(1.1rem * var(--cap));
-    font-weight: 800;
-}
-.ask {
-    font-size: calc(1rem * var(--cap));
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0.25rem 0.75rem;
-    font-weight: 600;
-}
-.ask[hidden] {
-    display: none;
-}
-.ask-buttons {
-    display: flex;
-    gap: 0.5rem;
-}
-
 .word-row {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 0.5rem;
-    min-height: 52px;
+    width: 100%;
+    max-width: 30rem;
+    padding: 0.35rem 0 0.25rem;
 }
-.word-row .icon-btn {
-    color: var(--paper-muted);
-}
-.word-row .icon-btn:hover {
-    background: var(--paper-raised);
-}
-.word-row .icon-btn[hidden] {
-    visibility: hidden;
+/* Delete and the tick: large round buttons that never move; dim while there is no word. */
+.word-btn {
+    flex: none;
     display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 2px solid var(--paper-line);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--paper-ink);
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    transition:
+        background-color 140ms,
+        border-color 140ms,
+        color 140ms,
+        opacity 140ms,
+        transform 90ms;
+}
+.word-btn .ico {
+    width: 28px;
+    height: 28px;
+    stroke-width: 2.4;
+}
+.word-btn.go {
+    border-color: var(--primary-bg);
+    background: var(--primary-bg);
+    color: var(--primary-ink);
+}
+.word-btn.go .ico {
+    width: 30px;
+    height: 30px;
+    stroke-width: 3;
+}
+.word-btn:active:not(:disabled) {
+    transform: scale(0.93);
+}
+.word-btn:disabled {
+    border-color: var(--paper-line);
+    background: transparent;
+    color: var(--paper-muted);
+    opacity: 0.42;
+    cursor: default;
+}
+/* A tapped word was taken by itself: the tick lights up for a moment, as if pressed. */
+.word-btn.took,
+.word-row.lit .word-btn.go {
+    border-color: var(--good);
+    background: var(--good);
+    color: var(--good-ink);
+    opacity: 1;
+}
+.word-btn.took {
+    animation: took 420ms ease-out;
+}
+@keyframes took {
+    40% {
+        transform: scale(1.12);
+    }
+}
+:root.contrast .word-btn {
+    border-width: 3px;
+}
+
+/* The field between them: the word, or the last message, or how to start. Its height is fixed (three short lines), so
+   nothing around it moves when its content changes. */
+.word-field {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: max(56px, calc(0.9rem * var(--cap) * var(--tz) * 3.6 + 8px));
+    display: grid;
+    place-items: center;
+    padding: 0 0.6rem;
+    border-radius: 18px;
+    background: var(--paper-raised);
+    font-size: calc(0.9rem * var(--cap));
+    line-height: 1.2;
+    text-align: center;
+    overflow: hidden;
+    transition: background-color 200ms;
+}
+.word-field[data-show="empty"] {
+    background: transparent;
+    box-shadow: inset 0 0 0 2px var(--paper-line);
+}
+.word-field[data-show="notice"] .current,
+.word-field[data-show="word"] .notice,
+.word-field[data-show="empty"] .notice {
+    display: none;
 }
 .current {
-    min-width: 8rem;
-    max-width: 70%;
-    padding: 0.1rem 0.9rem;
-    border-radius: 12px;
-    background: var(--paper-raised);
+    display: block;
     font-weight: 800;
-    font-size: calc(1.45rem * min(var(--ls), 1.25) * var(--cap));
-    letter-spacing: 0.12em;
-    text-align: center;
+    font-size: calc(1.5rem * min(var(--ls), 1.25) * var(--cap));
+    letter-spacing: 0.1em;
+    line-height: 1.15;
     overflow-wrap: anywhere;
-    line-height: 1.3;
 }
 .current .cl {
     display: inline-block;
@@ -559,14 +637,19 @@ input:focus-visible + span,
         opacity: 1;
     }
 }
+/* (Not the word book's empty box, which shares the class name.) */
 .current.empty {
-    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    background: none;
     color: var(--paper-muted);
     font-weight: 600;
-    font-size: calc(0.95rem * var(--cap));
+    font-size: 1em;
     letter-spacing: 0;
+    line-height: 1.2;
+    overflow-wrap: normal;
 }
-.current.shake {
+.word-field.shake {
     animation: shake 300ms ease-in-out;
 }
 @keyframes shake {
@@ -581,14 +664,45 @@ input:focus-visible + span,
         transform: translateX(8px);
     }
 }
+.notice {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: normal;
+    hyphens: manual;
+}
+.notice.good {
+    color: var(--accent-ink);
+}
+.notice.bad,
+.notice.soft {
+    color: var(--paper-muted);
+}
+.notice.big {
+    font-weight: 800;
+}
+.word-field:has(.notice.hidden) {
+    background: var(--ring);
+}
+.notice.hidden {
+    color: #1a1400;
+}
+.notice:not(:empty) {
+    animation: note-in 220ms ease-out;
+}
+@keyframes note-in {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+}
 
 .wheel-wrap {
     display: grid;
     place-items: center;
-    padding: 0.25rem 0 0.5rem;
+    padding: 0.35rem 0 0.5rem;
 }
 .wheel {
-    --size: 280px;
     --tile: 25%;
     position: relative;
     width: var(--size);
@@ -602,7 +716,7 @@ input:focus-visible + span,
     user-select: none;
     -webkit-user-select: none;
 }
-.wheel svg {
+.wheel svg.lines {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -640,6 +754,51 @@ input:focus-visible + span,
     to {
         transform: rotate(0deg);
     }
+}
+/* Shuffle sits in the middle of the wheel, under the swipe's line; a swipe across it never presses it. */
+.hub {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: clamp(48px, 23%, 64px);
+    height: clamp(48px, 23%, 64px);
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 2px solid var(--disc-edge);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--accent-ink);
+    box-shadow: 0 2px 6px var(--shadow);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition:
+        transform 90ms,
+        background-color 140ms;
+}
+.hub .ico {
+    width: 52%;
+    height: 52%;
+    stroke-width: 2.3;
+}
+.hub:hover {
+    background: var(--paper-raised);
+}
+.hub:active {
+    transform: translate(-50%, -50%) scale(0.92);
+}
+.hub.turn .ico {
+    animation: hub-turn 520ms cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+@keyframes hub-turn {
+    from {
+        transform: rotate(-180deg);
+    }
+}
+.hub:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
 }
 .tile {
     position: absolute;
@@ -686,6 +845,36 @@ input:focus-visible + span,
     }
     100% {
         transform: translate(-50%, -50%) scale(1.06);
+    }
+}
+/* A word taken by taps stays lit for a moment, then fades as it clears (js/ui/wheel-view.mjs, LINGER_MS). */
+.wheel.linger .tile.on {
+    animation: linger-tile 1100ms ease-in both;
+}
+.wheel.linger polyline {
+    animation: linger-line 1100ms ease-in both;
+}
+@keyframes linger-tile {
+    0%,
+    45% {
+        border-color: var(--tile-on);
+        background: var(--tile-on);
+        color: var(--tile-on-ink);
+    }
+    100% {
+        border-color: var(--tile-line);
+        background: var(--tile);
+        color: var(--tile-ink);
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+@keyframes linger-line {
+    0%,
+    45% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
 
@@ -747,46 +936,90 @@ input:focus-visible + span,
 }
 .badge {
     position: absolute;
-    top: -6px;
-    right: -14px;
-    min-width: 1.35rem;
-    height: 1.35rem;
+    top: 0;
+    right: 0;
+    transform: translate(62%, -38%);
+    display: grid;
+    place-items: center;
+    /* Sized from the text size (--tz), since only fonts grow with it. */
+    min-width: calc(1.35rem * var(--cap) * var(--tz));
+    height: calc(1.35rem * var(--cap) * var(--tz));
     padding: 0 0.3rem;
     border-radius: 999px;
     background: var(--ring);
     color: #1a1400;
     font-size: calc(0.8rem * var(--cap));
     font-weight: 800;
-    line-height: 1.35rem;
+    line-height: 1;
     text-align: center;
 }
 
-/* ---- sideways ---- */
+/* A narrow screen: the status line's button is a little smaller, so it more often fits beside the wheel's name. */
+@media (max-width: 22.5rem) {
+    .status {
+        column-gap: 0.5rem;
+    }
+    .chip {
+        padding: 0.2rem 0.7rem;
+        font-size: calc(0.92rem * var(--cap));
+    }
+}
+/* A short screen: less air around the word row and the wheel, so the crossword keeps its room. */
+@media (max-height: 40rem) and (orientation: portrait) {
+    .word-row {
+        padding: 0.15rem 0;
+    }
+    .wheel-wrap {
+        padding: 0.2rem 0 0.3rem;
+    }
+}
+
+/* ---- sideways: the crossword on the left, the word and the wheel on the right, the toolbar as a rail ---- */
 @media (orientation: landscape) and (min-width: 36rem) and (max-height: 34rem) {
-    .play {
+    .app {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
-        grid-template-rows: auto minmax(0, 1fr) auto auto;
+        grid-template-rows: auto minmax(0, 1fr);
+    }
+    .top {
+        grid-column: 1 / -1;
+    }
+    .play {
+        grid-column: 1;
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: auto minmax(0, 1fr);
         column-gap: 1rem;
     }
     .status {
-        grid-column: 1 / -1;
+        grid-column: 1;
+        grid-row: 1;
     }
     .grid {
         grid-column: 1;
-        grid-row: 2 / span 3;
-    }
-    .feedback {
-        grid-column: 2;
         grid-row: 2;
     }
-    .word-row {
+    .pad {
         grid-column: 2;
-        grid-row: 3;
+        grid-row: 1 / span 2;
+        justify-content: center;
+        /* From the wheel's size, never from the word or message in the row, so nothing moves as they change. */
+        width: max(17rem, var(--size));
     }
-    .wheel-wrap {
+    .bottom {
         grid-column: 2;
-        grid-row: 4;
+        grid-row: 2;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem max(0.5rem, env(safe-area-inset-right, 0px)) max(0.5rem, env(safe-area-inset-bottom, 0px))
+            0.5rem;
+    }
+    .tool {
+        flex: none;
+        width: 6.5rem;
+        max-width: none;
     }
 }
 
@@ -851,10 +1084,6 @@ dialog::backdrop {
     color: var(--paper-ink);
     font-weight: 700;
     cursor: pointer;
-}
-.btn.small {
-    min-height: 44px;
-    padding: 0.25rem 0.9rem;
 }
 .btn.primary {
     border-color: var(--primary-bg);
@@ -1028,6 +1257,117 @@ fieldset {
 .switch:focus-visible {
     outline: 3px solid var(--ring);
     outline-offset: 2px;
+}
+
+/* The small cards: the word-language picker under its pill, the hint question beside its square. */
+dialog.pop {
+    position: fixed;
+    inset: auto;
+    top: 60px;
+    left: 12px;
+    width: min(18rem, calc(100% - 24px));
+    max-width: calc(100% - 24px);
+    max-height: calc(100% - 16px);
+    margin: 0;
+    border: 1px solid var(--paper-line);
+    border-radius: 18px;
+    background: var(--paper);
+    box-shadow:
+        0 18px 44px var(--shadow),
+        0 2px 6px var(--shadow);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+dialog.pop[open] {
+    display: block;
+    animation: pop-in 170ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+@keyframes pop-in {
+    from {
+        transform: translateY(-6px) scale(0.96);
+        opacity: 0;
+    }
+}
+dialog.pop::backdrop {
+    background: var(--scrim);
+    opacity: 0.55;
+}
+.pop-in {
+    padding: 0.85rem 0.5rem 0.8rem;
+}
+.pop-title {
+    margin: 0 0.75rem 0.45rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+.lang-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.lang-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    min-height: 52px;
+    padding: 0.5rem 0.75rem;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--paper-ink);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+    cursor: pointer;
+}
+.lang-row:hover {
+    background: var(--paper-raised);
+}
+.lang-row .tick {
+    flex: none;
+    width: calc(1.4rem * var(--tz));
+    height: calc(1.4rem * var(--tz));
+    stroke-width: 2.6;
+    visibility: hidden;
+}
+.lang-row[aria-current="true"] {
+    background: var(--paper-raised);
+    background: color-mix(in srgb, var(--primary-bg) 13%, var(--paper));
+    color: var(--accent-ink);
+    font-weight: 800;
+}
+.lang-row[aria-current="true"] .tick {
+    visibility: visible;
+}
+:root.contrast .lang-row[aria-current="true"] {
+    box-shadow: inset 0 0 0 2px var(--primary-bg);
+}
+.pop-note {
+    margin: 0.55rem 0.75rem 0;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--paper-line);
+    color: var(--paper-muted);
+    font-size: 0.9rem;
+    line-height: 1.35;
+}
+#dlg-ask .pop-title {
+    font-size: 1rem;
+}
+#dlg-ask .pop-note {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+.pop-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin: 0.75rem 0.5rem 0;
 }
 
 /* calendar */
@@ -1261,25 +1601,25 @@ fieldset {
     }
 }
 .badge.plus {
-    right: -18px;
+    transform: translate(78%, -38%);
 }
 .badge.plus.rise {
     animation: rise 1300ms ease-out both;
 }
 @keyframes rise {
     0% {
-        transform: translateY(6px);
+        transform: translate(78%, calc(-38% + 6px));
         opacity: 0;
     }
     20% {
-        transform: none;
+        transform: translate(78%, -38%);
         opacity: 1;
     }
     80% {
         opacity: 1;
     }
     100% {
-        transform: translateY(-10px);
+        transform: translate(78%, calc(-38% - 10px));
         opacity: 0;
     }
 }
@@ -1287,7 +1627,7 @@ fieldset {
     display: none;
 }
 .jar-label {
-    white-space: nowrap;
+    text-wrap: balance;
 }
 
 /* Letters flying from the word to the crossword or the jar; they never take a touch. */

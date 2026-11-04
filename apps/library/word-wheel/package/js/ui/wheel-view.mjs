@@ -1,22 +1,38 @@
-// The letter wheel: five to seven round letters on a disc. A word is made by swiping from letter to letter (lifting
-// the finger tries it) or by tapping letters one by one. Swiping back over the previous letter takes the last one
-// back. Every letter is a real button, so a screen reader, a keyboard and a mouse can make words too.
+// The letter wheel: five to seven round letters on a disc, with the shuffle button in its middle. A word is made by
+// swiping from letter to letter (lifting the finger tries it) or by tapping letters one by one, where a word that is
+// an answer not found yet counts at once (js/wheel/taps.mjs has the rules). Swiping back over the previous letter
+// takes the last one back. Every letter is a real button, so a screen reader, a keyboard and a mouse can make words
+// too.
 
 import { display } from "../core/letters.mjs";
+import { EMPTY, tap as tapStep, back, wordOf, fromWord } from "../wheel/taps.mjs";
 
 // Where the letters sit, by how many there are: the circle's radius and a letter's size, in % of the wheel.
 const GEOMETRY = { 5: [32, 30], 6: [33, 28], 7: [34, 25] };
 
-export function createWheel(root, { onChange, onSubmit, letterLabel }) {
-  const svg = root.querySelector("svg");
+/** How long a word taken by taps stays lit before it clears by itself, in milliseconds (css/app.css fades it). */
+export const LINGER_MS = 1100;
+
+/**
+ * `answers()` returns `{ leadsOn(tiles), isNew(tiles) }` for the wheel as it stands; `onChange(word, { lit })` gets
+ * every change of the word; `onSubmit(word, { auto })` gets a word to try (`auto`: taken by taps, while it still
+ * shows); `onLetter()` is called when a letter joins the word.
+ */
+export function createWheel(root, { onChange, onSubmit, onLetter, letterLabel, answers }) {
+  const svg = root.querySelector("svg.lines");
   // Two lines on the same points: a wide soft one under a narrow bright one.
   const lines = Array.from(svg.querySelectorAll("polyline"));
   let tiles = [];
   let slots = []; // slots[i]: where letter i sits on the circle
   let buttons = [];
-  let path = []; // indices of the chosen letters, in order
-  let drag = null; // { pointerId, added, rects, start }
+  let taps = EMPTY; // the word made by taps
+  let path = []; // positions of the chosen letters, in order: a swipe's, or the taps' word
+  let drag = null; // { pointerId, rects, start, moved }
   let pointerTap = false;
+  let lingerTimer = 0;
+
+  const later = (fn, ms) => window.setTimeout(fn, ms);
+  const cancel = (id) => window.clearTimeout(id);
 
   function centre(i) {
     const n = tiles.length;
@@ -53,19 +69,77 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
   }
 
   function changed(extra) {
+    const lit = taps.lit && !drag;
     buttons.forEach((b, i) => {
       const on = path.includes(i);
       b.classList.toggle("on", on);
       b.setAttribute("aria-pressed", on ? "true" : "false");
     });
+    if (!lit) root.classList.remove("linger");
     drawLine(extra);
-    onChange(path.map((i) => tiles[i]));
+    onChange(
+      path.map((i) => tiles[i]),
+      { lit },
+    );
+  }
+
+  function setTaps(next) {
+    taps = next;
+    path = wordOf(taps);
+  }
+
+  function stopLinger() {
+    cancel(lingerTimer);
+    lingerTimer = 0;
+  }
+
+  // A word taken by taps stays lit and fades; then it clears, unless a tap carried it on meanwhile.
+  function startLinger() {
+    stopLinger();
+    root.classList.remove("linger");
+    void root.offsetWidth;
+    root.classList.add("linger");
+    lingerTimer = later(() => {
+      lingerTimer = 0;
+      if (!taps.lit || drag) return;
+      setTaps(EMPTY);
+      changed();
+    }, LINGER_MS);
+  }
+
+  function context() {
+    return { letters: tiles, ...answers() };
+  }
+
+  /** One letter picked by a tap, a click or a key. `felt`: the finger already felt it join (at pointerdown). */
+  function pick(i, felt) {
+    stopLinger();
+    const before = taps;
+    const { state, taken } = tapStep(taps, i, context());
+    if (state === before) {
+      setTaps(taps);
+      changed();
+      return false;
+    }
+    const grew = state.stream.length > before.stream.length;
+    setTaps(state);
+    if (grew) lift(i);
+    changed();
+    if (taken) {
+      onSubmit(taken, { auto: true });
+      startLinger();
+    } else if (grew && !felt && onLetter) onLetter();
+    return true;
   }
 
   function set(newTiles) {
+    stopLinger();
     tiles = newTiles.slice();
     slots = tiles.map((_, i) => i);
+    taps = EMPTY;
     path = [];
+    drag = null;
+    root.classList.remove("linger");
     root.querySelectorAll(".tile").forEach((b) => b.remove());
     buttons = tiles.map((tile, i) => {
       const b = document.createElement("button");
@@ -104,40 +178,44 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
   }
 
   function clear() {
-    path = [];
+    stopLinger();
+    setTaps(EMPTY);
     changed();
   }
 
+  /** The delete key: takes the last letter back. */
   function pop() {
-    path.pop();
+    stopLinger();
+    setTaps(back(taps));
     changed();
   }
 
-  // The word is handed over while it still shows, so the page can fly its letters from where they are.
+  // The tick: tries the word (the page says what it was). A word the taps took already only clears.
   function submit() {
+    if (taps.lit) {
+      clear();
+      return;
+    }
     if (!path.length) return;
     const word = path.map((i) => tiles[i]);
-    onSubmit(word);
-    path = [];
+    onSubmit(word, { auto: false });
+    stopLinger();
+    setTaps(EMPTY);
     changed();
   }
 
-  function add(i) {
-    if (path.includes(i)) return false;
-    path.push(i);
-    return true;
-  }
-
-  /** Picks the first unused letter typed on a keyboard ("c" picks a CH tile when the wheel has no C). */
+  /** Picks a letter typed on a keyboard ("c" picks a CH tile when the wheel has no C). */
   function type(key) {
     const k = key.toLowerCase();
-    let i = tiles.findIndex((t, n) => t === k && !path.includes(n));
-    if (i < 0 && k === "c") i = tiles.findIndex((t, n) => t === "ch" && !path.includes(n));
+    const used = new Set(path);
+    const hits = tiles.map((t, n) => (t === k ? n : -1)).filter((n) => n >= 0);
+    if (!hits.length && k === "c") tiles.forEach((t, n) => t === "ch" && hits.push(n));
+    if (!hits.length) return false;
+    const free = hits.find((n) => !used.has(n));
+    // A letter of a word just taken starts a new word with it; in a word being built a used letter does nothing.
+    const i = free !== undefined ? free : taps.lit ? hits[0] : -1;
     if (i < 0) return false;
-    add(i);
-    lift(i);
-    changed();
-    return true;
+    return pick(i, false);
   }
 
   // ---- pointer: swipe and tap
@@ -158,9 +236,10 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
     return [((x - box.left) / box.width) * 100, ((y - box.top) / box.height) * 100];
   }
 
+  // Only letters start a word: a touch on the disc or on the shuffle button in the middle is left to them.
   root.addEventListener("pointerdown", (e) => {
     if (e.button !== undefined && e.button > 0) return;
-    drag = { pointerId: e.pointerId, added: 0, rects: buttons.map((b) => b.getBoundingClientRect()), start: -1 };
+    drag = { pointerId: e.pointerId, rects: buttons.map((b) => b.getBoundingClientRect()), start: -1, moved: false };
     const i = hit(e.clientX, e.clientY, 1);
     if (i < 0) {
       drag = null;
@@ -173,11 +252,20 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
     } catch (err) {
       // capture is a convenience: moves still arrive while the finger stays on the wheel
     }
+    stopLinger();
     drag.start = i;
-    drag.wasOn = path.includes(i);
-    if (add(i)) {
-      drag.added = 1;
-      lift(i);
+    // The letter under the finger shows at once; whether this is a tap or a swipe's start is known later. The last
+    // letter of a word being built stays as it is (lifting takes it back, moving swipes on from it).
+    const word = wordOf(taps);
+    const isLast = !taps.lit && word[word.length - 1] === i;
+    if (!isLast) {
+      const preview = tapStep(taps, i, { ...context(), isNew: () => false }).state;
+      path = wordOf(preview);
+      if (preview.stream.length > taps.stream.length) {
+        lift(i);
+        drag.felt = true;
+        if (onLetter) onLetter();
+      }
     }
     changed();
   });
@@ -186,15 +274,19 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
     if (!drag || e.pointerId !== drag.pointerId) return;
     e.preventDefault();
     const i = hit(e.clientX, e.clientY, 0.8);
-    if (i >= 0) {
-      if (path.length >= 2 && i === path[path.length - 2]) {
-        path.pop();
-        drag.added = Math.max(0, drag.added - 1);
-        drag.moved = true;
-      } else if (add(i)) {
-        drag.added++;
-        drag.moved = true;
+    if (i >= 0 && i !== drag.start && !drag.moved) {
+      // A swipe makes its own word: after a word was taken it starts afresh, a word being tapped is carried on.
+      drag.moved = true;
+      const base = taps.lit ? [] : wordOf(taps);
+      path = base.includes(drag.start) ? base : [...base, drag.start];
+      taps = EMPTY;
+    }
+    if (i >= 0 && drag.moved) {
+      if (path.length >= 2 && i === path[path.length - 2]) path.pop();
+      else if (!path.includes(i)) {
+        path.push(i);
         lift(i);
+        if (onLetter) onLetter();
       }
     }
     changed(toPercent(e.clientX, e.clientY));
@@ -205,16 +297,24 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
     const d = drag;
     drag = null;
     // The click that follows this pointer's tap must not count twice.
-    window.setTimeout(() => {
+    later(() => {
       pointerTap = false;
     }, 400);
-    if (!cancelled && d.moved && path.length) {
-      submit();
+    if (d.moved) {
+      if (!cancelled && path.length) submit();
+      else {
+        // An interrupted swipe keeps its letters as a word being built.
+        setTaps(fromWord(path));
+        changed();
+      }
       return;
     }
-    // A tap: a new letter stays chosen; a tap on the last chosen letter takes it back.
-    if (!d.moved && d.wasOn && path[path.length - 1] === d.start) path.pop();
-    changed();
+    if (cancelled) {
+      setTaps(taps);
+      changed();
+      return;
+    }
+    pick(d.start, Boolean(d.felt));
   }
 
   root.addEventListener("pointerup", (e) => endDrag(e, false));
@@ -225,10 +325,7 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
     const b = e.target.closest(".tile");
     if (!b) return;
     if (pointerTap) return;
-    const i = Number(b.dataset.i);
-    if (path[path.length - 1] === i) path.pop();
-    else if (add(i)) lift(i);
-    changed();
+    pick(Number(b.dataset.i), false);
   });
 
   return {
@@ -241,6 +338,9 @@ export function createWheel(root, { onChange, onSubmit, letterLabel }) {
     relabel,
     get length() {
       return path.length;
+    },
+    get lit() {
+      return taps.lit;
     },
   };
 }
