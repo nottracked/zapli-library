@@ -1,5 +1,5 @@
 // Checks the page's pure logic with Node 22: money, the calculator, dates, repeat rules, balances, budgets and
-// "safe to spend today", the subscription finder, the page-made CSV and the translations.
+// "safe to spend today", the subscription finder, the cards on Home, the page-made CSV and the translations.
 // Run from the repository root: node apps/library/expenses/dev/test-logic.mjs
 
 import assert from "node:assert/strict";
@@ -10,6 +10,7 @@ import * as rrule from "../package/js/rrule.mjs";
 import * as ledger from "../package/js/ledger.mjs";
 import * as subs from "../package/js/subs.mjs";
 import * as csv from "../package/js/csv.mjs";
+import * as cards from "../package/js/homecards.mjs";
 import { STRINGS, translator } from "../package/js/i18n.mjs";
 import { sampleData } from "../package/js/sample.mjs";
 
@@ -358,6 +359,59 @@ test("the subscription finder", () => {
   // Two more payments at the new price make Music Box a subscription again.
   pay("2026-11-05", "12.99", { payee: "Music Box" });
   assert.ok(subs.findSubscriptions(list, { today: "2026-11-20" }).some((f) => f.name === "Music Box"));
+});
+
+// ---------------------------------------------------------------- the cards on Home
+test("Home cards: shown and in the usual order until the user chooses", () => {
+  const usual = ["safe", "month", "balance", "quick", "due", "budgets", "subscriptions", "recent"];
+  assert.deepEqual(cards.HOME_CARDS, usual);
+  for (const saved of [undefined, null, {}, { order: "x", hidden: 3 }]) {
+    assert.deepEqual(cards.homeOrder(saved), usual);
+    assert.ok(usual.every((id) => cards.isShown(saved, id)));
+    assert.ok(cards.isUsual(saved));
+    assert.equal(cards.shownCount(saved), 8);
+  }
+});
+test("Home cards: hiding and showing", () => {
+  let saved = cards.withShown(null, "safe", false);
+  assert.deepEqual(saved.hidden, ["safe"]);
+  assert.equal(cards.isShown(saved, "safe"), false);
+  assert.equal(cards.isShown(saved, "month"), true);
+  saved = cards.withShown(saved, "recent", false);
+  assert.deepEqual(saved.hidden, ["safe", "recent"]);
+  assert.equal(cards.shownCount(saved), 6);
+  assert.equal(cards.isUsual(saved), false);
+  saved = cards.withShown(saved, "safe", true);
+  assert.deepEqual(saved.hidden, ["recent"]);
+  saved = cards.withShown(saved, "recent", true);
+  assert.ok(cards.isUsual(saved));
+  // The choice is plain JSON, as the app's store keeps it.
+  assert.deepEqual(JSON.parse(JSON.stringify(saved)), saved);
+});
+test("Home cards: moving, and choices from other versions", () => {
+  let saved = cards.withMoved(null, "recent", -1);
+  assert.deepEqual(saved.order.slice(-2), ["recent", "subscriptions"]);
+  saved = cards.withMoved(saved, "safe", -1); // already first: stays
+  assert.equal(saved.order[0], "safe");
+  saved = cards.withMoved(saved, "safe", 1);
+  assert.deepEqual(saved.order.slice(0, 2), ["month", "safe"]);
+  const hidden = cards.withMoved(cards.withShown(null, "quick", false), "quick", 1);
+  assert.deepEqual(hidden.hidden, ["quick"], "moving keeps what is hidden");
+  // An older choice without the newer cards: they join at their usual place, shown; unknown ids are dropped.
+  const old = { order: ["recent", "safe", "month", "quick", "gone", "recent"], hidden: ["gone", "month"] };
+  assert.deepEqual(cards.homeOrder(old), [
+    "recent",
+    "safe",
+    "month",
+    "balance",
+    "quick",
+    "due",
+    "budgets",
+    "subscriptions",
+  ]);
+  assert.equal(cards.isShown(old, "balance"), true);
+  assert.equal(cards.isShown(old, "month"), false);
+  assert.deepEqual(cards.withShown(old, "due", false).hidden, ["month", "due"]);
 });
 
 // ---------------------------------------------------------------- CSV made by the page

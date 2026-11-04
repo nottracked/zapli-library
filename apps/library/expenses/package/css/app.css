@@ -72,6 +72,8 @@
 
 html {
     -webkit-text-size-adjust: 100%;
+    /* On the entry form a focused field scrolls clear of the dock at the bottom (--dock-h is set only there). */
+    scroll-padding-bottom: var(--dock-h, 0px);
 }
 
 body {
@@ -189,10 +191,12 @@ button {
     background: var(--surface);
 }
 
+/* Display-size text (titles, the amount, the keys) grows more slowly than body text when the phone's text size goes
+   up, as the phone's own large text does: the same size at the usual text size, about four fifths of it at double. */
 .bar-title {
     flex: 1;
     margin: 0 0.5rem;
-    font-size: 1.375rem;
+    font-size: calc(0.875rem + 8px);
     font-weight: 650;
     line-height: 1.2;
     overflow-wrap: break-word;
@@ -218,6 +222,11 @@ button {
 
 .icon-button:active {
     background: var(--variant);
+}
+
+.icon-button:disabled {
+    opacity: 0.3;
+    cursor: default;
 }
 
 .bar-save {
@@ -557,7 +566,8 @@ input:focus {
     flex-direction: column;
 }
 
-.toggle input {
+.toggle input,
+input.switch {
     appearance: none;
     flex: none;
     position: relative;
@@ -570,7 +580,8 @@ input:focus {
     cursor: pointer;
 }
 
-.toggle input::after {
+.toggle input::after,
+input.switch::after {
     content: "";
     position: absolute;
     top: 0.25rem;
@@ -582,12 +593,14 @@ input:focus {
     transition: transform 0.15s;
 }
 
-.toggle input:checked {
+.toggle input:checked,
+input.switch:checked {
     background: var(--primary);
     border-color: var(--primary);
 }
 
-.toggle input:checked::after {
+.toggle input:checked::after,
+input.switch:checked::after {
     background: var(--on-primary);
     transform: translateX(1.25rem);
 }
@@ -991,6 +1004,78 @@ body.with-tabs .fab {
     height: 5rem;
 }
 
+.home-end,
+.center-actions {
+    display: flex;
+    justify-content: center;
+    margin: 0.25rem 0 0.75rem;
+}
+
+.balance-amount {
+    font-size: 1.125rem;
+}
+
+/* Edit Home: each card's name beside its order arrows and switch, and under them, across the row, a line on what
+   it shows. The name and the line are the switch's label (a tap on them flips it). At a large text size the arrows
+   and the switch go to a line of their own. */
+.help.intro {
+    margin: 0 0 0.5rem;
+}
+
+.card-choices {
+    container-type: inline-size;
+}
+
+.card-choice {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 0.5rem;
+    padding: 0.375rem 0 0.625rem;
+}
+
+.card-choice-text {
+    display: contents;
+    cursor: pointer;
+}
+
+.card-choice-text .row-title {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.card-choice-text .row-sub {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+.card-choice-end {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+}
+
+@container (max-width: 14em) {
+    .card-choice {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .card-choice-end {
+        grid-column: 1;
+        grid-row: 3;
+        justify-self: end;
+    }
+}
+
+.card-choice-end .icon-button {
+    color: var(--muted);
+}
+
+.card-choice-end .switch {
+    margin-left: 0.5rem;
+}
+
 /* ------------------------------------------------------------------ bottom tabs */
 
 .tabs {
@@ -1314,8 +1399,11 @@ body.with-tabs .fab {
     margin-top: 0.25rem;
 }
 
+/* The amount and its currency share a line; at a large text size the currency goes under the amount, so the amount
+   keeps the whole width. */
 .amount-line {
     display: flex;
+    flex-wrap: wrap;
     align-items: stretch;
     gap: 0.5rem;
 }
@@ -1335,7 +1423,7 @@ body.with-tabs .fab {
 }
 
 .amount-box {
-    flex: 1;
+    flex: 1 1 10rem;
     display: flex;
     align-items: center;
     min-width: 0;
@@ -1367,11 +1455,19 @@ body.with-tabs .fab {
     height: 1.2em;
 }
 
+/* The amount stays on one line: --fit shrinks a long one (set by the editor); the longest ones wrap. */
 .amount-expr {
-    font-size: 2.25rem;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: calc((1.25rem + 16px) * var(--fit, 1));
     font-weight: 700;
     line-height: 1.15;
     font-variant-numeric: tabular-nums;
+}
+
+.amount-expr.wrap {
+    white-space: normal;
     overflow-wrap: break-word;
     word-break: break-all;
 }
@@ -1385,7 +1481,9 @@ body.with-tabs .fab {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
+    margin-left: auto;
     min-width: var(--touch);
+    min-height: var(--touch);
     padding: 0 0.75rem;
     border: 0;
     border-radius: var(--radius);
@@ -1428,10 +1526,15 @@ body.with-tabs .fab {
 
 .date-chip {
     position: relative;
+    max-width: 100%;
+    min-width: 0;
     padding-right: 0.25rem;
 }
 
+/* The date field gives way at a large text size rather than run past the screen's edge. */
 .date-chip input {
+    flex: 1 1 auto;
+    min-width: 0;
     min-height: var(--touch);
     border: 0;
     background: transparent;
@@ -1486,12 +1589,13 @@ body.with-tabs .fab {
     padding-top: 0.5rem;
 }
 
+/* Room under the form for the dock; the editor sets the dock's measured height here once it is drawn. */
 .keypad-space {
-    height: 0;
+    height: calc(48px + 0.5rem + 2rem);
 }
 
 .keypad-on .keypad-space {
-    height: calc(5 * (48px + 0.5rem) + 4 * 0.375rem + 1.25rem);
+    height: calc(6 * (48px + 0.5rem) + 5 * 0.375rem + 1.25rem);
 }
 
 .dock {
@@ -1506,9 +1610,9 @@ body.with-tabs .fab {
     box-shadow: 0 -2px 10px rgb(0 0 0 / 12%);
 }
 
+/* One row above the keys: the date keeps its width, a long account name ends in "…" (the dock's height stays put). */
 .dock-row {
     display: flex;
-    flex-wrap: wrap;
     gap: 0.375rem;
     margin-bottom: 0.375rem;
 }
@@ -1520,7 +1624,11 @@ body.with-tabs .fab {
     background: var(--surface);
 }
 
-.dock-chip span {
+.dock-chip:first-child {
+    flex-shrink: 0;
+}
+
+.dock-chip-label {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1539,8 +1647,9 @@ body.with-tabs .fab {
     border: 0;
     border-radius: 0.875rem;
     background: var(--surface);
-    font-size: 1.5rem;
+    font-size: calc(1rem + 8px);
     font-weight: 600;
+    line-height: 1;
 }
 
 .key.op {
@@ -1558,8 +1667,53 @@ body.with-tabs .fab {
     color: var(--on-primary);
 }
 
-.key:active {
+.key:active,
+.save-key:active {
     filter: brightness(0.9);
+}
+
+/* Save: the widest key, the last row of the dock, right under the thumb. It names the amount it saves. */
+.save-row {
+    display: flex;
+    gap: 0.375rem;
+}
+
+.dock.with-keypad .save-row {
+    margin-top: 0.375rem;
+}
+
+.save-key {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    justify-content: center;
+    gap: 0.125rem 0.5rem;
+    min-width: 0;
+    min-height: calc(48px + 0.5rem);
+    padding: 0.375rem 1rem;
+    border: 0;
+    border-radius: 0.875rem;
+    background: var(--primary);
+    color: var(--on-primary);
+    font-size: calc(0.875rem + 4px);
+    font-weight: 700;
+}
+
+.save-key .icon {
+    width: 1.3em;
+    height: 1.3em;
+}
+
+.save-amount {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.keypad-key {
+    flex: none;
+    min-width: calc(48px + 1rem);
 }
 
 /* ------------------------------------------------------------------ categories */
@@ -1705,7 +1859,7 @@ dialog.sheet {
 }
 
 body:not(.with-tabs) .snackbar {
-    bottom: calc(1rem + var(--fab-h, 0px) + 1rem + env(safe-area-inset-bottom));
+    bottom: calc(1rem + var(--fab-h, 0px) + var(--dock-h, 0px) + 1rem + env(safe-area-inset-bottom));
 }
 
 .snackbar.show:not(:empty) {
@@ -1740,7 +1894,8 @@ body.with-tabs .snackbar {
     }
 }
 
-/* Landscape on a phone: the form on the left, the date, account and keypad on the right, side by side. */
+/* Landscape on a phone: the form on the left, the date, account, keypad and Save on the right, side by side.
+   Without the keypad, Save is a bar at the bottom as in portrait. */
 @media (orientation: landscape) and (max-height: 34rem) {
     .editor.keypad-on {
         margin-right: 46%;
@@ -1750,7 +1905,7 @@ body.with-tabs .snackbar {
         height: 0 !important;
     }
 
-    .dock {
+    .dock.with-keypad {
         top: 0;
         left: auto;
         right: 0;
@@ -1764,8 +1919,17 @@ body.with-tabs .snackbar {
         border-radius: 0;
     }
 
-    .key {
+    .dock.with-keypad .key {
         min-height: 40px;
+    }
+
+    .dock:not(.with-keypad) {
+        left: auto;
+        right: 0;
+        width: 46%;
+        max-width: none;
+        transform: none;
+        border-radius: 1.25rem 0 0 0;
     }
 }
 

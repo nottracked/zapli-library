@@ -1,8 +1,9 @@
 // Draws every screen of the page in Node 22 on a small stand-in for the browser's DOM, once with the browser
 // preview's example data and once on a stand-in for Zapli's data bridge, and taps through the main flows (add an
-// entry with the keypad, edit it, delete it with Undo, a transfer, a category, an account, a recurring entry, a
-// subscription, the filters). It fails on a thrown error, on a screen that shows "something went wrong", and on
-// a text that is still a translation key. It checks the page's code, not how it looks: that needs a phone.
+// entry with the keypad and its Save key, edit it, delete it with Undo, a transfer, a category, an account, a
+// recurring entry, a subscription, the filters, the cards on Home). It fails on a thrown error, on a screen that
+// shows "something went wrong", and on a text that is still a translation key. It checks the page's code, not how
+// it looks: that needs a phone.
 // Run from the repository root: node apps/library/expenses/dev/smoke-render.mjs
 
 import assert from "node:assert/strict";
@@ -62,6 +63,9 @@ class Node {
     this.style = {
       setProperty(name, value) {
         this[name] = value;
+      },
+      removeProperty(name) {
+        delete this[name];
       },
     };
     this.classList = new ClassList(this);
@@ -159,6 +163,10 @@ class Node {
     if (document.activeElement === this) document.activeElement = document.body;
   }
   setSelectionRange() {}
+  // No layout here: every box is empty and at the top.
+  getBoundingClientRect() {
+    return { top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 };
+  }
   showModal() {
     this.open = true;
   }
@@ -325,6 +333,7 @@ const storage = {
 globalThis.window = globalThis;
 globalThis.addEventListener = (type, fn) => (windowListeners[type] ||= []).push(fn);
 globalThis.scrollTo = () => {};
+globalThis.scrollBy = () => {};
 globalThis.scrollY = 0;
 globalThis.localStorage = storage;
 globalThis.sessionStorage = storage;
@@ -539,6 +548,13 @@ function tapText(text, root = documentElement) {
   target.click();
 }
 
+/** The entry form's Save key at the bottom of the dock. */
+function tapSave() {
+  const key = main().querySelector(".save-key");
+  assert.ok(key, "no Save key on " + location.hash);
+  key.click();
+}
+
 function tapLabel(label) {
   const target = [...documentElement.walk()].find((n) => n.attributes && n.attributes["aria-label"] === label);
   assert.ok(target, "no control labelled '" + label + "' on " + location.hash);
@@ -575,6 +591,7 @@ async function visitAll(label) {
     "#/add?kind=income",
     "#/add?kind=transfer",
     "#/account-edit/new",
+    "#/home-edit",
   ];
   for (const route of routes) {
     await go(route);
@@ -590,8 +607,16 @@ async function flows(label, store) {
   for (const key of ["5"]) tapText(key);
   tapLabel(store.lang === "sk" ? "Plus" : "Plus");
   tapText("3");
+  const mark = store.lang === "sk" ? "," : ".";
+  assert.ok(
+    main()
+      .querySelector(".save-key")
+      .textContent.includes("15" + mark + "50"),
+    label + ": the Save key names the result of the open calculation: " + main().querySelector(".save-key").textContent,
+  );
+  assert.ok(!main().querySelector(".bar .btn"), label + ": the top bar of the form has no second Save");
   const before = store.entries.size;
-  tapText(store.lang === "sk" ? "Uložiť" : "Save");
+  tapSave();
   await sleep(20);
   assert.equal(store.entries.size, before + 1, label + ": the entry was saved");
   const added = [...store.entries.values()].find((e) => e.amount === "15.50");
@@ -616,7 +641,7 @@ async function flows(label, store) {
   await open("#/add?kind=transfer");
   tapText("5");
   tapText("0");
-  tapText(store.lang === "sk" ? "Uložiť" : "Save");
+  tapSave();
   await sleep(20);
   const transfer = [...store.entries.values()].find((e) => e.kind === "transfer" && e.amount === "50.00");
   if (store.accounts.filter((a) => !a.archived).length > 1)
@@ -851,11 +876,46 @@ async function flows2(label, store) {
   assert.equal(amountShown(), "15" + store.mark + "5", label + ": Discard shows the saved amount again");
   await systemBack();
 
+  // Save with the keypad away: a saved entry opens without it, typing a note keeps it away, and Save stays in the
+  // dock at the bottom; the keypad key brings the keys back.
+  await open("#/edit/" + saved.id);
+  assert.ok(!main().querySelector(".keypad"), label + ": a saved entry opens without the keypad");
+  assert.ok(main().querySelector(".dock .save-key"), label + ": Save is in the dock without the keypad");
+  const noteInput = [...main().walk()].find(
+    (n) => n.tagName === "input" && n.attributes.placeholder === T("What was it for?", "Za čo to bolo?"),
+  );
+  noteInput.focus();
+  noteInput.dispatch("focus");
+  noteInput.value = "Lunch with the team";
+  noteInput.dispatch("input");
+  assert.ok(main().querySelector(".dock .save-key"), label + ": Save stays while the note is typed");
+  main().querySelector(".keypad-key").click();
+  assert.ok(main().querySelector(".keypad"), label + ": the keypad key brings the keys back");
+  tapSave();
+  await sleep(30);
+  assert.equal(store.entries.get(saved.id).note, "Lunch with the team", label + ": Save kept the note");
+  assert.equal(store.entries.get(saved.id).amount, "15.50", label + ": and the amount");
+  assert.notEqual(location.hash, "#/edit/" + saved.id, label + ": and closed the form");
+  // Save on an amount of nothing says what is missing and stays on the form.
+  await open("#/add");
+  if (hasBanner()) {
+    // The draft kept from the keypad checks above goes first.
+    tapText(T("Discard", "Zahodiť"));
+    await sleep(50);
+  }
+  assert.equal(amountShown(), "0");
+  tapSave();
+  await sleep(20);
+  assert.equal(location.hash, "#/add", label + ": Save without an amount stays on the form");
+  assert.ok(byId("snackbar").textContent.includes(T("above zero", "väčšiu ako nula")), label + ": and asks for one");
+  await systemBack();
+  await sleep(20);
+
   // The snackbar: about four seconds, gone on a tap elsewhere, a swipe or its close button; it names what was saved.
   const addOne = async (digit) => {
     await open("#/add");
     tapText(digit);
-    tapText(T("Save", "Uložiť"));
+    tapSave();
     await sleep(30);
   };
   const box = byId("snackbar");
@@ -880,7 +940,84 @@ async function flows2(label, store) {
   assert.ok(!box.classList.contains("show"), label + ": a new screen dismisses it");
 }
 
-async function run(label, setup) {
+/** Card titles and row titles on Home, in the order drawn. */
+function homeTitles() {
+  return [...main().walk()]
+    .filter((n) => n.classList && (n.classList.contains("card-title") || n.classList.contains("row-title")))
+    .map((n) => n.textContent);
+}
+
+/** Edit Home: cards hidden and shown, moved, kept in the app's store, reached from Home and Settings. */
+async function homeCards(label, store, readUi) {
+  const T = (en, skText) => (sk(store) ? skText : en);
+  const quiet = label === "fresh";
+  await open("#/");
+  assert.ok(main().querySelector(".quick-row"), label + ": Home shows Quick add");
+  if (quiet) {
+    // No budget at all: one quiet row that offers to set one, never the big card.
+    assert.ok(!main().querySelector(".hero"), label + ": no big card without a budget");
+    assert.ok(homeTitles().includes(T("Safe to spend today", "Dnes môžete minúť")), label + ": the quiet budget row");
+  } else assert.ok(main().querySelector(".hero"), label + ": the big card with a budget");
+  tapText(T("Edit Home", "Upraviť prehľad"));
+  await sleep(20);
+  assert.equal(location.hash, "#/home-edit", label + ": Edit Home opens from Home");
+  checkScreen(label + " edit home");
+  const switchOf = (id) => byId("home-card-" + id);
+  assert.equal(switchOf("quick").checked, true, label + ": every card is on at first");
+  // Hide Quick add.
+  const quick = switchOf("quick");
+  quick.checked = false;
+  quick.dispatch("change");
+  await sleep(20);
+  assert.deepEqual(store.ui.home.hidden, ["quick"], label + ": Quick add is hidden");
+  assert.deepEqual((await readUi()).home.hidden, ["quick"], label + ": and kept in the app's store");
+  // Move Recent up one place: the arrow keeps the focus for the next tap.
+  const recentUp = () => main().querySelector(".card-recent .move-up");
+  recentUp().click();
+  await sleep(20);
+  const order = store.ui.home.order;
+  assert.ok(order.indexOf("recent") < order.indexOf("subscriptions"), label + ": Recent moved up: " + order);
+  assert.equal(document.activeElement, recentUp(), label + ": the arrow keeps the focus");
+  assert.deepEqual((await readUi()).home.order, order, label + ": the order is kept too");
+  // Back: Home without Quick add, Recent above Subscriptions.
+  await systemBack();
+  assert.equal(location.hash, "#/", label + ": Back from Edit Home goes Home");
+  assert.ok(!main().querySelector(".quick-row"), label + ": Home no longer shows Quick add");
+  const titles = homeTitles();
+  // The Subscriptions card's row is the last of that name (a category of that name may show in Budgets).
+  const subs = titles.lastIndexOf(T("Subscriptions", "Predplatné"));
+  if (subs >= 0) assert.ok(titles.indexOf(T("Recent", "Nedávne")) < subs, label + ": Recent comes first: " + titles);
+  // Settings: the row says how many cards show and opens the same screen; Back returns to Settings.
+  await open("#/settings");
+  assert.ok(main().textContent.includes(T("7 of 8 shown", "Zobrazené: 7 z 8")), label + ": Settings counts the cards");
+  tapRow(T("Edit Home", "Upraviť prehľad"));
+  await sleep(20);
+  assert.equal(location.hash, "#/home-edit", label + ": Edit Home opens from Settings");
+  // Every card off: Home says so and offers the way back.
+  for (const id of ["safe", "month", "balance", "due", "budgets", "subscriptions", "recent"]) {
+    switchOf(id).checked = false;
+    switchOf(id).dispatch("change");
+  }
+  await sleep(20);
+  await systemBack();
+  assert.equal(location.hash, "#/settings", label + ": Back from Edit Home returns to Settings");
+  await open("#/");
+  assert.ok(main().textContent.includes(T("Nothing on Home", "Prehľad je prázdny")), label + ": an empty Home says so");
+  tapText(T("Edit Home", "Upraviť prehľad"));
+  await sleep(20);
+  // The usual cards again.
+  tapText(T("Show all in the usual order", "Zobraziť všetky v pôvodnom poradí"));
+  await sleep(20);
+  assert.equal(store.ui.home, null, label + ": back to the usual cards");
+  assert.equal(switchOf("quick").checked, true, label + ": the switches show it");
+  await systemBack();
+  assert.ok(main().querySelector(".quick-row"), label + ": Quick add is back on Home");
+  await systemBack();
+  assert.ok(exited, label + ": and Back on Home leaves");
+  exited = false;
+}
+
+async function run(label, setup, readUi) {
   setup();
   await import(pathToFileURL(resolve(here, "../package/js/app.mjs")).href);
   ui = await import(pathToFileURL(resolve(here, "../package/js/ui.mjs")).href);
@@ -893,18 +1030,26 @@ async function run(label, setup) {
   await flows(label, store);
   store.mark = sk(store) ? "," : ".";
   await flows2(label, store);
+  await homeCards(label, store, readUi);
   console.log("ok: " + label + " (" + store.lang + ")");
   return store;
 }
 
+const previewUi = async () => JSON.parse(localStorage.getItem("expenses-preview-v4")).ui;
+const bridgeUi = (bridge) => () => bridge.zapli.data.kv.get("ui");
+
 if (MODE === "preview") {
-  await run("preview", () => {});
+  await run("preview", () => {}, previewUi);
 } else if (MODE === "fresh") {
   // A first start: the page asks the app to set itself up, then the welcome card shows.
   const bridge = fakeZapli({});
-  const live = await run("fresh", () => {
-    globalThis.zapli = bridge.zapli;
-  });
+  const live = await run(
+    "fresh",
+    () => {
+      globalThis.zapli = bridge.zapli;
+    },
+    bridgeUi(bridge),
+  );
   assert.ok(
     bridge.runs.some((r) => r[0] === "setUp"),
     "setUp ran on the first start",
@@ -913,9 +1058,13 @@ if (MODE === "preview") {
 } else {
   const { sampleData } = await import(pathToFileURL(resolve(here, "../package/js/sample.mjs")).href);
   const bridge = fakeZapli(sampleData(new Date()));
-  const live = await run("live", () => {
-    globalThis.zapli = bridge.zapli;
-  });
+  const live = await run(
+    "live",
+    () => {
+      globalThis.zapli = bridge.zapli;
+    },
+    bridgeUi(bridge),
+  );
   assert.ok(live.live, "the store runs on the bridge");
   assert.ok(
     bridge.tables.expense.some((e) => e.amount === "15.50"),

@@ -4,7 +4,7 @@
     "id": "library/expenses",
     "kind": "web",
     "name": "Expenses",
-    "version": "4.0.0",
+    "version": "4.1.0",
     "icon": "receipt_long",
     "category": "finance",
     "ageRating": "everyone",
@@ -652,15 +652,19 @@
     },
     "orientation": "any",
     "files": {
-      "css/app.css": { "sha256": "c585db1ba95e0b5bb022f3f8097f295b527994687dc95c94428098e776b45d2d", "size": 32714 },
+      "css/app.css": { "sha256": "ca641f3cb5f00b5420a70deeb6e402acec3ddade6cfbba8c3c67ef099fc47dbf", "size": 36738 },
       "index.html": { "sha256": "a16c201412a7da85f3d9fed4de2455aae15f3e5880462c622b910d6f12884632", "size": 707 },
-      "js/app.mjs": { "sha256": "4a00ce515188d059a8fb3592a2e4112e0a549679faa3bfaa0d1ae1017d723307", "size": 14074 },
+      "js/app.mjs": { "sha256": "3b9fb1966e458604682e517c7f9d11f222b58ebb6baa8fb6280d23f007866a51", "size": 14174 },
       "js/calc.mjs": { "sha256": "5be33edfedfcdf35b36d5aca1214522ff15be8bf71be08b350eee67fe3027a40", "size": 4969 },
       "js/charts.mjs": { "sha256": "9e40dab044fe12d11673d2d513efef4295882e62087b49a82258ac893ac4115e", "size": 4290 },
       "js/csv.mjs": { "sha256": "48f5fd1335ac5ac838743a7819ccd8acd775d8e33324f6eb3bafec059dff8b6d", "size": 726 },
       "js/dates.mjs": { "sha256": "555a123a34ad2edef9cbd1c990fa46bfcc587c7ea2a482fb0ec47bd60d728a0b", "size": 3944 },
-      "js/i18n.mjs": { "sha256": "eb3e609ab216096b4b142b53b6cbd12937a7d17f95f4eeb0ec7f9ae79f6c7382", "size": 52457 },
-      "js/icons.mjs": { "sha256": "03e4b659c5a13028d82657b77a7dbf7d988f0d0f2383ad020c97963a35a9a372", "size": 6709 },
+      "js/homecards.mjs": {
+        "sha256": "4df0039f9bd93b894dfd16b7e5e5cccee2f0c09879070d15f6000d537aa68522",
+        "size": 2635
+      },
+      "js/i18n.mjs": { "sha256": "49a465bcb07dd9de26434101de42d27d78a94a0ef097228dc939a1cb53cb9a63", "size": 54303 },
+      "js/icons.mjs": { "sha256": "69074a151e12d1fb8b06826918bae6d21a9d45a21d35981d9862de777b7c61ee", "size": 7029 },
       "js/ledger.mjs": { "sha256": "bf45661e8c43eb4372162bc0410a52b245c02ba456b0b5900e2ae48a4794a05a", "size": 14063 },
       "js/money.mjs": { "sha256": "8ea8b486a9aee527d183d26fbfe53936db7abaeb4537ec4186e0cf62a856c719", "size": 7412 },
       "js/rrule.mjs": { "sha256": "f70e336b0c2dbb12e7c177d6b7cec08094fffb3106ffa7d8dccdf9a546e5caa4", "size": 8320 },
@@ -681,17 +685,21 @@
         "sha256": "8608b5c077fad2abe57995b822367c39c84f75d74e869c8328cbc02d7e60f35f",
         "size": 11517
       },
+      "js/screens/edithome.mjs": {
+        "sha256": "c663fc0a6d73d80d6fd92163593061e7df22fc98b161817381ab40652a35fa36",
+        "size": 4020
+      },
       "js/screens/editor.mjs": {
-        "sha256": "3c92c93fc2ca58d423abe53e54ed81130e572fd66a1cb2ecae7d8551a130840e",
-        "size": 38769
+        "sha256": "0923d60e12d2597980cd3b5d706a0c5b0b47b4c323ad049a303c9ac182dcf280",
+        "size": 46364
       },
       "js/screens/entries.mjs": {
         "sha256": "e6ed980792f349f1e21c33d009b67934e77c7ddcc5fc5535cbe7305f58613841",
         "size": 16471
       },
       "js/screens/home.mjs": {
-        "sha256": "31a6b77ccd953572c59ac412d467844ad6e29363a6bce6e3ebabbd19bdecb400",
-        "size": 16906
+        "sha256": "2c503fa7c3e99ae015794998246b833155f918416aea2b55249b0703fc791884",
+        "size": 18844
       },
       "js/screens/importer.mjs": {
         "sha256": "1d82664a5f3218b4f89570563d8236443287f28aa96794c8adb6f472b297b2f1",
@@ -702,8 +710,8 @@
         "size": 15774
       },
       "js/screens/settings.mjs": {
-        "sha256": "b577c6fcb66bcc6397de9530178b318ab773a7008cf5f300ff05ac925db6aadf",
-        "size": 15731
+        "sha256": "93e3cd5fd732c4c1dcaedf3936427224eed87cc75997c63e1d17c946b08ef45a",
+        "size": 16126
       },
       "js/screens/stats.mjs": {
         "sha256": "0a7fb67f4278c9599a9351b0c6b01b0c7f0390fa1d383aa881396c64fa2de6ef",

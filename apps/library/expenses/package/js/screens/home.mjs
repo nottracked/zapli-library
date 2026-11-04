@@ -1,4 +1,5 @@
-// Home: what is safe to spend today, this month at a glance, quick add, payments due and the latest entries.
+// Home: what is safe to spend today, this month at a glance, the balance, quick add, payments due, budgets,
+// subscriptions and the latest entries. Which cards show, and in which order, is the user's choice (Edit Home).
 
 import {
   ctx,
@@ -32,7 +33,21 @@ import { parseTypedAmount, fromCents, toCents, currencyOfLocale } from "../money
 import { icon } from "../icons.mjs";
 import { findSubscriptions, keyOf } from "../subs.mjs";
 import { timesPerYear } from "../rrule.mjs";
+import { homeOrder, isShown } from "../homecards.mjs";
 import { pickCurrency, currencyName } from "./settings.mjs";
+
+// Each card draws itself, or returns null when it has nothing to show (on a first start, the welcome card speaks
+// for the month, the balance and the latest entries).
+const CARDS = {
+  safe: (model, today, first) => safeCard(model, today, first),
+  month: (model, today, first) => (first ? null : monthCard(model, today)),
+  balance: (model, today, first) => (first ? null : balanceCard(model)),
+  quick: (model, today) => quickAdd(model, today),
+  due: (model, today) => dueCard(today),
+  budgets: (model, today) => budgetCard(model, today),
+  subscriptions: (model, today) => subscriptionCard(model, today),
+  recent: (model, today, first) => (first ? null : recentCard(model)),
+};
 
 export function render() {
   const store = ctx.store;
@@ -51,16 +66,20 @@ export function render() {
   );
   if (!store.live) content.push(previewBanner());
   if (first) content.push(welcome());
-  content.push(safeCard(model, today));
-  if (!first) content.push(monthCard(model, today));
-  content.push(quickAdd(model, today));
-  const due = dueCard(today);
-  if (due) content.push(due);
-  const budgetsGlimpse = budgetCard(model, today);
-  if (budgetsGlimpse) content.push(budgetsGlimpse);
-  const subs = subscriptionCard(model, today);
-  if (subs) content.push(subs);
-  if (!first) content.push(recentCard(model));
+  const saved = store.ui.home;
+  const cards = homeOrder(saved)
+    .filter((id) => isShown(saved, id))
+    .map((id) => CARDS[id](model, today, first))
+    .filter(Boolean);
+  content.push(...cards);
+  const editHome = () => ctx.go("#/home-edit");
+  if (!cards.length && !first) {
+    content.push(
+      empty("🏠", t("homeEmpty"), t("homeEmptyText"), [button(t("editHome"), editHome, "tonal", { icon: "edit" })]),
+    );
+  } else {
+    content.push(h("div", { class: "home-end" }, button(t("editHome"), editHome, "text", { icon: "edit" })));
+  }
   content.push(h("div", { class: "fab-space" }));
   content.push(fab());
   return h("div", { class: "screen" }, content);
@@ -200,20 +219,27 @@ export function budgetSnack(name, value, undo) {
 
 /**
  * Safe to spend today: the day's share of what is left of the month's budget (it changes at midnight), and below it,
- * calmly, how today is going against that share.
+ * calmly, how today is going against that share. Without a budget it is one quiet row that offers to set one (on a
+ * first start the welcome card already does).
  */
-function safeCard(model, today) {
+function safeCard(model, today, first) {
   const s = budgetToday(model, today);
   if (s.budget === null) {
+    if (first) return null;
     return h(
       "section",
-      { class: "card hero" },
-      h("p", { class: "hero-label", text: t("safeToday") }),
-      h("p", { class: "hero-hint", text: t("safeNoBudget") }),
+      { class: "card" },
       h(
-        "div",
-        { class: "card-actions" },
-        button(t("setBudget"), () => setBudget(), "filled"),
+        "button",
+        { class: "row", type: "button", onClick: () => setBudget() },
+        h("span", { class: "disc hue-green", "aria-hidden": "true" }, "🎯"),
+        h(
+          "span",
+          { class: "row-text" },
+          h("span", { class: "row-title", text: t("safeToday") }),
+          h("span", { class: "row-sub", text: t("safeNoBudget") }),
+        ),
+        h("span", { class: "row-chevron" }, icon("chevronRight")),
       ),
     );
   }
@@ -248,7 +274,6 @@ function safeCard(model, today) {
 function monthCard(model, today) {
   const month = totals(model.entries, startOfMonth(today), endOfMonth(today));
   const vs = againstLastMonth(model, today);
-  const worth = netWorth(model, balances(model));
   let change = null;
   if (vs.pct !== null) {
     change =
@@ -272,9 +297,33 @@ function monthCard(model, today) {
       { class: "stats" },
       stat(t("spent"), money(month.spent), "", () => ctx.go("#/stats")),
       stat(t("income"), money(month.income), "income", () => ctx.go("#/stats")),
-      stat(t("balance"), money(worth.total), worth.total < 0 ? "negative" : "", () => ctx.go("#/accounts")),
     ),
     change ? h("p", { class: "muted", text: change }) : null,
+  );
+}
+
+/** What all accounts hold together; a tap opens the accounts. */
+function balanceCard(model) {
+  const worth = netWorth(model, balances(model));
+  return h(
+    "section",
+    { class: "card" },
+    h(
+      "button",
+      { class: "row", type: "button", onClick: () => ctx.go("#/accounts") },
+      h("span", { class: "disc hue-grey", "aria-hidden": "true" }, "🏦"),
+      h(
+        "span",
+        { class: "row-text" },
+        h("span", { class: "row-title", text: t("balance") }),
+        h("span", { class: "row-sub", text: t("allAccounts") }),
+      ),
+      h(
+        "span",
+        { class: "row-end" },
+        h("span", { class: "amount balance-amount" + (worth.total < 0 ? " negative" : ""), text: money(worth.total) }),
+      ),
+    ),
   );
 }
 

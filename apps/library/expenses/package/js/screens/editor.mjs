@@ -1,7 +1,8 @@
 // Adding and editing an entry: spending, income or a transfer. The amount comes from the calculator keypad, so
 // "12,40 + 3,10" works; the category, account and date are one tap each, and the usual ones are already picked.
-// The date and the account sit right above the keypad, so the everyday entry needs no scrolling. A half-typed entry
-// is kept (Back, a rotation, closing the app) until it is saved or discarded.
+// The date and the account sit right above the keypad and Save right below it, where the thumb is, so the everyday
+// entry needs no scrolling. Save stays at the bottom while the keypad is away too, above the phone's keyboard. A
+// half-typed entry is kept (Back, a rotation, closing the app) until it is saved or discarded.
 
 import {
   ctx,
@@ -139,6 +140,7 @@ function changed(...regions) {
 
 export function render(route) {
   const store = ctx.store;
+  undock();
   const slot = route.id || "new";
   const path = route.path + "?" + route.params.toString();
   if (state && state.slot !== slot && state.draft.dirty) persist(true);
@@ -187,6 +189,7 @@ export function render(route) {
 
 /** Leaving the form: for a screen opened from it (a new category) it stays as it is; otherwise a draft is kept. */
 export function leave({ deeper }) {
+  undock();
   if (!state) return;
   if (deeper) {
     // Off to a screen opened from the form (a new category): the form waits as it is.
@@ -220,10 +223,7 @@ function build() {
   const screen = h(
     "div",
     { class: "screen editor" },
-    bar(title(draft), {
-      back: true,
-      actions: [button(t("save"), save, "filled", { class: "bar-save" })],
-    }),
+    bar(title(draft), { back: true }),
     state.restored
       ? h(
           "p",
@@ -241,10 +241,11 @@ function build() {
     region("receipt"),
     draft.id ? actionsForSaved(draft) : null,
     h("div", { class: "keypad-space" }),
-    region("keypad"),
+    region("dock"),
   );
   state.screen = screen;
-  for (const name of ["kind", "amount", "pickers", "inline", "receipt", "keypad"]) paint(name);
+  for (const name of ["kind", "amount", "pickers", "inline", "receipt", "dock"]) paint(name);
+  watchViewport();
   return screen;
 }
 
@@ -258,10 +259,25 @@ function paint(name) {
     pickers: pickersRegion,
     inline: inlineRegion,
     receipt: receiptRegion,
-    keypad: keypadRegion,
+    dock: dockRegion,
   }[name];
   const content = draw();
   if (content) box.append(...[].concat(content).filter(Boolean));
+  if (name === "amount") {
+    fitAmount();
+    if (state.keypad) requestAnimationFrame(() => keepAmountVisible());
+  }
+}
+
+/** A long amount shrinks to stay on one line, as on a calculator; only the longest ones wrap. */
+function fitAmount() {
+  const expr = state && state.regions.amount && state.regions.amount.querySelector(".amount-expr");
+  if (!expr) return;
+  expr.classList.remove("wrap");
+  expr.style.setProperty("--fit", "1");
+  const over = () => expr.scrollWidth > expr.clientWidth + 1;
+  for (let fit = 0.9; over() && fit >= 0.5; fit -= 0.1) expr.style.setProperty("--fit", fit.toFixed(1));
+  if (over()) expr.classList.add("wrap");
 }
 
 // ---------------------------------------------------------------- kind and amount
@@ -291,7 +307,7 @@ function kindRegion() {
         draft.toAccount = other ? other.id : null;
       }
       state.screen.querySelector(".bar-title").textContent = title(draft);
-      changed("kind", "pickers", "amount", "inline", "keypad");
+      changed("kind", "pickers", "amount", "inline", "dock");
     },
     t("kind"),
   );
@@ -377,6 +393,7 @@ function amountRegion() {
   const parts = [h("div", { class: "amount-line" }, box, currencyButton)];
   if (result.error === "divideByZero") parts.push(h("p", { class: "error", role: "alert", text: t("divideByZero") }));
   if (draft.currency) parts.push(rateLine(draft, result.cents));
+  showSaveAmount();
   return parts;
 }
 
@@ -546,12 +563,12 @@ function pickAccount(id) {
     draft.currency = account.currency === store.main ? null : account.currency;
     draft.rate = draft.currency && rateOf(draft.currency) ? fromMicros(rateOf(draft.currency)) : null;
   }
-  changed("amount", "inline", "keypad");
+  changed("amount", "inline", "dock");
 }
 
 function pickDate(iso) {
   state.draft.date = iso;
-  changed("inline", "keypad");
+  changed("inline", "dock");
 }
 
 function transferPickers(draft) {
@@ -637,9 +654,12 @@ function dateInput() {
   });
 }
 
-/** Date and account in the form, shown while the keypad is put away (with the keypad they sit on top of it). */
+/**
+ * Date and account in the form, shown while the keypad is put away (with the keypad they sit on top of it, unless
+ * a large text size leaves the dock no room for them).
+ */
 function inlineRegion() {
-  if (state.keypad) return null;
+  if (state.keypad && !state.tight) return null;
   const draft = state.draft;
   const store = ctx.store;
   const yesterday = addDays(ctx.today, -1);
@@ -761,10 +781,14 @@ function details() {
       maxlength: String(max),
       list: listId || null,
       autocomplete: "off",
+      enterkeyhint: "done",
       onInput: (e) => {
         draft[key] = e.target.value;
         draft.dirty = true;
         persist();
+      },
+      onKeydown: (e) => {
+        if (e.key === "Enter") e.target.blur();
       },
       onFocus: () => showKeypad(false),
       ...extra,
@@ -927,25 +951,119 @@ function showKeypad(on) {
   if (state.keypad === on) return;
   state.keypad = on;
   if (on && document.activeElement && document.activeElement.blur) document.activeElement.blur();
-  paint("keypad");
+  paint("dock");
   paint("amount");
   paint("inline");
+  // At once, not a frame later: a field that just took the focus is scrolled clear of the dock's new height.
+  measureDock();
+  // The form's layout changed under the field that took the focus: put it in sight once it has settled.
+  if (!on) requestAnimationFrame(keepFieldVisible);
 }
 
-/** The keypad, docked at the bottom with the date and the account right above it. */
-function keypadRegion() {
+/**
+ * The dock at the bottom of the screen: with the keypad, the date and the account, then the keys, then Save, the
+ * biggest key, under the thumb; without it (typing a note, a saved entry opened), Save alone with a key that brings
+ * the keypad back. At a large text size the date and the account move into the form (see fitDock).
+ */
+function dockRegion() {
   if (state.screen) state.screen.classList.toggle("keypad-on", state.keypad);
   const spacer = state.screen && state.screen.querySelector(".keypad-space");
   if (spacer) spacer.style.height = "";
-  if (!state.keypad) return null;
+  const saveKey = h(
+    "button",
+    { type: "button", class: "save-key", onClick: save, onPointerdown: keepFocus },
+    saveLabel(),
+  );
+  state.saveKey = saveKey;
+  const saveRow = h(
+    "div",
+    { class: "save-row" },
+    state.keypad
+      ? null
+      : h(
+          "button",
+          {
+            type: "button",
+            class: "key op keypad-key",
+            "aria-label": t("showKeypad"),
+            title: t("showKeypad"),
+            onClick: () => showKeypad(true),
+          },
+          icon("keypad"),
+        ),
+    saveKey,
+  );
+  requestAnimationFrame(measureDock);
+  if (!state.keypad) return h("div", { class: "dock" }, saveRow);
+  return h("div", { class: "dock with-keypad" }, state.tight ? null : dockChips(), keypadKeys(), saveRow);
+}
+
+/** Save, with the amount it will save: the result when a calculation is still open ("12 + 3" saves 15). */
+function saveLabel() {
+  const draft = state.draft;
+  const { cents } = calc.evaluate(draft.expr);
+  return [
+    icon("check"),
+    h("span", { class: "save-word", text: t("save") }),
+    cents > 0 ? h("span", { class: "save-amount", text: money(cents, draft.currency || ctx.store.main) }) : null,
+  ];
+}
+
+function showSaveAmount() {
+  if (!state.saveKey) return;
+  state.saveKey.textContent = "";
+  for (const part of saveLabel()) if (part) state.saveKey.appendChild(part);
+  fitSave();
+}
+
+/** Save and its amount stay on one line; when both do not fit (a large text size), Save shows alone. */
+function fitSave() {
+  const key = state && state.saveKey;
+  const amount = key && key.querySelector(".save-amount");
+  if (!amount) return;
+  amount.hidden = false;
+  if (key.scrollWidth > key.clientWidth + 1) amount.hidden = true;
+}
+
+/** The date and the account, one tap each, right above the keys. */
+function dockChips() {
   const draft = state.draft;
   const store = ctx.store;
-  // The space under the form matches the dock's real height, which grows with the phone's text size.
-  requestAnimationFrame(() => {
-    const dock = state && state.screen && state.screen.querySelector(".dock");
-    const space = state && state.screen && state.screen.querySelector(".keypad-space");
-    if (dock && space && dock.offsetHeight > 0) space.style.height = dock.offsetHeight + 16 + "px";
-  });
+  const account = store.accounts.find((a) => a.id === draft.account);
+  const showAccount = draft.kind !== "transfer" && store.accounts.filter((a) => !a.archived).length > 1;
+  return h(
+    "div",
+    { class: "dock-row" },
+    h(
+      "button",
+      {
+        type: "button",
+        class: "chip dock-chip",
+        onClick: chooseDate,
+        onPointerdown: keepFocus,
+        "aria-label": t("dateIs", { date: dateName(draft.date) }),
+      },
+      icon("calendar"),
+      h("span", { class: "dock-chip-label", text: dateName(draft.date) }),
+    ),
+    showAccount
+      ? h(
+          "button",
+          {
+            type: "button",
+            class: "chip dock-chip",
+            onClick: chooseAccount,
+            onPointerdown: keepFocus,
+            "aria-label": t("accountIs", { name: account ? account.name : "" }),
+          },
+          accountDisc(account, "tiny"),
+          h("span", { class: "dock-chip-label", text: account ? account.name : t("account") }),
+        )
+      : null,
+  );
+}
+
+function keypadKeys() {
   const key = (value, label, aria, cls = "") =>
     h(
       "button",
@@ -958,62 +1076,134 @@ function keypadRegion() {
       },
       label,
     );
-  const account = store.accounts.find((a) => a.id === draft.account);
-  const showAccount = draft.kind !== "transfer" && store.accounts.filter((a) => !a.archived).length > 1;
   return h(
     "div",
-    { class: "dock" },
-    h(
-      "div",
-      { class: "dock-row" },
-      h(
-        "button",
-        {
-          type: "button",
-          class: "chip dock-chip",
-          onClick: chooseDate,
-          onPointerdown: keepFocus,
-          "aria-label": t("dateIs", { date: dateName(draft.date) }),
-        },
-        icon("calendar"),
-        h("span", { text: dateName(draft.date) }),
-      ),
-      showAccount
-        ? h(
-            "button",
-            {
-              type: "button",
-              class: "chip dock-chip",
-              onClick: chooseAccount,
-              onPointerdown: keepFocus,
-              "aria-label": t("accountIs", { name: account ? account.name : "" }),
-            },
-            accountDisc(account, "tiny"),
-            h("span", { text: account ? account.name : t("account") }),
-          )
-        : null,
-    ),
-    h(
-      "div",
-      { class: "keypad", role: "group", "aria-label": t("keypad") },
-      key("7", "7"),
-      key("8", "8"),
-      key("9", "9"),
-      backspace("key op back", t("deleteDigitHold")),
-      key("4", "4"),
-      key("5", "5"),
-      key("6", "6"),
-      key("÷", "÷", t("divide"), "op"),
-      key("1", "1"),
-      key("2", "2"),
-      key("3", "3"),
-      key("×", "×", t("multiply"), "op"),
-      key(".", ctx.mark, t("decimalMark")),
-      key("0", "0"),
-      key("−", "−", t("minus"), "op"),
-      key("+", "+", t("plus"), "op"),
-    ),
+    { class: "keypad", role: "group", "aria-label": t("keypad") },
+    key("7", "7"),
+    key("8", "8"),
+    key("9", "9"),
+    backspace("key op back", t("deleteDigitHold")),
+    key("4", "4"),
+    key("5", "5"),
+    key("6", "6"),
+    key("÷", "÷", t("divide"), "op"),
+    key("1", "1"),
+    key("2", "2"),
+    key("3", "3"),
+    key("×", "×", t("multiply"), "op"),
+    key(".", ctx.mark, t("decimalMark")),
+    key("0", "0"),
+    key("−", "−", t("minus"), "op"),
+    key("+", "+", t("plus"), "op"),
   );
+}
+
+// ---------------------------------------------------------------- the dock and the phone's keyboard
+
+// The phone on its side with the keypad open: the dock is a column beside the form, not a bar under it.
+const SIDE = "(orientation: landscape) and (max-height: 34rem)";
+
+/**
+ * The space under the form matches the dock's real height (it grows with the phone's text size), and the page
+ * scrolls a focused field clear of the dock (--dock-h is the root's scroll padding and lifts the snackbar).
+ */
+function measureDock() {
+  const dock = state && state.screen && state.screen.querySelector(".dock");
+  if (!dock || !(dock.offsetHeight > 0)) return;
+  if (fitDock(dock)) return;
+  fitSave();
+  fitAmount();
+  const beside = state.keypad && window.matchMedia && window.matchMedia(SIDE).matches;
+  const space = state.screen.querySelector(".keypad-space");
+  if (space) space.style.height = dock.offsetHeight + 16 + "px";
+  document.documentElement.style.setProperty("--dock-h", (beside ? 0 : dock.offsetHeight) + "px");
+  placeDock();
+  if (state.keypad && !beside) keepAmountVisible();
+}
+
+/** With the keypad up, the amount being typed is never behind the dock (at a large text size it could be). */
+function keepAmountVisible() {
+  const dock = state && state.screen && state.screen.querySelector(".dock");
+  const box = dock && state.screen.querySelector(".amount-box");
+  if (!box || (window.matchMedia && window.matchMedia(SIDE).matches)) return;
+  const limit = dock.getBoundingClientRect().top - 8;
+  const bottom = box.getBoundingClientRect().bottom;
+  if (bottom > limit) window.scrollBy(0, bottom - limit);
+}
+
+/**
+ * With the keypad, the dock may take at most about half of the screen, so the amount stays in sight while it is
+ * typed: when the date and account chips would make it taller, or would cut a name to less than half (a large text
+ * size), they move into the form. Returns true when it drew the dock again (it is measured again then).
+ */
+function fitDock(dock) {
+  if (!state.keypad || (window.matchMedia && window.matchMedia(SIDE).matches)) return false;
+  const chips = dock.querySelector(".dock-row");
+  if (chips) {
+    state.chipsHeight = chips.offsetHeight + 6;
+    state.chipsCut = [...chips.querySelectorAll(".dock-chip-label")].some((l) => l.scrollWidth > 2 * l.clientWidth);
+  }
+  const full = dock.offsetHeight + (chips ? 0 : state.chipsHeight || 0);
+  const tight = full > window.innerHeight * 0.55 || Boolean(state.chipsCut);
+  if (tight === Boolean(state.tight)) return false;
+  state.tight = tight;
+  paint("dock");
+  paint("inline");
+  measureDock();
+  return true;
+}
+
+/** The dock is gone (another screen): the page needs no room for it. */
+function undock() {
+  document.documentElement.style.removeProperty("--dock-h");
+}
+
+/**
+ * When the phone's keyboard covers the page instead of making it smaller, the dock moves up to sit on the keyboard,
+ * so Save stays in reach. Zoomed in, the dock stays where it is.
+ */
+function placeDock() {
+  const dock = state && state.screen && state.screen.querySelector(".dock");
+  const vv = window.visualViewport;
+  if (!dock) return;
+  let covered = 0;
+  if (vv && Math.abs(vv.scale - 1) < 0.01)
+    covered = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+  dock.style.bottom = covered ? covered + "px" : "";
+}
+
+/** A field being typed in is scrolled into sight: below the top bar and clear of the dock. */
+function keepFieldVisible() {
+  const el = document.activeElement;
+  const dock = state && state.screen && state.screen.querySelector(".dock");
+  if (!dock || !el || el.tagName !== "INPUT" || !state.screen.contains(el)) return;
+  const vv = window.visualViewport;
+  const bar = state.screen.querySelector(".bar");
+  const top = (bar ? bar.getBoundingClientRect().bottom : 0) + 8;
+  const bottom = (vv ? vv.offsetTop + vv.height : window.innerHeight) - dock.offsetHeight - 12;
+  const box = el.getBoundingClientRect();
+  if (box.top < top) window.scrollBy(0, box.top - top);
+  else if (box.bottom > bottom) window.scrollBy(0, Math.min(box.bottom - bottom, box.top - top));
+}
+
+let watching = false;
+
+/** Follows the phone's keyboard and the window's size while the form is open (set up once). */
+function watchViewport() {
+  if (watching) return;
+  watching = true;
+  const follow = () => {
+    if (!state || !state.screen) return;
+    measureDock();
+    keepFieldVisible();
+  };
+  window.addEventListener("resize", follow);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", follow);
+    window.visualViewport.addEventListener("scroll", () => state && state.screen && placeDock());
+  }
+  // The keyboard takes a moment to open after a field gets the focus.
+  document.addEventListener("focusin", () => setTimeout(() => state && state.screen && keepFieldVisible(), 350));
 }
 
 /** A key: the first digit typed into a saved amount replaces it; an operator goes on from it. */

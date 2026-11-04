@@ -1,5 +1,5 @@
-// Settings: the main currency, the budget and warnings, reminders, the usual account, exchange rates, import and
-// export, the app lock and the language.
+// Settings: the main currency, the budget and warnings, the cards on Home, reminders, the usual account, exchange
+// rates, import and export, the app lock and the language.
 
 import {
   ctx,
@@ -32,6 +32,7 @@ import {
 import { isIsoDate, startOfMonth, addMonths } from "../dates.mjs";
 import { setBudget } from "./home.mjs";
 import { exportThese } from "./entries.mjs";
+import { shownText } from "./edithome.mjs";
 
 export function render(route) {
   return route.name === "currencies" ? currencies() : settings();
@@ -180,6 +181,19 @@ function settings() {
           title: t("recurringEntries"),
           sub: t("recurringHint"),
           onClick: () => ctx.go("#/recurring"),
+        }),
+      ),
+    ),
+    section(
+      t("tabHome"),
+      h(
+        "ul",
+        { class: "list" },
+        row({
+          lead: h("span", { class: "disc hue-teal", "aria-hidden": "true" }, "🏠"),
+          title: t("editHome"),
+          sub: shownText(store.ui.home),
+          onClick: () => ctx.go("#/home-edit"),
         }),
       ),
     ),

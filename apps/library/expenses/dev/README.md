@@ -12,6 +12,7 @@ background jobs and the widgets) and the page that draws every screen (`index.ht
 | `js/store.mjs`     | The records through `zapli.data` (and example data in a plain browser)      |
 | `js/ledger.mjs`    | Balances, totals, budgets and "safe to spend today"                         |
 | `js/subs.mjs`      | The subscription finder                                                     |
+| `js/homecards.mjs` | Which cards Home shows, and their order (the choice in the page settings)   |
 | `js/rrule.mjs`     | Repeat rules of recurring entries: next dates, yearly counts, sentences     |
 | `js/money.mjs`     | Exact amounts in cents, rates in millionths, formats for English and Slovak |
 | `js/calc.mjs`      | The calculator of the amount field                                          |

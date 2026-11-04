@@ -19,6 +19,7 @@ import * as subscriptions from "./screens/subscriptions.mjs";
 import * as settings from "./screens/settings.mjs";
 import * as categories from "./screens/categories.mjs";
 import * as importer from "./screens/importer.mjs";
+import * as editHome from "./screens/edithome.mjs";
 
 const TABS = [
   ["", "home", "tabHome"],
@@ -48,6 +49,7 @@ const ROUTES = [
   [/^categories$/, categories],
   [/^category\/(.+)$/, categories],
   [/^import$/, importer],
+  [/^home-edit$/, editHome],
 ];
 
 // Where a pushed screen goes back to when it was opened directly (after a reload or from a notification).
@@ -65,6 +67,7 @@ const PARENTS = {
   categories: "settings",
   category: "categories",
   import: "settings",
+  "home-edit": "",
 };
 
 const main = document.getElementById("main");
