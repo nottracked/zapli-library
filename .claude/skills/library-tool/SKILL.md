@@ -272,20 +272,20 @@ files. The HTML pages carry no embedded manifest.
 
 ## 5. `listing.json`
 
-| Field         | Required | What it holds                                                                                                                               |
-| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`          | yes      | The app id, the same as `app.id` and the folder: `library/<name>`                                                                           |
-| `category`    | yes      | A Google Play category id in lowercase: `finance`, `health_and_fitness`, `productivity`, `tools`, `game_puzzle`, …; equal to `app.category` |
-| `replaces`    | yes      | The app type in generic words, at most 60 characters: `expense tracker`, `water reminder`. Never another app's name                         |
-| `title`       | yes      | The app's name in the library, at most 30 characters, usually `app.name`                                                                    |
-| `summary`     | yes      | One line, at most 80 characters: what it does for its user                                                                                  |
-| `description` | yes      | Markdown, at most 4,000 characters: what it does, what it never does (ads, tracking, accounts) and where the data stays                     |
-| `license`     | yes      | `GPL-3.0-or-later` for a new app and for every app from its next version; the same as `app.license`                                         |
-| `tags`        | no       | At most 10 lowercase search tags (`budget`, `meal planning`)                                                                                |
-| `screenshots` | no       | At most 8 `{file, caption, theme}` (`theme` is `light` or `dark`; the caption is also the image's text alternative)                         |
-| `sampleData`  | no       | Fictional records by entity id (at most 50 each) that fill the screenshots                                                                  |
-| `migration`   | no       | `{formats, summary, samples}`: the formats it imports (`csv`, `json`, `txt`), a generic summary, and `{file, about}` per sample file        |
-| `research`    | no       | At most 30 `{source, used_for}`: the public https pages the author learned the app type from, including other apps' export formats          |
+| Field         | Required | What it holds                                                                                                                                                                                                                                                        |
+| ------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`          | yes      | The app id, the same as `app.id` and the folder: `library/<name>`                                                                                                                                                                                                    |
+| `category`    | yes      | A Google Play category id in lowercase: `finance`, `health_and_fitness`, `productivity`, `tools`, `game_puzzle`, …; equal to `app.category`                                                                                                                          |
+| `replaces`    | yes      | The app type in generic words, at most 60 characters: `expense tracker`, `water reminder`. Never another app's name                                                                                                                                                  |
+| `title`       | yes      | The app's name in the library, at most 30 characters, usually `app.name`                                                                                                                                                                                             |
+| `summary`     | yes      | One line, at most 80 characters: what it does for its user                                                                                                                                                                                                           |
+| `description` | yes      | Markdown, at most 4,000 characters: what it does, what it never does (ads, tracking, accounts) and where the data stays                                                                                                                                              |
+| `license`     | yes      | `GPL-3.0-or-later` for a new app and for every app from its next version; the same as `app.license`                                                                                                                                                                  |
+| `tags`        | no       | At most 10 lowercase search tags (`budget`, `meal planning`)                                                                                                                                                                                                         |
+| `screenshots` | no       | At most 8 `{file, caption, theme, sha256, size}` (`theme` is `light` or `dark`; the caption is also the image's text alternative; PNG or WebP, at most 2 MiB and 4,096 px a side; `sha256` and `size` are written by `zapli library inventory <app folder> --write`) |
+| `sampleData`  | no       | Fictional records by entity id (at most 50 each) that fill the screenshots                                                                                                                                                                                           |
+| `migration`   | no       | `{formats, summary, samples}`: the formats it imports (`csv`, `json`, `txt`), a generic summary, and `{file, about}` per sample file                                                                                                                                 |
+| `research`    | no       | At most 30 `{source, used_for}`: the public https pages the author learned the app type from, including other apps' export formats                                                                                                                                   |
 
 - **Sample data** uses the stored values as the app keeps them: text as strings, `decimal` as a plain string
   (`"12.50"`), dates `YYYY-MM-DD`, times `HH:MM`, a `datetime` with its offset (`2026-10-15T08:30:00+02:00`), a

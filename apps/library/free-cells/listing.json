@@ -22,17 +22,23 @@
     {
       "file": "screenshots/01-deal-light.png",
       "caption": "A numbered deal with big cards; the green light says it can be won",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "5bc4887274bf34d103257974e94fc8af0e0d889675b5a9e8d6b7e94fa697d834",
+      "size": 426698
     },
     {
       "file": "screenshots/02-hint-light.png",
       "caption": "An honest hint: always a move from a real winning path",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "4af6075b3ad9625e20f387655033f69a7d4974b35a50e02ec3c1bc854b525273",
+      "size": 415074
     },
     {
       "file": "screenshots/03-not-winnable-light.png",
       "caption": "When the game can no longer be won, one tap goes back to where it could",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "ab2316ea4d380379950965cb46396d6a00caa472df4eb0601d1b7e66a81697c3",
+      "size": 380534
     }
   ],
   "research": [

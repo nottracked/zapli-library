@@ -22,17 +22,23 @@
     {
       "file": "screenshots/01-deal-light.png",
       "caption": "One-suit Spider on a deal that can be won",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "6c56038eebd0bd3a921dd3056ef6cc18ec6e039c3bdb2e63a9a0a863cd7d0c70",
+      "size": 385558
     },
     {
       "file": "screenshots/02-hint-light.png",
       "caption": "An honest hint, with the cards and the column outlined",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "00b8f4f4ffce53ae94cba3647e889cc6d0d7f9f59f1ec92fdf15d0c3d3fb1bb4",
+      "size": 374651
     },
     {
       "file": "screenshots/03-landscape-light.png",
       "caption": "Turn the phone for bigger cards in ten columns",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "344d9fae65181dade1944588c2a94fd74f2e53c91db213feac82bc15595c0961",
+      "size": 262003
     }
   ],
   "research": [

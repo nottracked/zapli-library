@@ -61,12 +61,13 @@ There are two kinds of app, and every app is one or the other:
   it needs. Zapli draws native screens for it. Most data apps (Water, To-do, Flashcards) are this kind.
 - A **web app** (`index.html`) is one HTML file with its manifest embedded in a
   `<script type="application/zapli+json">` block. Zapli runs it in a locked-down web view of its own; the same file
-  also opens in a plain browser. Games and other apps that draw their own screens (Solitaire, Mines, Gridfire, Pocket
+  also opens in a plain browser. Games and other apps that draw their own screens (Solitaire, Mines, Glowmere, Pocket
   Scan) are this kind.
 
 A web app that needs more than one file is a **package app**: its files are in a `package/` folder, described below.
-Free Cells, Spider and Word Wheel are package apps, and so is Expenses: its screens are web pages, while its manifest
-declares its records, imports, reminders and widgets, so they work as in a declarative app.
+Free Cells, Spider, Word Wheel, Hidden Word, Word Search, Patience and Bricks are package apps, and so are Expenses,
+Notes and Loyalty cards: their screens are web pages, while their manifests declare their records, imports, reminders
+and widgets, so they work as in a declarative app.
 
 ## Package apps
 
@@ -187,9 +188,10 @@ of an app under the app's own licence, and that you have the right to license it
 
 A maintainer reviews every pull request and runs the library checks before merging: every definition validates with
 no errors and no warnings; every listing fits its schema and names the same id and licence as its definition; the
-sample data fits the app's data; every screenshot and sample import file exists and reads in its format; a package
-app's files keep the path rules and the limits, match its manifest's list exactly and hold no minified code without
-its source; no app registers a service worker; and no listing names another app or brand, uses comparison wording or
+sample data fits the app's data; every screenshot and sample import file exists and reads in its format, and each
+screenshot matches the `sha256` and `size` its listing gives (`zapli library inventory <app folder> --write` writes
+them); a package app's files keep the path rules and the limits, match its manifest's list exactly and hold no
+minified code without its source; no app registers a service worker; and no listing names another app or brand, uses comparison wording or
 carries real-looking e-mail addresses or phone numbers. `CODEOWNERS` says who reviews which folder.
 
 Phones take apps from this repository only through the signed index: a list of every app's version and the SHA-256

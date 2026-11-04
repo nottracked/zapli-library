@@ -11,22 +11,30 @@
     {
       "file": "screenshots/01-today-light.png",
       "caption": "Today’s progress toward your goal, with one-tap quick adds",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "1db9c8a20681fc3ba1f8968b92297a99dadd0a6d40c7b15a3dc3bafc3c68adc0",
+      "size": 198082
     },
     {
       "file": "screenshots/02-log-light.png",
       "caption": "Every drink, grouped by day",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "f0984c3289bb20c5f2006e0045c8bbdd4295e308028fe0cc5eb5e04e41553525",
+      "size": 179812
     },
     {
       "file": "screenshots/03-history-light.png",
       "caption": "Goal streak, 7-day average and daily totals",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "935e846eb693aef1aefb28dbed8f001652dc46b64191d15ee1f6ccc49dfb5c01",
+      "size": 165616
     },
     {
       "file": "screenshots/04-today-dark.png",
       "caption": "Today in the dark theme",
-      "theme": "dark"
+      "theme": "dark",
+      "sha256": "4e492093eb0b4db2f9d6346d9d8f2502590aea2fd51e10db659bc5e035a0bacc",
+      "size": 200430
     }
   ],
   "sampleData": {

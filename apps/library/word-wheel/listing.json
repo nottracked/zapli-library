@@ -21,17 +21,23 @@
     {
       "file": "screenshots/01-wheel-light.png",
       "caption": "Swipe the letters to fill the crossword",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "7113eda2b89511838edb5f28ec8f844a37aecd59c1de58fb3876e407a60d0622",
+      "size": 145939
     },
     {
       "file": "screenshots/02-slovak-light.png",
       "caption": "Real Slovak words, with letters such as Š on the wheel",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "ae0c6e4f593de38ae6ce015f24f6d1c7dbcfc90be3286ee1103eec41ca864700",
+      "size": 148415
     },
     {
       "file": "screenshots/03-calendar-light.png",
       "caption": "A new daily wheel every day, and every past one still to play",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "5550db4ab57cfe132c34a7709613e1d04f53c13a31c6affc05010f40ba98b18a",
+      "size": 192881
     }
   ],
   "research": [

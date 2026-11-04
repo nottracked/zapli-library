@@ -11,17 +11,23 @@
     {
       "file": "screenshots/01-guesses-light.png",
       "caption": "Each guess is marked letter by letter: a dot in its place, a ring elsewhere, a dash not in the word",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "0734ec5646b715a263633d1736238e22de9f1fd3e0b992da228b36634e1fcb5a",
+      "size": 182400
     },
     {
       "file": "screenshots/02-how-to-play-light.png",
       "caption": "How to play in 15 seconds, with the marks explained",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "55d72bc4d09b4d420a4af92e371e84328b3521b2ec633687f31b13114d267684",
+      "size": 300903
     },
     {
       "file": "screenshots/03-guesses-dark.png",
       "caption": "The same game in dark mode",
-      "theme": "dark"
+      "theme": "dark",
+      "sha256": "8f411b3a1e404eb2c0c0d6525c6e8a22736d90a469acedc5b2bb327913873261",
+      "size": 171630
     }
   ],
   "research": [

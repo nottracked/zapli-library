@@ -59,8 +59,10 @@ check flags any other. `README.md` has the rules for people; this file is the sh
 
 Maintainers run `zapli library check` (Zapli's command-line tool) and the validator on every pull request: 0 errors
 and 0 warnings for every definition, every listing fits its schema, sample data fits the app, sample files and
-screenshots exist, a package app's files keep the path rules and limits and match `web.files`, no minified code
-without its source, no service worker, and no forbidden content. Contributors cannot run them yet, so be exact: valid
+screenshots exist (each screenshot's `sha256` and `size` in the listing match its file: run
+`zapli library inventory <app folder> --write` after adding or changing one), a package app's files keep the path
+rules and limits and match `web.files`, no minified code without its source, no service worker, and no forbidden
+content. Contributors cannot run them yet, so be exact: valid
 JSON, ids that match, and say in the pull request what you could and could not check.
 
 Use the `library-tool` skill (`.claude/skills/library-tool/SKILL.md`) to write or change an app.

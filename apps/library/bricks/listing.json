@@ -11,17 +11,23 @@
     {
       "file": "screenshots/01-home-light.png",
       "caption": "Play the next level in one tap, or the daily level and endless play",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "d3a9b486f17f882b5734bd8bb5ec4309dd6b56ea3eebaa3157f6064fed1ceb9e",
+      "size": 463901
     },
     {
       "file": "screenshots/02-play-light.png",
       "caption": "Glazed bricks, a glowing ball and gifts to catch",
-      "theme": "dark"
+      "theme": "dark",
+      "sha256": "a280e3ee22e5e9c6c26c30e7e6f7482a17fd5083106efaa55c0324dcdc387cab",
+      "size": 1028240
     },
     {
       "file": "screenshots/03-levels-light.png",
       "caption": "48 levels in four glazes, three stars each",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "3799fc43c7e53deb8c82615a08886907d753079482b4c7e96a0c8cd03907111d",
+      "size": 325925
     }
   ],
   "research": [

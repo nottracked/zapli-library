@@ -21,27 +21,37 @@
     {
       "file": "screenshots/01-overview-light.png",
       "caption": "Latest reading with its category, plus 7- and 30-day, morning and evening averages",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "7323773a9e122ebc5879ece721b16f9060b47b0035e0cd075bdfbd44f1f75d4f",
+      "size": 223540
     },
     {
       "file": "screenshots/02-reading-detail-light.png",
       "caption": "Each reading with pulse pressure, mean arterial pressure, arm, position and context",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "cd83e451e78a9120f60b1567c534a7d05afd91aa7f99baaa12c25fe5710eddc2",
+      "size": 136825
     },
     {
       "file": "screenshots/03-trends-light.png",
       "caption": "Daily blood pressure and pulse averages over 30 days",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "d91c5fe4d6f5c1ee287f4c53be0b2c1dc9a51e0cc1409be3beb7ad55d3eb074e",
+      "size": 159993
     },
     {
       "file": "screenshots/04-report-light.png",
       "caption": "A report for your doctor covering 7, 30 or 90 days or a year",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "d60cd2c35f08720b455fe7ebd31a45b3cc7f945fa7ab87473f563ebcd5d8cb56",
+      "size": 223529
     },
     {
       "file": "screenshots/05-overview-dark.png",
       "caption": "The overview in the dark theme",
-      "theme": "dark"
+      "theme": "dark",
+      "sha256": "b3aa98bebf34a2fd7c028bc16a70b32b0b3cf985be1702b85ab05dd0edcdecfb",
+      "size": 225367
     }
   ],
   "sampleData": {

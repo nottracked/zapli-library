@@ -22,17 +22,23 @@
     {
       "file": "screenshots/01-daily-light.png",
       "caption": "Today's puzzle: drag across the letters to find the farm words",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "bb0a6b2a18b0fa79b2e1bb0b3f1784113bf2a25b6c8e511aca2cd51ec629e2f4",
+      "size": 212548
     },
     {
       "file": "screenshots/02-themes-light.png",
       "caption": "46 themes in each language, each word kept in your collection",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "fb88880cd25e3ceb736273f553999c95e2be1bd71059d2927bc9b8e8607e9e00",
+      "size": 231537
     },
     {
       "file": "screenshots/03-daily-dark.png",
       "caption": "The daily puzzle in dark mode",
-      "theme": "dark"
+      "theme": "dark",
+      "sha256": "f0fc12096c4bb026c35dc2dfbaed99a3b56cea711e2484a187d90d1d603b02c7",
+      "size": 206274
     }
   ],
   "research": [

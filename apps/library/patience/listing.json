@@ -52,17 +52,23 @@
     {
       "file": "screenshots/01-picker-light.png",
       "caption": "Pyramid, Golf and Peaks, each with its own daily deal",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "b5712c7516526c7b98972fdf896764f8c75a068bd155600ebaf6e58f6f2804c7",
+      "size": 561034
     },
     {
       "file": "screenshots/02-pyramid-light.png",
       "caption": "Pyramid, with the light that tells you the deal can still be won",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "8dbe55624f9f8ce73122b540c83efaa2a2fcb238929f4ec7d957f1b335308c1e",
+      "size": 416871
     },
     {
       "file": "screenshots/03-peaks-light.png",
       "caption": "Peaks on big cards, fanned so they fit an upright phone",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "398bf3e1a8f867a0c8996d9c8a994394a13ce8e531dddd5b76ca478f08008371",
+      "size": 382676
     }
   ]
 }

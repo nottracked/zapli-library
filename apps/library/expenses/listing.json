@@ -11,42 +11,58 @@
     {
       "file": "screenshots/01-home-light.png",
       "caption": "Home: what is safe to spend today, the month so far and quick add",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "8e5f4a9c6ea6293c607ab872dd57d9d14f12d10b2b3f27467a202a9402f584e8",
+      "size": 200583
     },
     {
       "file": "screenshots/02-stats-light.png",
       "caption": "Stats by month or year: spent, income and where the money went",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "330ed47182935bfad4d8721b6ae1e275bc1bfe7a6945bea848eadd6edde8f353",
+      "size": 138107
     },
     {
       "file": "screenshots/03-subscriptions-light.png",
       "caption": "The subscription finder: payments that repeat, with their monthly and yearly cost",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "44ea74c46adc20beccd8835d87779cb27619a589d3be3c97bc1b12a2d39cc3e5",
+      "size": 275987
     },
     {
       "file": "screenshots/04-entries-light.png",
       "caption": "Every entry by day, with search and filters",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "15c8d616afdde1a1a7542b328b2a576fedbecd39a9f5f9e189c88ab24634eafc",
+      "size": 253588
     },
     {
       "file": "screenshots/05-budgets-light.png",
       "caption": "A monthly budget and one for each category",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "6724d16be23b49f6aa78a5a9b87ff141119acc96d01c0b34206e14c534f5aa24",
+      "size": 187069
     },
     {
       "file": "screenshots/06-accounts-light.png",
       "caption": "Accounts with their balances, and transfers between them",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "542302873b148e1b2fc760e6186fd7aa2a5f43e8864bd605e4281f21fb47ca65",
+      "size": 160747
     },
     {
       "file": "screenshots/07-calendar-light.png",
       "caption": "The month as a calendar: what each day cost",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "4302adace2a02ba27288101c218c80b57545a9b643e9f0d00747caf2f32c2d06",
+      "size": 118588
     },
     {
       "file": "screenshots/08-add-light.png",
       "caption": "Add an entry with the calculator keypad: amount, category, account, date",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "58f85ddffe83130e955a95ef15bf939f6dd5040affc1c7d2b2eeeb21ab6e1f9f",
+      "size": 179823
     }
   ],
   "sampleData": {
