@@ -4,7 +4,7 @@
     "id": "library/loyalty-cards",
     "kind": "web",
     "name": "Loyalty cards",
-    "version": "3.0.0",
+    "version": "3.1.1",
     "icon": "wallet",
     "category": "shopping",
     "ageRating": "everyone",
@@ -349,94 +349,11 @@
     }
   },
   "web": {
-    "entry": "index.html",
     "routes": {
       "wallet": "#/",
       "add": "#/add"
     },
-    "orientation": "any",
-    "files": {
-      "css/app.css": { "sha256": "ef0e524d443fb8af7dd31d8addf217695697bde0394f2882cdeba1578662743e", "size": 27024 },
-      "index.html": { "sha256": "02e17b518215cc8922e8466421ed71ff8f5e2ebfedeb902ab56af447557c992f", "size": 645 },
-      "js/app.mjs": { "sha256": "739f039b5304355ac52bde290408e86a47b01f5ebbd420a3ddbdcacfec52d4d8", "size": 8299 },
-      "js/barcode/aztec.mjs": {
-        "sha256": "0672be3d3644d5f7a42eaf92e81ed3b022f5cbe566b7e852a8df27dd6117dcb5",
-        "size": 12282
-      },
-      "js/barcode/datamatrix.mjs": {
-        "sha256": "5ebfa5f6adf5aa4eaf3de54a429c78abc9f90b015f0dd05d0710040136c3bd03",
-        "size": 7139
-      },
-      "js/barcode/index.mjs": {
-        "sha256": "66122b7df67ba7617ff93bc2044a79f87131211e665fa5b55bc7f1e53314840b",
-        "size": 3697
-      },
-      "js/barcode/linear.mjs": {
-        "sha256": "8aa6c55ac73b87f2c456985131cea8a38434716c39759c4173ef75d408958d8a",
-        "size": 15978
-      },
-      "js/barcode/pdf417-patterns.mjs": {
-        "sha256": "98d988583a14d9055d4f36867bd1529d1e636a9168830bf3993c2d1a6424e0c6",
-        "size": 12748
-      },
-      "js/barcode/pdf417.mjs": {
-        "sha256": "46a96deccde0d2e3757bd6dd557ba7f87269797a9bf4deff2dbd88d19769671d",
-        "size": 7077
-      },
-      "js/barcode/qr-tables.mjs": {
-        "sha256": "517f5975eb621b8fe2c7c7f74817ae72d603bd813e22d5ff0749f9275dd33f27",
-        "size": 1675
-      },
-      "js/barcode/qr.mjs": {
-        "sha256": "0c34ef646fe8df0bb856a97f0cdccdb121eb2b5516f1a3d195b77304767c68ba",
-        "size": 12787
-      },
-      "js/barcode/reedsolomon.mjs": {
-        "sha256": "c0fe9c5c1bf013676c602c4cd4b549e57c9ec763cad12173c81b6f202c3f0795",
-        "size": 2309
-      },
-      "js/barcode/symbol.mjs": {
-        "sha256": "839da83c5c9ccade8a20574d1b81e2caea4f962e39fb8b7fdbd61c515f68ab77",
-        "size": 2877
-      },
-      "js/brands.mjs": { "sha256": "dd293cf563125101d3bb29fa74f6fef725d9d6d290489d8d2dbca18f9853e0ab", "size": 13137 },
-      "js/faces.mjs": { "sha256": "68eb387e81e42c79b1401c984d38b6ddf1e0b96a4d880802967f1aaa56e16e65", "size": 8021 },
-      "js/formats.mjs": { "sha256": "212a3a23d598ddb8034b4fe5c37978441e2598f6952f143535107e060155bcc3", "size": 4366 },
-      "js/i18n.mjs": { "sha256": "072e92a5c7b939a08569468a486095916eb93d952a79b55b5da1acc0fe553249", "size": 19748 },
-      "js/icons.mjs": { "sha256": "39b282684cf25a3b9f3fa285605d4ed906c9b7c343949a8e7d922e6198a7cb30", "size": 6000 },
-      "js/photos.mjs": { "sha256": "6a0b206af44f9e9cfd1c96128211f8883cd96b13aced5a888df58bf1b1caa808", "size": 4601 },
-      "js/sample.mjs": { "sha256": "0c8c85f4820cd3ff1bf7c9dcee5703425766e692aad8e993860b7e131182efd3", "size": 2865 },
-      "js/screens/add.mjs": {
-        "sha256": "d4e37b530d2e675774186c8ee656bd3120e1a6fa2bbc317b1f5fe60296e4abcc",
-        "size": 3089
-      },
-      "js/screens/card.mjs": {
-        "sha256": "36efc9c7b54efcb6e947d5c612fd43900bcebc77f65538c7bfefbf640b4f80c3",
-        "size": 19425
-      },
-      "js/screens/edit.mjs": {
-        "sha256": "c4e2fe45aae38e8e4ae1f3361a7441184d2321425dd59b3e8324c390d1b4d30b",
-        "size": 12802
-      },
-      "js/screens/picker.mjs": {
-        "sha256": "5024e447bf585019e23d9b9e69185e5deeb5166cb3de5b459e20e9c1249a613c",
-        "size": 4373
-      },
-      "js/screens/settings.mjs": {
-        "sha256": "8303394096c1ae8f5667d7f6e33d0e473e89d50e88df6e6641041e2ec59830f4",
-        "size": 4415
-      },
-      "js/screens/transfer.mjs": {
-        "sha256": "24e4fa8ebc9ffb30bdb87f1a75ad78f81e0fe4d2319cea0070fc667cfdf5b6d6",
-        "size": 15866
-      },
-      "js/screens/wallet.mjs": {
-        "sha256": "eaf70301c78f821b85359a85e81d32f9dfab8fe10646641f41ef9b80e31af552",
-        "size": 7338
-      },
-      "js/store.mjs": { "sha256": "a1ccb48fae2d10f2bc87eadd584baaca42dba023ade72ebf3415094918502706", "size": 9122 },
-      "js/ui.mjs": { "sha256": "61705039a9312507a0f192cbe8396d9aea02fcfd6e495b0251591755f31008ee", "size": 6990 }
-    }
+    "orientation": "any"
   },
   "permissions": {
     "scan.barcode": {

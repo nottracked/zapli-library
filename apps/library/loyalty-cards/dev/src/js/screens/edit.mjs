@@ -5,8 +5,8 @@ import { brandColours } from "../brands.mjs";
 import { SWATCHES, brandOf, cardColours, fitNames, storeTile } from "../faces.mjs";
 import { FORMAT_IDS, FORMAT_NAMES, cleanNumber, detectFormat, numberProblem } from "../formats.mjs";
 import { icon } from "../icons.mjs";
-import { button, confirmDialog, ctx, dialog, h, snack, t, topBar } from "../ui.mjs";
-import { storePicker } from "./picker.mjs";
+import { button, confirmDialog, ctx, dialog, dock, enterMovesOn, h, snack, t, topBar } from "../ui.mjs";
+import { storeChooser } from "./chooser.mjs";
 import { scanCode, showProblem } from "./transfer.mjs";
 
 const KINDS = [
@@ -49,7 +49,7 @@ function formatLabel(id) {
 
 /** The number from a points field written the phone's way ("1 240,5" or "1,240.5"). */
 export function readPoints(text) {
-  const s = String(text || "").replace(/[\s ]/g, "");
+  const s = String(text || "").replace(/[\s\u00a0]/g, "");
   if (!s) return null;
   const normal = /,\d{1,2}$/.test(s) ? s.replace(/\./g, "").replace(",", ".") : s.replace(/,/g, "");
   const n = Number(normal);
@@ -59,7 +59,7 @@ export function readPoints(text) {
 export function render(route) {
   const store = ctx.store;
   const card = store.card(route.id);
-  const screen = h("div", { class: "screen edit" });
+  const screen = h("div", { class: "screen edit has-dock" });
   if (!card) {
     form = null;
     screen.appendChild(topBar({ title: t("editTitle"), onBack: () => ctx.back() }));
@@ -112,7 +112,11 @@ export function render(route) {
   const pickStore = () =>
     dialog(
       (close) => {
-        const picker = storePicker({ onPick: (brand, text) => close(brand || (text ? { name: text } : null)) });
+        const picker = storeChooser({
+          query: draft.brand ? "" : draft.store,
+          onStore: (brand) => close(brand),
+          onOwn: (name) => close(name ? { name } : null),
+        });
         requestAnimationFrame(() => picker.fit());
         return h(
           "div",
@@ -124,6 +128,7 @@ export function render(route) {
             button(t("close"), () => close(), "icon", { iconName: "close" }),
           ),
           picker.element,
+          picker.bar,
         );
       },
       { full: true, label: t("pickFromList") },
@@ -384,46 +389,46 @@ export function render(route) {
       actions: [button(t("save"), save, "text")],
     }),
   );
-  screen.appendChild(
+  const fields = h(
+    "div",
+    { class: "form" },
+    preview,
+    field(
+      "edit-store",
+      t("store"),
+      h(
+        "div",
+        { class: "input-row" },
+        storeInput,
+        button(t("pickFromList"), pickStore, "icon", { iconName: "search" }),
+      ),
+    ),
     h(
       "div",
-      { class: "form" },
-      preview,
-      field(
-        "edit-store",
-        t("store"),
-        h(
-          "div",
-          { class: "input-row" },
-          storeInput,
-          button(t("pickFromList"), pickStore, "icon", { iconName: "search" }),
-        ),
-      ),
-      h(
-        "div",
-        { class: "field" },
-        h("label", { class: "field-label", for: "edit-number", text: t("numberLabel") }),
-        h("div", { class: "input-row" }, numberInput, button(t("scanAgain"), scan, "icon", { iconName: "scan" })),
-        detected,
-      ),
-      field("edit-format", t("barcodeType"), formatSelect, t("formatHelp")),
-      field("edit-holder", t("nameCard"), holderInput),
-      field("edit-points", t("pointsBalance"), pointsInput),
-      h(
-        "div",
-        { class: "field" },
-        h("label", { class: "field-label", for: "edit-expires", text: t("validUntil") }),
-        h("div", { class: "input-row" }, dateInput, clearDate),
-        remindRow,
-      ),
-      field("edit-note", t("note"), noteInput),
-      h("div", { class: "field" }, h("span", { class: "field-label", text: t("colour") }), swatches),
-      field("edit-kind", t("kindShop"), kindSelect),
-      favouriteRow,
-      errors,
-      button(t("save"), save, "filled", { extraClass: "wide" }),
+      { class: "field" },
+      h("label", { class: "field-label", for: "edit-number", text: t("numberLabel") }),
+      h("div", { class: "input-row" }, numberInput, button(t("scanAgain"), scan, "icon", { iconName: "scan" })),
+      detected,
     ),
+    field("edit-format", t("barcodeType"), formatSelect, t("formatHelp")),
+    field("edit-holder", t("nameCard"), holderInput),
+    field("edit-points", t("pointsBalance"), pointsInput),
+    h(
+      "div",
+      { class: "field" },
+      h("label", { class: "field-label", for: "edit-expires", text: t("validUntil") }),
+      h("div", { class: "input-row" }, dateInput, clearDate),
+      remindRow,
+    ),
+    field("edit-note", t("note"), noteInput),
+    h("div", { class: "field" }, h("span", { class: "field-label", text: t("colour") }), swatches),
+    field("edit-kind", t("kindShop"), kindSelect),
+    favouriteRow,
+    errors,
   );
+  // Save stays above the keyboard; Enter on a field goes to the next one, and on the last one saves.
+  enterMovesOn(fields, save);
+  screen.append(fields, dock(button(t("save"), save, "filled", { extraClass: "dock-btn", iconName: "check" })));
   paintSwatches();
   paintPreview();
   paintDetected();

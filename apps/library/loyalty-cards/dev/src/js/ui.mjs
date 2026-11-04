@@ -71,11 +71,22 @@ export function button(label, onClick, kind = "filled", { iconName, id, disabled
 
 let snackTimer = 0;
 
+/**
+ * The snackbar lives in the top open dialog while there is one: a modal dialog hides the rest of the page from taps
+ * and screen readers, and a message under it could not be seen. Without a dialog it lives in the page.
+ */
+function placeSnack(bar) {
+  const open = document.querySelectorAll("dialog[open]");
+  const host = open.length ? open[open.length - 1] : document.body;
+  if (bar.parentElement !== host) host.appendChild(bar);
+}
+
 /** A message at the bottom of the screen; with `action` a button (Undo). It stays 7 s (10 s with a button), or until the screen changes. */
 export function snack(text, action) {
   const bar = document.getElementById("snackbar");
   if (!bar) return;
   clearTimeout(snackTimer);
+  placeSnack(bar);
   bar.textContent = "";
   bar.appendChild(h("span", { class: "snack-text", text }));
   if (action) {
@@ -106,13 +117,14 @@ export function hideSnack() {
 // ---------------------------------------------------------------- dialogs
 
 /**
- * A modal dialog: `build(close)` returns its content. `sheet` slides it up from the bottom; `full` fills the screen.
- * Returns a promise of the value `close` was called with (undefined when Back or the scrim closed it).
+ * A modal dialog: `build(close)` returns its content. `sheet` slides it up from the bottom; `full` fills the screen;
+ * `extraClass` styles one kind of dialog. Returns a promise of the value `close` was called with (undefined when Back
+ * or the scrim closed it). A message on show moves into the dialog, and back out when it closes.
  */
-export function dialog(build, { sheet = false, full = false, label = "", onClose } = {}) {
+export function dialog(build, { sheet = false, full = false, label = "", extraClass = "", onClose } = {}) {
   return new Promise((resolve) => {
     const el = h("dialog", {
-      class: "dialog" + (sheet ? " sheet" : "") + (full ? " full" : ""),
+      class: "dialog" + (sheet ? " sheet" : "") + (full ? " full" : "") + (extraClass ? " " + extraClass : ""),
       "aria-label": label || null,
     });
     let result;
@@ -124,6 +136,8 @@ export function dialog(build, { sheet = false, full = false, label = "", onClose
     el.appendChild(body);
     append(body, [build(close)]);
     el.addEventListener("close", () => {
+      const bar = document.getElementById("snackbar");
+      if (bar && el.contains(bar)) placeSnack(bar);
       el.remove();
       if (onClose) onClose(result);
       resolve(result);
@@ -134,8 +148,71 @@ export function dialog(build, { sheet = false, full = false, label = "", onClose
     });
     document.body.appendChild(el);
     el.showModal();
+    const bar = document.getElementById("snackbar");
+    if (bar && bar.classList.contains("on")) placeSnack(bar);
     const focus = el.querySelector("[autofocus]");
     if (focus) focus.focus();
+  });
+}
+
+/** Closes every open dialog (after a card was saved, nothing of the way there stays on screen). */
+export function closeDialogs() {
+  for (const el of document.querySelectorAll("dialog[open]")) el.close();
+}
+
+// ---------------------------------------------------------------- the keyboard
+
+/**
+ * Keeps the screen's main buttons above the phone's keyboard, whether the page shrinks with the keyboard or the
+ * keyboard covers it: `--keyboard` is the height the keyboard covers at the bottom, `--vvh` the height left visible.
+ * A field that takes the focus scrolls to the middle of what is visible, clear of the bar below it.
+ */
+export function followKeyboard() {
+  const root = document.documentElement;
+  const vv = window.visualViewport;
+  const update = () => {
+    if (!vv) return;
+    const covered = Math.max(0, Math.round(window.innerHeight - (vv.height + vv.offsetTop)));
+    root.style.setProperty("--keyboard", covered + "px");
+    root.style.setProperty("--vvh", Math.round(vv.height) + "px");
+  };
+  if (vv) {
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+  }
+  update();
+  document.addEventListener("focusin", (e) => {
+    if (!e.target.matches || !e.target.matches("input:not([type=checkbox]), textarea, select")) return;
+    setTimeout(() => {
+      if (document.activeElement === e.target) e.target.scrollIntoView({ block: "center", behavior: "smooth" });
+    }, 300);
+  });
+}
+
+/** The bar with a screen's main buttons, always above the keyboard. */
+export function dock(...buttons) {
+  return h("div", { class: "dock" }, buttons);
+}
+
+/**
+ * The phone's Enter key in a form: on a field with a next field it moves there; on the last field it runs `submit`.
+ * Fields are the text inputs of `form` in their order; text areas keep Enter for new lines.
+ */
+export function enterMovesOn(form, submit) {
+  const fields = (shown) =>
+    [...form.querySelectorAll("input:not([type=checkbox]):not([type=date])")].filter(
+      (f) => !f.disabled && (!shown || f.offsetParent !== null),
+    );
+  const all = fields(false);
+  all.forEach((field, i) => field.setAttribute("enterkeyhint", i === all.length - 1 ? "done" : "next"));
+  form.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" || e.target.tagName !== "INPUT" || e.isComposing) return;
+    const shown = fields(true);
+    const at = shown.indexOf(e.target);
+    if (at < 0) return;
+    e.preventDefault();
+    if (at < shown.length - 1) shown[at + 1].focus();
+    else submit();
   });
 }
 

@@ -4,7 +4,7 @@
 import { countryFor } from "./brands.mjs";
 import { pickLanguage, translator } from "./i18n.mjs";
 import { store } from "./store.mjs";
-import { ctx, h, hideSnack, t } from "./ui.mjs";
+import { ctx, followKeyboard, h, hideSnack, t } from "./ui.mjs";
 import * as wallet from "./screens/wallet.mjs";
 import * as add from "./screens/add.mjs";
 import * as card from "./screens/card.mjs";
@@ -45,10 +45,15 @@ export function parseRoute(hash) {
 
 // ---------------------------------------------------------------- Back
 //
-// Each screen opened by a tap gets a history entry of its own, holding the path to it (`stack`), so the phone's Back
-// goes one screen back and leaves the app from the wallet. Entries are only added during a tap: Chromium skips an
-// entry added without one, and Back would then leave the app. A screen reached after the scanner or the photo picker
-// (no tap any more) takes the place of the one that opened them instead.
+// Each screen opened by a tap gets a history entry of its own, holding the path to it (`stack`) and how many entries
+// lie above the wallet (`depth`), so the phone's Back goes one screen back and leaves the app from the wallet. Entries
+// are added during a tap: Chromium lets Back skip an entry a page added before it was first touched. A screen reached
+// after the scanner or the photo picker (no tap any more) takes the place of the one that opened them instead.
+//
+// A rotation, a dark-mode switch or a new text size makes the phone load the page again at its address, with nothing
+// behind it. At start, the way there is laid down again (the wallet, then each screen above it), so Back still goes
+// to the wallet. Until the page is first touched after such a load, Chromium may skip those entries, and a Back
+// before any touch can still leave the app.
 
 function chainFor(hash) {
   const route = parseRoute(hash);
@@ -64,6 +69,13 @@ function currentStack() {
 
 function depth() {
   return (history.state && history.state.depth) || 0;
+}
+
+/** A page loaded at a screen with no history of its own: the wallet below it, then the screens up to it. */
+function layDownPath() {
+  const chain = chainFor(location.hash || "#/");
+  history.replaceState({ stack: chain.slice(0, 1), depth: 0 }, "", chain[0]);
+  for (let i = 1; i < chain.length; i++) history.pushState({ stack: chain.slice(0, i + 1), depth: i }, "", chain[i]);
 }
 
 let ownStep = false;
@@ -209,9 +221,8 @@ async function start() {
   }
   applyLanguage();
   measureTextScale();
-  if (!history.state || !history.state.stack) {
-    history.replaceState({ stack: chainFor(location.hash || "#/"), depth: 0 }, "", location.hash || "#/");
-  }
+  followKeyboard();
+  if (!history.state || !history.state.stack) layDownPath();
   store.on(() => {
     applyLanguage();
     render(true);

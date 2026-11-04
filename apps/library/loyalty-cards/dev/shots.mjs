@@ -33,45 +33,67 @@ const DRAW_PHOTO = `(() => {
   return { type: "image/jpeg", b64: c.toDataURL("image/jpeg", 0.82).split(",")[1], w: 1100, h: 694 };
 })()`;
 
+// The stores of Slovakia in the store list, whatever the browser's language (as a user who picked them in Settings).
+const SLOVAK_STORES = `window.zapli && window.zapli.data.kv.set("ui", { country: "sk", held: false })`;
+const scanned = (value = "2994400123453", format = "ean13") => `#/add?code=${value}&format=${format}`;
+const typeInto = (p, selector, text, focus = false) =>
+  p.eval(
+    `(() => { const i = document.querySelector(${JSON.stringify(selector)}); i.value = ${JSON.stringify(text)}; i.dispatchEvent(new Event("input", { bubbles: true })); ${focus ? "i.focus();" : ""} })()`,
+  );
+const withSlovakStores = async (p, hash) => {
+  await p.open("#/");
+  await p.eval(SLOVAK_STORES);
+  await p.open(hash);
+};
+
 const SCENARIOS = {
   async wallet(p, name) {
     await p.open("#/");
     await p.shot(name);
   },
   async add(p, name) {
-    await p.open("#/");
+    await withSlovakStores(p, "#/");
     await p.click(".fab");
     await p.shot(name);
   },
-  async addSlovakia(p, name) {
-    await p.open("#/");
-    await p.click(".fab");
-    await p.click(".chip");
-    await p.shot(name);
-  },
-  async addSearch(p, name) {
-    await p.open("#/add");
-    await p.eval(
-      `(() => { const i = document.querySelector(".picker .search-input"); i.value = "dr"; i.dispatchEvent(new Event("input")); })()`,
-    );
-    await sleep(300);
+  async addTyped(p, name) {
+    await withSlovakStores(p, "#/add");
+    await typeInto(p, "#chooser-name", "City pool");
     await p.shot(name);
   },
   async scanned(p, name) {
-    await p.open("#/add");
-    await p.eval(`window.__scanAnswer = { value: "2994400123453", format: "ean13" }`);
-    await p.click('.tile[data-brand="tesco"]');
-    await sleep(600);
+    await withSlovakStores(p, scanned());
     await p.shot(name);
   },
-  async sheet(p, name) {
-    await p.open("#/add");
+  async scannedMatch(p, name) {
+    await withSlovakStores(p, scanned());
+    await typeInto(p, "#chooser-name", "bil");
+    await p.shot(name);
+  },
+  async scannedNew(p, name) {
+    await withSlovakStores(p, scanned());
+    await typeInto(p, "#chooser-name", p.lang === "sk" ? "Plaváreň" : "City pool");
+    await p.shot(name);
+  },
+  async keyboardScanned(p, name) {
+    await withSlovakStores(p, scanned());
+    await typeInto(p, "#chooser-name", "City pool", true);
+    await sleep(500);
+    await p.shot(name);
+  },
+  async numberSheet(p, name) {
+    await withSlovakStores(p, "#/add");
     await p.eval(`window.__scanAnswer = null`);
     await p.click('.tile[data-brand="billa"]');
-    await p.eval(
-      `(() => { const i = document.querySelector("#sheet-number"); i.value = "2900123456785"; i.dispatchEvent(new Event("input")); })()`,
-    );
-    await sleep(300);
+    await typeInto(p, "#sheet-number", "2900123456785", true);
+    await sleep(500);
+    await p.shot(name);
+  },
+  async landed(p, name) {
+    await withSlovakStores(p, scanned());
+    await typeInto(p, "#chooser-name", "billa");
+    await p.click(".dock .btn");
+    await sleep(500);
     await p.shot(name);
   },
   async till(p, name) {
@@ -86,38 +108,92 @@ const SCENARIOS = {
     await sleep(500);
     await p.shot(name);
   },
-  async photo(p, name) {
-    await p.open("#/");
-    await p.eval(`window.zapli.data.kv.set("photo:face:s6", ${DRAW_PHOTO})`);
-    await p.open("#/");
-    await p.click('.face-button[data-id="s6"]');
-    await sleep(600);
-    await p.eval(`window.scrollTo(0, 0)`);
-    await p.shot(name);
-  },
-  async walletPhoto(p, name) {
-    await p.open("#/");
-    await p.eval(`window.zapli.data.kv.set("photo:face:s6", ${DRAW_PHOTO})`);
-    await p.open("#/");
+  async fullCode(p, name) {
+    await p.open("#/card/s1?full=1");
     await sleep(500);
     await p.shot(name);
   },
-  async details(p, name) {
+  async fullQr(p, name) {
+    await p.open("#/card/s3?full=1");
+    await sleep(500);
+    await p.shot(name);
+  },
+  async scanCancelled(p, name) {
+    await withSlovakStores(p, "#/add");
+    await p.eval(`window.__scanAnswer = null`);
+    await p.click(".dock .btn");
+    await sleep(500);
+    await p.shot(name);
+  },
+  async mistyped(p, name) {
+    await withSlovakStores(p, "#/add");
+    await p.eval(`window.__scanAnswer = null`);
+    await p.click('.tile[data-brand="billa"]');
+    await typeInto(p, "#sheet-number", "4006381333932");
+    await p.click(".sheet-dock .btn");
+    await sleep(500);
+    await p.shot(name);
+  },
+  async longNameSheet(p, name) {
+    await withSlovakStores(p, "#/add");
+    await typeInto(p, "#chooser-name", "Riverside Garden Centre");
+    await p.eval(`window.__scanAnswer = null`);
+    await p.click(".dock .btn");
+    await sleep(500);
+    await p.shot(name);
+  },
+  async refused(p, name) {
+    await withSlovakStores(p, "#/add");
+    await p.eval(`window.__scanFail = "NEEDS_GESTURE"`);
+    await p.click('.tile[data-brand="billa"]');
+    await sleep(500);
+    await p.shot(name);
+  },
+  async holdMenu(p, name) {
     await p.open("#/");
-    await p.click('.face-button[data-id="s8"]');
+    const at = await p.center('.face-button[data-id="s4"]');
+    await p.mouse("mousePressed", at.x, at.y);
+    await sleep(650);
+    await p.mouse("mouseReleased", at.x, at.y);
     await sleep(400);
-    await p.eval(`window.scrollTo(0, 420)`);
+    await p.shot(name);
+  },
+  async dragging(p, name) {
+    await p.open("#/");
+    const from = await p.center('.face-button[data-id="s7"]');
+    const to = await p.eval(
+      `(() => { const r = document.querySelector('.face-button[data-id="s4"]').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; })()`,
+    );
+    await p.mouse("mousePressed", from.x, from.y);
+    await sleep(650);
+    for (let i = 1; i <= 6; i++) {
+      await p.mouse("mouseMoved", from.x + ((to.x - from.x) * i) / 7, from.y + ((to.y - from.y) * i) / 7);
+      await sleep(40);
+    }
+    await sleep(200);
+    await p.shot(name);
+    await p.mouse("mouseReleased", to.x, to.y);
+  },
+  async orderSheet(p, name) {
+    await p.open("#/");
+    await p.click(".topbar .btn.icon");
+    await p.click("dialog[open] .menu-item");
+    await sleep(300);
     await p.shot(name);
   },
   async edit(p, name) {
     await p.open("#/");
     await p.click('.face-button[data-id="s1"]');
     await p.click(".card-actions .btn");
+    await p.eval(`document.querySelector("#edit-points").focus()`);
+    await sleep(500);
     await p.shot(name);
   },
-  async menu(p, name) {
+  async photo(p, name) {
     await p.open("#/");
-    await p.click(".topbar .btn.icon");
+    await p.eval(`window.zapli.data.kv.set("photo:face:s6", ${DRAW_PHOTO})`);
+    await p.open("#/");
+    await sleep(500);
     await p.shot(name);
   },
   async settings(p, name) {
@@ -132,32 +208,45 @@ const SCENARIOS = {
 
 const RUNS = [
   ["01-wallet-light", "wallet", {}],
-  ["02-store-list-light", "add", {}],
-  ["02b-store-list-slovakia-light", "addSlovakia", {}],
-  ["03-scanned-tesco-light", "scanned", {}],
-  ["04-store-sheet-light", "sheet", {}],
-  ["05-till-light", "till", {}],
-  ["06-photo-face-light", "photo", {}],
-  ["07-wallet-dark", "wallet", { look: "dark" }],
-  ["08-store-list-dark", "add", { look: "dark" }],
-  ["09-till-qr-dark", "tillQr", { look: "dark" }],
-  ["10-wallet-200", "wallet", { text: 200 }],
-  ["11-store-list-200", "add", { text: 200 }],
-  ["12-till-200", "till", { text: 200 }],
-  ["13-till-landscape", "till", { width: 800, height: 360 }],
-  ["14-store-list-sk", "add", { lang: "sk-SK" }],
-  ["15-wallet-sk-412", "wallet", { lang: "sk-SK", width: 412, height: 915 }],
-  ["16-empty-light", "empty", { seed: [] }],
-  ["17-empty-dark-sk", "empty", { seed: [], look: "dark", lang: "sk-SK" }],
-  ["18-details-light", "details", {}],
-  ["19-edit-light", "edit", {}],
-  ["20-menu-light", "menu", {}],
-  ["21-settings-dark", "settings", { look: "dark" }],
-  ["22-search-light", "addSearch", {}],
-  ["23-wallet-photo-light", "walletPhoto", {}],
-  ["24-store-list-412-200", "add", { width: 412, height: 915, text: 200 }],
-  ["25-sheet-200", "sheet", { text: 200 }],
-  ["26-preview-browser", "wallet", { live: false }],
+  ["02-add-light", "add", {}],
+  ["03-add-typed-light", "addTyped", {}],
+  ["04-scanned-light", "scanned", {}],
+  ["05-scanned-match-light", "scannedMatch", {}],
+  ["06-scanned-new-light", "scannedNew", {}],
+  ["07-keyboard-scanned-light", "keyboardScanned", { width: 412, height: 600 }],
+  ["08-keyboard-number-light", "numberSheet", { width: 412, height: 600 }],
+  ["09-landed-light", "landed", {}],
+  ["10-till-light", "till", {}],
+  ["11-hold-menu-light", "holdMenu", {}],
+  ["12-dragging-light", "dragging", {}],
+  ["13-order-sheet-light", "orderSheet", {}],
+  ["14-keyboard-edit-light", "edit", { width: 412, height: 600 }],
+  ["15-photo-face-light", "photo", {}],
+  ["16-wallet-dark", "wallet", { look: "dark" }],
+  ["17-scanned-new-dark", "scannedNew", { look: "dark" }],
+  ["18-dragging-dark", "dragging", { look: "dark" }],
+  ["19-till-qr-dark", "tillQr", { look: "dark" }],
+  ["20-wallet-200", "wallet", { text: 200 }],
+  ["21-scanned-match-200", "scannedMatch", { text: 200 }],
+  ["22-number-sheet-200", "numberSheet", { text: 200 }],
+  ["23-edit-200", "edit", { text: 200 }],
+  ["24-till-landscape", "till", { width: 800, height: 360 }],
+  ["25-add-landscape", "scanned", { width: 800, height: 360 }],
+  ["26-scanned-new-sk", "scannedNew", { lang: "sk-SK" }],
+  ["27-wallet-sk-412", "wallet", { lang: "sk-SK", width: 412, height: 915 }],
+  ["28-add-412", "add", { width: 412, height: 915 }],
+  ["29-empty-dark-sk", "empty", { seed: [], look: "dark", lang: "sk-SK" }],
+  ["30-settings-dark", "settings", { look: "dark" }],
+  ["31-preview-browser", "wallet", { live: false }],
+  ["32-full-code-light", "fullCode", {}],
+  ["33-full-qr-dark", "fullQr", { look: "dark" }],
+  ["34-full-code-landscape", "fullCode", { width: 800, height: 360 }],
+  ["35-scan-cancelled-light", "scanCancelled", {}],
+  ["36-mistyped-light", "mistyped", {}],
+  ["37-long-name-sheet-200", "longNameSheet", { text: 200 }],
+  ["38-refused-light", "refused", {}],
+  ["39-add-200", "add", { text: 200 }],
+  ["40-add-200-sk", "add", { text: 200, lang: "sk-SK" }],
 ];
 
 let failed = false;
@@ -165,6 +254,7 @@ for (const [name, scenario, options] of RUNS) {
   if (ONLY && !ONLY.includes(name) && !ONLY.includes(scenario)) continue;
   console.log(name);
   const p = await browser.page(options);
+  p.lang = (options.lang || "en").slice(0, 2);
   try {
     await SCENARIOS[scenario](p, name);
   } catch (error) {

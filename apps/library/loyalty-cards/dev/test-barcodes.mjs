@@ -12,8 +12,8 @@ import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { encode, toSvg } from "../package/js/barcode/index.mjs";
-import { gs1CheckDigit } from "../package/js/barcode/linear.mjs";
+import { encode, toSvg } from "./src/js/barcode/index.mjs";
+import { gs1CheckDigit } from "./src/js/barcode/linear.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 let failures = 0;

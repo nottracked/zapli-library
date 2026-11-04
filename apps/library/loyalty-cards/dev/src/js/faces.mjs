@@ -216,6 +216,23 @@ export function fitNames(root) {
   }
 }
 
+/**
+ * A line of text (a card's number) kept on one line: it shrinks (to about half at most) rather than wrap, so it reads
+ * in one go; a text longer than that wraps.
+ */
+export function fitLine(el) {
+  el.classList.remove("wraps");
+  el.style.fontSize = "";
+  const zoom = textZoom(el);
+  let size = parseFloat(getComputedStyle(el).fontSize) / zoom || 20;
+  const min = size * 0.55;
+  for (let i = 0; i < 16 && size > min && el.scrollWidth > el.clientWidth + 1; i++) {
+    size *= 0.92;
+    el.style.fontSize = size + "px";
+  }
+  if (el.scrollWidth > el.clientWidth + 1) el.classList.add("wraps");
+}
+
 /** The ink of a store's name for screen readers and tests: whether the face keeps readable contrast. */
 export function readable(colours, ratio = 4.5) {
   return contrast(colours.bg, colours.fg) >= ratio;

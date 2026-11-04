@@ -55,6 +55,16 @@
     white-space: nowrap;
 }
 
+/* Text for screen readers only: the name of a field or a toggle whose look says it without words. */
+.unseen {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
 html {
     -webkit-tap-highlight-color: transparent;
 }
@@ -1165,6 +1175,18 @@ textarea.field-input {
     height: 100%;
 }
 
+/* The code is a button: a tap fills the screen with it. */
+.code-tap {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    cursor: zoom-in;
+}
+
 .cant-draw {
     margin: 0.5rem 0;
     padding: 0.75rem;
@@ -1374,6 +1396,346 @@ textarea.field-input {
     flex: 1 1 9rem;
 }
 
+/* ---------------------------------------------------------------- the bar above the keyboard */
+
+.dock {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: var(--keyboard, 0px);
+    z-index: 8;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem calc(var(--safe-right) + 1rem) calc(var(--safe-bottom) + 0.75rem) calc(var(--safe-left) + 1rem);
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -1px 0 var(--line);
+}
+
+.dock-btn {
+    width: 100%;
+    min-height: 3.5rem;
+    font-size: 1.1rem;
+    border-radius: 18px;
+}
+
+.screen.has-dock {
+    padding-bottom: calc(var(--safe-bottom) + 7.5rem + var(--keyboard, 0px));
+}
+
+.dialog.full .dialog-body {
+    padding-bottom: calc(var(--safe-bottom) + 7.5rem + var(--keyboard, 0px));
+}
+
+.dialog.full .dock {
+    position: fixed;
+    margin: 0;
+    padding: 0.75rem calc(var(--safe-right) + 1rem) calc(var(--safe-bottom) + 0.75rem) calc(var(--safe-left) + 1rem);
+}
+
+/* A sheet rises with the keyboard and keeps its Add button in view at its bottom. */
+.dialog.sheet {
+    margin-bottom: var(--keyboard, 0px);
+    max-height: calc(var(--vvh, 100dvh) - var(--safe-top) - 1rem);
+}
+
+.sheet-dock {
+    position: sticky;
+    bottom: calc(-1 * (1.25rem + var(--safe-bottom)));
+    margin: 1rem -1.25rem calc(-1 * (1.25rem + var(--safe-bottom)));
+    padding: 0.75rem 1.25rem calc(var(--safe-bottom) + 0.75rem);
+    background: var(--surface);
+    box-shadow: 0 -1px 0 var(--line);
+}
+
+/* ---------------------------------------------------------------- choosing what a card is */
+
+.quick-row {
+    display: flex;
+    padding: 0 1rem 0.25rem;
+}
+
+.quick-row .btn {
+    min-height: 2.75rem;
+    padding: 0.35rem 1rem;
+}
+
+.scan-card {
+    margin: 0.25rem 1rem 0.5rem;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff;
+    color: #111;
+    box-shadow: var(--shadow);
+}
+
+.scan-band {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0.5rem 0.75rem 0.5rem 1rem;
+    background: var(--face-bg);
+    background-image: linear-gradient(140deg, rgba(255, 255, 255, 0.14), rgba(0, 0, 0, 0.12));
+    color: var(--face-fg);
+}
+
+.scan-name {
+    flex: 1;
+    min-width: 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.scan-name.placeholder {
+    opacity: 0.8;
+    font-weight: 700;
+}
+
+.scan-ok {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.6rem 0.2rem 0.4rem;
+    border-radius: 999px;
+    background: #e3f6e8;
+    color: #135c2a;
+    font-weight: 700;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.scan-ok .icon {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.scan-code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.75rem 1rem;
+}
+
+.scan-bars {
+    width: 100%;
+    height: 3.5rem;
+}
+
+.scan-bars.square {
+    height: 5.5rem;
+}
+
+.scan-bars svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.scan-number {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+}
+
+.scan-number.wraps {
+    white-space: normal;
+    word-break: break-all;
+}
+
+.name-block {
+    padding: 0.5rem 1rem 0.25rem;
+}
+
+.name-label {
+    display: block;
+    margin: 0 0 0.4rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.big-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 3.75rem;
+    padding: 0 0.25rem 0 1rem;
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: inset 0 0 0 2px var(--line);
+    color: var(--muted);
+}
+
+.big-field:focus-within {
+    box-shadow: inset 0 0 0 2.5px var(--accent);
+}
+
+.big-input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 0.75rem 0;
+    outline: none;
+}
+
+.big-input::placeholder {
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.not-found {
+    margin: 0.75rem 1rem 0;
+    font-size: 1.05rem;
+    color: var(--muted);
+}
+
+.tile-hint {
+    margin: 0.75rem 1rem 0;
+}
+
+.own-face {
+    flex-direction: column;
+    gap: 0.25rem;
+    background: var(--surface);
+    background-image: none;
+    color: var(--text);
+    box-shadow: inset 0 0 0 2.5px var(--accent);
+    --face-line: transparent;
+}
+
+.own-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0.1rem 0.5rem 0.1rem 0.3rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.own-badge .icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.tiles.only-own {
+    grid-template-columns: 1fr;
+    margin-top: 0.75rem;
+}
+
+.tiles.only-own .tile-face {
+    aspect-ratio: auto;
+    min-height: 6.5rem;
+    padding: 0.85rem 1rem;
+    gap: 0.5rem;
+}
+
+.tiles.only-own .tile-name {
+    font-size: 1.5rem;
+}
+
+.queue .scan-card {
+    margin-top: 0.5rem;
+}
+
+/* ---------------------------------------------------------------- holding and moving a card */
+
+.face-button,
+.face {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.face-button.lifted .face {
+    transform: scale(1.04);
+    box-shadow:
+        0 10px 28px rgba(20, 16, 40, 0.28),
+        inset 0 0 0 1px var(--face-line);
+}
+
+.face-button.dragged {
+    position: relative;
+    z-index: 10;
+    transition: none;
+}
+
+.faces.dragging .face-button:not(.dragged) {
+    transition: transform 0.15s ease;
+}
+
+.hold-hint {
+    margin: -0.25rem 1rem 0.25rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.menu-title {
+    margin: 0.25rem 1rem 0.5rem;
+    font-size: 1.15rem;
+    line-height: 1.25;
+}
+
+.menu-hint {
+    margin: 0.5rem 1rem 0.25rem;
+}
+
+.menu-item[disabled] {
+    opacity: 0.45;
+}
+
+.menu-item.on {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Turned sideways: the code that was read becomes a strip, so the name field stays in view. */
+@media (orientation: landscape) and (max-height: 560px) {
+    .scan-card {
+        display: flex;
+        align-items: stretch;
+    }
+
+    .scan-band {
+        flex: 1;
+    }
+
+    .scan-code {
+        flex: 1;
+        padding: 0.4rem 1rem;
+    }
+
+    .scan-bars {
+        height: 2.25rem;
+    }
+
+    .dock {
+        flex-direction: row;
+        padding-top: 0.5rem;
+        padding-bottom: calc(var(--safe-bottom) + 0.5rem);
+    }
+
+    .dock-btn {
+        min-height: 3rem;
+    }
+}
+
 /* Turned sideways: the code fills the left, the details scroll on the right. */
 @media (orientation: landscape) and (max-height: 560px) {
     .card-screen {
@@ -1414,7 +1776,20 @@ textarea.field-input {
 }
 
 .big-text .number-input {
+    font-size: 0.95rem;
+}
+
+.big-text .big-input {
     font-size: 1.1rem;
+}
+
+.big-text .sheet-title {
+    font-size: 1.05rem;
+}
+
+.big-text .keyboard-toggle {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.6rem;
 }
 
 .big-text .code-number {
@@ -1423,6 +1798,104 @@ textarea.field-input {
 
 .big-text .band-name {
     font-size: 1rem;
+}
+
+/* The code full screen: white in light and dark, the code as large as fits, the number in large digits under it. */
+.dialog.full.till-full {
+    background: #ffffff;
+    color: #111111;
+}
+
+.dialog.full.till-full .dialog-body {
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.full-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    height: 100%;
+    padding: calc(var(--safe-top) + 1rem) calc(var(--safe-right) + 1rem) calc(var(--safe-bottom) + 1rem)
+        calc(var(--safe-left) + 1rem);
+    cursor: zoom-out;
+}
+
+.full-body:focus {
+    outline: none;
+}
+
+.full-name {
+    flex: none;
+    max-width: calc(100% - 6rem);
+    margin: 0.5rem 0 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+    color: #4b4a55;
+}
+
+/* The code and the number under it sit together in the middle of the room below the name. */
+.full-code {
+    display: flex;
+    flex: 0 1 auto;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 0;
+    margin-top: auto;
+}
+
+.full-code svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+/* A barcode runs across the whole width, half as tall as it is wide, or as tall as there is room. */
+.full-code.linear svg {
+    aspect-ratio: 2 / 1;
+}
+
+.full-number {
+    flex: none;
+    width: 100%;
+    margin: 0 0 auto;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.full-number.wraps {
+    white-space: normal;
+    word-break: break-all;
+}
+
+.full-close {
+    position: absolute;
+    top: calc(var(--safe-top) + 0.25rem);
+    right: calc(var(--safe-right) + 0.25rem);
+    color: #3c3b45;
+}
+
+.till-full .btn.icon:active {
+    background: #ececf0;
+}
+
+/* A number that looks mistyped: the way to keep it as it is, under the reason. */
+.save-as-typed {
+    width: 100%;
+    margin-top: 0.25rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

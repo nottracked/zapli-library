@@ -47,7 +47,7 @@ const MAX_LENGTH = 300;
  */
 export function cleanNumber(text) {
   const trimmed = String(text || "").trim();
-  const flat = trimmed.replace(/[\s ]+/g, "");
+  const flat = trimmed.replace(/[\s\u00a0]+/g, "");
   return /^[0-9]+$/.test(flat) ? flat : trimmed;
 }
 
@@ -116,11 +116,23 @@ export function numberProblem(number, format) {
   }
 }
 
+/**
+ * A typed number left on "auto" that has the length of an EAN-8, UPC-A or EAN-13 but whose last digit does not check
+ * out: most often a slip when typing, which would otherwise be drawn as Code 128 without a word. Returns the key of the
+ * message (see i18n), or null for any other number. Some cards do use such numbers, so the caller offers to keep it.
+ */
+export function checkDigitSlip(number) {
+  const n = String(number || "");
+  const kind = { 8: "ean8", 12: "upcA", 13: "ean13" }[n.length];
+  if (!kind || !/^[0-9]+$/.test(n)) return null;
+  return checks(n, kind) ? null : "lastDigitTyped";
+}
+
 /** The number in groups for reading aloud to a cashier: 2900 1234 5678 5. Text that is not digits stays as it is. */
 export function groupedNumber(number) {
   const n = String(number || "");
   if (!/^[0-9]{8,}$/.test(n)) return n;
-  return n.replace(/(\d{4})(?=\d)/g, "$1 ");
+  return n.replace(/(\d{4})(?=\d)/g, "$1\u2009");
 }
 
 /** The last four characters, for "•••• 6785" on a card's face. */

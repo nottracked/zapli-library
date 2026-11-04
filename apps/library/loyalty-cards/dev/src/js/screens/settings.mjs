@@ -45,6 +45,7 @@ function settingsScreen() {
           ["use", t("orderUse")],
           ["recent", t("orderRecent")],
           ["name", t("orderName")],
+          ["mine", t("orderMine")],
         ],
         ui.order || "use",
         (v) => store.saveUi({ order: v }),

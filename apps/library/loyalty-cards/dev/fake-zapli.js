@@ -1,7 +1,7 @@
 // Development only (not shipped): a stand-in for Zapli's bridge, injected by dev/shots.mjs before the page's scripts,
 // so the page runs its phone path in a headless browser: records with watches, the key-value store, declared
-// actions, the scanner (answers what the check sets in window.__scanAnswer), the picker and haptics. It records the
-// calls in window.__calls.
+// actions, the scanner (answers what the check sets in window.__scanAnswer, or fails with the code set in
+// window.__scanFail), the picker and haptics. It records the calls in window.__calls.
 (() => {
   const calls = [];
   // Kept in sessionStorage, so a reload (a rotation on the phone) finds the records and photos again.
@@ -97,6 +97,7 @@
     scan: {
       async barcode() {
         calls.push(["scan"]);
+        if (window.__scanFail) return fail(window.__scanFail);
         const answer = window.__scanAnswer;
         if (!answer) return fail("CANCELLED");
         return answer;

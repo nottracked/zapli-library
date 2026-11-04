@@ -1,11 +1,12 @@
-// Getting cards in and out: the scanner, the "add this store" sheet with its typed number, reading cards from
-// screenshots and photos, importing and backing up CSV files. Every call that needs a tap is made straight from one.
+// Getting cards in and out: the scanner, saving a new card and landing on it, the sheet for a number typed by hand,
+// cards read from screenshots and photos, importing and backing up CSV files. Every call that needs a tap is made
+// straight from one.
 
-import { SWATCHES, cardColours, fitNames, storeTile } from "../faces.mjs";
-import { FORMAT_NAMES, cleanNumber, detectFormat, numberProblem } from "../formats.mjs";
+import { fitNames, storeTile } from "../faces.mjs";
+import { FORMAT_NAMES, checkDigitSlip, cleanNumber, detectFormat, lastDigits, numberProblem } from "../formats.mjs";
 import { canPickPictures, canReadPictures, canScan, pickPictures, readCodes, shrink } from "../photos.mjs";
-import { button, buzz, ctx, dialog, h, snack, t } from "../ui.mjs";
-import { storePicker } from "./picker.mjs";
+import { button, buzz, closeDialogs, ctx, dialog, h, snack, t } from "../ui.mjs";
+import { storeChooser } from "./chooser.mjs";
 
 /** The words for a refusal from the phone, for the snackbar. */
 export function problemText(error) {
@@ -13,6 +14,8 @@ export function problemText(error) {
   if (code === "PERMISSION_DENIED" || code === "OS_DENIED") return t("permissionDenied");
   if (code === "QUOTA_EXCEEDED") return t("storageFull");
   if (code === "UNSUPPORTED") return ctx.store.live ? t("picturesUnavailable") : t("onPhoneOnly");
+  // The camera, the scanner, the picker, sharing and files open only from a tap on a button.
+  if (code === "NEEDS_GESTURE") return t("needsTap");
   return t("somethingWrong");
 }
 
@@ -44,84 +47,122 @@ export async function scanCode() {
   }
 }
 
-/** The card with this store and number, when the wallet has it already. */
-function existing(storeName, number) {
-  return ctx.store.cards.find((c) => c.store === storeName && c.number === number) || null;
+/** The name a card without one gets: "Card 6785", the last digits telling it apart. */
+export function defaultName(number) {
+  return t("defaultName", { digits: lastDigits(cleanNumber(number)) });
 }
 
 /**
- * Saves a new card and opens it. A card the wallet already has opens instead, with a word. `replace` shows the card
- * in the place of the screen that asked (after the scanner or a picker no tap is left to open a new screen).
+ * Shows a card just added: every sheet of the way there closed, the card's code at the till, and a word with Undo.
+ * The card takes the place of the add screen, so Back goes to the wallet, never into the add flow again; added from
+ * the wallet itself (screenshots, a file), it opens on top of it. Undo goes back down to the wallet's own entry, so
+ * the next Back leaves the app.
  */
-export async function saveNewCard({ brand, store: storeName, number, format, color, group }, { replace = true } = {}) {
-  const name = (brand ? brand.name : storeName || "").trim();
+function land(card, message, undoIds) {
+  closeDialogs();
+  const hash = "#/card/" + encodeURIComponent(card.id);
+  const here = location.hash.replace(/^#\/?/, "");
+  if (here === "" || here === "/") ctx.go(hash);
+  else ctx.replace(hash);
+  snack(message, {
+    label: t("undo"),
+    run: async () => {
+      for (const id of undoIds) await ctx.store.remove(id).catch(() => {});
+      ctx.go("#/");
+    },
+  });
+}
+
+let saving = false;
+
+/**
+ * Saves a new card and lands on it. A card the wallet already has opens instead, with a word. While one save runs,
+ * another tap saves nothing (no card twice).
+ */
+export async function saveNewCard({ brand, store: storeName, number, format, group }) {
+  if (saving) return null;
   const value = cleanNumber(number);
-  const known = existing(name, value);
+  const name = (brand ? brand.name : storeName || "").trim() || defaultName(value);
+  const known = ctx.store.cards.find((c) => c.store === name && c.number === value);
   if (known) {
-    snack(t("already", { store: name }));
-    openSaved(known, replace);
+    land(known, t("already", { store: name }), []);
     return known;
   }
-  const kind = group || (brand ? brand.kind : "storefront");
-  const values = {
-    store: name,
-    number: value,
-    format: format || "auto",
-    group: kind,
-    brand: brand ? brand.id : undefined,
-    color,
-  };
+  saving = true;
   try {
-    const record = await ctx.store.add(values);
-    buzz("success");
-    openSaved(record, replace);
-    snack(t("cardAdded", { store: name }), {
-      label: t("undo"),
-      run: async () => {
-        await ctx.store.remove(record.id);
-        ctx.replace("#/");
-      },
+    const record = await ctx.store.add({
+      store: name,
+      number: value,
+      format: format || "auto",
+      group: group || (brand ? brand.kind : "storefront"),
+      brand: brand ? brand.id : undefined,
     });
+    buzz("success");
+    land(record, brand || storeName ? t("cardAdded", { store: name }) : t("addedPlain"), [record.id]);
     return record;
   } catch (error) {
     const issue = error && error.issues && error.issues[0] && error.issues[0].message;
     snack(t("notSaved", { reason: issue || error.message || t("somethingWrong") }));
     return null;
+  } finally {
+    saving = false;
   }
 }
 
-function openSaved(card, replace) {
-  const hash = "#/card/" + encodeURIComponent(card.id);
-  if (replace) ctx.replace(hash);
-  else ctx.go(hash);
-}
-
-/** What the typed number will be drawn as: the type, and whether the last digit checks out. */
+/**
+ * What the typed number will be drawn as: the type, and whether the last digit checks out. A number with the length
+ * of an EAN or UPC whose last digit does not check out gets no line here: Add says what is wrong with it.
+ */
 function detectionLine(number) {
   const n = cleanNumber(number);
-  if (!n) return "";
+  if (!n || checkDigitSlip(n)) return "";
   const format = detectFormat(n);
   const name = format === "qr" ? t("qrCode") : FORMAT_NAMES[format];
   return ["ean13", "ean8", "upcA"].includes(format) ? t("digitOk", { format: name }) : t("drawnAs", { format: name });
 }
 
 /**
- * The sheet that finishes adding a card of `brand` (or an own card when it is null): the number typed, or scanned
- * again, or read from a picture. Opened when the scanner was closed without a code, or for an own card.
+ * The sheet for a number typed by hand, when the scanner closed without a code or was not opened yet: for a store of
+ * the list (`brand`), a card of the user's own (`name`), or neither (a name may be typed here, or left empty). The
+ * number can be scanned or read from a picture from here too. Its Add button stays above the keyboard; Done on the
+ * keyboard adds the card. A number with the length of an EAN-13, EAN-8 or UPC-A whose last digit does not check out
+ * is not saved by Add: the sheet says so, and "Save the number as typed" keeps it as a plain Code 128.
  */
-export function storeSheet(brand, { number = "", format = "auto", name = "" } = {}) {
-  let colour = null;
-  let digitsOnly = !number || /^[0-9 ]*$/.test(number);
-  const state = { number, format, name };
+export function numberSheet(brand, { name = "" } = {}) {
+  let digitsOnly = true;
+  const state = { number: "", format: "auto", name };
   return dialog(
     (close) => {
       const error = h("p", { class: "field-error", role: "alert" });
       const detected = h("p", { class: "field-hint detected", "aria-live": "polite" });
+      const asTyped = button(t("saveAsTyped"), () => save(null, { asTyped: true }), "tonal", {
+        extraClass: "save-as-typed",
+      });
+      asTyped.hidden = true;
+      const nameInput =
+        brand || name
+          ? null
+          : h("input", {
+              id: "sheet-name",
+              class: "field-input",
+              autocomplete: "off",
+              autocapitalize: "words",
+              spellcheck: "false",
+              enterkeyhint: "next",
+              placeholder: t("ownNameHint"),
+              "aria-describedby": "sheet-name-hint",
+              onInput: (e) => (state.name = e.target.value),
+              onKeydown: (e) => {
+                if (e.key === "Enter" && !e.isComposing) {
+                  e.preventDefault();
+                  numberInput.focus();
+                }
+              },
+            });
       const numberInput = h("input", {
         id: "sheet-number",
         class: "field-input number-input",
-        value: number,
-        inputmode: digitsOnly ? "numeric" : "text",
+        inputmode: "numeric",
         autocomplete: "off",
         autocapitalize: "characters",
         spellcheck: "false",
@@ -131,19 +172,22 @@ export function storeSheet(brand, { number = "", format = "auto", name = "" } = 
           state.number = e.target.value;
           state.format = "auto";
           error.textContent = "";
+          asTyped.hidden = true;
           detected.textContent = detectionLine(state.number);
         },
         onKeydown: (e) => {
-          if (e.key === "Enter") save();
+          if (e.key === "Enter" && !e.isComposing) {
+            e.preventDefault();
+            save();
+          }
         },
       });
-      detected.textContent = detectionLine(number);
       // The phone's keyboard: digits for most cards, letters for the few whose number has them.
       const keyboardToggle = h("button", {
         type: "button",
         class: "btn text keyboard-toggle",
-        text: digitsOnly ? "ABC" : "123",
-        "aria-label": digitsOnly ? t("typeLetters") : t("typeDigits"),
+        text: "ABC",
+        "aria-label": t("typeLetters"),
         onClick: () => {
           digitsOnly = !digitsOnly;
           numberInput.setAttribute("inputmode", digitsOnly ? "numeric" : "text");
@@ -153,117 +197,75 @@ export function storeSheet(brand, { number = "", format = "auto", name = "" } = 
           numberInput.focus();
         },
       });
-      const nameInput = brand
-        ? null
-        : h("input", {
-            id: "sheet-name",
-            class: "field-input",
-            value: name,
-            autocomplete: "off",
-            autocapitalize: "words",
-            spellcheck: "false",
-            placeholder: t("ownNameHint"),
-            onInput: (e) => {
-              state.name = e.target.value;
-              error.textContent = "";
-              preview.replaceChildren(previewFace());
-            },
-          });
-      const previewFace = () => {
-        if (brand) return storeTile(brand);
-        const tile = storeTile({ name: state.name.trim() || t("otherCard"), tone: "slate" });
-        const colours = cardColours({ color: colour || undefined, group: "storefront" });
-        tile.style.setProperty("--face-bg", colours.bg);
-        tile.style.setProperty("--face-fg", colours.fg);
-        return tile;
-      };
-      const preview = h("div", { class: "sheet-face" }, previewFace());
-      const save = async () => {
-        const value = cleanNumber(state.number);
-        const storeName = brand ? brand.name : state.name.trim();
-        if (!storeName) {
-          error.textContent = t("nameMissing");
-          if (nameInput) nameInput.focus();
-          return;
-        }
-        const problem = numberProblem(value, state.format);
+      const save = async (code, { asTyped: keep = false } = {}) => {
+        const value = cleanNumber(code ? code.value : state.number);
+        let format = code ? code.format : state.format;
+        const problem = numberProblem(value, format);
         if (problem) {
           error.textContent = t(problem);
           numberInput.focus();
           return;
         }
-        close(true);
-        await saveNewCard(
-          { brand, store: storeName, number: value, format: state.format, color: colour || undefined },
-          { replace: true },
-        );
+        // A scanner checks the digits itself; a typed number is checked here.
+        const slip = !code && format === "auto" ? checkDigitSlip(value) : null;
+        if (slip && !keep) {
+          error.textContent = t(slip);
+          asTyped.hidden = false;
+          numberInput.focus();
+          return;
+        }
+        if (slip) format = "code128";
+        const own = (state.name || "").trim();
+        await saveNewCard({ brand, store: brand ? brand.name : own, number: value, format });
       };
-      const fill = (code) => {
+      const fromCode = (code) => {
         if (!code) return;
-        state.number = code.value;
-        state.format = code.format;
         numberInput.value = code.value;
-        detected.textContent = detectionLine(code.value);
-        if (brand || state.name.trim()) save();
-        else if (nameInput) nameInput.focus();
+        save(code);
       };
-      const swatches = brand
-        ? null
-        : h(
-            "div",
-            { class: "swatches", role: "radiogroup", "aria-label": t("colour") },
-            SWATCHES.slice(0, 18).map((hex) =>
-              h("button", {
-                type: "button",
-                class: "swatch",
-                role: "radio",
-                "aria-checked": "false",
-                "aria-label": `${t("colour")} ${hex}`,
-                style: { background: hex },
-                onClick: (e) => {
-                  colour = hex;
-                  for (const s of e.currentTarget.parentElement.children)
-                    s.setAttribute("aria-checked", s === e.currentTarget ? "true" : "false");
-                  preview.replaceChildren(previewFace());
-                },
-              }),
-            ),
-          );
+      const title = brand ? brand.name : name || t("otherCard");
       const content = h(
         "div",
         { class: "store-sheet" },
         h(
           "div",
           { class: "sheet-head" },
-          preview,
-          h("h2", { class: "sheet-title", text: brand ? brand.name : t("otherCard") }),
+          h("div", { class: "sheet-face" }, storeTile(brand || { name: title, tone: "slate" })),
+          h("h2", { class: "sheet-title", text: title }),
           button(t("close"), () => close(false), "icon", { iconName: "close" }),
         ),
         nameInput ? h("label", { class: "field-label", for: "sheet-name", text: t("ownName") }) : null,
         nameInput,
-        swatches,
+        nameInput ? h("p", { class: "field-hint", id: "sheet-name-hint", text: t("nameLater") }) : null,
         h("label", { class: "field-label", for: "sheet-number", text: t("numberLabel") }),
         h("div", { class: "input-row" }, numberInput, keyboardToggle),
         h("p", { class: "field-hint", id: "sheet-number-hint", text: t("numberHint") }),
         detected,
         error,
+        asTyped,
         h(
           "div",
           { class: "sheet-actions" },
-          canScan() ? button(t("scanAgain"), async () => fill(await scanCode()), "tonal", { iconName: "scan" }) : null,
+          canScan()
+            ? button(t("scanAgain"), async () => fromCode(await scanCode()), "tonal", { iconName: "scan" })
+            : null,
           canPickPictures() || !ctx.store.live
-            ? button(t("fromPicture"), async () => fill(await codeFromOnePicture()), "tonal", { iconName: "image" })
+            ? button(t("fromPicture"), async () => fromCode(await codeFromOnePicture()), "tonal", { iconName: "image" })
             : null,
         ),
-        button(t("addCard"), save, "filled", { extraClass: "wide" }),
+        h(
+          "div",
+          { class: "sheet-dock" },
+          button(t("addCard"), () => save(), "filled", { extraClass: "dock-btn", iconName: "plus" }),
+        ),
       );
       requestAnimationFrame(() => {
         fitNames(content);
-        (nameInput && !name ? nameInput : numberInput).focus();
+        (nameInput || numberInput).focus();
       });
       return content;
     },
-    { sheet: true, label: brand ? brand.name : t("otherCard") },
+    { sheet: true, label: brand ? brand.name : name || t("otherCard") },
   );
 }
 
@@ -289,7 +291,8 @@ async function codeFromOnePicture() {
 
 /**
  * Cards from screenshots or photos (how people bring cards over from another wallet): pick up to 20 pictures, read
- * the barcode of each, then tap the store of each one under its picture. Call it straight from a tap.
+ * the barcode of each, then name each one under its picture, as after a scan. Lands on the first card added, with
+ * Undo for all of them. Call it straight from a tap.
  */
 export async function importFromPictures() {
   if (ctx.store.live && !canPickPictures()) {
@@ -320,55 +323,54 @@ export async function importFromPictures() {
       // A picture that cannot be read is left out.
     }
   }
-  if (!queue.length) {
-    snack(t("noCodesInPictures"));
+  const fresh = queue.filter((item) => !ctx.store.cards.some((c) => c.number === cleanNumber(item.value)));
+  if (!fresh.length) {
+    snack(queue.length ? t("allThere") : t("noCodesInPictures"));
     return;
   }
-  snack(t("foundIn", { n: queue.length }));
-  let added = 0;
-  for (let i = 0; i < queue.length; i++) {
-    const item = queue[i];
-    if (ctx.store.cards.some((c) => c.number === item.value)) continue;
-    const choice = await assignDialog(item, i + 1, queue.length);
+  const added = [];
+  for (let i = 0; i < fresh.length; i++) {
+    const item = fresh[i];
+    const choice = await nameDialog(item, i + 1, fresh.length);
     if (choice === undefined) break;
     if (!choice) continue;
-    const name = choice.brand ? choice.brand.name : choice.name;
-    if (!name) continue;
+    const value = cleanNumber(item.value);
+    const name = choice.brand ? choice.brand.name : choice.name || defaultName(value);
     try {
-      await ctx.store.add({
-        store: name,
-        number: cleanNumber(item.value),
-        format: item.format,
-        group: choice.brand ? choice.brand.kind : "storefront",
-        brand: choice.brand ? choice.brand.id : undefined,
-      });
-      added++;
+      added.push(
+        await ctx.store.add({
+          store: name,
+          number: value,
+          format: item.format,
+          group: choice.brand ? choice.brand.kind : "storefront",
+          brand: choice.brand ? choice.brand.id : undefined,
+        }),
+      );
       buzz("light");
     } catch (error) {
       showProblem(error);
     }
   }
-  snack(added ? t("queueDone", { n: added }) : t("queueNone"));
+  if (added.length)
+    land(
+      added[0],
+      t("queueDone", { n: added.length }),
+      added.map((c) => c.id),
+    );
+  else snack(t("queueNone"));
 }
 
-/** One picture of the queue: the picture and its code above the store list. Resolves {brand} or {name}, null to skip. */
-function assignDialog(item, i, n) {
+/** One picture of the queue: the picture and its code above the chooser. Resolves {brand} or {name}, null to skip. */
+function nameDialog(item, i, n) {
   return dialog(
     (close) => {
-      const picker = storePicker({
-        onPick: (brand, text) => {
-          if (brand) close({ brand });
-          else {
-            const name = (text || "").trim();
-            if (name) close({ name });
-            else picker.focus();
-          }
-        },
+      const chooser = storeChooser({
+        code: { value: item.value, format: item.format },
+        picture: item.thumb,
+        noName: true,
+        onStore: (brand) => close({ brand }),
+        onOwn: (name) => close({ name: name.trim() }),
       });
-      const picture = item.thumb
-        ? h("img", { class: "queue-picture", src: `data:${item.thumb.type};base64,${item.thumb.b64}`, alt: "" })
-        : null;
-      const formatName = item.format === "qr" ? t("qrCode") : FORMAT_NAMES[item.format] || "";
       const content = h(
         "div",
         { class: "queue" },
@@ -379,12 +381,10 @@ function assignDialog(item, i, n) {
           button(t("skip"), () => close(null), "text"),
           button(t("close"), () => close(undefined), "icon", { iconName: "close" }),
         ),
-        picture,
-        h("p", { class: "queue-code", text: t("scanned", { format: formatName, code: item.value }) }),
-        h("p", { class: "field-hint", text: t("queueHint") }),
-        picker.element,
+        chooser.element,
+        chooser.bar,
       );
-      requestAnimationFrame(() => picker.fit());
+      requestAnimationFrame(() => chooser.fit());
       return content;
     },
     { full: true, label: t("queueTitle", { i, n }) },

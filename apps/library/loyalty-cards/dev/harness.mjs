@@ -1,21 +1,27 @@
-// Development only (not shipped): the headless browser the checks in dev/ drive. It serves package/ from a small local
+// Development only (not shipped): the headless browser the checks in dev/ drive. It serves the built index.html from a small local
 // web server (modules load only from a web address), starts Chromium (CHROME, or Playwright's cached headless shell,
 // or Google Chrome) and drives it over the DevTools protocol with Node's own WebSocket. dev/fake-zapli.js stands in
 // for Zapli's bridge, seeded with cards, so the page runs its phone path.
-import { spawn } from "node:child_process";
 import { createServer } from "node:http";
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { dirname, extname, join, normalize, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { sampleCards } from "../package/js/sample.mjs";
+import { execFileSync, spawn } from "node:child_process";
+import { sampleCards } from "./src/js/sample.mjs";
 
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /** Starts the server and the browser; returns {page(options), close()}. Screenshots go to `out`. */
 export async function startBrowser({ out = tmpdir() } = {}) {
   const here = dirname(fileURLToPath(import.meta.url));
-  const PKG = resolve(here, "..", "package");
+  // The app as it ships: the built index.html in the app's folder, checked against dev/src first.
+  try {
+    execFileSync(process.execPath, [join(here, "build.mjs"), "--check"], { stdio: "pipe" });
+  } catch {
+    throw new Error("index.html is not what dev/src builds: run node dev/build.mjs first.");
+  }
+  const PKG = resolve(here, "..");
   const CANDIDATES = [
     process.env.CHROME,
     join(
@@ -163,6 +169,21 @@ export async function startBrowser({ out = tmpdir() } = {}) {
         await sleep(500);
       },
       eval: evaluate,
+      /** A real mouse event at (x, y) in CSS pixels: "mousePressed", "mouseMoved" or "mouseReleased". */
+      mouse: (type, x, y) =>
+        call("Input.dispatchMouseEvent", {
+          type,
+          x,
+          y,
+          button: type === "mouseMoved" ? "none" : "left",
+          buttons: type === "mouseReleased" ? 0 : 1,
+          clickCount: 1,
+        }),
+      /** The centre of the first element `selector` finds, after scrolling it into view. */
+      center: (selector) =>
+        evaluate(
+          `(() => { const el = document.querySelector(${JSON.stringify(selector)}); if (!el) return null; el.scrollIntoView({ block: "center" }); const r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; })()`,
+        ),
       async click(selector) {
         const ok = await evaluate(
           `(() => { const el = document.querySelector(${JSON.stringify(selector)}); if (!el) return false; el.click(); return true; })()`,
@@ -177,6 +198,10 @@ export async function startBrowser({ out = tmpdir() } = {}) {
         writeFileSync(file, Buffer.from(r.data, "base64"));
         console.log("  wrote", file);
       },
+      /** Any DevTools call on this page (touch input, the accessibility tree, the navigation history). */
+      cdp: call,
+      /** The page's history as the browser keeps it: {currentIndex, entries: [{url}]}. */
+      navigation: () => call("Page.getNavigationHistory"),
       close: () => send("Target.closeTarget", { targetId }),
     };
   }

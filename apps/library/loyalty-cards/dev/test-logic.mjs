@@ -22,26 +22,28 @@ import {
   fold,
   popular,
   search,
-} from "../package/js/brands.mjs";
-import { cardColours, contrast } from "../package/js/faces.mjs";
+} from "./src/js/brands.mjs";
+import { cardColours, contrast } from "./src/js/faces.mjs";
 import {
   FORMAT_IDS,
+  checkDigitSlip,
   cleanNumber,
   detectFormat,
   drawnFormat,
   groupedNumber,
   numberProblem,
-} from "../package/js/formats.mjs";
-import { STRINGS, pickLanguage, pluralForm, translator } from "../package/js/i18n.mjs";
-import { sampleCards } from "../package/js/sample.mjs";
-import { matches, orderedCards } from "../package/js/screens/wallet.mjs";
-import { readPoints } from "../package/js/screens/edit.mjs";
-import { encode } from "../package/js/barcode/index.mjs";
-import { gs1CheckDigit } from "../package/js/barcode/linear.mjs";
+} from "./src/js/formats.mjs";
+import { STRINGS, pickLanguage, pluralForm, translator } from "./src/js/i18n.mjs";
+import { sampleCards } from "./src/js/sample.mjs";
+import { HOLD_MS, matches } from "./src/js/screens/wallet.mjs";
+import { moved, orderedCards } from "./src/js/order.mjs";
+import { readPoints } from "./src/js/screens/edit.mjs";
+import { encode } from "./src/js/barcode/index.mjs";
+import { gs1CheckDigit } from "./src/js/barcode/linear.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const app = join(here, "..");
-const manifest = JSON.parse(readFileSync(join(app, "package", "manifest.json"), "utf8"));
+const manifest = JSON.parse(readFileSync(join(here, "src", "manifest.json"), "utf8"));
 const old = JSON.parse(readFileSync(join(here, "fixtures", "store-2.5.3.json"), "utf8"));
 
 let failures = 0;
@@ -151,7 +153,7 @@ eq(drawnFormat({ number: "4006381333931", format: "code128" }), "code128", "a ch
 eq(drawnFormat({ number: "4006381333931", format: "auto" }), "ean13", "automatic works it out");
 eq(cleanNumber(" 4006 3813 3393 1 "), "4006381333931", "spaces in a printed number go");
 eq(cleanNumber("GB-4471 0093"), "GB-4471 0093", "a number with letters keeps its spaces");
-eq(groupedNumber("2900123456785"), "2900 1234 5678 5", "digits in groups of four");
+eq(groupedNumber("2900123456785"), "2900\u20091234\u20095678\u20095", "digits in groups of four");
 eq(groupedNumber("BTC-7781"), "BTC-7781", "other numbers as they are");
 eq(numberProblem("2900123456", "ean13"), "ean13Needs12", "too short for EAN-13");
 eq(numberProblem("4006381333932", "ean13"), "lastDigitThisEan", "a wrong EAN-13 check digit");
@@ -162,6 +164,21 @@ eq(numberProblem("abc", "code39"), "code39TakesCapital", "Code 39 lower case");
 eq(numberProblem("Café", "code128"), "code128TakesPlain", "Code 128 accents");
 eq(numberProblem("A123", "codabar"), "codabarTakesDigitsWith", "Codabar frame");
 eq(numberProblem("4821337", "itf"), "itfNeedsEvenNumber", "ITF odd");
+// A typed number with an EAN or UPC length whose last digit is off is asked about, not drawn as Code 128 silently.
+for (const n of ["4006381333932", "7700123456781", "12345678", "036000291453"]) {
+  eq(checkDigitSlip(n), "lastDigitTyped", `${n}: a slip in the last digit`);
+}
+for (const n of [
+  "4006381333931",
+  "7700123456786",
+  "12345670",
+  "036000291452",
+  "1234567",
+  "GB-4471-0093",
+  "4006381333931234",
+]) {
+  eq(checkDigitSlip(n), null, `${n}: nothing to ask`);
+}
 eq(numberProblem("", "auto"), "numberMissing", "an empty number");
 eq(numberProblem("x".repeat(301), "auto"), "thatIsTooLong", "a number too long");
 // Every number the page accepts for a type, the encoder draws (except the length-only refusals the checks share).
@@ -208,10 +225,32 @@ eq(
   ["c", "b", "e", "a"],
   "favourites first, then A to Z without accents",
 );
+// The user's own order: the ids as moved; a card added since comes first among its group, newest first.
+const own = [
+  { id: "p", store: "P", pinned: true },
+  { id: "q", store: "Q", pinned: true },
+  { id: "r", store: "R" },
+  { id: "s", store: "S" },
+  { id: "t", store: "T" },
+  { id: "n", store: "New", createdAt: "2026-11-04T10:00:00Z" },
+];
+const mine = ["q", "p", "t", "s", "r"];
+eq(
+  orderedCards(own, "mine", mine).map((c) => c.id),
+  ["q", "p", "n", "t", "s", "r"],
+  "my order, a new card first among the others",
+);
+eq(moved(own, "mine", mine, "s", -1), ["q", "p", "n", "s", "t", "r"], "move up within the others");
+eq(moved(own, "mine", mine, "p", -1), ["p", "q", "n", "t", "s", "r"], "move up within the favourites");
+eq(moved(own, "mine", mine, "q", -1), null, "the first favourite cannot move up");
+eq(moved(own, "mine", mine, "r", 1), null, "the last card cannot move down");
+eq(moved(own, "mine", mine, "n", 1), ["q", "p", "t", "n", "s", "r"], "a new card moves into the list");
+eq(moved(cards, "use", [], "e", -1), ["c", "e", "b", "a"], "moving from another order starts from the order on show");
 check(
   matches(cards[4], "caj") && matches(cards[4], "zlava") && !matches(cards[4], "zeta"),
   "search ignores accents and reads notes",
 );
+eq(HOLD_MS, 400, "a card lifts after the phone's own long press, 400 ms");
 eq(readPoints("1 240,5"), 1240.5, "points with a decimal comma");
 eq(readPoints("1,240.5"), 1240.5, "points with a decimal point");
 eq(readPoints(""), null, "no points");
@@ -252,7 +291,7 @@ for (const option of fields.group.options) {
 }
 const allFrom = Object.values(importStep).flatMap((f) => (f.from || []).map((h) => h.toLowerCase()));
 for (const file of readdirSync(join(app, "import-samples"))) {
-  const text = readFileSync(join(app, "import-samples", file), "utf8").replace(/^﻿/, "");
+  const text = readFileSync(join(app, "import-samples", file), "utf8").replace(/^\ufeff/, "");
   const header = text.split(/\r?\n/)[0];
   const columns = header
     .split(header.includes(";") ? ";" : ",")
@@ -316,12 +355,15 @@ eq(
   ["one", "few", "few", "other", "other"],
   "Slovak plural forms",
 );
-eq(translator("sk")("cardCount", { n: 3 }), "3 karty", "a Slovak plural message");
+eq(translator("sk")("queueDone", { n: 3 }), "Pridané 3 karty.", "a Slovak plural message");
 eq(translator("en")("points", { n: 1 }), "1 point", "an English plural message");
 for (const [lang, table] of Object.entries(STRINGS)) {
   for (const [key, value] of Object.entries(table)) {
     for (const text of typeof value === "object" ? Object.values(value) : [value]) {
-      check(!/[​-‏‪-‮⁦-⁩﻿]/.test(text), `${lang}.${key} has no invisible characters`);
+      check(
+        !/[\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]/.test(text),
+        `${lang}.${key} has no invisible characters`,
+      );
       check(!/\bzapli\b/i.test(text), `${lang}.${key} never names the host`);
     }
   }

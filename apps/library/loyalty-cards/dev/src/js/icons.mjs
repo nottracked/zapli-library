@@ -44,6 +44,9 @@ const PATHS = {
   check: ["M5 12.5l4.5 4.5L19 7.5"],
   chevron: ["M9 6l6 6l-6 6"],
   chevronDown: ["M6 9l6 6l6-6"],
+  chevronUp: ["M6 15l6-6l6 6"],
+  sort: ["M4 7h10", "M4 12h7", "M4 17h4", "M17.5 5v14", "M14.5 16l3 3l3-3"],
+  blank: [],
   sun: [
     "M12 8.5a3.5 3.5 0 1 1 0 7a3.5 3.5 0 0 1 0-7z",
     "M12 3v2",

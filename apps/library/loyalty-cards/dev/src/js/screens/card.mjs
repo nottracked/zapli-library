@@ -1,14 +1,28 @@
 // A card at the till: its code big on white, the number under it, the screen at full brightness and kept on; a swipe
-// sideways shows the next card of the wallet. Below: points, expiry, the name on the card, the note, its photos.
+// sideways shows the next card of the wallet, and a tap on the code fills the screen with it. Below: points, expiry,
+// the name on the card, the note, its photos.
 
 import { encode, toSvg, FORMATS } from "../barcode/index.mjs";
-import { cardColours, fitNames, textZoom } from "../faces.mjs";
+import { cardColours, fitLine, fitNames } from "../faces.mjs";
 import { FORMAT_NAMES, drawnFormat, groupedNumber } from "../formats.mjs";
 import { icon, kindIcon } from "../icons.mjs";
 import { canPickPictures, canTakePhoto, pickPictures, shrink, takePhoto } from "../photos.mjs";
-import { button, confirmDialog, ctx, dialog, formatDate, formatNumber, h, snack, t, topBar } from "../ui.mjs";
+import {
+  button,
+  confirmDialog,
+  ctx,
+  dialog,
+  formatDate,
+  formatNumber,
+  h,
+  hideSnack,
+  snack,
+  t,
+  topBar,
+} from "../ui.mjs";
 import { showProblem } from "./transfer.mjs";
-import { orderedCards } from "./wallet.mjs";
+import { orderedCards } from "../order.mjs";
+import { moveCard } from "./wallet.mjs";
 
 const USED_AFTER_MS = 1500;
 
@@ -70,24 +84,6 @@ function slide(card) {
   return h("div", { class: "slide", "data-id": card.id }, panel);
 }
 
-/**
- * The number under a code on one line: it shrinks (to about half at most) rather than wrap, so a cashier reads it
- * in one go; a number longer than that wraps.
- */
-function fitNumber(el) {
-  el.classList.remove("wraps");
-  el.style.fontSize = "";
-  const zoom = textZoom(el);
-  let size = parseFloat(getComputedStyle(el).fontSize) / zoom || 20;
-  const min = size * 0.55;
-  let guard = 0;
-  while (guard++ < 16 && size > min && el.scrollWidth > el.clientWidth + 1) {
-    size *= 0.92;
-    el.style.fontSize = size + "px";
-  }
-  if (el.scrollWidth > el.clientWidth + 1) el.classList.add("wraps");
-}
-
 /** Draws the codes of the slide on show and its neighbours (the others wait until they come near). */
 function drawCodes() {
   if (!state) return;
@@ -99,11 +95,69 @@ function drawCodes() {
     if (!area || area.dataset.drawn) continue;
     area.dataset.drawn = "1";
     const markup = codeMarkup(card, t("codeLabel", { store: card.store, number: card.number }));
-    if (markup) area.innerHTML = markup;
-    else area.appendChild(h("p", { class: "cant-draw", text: t("cantDraw") }));
+    if (markup) {
+      const tap = h("button", {
+        type: "button",
+        class: "code-tap",
+        "aria-label": t("codeFull"),
+        onClick: () => openFull(card),
+      });
+      tap.innerHTML = markup;
+      area.appendChild(tap);
+    } else area.appendChild(h("p", { class: "cant-draw", text: t("cantDraw") }));
     const number = area.parentElement.querySelector(".code-number");
-    if (number) fitNumber(number);
+    if (number) fitLine(number);
   }
+}
+
+// ---------------------------------------------------------------- the code full screen
+
+let fullOpen = false;
+
+/** The card screen's address; `full` while the code fills the screen, so a reload after a rotation opens it again. */
+function cardHash(card, full = false) {
+  return "#/card/" + encodeURIComponent(card.id) + (full ? "?full=1" : "");
+}
+
+/**
+ * The code alone on white, as large as the screen allows, the number under it in large digits and the card's name
+ * small above. A linear barcode stretches across the whole width, the long side when the phone is turned. A tap or
+ * Back closes it; it adds no history entry (Back closes a dialog first) and the screen stays bright under it.
+ */
+function openFull(card) {
+  const format = drawnFormat(card);
+  const result = encode(card.number, format);
+  if (fullOpen || !result.ok) return;
+  fullOpen = true;
+  hideSnack();
+  ctx.replace(cardHash(card, true), { quiet: true });
+  const linear = result.symbol.linear;
+  dialog(
+    (close) => {
+      const code = h("div", { class: "full-code" + (linear ? " linear" : "") });
+      code.innerHTML = toSvg(result.symbol, format, {
+        label: t("codeLabel", { store: card.store, number: card.number }),
+      });
+      // Bars may stretch: only their widths relative to each other carry the code.
+      if (linear) code.firstElementChild.setAttribute("preserveAspectRatio", "none");
+      const number = h("p", { class: "full-number", text: groupedNumber(card.number) });
+      // The view itself takes the focus, so no close button is ringed as focused on the till's screen.
+      const content = h(
+        "div",
+        { class: "full-body", tabindex: "-1", autofocus: true, onClick: () => close() },
+        h("p", { class: "full-name", text: card.store }),
+        code,
+        number,
+        button(t("close"), () => close(), "icon", { iconName: "close", extraClass: "full-close" }),
+      );
+      requestAnimationFrame(() => fitLine(number));
+      return content;
+    },
+    { full: true, extraClass: "till-full", label: card.store },
+  ).then(() => {
+    fullOpen = false;
+    if (location.hash === cardHash(card, true)) ctx.replace(cardHash(card), { quiet: true });
+  });
 }
 
 // ---------------------------------------------------------------- the details under the code
@@ -378,6 +432,9 @@ function openMenu(card) {
         { class: "menu", role: "menu" },
         item(t("edit"), "edit", () => ctx.go("#/edit/" + encodeURIComponent(card.id))),
         item(t("shareCard"), "share", () => shareCard(card)),
+        // Moving here works without dragging, for screen readers and anyone who cannot hold and drag.
+        card.archived ? null : item(t("moveUp"), "chevronUp", () => moveHere(card, -1)),
+        card.archived ? null : item(t("moveDown"), "chevronDown", () => moveHere(card, 1)),
         card.archived
           ? item(t("unarchive"), "unarchive", async () => {
               await ctx.store.update(card.id, { archived: false });
@@ -393,6 +450,12 @@ function openMenu(card) {
     },
     { sheet: true, label: card.store },
   );
+}
+
+/** Moves the card in the wallet's order and shows the cards around it in their new order. */
+async function moveHere(card, delta) {
+  if (await moveCard(card.id, delta)) ctx.replace("#/card/" + encodeURIComponent(card.id));
+  else snack(delta < 0 ? t("alreadyFirst") : t("alreadyLast"));
 }
 
 async function deleteCard(card) {
@@ -433,9 +496,13 @@ function paintTop() {
   const card = current();
   if (!card || !state.top) return;
   state.top.querySelector(".topbar-title").textContent = card.store;
+  // A toggle: its name stays "Favourite" and its pressed state says whether the card is one. The name is text inside
+  // the button, which is where the phone's screen reader looks for a toggle button's name.
   const star = state.top.querySelector(".star-toggle");
-  star.replaceChildren(icon("star", { filled: Boolean(card.pinned) }));
-  star.setAttribute("aria-label", card.pinned ? t("removeFavourite") : t("addFavourite"));
+  star.replaceChildren(
+    icon("star", { filled: Boolean(card.pinned) }),
+    h("span", { class: "unseen", text: t("favouriteMark") }),
+  );
   star.setAttribute("aria-pressed", card.pinned ? "true" : "false");
   star.classList.toggle("on", Boolean(card.pinned));
   state.position.textContent = state.cards.length > 1 ? t("cardOf", { i: state.index + 1, n: state.cards.length }) : "";
@@ -472,6 +539,12 @@ function countLater(card) {
   }, USED_AFTER_MS);
 }
 
+/** The cards a swipe goes through: the wallet's, in its order, or the card alone when it is archived. */
+function cardsAround(card) {
+  const store = ctx.store;
+  return card.archived ? [card] : orderedCards(store.cards, store.ui.order, store.ui.manual);
+}
+
 export function render(route) {
   const store = ctx.store;
   const card = store.card(route.id);
@@ -482,7 +555,7 @@ export function render(route) {
     state = null;
     return screen;
   }
-  const cards = card.archived ? [card] : orderedCards(store.cards, store.ui.order);
+  const cards = cardsAround(card);
   const index = Math.max(
     0,
     cards.findIndex((c) => c.id === card.id),
@@ -490,6 +563,8 @@ export function render(route) {
   const previous = state;
   state = {
     cards,
+    // Which cards were favourites when the slides were laid out: a change of these reorders them.
+    pinned: cards.map((c) => Boolean(c.pinned)),
     index,
     counted: previous && previous.counted ? previous.counted : new Set(),
     usedTimer: 0,
@@ -498,6 +573,7 @@ export function render(route) {
   const star = h("button", {
     type: "button",
     class: "btn icon star-toggle",
+    "aria-pressed": "false",
     onClick: () => toggleFavourite(current()),
   });
   state.top = topBar({
@@ -527,7 +603,7 @@ export function render(route) {
   return screen;
 }
 
-export function mounted() {
+export function mounted(route) {
   if (!state) return;
   const width = state.slides.clientWidth;
   state.slides.scrollLeft = state.index * width;
@@ -535,15 +611,34 @@ export function mounted() {
   fitNames(document.getElementById("main"));
   brighten(true);
   countLater(current());
+  if (route && route.params.get("full") === "1") openFull(current());
 }
 
-/** A change of data (a favourite, a use counted, a photo): the slides stay, the details and the title follow. */
+/**
+ * A change of data (a use counted, a photo, a favourite): the details and the title follow. A card made a favourite
+ * here, or no longer one, moves in the wallet's order, so the slides take the new order at once with the card still
+ * on show. A use counted moves nothing while the cards show, so the slides never change under the finger.
+ */
 export function refresh() {
   if (!state) return;
   const store = ctx.store;
   const card = current() && store.card(current().id);
   if (!card) return;
-  state.cards[state.index] = card;
+  const starred = state.cards.some((c, i) => {
+    const now = store.card(c.id);
+    return now && Boolean(now.pinned) !== state.pinned[i];
+  });
+  if (starred) {
+    state.cards = cardsAround(card);
+    state.pinned = state.cards.map((c) => Boolean(c.pinned));
+    state.index = Math.max(
+      0,
+      state.cards.findIndex((c) => c.id === card.id),
+    );
+    state.slides.replaceChildren(...state.cards.map(slide));
+    state.slides.scrollLeft = state.index * state.slides.clientWidth;
+    drawCodes();
+  } else state.cards[state.index] = card;
   paintTop();
   paintDetails();
 }
@@ -551,7 +646,7 @@ export function refresh() {
 export function resized() {
   if (!state) return;
   state.slides.scrollLeft = state.index * state.slides.clientWidth;
-  for (const number of state.slides.querySelectorAll(".code-number")) fitNumber(number);
+  for (const number of state.slides.querySelectorAll(".code-number")) fitLine(number);
 }
 
 export function leave() {

@@ -4,7 +4,7 @@
   "replaces": "Loyalty-card wallet",
   "title": "Loyalty cards",
   "summary": "Every store card on your phone: pick the store, scan, show it at the till.",
-  "description": "**Loyalty cards** keeps your store cards, membership cards and vouchers on your phone, ready at the till. No account, no ads, and it works without a connection.\n\n### Add a card in two taps\n- **Pick the store, scan, done.** The store list shows the popular stores of your country first (Slovakia, Czechia or an international list, chosen from your phone's language) as colourful card-shaped tiles. Tap one and the scanner opens straight away; the card is saved the moment the barcode is read.\n- **Scan first** and tap the store after, **search** for a store as you type (accents not needed), or add **any other card** by name.\n- **No scanner at hand?** Type the number under the barcode on the number keypad: the barcode type is worked out from it, and a mistyped last digit is caught before you get to the till. Or read it from a screenshot or photo.\n\n### At the till\n- Tap a card and its code fills the screen on white, with the number under it in large digits for typing by hand. The screen goes to **full brightness and stays on** while the code shows.\n- **Swipe sideways** to the next card without going back.\n- Codes are drawn by the app itself: EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, Codabar, ITF, QR code, Data Matrix, PDF417 and Aztec.\n\n### Your wallet\n- Every card as a face in its store's colour, or with **your own photo** of the card. Favourites first, then the cards you use most (or last used, or A to Z). Search by store, number, name or note.\n- Points or balance, expiry date with a **reminder a week before**, the name on the card, a note, and photos of the front and back.\n- Archive cards you no longer use; share a card's code with someone in your family.\n- A **home-screen widget** with your favourite cards.\n\n### Bring your cards along\n- **From screenshots:** take a screenshot of each card in the app you used before, pick them all at once, and tap the store under each picture. The barcode is read on your phone.\n- **From a file:** imports the card list CSV most card wallet apps export (store, card number, barcode type, notes, expiry, points; comma or semicolon), including the card table those apps write into their backups. Cards you already have are left alone.\n- **Back up** all your cards to a CSV file, for example for a new phone.\n\n### What it never does\n- No ads, no tracking, no analytics, no account and no sign-in.\n- It cannot connect to the internet. Nothing leaves your phone unless you share a card or save a backup yourself.\n- It holds no payment cards: store and membership cards only. Store names are shown as plain text in the app's own colours; it ships no logos.\n\nIn English and Slovak, following your phone's language.",
+  "description": "**Loyalty cards** keeps your store cards, membership cards and vouchers on your phone, ready at the till. No account, no ads, and it works without a connection.\n\n### Add a card in two taps\n- **Pick the store, scan, done.** The popular stores of your country come first (Slovakia, Czechia or an international list, from your phone's language) as colourful card-shaped tiles. Tap one and the scanner opens straight away; the card is saved the moment the barcode is read.\n- **Or scan first.** The code that was read is shown, and one field, **Shop or card name**, finds the store as you type or names a card of your own. Not in the list? Add it under its own name, or save it without a name and name it later.\n- **No scanner at hand?** Type the number under the barcode on the number keypad: the barcode type is worked out from it, and a mistyped last digit is caught before you get to the till. Or read it from a screenshot or photo.\n- Every way ends on your new card, with Undo.\n\n### At the till\n- Tap a card and its code shows big on white, with the number under it in large digits for typing by hand. **Tap the code** and it fills the screen; turn the phone and a barcode runs along the long side. The screen goes to **full brightness and stays on** while the code shows.\n- **Swipe sideways** to the next card without going back.\n- Codes are drawn by the app itself: EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, Codabar, ITF, QR code, Data Matrix, PDF417 and Aztec.\n\n### Your wallet, your order\n- Every card as a face in its store's colour, or with **your own photo** of the card.\n- **Hold a card** to star it as a favourite or move it up or down, or **drag it** where you want it. Favourites stay on top; then most used, last used, A to Z, or **your own order**. Moving works from a card's menu too, without dragging.\n- Search by store, number, name or note.\n- Points or balance, expiry date with a **reminder a week before**, the name on the card, a note, and photos of the front and back.\n- Archive cards you no longer use; share a card's code with someone in your family.\n- A **home-screen widget** with your favourite cards.\n\n### Bring your cards along\n- **From screenshots:** take a screenshot of each card in the app you used before, pick them all at once, and name each one under its picture. The barcode is read on your phone.\n- **From a file:** imports the card list CSV most card wallet apps export (store, card number, barcode type, notes, expiry, points; comma or semicolon), including the card table those apps write into their backups. Cards you already have are left alone.\n- **Back up** all your cards to a CSV file, for example for a new phone.\n\n### What it never does\n- No ads, no tracking, no analytics, no account and no sign-in.\n- It cannot connect to the internet. Nothing leaves your phone unless you share a card or save a backup yourself.\n- It holds no payment cards: store and membership cards only. Store names are shown as plain text in the app's own colours; it ships no logos.\n\nIn English and Slovak, following your phone's language.",
   "license": "GPL-3.0-or-later",
   "tags": [
     "loyalty cards",
@@ -23,57 +23,57 @@
       "file": "screenshots/01-wallet-light.png",
       "caption": "Your cards as colourful faces, favourites first",
       "theme": "light",
-      "sha256": "10caa1220de1c02ceff6c1707b789df8d9cbfbb7dc919339f7e132e86bd6de90",
-      "size": 759548
+      "sha256": "8eb2d4e6e7e66acd087980260d892d533bb899340cfe3f17143ccd7d82ed13a9",
+      "size": 741321
     },
     {
-      "file": "screenshots/02-store-list-light.png",
-      "caption": "Pick your store from the popular stores of your country",
+      "file": "screenshots/02-add-light.png",
+      "caption": "Tap your store and the scanner opens, or type a name",
       "theme": "light",
-      "sha256": "1c4168a3ecc1c82b3bf323127915c646dccf67a4aa8e5fcd5624810a15a97015",
-      "size": 535286
+      "sha256": "151979953554e7f4650ca885cae68cddef9342522bbbd0c3c336dd1dba65c6b5",
+      "size": 376136
     },
     {
-      "file": "screenshots/03-till-light.png",
-      "caption": "Scanned and saved: the code big on white, ready at the till",
+      "file": "screenshots/03-name-after-scan-light.png",
+      "caption": "After a scan: one field finds the store or names your own card",
       "theme": "light",
-      "sha256": "124dc2411c7da68e1ca9ba7467ab5c9a919962197a02b67b8142758cbfd4e8de",
-      "size": 123100
+      "sha256": "7a1416da6f89e854805746af1549ce2648cbe2cd29efc6fac26df0739b1e9856",
+      "size": 143396
     },
     {
-      "file": "screenshots/04-type-number-light.png",
-      "caption": "No scanner? Type the number; the barcode type is worked out",
+      "file": "screenshots/04-till-light.png",
+      "caption": "Saved and shown at once: the code big on white, with Undo",
       "theme": "light",
-      "sha256": "5fa75c78f1536073ffdd234bcb0c42c1f5bb1c2bd32713711106f25e1b5eb60b",
-      "size": 185437
+      "sha256": "6fee80cf8b6c4cab41a6967d6cd62a618e593e8909f1c3cc7552ea2ae8c55eac",
+      "size": 154579
     },
     {
-      "file": "screenshots/05-photo-face-light.png",
+      "file": "screenshots/05-rearrange-light.png",
+      "caption": "Hold a card and drag it to put your cards in your own order",
+      "theme": "light",
+      "sha256": "d940776eebd8c7983666bc48c43f989c5406d9a8fed7d4635e86ea47204f1fa0",
+      "size": 729436
+    },
+    {
+      "file": "screenshots/06-photo-face-light.png",
       "caption": "Your own photo of a card as its face",
       "theme": "light",
-      "sha256": "0a0d1dcedfed5d817484ca3e305d995124c64e5b95ceceffe2811a6388f0812b",
-      "size": 760191
+      "sha256": "9644656f993985e26dc99da569f2fc3384f9f72d29c48351b39ed54b0b7585e4",
+      "size": 740846
     },
     {
-      "file": "screenshots/06-wallet-dark.png",
+      "file": "screenshots/07-wallet-dark.png",
       "caption": "Your wallet in the dark theme",
       "theme": "dark",
-      "sha256": "c876e1d21046bf9de3f6d28867537577ab2a7f679feaaabb8bf21b891c869078",
-      "size": 764911
+      "sha256": "179d1889fc0ab4d9ebc28479d812455ef1ad6deefcd5c2b3b59ca7b520fb2ee6",
+      "size": 748607
     },
     {
-      "file": "screenshots/07-till-dark.png",
+      "file": "screenshots/08-till-dark.png",
       "caption": "A QR code at the till; swipe sideways for the next card",
       "theme": "dark",
       "sha256": "c387c95c4a044b28ea87ba86fecd044e1b524fc74a8ae8f6562000d3e3bd3195",
       "size": 143744
-    },
-    {
-      "file": "screenshots/08-store-list-sk-light.png",
-      "caption": "In Slovak, with the stores of Slovakia first",
-      "theme": "light",
-      "sha256": "4b0fceceee62068c10ae6a260432d2020ee70966457c63d7318adcb1dd19c4c4",
-      "size": 540986
     }
   ],
   "sampleData": {
