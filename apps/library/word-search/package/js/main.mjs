@@ -344,6 +344,9 @@ window.addEventListener("popstate", (e) => {
 });
 
 // ---- vibration (Zapli's haptics; a plain browser has none and skips it)
+//
+// "light" is the faintest tick a phone has, which some phones barely play, so nothing here uses it: a found word is
+// "success", a hint "medium", and a solved puzzle "heavy" followed by "success".
 
 function buzz(kind) {
   if (!canBuzz || !settings.vibration) return;
@@ -650,7 +653,7 @@ function foundWord(word) {
     solve();
     return;
   }
-  buzz("light");
+  buzz("success");
   notice(t("found", { word: displayWord(word.w) }), "good");
 }
 
@@ -691,7 +694,7 @@ function solve() {
   refresh();
   const nowDone = themeDone(lang, g.puzzle.theme, collectionOf(lang));
   showSolved(!still(), nowDone && !wasDone);
-  buzzPattern(["success", "medium", "success"], 140);
+  buzzPattern(["heavy", "success"], 120);
 }
 
 // ---- the word list
@@ -824,7 +827,7 @@ function giveHint(word, wanted) {
   bumpStats(game.lang, { hints: 1 });
   renderWords();
   saveGame();
-  buzz("light");
+  buzz("medium");
   const first = game.puzzle.grid[cellsOf(game.puzzle, word)[0]].toUpperCase();
   if (r.level === 1) notice(t("hintFirst", { letter: first }), "hint");
   else if (game.puzzle.hideList) notice(t("hintWhereHidden", { n: word.n }), "hint");
@@ -877,8 +880,7 @@ function refresh() {
   chip.textContent = game.kind === "daily" ? t("toEndless") : t("toToday");
   $("btn-hint").disabled = state.done;
   $("lang-code").textContent = game.lang.toUpperCase();
-  $("lang-name").textContent = t(game.lang === "sk" ? "wordsSk" : "wordsEn");
-  $("btn-lang").setAttribute("aria-label", t(game.lang === "sk" ? "langToggleSk" : "langToggleEn"));
+  $("btn-lang").setAttribute("aria-label", t(game.lang === "sk" ? "langPillSk" : "langPillEn"));
   $("btn-lang").title = $("btn-lang").getAttribute("aria-label");
   $("daily-dot").hidden = todayDone;
   $("btn-daily").setAttribute("aria-label", todayDone ? t("daily") : t("dailyTodo"));
@@ -1000,6 +1002,50 @@ document.querySelectorAll("dialog").forEach((dlg) => {
     if (e.target === dlg) closeDialog(dlg);
   });
 });
+
+// The word-language picker: a small card under the language pill, with a row for each language in its own name. A row
+// switches and closes it; a tap outside it, Escape or the phone's Back close it as they close every dialog.
+function placePicker() {
+  const dlg = $("dlg-lang");
+  if (!dlg.open) return;
+  const pill = $("btn-lang").getBoundingClientRect();
+  const vw = window.innerWidth || root.clientWidth || 360;
+  const vh = window.innerHeight || root.clientHeight || 640;
+  const w = dlg.offsetWidth || 0;
+  const h = dlg.offsetHeight || 0;
+  const left = Math.max(12, Math.min(pill.left, vw - w - 12));
+  // Under the pill where it fits; on a short screen (sideways, large text) as low as it fits, over the pill if need be.
+  const top = Math.max(12, Math.min(pill.bottom + 8, vh - h - 12));
+  dlg.style.left = `${Math.round(left)}px`;
+  dlg.style.top = `${Math.round(top)}px`;
+}
+
+function openPicker() {
+  const dlg = $("dlg-lang");
+  const now = game ? game.lang : wordsLang();
+  let current = null;
+  dlg.querySelectorAll(".lang-row").forEach((row) => {
+    const on = row.dataset.lang === now;
+    row.classList.toggle("on", on);
+    if (on) {
+      row.setAttribute("aria-current", "true");
+      current = row;
+    } else row.removeAttribute("aria-current");
+  });
+  openDialog(dlg);
+  // Closed, the focus goes back to the pill, also where a tap does not focus a button.
+  returnFocus.set(dlg, $("btn-lang"));
+  placePicker();
+  if (current) current.focus({ preventScroll: true });
+}
+
+$("lang-rows").addEventListener("click", (e) => {
+  const row = e.target.closest(".lang-row");
+  if (!row) return;
+  closeDialog($("dlg-lang"));
+  switchLang(row.dataset.lang);
+});
+window.addEventListener("resize", placePicker);
 
 // daily calendar
 const calendar = createCalendar($("cal"), {
@@ -1229,7 +1275,7 @@ function onSetting(e) {
   if (input.id === "opt-contrast") settings.contrast = input.checked;
   else if (input.id === "opt-vibration") {
     settings.vibration = input.checked;
-    buzz("light");
+    buzz("success");
   } else if (input.id === "opt-timer") {
     settings.timer = input.checked;
     showClock();
@@ -1262,7 +1308,7 @@ function onSetting(e) {
 
 const on = (id, fn) => $(id).addEventListener("click", fn);
 
-on("btn-lang", () => switchLang(game && game.lang === "sk" ? "en" : "sk"));
+on("btn-lang", openPicker);
 on("btn-daily", openCalendar);
 on("btn-themes", () => {
   renderThemes();

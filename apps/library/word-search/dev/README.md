@@ -49,7 +49,8 @@ From the app's folder (`apps/library/word-search/`), with Node 22:
 
 ```sh
 node dev/check-game.mjs        # themes; every theme at every size, with and without a message; 400 daily puzzles
-node dev/check-page.mjs        # the page on a stand-in DOM: drags, taps, hints, solving, themes, Undo, daily, Slovak
+node dev/check-page.mjs        # the page on a stand-in DOM: drags, taps, hints, solving, themes, Undo, daily, Slovak,
+                               # the word-language picker and the vibration
 node dev/check-i18n.mjs        # English and Slovak texts complete and alike; How to play starts with 15 seconds
 node dev/review-sheet.mjs <file.md>
 ```

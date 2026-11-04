@@ -41,6 +41,12 @@
             <symbol id="i-prev" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7" /></symbol>
             <symbol id="i-next" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></symbol>
             <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></symbol>
+            <symbol id="i-down" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></symbol>
+            <symbol id="i-globe" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3Z" />
+                <path d="M3.6 9h16.8M3.6 15h16.8" />
+            </symbol>
             <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></symbol>
             <symbol id="i-letter" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="8.5" />
@@ -56,9 +62,10 @@
         <div class="app" id="app">
             <header class="band top">
                 <h1 class="brand" data-t="appName">Word Search</h1>
-                <button type="button" class="lang-btn" id="btn-lang">
-                    <span class="lang-code" id="lang-code" aria-hidden="true">EN</span
-                    ><span class="lang-name" id="lang-name"></span>
+                <button type="button" class="lang-btn" id="btn-lang" aria-haspopup="dialog">
+                    <svg class="ico globe" aria-hidden="true"><use href="#i-globe" /></svg
+                    ><span class="lang-code" id="lang-code">EN</span
+                    ><svg class="ico chev" aria-hidden="true"><use href="#i-down" /></svg>
                 </button>
                 <div class="tools">
                     <button type="button" class="icon-btn" id="btn-stats" data-t-label="statistics">
@@ -178,6 +185,23 @@
                 </button>
             </nav>
         </div>
+
+        <dialog id="dlg-lang" class="pop" aria-labelledby="lang-title">
+            <div class="pop-in">
+                <h2 class="pop-title" id="lang-title" data-t="langTitle">Word language</h2>
+                <div class="lang-rows" id="lang-rows">
+                    <button type="button" class="lang-row" data-lang="sk">
+                        <span lang="sk">Slovenčina</span>
+                        <svg class="ico tick" aria-hidden="true"><use href="#i-check" /></svg>
+                    </button>
+                    <button type="button" class="lang-row" data-lang="en">
+                        <span lang="en">English</span>
+                        <svg class="ico tick" aria-hidden="true"><use href="#i-check" /></svg>
+                    </button>
+                </div>
+                <p class="pop-note" data-t="langKept">Your puzzle in each language is kept.</p>
+            </div>
+        </dialog>
 
         <dialog id="dlg-daily" aria-labelledby="daily-title">
             <div class="dlg-head"><h2 id="daily-title" data-t="dailyTitle">Daily puzzle</h2></div>

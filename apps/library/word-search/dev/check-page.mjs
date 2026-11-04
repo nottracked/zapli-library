@@ -8,6 +8,10 @@
 //  - themes, Undo, the daily puzzle, Slovak words and texts, a hard puzzle with a hidden list, the dialogs;
 //  - Back (the page's history, as the phone sends it) closes the hint bar and every dialog first, and history
 //    entries are added only by taps;
+//  - the word-language picker: the pill opens it, Back, a tap outside or the ticked row close it and change nothing, a
+//    row switches, and each language's puzzle comes back as it was left;
+//  - vibration through a stand-in for Zapli's haptics: a found word "success", a hint "medium", a solved puzzle
+//    "heavy" then "success", and never the faintest kind;
 //  - progress survives a reload from the saved values.
 // Run: node dev/check-page.mjs
 import { readFileSync, readdirSync } from "node:fs";
@@ -42,6 +46,19 @@ for (const [id, n] of ids) if (n > 1) fail(`id "${id}" appears ${n} times in ind
     }
   }
 })(join(pkg, "js"));
+
+// Zapli's bridge as far as the game uses it here: ready at once, haptics only, and every buzz recorded.
+const buzzes = [];
+const zapli = {
+  ready: Promise.resolve(),
+  supports: (feature) => feature === "haptics.impact",
+  haptics: {
+    impact: (kind) => {
+      buzzes.push(kind);
+      return Promise.resolve();
+    },
+  },
+};
 
 // ---- a stand-in for the parts of the DOM the page uses
 const VOID = new Set(["meta", "link", "input", "br", "img"]);
@@ -360,6 +377,7 @@ function setUpGlobals(storage) {
       borderLeftWidth: "2px",
     }),
     crypto: globalThis.crypto,
+    zapli,
     localStorage: {
       getItem: (k) => (storage.has(k) ? storage.get(k) : null),
       setItem: (k, v) => storage.set(k, String(v)),
@@ -457,7 +475,10 @@ eq($("board").querySelectorAll(".l").length, 49, "49 letters on the board");
 eq(pills().length, g.puzzle.words.length, "a pill for every word");
 ok($("theme-name").textContent.length > 0, "the theme's name shows");
 ok(/^Puzzle 1 · 7 × 7$/.test($("mode-label").textContent), `mode line: ${$("mode-label").textContent}`);
-eq($("lang-name").textContent, "English words", "the language button says which words are in play");
+eq($("lang-code").textContent, "EN", "the language pill shows the words in play");
+eq($("btn-lang").getAttribute("aria-label"), "Word language: English. Tap to change.", "the pill says what it is");
+eq($("btn-lang").getAttribute("aria-haspopup"), "dialog", "the pill says it opens a choice");
+ok(visible($("opt-vibration-row")), "the vibration switch shows where the phone can vibrate");
 ok(visible($("first-help")), "the first start shows the line that opens How to play");
 ok(parseFloat($("board").style.width) > 200, `the board is sized (${$("board").style.width})`);
 eq($("progress").textContent, `0/${g.puzzle.words.length}`, "progress at start");
@@ -468,6 +489,7 @@ drag(a, b, g.puzzle.size, 6);
 g = current(storage, "en");
 eq(g.state.found, [g.puzzle.words[0].w], "a drag finds the word");
 ok(/found!/.test($("notice").textContent), `the find is announced: ${$("notice").textContent}`);
+eq(buzzes, ["success"], "a found word is felt");
 eq(foundPills().length, 1, "the pill is crossed off");
 ok($("board").querySelectorAll(".cap").length === 1, "one capsule on the board");
 ok(!visible($("first-help")), "the first-start line is gone after the first word");
@@ -504,6 +526,7 @@ ok(current(storage, "en").state.found.includes(tapWord.w), "tap, tap finds the w
 $("btn-hint").click();
 g = current(storage, "en");
 eq(g.state.used, 1, "a hint is counted");
+eq(buzzes.at(-1), "medium", "a hint is felt");
 ok($("board").querySelectorAll(".ring").length === 1, "the hint rings a first letter");
 ok($("notice").classList.contains("hint"), "the hint says which letter");
 let open = pills().find((x) => !x.classList.contains("found"));
@@ -526,11 +549,19 @@ eq(current(storage, "en").state.used, 2, "two hints counted");
 
 // solve the rest
 g = current(storage, "en");
+let mark = buzzes.length;
 for (const word of g.puzzle.words) {
   if (current(storage, "en").state.found.includes(word.w)) continue;
   [a, b] = ends(g.puzzle, word);
   drag(a, b, g.puzzle.size);
 }
+await tick(160);
+const solveBuzzes = buzzes.slice(mark);
+eq(solveBuzzes.slice(-2), ["heavy", "success"], "a solved puzzle is felt as heavy, then success");
+ok(
+  solveBuzzes.slice(0, -2).every((k) => k === "success"),
+  `each word before the last is felt, the last only as the solve: ${solveBuzzes}`,
+);
 g = current(storage, "en");
 eq(g.state.done, true, "every word found solves the puzzle");
 ok(visible($("solved")) && !visible($("words")), "the solved panel replaces the list");
@@ -582,12 +613,79 @@ ok($("dlg-daily").open, "the calendar opens");
 ok($("cal").querySelectorAll(".d").length >= 28, "the calendar shows a month");
 $("daily-close").click();
 
-// Slovak words
+// the word-language picker (after the closed dialogs above have taken their history entries back)
+await tick(5);
+eq(globalThis.window.history.index, 0, "no history entry is left from the dialogs");
+const picker = $("dlg-lang");
+const rows = () => picker.querySelectorAll(".lang-row");
+const row = (code) => picker.querySelector(`.lang-row[data-lang="${code}"]`);
 $("btn-lang").click();
+ok(picker.open, "the language pill opens the picker");
+eq($("lang-code").textContent, "EN", "opening the picker changes nothing");
+eq(globalThis.window.history.index, 1, "the picker has a history entry, added by the tap");
+eq($("lang-title").textContent, "Word language", "the picker's title");
+eq(
+  rows().map((r) => r.textContent.trim()),
+  ["Slovenčina", "English"],
+  "a row for each language, in its own name",
+);
+eq(
+  rows().map((r) => r.querySelector("span").lang),
+  ["sk", "en"],
+  "each name is marked with its language",
+);
+eq(
+  rows().map((r) => [r.classList.contains("on"), r.getAttribute("aria-current")]),
+  [
+    [false, null],
+    [true, "true"],
+  ],
+  "the language in play is ticked and current",
+);
+ok(doc.activeElement === row("en"), "the ticked row has the focus");
+eq(picker.querySelector(".pop-note").textContent, "Your puzzle in each language is kept.", "the line about the puzzle");
+eq(await back(), "stayed", "Back with the picker open stays in the game");
+ok(!picker.open, "Back closes the picker");
+eq($("lang-code").textContent, "EN", "and keeps the language");
+ok(doc.activeElement === $("btn-lang"), "the focus goes back to the pill");
+$("btn-lang").click();
+picker.dispatchEvent({ type: "click", target: picker });
+ok(!picker.open, "a tap outside the card closes the picker");
+await tick(5);
+eq(globalThis.window.history.index, 0, "and takes its history entry back");
+$("btn-lang").click();
+row("en").click();
+await tick(5);
+ok(!picker.open && $("lang-code").textContent === "EN", "the ticked row closes the picker and keeps the language");
+eq(globalThis.window.history.index, 0, "with no history entry left");
+
+// Slovak words, and back: each language keeps its puzzle
+const enSeed = current(storage, "en").puzzle.seed;
+const enMode = $("mode-label").textContent;
+$("btn-lang").click();
+row("sk").click();
+ok(!picker.open, "a row closes the picker");
+await tick(5);
+eq(globalThis.window.history.index, 0, "and takes its history entry back");
 g = current(storage, "sk");
-ok(g && g.puzzle.lang === "sk", "the language button makes a Slovak puzzle");
-eq($("lang-code").textContent, "SK", "the button says SK");
-eq($("lang-name").textContent, "Slovak words", "and names the words");
+ok(g && g.puzzle.lang === "sk", "the Slovak row makes a Slovak puzzle");
+eq($("lang-code").textContent, "SK", "the pill says SK");
+eq($("btn-lang").getAttribute("aria-label"), "Word language: Slovak. Tap to change.", "and its label names Slovak");
+$("btn-lang").click();
+eq(
+  rows().map((r) => r.classList.contains("on")),
+  [true, false],
+  "the picker ticks Slovak now",
+);
+row("en").click();
+await tick(5);
+eq(current(storage, "en").puzzle.seed, enSeed, "English brings back the puzzle it had on screen");
+eq($("mode-label").textContent, enMode, "as it was left");
+$("btn-lang").click();
+row("sk").click();
+await tick(5);
+g = current(storage, "sk");
+eq($("lang-code").textContent, "SK", "Slovak words again");
 ok(/^Slovak words now/.test($("notice").textContent), `the switch is confirmed: ${$("notice").textContent}`);
 const skLetters = new Set(
   "a á ä b c č d ď e é f g h ch i í j k l ĺ ľ m n ň o ó ô p q r ŕ s š t ť u ú v w x y ý z ž".split(" "),
@@ -603,6 +701,21 @@ ui.checked = true;
 $("dlg-settings").dispatchEvent({ type: "change", target: ui });
 eq($("btn-hint").querySelector("span").textContent, "Nápoveda", "the game speaks Slovak");
 eq(doc.documentElement.getAttribute("lang"), "sk", "the page's language is Slovak");
+$("btn-lang").click();
+eq($("lang-title").textContent, "Jazyk slov", "the picker's title in Slovak");
+eq(
+  picker.querySelector(".pop-note").textContent,
+  "Rozohraná osemsmerovka v každom jazyku zostane uložená.",
+  "the line about the puzzle in Slovak",
+);
+eq(
+  rows().map((r) => r.textContent.trim()),
+  ["Slovenčina", "English"],
+  "the languages' names stay as they are",
+);
+eq($("btn-lang").getAttribute("aria-label"), "Jazyk slov: slovenčina. Klepnutím ho zmeníte.", "the pill in Slovak");
+eq(await back(), "stayed", "Back closes the picker in Slovak too");
+ok(!picker.open, "the picker is closed");
 
 // hard: 12 × 12, the list shows only lengths
 const hard = $("dlg-settings").querySelector('input[name="difficulty"][value="hard"]');
@@ -653,6 +766,8 @@ eq(await back(), "left", "then Back leaves the game");
 $("btn-stats").click();
 ok($("stats-body").querySelectorAll("tr").length >= 9, "statistics have their rows");
 $("stats-done").click();
+
+ok(!buzzes.includes("light"), `nothing is felt as the faintest tick: ${[...new Set(buzzes)]}`);
 
 // a reload keeps everything
 await tick(50);
