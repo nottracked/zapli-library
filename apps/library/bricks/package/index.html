@@ -149,15 +149,20 @@
                 <button type="button" class="icon-btn hud-btn" id="btn-pause" data-t-label="pause">
                     <svg class="ico" aria-hidden="true"><use href="#i-pause" /></svg>
                 </button>
-                <div class="hud-title">
-                    <h2 id="hud-title"></h2>
-                    <span class="hud-sub" id="hud-sub"></span>
+                <div class="hud-mid">
+                    <div class="hud-title">
+                        <h2 id="hud-title"></h2>
+                        <span class="hud-sub" id="hud-sub"></span>
+                    </div>
+                    <div class="hud-powers" id="hud-powers" aria-hidden="true"></div>
                 </div>
                 <div class="hud-right">
-                    <span class="hud-score" id="hud-score" aria-live="off">0</span>
+                    <span class="hud-score-box">
+                        <span class="hud-score" id="hud-score" aria-live="off">0</span>
+                        <span class="hud-score hud-score-room" id="hud-score-room" aria-hidden="true"></span>
+                    </span>
                     <span class="hud-lives" id="hud-lives" role="img"></span>
                 </div>
-                <div class="hud-powers" id="hud-powers" aria-hidden="true"></div>
             </header>
             <div class="stage" id="stage">
                 <canvas id="arena" aria-hidden="true"></canvas>

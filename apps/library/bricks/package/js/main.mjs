@@ -671,7 +671,6 @@ function startSession(mode, key, snap) {
     lastScore: -1,
     lastLives: -1,
     powersKey: "",
-    powersT: 0,
     afterT: 0,
     after: null,
   };
@@ -704,6 +703,15 @@ function setHudTitle() {
   } else {
     $("hud-title").textContent = t("endless");
     $("hud-sub").textContent = t("hudWave", { n: s.key.wave });
+  }
+  // Room for the score: six digits in a level or the daily level, seven in endless play (a run carries its score
+  // from wave to wave), and a digit more than the score has when a run gets that far.
+  const digits = Math.max(s.mode === "endless" ? 7 : 6, String(Math.floor(s.game.score)).length + 1);
+  const room = num(Number("8".repeat(digits)));
+  if ($("hud-score-room").textContent !== room) {
+    $("hud-score-room").textContent = room;
+    // More room at a wave's start (or in another language): the HUD is laid out again then, between two walls.
+    if (route.name === "play") fitArena();
   }
   s.lastScore = -1;
   s.lastLives = -1;
@@ -821,17 +829,31 @@ function restartSession() {
 
 let arenaRect = { left: 0, top: 0, width: 360, height: 600 };
 
+/**
+ * Fits the board to the stage: at the start of a game and when the window really changes (the phone turned, split
+ * screen, the text size). The HUD has the same size all game long, so nothing the game shows calls this; a call that
+ * finds the same size changes nothing on the canvas.
+ */
 function fitArena() {
   const stage = $("stage");
+  const hud = $("hud");
   const pad = 6;
   if (sideways()) {
     // Sideways the board is as tall as the screen allows, and the stage only as wide as the board, so the HUD and
-    // the board sit together in the middle.
+    // the board sit together in the middle. The HUD's column keeps the width its texts need now (the score has its
+    // room from the start, the chips wrap inside), so the pair never slides while the game runs.
     const play = $("screen-play");
+    hud.style.width = "";
+    const hw = Math.ceil(hud.getBoundingClientRect().width || 0);
+    if (hw) hud.style.width = `${hw}px`;
     const h = stage.clientHeight || play.clientHeight;
-    const room = Math.max(120, play.clientWidth - ($("hud").offsetWidth || 0) - 16);
+    const room = Math.max(120, play.clientWidth - hw - 16);
     stage.style.width = `${Math.min(room, Math.floor(((h - pad * 2) * A.W) / A.H) + pad * 2)}px`;
-  } else stage.style.width = "";
+  } else {
+    hud.style.width = "";
+    stage.style.width = "";
+  }
+  fitChips();
   const sw = stage.clientWidth;
   const sh = stage.clientHeight;
   if (!sw || !sh) return;
@@ -845,10 +867,13 @@ function fitArena() {
   canvas.style.left = `${left}px`;
   canvas.style.top = `${top}px`;
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  renderer.resize(w, h, dpr);
+  const sized = renderer.resize(w, h, dpr);
   const r = stage.getBoundingClientRect();
   arenaRect = { left: r.left + left, top: r.top + top, width: w, height: h };
-  if (session) session.needsDraw = true;
+  if (!session) return;
+  // A canvas sized anew is blank: draw it at once, before the screen shows it, rather than on the next frame.
+  if (sized) drawArena(0);
+  else session.needsDraw = true;
 }
 
 // ---- play: input
@@ -1002,20 +1027,25 @@ function frame(now) {
   if (session !== s) return;
   // A finished game keeps drawing for a moment, while its last effects play out; then the picture holds still.
   if (s.done) s.doneT = (s.doneT || 0) + dt;
-  if (running || (s.done && s.doneT < 3) || s.needsDraw) {
-    renderer.draw(g, running || s.done ? dt : 0, {
-      aim: settings.aim,
-      hint:
-        running && g.phase === "ready" && G.holding(g)
-          ? t(inputKind === "mouse" ? "hintMouse" : inputKind === "keys" ? "hintKeys" : "hintTouch")
-          : "",
-      textScale,
-      font: uiFont,
-    });
-    s.needsDraw = false;
-  }
-  updateHud(dt);
+  if (running || (s.done && s.doneT < 3) || s.needsDraw) drawArena(running || s.done ? dt : 0);
+  updateHud();
   if (statsDirty && now - lastStatsSave > 4000) flushStats();
+}
+
+/** Draws the board of the game in play, `dt` seconds on from the last frame. */
+function drawArena(dt) {
+  const s = session;
+  const g = s.game;
+  renderer.draw(g, dt, {
+    aim: settings.aim,
+    hint:
+      playing() && g.phase === "ready" && G.holding(g)
+        ? t(inputKind === "mouse" ? "hintMouse" : inputKind === "keys" ? "hintKeys" : "hintTouch")
+        : "",
+    textScale,
+    font: uiFont,
+  });
+  s.needsDraw = false;
 }
 
 let lastStatsSave = 0;
@@ -1072,7 +1102,7 @@ function handleEvents(events) {
   }
 }
 
-function updateHud(dt) {
+function updateHud() {
   const s = session;
   if (!s) return;
   const g = s.game;
@@ -1088,32 +1118,71 @@ function updateHud(dt) {
     box.setAttribute("aria-label", tn("lives", Math.max(0, g.lives)));
     s.lastLives = g.lives;
   }
-  s.powersT -= dt;
-  if (s.powersT > 0) return;
-  s.powersT = 0.2;
+  updatePowers(s, g);
+}
+
+/**
+ * The chips of the running power-ups, in the HUD's title box (upright) or below the score (sideways). A chip keeps
+ * its place while others start or end; a new one joins at the end. When the last one ends, the chips fade out as
+ * they are (their rings empty) and the title fades back in. Nothing here changes the HUD's size.
+ */
+function updatePowers(s, g) {
+  const box = $("hud-powers");
   const active = Object.keys(g.timers).filter((k) => g.timers[k] > 0);
   const key = active.join(",");
-  const box = $("hud-powers");
   if (key !== s.powersKey) {
-    box.textContent = "";
-    for (const type of active) {
-      const chip = document.createElement("span");
-      chip.className = "pchip";
-      chip.dataset.type = type;
-      const ring = document.createElement("span");
-      ring.className = "ring";
-      ring.style.setProperty("--c", BEAD_COLORS[type]);
-      ring.appendChild(powerCanvas(type, 24));
-      const name = document.createElement("span");
-      name.textContent = t(`power_${type}`);
-      chip.append(ring, name);
-      box.appendChild(chip);
+    const fresh = s.powersKey === "?";
+    for (const chip of Array.from(box.children)) {
+      if (fresh || (active.length && !active.includes(chip.dataset.type))) chip.remove();
     }
+    for (const type of active) {
+      if (!Array.from(box.children).some((c) => c.dataset.type === type)) box.appendChild(powerChip(type));
+    }
+    if (active.length) fitChips();
+    $("hud").classList.toggle("powered", active.length > 0);
     s.powersKey = key;
   }
   for (const chip of box.children) {
     const type = chip.dataset.type;
-    chip.firstChild.style.setProperty("--p", (g.timers[type] / G.DURATION[type]).toFixed(3));
+    const left = g.timers[type] || 0;
+    const p = (left / G.DURATION[type]).toFixed(3);
+    const ring = chip.firstChild;
+    if (ring.style.getPropertyValue("--p") !== p) ring.style.setProperty("--p", p);
+    // Its last three seconds, while the game runs (paused, the picture holds still).
+    chip.classList.toggle("ending", left > 0 && left < 3 && playing());
+  }
+}
+
+function powerChip(type) {
+  const chip = document.createElement("span");
+  chip.className = "pchip";
+  chip.dataset.type = type;
+  const ring = document.createElement("span");
+  ring.className = "ring";
+  ring.style.setProperty("--c", BEAD_COLORS[type]);
+  ring.appendChild(powerCanvas(type, 24));
+  const name = document.createElement("span");
+  name.className = "name";
+  name.textContent = t(`power_${type}`);
+  chip.append(ring, name);
+  return chip;
+}
+
+/** The chips with their names while those fit in their box; else the rings only; else rings that overlap a little. */
+function fitChips() {
+  const box = $("hud-powers");
+  box.classList.remove("rings", "tight");
+  const over = () => box.scrollWidth > box.clientWidth + 1 || box.scrollHeight > box.clientHeight + 1;
+  if (!box.children.length || !over()) return;
+  box.classList.add("rings");
+  if (!over()) return;
+  box.classList.add("tight");
+  // The rings overlap just enough for all of them to show (upright; sideways they wrap instead).
+  const n = box.children.length;
+  const ring = box.children[0].getBoundingClientRect().width;
+  if (n > 1 && ring) {
+    const lap = Math.min(ring * 0.55, Math.max(0, ring - (box.clientWidth - ring) / (n - 1)));
+    box.style.setProperty("--lap", `${lap.toFixed(1)}px`);
   }
 }
 

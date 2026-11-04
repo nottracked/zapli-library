@@ -45,7 +45,6 @@ export function createRenderer(canvasEl) {
 
   let cssW = 360;
   let cssH = 600;
-  let dpr = 1;
   let s = 1; // device pixels per arena unit
   let bg = null;
   let tint = TINTS.terracotta;
@@ -64,17 +63,25 @@ export function createRenderer(canvasEl) {
   let shakeX = 0;
   let shakeY = 0;
 
+  /**
+   * Sizes the canvas: `w` × `h` CSS pixels at `ratio` device pixels each. Setting a canvas's size clears its picture
+   * and the tiles must be painted again for the new scale, so a call that changes nothing (the same CSS size and the
+   * same pixels) leaves everything as it is. True when the canvas was sized anew and needs a frame drawn.
+   */
   function resize(w, h, ratio) {
+    const pw = Math.max(1, Math.round(w * ratio));
+    const ph = Math.max(1, Math.round(h * ratio));
+    if (w === cssW && h === cssH && pw === canvasEl.width && ph === canvasEl.height) return false;
     cssW = w;
     cssH = h;
-    dpr = ratio;
     canvasEl.style.width = `${w}px`;
     canvasEl.style.height = `${h}px`;
-    canvasEl.width = Math.max(1, Math.round(w * dpr));
-    canvasEl.height = Math.max(1, Math.round(h * dpr));
+    canvasEl.width = pw;
+    canvasEl.height = ph;
     s = canvasEl.width / A.W;
     tiles.clear();
     bg = null;
+    return true;
   }
 
   function setTint(key) {

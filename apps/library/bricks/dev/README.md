@@ -8,7 +8,14 @@ node dev/check-physics.mjs   # no tunnelling at up to 4,000 units a second, the 
 node dev/check-levels.mjs    # every level: its picture, nothing walled in, and a bot that clears it (--quick: faster)
 node dev/check-sprites.mjs   # every picture drawn at zero, tiny, negative and normal sizes, on a strict canvas
 node dev/check-i18n.mjs      # English and Slovak texts complete, alike and all used
-node dev/check-page.mjs      # the page itself, on a stand-in for the browser (dev/fake-dom.mjs), in ten scenarios
+node dev/check-page.mjs      # the page itself, on a stand-in for the browser (dev/fake-dom.mjs), in eleven scenarios
+```
+
+One more check needs a Chromium (Playwright's cached headless shell, or any Chrome named in `CHROME`), driven over
+the DevTools protocol with nothing but Node:
+
+```sh
+node dev/check-layout.mjs    # the board holds still while the score grows and power-ups start and end (--shots <dir>)
 ```
 
 After a change to any file of `package/`, run `zapli library inventory apps/library/bricks --write`.

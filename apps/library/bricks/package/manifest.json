@@ -4,7 +4,7 @@
     "id": "library/bricks",
     "kind": "web",
     "name": "Bricks",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icon": "grid_view",
     "category": "game_arcade",
     "ageRating": "everyone",
@@ -27,8 +27,8 @@
       "endless": "#/play/endless"
     },
     "files": {
-      "css/app.css": { "sha256": "80a04d2d29811f1ce54ba28c86555042d1fc7efe0da6924bdfc59d4414a8a76a", "size": 29525 },
-      "index.html": { "sha256": "8336c9208e737ec5a6658cc37a7d6d48fb7626b3a494c504aae816523e75b47f", "size": 21135 },
+      "css/app.css": { "sha256": "610719ed700767ca611bfb3a72de29e7815e1ca7411360c306bf2dc24fa4a2ce", "size": 32586 },
+      "index.html": { "sha256": "a51810ff2a9d16358f932c1c963e013f74c7a6a9ffb403218e9740d6bd52c8bd", "size": 21407 },
       "js/audio/sound.mjs": {
         "sha256": "4a4db446f81fa34dd8ebcc3c46afa5813398ecdc5a53eeac8b2bbdc0eda45d28",
         "size": 7622
@@ -70,10 +70,10 @@
         "sha256": "c3b09de359751dbc21247ee27b21ba7f34fc6de43fbb8d87b81c472f12ecdb7d",
         "size": 5369
       },
-      "js/main.mjs": { "sha256": "0bba90ed233ea12702b5002cd87fccecbad6982b7c12ae1d7c24c238219d294d", "size": 56885 },
+      "js/main.mjs": { "sha256": "e5f819aac532a928d3ab6e1e496dd620f57c5308362d5792d1df52674e174a8d", "size": 60211 },
       "js/render/renderer.mjs": {
-        "sha256": "74a45ef923c44fc99c9721d03afc719ca045b7496cb6d307c178736fa3fb845d",
-        "size": 23678
+        "sha256": "0a2b9f738c058ede1149507be89ddc2601c29fdf8596aa6d50d8740a77a284ba",
+        "size": 24160
       },
       "js/render/sprites.mjs": {
         "sha256": "20ee6ea6ec095f37e30bd871fa15fc8b1b5040bf40d0af886f8b8da3b338ae2e",

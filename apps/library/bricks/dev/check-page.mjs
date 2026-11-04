@@ -13,7 +13,10 @@
 //  - zapli: inside a stand-in Zapli (its store, haptics, pause event, a Slovak phone): Slovak texts, the vibration
 //    switch, the store used, and the app's pause event saving the game;
 //  - modes: the daily level and endless play start, pause on Back and offer to resume from the start screen;
-//  - settings: switching the language and the light or dark menus.
+//  - settings: switching the language and the light or dark menus;
+//  - powers: a saved game with two power-ups running: their chips come and go in the HUD in the title's place, the
+//    board's canvas is never sized again while they do (nor for a resize event that changes nothing), and a real
+//    resize sizes it anew and draws it at once.
 // Run: node dev/check-page.mjs
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -45,7 +48,20 @@ if (!scenario) {
     }
   };
   walk(join(pkg, "js"));
-  for (const s of ["browser", "clear", "reload", "over", "skip", "endless", "flows", "zapli", "modes", "settings"]) {
+  const scenarios = [
+    "browser",
+    "clear",
+    "reload",
+    "over",
+    "skip",
+    "endless",
+    "flows",
+    "zapli",
+    "modes",
+    "settings",
+    "powers",
+  ];
+  for (const s of scenarios) {
     const r = spawnSync(process.execPath, [fileURLToPath(import.meta.url), s], { encoding: "utf8" });
     if (r.status !== 0) problems.push(`scenario ${s} failed:\n${(r.stdout + r.stderr).trim()}`);
     else console.log(`scenario ${s}: ok`);
@@ -114,6 +130,19 @@ function savedLastBall() {
   g.balls = [
     { x: 30, y: A.PADDLE_Y + 20, vx: 0, vy: 300, r: A.BALL_R, held: false, off: 0, heldT: 0, idle: 0, sticky: false },
   ];
+  return G.snapshot(g);
+}
+
+/** A saved game in play with the ball resting on the paddle, and two power-ups running: Broad for 1 s, Chill for 2 s. */
+function savedWithPowers() {
+  const l = levelById("1-1");
+  const w = worldOf(l);
+  const g = G.createGame({ def: l, speed: w.speed, power: [], drop: 0, seed: 5, lives: 3 });
+  g.phase = "play";
+  G.applyPower(g, "wide");
+  G.applyPower(g, "slow");
+  g.timers.wide = 1;
+  g.timers.slow = 2;
   return G.snapshot(g);
 }
 
@@ -220,6 +249,11 @@ if (scenario === "flows") {
   env.storage.set("bricks/saved", JSON.stringify({ daily: { day, seed: 3, snap: savedOf(ddef, 3, "clear") }, at: 5 }));
   env.storage.set("bricks/progress", JSON.stringify({ levels: { "1-1": { fails: 1 } }, at: 5 }));
   env.win.history.replaceState({ d: 0 }, "", "#/");
+}
+if (scenario === "powers") {
+  env.storage.set("bricks/saved", JSON.stringify({ level: { id: "1-1", seed: 7, snap: savedWithPowers() }, at: 5 }));
+  env.win.history.replaceState({ d: 0 }, "", "#/");
+  env.win.history.pushState({ d: 1, from: "#/" }, "", "#/play/level/1-1");
 }
 if (scenario === "over") {
   env.storage.set("bricks/saved", JSON.stringify({ level: { id: "1-1", seed: 7, snap: savedLastBall() }, at: 5 }));
@@ -515,6 +549,48 @@ if (scenario === "settings") {
   );
   const saved = JSON.parse(env.storage.get("bricks/settings") || "{}");
   check(saved.ui === "sk" && saved.theme === "dark", "the settings were not saved");
+}
+
+if (scenario === "powers") {
+  check(shown("play") && $("dlg-pause").open, "the saved game with power-ups did not open paused");
+  // Count every sizing of the board's canvas from here on: each one clears its picture.
+  const canvas = $("arena");
+  let sized = 0;
+  for (const k of ["width", "height"]) {
+    let v = canvas[k];
+    Object.defineProperty(canvas, k, {
+      configurable: true,
+      get: () => v,
+      set: (n) => {
+        sized += 1;
+        v = n;
+      },
+    });
+  }
+  const hud = $("hud");
+  const chips = () =>
+    $("hud-powers")
+      .children.map((c) => c.dataset.type)
+      .join(",");
+  $("pause-resume").click();
+  await advance(300);
+  check(hud.classList.contains("powered"), "the HUD does not show the running power-ups");
+  check(chips() === "wide,slow", `chips while both run: "${chips()}"`);
+  await advance(1000);
+  check(hud.classList.contains("powered") && chips() === "slow", `chips after Broad ended: "${chips()}"`);
+  env.win.dispatchEvent(new FakeEvent("resize"));
+  await advance(1200);
+  check(!hud.classList.contains("powered"), "the HUD still shows power-ups after the last one ended");
+  check(sized === 0, `the board's canvas was sized ${sized / 2} times while power-ups came and went`);
+  // A real change of the window: the canvas is sized anew and drawn at once, before the screen shows it blank.
+  $("stage").clientWidth = 360;
+  $("stage").clientHeight = 600;
+  $("stage").box = { left: 0, top: 64, width: 360, height: 600 };
+  const ctx = canvas.getContext("2d");
+  const drawn = ctx.calls;
+  env.win.dispatchEvent(new FakeEvent("resize"));
+  check(sized > 0, "a real resize did not size the board's canvas anew");
+  check(ctx.calls > drawn, "a real resize left the board's canvas blank until the next frame");
 }
 
 if (problems.length) {
