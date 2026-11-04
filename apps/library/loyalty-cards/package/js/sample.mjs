@@ -1,0 +1,125 @@
+// Made-up cards for the browser preview and the library's screenshots: invented stores and numbers, nobody real.
+// The same cards are the listing's sample data (dev/make-sample-data.mjs prints them).
+
+const CARDS = [
+  [
+    "Corner Grocer",
+    "2900123456785",
+    "ean13",
+    "shopping_cart",
+    "#2A803F",
+    { points: 1240, pinned: true, uses: 42, lastUsed: "2026-10-14T18:05:00+02:00", note: "Double points on Tuesdays." },
+  ],
+  [
+    "Green Basket Market",
+    "GB-4471-0093",
+    "auto",
+    "shopping_cart",
+    "#93C83E",
+    { uses: 31, lastUsed: "2026-10-15T08:40:00+02:00" },
+  ],
+  [
+    "Bean There Café",
+    "BTC-STAMPS-7781",
+    "qr",
+    "local_cafe",
+    "#6B4733",
+    { points: 7, pinned: true, uses: 23, lastUsed: "2026-10-15T07:55:00+02:00", note: "Tenth coffee is free." },
+  ],
+  [
+    "Fuel Stop",
+    "FS 008812",
+    "code39",
+    "directions_car",
+    "#1C5FC2",
+    { uses: 17, lastUsed: "2026-10-09T17:20:00+02:00" },
+  ],
+  [
+    "Pillbox Pharmacy",
+    "2000451183022",
+    "ean13",
+    "medication",
+    "#0D7A72",
+    { points: 85, uses: 9, lastUsed: "2026-10-12T12:10:00+02:00" },
+  ],
+  [
+    "Riverside Gym",
+    "RG|2026|00071",
+    "pdf417",
+    "fitness_center",
+    "#5A3EC0",
+    { holder: "Sam Rivera", expires: "2027-01-31", uses: 12, lastUsed: "2026-10-13T19:00:00+02:00" },
+  ],
+  [
+    "City Library",
+    "LIB0004417",
+    "code39",
+    "book",
+    "#152B5C",
+    { holder: "Sam Rivera", uses: 3, lastUsed: "2026-10-02T15:30:00+02:00" },
+  ],
+  [
+    "Page and Spine Books",
+    "PSB:MEMBER:550193",
+    "qr",
+    "menu_book",
+    "#AF1D35",
+    {
+      points: 320,
+      expires: "2026-11-09",
+      uses: 4,
+      lastUsed: "2026-09-28T11:00:00+02:00",
+      note: "Member voucher: 10% off until the 9th.",
+    },
+  ],
+  [
+    "Hammer and Hinge",
+    "2991700266149",
+    "auto",
+    "handyman",
+    "#C6520B",
+    { uses: 2, lastUsed: "2026-09-19T10:15:00+02:00" },
+  ],
+  [
+    "Petal Pets",
+    "036000291452",
+    "upcA",
+    "pets",
+    "#F4A51C",
+    { holder: "Alex Rivera", uses: 1, lastUsed: "2026-08-30T16:45:00+02:00" },
+  ],
+  [
+    "Shoe Barn",
+    "SB-GIFT-25-90311",
+    "dataMatrix",
+    "sell",
+    "#BE1A6C",
+    { points: 25, expires: "2026-09-30", uses: 0, note: "Gift voucher from the office party." },
+  ],
+  [
+    "Toy Harbor",
+    "20441098",
+    "ean8",
+    "child_care",
+    "#F2A7C3",
+    { archived: true, uses: 5, lastUsed: "2026-03-02T14:20:00+01:00" },
+  ],
+];
+
+/** The made-up cards as records, as the app stores them. */
+export function sampleCards() {
+  return CARDS.map(([store, number, format, group, color, extra], i) => ({
+    id: "s" + (i + 1),
+    createdAt: "2026-08-01T10:00:00.000Z",
+    updatedAt: "2026-10-15T10:00:00.000Z",
+    store,
+    number,
+    format,
+    group,
+    color,
+    pinned: false,
+    archived: false,
+    uses: 0,
+    ...extra,
+  }));
+}
