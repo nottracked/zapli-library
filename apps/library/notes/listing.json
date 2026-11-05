@@ -12,8 +12,8 @@
       "file": "screenshots/01-notes-light.png",
       "caption": "Pinned notes, checklists, recipes and labels on one page",
       "theme": "light",
-      "sha256": "d7fae14e6ea82366c026214a42fed087f016a969290fc285fd6dace8e887a0a0",
-      "size": 292848
+      "sha256": "4b4f062550c572400efe2890847dd2d72b9f5591dac27d10be8b0876981dd0f1",
+      "size": 297121
     },
     {
       "file": "screenshots/02-checklist-light.png",
@@ -26,8 +26,8 @@
       "file": "screenshots/03-notes-dark.png",
       "caption": "Your notes in dark mode",
       "theme": "dark",
-      "sha256": "41268b76dd5d0242e1b18795fdaede71c2f618601be87059f2bf0b8c8352106a",
-      "size": 289675
+      "sha256": "940e1f420a4726e895d7215daa840974b7600999d466b4ef71cd10050d02dbb4",
+      "size": 294279
     }
   ],
   "sampleData": {
