@@ -7,7 +7,8 @@
 role-playing game installed from GitHub.</sub></p>
 
 This repository holds the apps of **Zapli**: everyday ones such as an expense tracker, a water
-reminder, a to-do list, flashcards, a document scanner and a few games. Zapli ships with these apps built in, and later
+reminder, a to-do list, flashcards, a document scanner, and games such as Solitaire, Free Cells, Spider and Word
+Wheel (in English and Slovak, with a Slovak word list of its own). Zapli ships with the single-file apps built in, and later
 versions of Zapli will install and update them from this repository, so a fix merged here can reach phones without a
 new release of Zapli. Package apps (apps made of many files, below) are never built in: Zapli downloads them from
 here when someone installs one.
@@ -51,28 +52,31 @@ app.json | index.html | package/   the app: a declarative definition, a web app,
 listing.json               how the library presents it: title, summary, description, licence, sample data, sources
 import-samples/            small fictional files in the formats the app can import
 screenshots/               screenshots taken with the sample data
-dev/                       development scripts and sources that are not shipped (Solitaire's deal solver and its checks)
+dev/                       scripts and sources that are not shipped: solvers, word-list sources, build scripts, checks
 ```
 
 There are two kinds of app, and every app is one or the other:
 
 - A **declarative app** (`app.json`) is one JSON document: the data, screens, actions, reminders and the permissions
-  it needs. Zapli draws native screens for it. Most data apps (Expenses, Water, To-do) are this kind.
+  it needs. Zapli draws native screens for it. Most data apps (Water, To-do, Flashcards) are this kind.
 - A **web app** (`index.html`) is one HTML file with its manifest embedded in a
   `<script type="application/zapli+json">` block. Zapli runs it in a locked-down web view of its own; the same file
-  also opens in a plain browser. Games and other apps that draw their own screens (Solitaire, Mines, Gridfire, Pocket
+  also opens in a plain browser. Games and other apps that draw their own screens (Solitaire, Mines, Litadlo, Pocket
   Scan) are this kind.
 
 A web app that needs more than one file is a **package app**: its files are in a `package/` folder, described below.
+Free Cells, Spider, Word Wheel, Hidden Word, Word Search, Patience and Bricks are package apps, and so are Expenses,
+Notes and Loyalty cards: their screens are web pages, while their manifests declare their records, imports, reminders
+and widgets, so they work as in a declarative app.
 
 ## Package apps
 
-Most web apps fit in one HTML file, and one file is the better choice whenever it fits: it opens anywhere with a double
-click, Zapli ships it built in, and Zapli versions that know nothing of packages install it too. Make a package app
-instead when the app needs
-what one file cannot hold well: pictures, sounds, music or fonts (which one file would carry as base64, a third
-larger), WebGL shaders and textures, levels or other data, JavaScript split into modules, or a worker (a worker
-always starts from a script file of its own).
+For a small app, one HTML file is the better choice: it opens anywhere with a double click, Zapli ships it built in,
+and Zapli versions that know nothing of packages install it too. Make a package app instead when modules, workers or
+data files make the code clearer or easier to extend, or when the app needs what one file cannot hold well: pictures,
+sounds, music or fonts (which one file would carry as base64, a third larger), WebGL shaders and textures, levels,
+word lists or other data, JavaScript split into modules that other apps can reuse, or a worker (a worker always starts
+from a script file of its own).
 
 ```
 apps/library/<name>/
@@ -89,9 +93,9 @@ apps/library/<name>/
 - **`manifest.json`** is the app's definition (`"spec": "zapli/0.2"`, `app.kind: "web"`), the same as the manifest a
   single-file web app embeds, with two more members in `web`: `entry`, the page the app opens with, and `files`, the
   list of every other file of `package/` with its SHA-256 and size. The HTML pages carry no embedded manifest.
-- **`web.files` is written by a tool**, never by hand: `zapli library inventory --write` (Zapli's command-line tool;
-  the command is on its way) lists the files, and the library check refuses a package whose list and files differ in
-  any way: a file it does not list, a listed file that is missing, another size or another SHA-256.
+- **`web.files` is written by a tool**, never by hand: `zapli library inventory <app folder> --write` (Zapli's
+  command-line tool) lists the files, and the library check refuses a package whose list and files differ in any way:
+  a file it does not list, a listed file that is missing, another size or another SHA-256.
 - **Path rules.** Every file name and folder name in `package/` is plain ASCII: letters, digits, `.`, `_` and `-`,
   at most 128 characters, not starting with `.` and not ending with `.`. A path is at most 12 names deep (folders and
   the file) and 255 characters long. No hidden files (delete the `.DS_Store` files macOS leaves behind), no symbolic links, nothing under a folder
@@ -147,9 +151,20 @@ Each app's version is `app.version` (in `app.json`, in the manifest inside `inde
 
 ## Licence
 
-Each app's `listing.json` declares its licence: MIT for every app today (Apache-2.0, MIT-0, 0BSD and CC0-1.0 are
-allowed too; non-commercial and no-derivatives licences are not). When a definition sets `app.license`, the listing
-names the same one. The whole repository is under the MIT licence in `LICENSE`.
+Each app declares its licence in its `listing.json` and, when the definition sets `app.license`, there too; both name
+the same one.
+
+- **The apps:** the GNU General Public License, version 3 or later (`GPL-3.0-or-later`, the text is in
+  `LICENSES/GPL-3.0-or-later.txt`) for Expenses 4.0, Free Cells, Spider and Word Wheel, and for every other app from
+  its next version. Anyone may use, study, change and share them, also in apps of their own, as long as what they
+  share is under the same licence with its whole source. Versions published earlier stay under the MIT licence for
+  those who have them.
+- **Data written for an app** says its own licence where it lives: Word Wheel's Slovak word list is dedicated to the
+  public domain (CC0 1.0), and its English lists come from public-domain sources (`apps/library/word-wheel/dev/`).
+- **Everything else** in this repository (the gallery, the guide, the icons' sources and the render script, these
+  documents) is under the MIT licence in `LICENSE`.
+- Other licences an app may declare: MIT, Apache-2.0, MIT-0, 0BSD and CC0-1.0. Non-commercial and no-derivatives
+  licences are not allowed.
 
 ## Contributing
 
@@ -168,14 +183,15 @@ Contributions come as pull requests. Fixes, better wording, accessibility improv
 4. Open a pull request that says what you changed and why. For a translation, say which language and that you are a
    native speaker.
 
-By opening a pull request you agree that your contribution is licensed under this repository's MIT licence, and that
-you have the right to license it so.
+By opening a pull request you agree that your contribution is licensed under the MIT licence, so that it can be part
+of an app under the app's own licence, and that you have the right to license it so.
 
 A maintainer reviews every pull request and runs the library checks before merging: every definition validates with
 no errors and no warnings; every listing fits its schema and names the same id and licence as its definition; the
-sample data fits the app's data; every screenshot and sample import file exists and reads in its format; a package
-app's files keep the path rules and the limits, match its manifest's list exactly and hold no minified code without
-its source; no app registers a service worker; and no listing names another app or brand, uses comparison wording or
+sample data fits the app's data; every screenshot and sample import file exists and reads in its format, and each
+screenshot matches the `sha256` and `size` its listing gives (`zapli library inventory <app folder> --write` writes
+them); a package app's files keep the path rules and the limits, match its manifest's list exactly and hold no
+minified code without its source; no app registers a service worker; and no listing names another app or brand, uses comparison wording or
 carries real-looking e-mail addresses or phone numbers. `CODEOWNERS` says who reviews which folder.
 
 Phones take apps from this repository only through the signed index: a list of every app's version and the SHA-256

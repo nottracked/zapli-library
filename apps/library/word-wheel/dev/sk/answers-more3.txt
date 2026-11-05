@@ -1,0 +1,39 @@
+# Answer words: everyday verbs with prefixes, more adjectives, traditions, school, music and machines.
+# Hand-written for this list (CC0 1.0). Base forms as in the other answer files.
+
+# everyday verbs
+napísať prečítať uvariť upiecť vypiť zjesť zavolať nakresliť namaľovať zobrať spýtať
+opýtať naučiť pochopiť rozumieť zistiť spoznať uvidieť zbadať všimnúť ponúknuť ponúkať
+prijímať zaujímať starať postarať nocovať raňajkovať obedovať večerať oslavovať
+osláviť darovať blahoželať gratulovať ďakovať prepáčiť ospravedlniť odpustiť pozvať
+navštíviť zoznámiť rozlúčiť objednať vymeniť minúť ušetriť nakúpiť dostať vyhodiť
+vyskočiť preskočiť spadnúť vyrásť zamrznúť roztopiť nasypať rozsypať zaviazať
+učesať ostrihať zavesiť vysušiť vyčistiť zamiešať uloviť schovať postaviť zastaviť
+zbúrať zmerať odvážiť vyhrať prehrať vybrať pridať podať predať prísť nájsť vojsť
+priniesť odniesť vyliezť zliezť preletieť priletieť odletieť doplávať posedieť
+zaspievať zatancovať prehovoriť zasmiať zaplakať zakričať požiadať zdvihnúť
+napadnúť rozkvitnúť zhorieť pretiecť zabaliť rozbaliť zapnúť vypnúť zatvoriť
+
+# more adjectives
+vedľajší stredný horný dolný predný zadný vonkajší vnútorný bočný prostredný
+správny nesprávny presný tradičný typický bežný častý zriedkavý rušný polovičný
+dvojitý jediný minulý súčasný večný stály náhly ostatný voňavý pikantný svieži
+bolestivý prekvapený zamilovaný vystrašený priateľský nepriateľský vľúdny prívetivý
+srdečný pracovitý poslušný neposlušný vtipný zábavný bláznivý šialený slobodný voľný
+obsadený otvorený zatvorený zamknutý pokazený rozbitý slávnostný sviatočný
+
+# traditions and food of the country
+salaš koliba valach črpák valaška žinčica oštiepok korbáčik parenica lokša kapustnica
+fazuľovica demikát šúľanec pagáč trdelník medovník makovník orechovník bábovka
+koláčik tvarohovník strapačky škvarka jaternica tlačenka údenina pečienka fašírka
+jasličky betlehem koleda koledník kraslica korbáč oblievačka šibačka fašiangy hody
+dožinky
+
+# school and numbers
+kružidlo uhlomer školník zvonenie telocvičňa šatňa riaditeľňa zborovňa družina
+kôl klát hrča puklina trhlina hrb kužeľ ihlan hranol uhol objem obvod obsah súčin
+podiel zlomok rovnica výpočet tabuľka stĺpec
+
+# music and machines
+zbor kapela orchester organ orgán program priečinok displej slúchadlo reproduktor
+mikrofón anténa satelit

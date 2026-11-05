@@ -1,0 +1,208 @@
+{
+  "about": "Cards as version 2.5.3 stored them (made up): every stored field of its card entity, old palette colours, every barcode type, a number saved with a wrong last digit by an older version, archived and expired cards, and store names typed by hand.",
+  "storedFields": {
+    "store": "text",
+    "number": "barcode",
+    "format": "choice",
+    "holder": "text",
+    "group": "choice",
+    "points": "number",
+    "expires": "date",
+    "note": "longText",
+    "color": "color",
+    "picture": "image",
+    "pinned": "boolean",
+    "archived": "boolean",
+    "uses": "integer",
+    "lastUsed": "datetime"
+  },
+  "importHeaders": {
+    "store": ["Store", "Shop", "Merchant", "Store name", "Retailer", "Obchod"],
+    "number": [
+      "barcodeid",
+      "cardid",
+      "Card number",
+      "Card ID",
+      "Number",
+      "Member number",
+      "Membership number",
+      "Code",
+      "Barcode",
+      "Číslo karty"
+    ],
+    "format": ["Barcode type", "Barcode format", "Format", "Typ čiarového kódu"],
+    "holder": ["Name on the card", "Card holder", "Holder", "Meno na karte"],
+    "group": ["Kind of shop", "Group", "Category", "Druh obchodu"],
+    "points": ["Points or balance", "Points", "Balance", "Body alebo zostatok"],
+    "expires": ["Valid until", "Expiry date", "Expiry", "Expires", "Platná do"],
+    "note": ["Note", "Notes", "Comment", "Poznámka"],
+    "pinned": ["Pin to the top", "starstatus", "Favourite", "Favorite", "Starred", "Pripnúť navrch"],
+    "archived": ["Archived", "archive", "Archivovaná"],
+    "lastUsed": ["Last shown", "lastused", "Last used", "Naposledy zobrazená"]
+  },
+  "cards": [
+    {
+      "id": "01JB0000000000000000000001",
+      "store": "Corner Grocer",
+      "number": "2900123456785",
+      "format": "ean13",
+      "group": "shopping_cart",
+      "points": 1240,
+      "pinned": true,
+      "archived": false,
+      "uses": 42,
+      "lastUsed": "2026-10-14T16:05:00.000Z",
+      "note": "Double points on Tuesdays."
+    },
+    {
+      "id": "01JB0000000000000000000002",
+      "store": "kaufland",
+      "number": "2991234567897",
+      "format": "auto",
+      "group": "shopping_cart",
+      "color": "#D32F2F",
+      "pinned": false,
+      "archived": false,
+      "uses": 30
+    },
+    {
+      "id": "01JB0000000000000000000003",
+      "store": "DM drogerie markt",
+      "number": "DM-4471-0093",
+      "format": "code128",
+      "holder": "Sam Rivera",
+      "pinned": false,
+      "archived": false,
+      "uses": 3
+    },
+    {
+      "id": "01JB0000000000000000000004",
+      "store": "Fuel Stop",
+      "number": "FS 008812",
+      "format": "code39",
+      "group": "directions_car",
+      "color": "#1976D2",
+      "pinned": false,
+      "archived": false,
+      "uses": 17,
+      "lastUsed": "2026-10-09T15:20:00.000Z"
+    },
+    {
+      "id": "01JB0000000000000000000005",
+      "store": "Old Video Club",
+      "number": "48213377",
+      "format": "itf",
+      "group": "badge",
+      "pinned": false,
+      "archived": true,
+      "uses": 0
+    },
+    {
+      "id": "01JB0000000000000000000006",
+      "store": "Tram Pass",
+      "number": "A12345B",
+      "format": "codabar",
+      "group": "flight",
+      "expires": "2026-09-30",
+      "pinned": false,
+      "archived": false,
+      "uses": 2
+    },
+    {
+      "id": "01JB0000000000000000000007",
+      "store": "Petal Pets",
+      "number": "654321",
+      "format": "upcE",
+      "group": "pets",
+      "pinned": false,
+      "archived": false,
+      "uses": 1
+    },
+    {
+      "id": "01JB0000000000000000000008",
+      "store": "Riverside Gym",
+      "number": "RG|2026|00071",
+      "format": "pdf417",
+      "group": "fitness_center",
+      "holder": "Sam Rivera",
+      "expires": "2027-01-31",
+      "pinned": false,
+      "archived": false,
+      "uses": 12
+    },
+    {
+      "id": "01JB0000000000000000000009",
+      "store": "Mistyped Market",
+      "number": "4006381333932",
+      "format": "ean13",
+      "group": "shopping_cart",
+      "pinned": false,
+      "archived": false,
+      "uses": 0
+    },
+    {
+      "id": "01JB0000000000000000000010",
+      "store": "Bean There Café",
+      "number": "BTC-STAMPS-7781",
+      "format": "qr",
+      "group": "local_cafe",
+      "points": 7,
+      "color": "#6D4C41",
+      "pinned": true,
+      "archived": false,
+      "uses": 23
+    },
+    {
+      "id": "01JB0000000000000000000011",
+      "store": "Shoe Barn",
+      "number": "SB-GIFT-25-90311",
+      "format": "dataMatrix",
+      "group": "sell",
+      "points": 25,
+      "expires": "2026-09-30",
+      "pinned": false,
+      "archived": false,
+      "uses": 0
+    },
+    {
+      "id": "01JB0000000000000000000012",
+      "store": "Page and Spine Books",
+      "number": "PSB:MEMBER:550193",
+      "format": "aztec",
+      "group": "menu_book",
+      "pinned": false,
+      "archived": false,
+      "uses": 4
+    },
+    {
+      "id": "01JB0000000000000000000013",
+      "store": "City Library",
+      "number": "LIB-0004417",
+      "format": "code93",
+      "group": "book",
+      "pinned": false,
+      "archived": false,
+      "uses": 3
+    },
+    {
+      "id": "01JB0000000000000000000014",
+      "store": "Toy Harbor",
+      "number": "20441098",
+      "format": "ean8",
+      "group": "child_care",
+      "pinned": false,
+      "archived": false,
+      "uses": 5
+    },
+    {
+      "id": "01JB0000000000000000000015",
+      "store": "Hammer and Hinge",
+      "number": "036000291452",
+      "format": "upcA",
+      "group": "handyman",
+      "pinned": false,
+      "archived": false,
+      "uses": 2
+    }
+  ]
+}

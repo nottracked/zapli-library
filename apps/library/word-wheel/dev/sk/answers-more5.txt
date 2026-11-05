@@ -1,0 +1,6 @@
+# Answer words: common adjectives, adverbs and nouns added after the first checks.
+# Hand-written for this list (CC0 1.0). Base forms as in the other answer files.
+
+smiešny vážny hrozný strašný bezpečný nebezpečný radostný pracovný športový hudobný
+cenný pilný zručný obratný túra úžas smiešne vážne hrozne strašne bezpečne radostne
+spokojne ochotne pozorne opatrne rozumne slušne zdvorilo srdečne

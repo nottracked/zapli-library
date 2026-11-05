@@ -1,0 +1,8 @@
+# Accepted words: prepositions, conjunctions, particles and interjections.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words but never asks for them.
+
+pre pri nad pod pred cez bez medzi okolo vedľa podľa proti voči kvôli počas okrem mimo
+popri ponad popod pomedzi spoza spod sponad naproti napriek pozdĺž poza
+ako ale aby alebo ani keď ak lebo pretože kým než hoci preto teda totiž avšak však
+nech nuž veď hádam akurát čiže ibaže keby sotva zato ba
+ahoj servus nazdar dovidenia haló hurá jaj ach ojoj fuj bác bum hop hej ejha och aha

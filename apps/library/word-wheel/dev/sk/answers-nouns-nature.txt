@@ -1,0 +1,60 @@
+# Answer words, nouns: animals, plants, landscape, weather, the sky, materials.
+# Hand-written for this list (CC0 1.0). Base forms: nominative singular; plural-only nouns in the plural.
+
+# farm and pets
+pes psík šteňa mačka mačička kocúr mačiatko kôň koník žrebec kobyla žriebä krava kravička
+býk teľa vôl prasa sviňa prasiatko ovca ovečka baran jahňa koza cap kozľa sliepka kohút
+kuriatko hus gunár kačica káčer moriak morka holub zviera zvieratko dobytok stádo kŕdeľ
+
+# birds
+vták vtáčik vrabec sýkorka drozd kos slávik lastovička škovránok bocian orol sokol
+jastrab sova výr havran vrana straka ďateľ kukučka papagáj labuť čajka volavka
+plameniak tučniak pštros páv bažant jarabica prepelica kanárik pinka hýľ žluva
+kormorán sup kondor kolibrík
+
+# wild animals
+zajac králik veverička jež krtko myš myška potkan škrečok morča svišť bobor vydra
+jazvec líška vlk medveď rys diviak jeleň srnka srnec laň los zubor kamzík kozorožec
+netopier slon žirafa zebra lev levica tiger leopard gepard hroch nosorožec ťava opica
+gorila šimpanz krokodíl klokan koala panda lama antilopa bizón byvol mýval tchor
+lasica hranostaj kuna
+
+# water, reptiles, small creatures
+had užovka vretenica jašterica korytnačka žaba ropucha mlok šťuka sumec úhor rak krab
+chobotnica medúza veľryba delfín žralok tuleň mrož ryba rybka kapor pstruh losos
+sardinka hviezdica mušľa slimák dážďovka červ larva kukla hmyz mucha komár včela osa
+čmeliak sršeň mravec chrobák lienka motýľ húsenica pavúk kliešť blcha voš šváb svrček
+kobylka vážka svetluška pijavica ploštica moľa
+
+# parts of animals and their homes
+chvost labka tlapa pazúr srsť perie pierko krídlo zobák roh rožok kopyto hriva šupina
+plutva ulita pancier tykadlo žihadlo hniezdo brloh nora úľ mravenisko klietka akvárium
+vajíčko kožušina tesák kel
+
+# plants
+strom stromček ker krík kvet kvietok tráva burina konár vetva kmeň koreň kôra peň
+semeno plod puk púčik lupeň stonka steblo tŕň ihlica šiška žaluď dub buk breza lipa
+javor jaseň topoľ vŕba smrek jedľa borovica smrekovec tis jarabina baza lieska hloh
+šípka trnka ruža tulipán narcis ľalia fialka sedmokráska púpava nevädza margaréta
+snežienka konvalinka orgován slnečnica ďatelina žihľava mach papraď lišajník
+muchotrávka kaktus palma bambus obilie pšenica raž jačmeň ovos repa ľan chmeľ vinič
+bylina mäta levanduľa rozmarín bazalka kôpor pažítka šalvia harmanček klas zrno
+ lístok kalich peľ nektár miazga živica
+
+# landscape and water
+zem pôda piesok kameň kamienok skala balvan hora vrch kopec vrchol svah dolina údolie
+roklina jaskyňa priepasť sopka ľadovec rieka potok prameň jazero rybník more oceán
+záliv ostrov polostrov pláž breh vodopád močiar púšť step prales les lesík háj lúka
+pole pastvina roľa záhon sad vinica park cesta chodník lávka most kanál hrádza
+priehrada vlna príliv odliv prúd hladina dno pobrežie krajina príroda svet planéta
+vesmír hviezda slnko mesiac obloha nebo oblak mráčik mrak hmla dážď dáždik sneh ľad
+krupobitie búrka hrom blesk dúha vietor víchor víchrica mráz rosa inovať cencúľ vločka
+mláka kaluž blato prach dym oheň plameň iskra popol uhlie drevo vzduch para teplo zima
+chlad horúčava sucho povodeň záplava lavína tma svetlo tieň lúč úsvit súmrak západ
+východ sever juh kométa meteor horizont obzor pohorie nížina rovina planina sedlo
+štít hrebeň brod jazierko ostrovček útes
+
+# materials
+železo oceľ meď zlato striebro olovo cín hliník kov sklo plast guma papier látka
+bavlna hodváb mramor betón tehla hlina íl ropa nafta benzín plyn kryštál diamant
+perla jantár smola decht asfalt cement vápno

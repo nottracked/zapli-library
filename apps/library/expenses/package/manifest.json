@@ -1,0 +1,3630 @@
+{
+  "spec": "zapli/0.2",
+  "app": {
+    "id": "library/expenses",
+    "kind": "web",
+    "name": "Expenses",
+    "version": "4.1.0",
+    "icon": "receipt_long",
+    "category": "finance",
+    "ageRating": "everyone",
+    "license": "GPL-3.0-or-later",
+    "iconData": "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"
+  },
+  "theme": {
+    "seedColor": "#00796B",
+    "shape": "rounded"
+  },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "lockPurpose": {
+        "en": "Keep your money records behind your fingerprint, face or screen lock if you turn the lock on",
+        "sk": "Chrániť vaše záznamy o peniazoch odtlačkom prsta, tvárou alebo zámkou obrazovky, ak zámku zapnete"
+      },
+      "notifyPurpose": {
+        "en": "Warn you when a budget is nearly used up and remind you about recurring payments",
+        "sk": "Upozorniť vás, keď je rozpočet takmer vyčerpaný, a pripomínať pravidelné platby"
+      },
+      "filesPurpose": {
+        "en": "Save your entries as a CSV file, or add entries from one",
+        "sk": "Uložiť záznamy ako súbor CSV alebo z neho záznamy pridať"
+      },
+      "widgetPurpose": {
+        "en": "Show what is safe to spend today and this month’s spending on your home screen",
+        "sk": "Zobraziť na ploche, koľko môžete dnes minúť, a tohtomesačné výdavky"
+      },
+      "cameraPurpose": {
+        "en": "Take a photo of a receipt to keep with the entry",
+        "sk": "Odfotiť bloček a uložiť ho k záznamu"
+      },
+      "pickPurpose": {
+        "en": "Pick a picture of a receipt from your photos to keep with the entry",
+        "sk": "Vybrať obrázok bločku z vašich fotiek a uložiť ho k záznamu"
+      },
+      "filesFlow": {
+        "en": "Your entries, saved as a CSV file in a place you choose",
+        "sk": "Vaše záznamy sa uložia ako súbor CSV na miesto, ktoré vyberiete"
+      },
+      "monthlyBudget": {
+        "en": "Monthly budget",
+        "sk": "Mesačný rozpočet"
+      },
+      "warnMeAt": {
+        "en": "Warn me at",
+        "sk": "Upozorniť pri"
+      },
+      "tellMeWhenRecurring": {
+        "en": "Tell me when a recurring expense is added",
+        "sk": "Oznámiť, keď sa pridá pravidelný výdavok"
+      },
+      "dailyReminderLogSpending": {
+        "en": "Daily reminder to log spending",
+        "sk": "Denná pripomienka na zápis výdavkov"
+      },
+      "groceries": {
+        "en": "Groceries",
+        "sk": "Potraviny"
+      },
+      "eatingOut": {
+        "en": "Eating out",
+        "sk": "Jedlo vonku"
+      },
+      "coffee": {
+        "en": "Coffee",
+        "sk": "Káva"
+      },
+      "drinks": {
+        "en": "Drinks",
+        "sk": "Nápoje"
+      },
+      "carFuel": {
+        "en": "Car and fuel",
+        "sk": "Auto a palivo"
+      },
+      "bike": {
+        "en": "Bike",
+        "sk": "Bicykel"
+      },
+      "gettingAround": {
+        "en": "Getting around",
+        "sk": "Doprava"
+      },
+      "travel": {
+        "en": "Travel",
+        "sk": "Cestovanie"
+      },
+      "homeRent": {
+        "en": "Home and rent",
+        "sk": "Bývanie"
+      },
+      "energy": {
+        "en": "Energy",
+        "sk": "Energie"
+      },
+      "water": {
+        "en": "Water",
+        "sk": "Voda"
+      },
+      "internet": {
+        "en": "Internet",
+        "sk": "Internet"
+      },
+      "phone": {
+        "en": "Phone",
+        "sk": "Telefón"
+      },
+      "bills": {
+        "en": "Bills",
+        "sk": "Účty"
+      },
+      "subscriptions": {
+        "en": "Subscriptions",
+        "sk": "Predplatné"
+      },
+      "health": {
+        "en": "Health",
+        "sk": "Zdravie"
+      },
+      "pharmacy": {
+        "en": "Pharmacy",
+        "sk": "Lekáreň"
+      },
+      "sport": {
+        "en": "Sport",
+        "sk": "Šport"
+      },
+      "personalCare": {
+        "en": "Personal care",
+        "sk": "Osobná starostlivosť"
+      },
+      "shopping": {
+        "en": "Shopping",
+        "sk": "Nákupy"
+      },
+      "goingOut": {
+        "en": "Going out",
+        "sk": "Zábava"
+      },
+      "games": {
+        "en": "Games",
+        "sk": "Hry"
+      },
+      "music": {
+        "en": "Music",
+        "sk": "Hudba"
+      },
+      "books": {
+        "en": "Books",
+        "sk": "Knihy"
+      },
+      "education": {
+        "en": "Education",
+        "sk": "Vzdelávanie"
+      },
+      "kids": {
+        "en": "Kids",
+        "sk": "Deti"
+      },
+      "family": {
+        "en": "Family",
+        "sk": "Rodina"
+      },
+      "pets": {
+        "en": "Pets",
+        "sk": "Zvieratá"
+      },
+      "gifts": {
+        "en": "Gifts",
+        "sk": "Darčeky"
+      },
+      "garden": {
+        "en": "Garden",
+        "sk": "Záhrada"
+      },
+      "cleaning": {
+        "en": "Cleaning",
+        "sk": "Upratovanie"
+      },
+      "repairs": {
+        "en": "Repairs",
+        "sk": "Opravy"
+      },
+      "work": {
+        "en": "Work",
+        "sk": "Práca"
+      },
+      "savings": {
+        "en": "Savings",
+        "sk": "Úspory"
+      },
+      "giving": {
+        "en": "Giving",
+        "sk": "Dary"
+      },
+      "bankFees": {
+        "en": "Bank and fees",
+        "sk": "Banka a poplatky"
+      },
+      "otherCategory": {
+        "en": "Other",
+        "sk": "Ostatné"
+      },
+      "transport": {
+        "en": "Transport",
+        "sk": "Doprava"
+      },
+      "colour": {
+        "en": "Colour",
+        "sk": "Farba"
+      },
+      "category": {
+        "en": "Category",
+        "sk": "Kategória"
+      },
+      "categories": {
+        "en": "Categories",
+        "sk": "Kategórie"
+      },
+      "name": {
+        "en": "Name",
+        "sk": "Názov"
+      },
+      "icon": {
+        "en": "Icon",
+        "sk": "Ikona"
+      },
+      "amount": {
+        "en": "Amount",
+        "sk": "Suma"
+      },
+      "note": {
+        "en": "Note",
+        "sk": "Poznámka"
+      },
+      "date": {
+        "en": "Date",
+        "sk": "Dátum"
+      },
+      "addedFrom": {
+        "en": "Added from",
+        "sk": "Pridané z"
+      },
+      "repeats": {
+        "en": "Repeats",
+        "sk": "Opakuje sa"
+      },
+      "nextPayment": {
+        "en": "Next payment",
+        "sk": "Ďalšia platba"
+      },
+      "whenItIsDue": {
+        "en": "When it is due",
+        "sk": "Keď je splatný"
+      },
+      "addItMe": {
+        "en": "Add it for me",
+        "sk": "Pridať automaticky"
+      },
+      "askMeFirst": {
+        "en": "Ask me first",
+        "sk": "Najprv sa opýtať"
+      },
+      "active": {
+        "en": "Active",
+        "sk": "Aktívny"
+      },
+      "addedSoFar": {
+        "en": "Added so far",
+        "sk": "Doteraz pridané"
+      },
+      "spentThisMonth2": {
+        "en": "Spent this month",
+        "sk": "Tento mesiac minuté"
+      },
+      "budget2": {
+        "en": "Budget",
+        "sk": "Rozpočet"
+      },
+      "rentPhoneStreaming": {
+        "en": "Rent, phone, streaming…",
+        "sk": "Nájom, telefón, streamovanie…"
+      },
+      "skip": {
+        "en": "Skip",
+        "sk": "Vynechať"
+      },
+      "add": {
+        "en": "Add",
+        "sk": "Pridať"
+      },
+      "skippedThisOne": {
+        "en": "Skipped this one.",
+        "sk": "Tentoraz vynechané."
+      },
+      "spentAnythingToday": {
+        "en": "Spent anything today?",
+        "sk": "Minuli ste dnes niečo?"
+      },
+      "addItNowIt": {
+        "en": "Add it now, it takes a few seconds.",
+        "sk": "Zapíšte to hneď, zaberie to pár sekúnd."
+      },
+      "nearTitle": {
+        "en": "{name}: budget almost used",
+        "sk": "{name}: rozpočet je takmer vyčerpaný"
+      },
+      "overTitle": {
+        "en": "{name}: over budget",
+        "sk": "{name}: rozpočet je prekročený"
+      },
+      "budgetBody": {
+        "en": "{spent} of {budget} spent this month.",
+        "sk": "Tento mesiac minuté {spent} z {budget}."
+      },
+      "totalNearTitle": {
+        "en": "Monthly budget almost used",
+        "sk": "Mesačný rozpočet je takmer vyčerpaný"
+      },
+      "totalOverTitle": {
+        "en": "Over your monthly budget",
+        "sk": "Mesačný rozpočet je prekročený"
+      },
+      "dueTitle": {
+        "en": "{name} is due",
+        "sk": "Splatné: {name}"
+      },
+      "addedTitle": {
+        "en": "Added {name}",
+        "sk": "Pridané: {name}"
+      },
+      "addedBody": {
+        "en": "{amount}, as planned. Tap to check it.",
+        "sk": "{amount} podľa plánu. Klepnutím si ho pozriete."
+      },
+      "aRecurringExpense": {
+        "en": "a recurring expense",
+        "sk": "pravidelný výdavok"
+      },
+      "problemLine": {
+        "en": "Line {row}: {reason}",
+        "sk": "Riadok {row}: {reason}"
+      },
+      "whatWasIt": {
+        "en": "What was it for?",
+        "sk": "Za čo to bolo?"
+      },
+      "moneyIcon": {
+        "en": "Money",
+        "sk": "Peniaze"
+      },
+      "salesIcon": {
+        "en": "Sales",
+        "sk": "Predaj"
+      },
+      "investIcon": {
+        "en": "Investments",
+        "sk": "Investície"
+      },
+      "businessIcon": {
+        "en": "Business",
+        "sk": "Podnikanie"
+      },
+      "bonusIcon": {
+        "en": "Bonus",
+        "sk": "Prémia"
+      },
+      "salary": {
+        "en": "Salary",
+        "sk": "Mzda"
+      },
+      "giftsRefunds": {
+        "en": "Gifts and refunds",
+        "sk": "Dary a vratky"
+      },
+      "otherIncome": {
+        "en": "Other income",
+        "sk": "Iný príjem"
+      },
+      "bankAccount": {
+        "en": "Bank account",
+        "sk": "Bankový účet"
+      },
+      "cashAccount": {
+        "en": "Cash",
+        "sk": "Hotovosť"
+      },
+      "prefs": {
+        "en": "Preferences",
+        "sk": "Predvoľby"
+      },
+      "mainCurrency": {
+        "en": "Main currency",
+        "sk": "Hlavná mena"
+      },
+      "defaultAccount": {
+        "en": "Usual account",
+        "sk": "Bežný účet pre záznamy"
+      },
+      "budgetAlertsLabel": {
+        "en": "Budget warnings",
+        "sk": "Upozornenia na rozpočet"
+      },
+      "remindAtLabel": {
+        "en": "Reminder time",
+        "sk": "Čas pripomienky"
+      },
+      "account": {
+        "en": "Account",
+        "sk": "Účet"
+      },
+      "accounts": {
+        "en": "Accounts",
+        "sk": "Účty"
+      },
+      "accountType": {
+        "en": "Kind of account",
+        "sk": "Druh účtu"
+      },
+      "bankKind": {
+        "en": "Bank account",
+        "sk": "Bankový účet"
+      },
+      "cashKind": {
+        "en": "Cash",
+        "sk": "Hotovosť"
+      },
+      "cardKind": {
+        "en": "Credit card",
+        "sk": "Kreditná karta"
+      },
+      "savingsKind": {
+        "en": "Savings",
+        "sk": "Sporenie"
+      },
+      "otherKind": {
+        "en": "Other",
+        "sk": "Iné"
+      },
+      "currencyLabel": {
+        "en": "Currency",
+        "sk": "Mena"
+      },
+      "openingBalance": {
+        "en": "Starting balance",
+        "sk": "Počiatočný zostatok"
+      },
+      "inTotal": {
+        "en": "Count in the total",
+        "sk": "Započítať do celku"
+      },
+      "archived": {
+        "en": "Hidden",
+        "sk": "Skryté"
+      },
+      "position": {
+        "en": "Position",
+        "sk": "Poradie"
+      },
+      "kind": {
+        "en": "Type",
+        "sk": "Typ"
+      },
+      "expenseKind": {
+        "en": "Expense",
+        "sk": "Výdavok"
+      },
+      "incomeKind": {
+        "en": "Income",
+        "sk": "Príjem"
+      },
+      "transferKind": {
+        "en": "Transfer",
+        "sk": "Prevod"
+      },
+      "parentCategory": {
+        "en": "Part of",
+        "sk": "Patrí pod"
+      },
+      "subcategories": {
+        "en": "Subcategories",
+        "sk": "Podkategórie"
+      },
+      "entry": {
+        "en": "Entry",
+        "sk": "Záznam"
+      },
+      "entries": {
+        "en": "Entries",
+        "sk": "Záznamy"
+      },
+      "toAccount": {
+        "en": "To account",
+        "sk": "Na účet"
+      },
+      "toAmount": {
+        "en": "Amount received",
+        "sk": "Prijatá suma"
+      },
+      "rate": {
+        "en": "Rate",
+        "sk": "Kurz"
+      },
+      "baseAmount": {
+        "en": "In main currency",
+        "sk": "V hlavnej mene"
+      },
+      "payee": {
+        "en": "Payee",
+        "sk": "Príjemca platby"
+      },
+      "tags": {
+        "en": "Tags",
+        "sk": "Štítky"
+      },
+      "usedPct": {
+        "en": "Budget used",
+        "sk": "Využitý rozpočet"
+      },
+      "budgetShare": {
+        "en": "Share of the category budget",
+        "sk": "Podiel na rozpočte kategórie"
+      },
+      "parentShare": {
+        "en": "Share of the parent budget",
+        "sk": "Podiel na nadradenom rozpočte"
+      },
+      "srcLabel": {
+        "en": "Read from the imported file",
+        "sk": "Načítané z importovaného súboru"
+      },
+      "recurringEntry": {
+        "en": "Recurring entry",
+        "sk": "Pravidelný záznam"
+      },
+      "recurringEntries": {
+        "en": "Recurring entries",
+        "sk": "Pravidelné záznamy"
+      },
+      "trackOnly": {
+        "en": "Only track it",
+        "sk": "Len sledovať"
+      },
+      "isSubscription": {
+        "en": "Subscription",
+        "sk": "Predplatné"
+      },
+      "matchKey": {
+        "en": "Matched by",
+        "sk": "Rozpoznané podľa"
+      },
+      "rateEntity": {
+        "en": "Exchange rate",
+        "sk": "Výmenný kurz"
+      },
+      "rates": {
+        "en": "Exchange rates",
+        "sk": "Výmenné kurzy"
+      },
+      "perMain": {
+        "en": "Worth in the main currency",
+        "sk": "Hodnota v hlavnej mene"
+      },
+      "updated": {
+        "en": "Updated",
+        "sk": "Aktualizované"
+      },
+      "importLog": {
+        "en": "Import",
+        "sk": "Import"
+      },
+      "importLogs": {
+        "en": "Imports",
+        "sk": "Importy"
+      },
+      "added": {
+        "en": "Added",
+        "sk": "Pridané"
+      },
+      "skippedRows": {
+        "en": "Skipped",
+        "sk": "Vynechané"
+      },
+      "created": {
+        "en": "Created",
+        "sk": "Vytvorené"
+      },
+      "problems": {
+        "en": "Problems",
+        "sk": "Problémy"
+      },
+      "at": {
+        "en": "When",
+        "sk": "Kedy"
+      },
+      "dueBodyEntry": {
+        "en": "{amount} on {date}. Add it to your entries?",
+        "sk": "{amount} dňa {date}. Pridať k záznamom?"
+      },
+      "exportedEntries": {
+        "en": "{n, plural, =0 {Saved an empty file.} one {Saved # entry.} other {Saved # entries.}}",
+        "sk": "{n, plural, =0 {Uložil sa prázdny súbor.} one {Uložený # záznam.} few {Uložené # záznamy.} many {Uložené # záznamu.} other {Uložených # záznamov.}}"
+      },
+      "safeToday": {
+        "en": "Safe to spend today",
+        "sk": "Dnes môžete minúť"
+      },
+      "safeLeft": {
+        "en": "Today {today} · {left} left this month",
+        "sk": "Dnes {today} · tento mesiac zostáva {left}"
+      },
+      "safeOver": {
+        "en": "{over} over this month’s budget",
+        "sk": "O {over} nad mesačným rozpočtom"
+      },
+      "safeNone": {
+        "en": "–",
+        "sk": "–"
+      },
+      "safeSetBudget": {
+        "en": "Set a monthly budget in the app",
+        "sk": "Nastavte si v aplikácii mesačný rozpočet"
+      },
+      "nExpenses": {
+        "en": "{n, plural, =0 {No expenses} one {# expense} other {# expenses}}",
+        "sk": "{n, plural, =0 {Žiadne výdavky} one {# výdavok} few {# výdavky} many {# výdavku} other {# výdavkov}}"
+      }
+    }
+  },
+  "web": {
+    "entry": "index.html",
+    "routes": {
+      "home": "#/",
+      "add": "#/add",
+      "entries": "#/entries",
+      "stats": "#/stats",
+      "budgets": "#/budgets",
+      "accounts": "#/accounts",
+      "recurring": "#/recurring",
+      "subscriptions": "#/subscriptions",
+      "calendar": "#/calendar",
+      "settings": "#/settings"
+    },
+    "orientation": "any",
+    "files": {
+      "css/app.css": { "sha256": "ca641f3cb5f00b5420a70deeb6e402acec3ddade6cfbba8c3c67ef099fc47dbf", "size": 36738 },
+      "index.html": { "sha256": "a16c201412a7da85f3d9fed4de2455aae15f3e5880462c622b910d6f12884632", "size": 707 },
+      "js/app.mjs": { "sha256": "3b9fb1966e458604682e517c7f9d11f222b58ebb6baa8fb6280d23f007866a51", "size": 14174 },
+      "js/calc.mjs": { "sha256": "5be33edfedfcdf35b36d5aca1214522ff15be8bf71be08b350eee67fe3027a40", "size": 4969 },
+      "js/charts.mjs": { "sha256": "9e40dab044fe12d11673d2d513efef4295882e62087b49a82258ac893ac4115e", "size": 4290 },
+      "js/csv.mjs": { "sha256": "48f5fd1335ac5ac838743a7819ccd8acd775d8e33324f6eb3bafec059dff8b6d", "size": 726 },
+      "js/dates.mjs": { "sha256": "555a123a34ad2edef9cbd1c990fa46bfcc587c7ea2a482fb0ec47bd60d728a0b", "size": 3944 },
+      "js/homecards.mjs": {
+        "sha256": "4df0039f9bd93b894dfd16b7e5e5cccee2f0c09879070d15f6000d537aa68522",
+        "size": 2635
+      },
+      "js/i18n.mjs": { "sha256": "49a465bcb07dd9de26434101de42d27d78a94a0ef097228dc939a1cb53cb9a63", "size": 54303 },
+      "js/icons.mjs": { "sha256": "69074a151e12d1fb8b06826918bae6d21a9d45a21d35981d9862de777b7c61ee", "size": 7029 },
+      "js/ledger.mjs": { "sha256": "bf45661e8c43eb4372162bc0410a52b245c02ba456b0b5900e2ae48a4794a05a", "size": 14063 },
+      "js/money.mjs": { "sha256": "8ea8b486a9aee527d183d26fbfe53936db7abaeb4537ec4186e0cf62a856c719", "size": 7412 },
+      "js/rrule.mjs": { "sha256": "f70e336b0c2dbb12e7c177d6b7cec08094fffb3106ffa7d8dccdf9a546e5caa4", "size": 8320 },
+      "js/sample.mjs": { "sha256": "b3f5230b5d1f437db0d43d26995ce7ee35d7109f51d38ed4c02987a4fe2e056b", "size": 8158 },
+      "js/screens/accounts.mjs": {
+        "sha256": "009daccd1b861dbd68fbbccdbf0867ce5424c08758ffd777f5efeade8ee31cdf",
+        "size": 12398
+      },
+      "js/screens/budgets.mjs": {
+        "sha256": "9959f8690da17a74b9645b65e797b7e36121d8a5d4d7a1eb93002749d3f1fc71",
+        "size": 7916
+      },
+      "js/screens/calendar.mjs": {
+        "sha256": "73264e9edf2e302a24762f97d6664f6aeddc1720ac65b7b4734b0869fecf2a02",
+        "size": 4263
+      },
+      "js/screens/categories.mjs": {
+        "sha256": "8608b5c077fad2abe57995b822367c39c84f75d74e869c8328cbc02d7e60f35f",
+        "size": 11517
+      },
+      "js/screens/edithome.mjs": {
+        "sha256": "c663fc0a6d73d80d6fd92163593061e7df22fc98b161817381ab40652a35fa36",
+        "size": 4020
+      },
+      "js/screens/editor.mjs": {
+        "sha256": "0923d60e12d2597980cd3b5d706a0c5b0b47b4c323ad049a303c9ac182dcf280",
+        "size": 46364
+      },
+      "js/screens/entries.mjs": {
+        "sha256": "e6ed980792f349f1e21c33d009b67934e77c7ddcc5fc5535cbe7305f58613841",
+        "size": 16471
+      },
+      "js/screens/home.mjs": {
+        "sha256": "2c503fa7c3e99ae015794998246b833155f918416aea2b55249b0703fc791884",
+        "size": 18844
+      },
+      "js/screens/importer.mjs": {
+        "sha256": "1d82664a5f3218b4f89570563d8236443287f28aa96794c8adb6f472b297b2f1",
+        "size": 5427
+      },
+      "js/screens/recurring.mjs": {
+        "sha256": "9c7f495fc35fd1aa8f7b56541dcfc86dc087b01f3adb6b30066f2d84770a34be",
+        "size": 15774
+      },
+      "js/screens/settings.mjs": {
+        "sha256": "93e3cd5fd732c4c1dcaedf3936427224eed87cc75997c63e1d17c946b08ef45a",
+        "size": 16126
+      },
+      "js/screens/stats.mjs": {
+        "sha256": "0a7fb67f4278c9599a9351b0c6b01b0c7f0390fa1d383aa881396c64fa2de6ef",
+        "size": 11635
+      },
+      "js/screens/subscriptions.mjs": {
+        "sha256": "984a9bbecbeb972e1aead7307ad70fd966648a07fe713a06263ef778a5726f85",
+        "size": 7420
+      },
+      "js/store.mjs": { "sha256": "6f5ab6093f647fd49a5051ecfa25761a1b4ba6c8c0fd45365ee6a9ed3877f203", "size": 13398 },
+      "js/subs.mjs": { "sha256": "764a1cb65a8c8214f1743e30fd3c774abdf387b30bb71d88364b2f1601467d40", "size": 5935 },
+      "js/ui.mjs": { "sha256": "5360f642c11c9910efb6fc94e3f0055a46b47e7235d26e45711caf56f4cf34a6", "size": 18003 }
+    }
+  },
+  "permissions": {
+    "auth.lock": {
+      "purpose": "@lockPurpose",
+      "default": "off"
+    },
+    "notify.local": {
+      "purpose": "@notifyPurpose",
+      "maxPerDay": 20
+    },
+    "files.io": {
+      "purpose": "@filesPurpose",
+      "modes": ["import", "export"]
+    },
+    "widget.home": {
+      "purpose": "@widgetPurpose"
+    },
+    "camera.photo": {
+      "purpose": "@cameraPurpose",
+      "optional": true
+    },
+    "media.pick": {
+      "purpose": "@pickPurpose",
+      "optional": true
+    }
+  },
+  "dataFlows": [
+    {
+      "from": ["*"],
+      "to": "files.io",
+      "purpose": "@filesFlow"
+    }
+  ],
+  "entities": {
+    "prefs": {
+      "label": "@prefs",
+      "labelPlural": "@prefs",
+      "singleton": true,
+      "display": {
+        "title": "=item.currency"
+      },
+      "fields": {
+        "currency": {
+          "label": "@mainCurrency",
+          "type": "text",
+          "required": true,
+          "default": "EUR",
+          "maxLength": 3,
+          "pattern": "[A-Z]{3}"
+        },
+        "monthlyBudget": {
+          "label": "@monthlyBudget",
+          "type": "decimal",
+          "scale": 2,
+          "min": 0,
+          "sensitivity": "financial"
+        },
+        "budgetAlerts": {
+          "label": "@budgetAlertsLabel",
+          "type": "boolean",
+          "default": true
+        },
+        "warnAt": {
+          "label": "@warnMeAt",
+          "type": "integer",
+          "default": 80,
+          "min": 50,
+          "max": 100
+        },
+        "addedNotice": {
+          "label": "@tellMeWhenRecurring",
+          "type": "boolean",
+          "default": true
+        },
+        "remindDaily": {
+          "label": "@dailyReminderLogSpending",
+          "type": "boolean",
+          "default": false
+        },
+        "remindAt": {
+          "label": "@remindAtLabel",
+          "type": "time",
+          "default": "20:00"
+        },
+        "defaultAccount": {
+          "label": "@defaultAccount",
+          "type": "ref",
+          "to": "account",
+          "onDelete": "setNull"
+        }
+      }
+    },
+    "account": {
+      "label": "@account",
+      "labelPlural": "@accounts",
+      "sensitivity": "financial",
+      "sort": ["position", "name"],
+      "display": {
+        "title": "=item.name",
+        "icon": "=optionIcon(item.type)"
+      },
+      "fields": {
+        "name": {
+          "label": "@name",
+          "type": "text",
+          "required": true,
+          "unique": true,
+          "maxLength": 60
+        },
+        "type": {
+          "label": "@accountType",
+          "type": "choice",
+          "default": "bank",
+          "options": [
+            {
+              "value": "bank",
+              "label": "@bankKind",
+              "icon": "account_balance"
+            },
+            {
+              "value": "cash",
+              "label": "@cashKind",
+              "icon": "payments"
+            },
+            {
+              "value": "card",
+              "label": "@cardKind",
+              "icon": "credit_card"
+            },
+            {
+              "value": "savings",
+              "label": "@savingsKind",
+              "icon": "savings"
+            },
+            {
+              "value": "other",
+              "label": "@otherKind",
+              "icon": "wallet"
+            }
+          ]
+        },
+        "currency": {
+          "label": "@currencyLabel",
+          "type": "text",
+          "maxLength": 3,
+          "pattern": "[A-Z]{3}"
+        },
+        "opening": {
+          "label": "@openingBalance",
+          "type": "decimal",
+          "scale": 2,
+          "default": 0
+        },
+        "includeInTotal": {
+          "label": "@inTotal",
+          "type": "boolean",
+          "default": true
+        },
+        "archived": {
+          "label": "@archived",
+          "type": "boolean",
+          "default": false
+        },
+        "position": {
+          "label": "@position",
+          "type": "integer",
+          "default": 0
+        },
+        "entries": {
+          "type": "inverse",
+          "of": "expense.account",
+          "label": "@entries"
+        },
+        "arrivals": {
+          "type": "inverse",
+          "of": "expense.toAccount",
+          "label": "@entries"
+        }
+      }
+    },
+    "category": {
+      "label": "@category",
+      "labelPlural": "@categories",
+      "sort": ["name"],
+      "display": {
+        "title": "=item.name",
+        "icon": "=item.icon"
+      },
+      "fields": {
+        "name": {
+          "label": "@name",
+          "type": "text",
+          "required": true,
+          "unique": true,
+          "maxLength": 60,
+          "placeholder": "@groceries"
+        },
+        "icon": {
+          "label": "@icon",
+          "type": "choice",
+          "default": "category",
+          "options": [
+            {
+              "value": "shopping_cart",
+              "label": "@groceries",
+              "icon": "shopping_cart",
+              "hue": "green"
+            },
+            {
+              "value": "restaurant",
+              "label": "@eatingOut",
+              "icon": "restaurant",
+              "hue": "orange"
+            },
+            {
+              "value": "local_cafe",
+              "label": "@coffee",
+              "icon": "local_cafe",
+              "hue": "brown"
+            },
+            {
+              "value": "local_drink",
+              "label": "@drinks",
+              "icon": "local_drink",
+              "hue": "amber"
+            },
+            {
+              "value": "directions_car",
+              "label": "@carFuel",
+              "icon": "directions_car",
+              "hue": "blue"
+            },
+            {
+              "value": "directions_bike",
+              "label": "@bike",
+              "icon": "directions_bike",
+              "hue": "lime"
+            },
+            {
+              "value": "directions_walk",
+              "label": "@gettingAround",
+              "icon": "directions_walk",
+              "hue": "teal"
+            },
+            {
+              "value": "flight",
+              "label": "@travel",
+              "icon": "flight",
+              "hue": "cyan"
+            },
+            {
+              "value": "home",
+              "label": "@homeRent",
+              "icon": "home",
+              "hue": "brown"
+            },
+            {
+              "value": "bolt",
+              "label": "@energy",
+              "icon": "bolt",
+              "hue": "amber"
+            },
+            {
+              "value": "water_drop",
+              "label": "@water",
+              "icon": "water_drop",
+              "hue": "cyan"
+            },
+            {
+              "value": "wifi",
+              "label": "@internet",
+              "icon": "wifi",
+              "hue": "indigo"
+            },
+            {
+              "value": "call",
+              "label": "@phone",
+              "icon": "call",
+              "hue": "indigo"
+            },
+            {
+              "value": "receipt_long",
+              "label": "@bills",
+              "icon": "receipt_long",
+              "hue": "indigo"
+            },
+            {
+              "value": "autorenew",
+              "label": "@subscriptions",
+              "icon": "autorenew",
+              "hue": "violet"
+            },
+            {
+              "value": "medical_services",
+              "label": "@health",
+              "icon": "medical_services",
+              "hue": "red"
+            },
+            {
+              "value": "medication",
+              "label": "@pharmacy",
+              "icon": "medication",
+              "hue": "red"
+            },
+            {
+              "value": "fitness_center",
+              "label": "@sport",
+              "icon": "fitness_center",
+              "hue": "lime"
+            },
+            {
+              "value": "spa",
+              "label": "@personalCare",
+              "icon": "spa",
+              "hue": "pink"
+            },
+            {
+              "value": "shopping_bag",
+              "label": "@shopping",
+              "icon": "shopping_bag",
+              "hue": "violet"
+            },
+            {
+              "value": "movie",
+              "label": "@goingOut",
+              "icon": "movie",
+              "hue": "pink"
+            },
+            {
+              "value": "sports_esports",
+              "label": "@games",
+              "icon": "sports_esports",
+              "hue": "violet"
+            },
+            {
+              "value": "music_note",
+              "label": "@music",
+              "icon": "music_note",
+              "hue": "pink"
+            },
+            {
+              "value": "menu_book",
+              "label": "@books",
+              "icon": "menu_book",
+              "hue": "brown"
+            },
+            {
+              "value": "school",
+              "label": "@education",
+              "icon": "school",
+              "hue": "blue"
+            },
+            {
+              "value": "child_care",
+              "label": "@kids",
+              "icon": "child_care",
+              "hue": "amber"
+            },
+            {
+              "value": "family_restroom",
+              "label": "@family",
+              "icon": "family_restroom",
+              "hue": "orange"
+            },
+            {
+              "value": "pets",
+              "label": "@pets",
+              "icon": "pets",
+              "hue": "brown"
+            },
+            {
+              "value": "cake",
+              "label": "@gifts",
+              "icon": "cake",
+              "hue": "pink"
+            },
+            {
+              "value": "local_florist",
+              "label": "@garden",
+              "icon": "local_florist",
+              "hue": "green"
+            },
+            {
+              "value": "cleaning_services",
+              "label": "@cleaning",
+              "icon": "cleaning_services",
+              "hue": "cyan"
+            },
+            {
+              "value": "handyman",
+              "label": "@repairs",
+              "icon": "handyman",
+              "hue": "orange"
+            },
+            {
+              "value": "work",
+              "label": "@work",
+              "icon": "work",
+              "hue": "blue"
+            },
+            {
+              "value": "savings",
+              "label": "@savings",
+              "icon": "savings",
+              "hue": "green"
+            },
+            {
+              "value": "volunteer_activism",
+              "label": "@giving",
+              "icon": "volunteer_activism",
+              "hue": "red"
+            },
+            {
+              "value": "account_balance",
+              "label": "@bankFees",
+              "icon": "account_balance",
+              "hue": "grey"
+            },
+            {
+              "value": "category",
+              "label": "@otherCategory",
+              "icon": "category",
+              "hue": "grey"
+            },
+            {
+              "value": "attach_money",
+              "label": "@moneyIcon",
+              "icon": "attach_money",
+              "hue": "green"
+            },
+            {
+              "value": "sell",
+              "label": "@salesIcon",
+              "icon": "sell",
+              "hue": "teal"
+            },
+            {
+              "value": "trending_up",
+              "label": "@investIcon",
+              "icon": "trending_up",
+              "hue": "green"
+            },
+            {
+              "value": "storefront",
+              "label": "@businessIcon",
+              "icon": "storefront",
+              "hue": "blue"
+            },
+            {
+              "value": "emoji_events",
+              "label": "@bonusIcon",
+              "icon": "emoji_events",
+              "hue": "amber"
+            }
+          ]
+        },
+        "color": {
+          "type": "color",
+          "label": "@colour"
+        },
+        "budget": {
+          "type": "decimal",
+          "label": "@budget2",
+          "scale": 2,
+          "min": 0,
+          "sensitivity": "financial"
+        },
+        "kind": {
+          "label": "@kind",
+          "type": "choice",
+          "default": "expense",
+          "options": [
+            {
+              "value": "expense",
+              "label": "@expenseKind",
+              "icon": "trending_down"
+            },
+            {
+              "value": "income",
+              "label": "@incomeKind",
+              "icon": "trending_up"
+            }
+          ]
+        },
+        "parent": {
+          "label": "@parentCategory",
+          "type": "ref",
+          "to": "category",
+          "onDelete": "setNull"
+        },
+        "archived": {
+          "label": "@archived",
+          "type": "boolean",
+          "default": false
+        },
+        "expenses": {
+          "type": "inverse",
+          "of": "expense.category",
+          "label": "@entries"
+        },
+        "recurring": {
+          "type": "inverse",
+          "of": "recurring.category",
+          "label": "@recurringEntries"
+        },
+        "children": {
+          "type": "inverse",
+          "of": "category.parent",
+          "label": "@subcategories"
+        },
+        "ownSpent": {
+          "type": "decimal",
+          "label": "@spentThisMonth2",
+          "scale": 2,
+          "sensitivity": "financial",
+          "visible": false,
+          "compute": "=coalesce(sum(item.expenses.filter(e, e.kind == 'expense' && e.date >= startOf(today(), 'month') && e.date <= endOf(today(), 'month')).map(e, coalesce(e.baseAmount, e.amount))), decimal('0'))"
+        },
+        "spentMonth": {
+          "type": "decimal",
+          "label": "@spentThisMonth2",
+          "scale": 2,
+          "sensitivity": "financial",
+          "compute": "=coalesce(item.ownSpent, decimal('0')) + coalesce(sum(item.children.map(c, coalesce(c.ownSpent, decimal('0')))), decimal('0'))"
+        },
+        "usedPct": {
+          "type": "decimal",
+          "label": "@usedPct",
+          "scale": 2,
+          "sensitivity": "financial",
+          "visible": false,
+          "compute": "=coalesce(item.budget, decimal('0')) > 0 ? item.spentMonth * 100 / coalesce(item.budget, decimal('1')) : decimal('0')"
+        }
+      }
+    },
+    "expense": {
+      "label": "@entry",
+      "labelPlural": "@entries",
+      "sensitivity": "financial",
+      "sort": ["-date", "-createdAt"],
+      "display": {
+        "title": "=has(item.note) && item.note != '' ? item.note : coalesce(item.payee, item.category.name, t('entry'))",
+        "trailing": "=formatCurrency(item.amount, coalesce(item.currency, 'EUR'))",
+        "icon": "=coalesce(item.category.icon, optionIcon(item.kind))"
+      },
+      "fields": {
+        "amount": {
+          "label": "@amount",
+          "type": "decimal",
+          "required": true,
+          "scale": 2,
+          "min": 0.01
+        },
+        "kind": {
+          "label": "@kind",
+          "type": "choice",
+          "required": true,
+          "default": "expense",
+          "options": [
+            {
+              "value": "expense",
+              "label": "@expenseKind",
+              "icon": "trending_down"
+            },
+            {
+              "value": "income",
+              "label": "@incomeKind",
+              "icon": "trending_up"
+            },
+            {
+              "value": "transfer",
+              "label": "@transferKind",
+              "icon": "sync"
+            }
+          ]
+        },
+        "date": {
+          "label": "@date",
+          "type": "date",
+          "required": true,
+          "default": "=today()"
+        },
+        "category": {
+          "label": "@category",
+          "type": "ref",
+          "to": "category"
+        },
+        "account": {
+          "label": "@account",
+          "type": "ref",
+          "to": "account"
+        },
+        "toAccount": {
+          "label": "@toAccount",
+          "type": "ref",
+          "to": "account"
+        },
+        "toAmount": {
+          "label": "@toAmount",
+          "type": "decimal",
+          "scale": 2,
+          "min": 0.01
+        },
+        "currency": {
+          "label": "@currencyLabel",
+          "type": "text",
+          "maxLength": 3,
+          "pattern": "[A-Z]{3}"
+        },
+        "rate": {
+          "label": "@rate",
+          "type": "decimal",
+          "scale": 6,
+          "min": 1e-6
+        },
+        "baseAmount": {
+          "label": "@baseAmount",
+          "type": "decimal",
+          "scale": 2,
+          "min": 0
+        },
+        "note": {
+          "label": "@note",
+          "type": "text",
+          "maxLength": 500,
+          "placeholder": "@whatWasIt"
+        },
+        "payee": {
+          "label": "@payee",
+          "type": "text",
+          "maxLength": 100
+        },
+        "tags": {
+          "label": "@tags",
+          "type": "text",
+          "maxLength": 200
+        },
+        "recurring": {
+          "type": "ref",
+          "to": "recurring",
+          "label": "@addedFrom",
+          "onDelete": "setNull",
+          "editable": false
+        },
+        "budgetPct": {
+          "type": "decimal",
+          "label": "@budgetShare",
+          "scale": 2,
+          "visible": false,
+          "compute": "=coalesce(item.category.budget, decimal('0')) > 0 ? coalesce(item.baseAmount, item.amount) * 100 / coalesce(item.category.budget, decimal('1')) : decimal('0')"
+        },
+        "parentPct": {
+          "type": "decimal",
+          "label": "@parentShare",
+          "scale": 2,
+          "visible": false,
+          "compute": "=coalesce(item.category.parent.budget, decimal('0')) > 0 ? coalesce(item.baseAmount, item.amount) * 100 / coalesce(item.category.parent.budget, decimal('1')) : decimal('0')"
+        },
+        "srcType": {
+          "label": "@srcLabel",
+          "type": "text",
+          "visible": false,
+          "maxLength": 60
+        },
+        "srcIncome": {
+          "label": "@srcLabel",
+          "type": "boolean",
+          "visible": false
+        },
+        "srcTransfer": {
+          "label": "@srcLabel",
+          "type": "boolean",
+          "visible": false
+        },
+        "srcSigned": {
+          "label": "@srcLabel",
+          "type": "decimal",
+          "visible": false,
+          "scale": 2
+        },
+        "srcIncomeAmount": {
+          "label": "@srcLabel",
+          "type": "decimal",
+          "visible": false,
+          "scale": 2
+        },
+        "srcSub": {
+          "label": "@srcLabel",
+          "type": "text",
+          "visible": false,
+          "maxLength": 60
+        },
+        "srcNew": {
+          "label": "@srcLabel",
+          "type": "boolean",
+          "visible": false
+        },
+        "srcStep": {
+          "label": "@srcLabel",
+          "type": "integer",
+          "visible": false
+        },
+        "srcHalf": {
+          "label": "@srcLabel",
+          "type": "boolean",
+          "visible": false
+        }
+      }
+    },
+    "recurring": {
+      "label": "@recurringEntry",
+      "labelPlural": "@recurringEntries",
+      "sensitivity": "financial",
+      "sort": ["nextDue"],
+      "display": {
+        "title": "=item.name",
+        "trailing": "=formatCurrency(item.amount, coalesce(item.currency, 'EUR'))",
+        "icon": "=coalesce(item.category.icon, 'autorenew')"
+      },
+      "fields": {
+        "name": {
+          "label": "@name",
+          "type": "text",
+          "required": true,
+          "maxLength": 60,
+          "placeholder": "@rentPhoneStreaming"
+        },
+        "amount": {
+          "label": "@amount",
+          "type": "decimal",
+          "required": true,
+          "scale": 2,
+          "min": 0.01
+        },
+        "kind": {
+          "label": "@kind",
+          "type": "choice",
+          "required": true,
+          "default": "expense",
+          "options": [
+            {
+              "value": "expense",
+              "label": "@expenseKind",
+              "icon": "trending_down"
+            },
+            {
+              "value": "income",
+              "label": "@incomeKind",
+              "icon": "trending_up"
+            },
+            {
+              "value": "transfer",
+              "label": "@transferKind",
+              "icon": "sync"
+            }
+          ]
+        },
+        "category": {
+          "label": "@category",
+          "type": "ref",
+          "to": "category"
+        },
+        "account": {
+          "label": "@account",
+          "type": "ref",
+          "to": "account"
+        },
+        "toAccount": {
+          "label": "@toAccount",
+          "type": "ref",
+          "to": "account"
+        },
+        "currency": {
+          "label": "@currencyLabel",
+          "type": "text",
+          "maxLength": 3,
+          "pattern": "[A-Z]{3}"
+        },
+        "payee": {
+          "label": "@payee",
+          "type": "text",
+          "maxLength": 100
+        },
+        "schedule": {
+          "type": "recurrence",
+          "label": "@repeats",
+          "required": true,
+          "default": "FREQ=MONTHLY;BYMONTHDAY=1"
+        },
+        "nextDue": {
+          "type": "date",
+          "label": "@nextPayment",
+          "required": true,
+          "default": "=today()"
+        },
+        "mode": {
+          "type": "choice",
+          "label": "@whenItIsDue",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "@addItMe",
+              "icon": "autorenew"
+            },
+            {
+              "value": "ask",
+              "label": "@askMeFirst",
+              "icon": "notifications"
+            },
+            {
+              "value": "track",
+              "label": "@trackOnly",
+              "icon": "visibility"
+            }
+          ]
+        },
+        "active": {
+          "type": "boolean",
+          "label": "@active",
+          "default": true
+        },
+        "note": {
+          "label": "@note",
+          "type": "text",
+          "maxLength": 120
+        },
+        "isSubscription": {
+          "label": "@isSubscription",
+          "type": "boolean",
+          "default": false
+        },
+        "matchKey": {
+          "label": "@matchKey",
+          "type": "text",
+          "maxLength": 120,
+          "visible": false
+        },
+        "expenses": {
+          "type": "inverse",
+          "of": "expense.recurring",
+          "label": "@addedSoFar"
+        }
+      }
+    },
+    "rate": {
+      "label": "@rateEntity",
+      "labelPlural": "@rates",
+      "sort": ["currency"],
+      "display": {
+        "title": "=item.currency"
+      },
+      "fields": {
+        "currency": {
+          "label": "@currencyLabel",
+          "type": "text",
+          "required": true,
+          "unique": true,
+          "maxLength": 3,
+          "pattern": "[A-Z]{3}"
+        },
+        "perMain": {
+          "label": "@perMain",
+          "type": "decimal",
+          "required": true,
+          "scale": 6,
+          "min": 1e-6
+        },
+        "updated": {
+          "label": "@updated",
+          "type": "date",
+          "default": "=today()"
+        }
+      }
+    },
+    "importLog": {
+      "label": "@importLog",
+      "labelPlural": "@importLogs",
+      "sort": ["-at"],
+      "display": {
+        "title": "=formatDate(item.at, 'yMMMd')"
+      },
+      "fields": {
+        "at": {
+          "label": "@at",
+          "type": "datetime",
+          "required": true
+        },
+        "since": {
+          "label": "@at",
+          "type": "datetime"
+        },
+        "added": {
+          "label": "@added",
+          "type": "integer",
+          "default": 0
+        },
+        "skipped": {
+          "label": "@skippedRows",
+          "type": "integer",
+          "default": 0
+        },
+        "created": {
+          "label": "@created",
+          "type": "integer",
+          "default": 0
+        },
+        "problems": {
+          "label": "@problems",
+          "type": "longText",
+          "maxLength": 5000
+        }
+      }
+    }
+  },
+  "queries": {
+    "prefsAll": {
+      "entity": "prefs",
+      "limit": 1
+    },
+    "allAccounts": {
+      "entity": "account",
+      "limit": 200
+    },
+    "expenseCategories": {
+      "entity": "category",
+      "where": "=item.kind == 'expense'",
+      "limit": 200
+    },
+    "incomeCategories": {
+      "entity": "category",
+      "where": "=item.kind == 'income'",
+      "limit": 200
+    },
+    "monthSpent": {
+      "entity": "expense",
+      "where": "=item.kind == 'expense' && item.date >= startOf(today(), 'month') && item.date <= endOf(today(), 'month')",
+      "aggregate": {
+        "total": {
+          "fn": "sum",
+          "field": "baseAmount"
+        },
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "spentOtherDays": {
+      "entity": "expense",
+      "where": "=item.kind == 'expense' && item.date >= startOf(today(), 'month') && item.date <= endOf(today(), 'month') && item.date != today()",
+      "aggregate": {
+        "total": {
+          "fn": "sum",
+          "field": "baseAmount"
+        }
+      }
+    },
+    "spentToday": {
+      "entity": "expense",
+      "where": "=item.kind == 'expense' && item.date == today()",
+      "aggregate": {
+        "total": {
+          "fn": "sum",
+          "field": "baseAmount"
+        }
+      }
+    },
+    "todayCount": {
+      "entity": "expense",
+      "where": "=item.date == today()",
+      "aggregate": {
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "topBudgets": {
+      "entity": "category",
+      "where": "=item.kind == 'expense' && item.parent == null && has(item.budget)",
+      "aggregate": {
+        "total": {
+          "fn": "sum",
+          "field": "budget"
+        }
+      }
+    },
+    "entryCount": {
+      "entity": "expense",
+      "aggregate": {
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "categoryCount": {
+      "entity": "category",
+      "aggregate": {
+        "n": {
+          "fn": "count"
+        }
+      }
+    },
+    "dueAuto": {
+      "entity": "recurring",
+      "where": "=item.active && item.mode == 'auto' && item.nextDue <= today()",
+      "sort": ["nextDue"],
+      "limit": 100
+    },
+    "dueAsk": {
+      "entity": "recurring",
+      "where": "=item.active && item.mode == 'ask' && item.nextDue <= today()",
+      "sort": ["nextDue"],
+      "limit": 20
+    },
+    "dueTrack": {
+      "entity": "recurring",
+      "where": "=item.active && item.mode == 'track' && item.nextDue < today()",
+      "sort": ["nextDue"],
+      "limit": 200
+    },
+    "history": {
+      "entity": "expense",
+      "sort": ["-date", "-createdAt"],
+      "limit": 2000
+    },
+    "inRange": {
+      "entity": "expense",
+      "args": {
+        "from": {
+          "type": "date"
+        },
+        "to": {
+          "type": "date"
+        }
+      },
+      "where": "=item.date >= args.from && item.date <= args.to",
+      "sort": ["-date", "-createdAt"],
+      "limit": 2000
+    },
+    "rateOf": {
+      "entity": "rate",
+      "args": {
+        "currency": {
+          "type": "text"
+        }
+      },
+      "where": "=item.currency == args.currency",
+      "limit": 1
+    },
+    "catByName": {
+      "entity": "category",
+      "args": {
+        "name": {
+          "type": "text"
+        }
+      },
+      "where": "=item.name == args.name",
+      "limit": 1
+    },
+    "importA": {
+      "entity": "expense",
+      "where": "=item.srcNew == true && item.srcStep == null",
+      "limit": 1000
+    },
+    "importB": {
+      "entity": "expense",
+      "where": "=item.srcStep == 1",
+      "limit": 1000
+    },
+    "openHalves": {
+      "entity": "expense",
+      "where": "=item.srcHalf == true && item.kind == 'transfer' && item.account != null && item.toAccount == null",
+      "sort": ["date"],
+      "limit": 1000
+    },
+    "halfIn": {
+      "entity": "expense",
+      "args": {
+        "date": {
+          "type": "date"
+        },
+        "amount": {
+          "type": "decimal"
+        },
+        "from": {
+          "type": "text"
+        }
+      },
+      "where": "=item.srcHalf == true && item.kind == 'transfer' && item.account == null && item.toAccount != null && item.date == args.date && item.amount == args.amount && string(item.toAccount) != args.from",
+      "sort": ["createdAt"],
+      "limit": 1
+    },
+    "newAccounts": {
+      "entity": "account",
+      "args": {
+        "since": {
+          "type": "datetime"
+        }
+      },
+      "where": "=item.createdAt >= args.since",
+      "limit": 200
+    },
+    "newCategories": {
+      "entity": "category",
+      "args": {
+        "since": {
+          "type": "datetime"
+        }
+      },
+      "where": "=item.createdAt >= args.since && item.kind == 'expense'",
+      "limit": 500
+    },
+    "unconverted": {
+      "entity": "expense",
+      "args": {
+        "currency": {
+          "type": "text"
+        }
+      },
+      "where": "=item.currency == args.currency && item.rate == null",
+      "limit": 1000
+    },
+    "inAccount": {
+      "entity": "expense",
+      "args": {
+        "account": {
+          "type": "text"
+        }
+      },
+      "where": "=string(item.account) == args.account",
+      "limit": 1000
+    },
+    "intoAccount": {
+      "entity": "expense",
+      "args": {
+        "account": {
+          "type": "text"
+        }
+      },
+      "where": "=string(item.toAccount) == args.account",
+      "limit": 1000
+    },
+    "rulesInAccount": {
+      "entity": "recurring",
+      "args": {
+        "account": {
+          "type": "text"
+        }
+      },
+      "where": "=string(item.account) == args.account || string(item.toAccount) == args.account",
+      "limit": 500
+    },
+    "inCategory": {
+      "entity": "expense",
+      "args": {
+        "category": {
+          "type": "text"
+        }
+      },
+      "where": "=string(item.category) == args.category",
+      "limit": 1000
+    },
+    "rulesInCategory": {
+      "entity": "recurring",
+      "args": {
+        "category": {
+          "type": "text"
+        }
+      },
+      "where": "=string(item.category) == args.category",
+      "limit": 500
+    }
+  },
+  "actions": {
+    "setUp": {
+      "steps": [
+        {
+          "type": "query",
+          "query": "prefsAll",
+          "as": "prefs"
+        },
+        {
+          "type": "query",
+          "query": "allAccounts",
+          "as": "accounts"
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.accounts) == 0",
+          "entity": "account",
+          "values": {
+            "name": "=t('bankAccount')",
+            "type": "bank",
+            "position": 0
+          },
+          "as": "bank"
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.accounts) == 0",
+          "entity": "account",
+          "values": {
+            "name": "=t('cashAccount')",
+            "type": "cash",
+            "position": 1
+          },
+          "as": "cash"
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.prefs) == 0",
+          "entity": "prefs",
+          "values": {
+            "defaultAccount": "=vars.bank.id"
+          }
+        },
+        {
+          "type": "query",
+          "query": "expenseCategories",
+          "as": "cats"
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.cats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('groceries')",
+            "icon": "shopping_cart",
+            "kind": "expense"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.cats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('eatingOut')",
+            "icon": "restaurant",
+            "kind": "expense"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.cats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('transport')",
+            "icon": "directions_car",
+            "kind": "expense"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.cats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('homeRent')",
+            "icon": "home",
+            "kind": "expense"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.cats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('bills')",
+            "icon": "receipt_long",
+            "kind": "expense"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.cats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('subscriptions')",
+            "icon": "autorenew",
+            "kind": "expense"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.cats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('health')",
+            "icon": "medical_services",
+            "kind": "expense"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.cats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('shopping')",
+            "icon": "shopping_bag",
+            "kind": "expense"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.cats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('goingOut')",
+            "icon": "movie",
+            "kind": "expense"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.cats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('otherCategory')",
+            "icon": "category",
+            "kind": "expense"
+          }
+        },
+        {
+          "type": "query",
+          "query": "incomeCategories",
+          "as": "incomeCats"
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.incomeCats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('salary')",
+            "icon": "work",
+            "kind": "income"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.incomeCats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('giftsRefunds')",
+            "icon": "cake",
+            "kind": "income"
+          }
+        },
+        {
+          "type": "createRecord",
+          "when": "=size(vars.incomeCats) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=t('otherIncome')",
+            "icon": "attach_money",
+            "kind": "income"
+          }
+        }
+      ]
+    },
+    "setAccount": {
+      "args": {
+        "entry": {
+          "type": "ref",
+          "to": "expense"
+        },
+        "account": {
+          "type": "ref",
+          "to": "account"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.entry",
+          "set": {
+            "account": "=args.account"
+          }
+        }
+      ]
+    },
+    "dailyRun": {
+      "steps": [
+        {
+          "type": "runAction",
+          "action": "postDue"
+        },
+        {
+          "type": "forEach",
+          "query": "dueTrack",
+          "do": "advanceRule",
+          "args": {
+            "rule": "=item.id"
+          },
+          "max": 200
+        }
+      ]
+    },
+    "postDue": {
+      "steps": [
+        {
+          "type": "forEach",
+          "query": "dueAuto",
+          "do": "postRecurring",
+          "args": {
+            "rule": "=item.id"
+          },
+          "max": 100
+        }
+      ]
+    },
+    "postRecurring": {
+      "args": {
+        "rule": {
+          "type": "ref",
+          "to": "recurring"
+        },
+        "due": {
+          "type": "text"
+        }
+      },
+      "steps": [
+        {
+          "type": "query",
+          "query": "rateOf",
+          "args": {
+            "currency": "=coalesce(args.rule.currency, '')"
+          },
+          "as": "rate"
+        },
+        {
+          "type": "createRecord",
+          "when": "=args.rule.active && (args.due == null || args.due == string(args.rule.nextDue))",
+          "entity": "expense",
+          "values": {
+            "amount": "=args.rule.amount",
+            "kind": "=args.rule.kind",
+            "category": "=args.rule.category",
+            "account": "=args.rule.account",
+            "toAccount": "=args.rule.toAccount",
+            "currency": "=args.rule.currency",
+            "rate": "=args.rule.currency == null || args.rule.currency == first(q.prefsAll).currency || size(vars.rate) == 0 ? null : first(vars.rate).perMain",
+            "baseAmount": "=args.rule.currency == null || args.rule.currency == first(q.prefsAll).currency ? args.rule.amount : (size(vars.rate) > 0 ? round(coalesce(args.rule.amount, decimal('0')) * coalesce(first(vars.rate).perMain, decimal('1')), 2) : args.rule.amount)",
+            "note": "=args.rule.name",
+            "payee": "=args.rule.payee",
+            "date": "=args.rule.nextDue",
+            "recurring": "=args.rule"
+          },
+          "as": "added"
+        },
+        {
+          "type": "updateRecord",
+          "when": "=vars.added != null",
+          "record": "=args.rule",
+          "set": {
+            "nextDue": "=coalesce(nextOccurrence(args.rule.schedule, args.rule.nextDue), args.rule.nextDue)",
+            "active": "=nextOccurrence(args.rule.schedule, args.rule.nextDue) != null"
+          }
+        }
+      ]
+    },
+    "skipRecurring": {
+      "args": {
+        "rule": {
+          "type": "ref",
+          "to": "recurring"
+        },
+        "due": {
+          "type": "text"
+        }
+      },
+      "steps": [
+        {
+          "type": "runAction",
+          "when": "=args.rule.active && (args.due == null || args.due == string(args.rule.nextDue))",
+          "action": "advanceRule",
+          "args": {
+            "rule": "=args.rule"
+          }
+        },
+        {
+          "type": "toast",
+          "text": "@skippedThisOne"
+        }
+      ]
+    },
+    "advanceRule": {
+      "args": {
+        "rule": {
+          "type": "ref",
+          "to": "recurring"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.rule",
+          "set": {
+            "nextDue": "=coalesce(nextOccurrence(args.rule.schedule, args.rule.nextDue), args.rule.nextDue)",
+            "active": "=nextOccurrence(args.rule.schedule, args.rule.nextDue) != null"
+          }
+        }
+      ]
+    },
+    "askDue": {
+      "steps": [
+        {
+          "type": "forEach",
+          "query": "dueAsk",
+          "do": "askRecurring",
+          "args": {
+            "rule": "=item.id"
+          },
+          "max": 5
+        }
+      ]
+    },
+    "askRecurring": {
+      "args": {
+        "rule": {
+          "type": "ref",
+          "to": "recurring"
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=t('dueTitle', {'name': args.rule.name})",
+            "body": "=t('dueBodyEntry', {'amount': formatCurrency(args.rule.amount, coalesce(args.rule.currency, first(q.prefsAll).currency, 'EUR')), 'date': formatDate(args.rule.nextDue, 'MMMd')})",
+            "open": {
+              "route": "recurring"
+            },
+            "buttons": [
+              {
+                "id": "add",
+                "label": "=t('add')",
+                "action": "postRecurring"
+              },
+              {
+                "id": "skip",
+                "label": "=t('skip')",
+                "action": "skipRecurring"
+              }
+            ],
+            "data": {
+              "rule": "=string(args.rule.id)",
+              "due": "=string(args.rule.nextDue)"
+            },
+            "tag": "='due-' + string(args.rule.id)",
+            "channel": "recurring"
+          }
+        }
+      ]
+    },
+    "noticeAdded": {
+      "args": {
+        "expense": {
+          "type": "ref",
+          "to": "expense"
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=t('addedTitle', {'name': coalesce(args.expense.recurring.name, t('aRecurringExpense'))})",
+            "body": "=t('addedBody', {'amount': formatCurrency(args.expense.amount, coalesce(args.expense.currency, first(q.prefsAll).currency, 'EUR'))})",
+            "open": {
+              "route": "home"
+            },
+            "channel": "recurring"
+          }
+        }
+      ]
+    },
+    "warnBudget": {
+      "args": {
+        "category": {
+          "type": "ref",
+          "to": "category"
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=args.category.spentMonth > coalesce(args.category.budget, decimal('0')) ? t('overTitle', {'name': args.category.name}) : t('nearTitle', {'name': args.category.name})",
+            "body": "=t('budgetBody', {'spent': formatCurrency(args.category.spentMonth, coalesce(first(q.prefsAll).currency, 'EUR')), 'budget': formatCurrency(coalesce(args.category.budget, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))})",
+            "open": {
+              "route": "budgets"
+            },
+            "tag": "='budget-' + string(args.category.id)",
+            "channel": "budgets"
+          }
+        }
+      ]
+    },
+    "warnTotal": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=coalesce(q.monthSpent.total, decimal('0')) > coalesce(first(q.prefsAll).monthlyBudget, decimal('0')) ? t('totalOverTitle') : t('totalNearTitle')",
+            "body": "=t('budgetBody', {'spent': formatCurrency(coalesce(q.monthSpent.total, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR')), 'budget': formatCurrency(coalesce(first(q.prefsAll).monthlyBudget, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))})",
+            "open": {
+              "route": "budgets"
+            },
+            "tag": "budget-total",
+            "channel": "budgets"
+          }
+        }
+      ]
+    },
+    "remindLog": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=t('spentAnythingToday')",
+            "body": "=t('addItNowIt')",
+            "open": {
+              "route": "add"
+            },
+            "tag": "evening",
+            "channel": "reminders"
+          }
+        }
+      ]
+    },
+    "exportAll": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "history",
+            "sort": ["date"],
+            "fileName": "='expenses-' + string(today()) + '.csv'",
+            "columns": [
+              "date",
+              "kind",
+              "amount",
+              "currency",
+              "category",
+              "account",
+              "toAccount",
+              "toAmount",
+              "baseAmount",
+              "rate",
+              "payee",
+              "note",
+              "tags"
+            ]
+          },
+          "as": "saved"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.saved.saved",
+          "text": "=t('exportedEntries', {'n': coalesce(vars.saved.rows, 0)})"
+        }
+      ]
+    },
+    "exportRange": {
+      "args": {
+        "from": {
+          "type": "date"
+        },
+        "to": {
+          "type": "date"
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "inRange",
+            "queryArgs": {
+              "from": "=args.from",
+              "to": "=args.to"
+            },
+            "sort": ["date"],
+            "fileName": "='expenses-' + string(args.from) + '-to-' + string(args.to) + '.csv'",
+            "columns": [
+              "date",
+              "kind",
+              "amount",
+              "currency",
+              "category",
+              "account",
+              "toAccount",
+              "toAmount",
+              "baseAmount",
+              "rate",
+              "payee",
+              "note",
+              "tags"
+            ]
+          },
+          "as": "saved"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.saved.saved",
+          "text": "=t('exportedEntries', {'n': coalesce(vars.saved.rows, 0)})"
+        }
+      ]
+    },
+    "importCsv": {
+      "args": {
+        "order": {
+          "type": "text"
+        },
+        "since": {
+          "type": "datetime",
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "query",
+          "query": "entryCount",
+          "as": "before"
+        },
+        {
+          "type": "query",
+          "query": "categoryCount",
+          "as": "catsBefore"
+        },
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "importCsv",
+          "args": {
+            "entity": "expense",
+            "createMissing": ["category", "account", "toAccount"],
+            "set": {
+              "srcNew": true
+            },
+            "fields": {
+              "date": {
+                "from": ["Date", "Transaction date", "Booking date", "Dátum"]
+              },
+              "amount": {
+                "from": [
+                  "Amount",
+                  "Sum",
+                  "Value",
+                  "Betrag",
+                  "Suma",
+                  "In main currency",
+                  "Expense amount",
+                  "Income amount"
+                ],
+                "absolute": true
+              },
+              "srcSigned": {
+                "from": ["Amount", "Sum", "Value", "Betrag", "Suma"]
+              },
+              "srcIncomeAmount": {
+                "from": ["Income amount"]
+              },
+              "srcType": {
+                "from": ["Type", "Transaction type", "Income/Expense", "Typ"],
+                "values": {
+                  "Expense": "expense",
+                  "Expenses": "expense",
+                  "Exp.": "expense",
+                  "Spending": "expense",
+                  "Debit": "expense",
+                  "Výdavok": "expense",
+                  "Výdavky": "expense",
+                  "Income": "income",
+                  "Incomes": "income",
+                  "Credit": "income",
+                  "Deposit": "income",
+                  "Príjem": "income",
+                  "Príjmy": "income",
+                  "Transfer": "transfer",
+                  "Transfers": "transfer",
+                  "Prevod": "transfer",
+                  "Transfer-In": "transferIn",
+                  "Transfer in": "transferIn",
+                  "Incoming transfer": "transferIn",
+                  "Transfer-Out": "transferOut",
+                  "Transfer out": "transferOut",
+                  "Outgoing transfer": "transferOut"
+                }
+              },
+              "srcIncome": {
+                "from": ["income"]
+              },
+              "srcTransfer": {
+                "from": ["transfer"]
+              },
+              "category": {
+                "from": ["Category", "Category name", "Kategória"]
+              },
+              "srcSub": {
+                "from": ["Subcategory", "Subcategory name", "Podkategória"]
+              },
+              "account": {
+                "from": ["Account", "Wallet", "Účet"]
+              },
+              "toAccount": {
+                "from": ["To account", "Na účet"]
+              },
+              "toAmount": {
+                "from": ["Amount received", "Prijatá suma"],
+                "absolute": true
+              },
+              "currency": {
+                "from": ["Main currency", "Currency", "Mena"]
+              },
+              "baseAmount": {
+                "from": [
+                  "In main currency",
+                  "V hlavnej mene",
+                  "ref_currency_amount",
+                  "converted amount",
+                  "Amount",
+                  "Sum",
+                  "Value",
+                  "Betrag",
+                  "Suma",
+                  "Expense amount"
+                ],
+                "absolute": true
+              },
+              "rate": {
+                "from": ["Rate", "Kurz"]
+              },
+              "note": {
+                "from": ["Note", "Notes", "Description", "Title", "Memo", "Comment", "Poznámka", "Popis"]
+              },
+              "payee": {
+                "from": ["Payee", "Merchant", "Shop", "Príjemca platby"]
+              },
+              "tags": {
+                "from": ["Tags", "Labels", "Štítky"]
+              }
+            },
+            "dateOrder": "=args.order == 'mdy' ? 'mdy' : 'dmy'",
+            "onError": "skip"
+          },
+          "as": "imported"
+        },
+        {
+          "type": "runAction",
+          "action": "finishImport",
+          "args": {
+            "since": "=args.since"
+          }
+        },
+        {
+          "type": "query",
+          "query": "entryCount",
+          "as": "after"
+        },
+        {
+          "type": "query",
+          "query": "categoryCount",
+          "as": "catsAfter"
+        },
+        {
+          "type": "createRecord",
+          "entity": "importLog",
+          "values": {
+            "at": "=now()",
+            "since": "=args.since",
+            "added": "=coalesce(vars.after.n, 0) - coalesce(vars.before.n, 0)",
+            "skipped": "=vars.imported.skipped",
+            "created": "=coalesce(vars.catsAfter.n, 0) - coalesce(vars.catsBefore.n, 0)",
+            "problems": "=join(take(vars.imported.problems, 12).map(p, t('problemLine', {'row': p.row, 'reason': p.reason})), '\\n')"
+          }
+        }
+      ]
+    },
+    "finishImport": {
+      "args": {
+        "since": {
+          "type": "datetime",
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "query",
+          "query": "prefsAll",
+          "as": "prefs"
+        },
+        {
+          "type": "forEach",
+          "query": "importA",
+          "do": "importKind",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importA",
+          "do": "importKind",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importA",
+          "do": "importKind",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importA",
+          "do": "importKind",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importA",
+          "do": "importKind",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importA",
+          "do": "importKind",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importA",
+          "do": "importKind",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importA",
+          "do": "importKind",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importA",
+          "do": "importKind",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importA",
+          "do": "importKind",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importB",
+          "do": "importSettle",
+          "args": {
+            "row": "=item.id",
+            "main": "=coalesce(first(vars.prefs).currency, 'EUR')",
+            "since": "=args.since"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importB",
+          "do": "importSettle",
+          "args": {
+            "row": "=item.id",
+            "main": "=coalesce(first(vars.prefs).currency, 'EUR')",
+            "since": "=args.since"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importB",
+          "do": "importSettle",
+          "args": {
+            "row": "=item.id",
+            "main": "=coalesce(first(vars.prefs).currency, 'EUR')",
+            "since": "=args.since"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importB",
+          "do": "importSettle",
+          "args": {
+            "row": "=item.id",
+            "main": "=coalesce(first(vars.prefs).currency, 'EUR')",
+            "since": "=args.since"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importB",
+          "do": "importSettle",
+          "args": {
+            "row": "=item.id",
+            "main": "=coalesce(first(vars.prefs).currency, 'EUR')",
+            "since": "=args.since"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importB",
+          "do": "importSettle",
+          "args": {
+            "row": "=item.id",
+            "main": "=coalesce(first(vars.prefs).currency, 'EUR')",
+            "since": "=args.since"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importB",
+          "do": "importSettle",
+          "args": {
+            "row": "=item.id",
+            "main": "=coalesce(first(vars.prefs).currency, 'EUR')",
+            "since": "=args.since"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importB",
+          "do": "importSettle",
+          "args": {
+            "row": "=item.id",
+            "main": "=coalesce(first(vars.prefs).currency, 'EUR')",
+            "since": "=args.since"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importB",
+          "do": "importSettle",
+          "args": {
+            "row": "=item.id",
+            "main": "=coalesce(first(vars.prefs).currency, 'EUR')",
+            "since": "=args.since"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "importB",
+          "do": "importSettle",
+          "args": {
+            "row": "=item.id",
+            "main": "=coalesce(first(vars.prefs).currency, 'EUR')",
+            "since": "=args.since"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "openHalves",
+          "do": "pairHalf",
+          "args": {
+            "row": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "newAccounts",
+          "queryArgs": {
+            "since": "=args.since"
+          },
+          "do": "guessAccountType",
+          "args": {
+            "account": "=item.id"
+          },
+          "max": 200
+        },
+        {
+          "type": "forEach",
+          "query": "newCategories",
+          "queryArgs": {
+            "since": "=args.since"
+          },
+          "do": "settleCategory",
+          "args": {
+            "category": "=item.id"
+          },
+          "max": 500
+        },
+        {
+          "type": "deleteRecords",
+          "entity": "category",
+          "where": "=item.createdAt >= args.since && size(item.expenses) == 0 && size(item.children) == 0 && size(item.recurring) == 0"
+        }
+      ]
+    },
+    "importKind": {
+      "args": {
+        "row": {
+          "type": "ref",
+          "to": "expense"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.row",
+          "set": {
+            "kind": "=args.row.srcTransfer == true || args.row.srcType == 'transfer' || args.row.srcType == 'transferIn' || args.row.srcType == 'transferOut' || startsWith(coalesce(args.row.category.name, ''), \"To '\") || startsWith(coalesce(args.row.category.name, ''), \"From '\") ? 'transfer' : (args.row.srcType == 'income' || (args.row.srcType != 'expense' && (args.row.srcIncome == true || coalesce(args.row.srcIncomeAmount, decimal('0')) > 0 || (args.row.srcType == null && args.row.srcIncome == null && args.row.srcIncomeAmount == null && args.row.account != null && coalesce(args.row.srcSigned, decimal('0')) > 0))) ? 'income' : 'expense')",
+            "srcStep": 1
+          }
+        }
+      ]
+    },
+    "importSettle": {
+      "args": {
+        "row": {
+          "type": "ref",
+          "to": "expense"
+        },
+        "main": {
+          "type": "text"
+        },
+        "since": {
+          "type": "datetime"
+        }
+      },
+      "steps": [
+        {
+          "type": "query",
+          "when": "=has(args.row.srcSub) && args.row.kind != 'transfer'",
+          "query": "catByName",
+          "args": {
+            "name": "=coalesce(args.row.srcSub, '')"
+          },
+          "as": "sub"
+        },
+        {
+          "type": "createRecord",
+          "when": "=has(args.row.srcSub) && args.row.kind != 'transfer' && size(vars.sub) == 0",
+          "entity": "category",
+          "values": {
+            "name": "=args.row.srcSub",
+            "parent": "=args.row.category",
+            "icon": "=coalesce(args.row.category.icon, 'category')",
+            "kind": "=args.row.kind == 'income' ? 'income' : 'expense'"
+          },
+          "as": "newSub"
+        },
+        {
+          "type": "updateRecord",
+          "record": "=args.row",
+          "set": {
+            "category": "=args.row.kind == 'transfer' ? null : (size(vars.sub) > 0 ? first(vars.sub).id : (vars.newSub != null ? vars.newSub.id : args.row.category))",
+            "account": "=args.row.kind == 'transfer' && args.row.toAccount == null && (args.row.srcType == 'transferIn' || args.row.srcType == 'income' || startsWith(coalesce(args.row.category.name, ''), \"From '\") || (args.row.srcType != 'expense' && args.row.srcType != 'transferOut' && coalesce(args.row.srcSigned, decimal('0')) > 0)) ? null : args.row.account",
+            "toAccount": "=args.row.kind == 'transfer' && args.row.toAccount == null && (args.row.srcType == 'transferIn' || args.row.srcType == 'income' || startsWith(coalesce(args.row.category.name, ''), \"From '\") || (args.row.srcType != 'expense' && args.row.srcType != 'transferOut' && coalesce(args.row.srcSigned, decimal('0')) > 0)) ? args.row.account : args.row.toAccount",
+            "srcHalf": "=args.row.kind == 'transfer' && args.row.toAccount == null ? true : null",
+            "currency": "=args.row.currency == args.main ? null : args.row.currency",
+            "baseAmount": "=coalesce(args.row.baseAmount, args.row.amount)",
+            "srcType": "=null",
+            "srcIncome": "=null",
+            "srcTransfer": "=null",
+            "srcSigned": "=null",
+            "srcIncomeAmount": "=null",
+            "srcSub": "=null",
+            "srcNew": "=null",
+            "srcStep": "=null"
+          }
+        }
+      ]
+    },
+    "pairHalf": {
+      "args": {
+        "row": {
+          "type": "ref",
+          "to": "expense"
+        }
+      },
+      "steps": [
+        {
+          "type": "query",
+          "query": "halfIn",
+          "args": {
+            "date": "=args.row.date",
+            "amount": "=args.row.amount",
+            "from": "=string(args.row.account)"
+          },
+          "as": "match"
+        },
+        {
+          "type": "updateRecord",
+          "when": "=size(vars.match) > 0 && first(vars.match).createdAt < args.row.createdAt",
+          "record": "=first(vars.match).id",
+          "set": {
+            "account": "=args.row.account",
+            "srcHalf": "=null"
+          }
+        },
+        {
+          "type": "deleteRecords",
+          "when": "=size(vars.match) > 0 && first(vars.match).createdAt < args.row.createdAt",
+          "entity": "expense",
+          "where": "=item.id == args.row.id"
+        },
+        {
+          "type": "updateRecord",
+          "when": "=size(vars.match) > 0 && first(vars.match).createdAt >= args.row.createdAt",
+          "record": "=args.row",
+          "set": {
+            "toAccount": "=first(vars.match).toAccount",
+            "toAmount": "=first(vars.match).amount",
+            "srcHalf": "=null"
+          }
+        },
+        {
+          "type": "deleteRecords",
+          "when": "=size(vars.match) > 0 && first(vars.match).createdAt >= args.row.createdAt",
+          "entity": "expense",
+          "where": "=item.id == first(vars.match).id"
+        }
+      ]
+    },
+    "guessAccountType": {
+      "args": {
+        "account": {
+          "type": "ref",
+          "to": "account"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.account",
+          "set": {
+            "type": "=lower(args.account.name).contains('cash') || lower(args.account.name).contains('hotovos') || lower(args.account.name).contains('wallet') ? 'cash' : (lower(args.account.name).contains('saving') || lower(args.account.name).contains('spor') ? 'savings' : (lower(args.account.name).contains('credit') || lower(args.account.name).contains('kredit') ? 'card' : 'bank'))"
+          }
+        }
+      ]
+    },
+    "settleCategory": {
+      "args": {
+        "category": {
+          "type": "ref",
+          "to": "category"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "when": "=args.category.expenses.exists(e, e.kind == 'income') && !args.category.expenses.exists(e, e.kind == 'expense')",
+          "record": "=args.category",
+          "set": {
+            "kind": "income"
+          }
+        }
+      ]
+    },
+    "undoImport": {
+      "args": {
+        "since": {
+          "type": "datetime",
+          "required": true
+        },
+        "until": {
+          "type": "datetime",
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "deleteRecords",
+          "entity": "expense",
+          "where": "=item.createdAt >= args.since && item.createdAt <= args.until"
+        },
+        {
+          "type": "deleteRecords",
+          "entity": "category",
+          "where": "=item.createdAt >= args.since && item.createdAt <= args.until && size(item.expenses) == 0 && size(item.children) == 0 && size(item.recurring) == 0"
+        },
+        {
+          "type": "deleteRecords",
+          "entity": "account",
+          "where": "=item.createdAt >= args.since && item.createdAt <= args.until && size(item.entries) == 0 && size(item.arrivals) == 0"
+        }
+      ]
+    },
+    "applyRate": {
+      "args": {
+        "currency": {
+          "type": "text",
+          "required": true
+        },
+        "rate": {
+          "type": "decimal",
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "forEach",
+          "query": "unconverted",
+          "queryArgs": {
+            "currency": "=args.currency"
+          },
+          "do": "convertEntry",
+          "args": {
+            "entry": "=item.id",
+            "rate": "=args.rate"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "unconverted",
+          "queryArgs": {
+            "currency": "=args.currency"
+          },
+          "do": "convertEntry",
+          "args": {
+            "entry": "=item.id",
+            "rate": "=args.rate"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "unconverted",
+          "queryArgs": {
+            "currency": "=args.currency"
+          },
+          "do": "convertEntry",
+          "args": {
+            "entry": "=item.id",
+            "rate": "=args.rate"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "unconverted",
+          "queryArgs": {
+            "currency": "=args.currency"
+          },
+          "do": "convertEntry",
+          "args": {
+            "entry": "=item.id",
+            "rate": "=args.rate"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "unconverted",
+          "queryArgs": {
+            "currency": "=args.currency"
+          },
+          "do": "convertEntry",
+          "args": {
+            "entry": "=item.id",
+            "rate": "=args.rate"
+          },
+          "max": 1000
+        }
+      ]
+    },
+    "convertEntry": {
+      "args": {
+        "entry": {
+          "type": "ref",
+          "to": "expense"
+        },
+        "rate": {
+          "type": "decimal"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.entry",
+          "set": {
+            "rate": "=args.rate",
+            "baseAmount": "=round(coalesce(args.entry.amount, decimal('0')) * coalesce(args.rate, decimal('1')), 2)"
+          }
+        }
+      ]
+    },
+    "moveAccount": {
+      "args": {
+        "from": {
+          "type": "text",
+          "required": true
+        },
+        "to": {
+          "type": "ref",
+          "to": "account"
+        }
+      },
+      "steps": [
+        {
+          "type": "forEach",
+          "query": "inAccount",
+          "queryArgs": {
+            "account": "=args.from"
+          },
+          "do": "setAccount",
+          "args": {
+            "entry": "=item.id",
+            "account": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "inAccount",
+          "queryArgs": {
+            "account": "=args.from"
+          },
+          "do": "setAccount",
+          "args": {
+            "entry": "=item.id",
+            "account": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "inAccount",
+          "queryArgs": {
+            "account": "=args.from"
+          },
+          "do": "setAccount",
+          "args": {
+            "entry": "=item.id",
+            "account": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "inAccount",
+          "queryArgs": {
+            "account": "=args.from"
+          },
+          "do": "setAccount",
+          "args": {
+            "entry": "=item.id",
+            "account": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "inAccount",
+          "queryArgs": {
+            "account": "=args.from"
+          },
+          "do": "setAccount",
+          "args": {
+            "entry": "=item.id",
+            "account": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "intoAccount",
+          "queryArgs": {
+            "account": "=args.from"
+          },
+          "do": "setToAccount",
+          "args": {
+            "entry": "=item.id",
+            "account": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "intoAccount",
+          "queryArgs": {
+            "account": "=args.from"
+          },
+          "do": "setToAccount",
+          "args": {
+            "entry": "=item.id",
+            "account": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "rulesInAccount",
+          "queryArgs": {
+            "account": "=args.from"
+          },
+          "do": "moveRuleAccount",
+          "args": {
+            "rule": "=item.id",
+            "from": "=args.from",
+            "account": "=args.to"
+          },
+          "max": 500
+        }
+      ]
+    },
+    "setToAccount": {
+      "args": {
+        "entry": {
+          "type": "ref",
+          "to": "expense"
+        },
+        "account": {
+          "type": "ref",
+          "to": "account"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.entry",
+          "set": {
+            "toAccount": "=args.account"
+          }
+        }
+      ]
+    },
+    "moveRuleAccount": {
+      "args": {
+        "rule": {
+          "type": "ref",
+          "to": "recurring"
+        },
+        "from": {
+          "type": "text"
+        },
+        "account": {
+          "type": "ref",
+          "to": "account"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.rule",
+          "set": {
+            "account": "=string(args.rule.account) == args.from ? args.account : args.rule.account",
+            "toAccount": "=string(args.rule.toAccount) == args.from ? args.account : args.rule.toAccount"
+          }
+        }
+      ]
+    },
+    "moveCategory": {
+      "args": {
+        "from": {
+          "type": "text",
+          "required": true
+        },
+        "to": {
+          "type": "ref",
+          "to": "category"
+        }
+      },
+      "steps": [
+        {
+          "type": "forEach",
+          "query": "inCategory",
+          "queryArgs": {
+            "category": "=args.from"
+          },
+          "do": "setCategory",
+          "args": {
+            "entry": "=item.id",
+            "category": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "inCategory",
+          "queryArgs": {
+            "category": "=args.from"
+          },
+          "do": "setCategory",
+          "args": {
+            "entry": "=item.id",
+            "category": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "inCategory",
+          "queryArgs": {
+            "category": "=args.from"
+          },
+          "do": "setCategory",
+          "args": {
+            "entry": "=item.id",
+            "category": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "inCategory",
+          "queryArgs": {
+            "category": "=args.from"
+          },
+          "do": "setCategory",
+          "args": {
+            "entry": "=item.id",
+            "category": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "inCategory",
+          "queryArgs": {
+            "category": "=args.from"
+          },
+          "do": "setCategory",
+          "args": {
+            "entry": "=item.id",
+            "category": "=args.to"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "rulesInCategory",
+          "queryArgs": {
+            "category": "=args.from"
+          },
+          "do": "setRuleCategory",
+          "args": {
+            "rule": "=item.id",
+            "category": "=args.to"
+          },
+          "max": 500
+        }
+      ]
+    },
+    "setCategory": {
+      "args": {
+        "entry": {
+          "type": "ref",
+          "to": "expense"
+        },
+        "category": {
+          "type": "ref",
+          "to": "category"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.entry",
+          "set": {
+            "category": "=args.category"
+          }
+        }
+      ]
+    },
+    "setRuleCategory": {
+      "args": {
+        "rule": {
+          "type": "ref",
+          "to": "recurring"
+        },
+        "category": {
+          "type": "ref",
+          "to": "category"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.rule",
+          "set": {
+            "category": "=args.category"
+          }
+        }
+      ]
+    }
+  },
+  "triggers": {
+    "firstRun": {
+      "type": "app",
+      "on": "firstRun",
+      "do": "setUp"
+    },
+    "upgraded": {
+      "type": "app",
+      "on": "updated",
+      "do": "setUp"
+    },
+    "postOnOpen": {
+      "type": "app",
+      "on": "open",
+      "do": "postDue"
+    },
+    "midnight": {
+      "type": "schedule",
+      "rrule": "FREQ=DAILY",
+      "times": ["00:05"],
+      "do": "dailyRun"
+    },
+    "askDaily": {
+      "type": "schedule",
+      "rrule": "FREQ=DAILY",
+      "times": ["09:00"],
+      "when": "=size(q.dueAsk) > 0",
+      "do": "askDue",
+      "maxPerDay": 1
+    },
+    "recurringAdded": {
+      "type": "record",
+      "entity": "expense",
+      "on": ["create"],
+      "when": "=coalesce(first(q.prefsAll).addedNotice, true) && has(item.recurring) && item.recurring.mode == 'auto'",
+      "do": "noticeAdded",
+      "args": {
+        "expense": "=item.id"
+      },
+      "maxPerDay": 3
+    },
+    "budgetCrossed": {
+      "type": "record",
+      "entity": "expense",
+      "on": ["create"],
+      "when": "=item.srcNew != true && coalesce(first(q.prefsAll).budgetAlerts, true) && item.kind == 'expense' && item.date >= startOf(today(), 'month') && item.date <= endOf(today(), 'month') && item.budgetPct > 0 && ((coalesce(item.category.usedPct, decimal('0')) >= coalesce(first(q.prefsAll).warnAt, 80) && coalesce(item.category.usedPct, decimal('0')) - item.budgetPct < coalesce(first(q.prefsAll).warnAt, 80)) || (coalesce(item.category.usedPct, decimal('0')) > 100 && coalesce(item.category.usedPct, decimal('0')) - item.budgetPct <= 100))",
+      "do": "warnBudget",
+      "args": {
+        "category": "=item.category"
+      },
+      "maxPerDay": 4
+    },
+    "parentCrossed": {
+      "type": "record",
+      "entity": "expense",
+      "on": ["create"],
+      "when": "=item.srcNew != true && coalesce(first(q.prefsAll).budgetAlerts, true) && item.kind == 'expense' && item.date >= startOf(today(), 'month') && item.date <= endOf(today(), 'month') && item.parentPct > 0 && ((coalesce(item.category.parent.usedPct, decimal('0')) >= coalesce(first(q.prefsAll).warnAt, 80) && coalesce(item.category.parent.usedPct, decimal('0')) - item.parentPct < coalesce(first(q.prefsAll).warnAt, 80)) || (coalesce(item.category.parent.usedPct, decimal('0')) > 100 && coalesce(item.category.parent.usedPct, decimal('0')) - item.parentPct <= 100))",
+      "do": "warnBudget",
+      "args": {
+        "category": "=item.category.parent"
+      },
+      "maxPerDay": 4
+    },
+    "totalCrossed": {
+      "type": "record",
+      "entity": "expense",
+      "on": ["create"],
+      "when": "=item.srcNew != true && coalesce(first(q.prefsAll).budgetAlerts, true) && item.kind == 'expense' && item.date >= startOf(today(), 'month') && item.date <= endOf(today(), 'month') && coalesce(first(q.prefsAll).monthlyBudget, decimal('0')) > 0 && ((coalesce(q.monthSpent.total, decimal('0')) * 100 >= coalesce(first(q.prefsAll).monthlyBudget, decimal('0')) * coalesce(first(q.prefsAll).warnAt, 80) && (coalesce(q.monthSpent.total, decimal('0')) - coalesce(item.baseAmount, item.amount)) * 100 < coalesce(first(q.prefsAll).monthlyBudget, decimal('0')) * coalesce(first(q.prefsAll).warnAt, 80)) || (coalesce(q.monthSpent.total, decimal('0')) > coalesce(first(q.prefsAll).monthlyBudget, decimal('0')) && coalesce(q.monthSpent.total, decimal('0')) - coalesce(item.baseAmount, item.amount) <= coalesce(first(q.prefsAll).monthlyBudget, decimal('0'))))",
+      "do": "warnTotal",
+      "maxPerDay": 2
+    },
+    "evening": {
+      "type": "recordSchedule",
+      "entity": "prefs",
+      "rrule": "='FREQ=DAILY'",
+      "time": "=coalesce(item.remindAt, time('20:00'))",
+      "when": "=item.remindDaily && coalesce(q.todayCount.n, 0) == 0",
+      "do": "remindLog",
+      "maxPerDay": 1
+    }
+  },
+  "widgets": {
+    "safeWidget": {
+      "template": "stat",
+      "title": "@safeToday",
+      "sizes": ["small", "medium"],
+      "value": "=coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) <= 0 ? t('safeNone') : formatCurrency(max(round((coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) - coalesce(q.spentOtherDays.total, decimal('0'))) / (daysBetween(today(), endOf(today(), 'month')) + 1), 2), decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))",
+      "caption": "=coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) <= 0 ? t('safeSetBudget') : (coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) >= coalesce(q.monthSpent.total, decimal('0')) ? t('safeLeft', {'today': formatCurrency(coalesce(q.spentToday.total, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR')), 'left': formatCurrency(coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')) - coalesce(q.monthSpent.total, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))}) : t('safeOver', {'over': formatCurrency(coalesce(q.monthSpent.total, decimal('0')) - coalesce(first(q.prefsAll).monthlyBudget, q.topBudgets.total, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))}))",
+      "icon": "savings",
+      "open": "home"
+    },
+    "monthWidget": {
+      "template": "stat",
+      "title": "@spentThisMonth2",
+      "sizes": ["small", "medium"],
+      "value": "=formatCurrency(coalesce(q.monthSpent.total, decimal('0')), coalesce(first(q.prefsAll).currency, 'EUR'))",
+      "caption": "=t('nExpenses', {'n': coalesce(q.monthSpent.n, 0)})",
+      "icon": "receipt_long",
+      "open": "home"
+    }
+  },
+  "migrations": [
+    {
+      "from": "<3.0.0",
+      "steps": [
+        {
+          "op": "deleteField",
+          "entity": "expense",
+          "field": "chartAmount"
+        }
+      ]
+    },
+    {
+      "from": "<4.0.0",
+      "steps": [
+        {
+          "op": "backfill",
+          "entity": "expense",
+          "field": "kind",
+          "value": "expense"
+        },
+        {
+          "op": "backfill",
+          "entity": "expense",
+          "field": "baseAmount",
+          "value": "=item.amount"
+        },
+        {
+          "op": "deleteField",
+          "entity": "expense",
+          "field": "payment"
+        },
+        {
+          "op": "deleteField",
+          "entity": "expense",
+          "field": "receipt"
+        },
+        {
+          "op": "deleteField",
+          "entity": "recurring",
+          "field": "payment"
+        },
+        {
+          "op": "backfill",
+          "entity": "category",
+          "field": "kind",
+          "value": "expense"
+        },
+        {
+          "op": "backfill",
+          "entity": "category",
+          "field": "archived",
+          "value": false
+        },
+        {
+          "op": "backfill",
+          "entity": "recurring",
+          "field": "kind",
+          "value": "expense"
+        },
+        {
+          "op": "backfill",
+          "entity": "recurring",
+          "field": "isSubscription",
+          "value": false
+        }
+      ]
+    }
+  ]
+}

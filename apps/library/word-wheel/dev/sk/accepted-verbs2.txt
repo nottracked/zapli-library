@@ -1,0 +1,27 @@
+# Accepted words, verbs in the infinitive (without sa or si): short prefixed verbs and more everyday verbs.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+# with prefixes
+zomlieť umlieť pomlieť namlieť natrieť zotrieť otrieť potrieť vytrieť udrieť odrieť zodrieť
+vymrieť zovrieť vyvrieť zožať požať utkať vytkať pretkať vysať nasať odsať prisať vyhnať
+zahnať odohnať prihnať dohnať prehnať pohnať zohnať nahnať uhnať vyzvať nazvať ozvať prizvať
+zaorať vyorať poorať preorať rozorať doorať vykuť ukuť prikuť skuť okuť nadúť vydúť zadúť
+zavyť zaviať odviať vyviať naviať priviať rozviať oviať zohriať ohriať nahriať zahriať
+vyhriať spáliť vypáliť opáliť popáliť dopáliť odpáliť napáliť vysekať posekať nasekať
+odsekať osekať zhrabať upliesť spliesť striasť otriasť ohrýzť nahrýzť pohrýzť požuť prežuť
+zhniť vylákať nalákať zlákať ulapiť skvasiť podojiť vydojiť spásť vypásť popásť napásť
+prepásť umučiť vylúčiť zlúčiť odlúčiť skopnúť zoťať odťať sťať vyťať preťať zaťať naťať
+zajať odňať vyňať sňať zaujať pojať najať ujať dojať počať zohnúť prehnúť vyhnúť uhnúť
+zahnúť odhnúť nahnúť zatknúť posadiť vysadiť zasadiť nasadiť odsadiť usadiť zameniť
+obmeniť vynosiť donosiť unosiť vyvoziť dovoziť odvoziť zvoziť navoziť uhodiť uchytiť
+šepnúť kývnuť zakývať mávnuť zamávať štipnúť hryznúť olízať vylízať zlízať zafúkať
+sfúknuť vziať vyzuť zlepšiť zdržať zlyhať
+
+# without prefixes
+cicať civieť cvakať čarovať činiť čmárať čudovať čumieť dlabať dláviť dlhovať dopĺňať
+dráždiť drať drobiť dupotať fičať frčať hlásiť hlodať hmatať hnisať hodovať hostiť hovieť
+hrdúsiť hrkotať hroziť hútať hýriť chrčať kajať kaliť kapať kliať konať kotviť kovať krčiť
+krstiť kúsať lebediť leštiť mačkať márniť mastiť metať mieriť modliť moriť mrhať nechať
+núkať obávať planúť plašiť plátať plodiť plynúť počúvať pražiť revať rvať rýpať slabnúť
+slepnúť soliť sporiť stierať studiť svrbieť škúliť špiniť tasiť tiahnuť tvrdiť unášať
+valiť vítať vládnuť vznikať zdieľať

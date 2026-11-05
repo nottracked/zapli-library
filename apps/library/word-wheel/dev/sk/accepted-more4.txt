@@ -1,0 +1,8 @@
+# Accepted words: more short nouns, adjectives and adverbs.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+lup vrh vrt dril fáma fúga jasle kápia klan kója krám mafia mamut nárez panva parno ríza
+róba tiara žezlo žreb
+snaživý nešikovný nemotorný neohrabaný príšerný hnusný odporný nechutný lahodný výdatný
+drahocenný zreteľný nejasný vážený milovaný žalostný nádejný beznádejný nepokojný
+hlasitý spevavý zamestnaný nevďačný

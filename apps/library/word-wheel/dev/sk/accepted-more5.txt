@@ -1,0 +1,16 @@
+# Accepted words: more verbs, people, beings of tales and places.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+# verbs
+vniesť obliezť vytrhať natrhať potrhať otrhať strhnúť pochytať nachytať ošúpať olúpať zvedieť
+zazrieť uzrieť vypočuť pocítiť vycítiť zavoňať uschnúť vyschnúť zaschnúť oschnúť zmoknúť
+skysnúť zahynúť vyhynúť skĺznuť smrkať vypľuť napľuť opľuť vrtieť farbiť lakovať vyšívať
+priasť údiť koreniť sladiť vynášať
+
+# people
+kravár koniar husár drotár kožiar maskér trubač sólista editor majiteľ darca kuriér taxikár
+tulák klamár učenec veštec veštica čarodej vlkolak rusalka diabol svätica apoštol bežkyňa
+bohyňa tkáčka
+
+# places
+kotolňa ohnisko ohrada výbeh senník humno sýpka

@@ -1,0 +1,74 @@
+{
+  "id": "library/patience",
+  "category": "game_card",
+  "replaces": "pyramid, golf and peaks solitaire",
+  "title": "Patience",
+  "summary": "Pyramid, Golf and Peaks with big cards, daily deals and an honest winnable light",
+  "description": "**Patience** holds three classic patience games with big cards that are easy to read: Pyramid, Golf and Peaks. No ads between games, no account, no tracking.\n\n**Three games, one tap away**\n\n- Pyramid: take away pairs of free cards that add up to 13; a king goes alone. Go through the stock once, three times or as often as you like.\n- Golf: play the uncovered card of any of seven columns onto the waste, one higher or one lower, whatever the suit. Choose what may go on a king.\n- Peaks: clear three peaks of cards, one higher or one lower, and see how long a run you can play before you turn the stock. Kings and aces may follow each other, and you can deal every card face up for a calmer puzzle.\n- The start screen shows each game's table as it stands, and each of the three keeps its game in progress for you.\n\n**Know where you stand**\n\n- A calm light beside the move count stays green while the deal can still be won. When a move makes a win impossible, it turns amber, and one tap takes you back to the last position that can still be won.\n- The answer comes from a solver that tries every way to play from where you are, the order of the stock included, so \"can no longer be won\" is exact. If a position ever needs more time than the solver has, the light says it is not sure instead.\n- Honest hints: Hint shows the next move of a real way to win, never just any move that fits.\n- When nothing is left to play, the game says so calmly and offers Undo, the same deal again or a new one.\n\n**Deals**\n\n- Winnable deals by default: the solver has won every one of them. Prefer pure chance? Choose any deal.\n- A daily deal for each game, the same on every phone with the same rules, with a calendar of the days you solved and how many in a row. Days you missed this month and last month can still be played, and nothing nags you.\n\n**Easy to play**\n\n- Tap a card to play it; in Pyramid, tap two cards that make 13. Dragging and the keyboard work too.\n- Undo as many moves as you like. Once the rest can be cleared without the stock, it plays out by itself (you can switch that off).\n- A short guide for each game: the goal and the rules in 15 seconds, with small pictures, then the details.\n\n**Cards you can read**\n\n- Three card sizes; until you choose, the game picks the size that matches your phone's text size.\n- Bold, drawn ranks and suits that a large text setting never cuts off, a four-colour deck and a high-contrast switch.\n- Two card styles, six card shapes, eight card backs and six tables, all open from the start. Turn the phone sideways and the stock moves to the side, so the cards grow.\n\n**Your games and your numbers**\n\n- Every game in progress, your settings and your statistics are saved after every move, Undo included. Inside the app they are part of the app's own data.\n- Statistics for each game: games played and won, win rate, best time, fewest moves, the current and longest winning streak, the longest run in Peaks and the daily deals solved.\n\n**Easy to use**\n\n- Light and dark, English or Slovak, screen-reader labels for every card, and a short vibration you can turn off. The win celebration stays still when your phone asks for reduced motion.\n\n**What it never does**\n\n- No ads, no in-app purchases, no coins, no lives and no hints to buy.\n- No level maps and no timers that push you.\n- No account and no sign-in.\n- No internet access: the games work offline and cannot connect anywhere.\n- No analytics or tracking of any kind.",
+  "license": "GPL-3.0-or-later",
+  "tags": [
+    "solitaire",
+    "patience",
+    "pyramid",
+    "golf",
+    "card game",
+    "large cards",
+    "daily deal",
+    "winnable deals",
+    "offline",
+    "no ads"
+  ],
+  "research": [
+    {
+      "source": "https://en.wikipedia.org/wiki/Pyramid_(solitaire)",
+      "used_for": "The rules of Pyramid (seven rows of 28 cards, pairs of free cards that make 13, kings alone, the stock and waste, clearing only the pyramid as the usual goal, redeals as a common variant) and that the strictest rules win about one deal in fifty"
+    },
+    {
+      "source": "https://en.wikipedia.org/wiki/Golf_(patience)",
+      "used_for": "The rules of Golf (seven columns of five, 16 cards in the stock, one higher or lower regardless of suit, nothing on a king and no wrapping in the strict game) and its variants: a queen on a king, and kings and aces following each other"
+    },
+    {
+      "source": "https://en.wikipedia.org/wiki/Tri_Peaks_(game)",
+      "used_for": "The rules of the three-peaks game (three face-down peaks over an open row of ten, a stock of 23 and one waste card, one higher or lower, cards turning over when uncovered), its variants (all cards face up) and that over 90 % of deals can be won; the game is called Peaks here"
+    },
+    {
+      "source": "https://solitaire.com/tripeaks-solitaire/",
+      "used_for": "Read through a search summary: that kings and aces following each other is the usual rule of the three-peaks game, and that runs (cards played in a row before turning the stock) are what players chase"
+    },
+    {
+      "source": "https://apps.apple.com/us/app/id1400904615?l=en-us",
+      "used_for": "Read through a search summary: features expected of pyramid apps, such as going through the deck again, daily challenges, unlimited undo and hints, and deals with a known solution"
+    },
+    {
+      "source": "https://appgoblin.info/apps/com.mobilityware.GolfSolitaire",
+      "used_for": "Read through a search summary: features of golf and peaks apps (daily challenges, endless play, themes) and that removing ads and future daily challenges sit behind a subscription"
+    },
+    {
+      "source": "https://apps.appfollow.io/ios/solitaire-card-game/594007249?country=us",
+      "used_for": "Read through a search summary: the most common complaints about card patience apps are intrusive ads during and after games and hints or undo held back for payment"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/01-picker-light.png",
+      "caption": "Pyramid, Golf and Peaks, each with its own daily deal",
+      "theme": "light",
+      "sha256": "b5712c7516526c7b98972fdf896764f8c75a068bd155600ebaf6e58f6f2804c7",
+      "size": 561034
+    },
+    {
+      "file": "screenshots/02-pyramid-light.png",
+      "caption": "Pyramid, with the light that tells you the deal can still be won",
+      "theme": "light",
+      "sha256": "8dbe55624f9f8ce73122b540c83efaa2a2fcb238929f4ec7d957f1b335308c1e",
+      "size": 416871
+    },
+    {
+      "file": "screenshots/03-peaks-light.png",
+      "caption": "Peaks on big cards, fanned so they fit an upright phone",
+      "theme": "light",
+      "sha256": "398bf3e1a8f867a0c8996d9c8a994394a13ce8e531dddd5b76ca478f08008371",
+      "size": 382676
+    }
+  ]
+}

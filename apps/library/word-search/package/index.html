@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="color-scheme" content="light dark" />
+        <title>Word Search</title>
+        <link rel="stylesheet" href="css/app.css" />
+        <script type="module" src="js/main.mjs"></script>
+    </head>
+    <body>
+        <svg class="sprite" aria-hidden="true">
+            <symbol id="i-daily" viewBox="0 0 24 24">
+                <rect x="4" y="5" width="16" height="15" rx="2" />
+                <path d="M4 10h16M9 3v4M15 3v4" />
+                <path d="m9.5 15 2 2 3.5-4" />
+            </symbol>
+            <symbol id="i-themes" viewBox="0 0 24 24">
+                <rect x="4" y="4" width="7" height="7" rx="2" />
+                <rect x="13" y="4" width="7" height="7" rx="2" />
+                <rect x="4" y="13" width="7" height="7" rx="2" />
+                <path d="m14 16.5 2 2 3.5-4" />
+            </symbol>
+            <symbol id="i-stats" viewBox="0 0 24 24">
+                <path d="M5 20V11M12 20V5M19 20v-6" />
+            </symbol>
+            <symbol id="i-help" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6" />
+                <path d="M12 17.2v.1" />
+            </symbol>
+            <symbol id="i-settings" viewBox="0 0 24 24">
+                <path d="M4 7h9M17 7h3M4 17h3M11 17h9" />
+                <circle cx="15" cy="7" r="2" />
+                <circle cx="9" cy="17" r="2" />
+            </symbol>
+            <symbol id="i-hint" viewBox="0 0 24 24">
+                <path d="M9 18h6M10 21h4" />
+                <path d="M12 3a6 6 0 0 0-3.5 10.9c.7.5 1 1.2 1 2.1h5c0-.9.3-1.6 1-2.1A6 6 0 0 0 12 3Z" />
+            </symbol>
+            <symbol id="i-prev" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7" /></symbol>
+            <symbol id="i-next" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></symbol>
+            <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></symbol>
+            <symbol id="i-down" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></symbol>
+            <symbol id="i-globe" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3Z" />
+                <path d="M3.6 9h16.8M3.6 15h16.8" />
+            </symbol>
+            <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></symbol>
+            <symbol id="i-letter" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8.5" />
+                <path d="m9 16 3-8 3 8M10 13.5h4" />
+            </symbol>
+            <symbol id="i-where" viewBox="0 0 24 24">
+                <rect x="3" y="8" width="18" height="8" rx="4" stroke-dasharray="3 2.4" />
+                <path d="M8 12h8" />
+            </symbol>
+        </svg>
+        <span id="tz-probe" aria-hidden="true">M</span>
+
+        <div class="app" id="app">
+            <header class="band top">
+                <h1 class="brand" data-t="appName">Word Search</h1>
+                <button type="button" class="lang-btn" id="btn-lang" aria-haspopup="dialog">
+                    <svg class="ico globe" aria-hidden="true"><use href="#i-globe" /></svg
+                    ><span class="lang-code" id="lang-code">EN</span
+                    ><svg class="ico chev" aria-hidden="true"><use href="#i-down" /></svg>
+                </button>
+                <div class="tools">
+                    <button type="button" class="icon-btn" id="btn-stats" data-t-label="statistics">
+                        <svg class="ico" aria-hidden="true"><use href="#i-stats" /></svg>
+                    </button>
+                    <button type="button" class="icon-btn" id="btn-help" data-t-label="howToPlay">
+                        <svg class="ico" aria-hidden="true"><use href="#i-help" /></svg>
+                    </button>
+                    <button type="button" class="icon-btn" id="btn-settings" data-t-label="settings">
+                        <svg class="ico" aria-hidden="true"><use href="#i-settings" /></svg>
+                    </button>
+                </div>
+            </header>
+
+            <main class="play" id="play">
+                <div class="status" id="status">
+                    <div class="title-block">
+                        <h2 class="theme-name" id="theme-name"></h2>
+                        <p class="mode" id="mode-label"></p>
+                    </div>
+                    <div class="status-side">
+                        <span class="nums"
+                            ><span class="clock" id="clock" hidden></span><span class="progress" id="progress"></span
+                        ></span>
+                        <button type="button" class="chip" id="btn-switch"></button>
+                    </div>
+                </div>
+
+                <div class="board-wrap" id="board-wrap">
+                    <div class="frame">
+                        <div class="board" id="board" tabindex="0" role="application">
+                            <svg class="caps" aria-hidden="true" focusable="false"></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feedback" id="feedback">
+                    <p class="notice probe" id="notice-probe" aria-hidden="true">M<br />M</p>
+                    <div class="notice-row">
+                        <p id="notice" class="notice" role="status" aria-live="polite"></p>
+                        <button type="button" class="btn small" id="btn-undo" hidden data-t="undo">Undo</button>
+                    </div>
+                    <button type="button" class="first-help" id="first-help" hidden>
+                        <svg class="ico" aria-hidden="true"><use href="#i-help" /></svg
+                        ><span data-t="firstHelp">New here? How to play in 15 seconds</span>
+                    </button>
+                </div>
+
+                <div id="ask" class="ask" role="group" aria-labelledby="ask-word" hidden>
+                    <span class="ask-word" id="ask-word"></span>
+                    <span class="ask-buttons">
+                        <button type="button" class="btn small" id="ask-first">
+                            <svg class="ico" aria-hidden="true"><use href="#i-letter" /></svg
+                            ><span data-t="hintFirstBtn">First letter</span>
+                        </button>
+                        <button type="button" class="btn small" id="ask-where">
+                            <svg class="ico" aria-hidden="true"><use href="#i-where" /></svg
+                            ><span data-t="hintWhereBtn">Show where</span>
+                        </button>
+                        <button type="button" class="icon-btn quiet" id="ask-cancel" data-t-label="cancel">
+                            <svg class="ico" aria-hidden="true"><use href="#i-close" /></svg>
+                        </button>
+                    </span>
+                </div>
+
+                <div class="below" id="below">
+                    <section class="words" id="words" aria-labelledby="words-title">
+                        <h3 class="sr-only" id="words-title" data-t="wordsToFind">Words to find</h3>
+                        <ul class="word-list" id="word-list"></ul>
+                        <p class="message-line" id="message-line" hidden></p>
+                    </section>
+
+                    <section class="solved" id="solved" hidden aria-labelledby="solved-title">
+                        <div class="solved-head">
+                            <span class="seal" aria-hidden="true"
+                                ><svg class="ico"><use href="#i-check" /></svg
+                            ></span>
+                            <h3 id="solved-title"></h3>
+                        </div>
+                        <div class="reveal" id="reveal" hidden>
+                            <p class="reveal-label" data-t="hiddenMessage">Hidden message</p>
+                            <p class="reveal-text" id="reveal-text"></p>
+                        </div>
+                        <p class="facts" id="solved-facts"></p>
+                        <div class="collect" id="solved-collect">
+                            <p id="solved-collect-text"></p>
+                            <span class="bar" aria-hidden="true"><span id="solved-bar"></span></span>
+                        </div>
+                        <div class="solved-actions">
+                            <button type="button" class="btn" id="btn-again"></button>
+                            <button type="button" class="btn primary" id="btn-next"></button>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="failed" class="failed" hidden>
+                    <p data-t="makeFailed">This puzzle could not be made.</p>
+                    <button type="button" class="btn primary" id="btn-retry" data-t="tryAnother">
+                        Try another theme
+                    </button>
+                </div>
+            </main>
+
+            <nav class="band bottom toolbar" data-t-label="toolbar">
+                <button type="button" class="tool" id="btn-daily">
+                    <span class="ico-wrap"
+                        ><svg class="ico" aria-hidden="true"><use href="#i-daily" /></svg
+                        ><span class="dot" id="daily-dot" hidden></span></span
+                    ><span data-t="daily">Daily</span>
+                </button>
+                <button type="button" class="tool hint-tool" id="btn-hint">
+                    <svg class="ico" aria-hidden="true"><use href="#i-hint" /></svg><span data-t="hint">Hint</span>
+                </button>
+                <button type="button" class="tool" id="btn-themes">
+                    <svg class="ico" aria-hidden="true"><use href="#i-themes" /></svg
+                    ><span data-t="themes">Themes</span>
+                </button>
+            </nav>
+        </div>
+
+        <dialog id="dlg-lang" class="pop" aria-labelledby="lang-title">
+            <div class="pop-in">
+                <h2 class="pop-title" id="lang-title" data-t="langTitle">Word language</h2>
+                <div class="lang-rows" id="lang-rows">
+                    <button type="button" class="lang-row" data-lang="sk">
+                        <span lang="sk">Slovenčina</span>
+                        <svg class="ico tick" aria-hidden="true"><use href="#i-check" /></svg>
+                    </button>
+                    <button type="button" class="lang-row" data-lang="en">
+                        <span lang="en">English</span>
+                        <svg class="ico tick" aria-hidden="true"><use href="#i-check" /></svg>
+                    </button>
+                </div>
+                <p class="pop-note" data-t="langKept">Your puzzle in each language is kept.</p>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-daily" aria-labelledby="daily-title">
+            <div class="dlg-head"><h2 id="daily-title" data-t="dailyTitle">Daily puzzle</h2></div>
+            <div class="dlg-body">
+                <p class="muted" data-t="dailyIntro"></p>
+                <div class="streak" id="streak"></div>
+                <div class="cal-head">
+                    <button type="button" class="icon-btn cal-nav" id="cal-prev" data-t-label="prevMonth">
+                        <svg class="ico" aria-hidden="true"><use href="#i-prev" /></svg>
+                    </button>
+                    <h3 id="cal-month" aria-live="polite"></h3>
+                    <button type="button" class="icon-btn cal-nav" id="cal-next" data-t-label="nextMonth">
+                        <svg class="ico" aria-hidden="true"><use href="#i-next" /></svg>
+                    </button>
+                </div>
+                <div class="cal" id="cal"></div>
+                <p class="note" id="cal-count"></p>
+            </div>
+            <div class="dlg-foot">
+                <button type="button" class="btn" id="daily-close" data-t="close">Close</button>
+                <button type="button" class="btn primary" id="daily-play" data-t="playToday">
+                    Play today's puzzle
+                </button>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-themes" class="sheet" aria-labelledby="themes-title">
+            <div class="sheet-head">
+                <h2 id="themes-title"><span data-t="themes">Themes</span></h2>
+                <button type="button" class="btn primary" id="themes-done" data-t="done">Done</button>
+            </div>
+            <div class="sheet-body">
+                <p class="collection-sum" id="themes-sum"></p>
+                <p class="muted" data-t="themesIntro"></p>
+                <ul class="theme-cards" id="theme-cards"></ul>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-stats" aria-labelledby="stats-title">
+            <div class="dlg-head"><h2 id="stats-title" data-t="statistics">Statistics</h2></div>
+            <div class="dlg-body">
+                <table class="stats">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <th scope="col" data-t="colSk">Slovak</th>
+                            <th scope="col" data-t="colEn">English</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stats-body"></tbody>
+                </table>
+                <p class="muted" data-t="statsNote"></p>
+            </div>
+            <div class="dlg-foot">
+                <button type="button" class="btn primary" id="stats-done" data-t="done">Done</button>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-help" aria-labelledby="help-title">
+            <div class="dlg-head"><h2 id="help-title" data-t="howToPlay">How to play</h2></div>
+            <div class="dlg-body">
+                <section class="tldr" aria-labelledby="tldr-title">
+                    <h3 id="tldr-title" data-t="tldrTitle">In 15 seconds</h3>
+                    <p><b data-t="goalLabel">Goal:</b> <span data-t="tldrGoal"></span></p>
+                    <ul>
+                        <li data-t="tldr1"></li>
+                        <li data-t="tldr2"></li>
+                        <li data-t="tldr3"></li>
+                    </ul>
+                    <p class="tip"><b data-t="tipLabel">Tip:</b> <span data-t="tldrTip"></span></p>
+                </section>
+                <h3 class="details" data-t="helpDetails">The details</h3>
+                <p data-t="helpGoal"></p>
+                <h3 data-t="helpSelect"></h3>
+                <p data-t="helpSelect1"></p>
+                <p data-t="helpSelect2"></p>
+                <h3 data-t="helpDirections"></h3>
+                <p data-t="helpDirections1"></p>
+                <h3 data-t="helpMessage"></h3>
+                <p data-t="helpMessage1"></p>
+                <h3 data-t="helpHints"></h3>
+                <p data-t="helpHints1"></p>
+                <p data-t="helpHints2"></p>
+                <h3 data-t="helpDaily"></h3>
+                <p data-t="helpDaily1"></p>
+                <h3 data-t="helpThemes"></h3>
+                <p data-t="helpThemes1"></p>
+                <h3 data-t="helpSk"></h3>
+                <p data-t="helpSk1"></p>
+                <h3 data-t="helpKeys"></h3>
+                <p data-t="helpKeys1"></p>
+                <p class="muted" data-t="storageNote"></p>
+            </div>
+            <div class="dlg-foot">
+                <button type="button" class="btn primary" id="help-done" data-t="done">Done</button>
+            </div>
+        </dialog>
+
+        <dialog id="dlg-settings" class="sheet" aria-labelledby="settings-title">
+            <div class="sheet-head">
+                <h2 id="settings-title" data-t="settings">Settings</h2>
+                <button type="button" class="btn primary" id="settings-done" data-t="done">Done</button>
+            </div>
+            <div class="sheet-body">
+                <fieldset>
+                    <legend data-t="wordsLang">Language of the words</legend>
+                    <div class="seg">
+                        <label><input type="radio" name="words" value="sk" /><span>Slovenčina</span></label>
+                        <label><input type="radio" name="words" value="en" /><span>English</span></label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend data-t="difficulty">Difficulty</legend>
+                    <div class="seg two-rows">
+                        <label
+                            ><input type="radio" name="difficulty" value="grow" /><span data-t="diffGrow"
+                                >Growing</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="difficulty" value="easy" /><span data-t="diffEasy"
+                                >Easy</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="difficulty" value="medium" /><span data-t="diffMedium"
+                                >Medium</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="difficulty" value="hard" /><span data-t="diffHard"
+                                >Hard</span
+                            ></label
+                        >
+                    </div>
+                    <p class="note" id="difficulty-note"></p>
+                </fieldset>
+                <label class="opt">
+                    <span
+                        ><span class="opt-title" data-t="optMessage">Hidden message</span
+                        ><span class="note" data-t="optMessageNote"></span
+                    ></span>
+                    <input type="checkbox" class="switch" id="opt-message" />
+                </label>
+                <label class="opt">
+                    <span
+                        ><span class="opt-title" data-t="optTimer">Timer</span
+                        ><span class="note" data-t="optTimerNote"></span
+                    ></span>
+                    <input type="checkbox" class="switch" id="opt-timer" />
+                </label>
+                <fieldset>
+                    <legend data-t="letterSize">Letter size</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="letters" value="normal" /><span data-t="sizeNormal"
+                                >Normal</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="letters" value="large" /><span data-t="sizeLarge"
+                                >Large</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="letters" value="largest" /><span data-t="sizeLargest"
+                                >Largest</span
+                            ></label
+                        >
+                    </div>
+                    <p class="note" data-t="sizeNote"></p>
+                </fieldset>
+                <label class="opt" id="opt-vibration-row">
+                    <span
+                        ><span class="opt-title" data-t="vibration">Vibration</span
+                        ><span class="note" data-t="vibrationNote"></span
+                    ></span>
+                    <input type="checkbox" class="switch" id="opt-vibration" />
+                </label>
+                <label class="opt"
+                    ><span
+                        ><span class="opt-title" data-t="contrast">High contrast</span
+                        ><span class="note" data-t="contrastNote"></span
+                    ></span>
+                    <input type="checkbox" class="switch" id="opt-contrast" />
+                </label>
+                <fieldset>
+                    <legend data-t="theme">Light or dark</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="theme" value="device" /><span data-t="themeDevice"
+                                >Like the phone</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="theme" value="light" /><span data-t="themeLight"
+                                >Light</span
+                            ></label
+                        >
+                        <label
+                            ><input type="radio" name="theme" value="dark" /><span data-t="themeDark">Dark</span></label
+                        >
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend data-t="language">Language of the game</legend>
+                    <div class="seg">
+                        <label
+                            ><input type="radio" name="ui" value="auto" /><span data-t="langAuto"
+                                >Automatic</span
+                            ></label
+                        >
+                        <label><input type="radio" name="ui" value="sk" /><span>Slovenčina</span></label>
+                        <label><input type="radio" name="ui" value="en" /><span>English</span></label>
+                    </div>
+                </fieldset>
+                <p class="muted" data-t="storageNote"></p>
+            </div>
+        </dialog>
+
+        <div id="sr" class="sr-only" aria-live="polite"></div>
+    </body>
+</html>

@@ -11,22 +11,30 @@
     {
       "file": "screenshots/01-today-light.png",
       "caption": "Today: overdue, due today and done, with priorities and repeats",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "974f05de38444b94340eb0d872b7eca38d10c896ff27af8d09697c6cbe1b6298",
+      "size": 174765
     },
     {
       "file": "screenshots/02-task-detail-light.png",
       "caption": "A task with its list, due time, priority, notes and steps",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "a615a419073551c8561d5a79e1fc06737d3586f4e1e50ddb7456a821b128c67a",
+      "size": 144385
     },
     {
       "file": "screenshots/03-progress-light.png",
       "caption": "Progress: today as a ring, this week, streak and a 14-day chart",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "3fb1b9f9134fc521b74bda5989ca89d07011e1ad6dcf4710edc896fcba9466c1",
+      "size": 108938
     },
     {
       "file": "screenshots/04-today-dark.png",
       "caption": "Today in the dark theme",
-      "theme": "dark"
+      "theme": "dark",
+      "sha256": "4f16ab497127a1089c8349066ee11553cb7a1392b4b332e8fa7da186d2f97b71",
+      "size": 158746
     }
   ],
   "sampleData": {

@@ -1,0 +1,24 @@
+# Answer words: more everyday nouns, verbs and adjectives.
+# Hand-written for this list (CC0 1.0). Base forms as in the other answer files.
+
+# nouns
+nájom nábytok kúrenie smeti suvenír príbor kredenc chlebník fľaška servítka korenička
+soľnička mixér hriankovač porcia príloha predjedlo dezert zákusok pracka výstrih manžeta
+rúško závoj pršiplášť nozdra slezina žlčník holeň malíček prstenník prostredník
+ukazovák lúčka bučina dúbrava smrečina ihličie lístie konárik kamenivo štrk kremeň
+vápenec pieskovec rašelina humus bahno kal duna kaňon delta ústie bystrina kaskáda pleso
+tajch mokraď pasienok medza brázda agent alarm anketa atrament azyl baránok blok box
+bufet cent centimeter cigareta čaša čakáreň čerpadlo čitáreň defekt disk expres guľka
+horolezec hrášok internát kabína katalóg
+
+# verbs
+baviť bodať cediť dariť diviť dláždiť dotknúť drviť fajčiť hojdať chápať chváliť chystať
+kradnúť lámať ľutovať ručiť slúžiť strácať šplhať trápiť trvať tušiť visieť znieť želať
+žiadať
+
+# adjectives
+slovenský český nemecký maďarský poľský taliansky francúzsky ruský španielsky anglický
+európsky americký svätý vianočný veľkonočný snehový dažďový kvetinový ovocný
+zeleninový mäsový syrový chlebový jablkový jahodový malinový čerešňový orechový makový
+tvarohový zemiakový kapustový fazuľový bravčový hovädzí teľací baraní jahňací kačací
+husací kravský

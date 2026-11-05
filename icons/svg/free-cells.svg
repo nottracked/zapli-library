@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Free Cells: four free cells; three wait empty, one holds a card with a big red heart. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3A7487"/>
+      <stop offset="1" stop-color="#275566"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <rect x="47.5" y="31.5" width="41" height="57" rx="11" fill="none" stroke="#FFF" stroke-opacity="0.6" stroke-width="7"/>
+  <rect x="47.5" y="103.5" width="41" height="57" rx="11" fill="none" stroke="#FFF" stroke-opacity="0.6" stroke-width="7"/>
+  <rect x="103.5" y="103.5" width="41" height="57" rx="11" fill="none" stroke="#FFF" stroke-opacity="0.6" stroke-width="7"/>
+  <rect x="96" y="36" width="56" height="72" rx="13" fill="#000" fill-opacity="0.2"/>
+  <rect x="96" y="28" width="56" height="72" rx="13" fill="#FFF"/>
+  <path fill="#E2333B" d="M124 87 C114 79 104 71 104 59 C104 51 110 46 116 46 C120 46 123 48 124 52 C125 48 128 46 132 46 C138 46 144 51 144 59 C144 71 134 79 124 87 Z"/>
+</svg>

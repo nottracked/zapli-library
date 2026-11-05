@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Notes: a sheet with a folded corner and three lines, and a pencil writing on it. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A85D0B"/>
+      <stop offset="1" stop-color="#8A4A04"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <path fill="#000" fill-opacity="0.2" d="M50 40 H112 L140 68 V156 Q140 168 128 168 H50 Q38 168 38 156 V52 Q38 40 50 40 Z"/>
+  <path fill="#FFF" d="M50 32 H112 L140 60 V148 Q140 160 128 160 H50 Q38 160 38 148 V44 Q38 32 50 32 Z"/>
+  <path fill="#F2DFC4" d="M112 32 L140 60 H122 Q112 60 112 50 Z"/>
+  <rect x="56" y="66" width="44" height="12" rx="6" fill="#B8711A"/>
+  <rect x="56" y="90" width="56" height="12" rx="6" fill="#B8711A"/>
+  <rect x="56" y="114" width="36" height="12" rx="6" fill="#B8711A"/>
+  <g transform="translate(122 156) rotate(28)">
+    <path fill="#000" fill-opacity="0.2" d="M0 0 L-11 -22 V-92 Q-11 -100 -3 -100 H3 Q11 -100 11 -92 V-22 Z"/>
+  </g>
+  <g transform="translate(122 148) rotate(28)" stroke="#B07400" stroke-width="5" stroke-linejoin="round">
+    <path fill="#F7D9A8" d="M0 0 L-11 -22 H11 Z"/>
+    <rect x="-11" y="-80" width="22" height="58" fill="#FFC531"/>
+    <rect x="-11" y="-100" width="22" height="20" rx="6" fill="#FFF"/>
+  </g>
+  <g transform="translate(122 148) rotate(28)">
+    <rect x="2" y="-77.5" width="6.5" height="53" fill="#F2AC14"/>
+    <path fill="#1E2433" d="M0 0 L-4.5 -9 H4.5 Z"/>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+﻿"Title","Text","Labels","Color","Pinned","Archived","Created","Edited","Reminder","Repeat"
+"Bike service, spring","New chain and brakes; keep the receipt.","","none","false","true","2026-03-10T12:00:00+01:00","2026-04-02T12:00:00+02:00","",""
+"Water the plants","Balcony first, then the kitchen herbs.","","teal","false","false","2026-09-01T07:00:00+02:00","2026-09-01T07:00:00+02:00","2026-11-08T19:00:00+01:00","FREQ=WEEKLY;BYDAY=SU;DTSTART=20261108"
+"Gift ideas for Ana","A pottery class for two.
+The green scarf from the market.","Ideas, Family","pink","false","false","2026-10-12T20:05:00+02:00","2026-10-30T21:10:00+01:00","",""
+"Groceries","'- [ ] Oat milk
+'- [ ] Rye bread
+'- [x] Coffee beans","Home","yellow","true","false","2026-10-28T08:15:00+01:00","2026-11-02T18:40:00+01:00","",""

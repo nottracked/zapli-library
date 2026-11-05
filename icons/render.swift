@@ -196,14 +196,15 @@ func png(_ pixels: Pixels) -> [UInt8] {
 
 // MARK: The tools' definitions
 
-/// The tool's definition file: its app.json, or the index.html whose manifest names it.
+/// The tool's definition file: its app.json, the index.html whose manifest names it, or a package app's
+/// package/manifest.json (outside `web.files`, so embedding the icon never changes the package's file list).
 func definition(of tool: String) -> URL {
     let folder = tools.appendingPathComponent(tool)
-    for name in ["app.json", "index.html"] {
+    for name in ["app.json", "index.html", "package/manifest.json"] {
         let file = folder.appendingPathComponent(name)
         if FileManager.default.fileExists(atPath: file.path) { return file }
     }
-    fail("no library tool \"\(tool)\" (library/apps/library/\(tool)/app.json or index.html)")
+    fail("no library tool \"\(tool)\" (library/apps/library/\(tool)/app.json, index.html or package/manifest.json)")
 }
 
 /// The text of [file] with `app.iconData` set to [base64]: the line replaced when the app block has one, else added as

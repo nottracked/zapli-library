@@ -1,0 +1,45 @@
+# Accepted words, adjectives (masculine nominative singular): relational adjectives, participles used as
+# adjectives, shades, character and shape. Hand-written for this list (CC0 1.0).
+
+# the body, the home, school
+zubný ušný očný nosný krčný krvný kostný kožný telesný duševný liečivý chorobný bolestný
+pľúcny črevný svalový nervový srdcový mozgový vlasový bytový izbový strešný okenný stropný
+stolový záhradný triedny učebný písomný ústny knižný
+
+# places, travel, money, the state
+cestný uličný zemný podzemný nadzemný hodinový minútový cestovný letecký lodný vlakový
+kolesový pešší peňažný bankový obchodný trhový cenový daňový mzdový platový úverový
+vojenský policajný súdny štátny krajský okresný obecný vládny zákonný právny
+
+# culture and sport
+divadelný filmový básnický umelecký výtvarný tanečný spevácky futbalový hokejový tenisový
+plavecký bežecký
+
+# food and cooking
+maslový vaječný múčny cukrový kávový čajový pivný vínny korenistý sladkastý horkastý
+slanastý šťavnatý mäsitý varený pečený pražený sušený údený solený mletý krájaný mrazený
+smažený dusený plnený miešaný kvasený nezrelý uvarený upečený zjedený vypitý umytý
+
+# made and done
+natretý zlomený šitý pletený tkaný písaný tlačený viazaný balený plátený kovaný liaty
+brúsený leštený farbený pokrytý krytý zavretý skrytý ukrytý nájdený daný nosený použitý
+ranený zranený opitý triezvy
+
+# character and mood
+mrzutý nevrlý márnivý ješitný sebecký šetrný nežný
+
+# shape, matter and colour
+guľatý oválny kruhový špicatý vypuklý tekutý ohybný lámavý okrový olivový krémový bronzový
+
+# time, amount, kind
+terajší včasný neskorý skorý občasný trvalý dočasný nedávny úplný neúplný hojný rovnaký
+podobný odlišný rôzny umelý božský pekelný kúzelný čarovný povinný nutný vhodný chybný
+výhodný ziskový úspešný zdatný schopný učený sčítaný zbehlý skúsený susedný krajný vrchný
+spodný dospelý bratský prašný
+
+# animals
+hmyzí medvedí vlčí líščí zajačí srnčí jelení orlí holubí žabí hadí myší
+
+# countries and peoples
+rakúsky grécky turecký čínsky indický arabský africký ázijský srbský švédsky nórsky fínsky
+dánsky írsky škótsky mexický rímsky rómsky

@@ -13,9 +13,10 @@ check flags any other. `README.md` has the rules for people; this file is the sh
   and `dev/` (scripts and sources that are not shipped).
 - A package app's folder: `listing.json`, `screenshots/` and `dev/` beside `package/`, and in `package/` only the
   app's files: `manifest.json` (the definition, with `app.kind: "web"`, `web.entry` and `web.files`), the entry page
-  and its scripts, workers, pictures, sounds and data. Prefer one HTML file whenever the app fits in one; choose a
-  package for pictures, sounds, fonts, WebGL assets, modules or workers. Phones download a package app's files only
-  when it is installed or updated, and Zapli never ships one built in.
+  and its scripts, workers, pictures, sounds and data. Prefer one HTML file for a small app; choose a package when
+  modules, workers or data files make the code clearer or easier to extend, or for pictures, sounds, fonts and WebGL
+  assets. Phones download a package app's files only when it is installed or updated, and Zapli never ships one built
+  in.
 - `icons/`: the apps' own icons (`svg/` sources, `render.swift`, `png/`, `contact-sheet.png`).
 
 ## Hard rules
@@ -31,13 +32,16 @@ check flags any other. `README.md` has the rules for people; this file is the sh
   comments, listings or commit messages.
 - **Original work.** Never copy another app's name, text, icons, colours or screenshots, and never name another app in
   user-facing text ("alternative to …", "like …").
+- **Licence:** a new app, and every app from its next version, is `GPL-3.0-or-later` in `listing.json` and in
+  `app.license` (text in `LICENSES/`); data written for an app may carry its own licence, said where it lives. The
+  rest of the repository is MIT (`LICENSE`).
 - **Keep `listing.json` and the version in step.** A change users should get raises `app.version` (patch for fixes,
   minor for features) and updates the listing's description when the app's features change.
 - **Users keep their data.** Never rename or remove a stored field or entity without a migration.
 - **Package apps:**
   - `web.files` lists every file of `package/` except `manifest.json`, each with its SHA-256 and size. Never edit it
-    by hand: run `zapli library inventory --write` (the command is coming in Zapli's command-line tool) after every
-    change to a file of the package; the check refuses any difference.
+    by hand: run `zapli library inventory <app folder> --write` (Zapli's command-line tool) after every change to a
+    file of the package; the check refuses any difference.
   - Path rules for every file and folder in `package/`: ASCII letters, digits, `.`, `_` and `-` only, at most 128
     characters a name, never starting or ending with `.`; at most 12 names deep and 255 characters; no hidden files
     (delete `.DS_Store`), no symbolic links, nothing under `_zapli/` or `_anyapp/` in any case, no Windows device
@@ -55,8 +59,10 @@ check flags any other. `README.md` has the rules for people; this file is the sh
 
 Maintainers run `zapli library check` (Zapli's command-line tool) and the validator on every pull request: 0 errors
 and 0 warnings for every definition, every listing fits its schema, sample data fits the app, sample files and
-screenshots exist, a package app's files keep the path rules and limits and match `web.files`, no minified code
-without its source, no service worker, and no forbidden content. Contributors cannot run them yet, so be exact: valid
+screenshots exist (each screenshot's `sha256` and `size` in the listing match its file: run
+`zapli library inventory <app folder> --write` after adding or changing one), a package app's files keep the path
+rules and limits and match `web.files`, no minified code without its source, no service worker, and no forbidden
+content. Contributors cannot run them yet, so be exact: valid
 JSON, ids that match, and say in the pull request what you could and could not check.
 
 Use the `library-tool` skill (`.claude/skills/library-tool/SKILL.md`) to write or change an app.

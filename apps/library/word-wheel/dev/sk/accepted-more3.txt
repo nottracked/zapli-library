@@ -1,0 +1,42 @@
+# Accepted words: sport, music, science, geography, building, and many more verbs.
+# Hand-written for this list (CC0 1.0). The game accepts them as extra words.
+
+# sport and music
+golf judo karate rugby šerm kajak ring hokejka lyžiar lyžiarka sánky šprint maratón
+štafeta oštep tyčka laťka doskočisko set gem pálka kriket bejzbal šípky terč kuša šabľa
+akord basa činel cimbal píšťala klarinet hoboj fagot trombón lutna mandolína banjo viola
+violončelo kontrabas ária kuplet refrén sloha pauza tónina stupnica dur opus sonáta
+suita symfónia pochod čardáš
+
+# science and numbers
+molekula prvok kyslík vodík dusík uhlík síra fosfor chlór sodík draslík vápnik horčík
+zinok nikel kobalt chróm platina urán ortuť kremík neón argón hélium zásada roztok zmes
+výkon zrýchlenie hustota kružnica priamka úsečka polomer priemer desatina stotina
+tisícina vzorec laboratórium mikroskop ďalekohľad magnet napätie odpor volt watt ampér
+liter kilogram tona stupeň promile
+
+# geography
+kontinent pevnina svetadiel rovník pól obratník poludník rovnobežka prítok sútok
+prieliv súostrovie savana džungľa tundra tajga gejzír magma
+
+# building
+murivo priečka krokva dyha preglejka fošňa hobliny tmel malta tvárnica obklad pánt
+potrubie poistka svietidlo
+
+# verbs
+bádať bažiť bedákať beliť blyšťať brodiť búriť cengať ceriť cupkať čeliť čnieť čvirikať
+dáviť deptať dierovať drevenieť drgnúť driapať drkotať dudrať dumať dvoriť fňukať frflať
+fučať gánať hájiť hašteriť hladkať hltať hmýriť hrdiť hrešiť hromadiť hromžiť hustnúť
+hutoriť chladiť chrliť chrúmať chvastať iskriť jasať jedovať kalkulovať kamarátiť karhať
+kaziť klebetiť klepať klíčiť klipkať kmitať kľučkovať kolísať kopírovať kotúľať krívať
+krotiť kŕčiť kuchtiť kukať kúriť lapať lemovať lenošiť lichotiť lipnúť mámiť maškrtiť
+mdlieť meditovať mihať mľaskať mrholiť mračiť mrviť mumlať mútiť nadávať napodobniť
+nariekať nútiť obdivovať ochkať páchať páchnuť pachtiť papať pariť pečatiť pichať
+pichnúť pípnuť pľaskať plieniť plytvať pľuvať pohnúť pokúšať poliehať potiť práskať
+prášiť predstierať prihovárať pripomínať prskať pukať pustošiť pykať rachotiť radiť
+rapotať rehotať rinčať rmútiť rozkazovať rušiť rúcať ryčať sipieť skučať slintať snoriť
+stískať šantiť šibať šikanovať škrabať škriepiť škrtať šľahať šliapať šmatlať šokovať
+špliechať štebotať štekliť štípať šťuchať šuchotať šušťať tápať tieniť tikať tíšiť tlieť
+trhnúť trilkovať trpieť trúsiť tŕpnuť túlať túžiť ťapkať ťuknúť vábiť váhať valcovať
+vandrovať váľať vďačiť vetriť vetrať víriť vlniť vracať vravieť vrhať vŕzgať vzdychať
+zabávať zdôrazniť zúfať zúriť žalovať žartovať žasnúť žmýkať žobrať žonglovať

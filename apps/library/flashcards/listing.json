@@ -21,27 +21,37 @@
     {
       "file": "screenshots/01-decks-light.png",
       "caption": "Your decks with what's due and new today",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "4fd44ab39d0dcd803276a303fc27983d595f9deb4880cc0d9725abf367b7af5c",
+      "size": 125937
     },
     {
       "file": "screenshots/02-deck-light.png",
       "caption": "A deck: due and new cards, a daily reminder and all its cards",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "6c10fa868f9c2d02aa0c82703e50c55423dd215e3e0324c14f6027ade78ea84f",
+      "size": 215819
     },
     {
       "file": "screenshots/03-study-light.png",
       "caption": "Study with spaced repetition: Again, Hard, Good, Easy",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "a10643c551e55fb69b5aa7ee2b1256df4532f9f4cefcac655bf4385beed64d0b",
+      "size": 125768
     },
     {
       "file": "screenshots/04-stats-light.png",
       "caption": "Streak, cards answered, recall rate and answers over 30 days",
-      "theme": "light"
+      "theme": "light",
+      "sha256": "18a347fc5f5c595893d62cead97b77067faa84db43702a847c11b0c076651734",
+      "size": 157067
     },
     {
       "file": "screenshots/05-study-dark.png",
       "caption": "Studying in the dark theme",
-      "theme": "dark"
+      "theme": "dark",
+      "sha256": "aadaa2c63d1ffce6215f41414a2ee8ab4054bea5c3fdb982711a362f9bc349fb",
+      "size": 103011
     }
   ],
   "sampleData": {

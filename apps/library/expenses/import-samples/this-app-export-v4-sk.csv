@@ -1,0 +1,4 @@
+﻿"Dátum","Typ","Suma","Mena","Kategória","Účet","Na účet","Prijatá suma","V hlavnej mene","Kurz","Príjemca platby","Poznámka","Štítky"
+"2026-10-05","Výdavok","3.20","EUR","Káva","Hotovosť","","","3.20","","Kaviareň na rohu","Ranná káva",""
+"2026-10-06","Príjem","120.00","EUR","Dary a vratky","Hotovosť","","","120.00","","","Vrátená záloha",""
+"2026-10-07","Prevod","50.00","EUR","","Bankový účet","Hotovosť","","50.00","","","Výber z bankomatu",""

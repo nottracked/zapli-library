@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Spider: three cards cascading down a column, a spade on the band of each covered card and a big spade in front. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5A5F9E"/>
+      <stop offset="1" stop-color="#40447D"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <rect x="44" y="32" width="72" height="96" rx="14" fill="#000" fill-opacity="0.2"/>
+  <rect x="44" y="24" width="72" height="96" rx="14" fill="#FFF"/>
+  <path fill="#1E2433" d="M98 30 C101 35 109 39 109 45 C109 49 106 51 103 51 C101 51 100 50 99 49 L100 53 H96 L97 49 C96 50 95 51 93 51 C90 51 87 49 87 45 C87 39 95 35 98 30 Z"/>
+  <rect x="60" y="58" width="72" height="96" rx="14" fill="#000" fill-opacity="0.2"/>
+  <rect x="60" y="50" width="72" height="96" rx="14" fill="#FFF"/>
+  <path fill="#1E2433" d="M114 56 C117 61 125 65 125 71 C125 75 122 77 119 77 C117 77 116 76 115 75 L116 79 H112 L113 75 C112 76 111 77 109 77 C106 77 103 75 103 71 C103 65 111 61 114 56 Z"/>
+  <rect x="76" y="84" width="72" height="88" rx="14" fill="#000" fill-opacity="0.2"/>
+  <rect x="76" y="76" width="72" height="88" rx="14" fill="#FFF"/>
+  <path fill="#1E2433" d="M112 88 C119 99 134 106 134 119 C134 127 128 132 121 132 C117 132 114 130 113 127 L115 141 H109 L111 127 C110 130 107 132 103 132 C96 132 90 127 90 119 C90 106 105 99 112 88 Z"/>
+</svg>

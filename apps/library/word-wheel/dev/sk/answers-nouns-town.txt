@@ -1,0 +1,40 @@
+# Answer words, nouns: town, travel, work, society, school, culture, sport, time and ideas.
+# Hand-written for this list (CC0 1.0). Base forms: nominative singular; plural-only nouns in the plural.
+
+# town and buildings
+mesto mestečko dedina obec ulica ulička námestie diaľnica križovatka semafor priechod
+budova panelák mrakodrap kostol kostolík katedrála chrám veža hrad zámok palác pevnosť
+múr hradba radnica úrad pošta banka kino divadlo múzeum galéria knižnica škola škôlka
+gymnázium univerzita ihrisko štadión kúpalisko bazén plaváreň hotel penzión
+reštaurácia kaviareň krčma hostinec bar cukráreň pekáreň mäsiareň väznica polícia
+stanica zastávka letisko prístav nástupište parkovisko továreň závod fabrika sklad
+cintorín hrob pomník socha fontána kaplnka fara kláštor sídlisko štvrť predmestie
+centrum okres kraj
+
+# travel and transport
+auto autíčko autobus trolejbus električka vlak vagón lokomotíva metro taxík taxi
+motorka skúter traktor kamión dodávka loď loďka čln plachetnica jachta parník trajekt
+ponorka lietadlo vrtuľník helikoptéra balón koleso kolo volant brzda motor pneumatika
+sedadlo kapota lístok jazda výlet zájazd let plavba koľaj peron kormidlo veslo stožiar
+paluba kajuta sedačka lanovka cesta cestička smer mapa kompas turista nosič batožina
+cestovanie dopravník doprava premávka zápcha nehoda
+
+# work, money, the state
+práca zamestnanie povolanie úloha firma podnik kancelária porada stretnutie zmluva
+podpis dokument súbor správa balík zásielka plat mzda dôchodok daň poplatok dlh
+pôžička úver úrok výrobok zisk strata kúpa predaj nákup faktúra objednávka stroj
+prístroj zariadenie nástroj robot linka smena prestávka dovolenka porucha oprava
+údržba projekt plán cieľ výsledok úspech neúspech chyba problém riešenie otázka
+odpoveď nápad myšlienka rada návod pravidlo zákon právo súd trest pokuta väzenie
+sloboda voľba štát vláda národ ľud vlasť hranica armáda vojna mier boj bitka zbraň meč
+štít luk šíp puška delo tank víťazstvo porážka obrana útok sila moc kráľovstvo
+ríša vlajka erb hymna koruna trón
+
+# school, language, culture
+trieda predmet matematika fyzika chémia dejepis zemepis telocvik hudba jazyk slovo veta
+písmeno hláska slabika text príbeh rozprávka báseň pieseň pesnička rým verš román
+poviedka bájka povesť legenda mýtus čitateľ divák poslucháč maľba kresba fotka
+fotografia film seriál koncert opera balet predstavenie scéna javisko opona tanec ples
+zábava oslava svadba krst pohreb hostina darček dar prekvapenie prianie pozdrav
+vysvedčenie známka skúška test diktát cvičenie príklad
+lekcia trieda hodina prednáška seminár štúdium

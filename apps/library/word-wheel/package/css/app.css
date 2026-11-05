@@ -1,0 +1,1683 @@
+/* Word Wheel: a warm paper page between two dark bands. The crossword takes the room above; the word row (delete,
+   the word, the tick) and the letter wheel sit together in thumb reach above the toolbar. Turned sideways, the
+   crossword stands beside the word and the wheel, and the toolbar becomes a rail at the side. Letter sizes follow the
+   Letter size setting (--ls), which starts from the phone's text size. */
+
+:root {
+    color-scheme: light;
+    --ls: 1;
+    /* The phone's text size (1 = normal), measured at start: lines that must fit between the crossword and the wheel
+     grow with it only up to a cap, and letters drawn to fit a square or a disc do not grow with it at all. */
+    --tz: 1;
+    --cap: min(1, 1.3 / var(--tz));
+    --font-ui: var(--zapli-font-family, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif);
+    --band: #2a1a12;
+    --band-hover: #45301f;
+    --on-band: #fff6ef;
+    --on-band-dim: #e3cdbd;
+    --paper: #fbf6f0;
+    --paper-ink: #23170f;
+    --paper-muted: #6a5546;
+    --paper-line: #dccab9;
+    --paper-raised: #f1e5d8;
+    --primary-bg: #b44e14;
+    --primary-ink: #ffffff;
+    --accent-ink: #9a3f0c;
+    --cell: #ffffff;
+    --cell-line: #c8b19c;
+    --cell-found: #b44e14;
+    --cell-found-ink: #ffffff;
+    --cell-hint-ink: #9a3f0c;
+    --disc: #efdcc9;
+    --tile: #ffffff;
+    --tile-ink: #23170f;
+    --tile-line: #d2bba6;
+    --tile-on: #b44e14;
+    --tile-on-ink: #ffffff;
+    --path: rgba(180, 78, 20, 0.85);
+    --path-glow: rgba(180, 78, 20, 0.22);
+    --disc-edge: #e3c9b0;
+    --cell-solved: #2f7a5b;
+    --cell-solved-ink: #ffffff;
+    --good: #2f7a5b;
+    --good-ink: #ffffff;
+    --ring: #ffc531;
+    --danger: #a3172e;
+    --scrim: rgba(20, 10, 4, 0.6);
+    --shadow: rgba(30, 14, 4, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --path-glow: rgba(233, 138, 79, 0.25);
+        --disc-edge: #3a2c23;
+        --cell-solved: #5fc59a;
+        --cell-solved-ink: #0c1f17;
+        --good: #5fc59a;
+        --good-ink: #0c1f17;
+        --band: #000000;
+        --band-hover: #2a1d15;
+        --paper: #17110d;
+        --paper-ink: #f4eae2;
+        --paper-muted: #bfab9c;
+        --paper-line: #3b2d24;
+        --paper-raised: #261c16;
+        --primary-bg: #e98a4f;
+        --primary-ink: #1a0e07;
+        --accent-ink: #f4a26f;
+        --cell: #2a1f18;
+        --cell-line: #5c4739;
+        --cell-found: #e98a4f;
+        --cell-found-ink: #1a0e07;
+        --cell-hint-ink: #f4a26f;
+        --disc: #261c16;
+        --tile: #3a2c23;
+        --tile-ink: #f4eae2;
+        --tile-line: #5c4739;
+        --tile-on: #e98a4f;
+        --tile-on-ink: #1a0e07;
+        --path: rgba(233, 138, 79, 0.75);
+        --danger: #ff8d9c;
+        --scrim: rgba(0, 0, 0, 0.66);
+        --shadow: rgba(0, 0, 0, 0.6);
+    }
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --path-glow: rgba(233, 138, 79, 0.25);
+    --disc-edge: #3a2c23;
+    --cell-solved: #5fc59a;
+    --cell-solved-ink: #0c1f17;
+    --good: #5fc59a;
+    --good-ink: #0c1f17;
+    --band: #000000;
+    --band-hover: #2a1d15;
+    --paper: #17110d;
+    --paper-ink: #f4eae2;
+    --paper-muted: #bfab9c;
+    --paper-line: #3b2d24;
+    --paper-raised: #261c16;
+    --primary-bg: #e98a4f;
+    --primary-ink: #1a0e07;
+    --accent-ink: #f4a26f;
+    --cell: #2a1f18;
+    --cell-line: #5c4739;
+    --cell-found: #e98a4f;
+    --cell-found-ink: #1a0e07;
+    --cell-hint-ink: #f4a26f;
+    --disc: #261c16;
+    --tile: #3a2c23;
+    --tile-ink: #f4eae2;
+    --tile-line: #5c4739;
+    --tile-on: #e98a4f;
+    --tile-on-ink: #1a0e07;
+    --path: rgba(233, 138, 79, 0.75);
+    --danger: #ff8d9c;
+    --scrim: rgba(0, 0, 0, 0.66);
+    --shadow: rgba(0, 0, 0, 0.6);
+}
+
+/* High contrast: pure surfaces, black or white letters, thicker outlines (dark-now: the page shows dark). */
+:root.contrast:not(.dark-now) {
+    --paper: #ffffff;
+    --paper-ink: #000000;
+    --paper-muted: #2b2b2b;
+    --cell: #ffffff;
+    --cell-line: #000000;
+    --cell-found: #7a2e04;
+    --tile: #ffffff;
+    --tile-ink: #000000;
+    --tile-line: #000000;
+    --tile-on: #7a2e04;
+    --disc: #e8d2bd;
+    --primary-bg: #7a2e04;
+}
+:root.contrast.dark-now {
+    --paper: #000000;
+    --paper-ink: #ffffff;
+    --paper-muted: #e0e0e0;
+    --cell: #000000;
+    --cell-line: #ffffff;
+    --cell-found: #ffb37e;
+    --cell-found-ink: #000000;
+    --tile: #000000;
+    --tile-ink: #ffffff;
+    --tile-line: #ffffff;
+    --tile-on: #ffb37e;
+    --tile-on-ink: #000000;
+    --disc: #1d1612;
+    --primary-bg: #ffb37e;
+    --primary-ink: #000000;
+}
+:root.contrast .cell,
+:root.contrast .tile {
+    border-width: 3px;
+}
+
+* {
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+body {
+    background: var(--paper);
+    color: var(--paper-ink);
+    font: 1rem/1.4 var(--font-ui);
+    -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
+}
+button,
+input {
+    font: inherit;
+    color: inherit;
+}
+button:focus-visible,
+input:focus-visible + span,
+.tile:focus-visible,
+.cell:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+}
+.sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+#tz-probe {
+    position: absolute;
+    visibility: hidden;
+    font-size: 100px;
+    line-height: 1;
+    pointer-events: none;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ---- frame ---- */
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.band {
+    background: var(--band);
+    color: var(--on-band);
+    padding-left: max(12px, env(safe-area-inset-left, 0px));
+    padding-right: max(12px, env(safe-area-inset-right, 0px));
+}
+.top {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem 0.5rem;
+    min-height: 52px;
+    padding-top: max(2px, env(safe-area-inset-top, 0px));
+    padding-bottom: 2px;
+}
+.brand {
+    margin: 0 auto 0 0;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+/* The word language: a globe, the language's code and a chevron, so it reads as a choice that opens. */
+.lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-width: 48px;
+    height: 40px;
+    padding: 0 0.6rem 0 0.55rem;
+    border: 2px solid var(--on-band-dim);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--on-band);
+    font-size: calc(1rem * var(--cap));
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    cursor: pointer;
+}
+.lang-btn .globe {
+    flex: none;
+    width: calc(1.3rem * var(--cap) * var(--tz));
+    height: calc(1.3rem * var(--cap) * var(--tz));
+    color: var(--on-band-dim);
+    stroke-width: 1.8;
+}
+.lang-btn .chev {
+    flex: none;
+    width: calc(1.05rem * var(--cap) * var(--tz));
+    height: calc(1.05rem * var(--cap) * var(--tz));
+    margin-left: -0.15rem;
+    color: var(--on-band-dim);
+}
+.lang-btn:hover,
+.lang-btn[aria-expanded="true"] {
+    background: var(--band-hover);
+}
+.top .lang-btn {
+    flex: none;
+}
+.top.tight {
+    padding-left: max(6px, env(safe-area-inset-left, 0px));
+    padding-right: max(6px, env(safe-area-inset-right, 0px));
+    column-gap: 0.25rem;
+}
+.top.tight .lang-btn {
+    padding: 0 0.5rem;
+}
+.top.tight .lang-btn .chev,
+.top.tighter .lang-btn .globe {
+    display: none;
+}
+.tools {
+    display: flex;
+    gap: 0;
+}
+.icon-btn {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    cursor: pointer;
+}
+.band .icon-btn:hover,
+.tool:hover:not(:disabled) {
+    background: var(--band-hover);
+}
+.ico {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+@media (max-width: 26rem) {
+    .brand {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
+    .lang-btn {
+        margin-right: auto;
+    }
+}
+
+/* ---- the play area ---- */
+.play {
+    --size: 260px;
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.25rem max(12px, env(safe-area-inset-right, 0px)) 0.25rem max(12px, env(safe-area-inset-left, 0px));
+}
+.status {
+    flex: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    min-height: 48px;
+    padding: 0.2rem 0;
+}
+.status {
+    font-size: calc(1rem * var(--cap));
+}
+.mode {
+    font-weight: 800;
+}
+.progress {
+    color: var(--paper-muted);
+    font-variant-numeric: tabular-nums;
+    margin-right: auto;
+}
+.chip {
+    font-size: calc(1rem * var(--cap));
+    min-height: 40px;
+    padding: 0.25rem 0.9rem;
+    border: 2px solid var(--primary-bg);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--accent-ink);
+    font-weight: 700;
+    cursor: pointer;
+}
+.chip[hidden] {
+    display: none;
+}
+.chip.go {
+    border-color: var(--primary-bg);
+    background: var(--primary-bg);
+    color: var(--primary-ink);
+}
+.solved-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-right: auto;
+    padding: 0.2rem 0.75rem 0.2rem 0.5rem;
+    border-radius: 999px;
+    background: var(--good);
+    color: var(--good-ink);
+    font-weight: 800;
+}
+.solved-badge .ico {
+    width: 20px;
+    height: 20px;
+    stroke-width: 3;
+}
+.solved-badge[hidden],
+.progress[hidden] {
+    display: none;
+}
+.grid {
+    flex: 1 1 0;
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.board {
+    --cell: 36px;
+    display: grid;
+    gap: 3px;
+}
+.cell {
+    width: var(--cell);
+    height: var(--cell);
+    padding: 0;
+    border: 2px solid var(--cell-line);
+    border-radius: calc(var(--cell) * 0.18);
+    background: var(--cell);
+    color: var(--paper-ink);
+    font-weight: 800;
+    font-size: calc(var(--cell) * 0.5 / var(--tz));
+    line-height: 1;
+    cursor: pointer;
+}
+.cell.shown {
+    border-color: var(--cell-found);
+    background: var(--cell-found);
+    color: var(--cell-found-ink);
+    cursor: default;
+}
+.cell.shown.hinted {
+    background: var(--cell);
+    color: var(--cell-hint-ink);
+}
+.cell:disabled {
+    cursor: default;
+}
+/* A square whose flying letter is still on its way: blank until it lands. */
+.cell.incoming,
+.grid.solved .cell.incoming {
+    border-color: var(--cell-line);
+    background: var(--cell);
+    color: transparent;
+}
+.cell.lit {
+    box-shadow: 0 0 0 3px var(--ring);
+}
+/* Solved: every square turns to the solved colour, which stays. */
+.grid.solved .cell.shown,
+.grid.solved .cell.shown.hinted {
+    border-color: var(--cell-solved);
+    background: var(--cell-solved);
+    color: var(--cell-solved-ink);
+}
+.cell.wave {
+    animation: wave 560ms ease-out both;
+}
+@keyframes wave {
+    0% {
+        transform: none;
+    }
+    40% {
+        transform: translateY(-22%) scale(1.1);
+    }
+    100% {
+        transform: none;
+    }
+}
+.cell.pick {
+    outline: 3px solid var(--ring);
+    outline-offset: 1px;
+}
+.cell.pop {
+    animation: pop 320ms ease-out both;
+}
+.cell.again {
+    animation: nudge 360ms ease-in-out;
+}
+@keyframes pop {
+    0% {
+        transform: scale(0.6);
+    }
+    60% {
+        transform: scale(1.12);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes nudge {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    35% {
+        transform: translateY(-18%);
+    }
+    70% {
+        transform: translateY(6%);
+    }
+}
+
+/* ---- the word row and the wheel ---- */
+.pad {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.word-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 30rem;
+    padding: 0.35rem 0 0.25rem;
+}
+/* Delete and the tick: large round buttons that never move; dim while there is no word. */
+.word-btn {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 2px solid var(--paper-line);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--paper-ink);
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    transition:
+        background-color 140ms,
+        border-color 140ms,
+        color 140ms,
+        opacity 140ms,
+        transform 90ms;
+}
+.word-btn .ico {
+    width: 28px;
+    height: 28px;
+    stroke-width: 2.4;
+}
+.word-btn.go {
+    border-color: var(--primary-bg);
+    background: var(--primary-bg);
+    color: var(--primary-ink);
+}
+.word-btn.go .ico {
+    width: 30px;
+    height: 30px;
+    stroke-width: 3;
+}
+.word-btn:active:not(:disabled) {
+    transform: scale(0.93);
+}
+.word-btn:disabled {
+    border-color: var(--paper-line);
+    background: transparent;
+    color: var(--paper-muted);
+    opacity: 0.42;
+    cursor: default;
+}
+/* A tapped word was taken by itself: the tick lights up for a moment, as if pressed. */
+.word-btn.took,
+.word-row.lit .word-btn.go {
+    border-color: var(--good);
+    background: var(--good);
+    color: var(--good-ink);
+    opacity: 1;
+}
+.word-btn.took {
+    animation: took 420ms ease-out;
+}
+@keyframes took {
+    40% {
+        transform: scale(1.12);
+    }
+}
+:root.contrast .word-btn {
+    border-width: 3px;
+}
+
+/* The field between them: the word, or the last message, or how to start. Its height is fixed (three short lines), so
+   nothing around it moves when its content changes. */
+.word-field {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: max(56px, calc(0.9rem * var(--cap) * var(--tz) * 3.6 + 8px));
+    display: grid;
+    place-items: center;
+    padding: 0 0.6rem;
+    border-radius: 18px;
+    background: var(--paper-raised);
+    font-size: calc(0.9rem * var(--cap));
+    line-height: 1.2;
+    text-align: center;
+    overflow: hidden;
+    transition: background-color 200ms;
+}
+.word-field[data-show="empty"] {
+    background: transparent;
+    box-shadow: inset 0 0 0 2px var(--paper-line);
+}
+.word-field[data-show="notice"] .current,
+.word-field[data-show="word"] .notice,
+.word-field[data-show="empty"] .notice {
+    display: none;
+}
+.current {
+    display: block;
+    font-weight: 800;
+    font-size: calc(1.5rem * min(var(--ls), 1.25) * var(--cap));
+    letter-spacing: 0.1em;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+.current .cl {
+    display: inline-block;
+}
+.current .cl.new {
+    animation: chip-in 160ms ease-out;
+}
+@keyframes chip-in {
+    from {
+        transform: translateY(30%) scale(0.6);
+        opacity: 0;
+    }
+    to {
+        transform: none;
+        opacity: 1;
+    }
+}
+/* (Not the word book's empty box, which shares the class name.) */
+.current.empty {
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--paper-muted);
+    font-weight: 600;
+    font-size: 1em;
+    letter-spacing: 0;
+    line-height: 1.2;
+    overflow-wrap: normal;
+}
+.word-field.shake {
+    animation: shake 300ms ease-in-out;
+}
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-8px);
+    }
+    75% {
+        transform: translateX(8px);
+    }
+}
+.notice {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: normal;
+    hyphens: manual;
+}
+.notice.good {
+    color: var(--accent-ink);
+}
+.notice.bad,
+.notice.soft {
+    color: var(--paper-muted);
+}
+.notice.big {
+    font-weight: 800;
+}
+.word-field:has(.notice.hidden) {
+    background: var(--ring);
+}
+.notice.hidden {
+    color: #1a1400;
+}
+.notice:not(:empty) {
+    animation: note-in 220ms ease-out;
+}
+@keyframes note-in {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+}
+
+.wheel-wrap {
+    display: grid;
+    place-items: center;
+    padding: 0.35rem 0 0.5rem;
+}
+.wheel {
+    --tile: 25%;
+    position: relative;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 38%, var(--paper) 0%, var(--disc) 62%);
+    box-shadow:
+        inset 0 0 0 3px var(--disc-edge),
+        0 6px 18px var(--shadow);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.wheel svg.lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.wheel polyline {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.wheel polyline.glow {
+    stroke: var(--path-glow);
+    stroke-width: 9;
+}
+.wheel polyline.core {
+    stroke: var(--path);
+    stroke-width: 3.4;
+}
+/* A dotted ring between the letters: it turns when the wheel is shuffled. */
+.wheel::before {
+    content: "";
+    position: absolute;
+    inset: 22%;
+    border: 2px dashed var(--disc-edge);
+    border-radius: 50%;
+}
+.wheel.spin::before {
+    animation: spin 520ms cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+@keyframes spin {
+    from {
+        transform: rotate(-90deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+/* Shuffle sits in the middle of the wheel, under the swipe's line; a swipe across it never presses it. */
+.hub {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: clamp(48px, 23%, 64px);
+    height: clamp(48px, 23%, 64px);
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 2px solid var(--disc-edge);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--accent-ink);
+    box-shadow: 0 2px 6px var(--shadow);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition:
+        transform 90ms,
+        background-color 140ms;
+}
+.hub .ico {
+    width: 52%;
+    height: 52%;
+    stroke-width: 2.3;
+}
+.hub:hover {
+    background: var(--paper-raised);
+}
+.hub:active {
+    transform: translate(-50%, -50%) scale(0.92);
+}
+.hub.turn .ico {
+    animation: hub-turn 520ms cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+@keyframes hub-turn {
+    from {
+        transform: rotate(-180deg);
+    }
+}
+.hub:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+}
+.tile {
+    position: absolute;
+    width: var(--tile);
+    height: var(--tile);
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 2px solid var(--tile-line);
+    border-radius: 50%;
+    background: var(--tile);
+    color: var(--tile-ink);
+    font-weight: 800;
+    font-size: calc(var(--size) * 0.12 * min(var(--ls), 1.15) / var(--tz));
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        left 420ms cubic-bezier(0.34, 1.4, 0.64, 1),
+        top 420ms cubic-bezier(0.34, 1.4, 0.64, 1),
+        transform 120ms ease,
+        background-color 120ms;
+    box-shadow:
+        0 3px 0 var(--disc-edge),
+        0 4px 10px var(--shadow);
+}
+.tile.on {
+    border-color: var(--tile-on);
+    background: var(--tile-on);
+    color: var(--tile-on-ink);
+    transform: translate(-50%, -50%) scale(1.06);
+    box-shadow: 0 0 0 4px var(--path-glow);
+}
+/* The letter just added grows under the finger for a moment. */
+.tile.hot {
+    animation: hot 220ms ease-out;
+}
+@keyframes hot {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.06);
+    }
+}
+/* A word taken by taps stays lit for a moment, then fades as it clears (js/ui/wheel-view.mjs, LINGER_MS). */
+.wheel.linger .tile.on {
+    animation: linger-tile 1100ms ease-in both;
+}
+.wheel.linger polyline {
+    animation: linger-line 1100ms ease-in both;
+}
+@keyframes linger-tile {
+    0%,
+    45% {
+        border-color: var(--tile-on);
+        background: var(--tile-on);
+        color: var(--tile-on-ink);
+    }
+    100% {
+        border-color: var(--tile-line);
+        background: var(--tile);
+        color: var(--tile-ink);
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+@keyframes linger-line {
+    0%,
+    45% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.loading {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--paper);
+    text-align: center;
+    font-weight: 600;
+}
+.loading[hidden] {
+    display: none;
+}
+
+/* ---- the toolbar ---- */
+.bottom {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: max(0.25rem, env(safe-area-inset-bottom, 0px));
+}
+.tool {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 9rem;
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 0.25rem;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    /* Labels wrap only at spaces, never inside a word, and grow with the text size only up to the cap. */
+    font-size: calc(0.85rem * var(--cap));
+    font-weight: 700;
+    line-height: 1.1;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: manual;
+    text-align: center;
+    cursor: pointer;
+}
+.tool:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+.ico-wrap {
+    position: relative;
+    display: inline-grid;
+}
+.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(62%, -38%);
+    display: grid;
+    place-items: center;
+    /* Sized from the text size (--tz), since only fonts grow with it. */
+    min-width: calc(1.35rem * var(--cap) * var(--tz));
+    height: calc(1.35rem * var(--cap) * var(--tz));
+    padding: 0 0.3rem;
+    border-radius: 999px;
+    background: var(--ring);
+    color: #1a1400;
+    font-size: calc(0.8rem * var(--cap));
+    font-weight: 800;
+    line-height: 1;
+    text-align: center;
+}
+
+/* A narrow screen: the status line's button is a little smaller, so it more often fits beside the wheel's name. */
+@media (max-width: 22.5rem) {
+    .status {
+        column-gap: 0.5rem;
+    }
+    .chip {
+        padding: 0.2rem 0.7rem;
+        font-size: calc(0.92rem * var(--cap));
+    }
+}
+/* A short screen: less air around the word row and the wheel, so the crossword keeps its room. */
+@media (max-height: 40rem) and (orientation: portrait) {
+    .word-row {
+        padding: 0.15rem 0;
+    }
+    .wheel-wrap {
+        padding: 0.2rem 0 0.3rem;
+    }
+}
+
+/* ---- sideways: the crossword on the left, the word and the wheel on the right, the toolbar as a rail ---- */
+@media (orientation: landscape) and (min-width: 36rem) and (max-height: 34rem) {
+    .app {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: auto minmax(0, 1fr);
+    }
+    .top {
+        grid-column: 1 / -1;
+    }
+    .play {
+        grid-column: 1;
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: auto minmax(0, 1fr);
+        column-gap: 1rem;
+    }
+    .status {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .grid {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .pad {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        justify-content: center;
+        /* From the wheel's size, never from the word or message in the row, so nothing moves as they change. */
+        width: max(17rem, var(--size));
+    }
+    .bottom {
+        grid-column: 2;
+        grid-row: 2;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem max(0.5rem, env(safe-area-inset-right, 0px)) max(0.5rem, env(safe-area-inset-bottom, 0px))
+            0.5rem;
+    }
+    .tool {
+        flex: none;
+        width: 6.5rem;
+        max-width: none;
+    }
+}
+
+/* ---- dialogs ---- */
+dialog {
+    width: min(30rem, calc(100% - 32px));
+    max-height: calc(100% - 32px);
+    padding: 0;
+    border: 0;
+    border-radius: 16px;
+    background: var(--paper);
+    color: var(--paper-ink);
+    box-shadow: 0 24px 60px var(--shadow);
+    overflow: auto;
+}
+dialog::backdrop {
+    background: var(--scrim);
+}
+.dlg-head {
+    padding: 1.1rem 1.25rem 0.25rem;
+}
+.dlg-head h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+.dlg-body {
+    padding: 0.25rem 1.25rem 1rem;
+}
+.dlg-body p {
+    margin: 0.5rem 0;
+    max-width: 60ch;
+}
+.dlg-body h3 {
+    margin: 1rem 0 0.25rem;
+    font-size: 1.05rem;
+}
+.muted {
+    color: var(--paper-muted);
+    font-size: 0.95rem;
+}
+.note {
+    margin: 0.4rem 0 0;
+    color: var(--paper-muted);
+    font-size: 0.9rem;
+}
+.dlg-foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem 1.1rem;
+    border-top: 1px solid var(--paper-line);
+}
+.btn {
+    min-height: 48px;
+    padding: 0.4rem 1.1rem;
+    border: 2px solid var(--paper-line);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--paper-ink);
+    font-weight: 700;
+    cursor: pointer;
+}
+.btn.primary {
+    border-color: var(--primary-bg);
+    background: var(--primary-bg);
+    color: var(--primary-ink);
+}
+.btn[hidden] {
+    display: none;
+}
+
+dialog.sheet {
+    width: min(36rem, 100%);
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+    border-radius: 0;
+    overflow: hidden;
+    overflow: clip;
+}
+dialog.sheet[open] {
+    display: flex;
+    flex-direction: column;
+}
+@media (min-width: 40rem) and (min-height: 30rem) {
+    dialog.sheet {
+        height: calc(100% - 32px);
+        margin: auto;
+        border-radius: 16px;
+    }
+}
+.sheet-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: max(0.5rem, env(safe-area-inset-top, 0px)) 0.75rem 0.375rem 1.25rem;
+}
+.sheet-head h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+.sheet-head .count {
+    color: var(--paper-muted);
+    font-size: 1rem;
+    font-weight: 700;
+}
+.sheet-head .btn {
+    border-radius: 999px;
+    padding-inline: 1.4rem;
+}
+.sheet-body {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding: 0 1.25rem max(1.5rem, env(safe-area-inset-bottom, 0px));
+    overscroll-behavior: contain;
+}
+.sheet-body h3,
+.sheet-body legend {
+    margin: 1.25rem 0 0.5rem;
+    padding: 0;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper-muted);
+}
+fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+}
+.seg {
+    display: flex;
+    overflow: hidden;
+    border: 2px solid var(--paper-muted);
+    border-radius: 14px;
+}
+.seg label {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+}
+.seg label + label {
+    border-left: 2px solid var(--paper-muted);
+}
+.seg input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.seg span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    height: 100%;
+    padding: 0.25rem 0.4rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+.seg input:checked + span {
+    background: var(--primary-bg);
+    color: var(--primary-ink);
+}
+.seg.stack {
+    flex-direction: column;
+}
+.seg.stack label + label {
+    border-left: 0;
+    border-top: 2px solid var(--paper-muted);
+}
+.opt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 64px;
+    margin-top: 1rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--paper-line);
+    border-bottom: 1px solid var(--paper-line);
+    cursor: pointer;
+}
+.opt-title {
+    display: block;
+    font-weight: 700;
+}
+.switch {
+    appearance: none;
+    -webkit-appearance: none;
+    flex: none;
+    position: relative;
+    width: 52px;
+    height: 32px;
+    margin: 0;
+    border: 2px solid var(--paper-muted);
+    border-radius: 999px;
+    background: var(--paper-raised);
+    cursor: pointer;
+}
+.switch::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--paper-muted);
+    transition: transform 150ms;
+}
+.switch:checked {
+    border-color: var(--primary-bg);
+    background: var(--primary-bg);
+}
+.switch:checked::after {
+    background: var(--primary-ink);
+    transform: translateX(20px);
+}
+.switch:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+}
+
+/* The small cards: the word-language picker under its pill, the hint question beside its square. */
+dialog.pop {
+    position: fixed;
+    inset: auto;
+    top: 60px;
+    left: 12px;
+    width: min(18rem, calc(100% - 24px));
+    max-width: calc(100% - 24px);
+    max-height: calc(100% - 16px);
+    margin: 0;
+    border: 1px solid var(--paper-line);
+    border-radius: 18px;
+    background: var(--paper);
+    box-shadow:
+        0 18px 44px var(--shadow),
+        0 2px 6px var(--shadow);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+dialog.pop[open] {
+    display: block;
+    animation: pop-in 170ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+@keyframes pop-in {
+    from {
+        transform: translateY(-6px) scale(0.96);
+        opacity: 0;
+    }
+}
+dialog.pop::backdrop {
+    background: var(--scrim);
+    opacity: 0.55;
+}
+.pop-in {
+    padding: 0.85rem 0.5rem 0.8rem;
+}
+.pop-title {
+    margin: 0 0.75rem 0.45rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+.lang-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.lang-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    min-height: 52px;
+    padding: 0.5rem 0.75rem;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--paper-ink);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+    cursor: pointer;
+}
+.lang-row:hover {
+    background: var(--paper-raised);
+}
+.lang-row .tick {
+    flex: none;
+    width: calc(1.4rem * var(--tz));
+    height: calc(1.4rem * var(--tz));
+    stroke-width: 2.6;
+    visibility: hidden;
+}
+.lang-row[aria-current="true"] {
+    background: var(--paper-raised);
+    background: color-mix(in srgb, var(--primary-bg) 13%, var(--paper));
+    color: var(--accent-ink);
+    font-weight: 800;
+}
+.lang-row[aria-current="true"] .tick {
+    visibility: visible;
+}
+:root.contrast .lang-row[aria-current="true"] {
+    box-shadow: inset 0 0 0 2px var(--primary-bg);
+}
+.pop-note {
+    margin: 0.55rem 0.75rem 0;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--paper-line);
+    color: var(--paper-muted);
+    font-size: 0.9rem;
+    line-height: 1.35;
+}
+#dlg-ask .pop-title {
+    font-size: 1rem;
+}
+#dlg-ask .pop-note {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+.pop-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin: 0.75rem 0.5rem 0;
+}
+
+/* calendar */
+.cal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+.cal-head h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    text-align: center;
+}
+.cal-nav:disabled {
+    opacity: 0.3;
+}
+.cal {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+    margin-top: 0.25rem;
+    text-align: center;
+}
+.cal .wd {
+    padding: 0.25rem 0;
+    color: var(--paper-muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+.cal .d {
+    position: relative;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: var(--paper-raised);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+}
+.cal .d.solved {
+    background: var(--primary-bg);
+    color: var(--primary-ink);
+}
+.cal .d.solved::after {
+    content: "✓";
+    position: absolute;
+    top: 1px;
+    right: 4px;
+    font-size: 0.75em;
+    line-height: 1;
+}
+.cal .d.started {
+    border-color: var(--primary-bg);
+}
+.cal .d.today {
+    outline: 2px solid var(--paper-ink);
+    outline-offset: 1px;
+}
+.cal .d:disabled {
+    background: transparent;
+    color: var(--paper-muted);
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* word book */
+.words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.25rem 0 0.5rem;
+    padding: 0;
+    list-style: none;
+}
+.words li {
+    padding: 0.3rem 0.65rem;
+    border-radius: 10px;
+    background: var(--paper-raised);
+    font-weight: 700;
+    font-size: calc(1rem * min(var(--ls), 1.3));
+    letter-spacing: 0.04em;
+}
+.book-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: stretch;
+    margin-bottom: 0.5rem;
+}
+.book-tools[hidden] {
+    display: none;
+}
+.search {
+    flex: 1 1 12rem;
+    display: flex;
+}
+.search input {
+    flex: 1;
+    min-height: 52px;
+    padding: 0.25rem 0.9rem;
+    border: 2px solid var(--paper-muted);
+    border-radius: 14px;
+    background: var(--paper);
+}
+.book-tools .seg {
+    flex: 1 1 12rem;
+}
+.empty {
+    padding: 1rem;
+    border-radius: 12px;
+    background: var(--paper-raised);
+}
+.empty[hidden] {
+    display: none;
+}
+
+/* statistics */
+.stats {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+}
+.stats th,
+.stats td {
+    padding: 0.5rem 0.25rem;
+    border-bottom: 1px solid var(--paper-line);
+    text-align: right;
+}
+.stats tbody th {
+    text-align: left;
+    font-weight: 600;
+}
+.stats thead th {
+    font-size: 0.9rem;
+    color: var(--paper-muted);
+}
+
+/* solved */
+.summary {
+    margin: 0.25rem 0;
+    padding-left: 1.2rem;
+}
+.summary li {
+    margin: 0.3rem 0;
+    font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ---- the jar: the hidden words' count and the way to the next free hint ---- */
+.jar {
+    width: 30px;
+    height: 36px;
+}
+.jar-art {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+.jar-back {
+    fill: rgba(255, 255, 255, 0.12);
+}
+.jar-glass {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.6;
+    stroke-linejoin: round;
+}
+.jar-lid {
+    fill: currentColor;
+}
+.jar-fill {
+    fill: var(--ring);
+}
+.jar-shine {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.55);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+}
+.jar.all .jar-lid {
+    fill: var(--ring);
+}
+.jar.pop {
+    animation: jar-pop 440ms cubic-bezier(0.34, 1.6, 0.64, 1);
+}
+.jar.pop-light {
+    animation: jar-pop-light 300ms ease-out;
+}
+.jar.nudge {
+    animation: nudge-x 320ms ease-in-out;
+}
+.jar.glow .jar-glass,
+.jar.lit .jar-glass {
+    stroke: var(--ring);
+}
+@keyframes jar-pop {
+    0% {
+        transform: scale(1);
+    }
+    45% {
+        transform: scale(1.35) rotate(-6deg);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes jar-pop-light {
+    50% {
+        transform: scale(1.15);
+    }
+}
+@keyframes nudge-x {
+    25% {
+        transform: translateX(-4px);
+    }
+    75% {
+        transform: translateX(4px);
+    }
+}
+.badge.plus {
+    transform: translate(78%, -38%);
+}
+.badge.plus.rise {
+    animation: rise 1300ms ease-out both;
+}
+@keyframes rise {
+    0% {
+        transform: translate(78%, calc(-38% + 6px));
+        opacity: 0;
+    }
+    20% {
+        transform: translate(78%, -38%);
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(78%, calc(-38% - 10px));
+        opacity: 0;
+    }
+}
+.badge[hidden] {
+    display: none;
+}
+.jar-label {
+    text-wrap: balance;
+}
+
+/* Letters flying from the word to the crossword or the jar; they never take a touch. */
+.fx {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    overflow: hidden;
+}
+.flyer {
+    position: fixed;
+    display: grid;
+    place-items: center;
+    border-radius: 28%;
+    background: var(--tile-on);
+    color: var(--tile-on-ink);
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 4px 12px var(--shadow);
+    will-change: transform, opacity;
+}
+.flyer.light {
+    background: var(--ring);
+    color: #1a1400;
+}
+
+/* How to play: the short version first. */
+.tldr {
+    margin: 0.5rem 0 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
+    background: var(--paper-raised);
+}
+.tldr h3 {
+    margin-top: 0;
+}
+.tldr ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+.tldr li {
+    margin: 0.35rem 0;
+    font-weight: 600;
+}
+.tldr li.tip {
+    list-style: none;
+    margin-left: -1.2rem;
+    color: var(--accent-ink);
+}
+.opt[hidden] {
+    display: none;
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Word Wheel: a white letter wheel with six round letters; a dark path joins three of them, the way a word is
+       swiped. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B44E14"/>
+      <stop offset="1" stop-color="#93390A"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <circle cx="96" cy="106" r="66" fill="#000" fill-opacity="0.2"/>
+  <circle cx="96" cy="98" r="66" fill="#FFFFFF"/>
+  <g fill="#F2DCCB">
+    <circle cx="96" cy="56" r="14"/>
+    <circle cx="132.4" cy="77" r="14"/>
+    <circle cx="132.4" cy="119" r="14"/>
+    <circle cx="96" cy="140" r="14"/>
+    <circle cx="59.6" cy="119" r="14"/>
+    <circle cx="59.6" cy="77" r="14"/>
+  </g>
+  <path d="M59.6 77 L96 140 L132.4 77" fill="none" stroke="#1E2433" stroke-width="12" stroke-linecap="round"
+    stroke-linejoin="round"/>
+  <g fill="#1E2433">
+    <circle cx="59.6" cy="77" r="14"/>
+    <circle cx="96" cy="140" r="14"/>
+    <circle cx="132.4" cy="77" r="14"/>
+  </g>
+  <path d="M160 30 l4.5 9.5 l9.5 4.5 l-9.5 4.5 l-4.5 9.5 l-4.5 -9.5 l-9.5 -4.5 l9.5 -4.5 z" fill="#FFC531"/>
+</svg>

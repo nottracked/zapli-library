@@ -1,0 +1,1116 @@
+{
+  "spec": "zapli/0.2",
+  "app": {
+    "id": "library/loyalty-cards",
+    "kind": "web",
+    "name": "Loyalty cards",
+    "version": "3.1.1",
+    "icon": "wallet",
+    "category": "shopping",
+    "ageRating": "everyone",
+    "license": "GPL-3.0-or-later",
+    "iconData": "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"
+  },
+  "theme": {
+    "seedColor": "#5E35B1",
+    "shape": "extraRounded"
+  },
+  "i18n": {
+    "defaultLocale": "en",
+    "strings": {
+      "scanPurpose": {
+        "en": "Add a card by scanning its barcode with the camera",
+        "sk": "Pridať kartu naskenovaním jej čiarového kódu fotoaparátom"
+      },
+      "brightPurpose": {
+        "en": "Show a card’s code at full brightness and keep the screen on while it is shown",
+        "sk": "Ukázať kód karty pri plnom jase a nechať obrazovku zapnutú, kým je kód zobrazený"
+      },
+      "showCodePurpose": {
+        "en": "Show a card’s code full screen and bright, so the cashier can scan it",
+        "sk": "Zobraziť kód karty na celej obrazovke a jasne, aby ho pri pokladni ľahko naskenovali"
+      },
+      "remindPurpose": {
+        "en": "Remind you a week before a card or voucher expires",
+        "sk": "Pripomenúť vám týždeň vopred, že sa končí platnosť karty alebo poukážky"
+      },
+      "filesPurpose": {
+        "en": "Back up your cards to a file, or add cards from one",
+        "sk": "Zálohovať karty do súboru alebo zo súboru karty pridať"
+      },
+      "sharePurpose": {
+        "en": "Send a card’s code to someone you choose",
+        "sk": "Poslať kód karty niekomu, koho vyberiete"
+      },
+      "widgetPurpose": {
+        "en": "Show your favourite cards on your home screen",
+        "sk": "Zobraziť obľúbené karty na ploche"
+      },
+      "pickPurpose": {
+        "en": "Read a card from a screenshot or photo, or use a photo as a card’s face",
+        "sk": "Načítať kartu zo snímky obrazovky alebo fotky, prípadne použiť fotku ako vzhľad karty"
+      },
+      "cameraPurpose": {
+        "en": "Take a photo of a card’s front or back to keep with it",
+        "sk": "Odfotiť prednú alebo zadnú stranu karty a uložiť ju ku karte"
+      },
+      "filesFlow": {
+        "en": "Your cards, saved as a backup file in a place you choose",
+        "sk": "Vaše karty sa uložia ako záložný súbor na miesto, ktoré vyberiete"
+      },
+      "shareFlow": {
+        "en": "A card’s code and store, when you tap Share",
+        "sk": "Kód a obchod karty, keď klepnete na Zdieľať"
+      },
+      "endsIn": {
+        "en": "Number ending {digits}",
+        "sk": "Číslo končí na {digits}"
+      },
+      "expiredLine": {
+        "en": "Expired {date}",
+        "sk": "Platnosť skončila {date}"
+      },
+      "exported": {
+        "en": "{n, plural, =0 {Saved an empty file.} one {Saved # card.} other {Saved # cards.}}",
+        "sk": "{n, plural, =0 {Uložil sa prázdny súbor.} one {Uložená # karta.} few {Uložené # karty.} many {Uložené # karty.} other {Uložených # kariet.}}"
+      },
+      "expiryTitle": {
+        "en": "{store} card expires soon",
+        "sk": "Platnosť karty {store} čoskoro skončí"
+      },
+      "expiryBody": {
+        "en": "It is valid until {date}.",
+        "sk": "Platí do {date}."
+      },
+      "problemLine": {
+        "en": "Line {row}: {reason}",
+        "sk": "Riadok {row}: {reason}"
+      },
+      "moreProblems": {
+        "en": "{n, plural, one {…and # more row} other {…and # more rows}}",
+        "sk": "{n, plural, one {…a ešte # riadok} few {…a ešte # riadky} many {…a ešte # riadka} other {…a ešte # riadkov}}"
+      },
+      "points": {
+        "en": "{n, plural, one {# point} other {# points}}",
+        "sk": "{n, plural, one {# bod} few {# body} many {# bodu} other {# bodov}}"
+      },
+      "balance": {
+        "en": "Balance {n}",
+        "sk": "Zostatok {n}"
+      },
+      "card": {
+        "en": "Card",
+        "sk": "Karta"
+      },
+      "cards": {
+        "en": "Cards",
+        "sk": "Karty"
+      },
+      "store": {
+        "en": "Store",
+        "sk": "Obchod"
+      },
+      "cardNumber": {
+        "en": "Card number",
+        "sk": "Číslo karty"
+      },
+      "thatIsTooLong": {
+        "en": "That is too long for a card number.",
+        "sk": "Na číslo karty je to príliš dlhé."
+      },
+      "ean13Needs12": {
+        "en": "EAN-13 needs 12 or 13 digits.",
+        "sk": "EAN-13 potrebuje 12 alebo 13 číslic."
+      },
+      "lastDigitThisEan": {
+        "en": "The last digit of this EAN-13 doesn’t match the rest of the number. Check the number.",
+        "sk": "Posledná číslica tohto kódu EAN-13 nesedí so zvyškom čísla. Overte číslo."
+      },
+      "ean8Needs7": {
+        "en": "EAN-8 needs 7 or 8 digits.",
+        "sk": "EAN-8 potrebuje 7 alebo 8 číslic."
+      },
+      "lastDigitThisEan2": {
+        "en": "The last digit of this EAN-8 doesn’t match the rest of the number. Check the number.",
+        "sk": "Posledná číslica tohto kódu EAN-8 nesedí so zvyškom čísla. Overte číslo."
+      },
+      "upcNeeds1112": {
+        "en": "UPC-A needs 11 or 12 digits.",
+        "sk": "UPC-A potrebuje 11 alebo 12 číslic."
+      },
+      "lastDigitThisUpc": {
+        "en": "The last digit of this UPC-A doesn’t match the rest of the number. Check the number.",
+        "sk": "Posledná číslica tohto kódu UPC-A nesedí so zvyškom čísla. Overte číslo."
+      },
+      "upcENeeds6": {
+        "en": "UPC-E needs 6 digits, or 7 or 8 starting with 0 or 1.",
+        "sk": "UPC-E potrebuje 6 číslic, alebo 7 či 8 číslic so začiatočnou 0 alebo 1."
+      },
+      "lastDigitThisUpc2": {
+        "en": "The last digit of this UPC-E doesn’t match the rest of the number. Check the number.",
+        "sk": "Posledná číslica tohto kódu UPC-E nesedí so zvyškom čísla. Overte číslo."
+      },
+      "code39TakesCapital": {
+        "en": "Code 39 takes capital letters, digits, spaces and - . $ / + %.",
+        "sk": "Code 39 prijíma veľké písmená, číslice, medzery a - . $ / + %."
+      },
+      "code128TakesPlain": {
+        "en": "Code 128 takes plain letters, digits and symbols.",
+        "sk": "Code 128 prijíma písmená bez diakritiky, číslice a symboly."
+      },
+      "code93TakesPlain": {
+        "en": "Code 93 takes plain letters, digits and symbols.",
+        "sk": "Code 93 prijíma písmená bez diakritiky, číslice a symboly."
+      },
+      "codabarTakesDigitsWith": {
+        "en": "Codabar takes digits and - $ : / . +, with A, B, C or D at both ends or at neither.",
+        "sk": "Codabar prijíma číslice a - $ : / . +, s písmenom A, B, C alebo D na oboch koncoch alebo na žiadnom."
+      },
+      "itfNeedsEvenNumber": {
+        "en": "ITF needs an even number of digits, at least 6.",
+        "sk": "ITF potrebuje párny počet číslic, aspoň 6."
+      },
+      "barcodeType": {
+        "en": "Barcode type",
+        "sk": "Typ čiarového kódu"
+      },
+      "automatic": {
+        "en": "Automatic",
+        "sk": "Automaticky"
+      },
+      "qrCode": {
+        "en": "QR code",
+        "sk": "QR kód"
+      },
+      "nameCard": {
+        "en": "Name on the card",
+        "sk": "Meno na karte"
+      },
+      "kindShop": {
+        "en": "Kind of shop",
+        "sk": "Druh obchodu"
+      },
+      "groceries": {
+        "en": "Groceries",
+        "sk": "Potraviny"
+      },
+      "shop": {
+        "en": "Shop",
+        "sk": "Obchod"
+      },
+      "clothesShoes": {
+        "en": "Clothes and shoes",
+        "sk": "Oblečenie a obuv"
+      },
+      "pharmacy": {
+        "en": "Pharmacy",
+        "sk": "Lekáreň"
+      },
+      "beauty": {
+        "en": "Beauty",
+        "sk": "Kozmetika a drogéria"
+      },
+      "fuelCar": {
+        "en": "Fuel and car",
+        "sk": "Palivo a auto"
+      },
+      "homeDiy": {
+        "en": "Home and DIY",
+        "sk": "Domácnosť a hobby"
+      },
+      "electronics": {
+        "en": "Electronics",
+        "sk": "Elektronika"
+      },
+      "books": {
+        "en": "Books",
+        "sk": "Knihy"
+      },
+      "foodDrink": {
+        "en": "Food and drink",
+        "sk": "Jedlo a nápoje"
+      },
+      "coffee": {
+        "en": "Coffee",
+        "sk": "Káva"
+      },
+      "travel": {
+        "en": "Travel",
+        "sk": "Cestovanie"
+      },
+      "sportGym": {
+        "en": "Sport and gym",
+        "sk": "Šport a fitnes"
+      },
+      "pets": {
+        "en": "Pets",
+        "sk": "Zvieratá"
+      },
+      "kids": {
+        "en": "Kids",
+        "sk": "Deti"
+      },
+      "library": {
+        "en": "Library",
+        "sk": "Knižnica"
+      },
+      "membership": {
+        "en": "Membership",
+        "sk": "Členstvo"
+      },
+      "voucherGiftCard": {
+        "en": "Voucher or gift card",
+        "sk": "Poukážka alebo darčeková karta"
+      },
+      "pointsBalance": {
+        "en": "Points or balance",
+        "sk": "Body alebo zostatok"
+      },
+      "validUntil": {
+        "en": "Valid until",
+        "sk": "Platná do"
+      },
+      "note": {
+        "en": "Note",
+        "sk": "Poznámka"
+      },
+      "colour": {
+        "en": "Colour",
+        "sk": "Farba"
+      },
+      "pictureCard": {
+        "en": "Picture of the card",
+        "sk": "Obrázok karty"
+      },
+      "archived": {
+        "en": "Archived",
+        "sk": "Archivovaná"
+      },
+      "timesShown2": {
+        "en": "Times shown",
+        "sk": "Počet zobrazení"
+      },
+      "lastShown": {
+        "en": "Last shown",
+        "sk": "Naposledy zobrazená"
+      },
+      "expired": {
+        "en": "Expired",
+        "sk": "Platnosť skončila"
+      },
+      "pinned": {
+        "en": "Pinned",
+        "sk": "Pripnutá"
+      },
+      "favourite": {
+        "en": "Favourite",
+        "sk": "Obľúbená"
+      },
+      "storeId": {
+        "en": "Store in the list",
+        "sk": "Obchod v zozname"
+      },
+      "remind": {
+        "en": "Remind me before it expires",
+        "sk": "Pripomenúť pred koncom platnosti"
+      },
+      "importLog": {
+        "en": "Import",
+        "sk": "Import"
+      },
+      "importLogs": {
+        "en": "Imports",
+        "sk": "Importy"
+      },
+      "importedAt": {
+        "en": "Imported",
+        "sk": "Importované"
+      },
+      "added": {
+        "en": "Added",
+        "sk": "Pridané"
+      },
+      "duplicates": {
+        "en": "Already there",
+        "sk": "Už existujúce"
+      },
+      "skippedRows": {
+        "en": "Rows left out",
+        "sk": "Vynechané riadky"
+      },
+      "problems": {
+        "en": "Problems",
+        "sk": "Problémy"
+      },
+      "favouriteCards": {
+        "en": "Favourite cards",
+        "sk": "Obľúbené karty"
+      }
+    }
+  },
+  "web": {
+    "routes": {
+      "wallet": "#/",
+      "add": "#/add"
+    },
+    "orientation": "any"
+  },
+  "permissions": {
+    "scan.barcode": {
+      "purpose": "@scanPurpose",
+      "formats": [
+        "qr",
+        "ean13",
+        "ean8",
+        "upcA",
+        "upcE",
+        "code128",
+        "code39",
+        "dataMatrix",
+        "pdf417",
+        "aztec",
+        "codabar",
+        "code93",
+        "itf"
+      ]
+    },
+    "device.ux": {
+      "purpose": "@brightPurpose"
+    },
+    "barcode.render": {
+      "purpose": "@showCodePurpose"
+    },
+    "notify.local": {
+      "purpose": "@remindPurpose",
+      "maxPerDay": 3
+    },
+    "files.io": {
+      "purpose": "@filesPurpose",
+      "modes": ["import", "export"]
+    },
+    "share": {
+      "purpose": "@sharePurpose"
+    },
+    "widget.home": {
+      "purpose": "@widgetPurpose"
+    },
+    "media.pick": {
+      "purpose": "@pickPurpose",
+      "optional": true
+    },
+    "camera.photo": {
+      "purpose": "@cameraPurpose",
+      "optional": true
+    }
+  },
+  "dataFlows": [
+    {
+      "from": ["*"],
+      "to": "files.io",
+      "purpose": "@filesFlow"
+    },
+    {
+      "from": ["*"],
+      "to": "share",
+      "purpose": "@shareFlow"
+    }
+  ],
+  "entities": {
+    "card": {
+      "label": "@card",
+      "labelPlural": "@cards",
+      "unique": [["store", "number"]],
+      "sort": ["-pinned", "-uses", "store"],
+      "display": {
+        "title": "=item.store",
+        "subtitle": "=item.expired ? t('expiredLine', {'date': formatDate(item.expires, 'yMMMd')}) : t('endsIn', {'digits': substring(item.number, max(size(item.number) - 4, 0))})",
+        "trailing": "=has(item.points) ? formatNumber(item.points) : ''",
+        "icon": "=coalesce(optionIcon(item.group), 'storefront')",
+        "tone": "=item.expired ? 'warning' : null"
+      },
+      "fields": {
+        "store": {
+          "type": "text",
+          "label": "@store",
+          "required": true,
+          "maxLength": 60,
+          "kind": "name"
+        },
+        "number": {
+          "type": "barcode",
+          "label": "@cardNumber",
+          "required": true,
+          "kind": "loyaltyCard",
+          "sensitivity": "personal",
+          "checks": [
+            {
+              "condition": "=size(item.number) <= 300",
+              "message": "@thatIsTooLong"
+            },
+            {
+              "condition": "=item.format != 'ean13' || item.number.matches(r'^[0-9]{12,13}$')",
+              "message": "@ean13Needs12"
+            },
+            {
+              "condition": "=item.format != 'ean13' || !item.number.matches(r'^[0-9]{13}$') || checkDigitValid(item.number, 'ean13')",
+              "message": "@lastDigitThisEan"
+            },
+            {
+              "condition": "=item.format != 'ean8' || item.number.matches(r'^[0-9]{7,8}$')",
+              "message": "@ean8Needs7"
+            },
+            {
+              "condition": "=item.format != 'ean8' || !item.number.matches(r'^[0-9]{8}$') || checkDigitValid(item.number, 'ean8')",
+              "message": "@lastDigitThisEan2"
+            },
+            {
+              "condition": "=item.format != 'upcA' || item.number.matches(r'^[0-9]{11,12}$')",
+              "message": "@upcNeeds1112"
+            },
+            {
+              "condition": "=item.format != 'upcA' || !item.number.matches(r'^[0-9]{12}$') || checkDigitValid(item.number, 'upcA')",
+              "message": "@lastDigitThisUpc"
+            },
+            {
+              "condition": "=item.format != 'upcE' || item.number.matches(r'^([0-9]{6}|[01][0-9]{6,7})$')",
+              "message": "@upcENeeds6"
+            },
+            {
+              "condition": "=item.format != 'upcE' || !item.number.matches(r'^[01][0-9]{7}$') || checkDigitValid(item.number, 'upcE')",
+              "message": "@lastDigitThisUpc2"
+            },
+            {
+              "condition": "=item.format != 'code39' || item.number.matches(r'^[0-9A-Z .$/+%-]+$')",
+              "message": "@code39TakesCapital"
+            },
+            {
+              "condition": "=item.format != 'code128' || item.number.matches(r'^[ -~]+$')",
+              "message": "@code128TakesPlain"
+            },
+            {
+              "condition": "=item.format != 'code93' || item.number.matches(r'^[ -~]+$')",
+              "message": "@code93TakesPlain"
+            },
+            {
+              "condition": "=item.format != 'codabar' || item.number.matches(r'^([A-D][0-9$:/.+-]{2,}[A-D]|[0-9$:/.+-]{2,})$')",
+              "message": "@codabarTakesDigitsWith"
+            },
+            {
+              "condition": "=item.format != 'itf' || item.number.matches(r'^([0-9][0-9]){3,}$')",
+              "message": "@itfNeedsEvenNumber"
+            }
+          ]
+        },
+        "format": {
+          "type": "choice",
+          "label": "@barcodeType",
+          "required": true,
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "@automatic",
+              "icon": "barcode"
+            },
+            {
+              "value": "code128",
+              "label": "Code 128",
+              "icon": "barcode"
+            },
+            {
+              "value": "ean13",
+              "label": "EAN-13",
+              "icon": "barcode"
+            },
+            {
+              "value": "ean8",
+              "label": "EAN-8",
+              "icon": "barcode"
+            },
+            {
+              "value": "upcA",
+              "label": "UPC-A",
+              "icon": "barcode"
+            },
+            {
+              "value": "upcE",
+              "label": "UPC-E",
+              "icon": "barcode"
+            },
+            {
+              "value": "code39",
+              "label": "Code 39",
+              "icon": "barcode"
+            },
+            {
+              "value": "qr",
+              "label": "@qrCode",
+              "icon": "qr_code_2"
+            },
+            {
+              "value": "dataMatrix",
+              "label": "Data Matrix",
+              "icon": "qr_code"
+            },
+            {
+              "value": "pdf417",
+              "label": "PDF417",
+              "icon": "barcode"
+            },
+            {
+              "value": "aztec",
+              "label": "Aztec",
+              "icon": "qr_code"
+            },
+            {
+              "value": "codabar",
+              "label": "Codabar",
+              "icon": "barcode"
+            },
+            {
+              "value": "code93",
+              "label": "Code 93",
+              "icon": "barcode"
+            },
+            {
+              "value": "itf",
+              "label": "ITF (Interleaved 2 of 5)",
+              "icon": "barcode"
+            }
+          ]
+        },
+        "holder": {
+          "type": "text",
+          "label": "@nameCard",
+          "maxLength": 60,
+          "kind": "name",
+          "sensitivity": "personal"
+        },
+        "group": {
+          "type": "choice",
+          "label": "@kindShop",
+          "options": [
+            {
+              "value": "shopping_cart",
+              "label": "@groceries",
+              "icon": "shopping_cart",
+              "hue": "green"
+            },
+            {
+              "value": "storefront",
+              "label": "@shop",
+              "icon": "storefront",
+              "hue": "indigo"
+            },
+            {
+              "value": "shopping_bag",
+              "label": "@clothesShoes",
+              "icon": "shopping_bag",
+              "hue": "violet"
+            },
+            {
+              "value": "medication",
+              "label": "@pharmacy",
+              "icon": "medication",
+              "hue": "red"
+            },
+            {
+              "value": "spa",
+              "label": "@beauty",
+              "icon": "spa",
+              "hue": "pink"
+            },
+            {
+              "value": "directions_car",
+              "label": "@fuelCar",
+              "icon": "directions_car",
+              "hue": "blue"
+            },
+            {
+              "value": "handyman",
+              "label": "@homeDiy",
+              "icon": "handyman",
+              "hue": "orange"
+            },
+            {
+              "value": "keyboard",
+              "label": "@electronics",
+              "icon": "keyboard",
+              "hue": "grey"
+            },
+            {
+              "value": "menu_book",
+              "label": "@books",
+              "icon": "menu_book",
+              "hue": "amber"
+            },
+            {
+              "value": "restaurant",
+              "label": "@foodDrink",
+              "icon": "restaurant",
+              "hue": "orange"
+            },
+            {
+              "value": "local_cafe",
+              "label": "@coffee",
+              "icon": "local_cafe",
+              "hue": "brown"
+            },
+            {
+              "value": "flight",
+              "label": "@travel",
+              "icon": "flight",
+              "hue": "cyan"
+            },
+            {
+              "value": "fitness_center",
+              "label": "@sportGym",
+              "icon": "fitness_center",
+              "hue": "lime"
+            },
+            {
+              "value": "pets",
+              "label": "@pets",
+              "icon": "pets",
+              "hue": "cyan"
+            },
+            {
+              "value": "child_care",
+              "label": "@kids",
+              "icon": "child_care",
+              "hue": "pink"
+            },
+            {
+              "value": "book",
+              "label": "@library",
+              "icon": "book",
+              "hue": "teal"
+            },
+            {
+              "value": "badge",
+              "label": "@membership",
+              "icon": "badge",
+              "hue": "indigo"
+            },
+            {
+              "value": "sell",
+              "label": "@voucherGiftCard",
+              "icon": "sell",
+              "hue": "violet"
+            }
+          ]
+        },
+        "points": {
+          "type": "number",
+          "label": "@pointsBalance",
+          "min": 0
+        },
+        "expires": {
+          "type": "date",
+          "label": "@validUntil"
+        },
+        "note": {
+          "type": "longText",
+          "label": "@note",
+          "maxLength": 500
+        },
+        "color": {
+          "type": "color",
+          "label": "@colour"
+        },
+        "picture": {
+          "type": "image",
+          "label": "@pictureCard"
+        },
+        "pinned": {
+          "type": "boolean",
+          "label": "@favourite",
+          "default": false
+        },
+        "archived": {
+          "type": "boolean",
+          "label": "@archived",
+          "default": false
+        },
+        "uses": {
+          "type": "integer",
+          "label": "@timesShown2",
+          "default": 0,
+          "min": 0,
+          "merge": "counter",
+          "editable": false
+        },
+        "lastUsed": {
+          "type": "datetime",
+          "label": "@lastShown",
+          "editable": false
+        },
+        "brand": {
+          "type": "text",
+          "label": "@storeId",
+          "maxLength": 40
+        },
+        "remind": {
+          "type": "boolean",
+          "label": "@remind",
+          "default": true
+        },
+        "expired": {
+          "type": "boolean",
+          "label": "@expired",
+          "compute": "=has(item.expires) && item.expires < today()"
+        }
+      }
+    },
+    "importLog": {
+      "label": "@importLog",
+      "labelPlural": "@importLogs",
+      "sort": ["-at"],
+      "display": {
+        "title": "=formatDate(item.at, 'yMMMd')"
+      },
+      "fields": {
+        "at": {
+          "type": "datetime",
+          "label": "@importedAt",
+          "required": true
+        },
+        "added": {
+          "type": "integer",
+          "label": "@added",
+          "default": 0
+        },
+        "duplicates": {
+          "type": "integer",
+          "label": "@duplicates",
+          "default": 0
+        },
+        "skipped": {
+          "type": "integer",
+          "label": "@skippedRows",
+          "default": 0
+        },
+        "problems": {
+          "type": "longText",
+          "label": "@problems",
+          "maxLength": 5000
+        }
+      }
+    }
+  },
+  "queries": {
+    "top": {
+      "entity": "card",
+      "where": "=!item.archived",
+      "sort": ["-pinned", "-uses", "-lastUsed", "store"],
+      "limit": 5
+    },
+    "allCards": {
+      "entity": "card",
+      "sort": ["store"],
+      "limit": 2000
+    }
+  },
+  "actions": {
+    "screenOn": {
+      "args": {
+        "on": {
+          "type": "boolean",
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "device.ux",
+          "action": "keepScreenOn",
+          "args": {
+            "enabled": "=args.on"
+          },
+          "onError": "continue"
+        },
+        {
+          "type": "capability",
+          "capability": "device.ux",
+          "action": "maxBrightness",
+          "args": {
+            "enabled": "=args.on"
+          }
+        }
+      ]
+    },
+    "showCode": {
+      "args": {
+        "card": {
+          "type": "ref",
+          "to": "card",
+          "required": true
+        },
+        "format": {
+          "type": "text",
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "barcode.render",
+          "action": "show",
+          "args": {
+            "value": "=args.card.number",
+            "format": "=args.format",
+            "title": "=args.card.store"
+          },
+          "onError": "continue",
+          "errorAs": "showError"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.showError != null && vars.showError.code != 'CANCELLED'",
+          "text": "=coalesce(vars.showError.message, '')"
+        }
+      ]
+    },
+    "markUsed": {
+      "args": {
+        "card": {
+          "type": "ref",
+          "to": "card",
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.card",
+          "increment": {
+            "uses": 1
+          },
+          "set": {
+            "lastUsed": "=now()"
+          }
+        }
+      ]
+    },
+    "exportCards": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "exportCsv",
+          "args": {
+            "query": "allCards",
+            "fileName": "='cards-' + string(today()) + '.csv'",
+            "columns": [
+              "store",
+              "number",
+              "format",
+              "holder",
+              "group",
+              "points",
+              "expires",
+              "note",
+              "pinned",
+              "archived",
+              "brand",
+              "remind"
+            ]
+          },
+          "as": "saved"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.saved.saved",
+          "text": "=t('exported', {'n': coalesce(vars.saved.rows, 0)})"
+        }
+      ]
+    },
+    "importCards": {
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "importCsv",
+          "args": {
+            "entity": "card",
+            "fields": {
+              "store": {
+                "from": ["Store", "Shop", "Merchant", "Store name", "Retailer", "Obchod"]
+              },
+              "number": {
+                "from": [
+                  "barcodeid",
+                  "cardid",
+                  "Card number",
+                  "Card ID",
+                  "Number",
+                  "Member number",
+                  "Membership number",
+                  "Code",
+                  "Barcode",
+                  "Číslo karty"
+                ]
+              },
+              "format": {
+                "from": ["Barcode type", "Barcode format", "Format", "Typ čiarového kódu"],
+                "values": {
+                  "*": "auto",
+                  "Automatic": "auto",
+                  "Automaticky": "auto",
+                  "QR code": "qr",
+                  "QR kód": "qr",
+                  "ITF (Interleaved 2 of 5)": "itf"
+                }
+              },
+              "holder": {
+                "from": ["Name on the card", "Card holder", "Holder", "Meno na karte"]
+              },
+              "group": {
+                "values": {
+                  "Groceries": "shopping_cart",
+                  "Potraviny": "shopping_cart",
+                  "Shop": "storefront",
+                  "Obchod": "storefront",
+                  "Clothes and shoes": "shopping_bag",
+                  "Oblečenie a obuv": "shopping_bag",
+                  "Pharmacy": "medication",
+                  "Lekáreň": "medication",
+                  "Beauty": "spa",
+                  "Kozmetika": "spa",
+                  "Fuel and car": "directions_car",
+                  "Palivo a auto": "directions_car",
+                  "Home and DIY": "handyman",
+                  "Domácnosť a hobby": "handyman",
+                  "Electronics": "keyboard",
+                  "Elektronika": "keyboard",
+                  "Books": "menu_book",
+                  "Knihy": "menu_book",
+                  "Food and drink": "restaurant",
+                  "Jedlo a nápoje": "restaurant",
+                  "Coffee": "local_cafe",
+                  "Káva": "local_cafe",
+                  "Travel": "flight",
+                  "Cestovanie": "flight",
+                  "Sport and gym": "fitness_center",
+                  "Šport a fitnes": "fitness_center",
+                  "Zvieratá": "pets",
+                  "Kids": "child_care",
+                  "Deti": "child_care",
+                  "Library": "book",
+                  "Knižnica": "book",
+                  "Membership": "badge",
+                  "Členstvo": "badge",
+                  "Voucher or gift card": "sell",
+                  "Poukážka alebo darčeková karta": "sell",
+                  "Kozmetika a drogéria": "spa",
+                  "Pets": "pets"
+                },
+                "from": ["Kind of shop", "Group", "Category", "Druh obchodu"]
+              },
+              "points": {
+                "from": ["Points or balance", "Points", "Balance", "Body alebo zostatok"]
+              },
+              "expires": {
+                "from": ["Valid until", "Expiry date", "Expiry", "Expires", "Platná do"]
+              },
+              "note": {
+                "from": ["Note", "Notes", "Comment", "Poznámka"]
+              },
+              "pinned": {
+                "from": [
+                  "Favourite",
+                  "Obľúbená",
+                  "Pin to the top",
+                  "Pripnúť navrch",
+                  "starstatus",
+                  "Favorite",
+                  "Starred"
+                ]
+              },
+              "archived": {
+                "from": ["Archived", "archive", "Archivovaná"]
+              },
+              "lastUsed": {
+                "from": ["Last shown", "lastused", "Last used", "Naposledy zobrazená"],
+                "values": {
+                  "0": ""
+                }
+              },
+              "brand": {
+                "from": ["Store in the list", "Obchod v zozname", "Brand"]
+              },
+              "remind": {
+                "from": ["Remind me before it expires", "Pripomenúť pred koncom platnosti"]
+              }
+            },
+            "onDuplicate": "skip",
+            "key": ["store", "number"],
+            "onError": "skip"
+          },
+          "as": "imported"
+        },
+        {
+          "type": "createRecord",
+          "entity": "importLog",
+          "values": {
+            "at": "=now()",
+            "added": "=vars.imported.added",
+            "duplicates": "=vars.imported.duplicates",
+            "skipped": "=vars.imported.skipped",
+            "problems": "=join(take(vars.imported.problems, 8).map(p, t('problemLine', {'row': p.row, 'reason': p.reason})), '\\n') + (vars.imported.skipped > 8 ? '\\n' + t('moreProblems', {'n': vars.imported.skipped - 8}) : '')"
+          }
+        }
+      ]
+    },
+    "remindExpiry": {
+      "args": {
+        "card": {
+          "type": "ref",
+          "to": "card"
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "notify.local",
+          "action": "show",
+          "args": {
+            "title": "=t('expiryTitle', {'store': args.card.store})",
+            "body": "=t('expiryBody', {'date': formatDate(args.card.expires, 'yMMMd')})",
+            "open": {
+              "route": "wallet"
+            },
+            "tag": "='expiry-' + string(args.card.id)",
+            "channel": "expiry"
+          }
+        }
+      ]
+    }
+  },
+  "triggers": {
+    "expirySoon": {
+      "type": "recordTime",
+      "entity": "card",
+      "at": "=has(item.expires) ? timestamp(string(addDays(item.expires, -7)) + 'T09:00') : null",
+      "ifPast": "now",
+      "when": "=coalesce(item.remind, true) && has(item.expires) && item.expires >= today() && !item.archived",
+      "do": "remindExpiry",
+      "args": {
+        "card": "=item.id"
+      },
+      "maxPerDay": 3
+    }
+  },
+  "widgets": {
+    "topCards": {
+      "template": "list",
+      "title": "@favouriteCards",
+      "sizes": ["medium", "large"],
+      "query": "top",
+      "label": "=item.store",
+      "caption": "=coalesce(item.holder, '') != '' ? coalesce(item.holder, '') : t('endsIn', {'digits': substring(item.number, max(size(item.number) - 4, 0))})",
+      "icon": "=coalesce(optionIcon(item.group), 'storefront')",
+      "open": "wallet"
+    }
+  }
+}

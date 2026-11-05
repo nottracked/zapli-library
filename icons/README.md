@@ -37,7 +37,7 @@ One set, so the library reads as a sticker sheet:
   the bottom. Expenses leans green and Flashcards blue-green, so the two teal tools tell apart.
 - **Light from the top:** every object casts a hard shadow 8 px straight down (black, 20 %), as the sticker's lift
   does; round and glass things get a highlight at the upper left; a top face is lighter than its side (Flashcards'
-  cap, Gridfire's wings).
+  cap, Litadlo's ship).
 - **Shapes:** bold filled shapes; main lines 12 px with round caps, small marks at least 7 px; corners 12–16 px on cards
   and sheets, 22 px on Mines' tile. No text, no thin lines, no tiny detail: each icon has to read at 48 px.
 - **Colours:** white for the main object, and accents shared by the set: sun yellow `#FFC531`, heart red `#E2333B`,
@@ -46,19 +46,19 @@ One set, so the library reads as a sticker sheet:
   or more on every background, yellow 3:1 or more, red 3.7:1 or more and ink 13:1 or more on what they sit on; the
   marks inside an object 3.2:1 or more (To-do's lines, Water's water).
 
-| Tool           | Shows                                                       | Background (top → bottom) |
-| -------------- | ----------------------------------------------------------- | ------------------------- |
-| Blood pressure | a white heart with a pulse line cut through it              | `#CF302D` → `#B42323`     |
-| Expenses       | a receipt with a gold coin                                  | `#0A7D67` → `#045F50`     |
-| Flashcards     | a stack of index cards, a graduation cap on the front one   | `#087E85` → `#035F66`     |
-| Gridfire       | a ship and its flame over a grid of light that bends        | `#0A6F86` → `#053849`     |
-| Loyalty cards  | a store card with a bold barcode, a second card behind      | `#7A55D4` → `#6040BA`     |
-| Mines          | the game's red flag on a raised square of the field         | `#4C7A54` → `#375E3F`     |
-| Music Player   | two beamed notes in white with a yellow spark               | `#B2367A` → `#8F2560`     |
-| Pocket Scan    | a page inside the camera's four corners, a yellow scan line | `#3563E6` → `#2447B8`     |
-| Solitaire      | two playing cards fanned out: a big red heart and a spade   | `#467762` → `#2E5747`     |
-| To-do          | a list with two items ticked off and one to go              | `#5065CA` → `#3B4EB2`     |
-| Water          | a glass of water with a wave on top                         | `#0475B8` → `#005590`     |
+| Tool           | Shows                                                                                  | Background (top → bottom) |
+| -------------- | -------------------------------------------------------------------------------------- | ------------------------- |
+| Blood pressure | a white heart with a pulse line cut through it                                         | `#CF302D` → `#B42323`     |
+| Expenses       | a receipt with a gold coin                                                             | `#0A7D67` → `#045F50`     |
+| Flashcards     | a stack of index cards, a graduation cap on the front one                              | `#087E85` → `#035F66`     |
+| Litadlo        | the white ship combing a wake through a round pool of light reeds, firing at a pouncer | `#1E4466` → `#0F2238`     |
+| Loyalty cards  | a store card with a bold barcode, a second card behind                                 | `#7A55D4` → `#6040BA`     |
+| Mines          | the game's red flag on a raised square of the field                                    | `#4C7A54` → `#375E3F`     |
+| Music Player   | two beamed notes in white with a yellow spark                                          | `#B2367A` → `#8F2560`     |
+| Pocket Scan    | a page inside the camera's four corners, a yellow scan line                            | `#3563E6` → `#2447B8`     |
+| Solitaire      | two playing cards fanned out: a big red heart and a spade                              | `#467762` → `#2E5747`     |
+| To-do          | a list with two items ticked off and one to go                                         | `#5065CA` → `#3B4EB2`     |
+| Water          | a glass of water with a wave on top                                                    | `#0475B8` → `#005590`     |
 
 Every icon is original, drawn for this library from plain shapes: no other app's or brand's icon, and none of their
 marks (the library's rule 1, [README](../README.md)). They are MIT like the tools.
@@ -81,8 +81,8 @@ new icon to every installed copy. It refuses a PNG over the format's limit of 32
 19,731 bytes.
 
 The embed sets `app.iconData` (plain base64, no `data:` prefix) as the last member of the tool's `app` block, the one
-whose first member is `"id": "library/<tool>"`, in `app.json` or in the `index.html` manifest; an existing
-`iconData` line is replaced. CoreSVG reads paths, rects, circles, ellipses, groups with transforms, opacity and linear
+whose first member is `"id": "library/<tool>"`, in `app.json`, in the `index.html` manifest or in a package app's
+`package/manifest.json` (which its `web.files` does not list); an existing `iconData` line is replaced. CoreSVG reads paths, rects, circles, ellipses, groups with transforms, opacity and linear
 or radial gradients; keep to those (no filters, masks or text). The script refuses an SVG that could reach outside
 itself (`href`, `<image>`, `<script>`, `<foreignObject>`, `@import`, a `url()` other than the file's own `#id`) or
 declares a document type or an entity (`<!DOCTYPE`, `<!ENTITY`: an external entity reads another file, an internal one

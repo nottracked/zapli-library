@@ -3,30 +3,77 @@
   "category": "shopping",
   "replaces": "Loyalty-card wallet",
   "title": "Loyalty cards",
-  "summary": "All your store cards on your phone, ready to scan at the checkout.",
-  "description": "**Loyalty cards** keeps the store cards, membership cards and vouchers from your wallet on your phone, ready for the checkout. No account, no ads, and it works without a connection.\n\n### What it does\n- **Add a card by scanning its barcode** with the camera. The barcode type is detected for you. A card without a usable barcode? Just type the number: the app works out the barcode type from it (EAN-13, EAN-8 or UPC-A for a retail number whose last digit matches, Code 128 for the rest), and you can pick another type when you edit the card.\n- **Show it at the till:** tap a card and its code opens full screen at full brightness, so the cashier can scan it. Close it to see the code again with its number under the bars for typing by hand, plus your points and notes; the kind of shop, barcode type and how often you showed the card are under Details.\n- **Your cards as a wallet of card faces**, each in its own colour (its kind of shop's, or one you pick), with your most-used cards first; pin favourites to the top. Search finds a card by store, number, name or note as you type.\n- **Store, name on the card, kind of shop, colour, points or balance, expiry date and a note** for each card. Expired cards are marked, and you get a reminder a week before a card or voucher runs out, even for one you add in its last week.\n- **Barcode types:** Code 128, EAN-13, EAN-8, UPC-A, UPC-E, Code 39, Code 93, Codabar, ITF (Interleaved 2 of 5), QR code, Data Matrix, PDF417 and Aztec. When you pick a type yourself, the form checks that the number has the right length and characters for it before you save, and for EAN and UPC codes that the last digit matches the rest, so a mistyped number is caught before you get to the till. Imported rows with a mistyped number are left out and listed with the reason.\n- **Archive** cards you no longer use instead of deleting them.\n- **Bring your cards along:** imports a card list CSV with the usual columns (store, card number, barcode type, notes, expiry, points), including the card table that card wallet apps write into their backups. Cards you already have are left as they are, so importing the same file twice adds nothing twice. Back up all your cards to a CSV file, for example for a new phone.\n- **Share** a card’s store and number with someone in your family.\n- **Home-screen widget** with your most-used cards.\n- On phones that support it, add a card from a screenshot or photo: the app reads the barcode in the picture.\n- **In English or Slovak**, following your phone's language.\n\n### What it never does\n- No ads, no tracking, no analytics, no account and no sign-in. Your cards never depend on someone else’s server.\n- It cannot connect to the internet. Nothing leaves your phone unless you share a card or save a backup yourself.\n- It does not hold payment cards. Store and membership cards only.\n\n### Privacy\nThe camera is used only while you scan a card, inside the scanner sheet; the app receives the decoded number, never the camera picture.",
-  "license": "MIT",
-  "tags": ["loyalty cards", "store cards", "membership", "barcode", "wallet", "vouchers", "offline", "slovak"],
+  "summary": "Every store card on your phone: pick the store, scan, show it at the till.",
+  "description": "**Loyalty cards** keeps your store cards, membership cards and vouchers on your phone, ready at the till. No account, no ads, and it works without a connection.\n\n### Add a card in two taps\n- **Pick the store, scan, done.** The popular stores of your country come first (Slovakia, Czechia or an international list, from your phone's language) as colourful card-shaped tiles. Tap one and the scanner opens straight away; the card is saved the moment the barcode is read.\n- **Or scan first.** The code that was read is shown, and one field, **Shop or card name**, finds the store as you type or names a card of your own. Not in the list? Add it under its own name, or save it without a name and name it later.\n- **No scanner at hand?** Type the number under the barcode on the number keypad: the barcode type is worked out from it, and a mistyped last digit is caught before you get to the till. Or read it from a screenshot or photo.\n- Every way ends on your new card, with Undo.\n\n### At the till\n- Tap a card and its code shows big on white, with the number under it in large digits for typing by hand. **Tap the code** and it fills the screen; turn the phone and a barcode runs along the long side. The screen goes to **full brightness and stays on** while the code shows.\n- **Swipe sideways** to the next card without going back.\n- Codes are drawn by the app itself: EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, Codabar, ITF, QR code, Data Matrix, PDF417 and Aztec.\n\n### Your wallet, your order\n- Every card as a face in its store's colour, or with **your own photo** of the card.\n- **Hold a card** to star it as a favourite or move it up or down, or **drag it** where you want it. Favourites stay on top; then most used, last used, A to Z, or **your own order**. Moving works from a card's menu too, without dragging.\n- Search by store, number, name or note.\n- Points or balance, expiry date with a **reminder a week before**, the name on the card, a note, and photos of the front and back.\n- Archive cards you no longer use; share a card's code with someone in your family.\n- A **home-screen widget** with your favourite cards.\n\n### Bring your cards along\n- **From screenshots:** take a screenshot of each card in the app you used before, pick them all at once, and name each one under its picture. The barcode is read on your phone.\n- **From a file:** imports the card list CSV most card wallet apps export (store, card number, barcode type, notes, expiry, points; comma or semicolon), including the card table those apps write into their backups. Cards you already have are left alone.\n- **Back up** all your cards to a CSV file, for example for a new phone.\n\n### What it never does\n- No ads, no tracking, no analytics, no account and no sign-in.\n- It cannot connect to the internet. Nothing leaves your phone unless you share a card or save a backup yourself.\n- It holds no payment cards: store and membership cards only. Store names are shown as plain text in the app's own colours; it ships no logos.\n\nIn English and Slovak, following your phone's language.",
+  "license": "GPL-3.0-or-later",
+  "tags": [
+    "loyalty cards",
+    "store cards",
+    "membership",
+    "barcode",
+    "wallet",
+    "vouchers",
+    "offline",
+    "slovak",
+    "screenshots",
+    "scanner"
+  ],
   "screenshots": [
     {
       "file": "screenshots/01-wallet-light.png",
-      "caption": "All your loyalty cards in one searchable list",
-      "theme": "light"
+      "caption": "Your cards as colourful faces, favourites first",
+      "theme": "light",
+      "sha256": "8eb2d4e6e7e66acd087980260d892d533bb899340cfe3f17143ccd7d82ed13a9",
+      "size": 741321
     },
     {
-      "file": "screenshots/02-card-detail-light.png",
-      "caption": "Show the barcode at the till, with its number, your points and note",
-      "theme": "light"
+      "file": "screenshots/02-add-light.png",
+      "caption": "Tap your store and the scanner opens, or type a name",
+      "theme": "light",
+      "sha256": "151979953554e7f4650ca885cae68cddef9342522bbbd0c3c336dd1dba65c6b5",
+      "size": 376136
     },
     {
-      "file": "screenshots/03-add-card-light.png",
-      "caption": "Add a card by scanning it or typing its number",
-      "theme": "light"
+      "file": "screenshots/03-name-after-scan-light.png",
+      "caption": "After a scan: one field finds the store or names your own card",
+      "theme": "light",
+      "sha256": "7a1416da6f89e854805746af1549ce2648cbe2cd29efc6fac26df0739b1e9856",
+      "size": 143396
     },
     {
-      "file": "screenshots/04-wallet-dark.png",
+      "file": "screenshots/04-till-light.png",
+      "caption": "Saved and shown at once: the code big on white, with Undo",
+      "theme": "light",
+      "sha256": "6fee80cf8b6c4cab41a6967d6cd62a618e593e8909f1c3cc7552ea2ae8c55eac",
+      "size": 154579
+    },
+    {
+      "file": "screenshots/05-rearrange-light.png",
+      "caption": "Hold a card and drag it to put your cards in your own order",
+      "theme": "light",
+      "sha256": "d940776eebd8c7983666bc48c43f989c5406d9a8fed7d4635e86ea47204f1fa0",
+      "size": 729436
+    },
+    {
+      "file": "screenshots/06-photo-face-light.png",
+      "caption": "Your own photo of a card as its face",
+      "theme": "light",
+      "sha256": "9644656f993985e26dc99da569f2fc3384f9f72d29c48351b39ed54b0b7585e4",
+      "size": 740846
+    },
+    {
+      "file": "screenshots/07-wallet-dark.png",
       "caption": "Your wallet in the dark theme",
-      "theme": "dark"
+      "theme": "dark",
+      "sha256": "179d1889fc0ab4d9ebc28479d812455ef1ad6deefcd5c2b3b59ca7b520fb2ee6",
+      "size": 748607
+    },
+    {
+      "file": "screenshots/08-till-dark.png",
+      "caption": "A QR code at the till; swipe sideways for the next card",
+      "theme": "dark",
+      "sha256": "c387c95c4a044b28ea87ba86fecd044e1b524fc74a8ae8f6562000d3e3bd3195",
+      "size": 143744
     }
   ],
   "sampleData": {
@@ -36,9 +83,11 @@
         "number": "2900123456785",
         "format": "ean13",
         "group": "shopping_cart",
-        "points": 1240,
+        "color": "#2A803F",
         "pinned": true,
+        "archived": false,
         "uses": 42,
+        "points": 1240,
         "lastUsed": "2026-10-14T18:05:00+02:00",
         "note": "Double points on Tuesdays."
       },
@@ -47,6 +96,9 @@
         "number": "GB-4471-0093",
         "format": "auto",
         "group": "shopping_cart",
+        "color": "#93C83E",
+        "pinned": false,
+        "archived": false,
         "uses": 31,
         "lastUsed": "2026-10-15T08:40:00+02:00"
       },
@@ -55,8 +107,11 @@
         "number": "BTC-STAMPS-7781",
         "format": "qr",
         "group": "local_cafe",
-        "points": 7,
+        "color": "#6B4733",
+        "pinned": true,
+        "archived": false,
         "uses": 23,
+        "points": 7,
         "lastUsed": "2026-10-15T07:55:00+02:00",
         "note": "Tenth coffee is free."
       },
@@ -65,6 +120,9 @@
         "number": "FS 008812",
         "format": "code39",
         "group": "directions_car",
+        "color": "#1C5FC2",
+        "pinned": false,
+        "archived": false,
         "uses": 17,
         "lastUsed": "2026-10-09T17:20:00+02:00"
       },
@@ -73,8 +131,11 @@
         "number": "2000451183022",
         "format": "ean13",
         "group": "medication",
-        "points": 85,
+        "color": "#0D7A72",
+        "pinned": false,
+        "archived": false,
         "uses": 9,
+        "points": 85,
         "lastUsed": "2026-10-12T12:10:00+02:00"
       },
       {
@@ -82,9 +143,12 @@
         "number": "RG|2026|00071",
         "format": "pdf417",
         "group": "fitness_center",
+        "color": "#5A3EC0",
+        "pinned": false,
+        "archived": false,
+        "uses": 12,
         "holder": "Sam Rivera",
         "expires": "2027-01-31",
-        "uses": 12,
         "lastUsed": "2026-10-13T19:00:00+02:00"
       },
       {
@@ -92,8 +156,11 @@
         "number": "LIB0004417",
         "format": "code39",
         "group": "book",
-        "holder": "Sam Rivera",
+        "color": "#152B5C",
+        "pinned": false,
+        "archived": false,
         "uses": 3,
+        "holder": "Sam Rivera",
         "lastUsed": "2026-10-02T15:30:00+02:00"
       },
       {
@@ -101,17 +168,23 @@
         "number": "PSB:MEMBER:550193",
         "format": "qr",
         "group": "menu_book",
-        "points": 320,
-        "expires": "2026-10-20",
+        "color": "#AF1D35",
+        "pinned": false,
+        "archived": false,
         "uses": 4,
+        "points": 320,
+        "expires": "2026-11-09",
         "lastUsed": "2026-09-28T11:00:00+02:00",
-        "note": "Member voucher: 10% off until the 20th."
+        "note": "Member voucher: 10% off until the 9th."
       },
       {
         "store": "Hammer and Hinge",
         "number": "2991700266149",
         "format": "auto",
         "group": "handyman",
+        "color": "#C6520B",
+        "pinned": false,
+        "archived": false,
         "uses": 2,
         "lastUsed": "2026-09-19T10:15:00+02:00"
       },
@@ -120,8 +193,11 @@
         "number": "036000291452",
         "format": "upcA",
         "group": "pets",
-        "holder": "Alex Rivera",
+        "color": "#F4A51C",
+        "pinned": false,
+        "archived": false,
         "uses": 1,
+        "holder": "Alex Rivera",
         "lastUsed": "2026-08-30T16:45:00+02:00"
       },
       {
@@ -129,9 +205,12 @@
         "number": "SB-GIFT-25-90311",
         "format": "dataMatrix",
         "group": "sell",
+        "color": "#BE1A6C",
+        "pinned": false,
+        "archived": false,
+        "uses": 0,
         "points": 25,
         "expires": "2026-09-30",
-        "uses": 0,
         "note": "Gift voucher from the office party."
       },
       {
@@ -139,6 +218,8 @@
         "number": "20441098",
         "format": "ean8",
         "group": "child_care",
+        "color": "#F2A7C3",
+        "pinned": false,
         "archived": true,
         "uses": 5,
         "lastUsed": "2026-03-02T14:20:00+01:00"
@@ -146,6 +227,58 @@
     ]
   },
   "research": [
+    {
+      "source": "https://appgoblin.info/apps/de.superapps.supercards",
+      "used_for": "What a leading offline card wallet offers: thousands of store templates, scan or type a card, import several cards at once from screenshots, works offline, backups without an account, no ads."
+    },
+    {
+      "source": "https://www.iphone-ticker.de/kundenkarten-apps-supercards-als-alternative-zu-stocard-245162/",
+      "used_for": "How people move cards between wallets: a screenshot of each card, all picked at once, one card made from each; scan or type as the other ways in; what reviewers liked (looks, speed) and missed."
+    },
+    {
+      "source": "https://www.iphone-ticker.de/supercards-stocards-alternative-hat-jetzt-4-000-kundenkarten-vorlagen-256894/",
+      "used_for": "A store list with the cards of many European countries as the fast way to add a card; a custom card with your own picture for stores not in it; local storage and transfer by QR code."
+    },
+    {
+      "source": "https://alternativeto.net/software/supercards--loyalty-cards/about",
+      "used_for": "What users praise in a simple card wallet: no ads, no sign-in, a clean design."
+    },
+    {
+      "source": "https://gizmodo.com/download/supercards-loyalty-card-wallet",
+      "used_for": "Simplicity as the reason people pick a card wallet; extras that can make one feel bare."
+    },
+    {
+      "source": "https://packinglighttravel.com/travel-tech/best-loyalty-card-wallet-app/",
+      "used_for": "What reviewers value: most-used or recently used cards at the top, notes and photos, working offline, a code that does not fail at the checkout; complaints about being pushed to create an account."
+    },
+    {
+      "source": "https://support.google.com/wallet/answer/12059603",
+      "used_for": "Adding a loyalty card by tapping or searching the store's or programme's name, then scanning the card or typing its number."
+    },
+    {
+      "source": "https://support.google.com/wallet/answer/12060038",
+      "used_for": "Adding a pass from a photo or screenshot of its barcode; what to do when a till cannot scan a code."
+    },
+    {
+      "source": "https://touchit.sk/aplikacia-stocard-konci-klarna/660183",
+      "used_for": "The Slovak card-wallet market: a widely used wallet closing and moving its users to an app with an account, and the card wallets Slovak shoppers turn to instead."
+    },
+    {
+      "source": "https://www.mediaguru.cz/clanky/2022/11/cesi-vyuzivaji-prumerne-pres-trinact-vernostnich-programu/",
+      "used_for": "The most known and most used loyalty programmes in Czechia (a supermarket chain's card first, a pharmacy chain's most used), for the Czech store list."
+    },
+    {
+      "source": "https://www.finance.cz/510163-ktere-vernostni-karticky-a-programy-doopravdy-pouzivame",
+      "used_for": "Which cards Czech shoppers carry (supermarkets, drugstores, pharmacies), for the order of the Czech store list."
+    },
+    {
+      "source": "https://us.community.samsung.com/t5/Samsung-Apps-and-Services/No-longer-have-the-option-to-scan-barcodes-in-Samsung-wallet/td-p/2947782",
+      "used_for": "A common complaint: a code drawn in the wrong barcode type is refused at the till, so a scanned card keeps the type it was scanned in."
+    },
+    {
+      "source": "https://help.ibotta.com/hc/en-us/articles/360012934454-Help-My-gift-card-wouldn-t-scan",
+      "used_for": "Why the code is shown at full brightness: a dim screen is the first reason a phone's code does not scan at the register."
+    },
     {
       "source": "https://f-droid.org/en/packages/me.hackerchick.catima/",
       "used_for": "Core functions of an offline card wallet: scan with the camera, type a code when there is no usable barcode, card colours, backup and transfer to a new phone, share a card, import from files."
@@ -159,20 +292,8 @@
       "used_for": "Expected extras: groups, archive, star, balance, expiry and valid-from dates, notes, front and back photos, reading a barcode from an image, brighter screen when showing a code, home-screen shortcuts and widget, CSV import and export, search that ignores accents."
     },
     {
-      "source": "https://packinglighttravel.com/travel-tech/best-loyalty-card-wallet-app/",
-      "used_for": "What reviewers value: most-used or recently used cards at the top, sorting by name, last use or frequency, notes and photos, working offline; complaints about being pushed to create an account."
-    },
-    {
       "source": "https://mezha.media/en/2024/11/05/stocard-bonus-card-storage-app-is-closing",
       "used_for": "Why the category needs a local-first app: a large card wallet shut down in December 2024 and moved users to an app with an account."
-    },
-    {
-      "source": "https://spy.macrumors.com/threads/stocard-replacement.2434874",
-      "used_for": "User needs after that shutdown: find the right card quickly, no login, moving cards over by screenshot."
-    },
-    {
-      "source": "https://support.google.com/wallet/answer/12060038",
-      "used_for": "Adding a pass from a photo or screenshot of its barcode, and typing a member number when scanning is not possible."
     },
     {
       "source": "https://github.com/CatimaLoyalty/Android/blob/main/app/src/main/java/protect/card_locker/importexport/CatimaExporter.java",
@@ -185,7 +306,7 @@
   ],
   "migration": {
     "formats": ["csv"],
-    "summary": "Imports a card list CSV with store, card number and barcode type columns (common column names, comma or semicolon), including a card wallet’s card table, and this app’s own backup.",
+    "summary": "Imports a card list CSV (store, card number, barcode type; comma or semicolon), the card table card wallet apps put in their backups, and this app's own backup.",
     "samples": [
       {
         "file": "import-samples/this-app-export.csv",

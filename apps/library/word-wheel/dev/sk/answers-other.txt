@@ -1,0 +1,35 @@
+# Answer words: adverbs, numerals and pronouns (their base form).
+# Hand-written for this list (CC0 1.0).
+
+# adverbs
+dnes zajtra včera teraz potom predtým skoro neskoro rýchlo pomaly dobre zle veľa málo
+trochu dosť príliš veľmi tu tam sem hore dole vpredu vzadu vľavo vpravo doma vonku dnu
+všade nikde niekde kde kedy ako prečo koľko vždy nikdy niekedy často zriedka hneď
+stále ešte už znova opäť spolu naozaj asi možno iste určite áno nie blízko ďaleko
+vysoko nízko hlboko dlho krátko nahlas potichu rovno naspäť späť dopredu dozadu nahor
+nadol vedľa okolo zvlášť len iba tiež takisto hlavne najmä takmer presne zrazu náhle
+nakoniec najprv medzitým zatiaľ odvtedy dovtedy dávno nedávno včas zavčasu ľahko
+ťažko draho lacno horúco chladno mokro jasne smutno veselo krásne pekne škaredo
+správne isto ozaj vari azda akoby inak ináč tak takto odtiaľ odkiaľ kade kam hocikde
+hocikedy hocijako nijako nejako akosi kdesi kedysi raz dvakrát trikrát mnoho
+niekoľko spolu zadarmo naraz navrchu naspodku nablízku vnútri zvonka zhora zdola
+
+# numerals
+nula jeden dva tri štyri päť šesť sedem osem deväť desať jedenásť dvanásť trinásť
+štrnásť pätnásť šestnásť sedemnásť osemnásť devätnásť dvadsať tridsať štyridsať
+päťdesiat šesťdesiat sedemdesiat osemdesiat deväťdesiat sto tisíc milión miliarda pol
+prvý druhý tretí štvrtý piaty šiesty siedmy ôsmy deviaty desiaty jedenásty dvanásty
+stý tisíci oba obidva
+
+# pronouns
+ja ty on ona ono my vy oni ony môj tvoj jeho jej ich náš váš svoj tento ten tamten
+taký aký ktorý čí kto čo niekto nikto niečo nič všetko všetok každý žiadny nijaký
+nejaký akýsi ktosi čosi hocikto hocičo seba
+
+# adverbs made from common adjectives
+ticho hlasno slabo silno pevne mäkko tvrdo teplo studeno sucho čisto sladko slano kyslo
+horko ostro hladko svetlo tmavo plytko krivo široko úzko milo múdro hlúpo šikovne
+verne smelo hrdo skromne tvrdo jemne hrubo tenko husto riedko plno prázdno pusto
+zdravo zle draho lacno skvele výborne krásne nádherne príjemne zvláštne divne čudne
+obyčajne vzácne prísne láskavo štedro poctivo čestne úprimne odvážne statočne zvedavo
+pokojne divoko rýchlo pomaly vysoko hlboko dlho mokro

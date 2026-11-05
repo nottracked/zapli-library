@@ -1,0 +1,40 @@
+# Accepted words, nouns: young animals and diminutives, the home, food, the body and health, town, ideas,
+# language and art, weather and the land. Hand-written for this list (CC0 1.0).
+
+# young animals and diminutives
+zajko macko kozička kačička húska včielka mravček žabka rybička kríček hríbik jahôdka
+malinka čajík kávička vodička šálik prštek obláčik jamka dierka ihlička vrabček holúbok
+vlčiak medvieďa vĺča líšča zajača srnča húsa líčko
+
+# the home, sewing, clothes
+zvonec stojan baterka knôt náradie puzdro nášivka výšivka volán šilt baretka turban
+chránič frak smoking lievik cedidlo vareška mažiar tĺčik karafa krígeľ vejár kulma háčik
+pradeno krosná vreteno priadza plsť
+
+# food
+hrianka bageta mazanec langoš omeleta biftek kotleta karé perkelt rizoto šafran kurkuma
+rukola reďkev fenikel špargľa fazuľka cícer batát patizón drienka
+
+# the body and health
+pokožka krvinka bunka tkanivo chrupka lymfa hlien sopeľ moč stolica hnačka kiahne osýpky
+mumps opuch výron otras šok kóma migréna astma infarkt mŕtvica zimnica triaška chrapot
+pilulka tableta kapsula čapík zábal dlaha preukaz
+
+# town, shops, places
+bistro menza kiosk trafika zelovoc butik pasáž tržnica depo pivovar vináreň vila nadjazd
+podjazd klzisko
+
+# ideas, amounts, shapes
+zmysel význam vývoj pokles nárast úbytok rozmer povrch vnútro špička zvyšok zlom ohyb záhyb
+logo titul názov návrh predpis príkaz zákaz súhlas prosba žiadosť ponuka dopyt výmena
+nepokoj chaos zmätok postup proces priebeh hrôza panika úľava priazeň nevôľa irónia
+výsmech posmech chichot vzdych
+
+# language, writing, art and show
+nárečie prízvuk vid čiarka otáznik medzera odsek schránka oznam plagát reklama leták
+brožúra titulok portrét zátišie busta reliéf mozaika freska výstava exponát kulisa
+parochňa líčidlo rúž púder parfum voňavka
+
+# weather, sky and land
+úbočie úpätie končiar húština krovie porast čistina sejba žatva zber neúroda námraza závej
+vánica lejak páľava šero spln nov galaxia príboj žriedlo veľtok násyp

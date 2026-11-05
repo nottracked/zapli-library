@@ -1,0 +1,6 @@
+Date,Account,Category,Subcategory,Note,Amount,Income/Expense,Description,Currency
+03.10.2026,Wallet,Food,Lunch,Soup and bread,6.90,Exp.,,EUR
+04.10.2026,Bank,Salary,,October pay,2300.00,Income,,EUR
+05.10.2026,Bank,Wallet,,,150.00,Transfer-Out,Cash for the week,EUR
+05.10.2026,Wallet,Bank,,,150.00,Transfer-In,Cash for the week,EUR
+07.10.2026,Bank,Housing,Electricity,,64.20,Exp.,Autumn bill,EUR

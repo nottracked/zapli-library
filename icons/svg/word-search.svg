@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Word Search: a white card of letters, four by four, with a red highlighter capsule over the diagonal word. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#966200"/>
+      <stop offset="1" stop-color="#744C00"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#bg)"/>
+  <rect x="34" y="44" width="124" height="124" rx="18" fill="#000" fill-opacity="0.2"/>
+  <rect x="34" y="36" width="124" height="124" rx="18" fill="#FFFFFF"/>
+  <g fill="#E6D7BD">
+    <circle cx="57" cy="59" r="8"/>
+    <circle cx="83" cy="59" r="8"/>
+    <circle cx="109" cy="59" r="8"/>
+    <circle cx="135" cy="59" r="8"/>
+    <circle cx="57" cy="85" r="8"/>
+    <circle cx="83" cy="85" r="8"/>
+    <circle cx="109" cy="85" r="8"/>
+    <circle cx="135" cy="85" r="8"/>
+    <circle cx="57" cy="111" r="8"/>
+    <circle cx="83" cy="111" r="8"/>
+    <circle cx="109" cy="111" r="8"/>
+    <circle cx="135" cy="111" r="8"/>
+    <circle cx="57" cy="137" r="8"/>
+    <circle cx="83" cy="137" r="8"/>
+    <circle cx="109" cy="137" r="8"/>
+    <circle cx="135" cy="137" r="8"/>
+  </g>
+  <path d="M57 59 L135 137" fill="none" stroke="#E2333B" stroke-width="30" stroke-linecap="round"/>
+  <g fill="#FFFFFF">
+    <circle cx="57" cy="59" r="8"/>
+    <circle cx="83" cy="85" r="8"/>
+    <circle cx="109" cy="111" r="8"/>
+    <circle cx="135" cy="137" r="8"/>
+  </g>
+  <path d="M160 24 l4.5 9.5 l9.5 4.5 l-9.5 4.5 l-4.5 9.5 l-4.5 -9.5 l-9.5 -4.5 l9.5 -4.5 z" fill="#FFC531"/>
+</svg>
