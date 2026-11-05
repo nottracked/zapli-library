@@ -17,10 +17,10 @@
     },
     {
       "file": "screenshots/02-play-light.png",
-      "caption": "Glazed bricks, a glowing ball and gifts to catch",
+      "caption": "Glazed bricks, a glowing ball and gifts to catch; a caught power-up shows in the top bar",
       "theme": "dark",
-      "sha256": "a280e3ee22e5e9c6c26c30e7e6f7482a17fd5083106efaa55c0324dcdc387cab",
-      "size": 1028240
+      "sha256": "4c0bfdcdb49b48d926418b0ef6a011abf68e695e843714b26764c2f7207a7a9c",
+      "size": 1026105
     },
     {
       "file": "screenshots/03-levels-light.png",

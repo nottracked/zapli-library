@@ -21,10 +21,10 @@
   "screenshots": [
     {
       "file": "screenshots/01-daily-light.png",
-      "caption": "Today's puzzle: drag across the letters to find the farm words",
+      "caption": "Today's puzzle: drag across the letters to find the herbs and spices",
       "theme": "light",
-      "sha256": "bb0a6b2a18b0fa79b2e1bb0b3f1784113bf2a25b6c8e511aca2cd51ec629e2f4",
-      "size": 212548
+      "sha256": "8c623385b933ddae3e2eba6b70331a8517bd110a832e3e525674187a1e8ca6aa",
+      "size": 219163
     },
     {
       "file": "screenshots/02-themes-light.png",
@@ -37,8 +37,8 @@
       "file": "screenshots/03-daily-dark.png",
       "caption": "The daily puzzle in dark mode",
       "theme": "dark",
-      "sha256": "f0fc12096c4bb026c35dc2dfbaed99a3b56cea711e2484a187d90d1d603b02c7",
-      "size": 206274
+      "sha256": "3c92af981ea7d9c54a6d1d91e4c69d9b035fe70aa13b39a141c8fe27e278fc00",
+      "size": 208952
     }
   ],
   "research": [
