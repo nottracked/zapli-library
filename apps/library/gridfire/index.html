@@ -18,7 +18,7 @@
                     "id": "library/gridfire",
                     "kind": "web",
                     "name": "Litadlo",
-                    "version": "2.0.1",
+                    "version": "2.0.2",
                     "icon": "my_location",
                     "category": "game_arcade",
                     "ageRating": "everyone",
@@ -2261,6 +2261,7 @@
                     </button>
                     <button class="btn" type="button" data-close="settings" data-t="settings">Settings</button>
                     <button class="btn" type="button" data-close="exit" data-t="saveExit">Save and exit</button>
+                    <button class="btn" type="button" data-close="end" data-t="endRun">End run</button>
                 </div>
             </div>
         </dialog>
@@ -2441,6 +2442,7 @@
                         restartSector: "Restart sector",
                         restartRun: "Restart run",
                         saveExit: "Save and exit",
+                        endRun: "End run",
                         sectorClear: "Sector clear",
                         runOver: "Run over",
                         gameOver: "Game over",
@@ -2656,6 +2658,7 @@
                         restartSector: "Začať sektor odznova",
                         restartRun: "Začať odznova",
                         saveExit: "Uložiť a odísť",
+                        endRun: "Ukončiť pokus",
                         sectorClear: "Sektor vyčistený",
                         runOver: "Koniec pokusu",
                         gameOver: "Koniec hry",
@@ -6515,6 +6518,7 @@ void main(){
                         beginPick();
                     } else startWave(run.wave, snap ? "resume" : "first");
                     showCoach();
+                    armGuard();
                 }
                 function startWave(w, mode) {
                     run.wave = w;
@@ -8233,7 +8237,8 @@ void main(){
                         announce(
                             `${t("sectorClear")}. ${t("bonus", { bonus: fmt(bonus) })}. ${t("scoreSay", { score: fmt(run.score) })}`,
                         );
-                    } else {
+                    } else if (!run.quit) {
+                        // A run ended on the pause screen goes straight to its results, without the breach.
                         Sound.sfx.over();
                         showBanner(run.endless ? t("runOver") : t("hullBreached"), "");
                         announce(`${t("gameOver")}. ${t("scoreSay", { score: fmt(run.score) })}`);
@@ -8911,6 +8916,14 @@ void main(){
    ========================================================= */
                 function pauseGame(note) {
                     if (!run || run.done) return;
+                    // A run whose last moments play out has nothing left to pause: its results show at once.
+                    if (run.state === "over" || run.state === "clear") {
+                        if (route === "play" && !run.shown) {
+                            run.shown = true;
+                            showResults();
+                        }
+                        return;
+                    }
                     if (!run.paused) {
                         run.paused = true;
                         Input.reset();
@@ -8944,12 +8957,28 @@ void main(){
                     Sound.warp(run.pw.warp > 0);
                     lastNow = 0;
                     if (run.state === "pick") openPicker();
+                    armGuard();
+                }
+                // End run on the pause screen: the run is over where it stands. As for a run that ends in play, its
+                // score counts towards the best and its experience is kept; its results show at once.
+                function quitRun() {
+                    if (!run || run.done) return;
+                    run.paused = false;
+                    run.quit = true;
+                    Sound.duck(false);
+                    endRun("over");
+                    run.shown = true;
+                    showResults();
                 }
                 function showResults() {
                     const d = $("#dlg-result"),
                         clear = run.state === "clear";
                     run.done = true;
-                    $("#res-h").textContent = clear ? t("sectorClear") : run.endless ? t("runOver") : t("gameOver");
+                    $("#res-h").textContent = clear
+                        ? t("sectorClear")
+                        : run.endless || run.quit
+                          ? t("runOver")
+                          : t("gameOver");
                     $("#res-sub").textContent = run.endless
                         ? t("reachedWave", { n: run.wave + 1 })
                         : t("sectorName", { n: run.si + 1, name: SECTORS[run.si].name });
@@ -9066,6 +9095,42 @@ void main(){
                 const navStack = [];
                 let memHash = null; // used only if this page cannot change its own address
                 const currentHash = () => (memHash !== null ? memHash : location.hash || "#/");
+                // Back during a run pauses it instead of leaving the play screen. While a run is on the play screen,
+                // the page's history holds one more entry above the play screen's own, at the same address: the
+                // run's guard. Back steps down from the guard, which pauses the run, and the page steps up onto it
+                // again at once, so pausing and playing on add no entries. A guard is pushed only when a run starts,
+                // or plays on without one (after the page was opened straight onto the play screen).
+                const GUARD = "litadloRun";
+                let afterGuard = null; // what to do once the page has stepped down from the guard
+                function onGuard() {
+                    try {
+                        return Boolean(history.state && history.state[GUARD]);
+                    } catch (e) {
+                        return false;
+                    }
+                }
+                function armGuard() {
+                    if (memHash !== null || route !== "play" || !run || run.done || onGuard()) return;
+                    try {
+                        history.pushState({ [GUARD]: true }, "");
+                    } catch (e) {
+                        /* no history: Back leaves the play screen, and the run is saved and waits */
+                    }
+                }
+                // Back on the play screen's own entry: a run under way pauses (one whose last moments play out shows
+                // its results) and the guard is taken up again for the next Back; with no run, Back goes on back.
+                function onPlayBack() {
+                    if (!run || run.done) {
+                        navBack();
+                        return;
+                    }
+                    pauseGame();
+                    try {
+                        history.forward();
+                    } catch (e) {
+                        /* stays on the play screen's own entry; playing on pushes a new guard */
+                    }
+                }
                 function parseRoute() {
                     const m = /^#\/([a-z]*)\/?$/.exec(currentHash());
                     return m && ROUTES.includes(m[1]) ? m[1] : null;
@@ -9092,6 +9157,12 @@ void main(){
                         onRoute();
                         return;
                     }
+                    // Down from the run's guard first, so that the play screen's own entry is the one replaced.
+                    if (memHash === null && onGuard()) {
+                        afterGuard = () => replaceTo(name);
+                        history.back();
+                        return;
+                    }
                     navStack.pop();
                     if (memHash === null) {
                         try {
@@ -9110,7 +9181,8 @@ void main(){
                         replaceTo("");
                         return;
                     }
-                    if (memHash === null) history.back();
+                    // From the run's guard, the screen before is two entries back.
+                    if (memHash === null) history.go(onGuard() ? -2 : -1);
                     else {
                         memHash = "#/" + navStack[n - 2];
                         onRoute();
@@ -9817,6 +9889,7 @@ void main(){
                             startRun(run.si);
                         } else if (v === "settings") go("#/settings");
                         else if (v === "exit") goBackTo("levels");
+                        else if (v === "end") quitRun();
                         else resumeGame();
                     });
                     const dr = $("#dlg-result");
@@ -9901,6 +9974,18 @@ void main(){
                     window.addEventListener("hashchange", () => {
                         memHash = null;
                         onRoute();
+                    });
+                    // A step between the run's guard and the play screen's own entry keeps the address, so it fires
+                    // popstate alone; steps between screens are left to hashchange.
+                    window.addEventListener("popstate", () => {
+                        if (afterGuard) {
+                            const then = afterGuard;
+                            afterGuard = null;
+                            then();
+                            return;
+                        }
+                        if (memHash !== null || route !== "play" || parseRoute() !== "play" || onGuard()) return;
+                        onPlayBack();
                     });
                     const onScheme = () => {
                         if (S.theme === "system") {

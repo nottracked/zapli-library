@@ -1,7 +1,8 @@
 // The app's data. Inside Zapli everything lives in the app's own declared records (zapli.data), so backups, the
 // home-screen widget, reminders and budget warnings see it even while the app is closed; small page settings and
-// receipt pictures live in zapli.data.kv. In a plain browser (a preview) the same calls run on example data kept in
-// this browser's storage.
+// receipt pictures live in zapli.data.kv. A receipt photo from an earlier version stays in its entry's record, which
+// the page cannot read pictures from; such an entry carries `oldReceipt`. In a plain browser (a preview) the same calls
+// run on example data kept in this browser's storage.
 
 import { toCents, toMicros } from "./money.mjs";
 import { sampleData } from "./sample.mjs";

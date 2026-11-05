@@ -1,5 +1,5 @@
 {
-  "about": "Cards as version 2.5.3 stored them (made up): every stored field of its card entity, old palette colours, every barcode type, a number saved with a wrong last digit by an older version, archived and expired cards, and store names typed by hand.",
+  "about": "Cards as version 2.5.3 stored them (made up): every stored field of its card entity, old palette colours, every barcode type, a number saved with a wrong last digit by an older version, archived and expired cards, and store names typed by hand. Its two settings, as it declared them, are in storedSettings.",
   "storedFields": {
     "store": "text",
     "number": "barcode",
@@ -15,6 +15,10 @@
     "archived": "boolean",
     "uses": "integer",
     "lastUsed": "datetime"
+  },
+  "storedSettings": {
+    "fullScreen": { "type": "boolean", "default": true },
+    "expiryReminders": { "type": "boolean", "default": true }
   },
   "importHeaders": {
     "store": ["Store", "Shop", "Merchant", "Store name", "Retailer", "Obchod"],

@@ -1,7 +1,8 @@
 // Development only (not shipped): a stand-in for Zapli's bridge, injected by dev/shots.mjs before the page's scripts,
 // so the page runs its phone path in a headless browser: records with watches, the key-value store, declared
 // actions, the scanner (answers what the check sets in window.__scanAnswer, or fails with the code set in
-// window.__scanFail), the picker and haptics. It records the calls in window.__calls.
+// window.__scanFail), the picker and haptics. It records the calls in window.__calls. The app's settings are the ones
+// the check sets in window.__settings (as a user left them; null: never touched), read as the manifest reads them.
 (() => {
   const calls = [];
   // Kept in sessionStorage, so a reload (a rotation on the phone) finds the records and photos again.
@@ -19,6 +20,11 @@
     for (const w of watches) if (w.entity === entity) w.fn(records[entity].slice(0, w.limit || 200));
   };
   const fail = (code) => Promise.reject(Object.assign(new Error(code), { code }));
+  // A setting the user set, else its default in the manifest.
+  const setting = (id, fallback) => {
+    const set = window.__settings;
+    return set && id in set ? set[id] : fallback;
+  };
   const record = (entity, values) => ({ id: "r" + next++, createdAt: now(), updatedAt: now(), ...values });
   const zapli = {
     ready: Promise.resolve({}),
@@ -40,6 +46,10 @@
         calls.push(["add", entity, values]);
         if (entity === "card" && records.card.some((c) => c.store === values.store && c.number === values.number))
           return fail("INVALID_DATA");
+        // A field the page leaves out takes its default, as the manifest declares it: a card's reminder starts as the
+        // setting "Remind me before a card expires" is.
+        if (entity === "card" && !("remind" in values))
+          values = { ...values, remind: setting("expiryReminders", true) };
         const r = record(entity, values);
         records[entity].push(r);
         setTimeout(() => notify(entity), 0);
@@ -67,6 +77,13 @@
       },
       async runAction(action, args) {
         calls.push(["runAction", action, args]);
+        if (action === "keepReminderChoice") {
+          // The manifest's action: every card without a reminder of its own gets the setting's value.
+          const choice = setting("expiryReminders", true);
+          const left = records.card.filter((x) => x.remind === undefined || x.remind === null);
+          for (const r of left) Object.assign(r, { remind: choice, updatedAt: now() });
+          if (left.length) setTimeout(() => notify("card"), 0);
+        }
         if (action === "markUsed") {
           const r = records.card.find((x) => x.id === args.card);
           if (r) {

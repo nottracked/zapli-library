@@ -1,6 +1,7 @@
 // Development only (not shipped): every way of adding a card, holding, dragging and moving cards, Back after the page
-// was loaded again (a rotation), the code full screen, and the texts large text and screen readers need, run in a
-// headless Chromium on the built index.html with a stand-in bridge (dev/harness.mjs, dev/fake-zapli.js).
+// was loaded again (a rotation), the code full screen, the texts large text and screen readers need, and the expiry
+// reminders of cards kept from 2.5.3, run in a headless Chromium on the built index.html with a stand-in bridge
+// (dev/harness.mjs, dev/fake-zapli.js).
 //
 //   node dev/test-flows.mjs
 //
@@ -762,6 +763,97 @@ await flow(
     check(star && star.name === "Favourite" && star.pressed === "true", "the star, on: " + JSON.stringify(star));
   },
   { seed: undefined },
+);
+
+// 29. After the update from 2.5.3: its cards have no reminder of their own, and its one setting for all cards, "Remind
+// me before a card expires", decides. The page has the setting written into each such card once, so a card's switch
+// shows what will happen; a card added later starts as the setting is (the page leaves the field to its default).
+// Someone who had turned the setting off gets no reminders; with it on, or never touched, the cards remind as before.
+const CARDS_253 = [
+  {
+    id: "o1",
+    store: "Riverside Gym",
+    number: "RG|2026|00071",
+    format: "pdf417",
+    group: "fitness_center",
+    expires: "2027-01-31",
+    pinned: false,
+    archived: false,
+    uses: 12,
+  },
+  {
+    id: "o2",
+    store: "Corner Grocer",
+    number: "2900123456785",
+    format: "ean13",
+    group: "shopping_cart",
+    pinned: true,
+    archived: false,
+    uses: 42,
+  },
+];
+const remindSwitch = `(() => {
+  const row = [...document.querySelectorAll(".switch-row")].find((r) => r.textContent.includes("Remind me before it expires"));
+  return row ? { shown: !row.hidden, on: row.querySelector("input").checked } : null;
+})()`;
+for (const [settings, on, what] of [
+  [{ expiryReminders: false }, false, "turned off"],
+  [{ expiryReminders: true }, true, "left on"],
+  [null, true, "never touched"],
+]) {
+  await flow(
+    `reminders from 2.5.3, ${what}`,
+    async (p) => {
+      await p.open("#/");
+      await sleep(300);
+      let s = await state(p);
+      check(
+        s.runs.filter((r) => r === "keepReminderChoice{}").length === 1,
+        `${what}: the old setting is written into the cards once: ${s.runs}`,
+      );
+      const reminds = await p.eval(`window.__records.card.map((c) => c.remind)`);
+      check(
+        reminds.length === 2 && reminds.every((r) => r === on),
+        `${what}: every old card reminds: ${on}, got ${reminds}`,
+      );
+      await p.open("#/edit/o1");
+      const toggle = await p.eval(remindSwitch);
+      check(
+        toggle && toggle.shown && toggle.on === on,
+        `${what}: the card's switch shows ${on}: ${JSON.stringify(toggle)}`,
+      );
+      s = await state(p);
+      check(
+        !s.runs.some((r) => r.startsWith("keepReminderChoice")),
+        `${what}: nothing left to write at the next start`,
+      );
+      await p.open("#/");
+      await scanAnswer(p, "2994400123453", "ean13");
+      await p.click(".fab");
+      await p.click('.tile[data-brand="tesco"]');
+      await sleep(500);
+      const added = await p.eval(`(() => {
+        const call = window.__calls.find((c) => c[0] === "add");
+        const card = window.__records.card.find((c) => c.number === "2994400123453");
+        return { written: call ? "remind" in call[2] : null, remind: card ? card.remind : null };
+      })()`);
+      check(added.written === false, `${what}: a new card's reminder is left to its default: ${JSON.stringify(added)}`);
+      check(added.remind === on, `${what}: a new card starts as the old setting: ${JSON.stringify(added)}`);
+    },
+    { seed: CARDS_253, settings },
+  );
+}
+
+// 30. Cards that each have their own reminder (a new install, or cards added in this version) need nothing written.
+await flow(
+  "reminders of this version's cards",
+  async (p) => {
+    await p.open("#/");
+    await sleep(300);
+    const s = await state(p);
+    check(!s.runs.some((r) => r.startsWith("keepReminderChoice")), "no card without its own reminder: nothing run");
+  },
+  { seed: CARDS_253.map((c, i) => ({ ...c, remind: i === 0 })), settings: { expiryReminders: false } },
 );
 
 await browser.close();

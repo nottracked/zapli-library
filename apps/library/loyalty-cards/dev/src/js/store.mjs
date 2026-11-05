@@ -87,11 +87,27 @@ class Store {
       this.ui = {};
     }
     await Promise.all([this.watchCards(), this.loadPhotoKeys()]);
+    this.keepReminderChoice();
     this.zapli.data.watch("importLog", { sort: ["-at"], limit: 1 }, (items) => {
       this.importLog = items[0] || null;
       this.changed();
     });
     this.zapli.app.on("resume", () => this.changed());
+  }
+
+  /**
+   * Cards kept from before reminders were per card have no reminder of their own: until they get one, the earlier
+   * setting for all cards ("Remind me before a card expires") decides whether they remind. The declared action
+   * keepReminderChoice writes that setting into each of them once, so a card's switch on the edit screen shows what
+   * will happen. Cards added since start with the setting's value, so there is nothing to do for them.
+   */
+  async keepReminderChoice() {
+    if (!this.cards.some((c) => c.remind === undefined || c.remind === null)) return;
+    try {
+      await this.zapli.data.runAction("keepReminderChoice", {});
+    } catch {
+      // The reminders follow the setting meanwhile; the switches catch up at the next start.
+    }
   }
 
   watchCards() {

@@ -36,6 +36,7 @@ node apps/library/expenses/dev/smoke-render.mjs fresh   # a first start: the app
 node apps/library/expenses/dev/smoke-render.mjs preview # the browser preview
 SMOKE_LANG=sk-SK node apps/library/expenses/dev/smoke-render.mjs live
 node apps/library/expenses/dev/check-characters.mjs   # no literal invisible or direction characters
+node apps/library/expenses/dev/check-carry-over.mjs   # an update from version 3 keeps its fields, settings and widgets
 node apps/library/expenses/dev/make-sample-data.mjs     # prints the listing's sampleData
 ```
 
