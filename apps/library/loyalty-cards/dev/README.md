@@ -8,11 +8,11 @@ node dev/build.mjs           # writes index.html
 node dev/build.mjs --check   # exits 1 when index.html is not what dev/src builds
 ```
 
-The build puts `dev/src/manifest.json` (the records, the import and export mappings, the expiry reminder, the widget
-and the actions the page runs: the code's brightness, the full-screen code, counting a use) into the page's manifest
-element, `dev/src/css/app.css` into a `<style>` element, and the modules of `dev/src/js/` into one module script, each
-module a block of its own in the order they import each other. Nothing is minified: names, comments and lines stay as
-written.
+The build puts `dev/src/manifest.json` (the records, the import and export mappings, the expiry reminder and the
+earlier setting it still reads, the widget and the actions the page runs: the code's brightness, the full-screen code,
+counting a use, writing that setting into older cards) into the page's manifest element, `dev/src/css/app.css` into a
+`<style>` element, and the modules of `dev/src/js/` into one module script, each module a block of its own in the
+order they import each other. Nothing is minified: names, comments and lines stay as written.
 
 ## The modules (`dev/src/js/`)
 
@@ -51,7 +51,8 @@ node dev/test-logic.mjs                       # store list, barcode types, the w
 node dev/test-barcodes.mjs                    # check digits, refusals, sizes
 ZXING_JAR=<zxing core 3.5.x jar> node dev/test-barcodes.mjs   # and every code read back by ZXing (Java 17)
 node dev/test-flows.mjs                       # every way of adding a card, holding, dragging and moving cards, editing,
-                                              # Back after a reload, the code full screen, large text, screen readers
+                                              # Back after a reload, the code full screen, large text, screen readers,
+                                              # expiry reminders of cards kept from 2.5.3
 node dev/shots.mjs --out <dir>                # screenshots: 360 × 800, 412 × 915 and 412 × 600, light and dark, 200 %, turned
 node dev/make-sample-data.mjs                 # prints the listing's sampleData
 ```
@@ -63,7 +64,9 @@ an open dialog closes first (the host's own script), then the page's history, el
 errors, wrong saves and wrong Back steps, and show the look; the phone's own scanner, brightness, picker and widget
 are checked on a phone.
 `dev/fixtures/store-2.5.3.json` holds cards as version 2.5.3 stored them, which the logic check reads as this version
-does.
+does, and the two settings 2.5.3 declared. Its setting "Remind me before a card expires" is still declared, so the value
+a user stored stays readable: a card without a reminder of its own follows it, a new card starts as it is, and the page
+runs the declared action `keepReminderChoice` once to write it into each card that has none.
 
 After changing a screenshot, write its hash into the listing with `zapli library inventory apps/library/loyalty-cards
 --write`.

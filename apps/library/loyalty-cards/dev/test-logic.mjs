@@ -5,8 +5,8 @@
 // The store list (ids, kinds, colours that read, search, the country order), barcode types (detection as version
 // 2.5.3 worked it out, the number checks, cleaning a typed number), the wallet's order and search, the points field,
 // the manifest (every stored field of 2.5.3 kept with its type, every import column name kept, the export readable by
-// the import, the import samples' columns mapped), the made-up sample cards, and the texts (every key in both
-// languages, the same values in each message).
+// the import, the import samples' columns mapped, expiry reminders as 2.5.3's setting left them), the made-up sample
+// cards, and the texts (every key in both languages, the same values in each message).
 
 import { readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -324,6 +324,76 @@ check(
   !encode("4006381333932", "ean13").ok,
   "a 2.5.3 card with a wrong check digit is shown with its reason, not a wrong code",
 );
+
+// ---------------------------------------------------------------- expiry reminders as 2.5.3's users left them
+// 2.5.3 had one setting for all cards, "Remind me before a card expires"; this version has a reminder per card
+// (`remind`), which 2.5.3's cards do not have. The setting stays declared, so the value a user stored stays readable:
+// a card without a reminder of its own follows it, a new card starts as it is, and the action keepReminderChoice
+// (run by the page) writes it into each card that has none. The manifest's expressions must read exactly as these
+// models of them, which are then run on 2.5.3's cards.
+const declared = (manifest.settings || {}).expiryReminders || {};
+for (const key of ["type", "default"]) {
+  eq(declared[key], old.storedSettings.expiryReminders[key], `2.5.3's setting expiryReminders kept: ${key}`);
+}
+const GUARD =
+  "=coalesce(item.remind, settings.expiryReminders) && has(item.expires) && item.expires >= today() && !item.archived";
+eq(manifest.triggers.expirySoon.when, GUARD, "the expiry reminder asks the card first, then the old setting");
+eq(fields.remind.default, "=settings.expiryReminders", "a new card's reminder starts as the old setting");
+eq(
+  manifest.queries.noReminderChoice,
+  { entity: "card", where: "=!has(item.remind)", limit: 1000 },
+  "the cards without a reminder of their own",
+);
+eq(
+  (manifest.actions.keepReminderChoice || {}).steps,
+  [{ type: "forEach", query: "noReminderChoice", do: "copyReminderChoice", args: { card: "=item.id" } }],
+  "keepReminderChoice visits each of them",
+);
+eq(
+  (manifest.actions.copyReminderChoice || {}).steps,
+  [{ type: "updateRecord", record: "=args.card", set: { remind: "=settings.expiryReminders" } }],
+  "and writes the old setting into it",
+);
+const TODAY = "2026-11-05";
+const reminds = (card, settings) =>
+  Boolean((card.remind ?? settings.expiryReminders) && card.expires != null && card.expires >= TODAY && !card.archived);
+const reminds311 = (card) =>
+  Boolean((card.remind ?? true) && card.expires != null && card.expires >= TODAY && !card.archived);
+const kept = (cards, settings) => cards.map((c) => (c.remind == null ? { ...c, remind: settings.expiryReminders } : c));
+const due = (cards, rule) => cards.filter(rule).map((c) => c.store);
+const OFF = { expiryReminders: false };
+const ON = { expiryReminders: true };
+const UNTOUCHED = { expiryReminders: declared.default };
+check(due(old.cards, reminds311).length > 0, "2.5.3's cards include one an expiry reminder is due for");
+eq(
+  due(old.cards, (c) => reminds(c, OFF)),
+  [],
+  "turned off in 2.5.3: no card reminds",
+);
+eq(
+  due(kept(old.cards, OFF), (c) => reminds(c, OFF)),
+  [],
+  "turned off: none either once the setting is written in",
+);
+for (const [settings, what] of [
+  [ON, "left on"],
+  [UNTOUCHED, "never touched"],
+]) {
+  eq(
+    due(old.cards, (c) => reminds(c, settings)),
+    due(old.cards, reminds311),
+    `${what}: the cards remind as in 3.1.1`,
+  );
+  eq(
+    due(kept(old.cards, settings), (c) => reminds(c, settings)),
+    due(old.cards, reminds311),
+    `${what}: the same once the setting is written in`,
+  );
+}
+const later = { store: "Later Card", expires: "2027-03-01", archived: false };
+eq(reminds({ ...later, remind: UNTOUCHED.expiryReminders }, UNTOUCHED), true, "a new install: a new card reminds");
+eq(reminds({ ...later, remind: OFF.expiryReminders }, OFF), false, "turned off: a card added later starts off");
+eq(reminds({ ...later, remind: true }, OFF), true, "turned off: a card switched on by hand reminds");
 
 // ---------------------------------------------------------------- sample cards
 for (const card of sampleCards()) {

@@ -107,6 +107,8 @@ export async function startBrowser({ out = tmpdir() } = {}) {
     lang = "en-GB",
     live = true,
     seed = sampleCards(),
+    // The app's settings as a user set them (null: never touched, so their defaults).
+    settings = null,
   }) {
     const { targetId } = await send("Target.createTarget", { url: "about:blank" });
     const { sessionId } = await send("Target.attachToTarget", { targetId, flatten: true });
@@ -128,6 +130,7 @@ export async function startBrowser({ out = tmpdir() } = {}) {
       `try { localStorage.clear(); sessionStorage.removeItem("__fakeZapli"); } catch (e) {}`,
       `window.__locale = ${JSON.stringify(lang)};`,
       `window.__seedCards = ${JSON.stringify(seed)};`,
+      `window.__settings = ${JSON.stringify(settings)};`,
       live ? FAKE : "",
       `new MutationObserver((m, o) => { if (!document.head) return; o.disconnect(); const s = document.createElement("style"); s.textContent = ":root{-webkit-text-size-adjust:${text}% !important}"; document.head.prepend(s); }).observe(document, { childList: true, subtree: true });`,
     ].join("\n");
