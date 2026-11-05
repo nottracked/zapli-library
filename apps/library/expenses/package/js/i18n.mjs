@@ -177,6 +177,9 @@ const en = {
   openReceipt: "Open the receipt",
   takePhoto: "Take a photo",
   pickPicture: "Pick a picture",
+  oldReceiptText:
+    "A receipt photo from an earlier version of Expenses is kept with this entry. This version can’t show it yet: save it to your phone to look at it.",
+  saveOldReceipt: "Save the photo",
   cameraDenied: "The app may not use the camera. You can allow it in its permissions.",
   pictureFailed: "The picture could not be kept. Try another one.",
   keypad: "Keypad",
@@ -717,6 +720,9 @@ const sk = {
   openReceipt: "Otvoriť bloček",
   takePhoto: "Odfotiť",
   pickPicture: "Vybrať obrázok",
+  oldReceiptText:
+    "K tomuto záznamu je uložená fotka bločku z predchádzajúcej verzie aplikácie Expenses. Táto verzia ju zatiaľ nevie zobraziť: uložte si ju do telefónu a pozrite si ju tam.",
+  saveOldReceipt: "Uložiť fotku",
   cameraDenied: "Aplikácia nesmie použiť fotoaparát. Povoliť ho môžete v jej povoleniach.",
   pictureFailed: "Obrázok sa nepodarilo uložiť. Skúste iný.",
   keypad: "Klávesnica",

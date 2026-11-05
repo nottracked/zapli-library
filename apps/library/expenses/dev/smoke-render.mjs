@@ -1070,6 +1070,28 @@ if (MODE === "preview") {
     bridge.tables.expense.some((e) => e.amount === "15.50"),
     "the bridge holds the new entry",
   );
+  // An entry an earlier version saved with a receipt photo, which only the record holds: its form says so and offers
+  // to save the photo through the app's action.
+  const carried = await bridge.zapli.data.add("expense", {
+    amount: "8.40",
+    kind: "expense",
+    date: todayIso(),
+    baseAmount: "8.40",
+    note: "Bakery",
+    payment: "cash",
+    oldReceipt: true,
+  });
+  // The page reads every entry again, as when it comes back to the front.
+  await live.loadEntries();
+  await sleep(20);
+  await open("#/edit/" + carried.id);
+  assert.ok(textOf(main()).includes(ui.t("oldReceiptText")), "the form tells of the earlier receipt photo");
+  tapText(ui.t("saveOldReceipt"));
+  await sleep(20);
+  assert.ok(
+    bridge.runs.some(([action, args]) => action === "saveOldReceipt" && args.entry === carried.id),
+    "Save the photo runs saveOldReceipt for the entry",
+  );
   console.log("actions run:", [...new Set(bridge.runs.map((r) => r[0]))].join(", ") || "none");
 }
 process.exit(0);

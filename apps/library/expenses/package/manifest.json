@@ -4,7 +4,7 @@
     "id": "library/expenses",
     "kind": "web",
     "name": "Expenses",
-    "version": "4.1.0",
+    "version": "4.2.0",
     "icon": "receipt_long",
     "category": "finance",
     "ageRating": "everyone",
@@ -534,10 +534,6 @@
         "en": "Share of the parent budget",
         "sk": "Podiel na nadradenom rozpočte"
       },
-      "srcLabel": {
-        "en": "Read from the imported file",
-        "sk": "Načítané z importovaného súboru"
-      },
       "recurringEntry": {
         "en": "Recurring entry",
         "sk": "Pravidelný záznam"
@@ -633,6 +629,78 @@
       "nExpenses": {
         "en": "{n, plural, =0 {No expenses} one {# expense} other {# expenses}}",
         "sk": "{n, plural, =0 {Žiadne výdavky} one {# výdavok} few {# výdavky} many {# výdavku} other {# výdavkov}}"
+      },
+      "srcTypeLabel": {
+        "en": "Type as written in an imported file",
+        "sk": "Typ uvedený v importovanom súbore"
+      },
+      "srcIncomeLabel": {
+        "en": "Income mark in an imported file",
+        "sk": "Označenie príjmu v importovanom súbore"
+      },
+      "srcTransferLabel": {
+        "en": "Transfer mark in an imported file",
+        "sk": "Označenie prevodu v importovanom súbore"
+      },
+      "srcSignedLabel": {
+        "en": "Amount with its sign in an imported file",
+        "sk": "Suma so znamienkom v importovanom súbore"
+      },
+      "srcIncomeAmountLabel": {
+        "en": "Income amount in an imported file",
+        "sk": "Suma príjmu v importovanom súbore"
+      },
+      "srcSubLabel": {
+        "en": "Subcategory in an imported file",
+        "sk": "Podkategória v importovanom súbore"
+      },
+      "srcNewLabel": {
+        "en": "Row of an import in progress",
+        "sk": "Riadok rozpracovaného importu"
+      },
+      "srcStepLabel": {
+        "en": "Import step reached",
+        "sk": "Dosiahnutý krok importu"
+      },
+      "srcHalfLabel": {
+        "en": "One half of an imported transfer",
+        "sk": "Polovica importovaného prevodu"
+      },
+      "paidWithBefore": {
+        "en": "Earlier way of paying",
+        "sk": "Pôvodný spôsob platby"
+      },
+      "receiptBefore": {
+        "en": "Earlier receipt photo",
+        "sk": "Pôvodná fotka bločku"
+      },
+      "hasReceiptBefore": {
+        "en": "Has an earlier receipt photo",
+        "sk": "Má pôvodnú fotku bločku"
+      },
+      "usualPayment": {
+        "en": "Usual way to pay",
+        "sk": "Bežný spôsob platby"
+      },
+      "payCard": {
+        "en": "Card",
+        "sk": "Karta"
+      },
+      "payTransfer": {
+        "en": "Bank transfer",
+        "sk": "Bankový prevod"
+      },
+      "payMobile": {
+        "en": "Phone or watch",
+        "sk": "Telefón alebo hodinky"
+      },
+      "addExpense": {
+        "en": "Add expense",
+        "sk": "Pridať výdavok"
+      },
+      "receiptSaved": {
+        "en": "Receipt photo saved.",
+        "sk": "Fotka bločku je uložená."
       }
     }
   },
@@ -663,7 +731,7 @@
         "sha256": "4df0039f9bd93b894dfd16b7e5e5cccee2f0c09879070d15f6000d537aa68522",
         "size": 2635
       },
-      "js/i18n.mjs": { "sha256": "49a465bcb07dd9de26434101de42d27d78a94a0ef097228dc939a1cb53cb9a63", "size": 54303 },
+      "js/i18n.mjs": { "sha256": "4fdef6cc1d2c4b52ae869854c4d284bbcd0c2c2550a4a250af22d1b88d0ed7c9", "size": 54755 },
       "js/icons.mjs": { "sha256": "69074a151e12d1fb8b06826918bae6d21a9d45a21d35981d9862de777b7c61ee", "size": 7029 },
       "js/ledger.mjs": { "sha256": "bf45661e8c43eb4372162bc0410a52b245c02ba456b0b5900e2ae48a4794a05a", "size": 14063 },
       "js/money.mjs": { "sha256": "8ea8b486a9aee527d183d26fbfe53936db7abaeb4537ec4186e0cf62a856c719", "size": 7412 },
@@ -690,8 +758,8 @@
         "size": 4020
       },
       "js/screens/editor.mjs": {
-        "sha256": "0923d60e12d2597980cd3b5d706a0c5b0b47b4c323ad049a303c9ac182dcf280",
-        "size": 46364
+        "sha256": "1a46c25db0bc69f1e30e7040d12fe8520ab12386f0195122a7932c64001dc49f",
+        "size": 47281
       },
       "js/screens/entries.mjs": {
         "sha256": "e6ed980792f349f1e21c33d009b67934e77c7ddcc5fc5535cbe7305f58613841",
@@ -721,9 +789,9 @@
         "sha256": "984a9bbecbeb972e1aead7307ad70fd966648a07fe713a06263ef778a5726f85",
         "size": 7420
       },
-      "js/store.mjs": { "sha256": "6f5ab6093f647fd49a5051ecfa25761a1b4ba6c8c0fd45365ee6a9ed3877f203", "size": 13398 },
+      "js/store.mjs": { "sha256": "c65a4b2edb3c2b3d28ddeee335ea43de98e707619c53f3514a016bd5ae1f0003", "size": 13548 },
       "js/subs.mjs": { "sha256": "764a1cb65a8c8214f1743e30fd3c774abdf387b30bb71d88364b2f1601467d40", "size": 5935 },
-      "js/ui.mjs": { "sha256": "5360f642c11c9910efb6fc94e3f0055a46b47e7235d26e45711caf56f4cf34a6", "size": 18003 }
+      "js/ui.mjs": { "sha256": "515b5a87b941468d243029bffc25ae9f5e4a23c28f329ec4111aa449ecb76239", "size": 18043 }
     }
   },
   "permissions": {
@@ -758,6 +826,111 @@
       "purpose": "@filesFlow"
     }
   ],
+  "settings": {
+    "currency": {
+      "type": "choice",
+      "label": "@mainCurrency",
+      "default": "EUR",
+      "visible": false,
+      "options": [
+        "EUR",
+        "USD",
+        "GBP",
+        "CHF",
+        "CZK",
+        "PLN",
+        "HUF",
+        "RON",
+        "SEK",
+        "NOK",
+        "DKK",
+        "UAH",
+        "TRY",
+        "CAD",
+        "AUD",
+        "NZD",
+        "JPY",
+        "CNY",
+        "INR",
+        "BRL",
+        "MXN",
+        "ZAR"
+      ]
+    },
+    "monthlyBudget": {
+      "type": "decimal",
+      "label": "@monthlyBudget",
+      "scale": 2,
+      "min": 0,
+      "sensitivity": "financial",
+      "visible": false
+    },
+    "budgetAlerts": {
+      "type": "boolean",
+      "label": "@budgetAlertsLabel",
+      "default": true,
+      "visible": false
+    },
+    "warnAt": {
+      "type": "integer",
+      "label": "@warnMeAt",
+      "default": 80,
+      "min": 50,
+      "max": 100,
+      "visible": false
+    },
+    "addedNotice": {
+      "type": "boolean",
+      "label": "@tellMeWhenRecurring",
+      "default": true,
+      "visible": false
+    },
+    "remindDaily": {
+      "type": "boolean",
+      "label": "@dailyReminderLogSpending",
+      "default": false,
+      "visible": false
+    },
+    "remindAt": {
+      "type": "time",
+      "label": "@remindAtLabel",
+      "default": "20:00",
+      "visible": false
+    },
+    "defaultPayment": {
+      "type": "choice",
+      "label": "@usualPayment",
+      "default": "card",
+      "visible": false,
+      "options": [
+        {
+          "value": "cash",
+          "label": "@cashKind",
+          "icon": "payments"
+        },
+        {
+          "value": "card",
+          "label": "@payCard",
+          "icon": "credit_card"
+        },
+        {
+          "value": "transfer",
+          "label": "@payTransfer",
+          "icon": "account_balance"
+        },
+        {
+          "value": "mobile",
+          "label": "@payMobile",
+          "icon": "wallet"
+        },
+        {
+          "value": "other",
+          "label": "@otherKind",
+          "icon": "more_horiz"
+        }
+      ]
+    }
+  },
   "entities": {
     "prefs": {
       "label": "@prefs",
@@ -1369,6 +1542,48 @@
           "onDelete": "setNull",
           "editable": false
         },
+        "payment": {
+          "label": "@paidWithBefore",
+          "type": "choice",
+          "visible": false,
+          "options": [
+            {
+              "value": "cash",
+              "label": "@cashKind",
+              "icon": "payments"
+            },
+            {
+              "value": "card",
+              "label": "@payCard",
+              "icon": "credit_card"
+            },
+            {
+              "value": "transfer",
+              "label": "@payTransfer",
+              "icon": "account_balance"
+            },
+            {
+              "value": "mobile",
+              "label": "@payMobile",
+              "icon": "wallet"
+            },
+            {
+              "value": "other",
+              "label": "@otherKind",
+              "icon": "more_horiz"
+            }
+          ]
+        },
+        "receipt": {
+          "label": "@receiptBefore",
+          "type": "image",
+          "visible": false
+        },
+        "oldReceipt": {
+          "label": "@hasReceiptBefore",
+          "type": "boolean",
+          "visible": false
+        },
         "budgetPct": {
           "type": "decimal",
           "label": "@budgetShare",
@@ -1384,51 +1599,51 @@
           "compute": "=coalesce(item.category.parent.budget, decimal('0')) > 0 ? coalesce(item.baseAmount, item.amount) * 100 / coalesce(item.category.parent.budget, decimal('1')) : decimal('0')"
         },
         "srcType": {
-          "label": "@srcLabel",
+          "label": "@srcTypeLabel",
           "type": "text",
           "visible": false,
           "maxLength": 60
         },
         "srcIncome": {
-          "label": "@srcLabel",
+          "label": "@srcIncomeLabel",
           "type": "boolean",
           "visible": false
         },
         "srcTransfer": {
-          "label": "@srcLabel",
+          "label": "@srcTransferLabel",
           "type": "boolean",
           "visible": false
         },
         "srcSigned": {
-          "label": "@srcLabel",
+          "label": "@srcSignedLabel",
           "type": "decimal",
           "visible": false,
           "scale": 2
         },
         "srcIncomeAmount": {
-          "label": "@srcLabel",
+          "label": "@srcIncomeAmountLabel",
           "type": "decimal",
           "visible": false,
           "scale": 2
         },
         "srcSub": {
-          "label": "@srcLabel",
+          "label": "@srcSubLabel",
           "type": "text",
           "visible": false,
           "maxLength": 60
         },
         "srcNew": {
-          "label": "@srcLabel",
+          "label": "@srcNewLabel",
           "type": "boolean",
           "visible": false
         },
         "srcStep": {
-          "label": "@srcLabel",
+          "label": "@srcStepLabel",
           "type": "integer",
           "visible": false
         },
         "srcHalf": {
-          "label": "@srcLabel",
+          "label": "@srcHalfLabel",
           "type": "boolean",
           "visible": false
         }
@@ -1552,6 +1767,38 @@
           "type": "text",
           "maxLength": 120
         },
+        "payment": {
+          "label": "@paidWithBefore",
+          "type": "choice",
+          "visible": false,
+          "options": [
+            {
+              "value": "cash",
+              "label": "@cashKind",
+              "icon": "payments"
+            },
+            {
+              "value": "card",
+              "label": "@payCard",
+              "icon": "credit_card"
+            },
+            {
+              "value": "transfer",
+              "label": "@payTransfer",
+              "icon": "account_balance"
+            },
+            {
+              "value": "mobile",
+              "label": "@payMobile",
+              "icon": "wallet"
+            },
+            {
+              "value": "other",
+              "label": "@otherKind",
+              "icon": "more_horiz"
+            }
+          ]
+        },
         "isSubscription": {
           "label": "@isSubscription",
           "type": "boolean",
@@ -1648,6 +1895,17 @@
     "allAccounts": {
       "entity": "account",
       "limit": 200
+    },
+    "accountOfType": {
+      "entity": "account",
+      "args": {
+        "type": {
+          "type": "text"
+        }
+      },
+      "where": "=item.type == args.type && item.archived != true",
+      "sort": ["position", "name"],
+      "limit": 1
     },
     "expenseCategories": {
       "entity": "category",
@@ -1896,6 +2154,21 @@
       },
       "where": "=string(item.category) == args.category",
       "limit": 500
+    },
+    "paidBefore": {
+      "entity": "expense",
+      "where": "=item.account == null && has(item.payment) && item.kind != 'transfer'",
+      "limit": 1000
+    },
+    "rulesPaidBefore": {
+      "entity": "recurring",
+      "where": "=item.account == null && has(item.payment) && item.kind != 'transfer'",
+      "limit": 500
+    },
+    "receiptsBefore": {
+      "entity": "expense",
+      "where": "=has(item.receipt) && item.oldReceipt != true",
+      "limit": 1000
     }
   },
   "actions": {
@@ -1934,11 +2207,49 @@
           "as": "cash"
         },
         {
+          "type": "query",
+          "query": "accountOfType",
+          "args": {
+            "type": "bank"
+          },
+          "as": "banks"
+        },
+        {
+          "type": "query",
+          "query": "accountOfType",
+          "args": {
+            "type": "cash"
+          },
+          "as": "cashes"
+        },
+        {
           "type": "createRecord",
           "when": "=size(vars.prefs) == 0",
           "entity": "prefs",
           "values": {
-            "defaultAccount": "=vars.bank.id"
+            "currency": "=settings.currency",
+            "monthlyBudget": "=settings.monthlyBudget",
+            "budgetAlerts": "=settings.budgetAlerts",
+            "warnAt": "=settings.warnAt",
+            "addedNotice": "=settings.addedNotice",
+            "remindDaily": "=settings.remindDaily",
+            "remindAt": "=settings.remindAt",
+            "defaultAccount": "=settings.defaultPayment == 'cash' && size(vars.cashes) > 0 ? first(vars.cashes).id : (size(vars.banks) > 0 ? first(vars.banks).id : null)"
+          }
+        },
+        {
+          "type": "updateRecord",
+          "when": "=size(vars.prefs) > 0 && first(vars.prefs).updatedAt == first(vars.prefs).createdAt && (settings.currency != first(vars.prefs).currency || settings.monthlyBudget != first(vars.prefs).monthlyBudget || settings.budgetAlerts != first(vars.prefs).budgetAlerts || settings.warnAt != first(vars.prefs).warnAt || settings.addedNotice != first(vars.prefs).addedNotice || settings.remindDaily != first(vars.prefs).remindDaily || settings.remindAt != first(vars.prefs).remindAt || (settings.defaultPayment == 'cash' && size(vars.cashes) > 0))",
+          "record": "=first(vars.prefs).id",
+          "set": {
+            "currency": "=settings.currency",
+            "monthlyBudget": "=settings.monthlyBudget",
+            "budgetAlerts": "=settings.budgetAlerts",
+            "warnAt": "=settings.warnAt",
+            "addedNotice": "=settings.addedNotice",
+            "remindDaily": "=settings.remindDaily",
+            "remindAt": "=settings.remindAt",
+            "defaultAccount": "=settings.defaultPayment == 'cash' && size(vars.cashes) > 0 ? first(vars.cashes).id : first(vars.prefs).defaultAccount"
           }
         },
         {
@@ -2080,6 +2391,193 @@
             "icon": "attach_money",
             "kind": "income"
           }
+        },
+        {
+          "type": "forEach",
+          "query": "paidBefore",
+          "do": "placePayment",
+          "args": {
+            "entry": "=item.id",
+            "cash": "=size(vars.cashes) > 0 ? first(vars.cashes).id : null",
+            "bank": "=size(vars.banks) > 0 ? first(vars.banks).id : (size(vars.prefs) > 0 ? first(vars.prefs).defaultAccount : null)"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "paidBefore",
+          "do": "placePayment",
+          "args": {
+            "entry": "=item.id",
+            "cash": "=size(vars.cashes) > 0 ? first(vars.cashes).id : null",
+            "bank": "=size(vars.banks) > 0 ? first(vars.banks).id : (size(vars.prefs) > 0 ? first(vars.prefs).defaultAccount : null)"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "paidBefore",
+          "do": "placePayment",
+          "args": {
+            "entry": "=item.id",
+            "cash": "=size(vars.cashes) > 0 ? first(vars.cashes).id : null",
+            "bank": "=size(vars.banks) > 0 ? first(vars.banks).id : (size(vars.prefs) > 0 ? first(vars.prefs).defaultAccount : null)"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "paidBefore",
+          "do": "placePayment",
+          "args": {
+            "entry": "=item.id",
+            "cash": "=size(vars.cashes) > 0 ? first(vars.cashes).id : null",
+            "bank": "=size(vars.banks) > 0 ? first(vars.banks).id : (size(vars.prefs) > 0 ? first(vars.prefs).defaultAccount : null)"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "paidBefore",
+          "do": "placePayment",
+          "args": {
+            "entry": "=item.id",
+            "cash": "=size(vars.cashes) > 0 ? first(vars.cashes).id : null",
+            "bank": "=size(vars.banks) > 0 ? first(vars.banks).id : (size(vars.prefs) > 0 ? first(vars.prefs).defaultAccount : null)"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "rulesPaidBefore",
+          "do": "placeRulePayment",
+          "args": {
+            "rule": "=item.id",
+            "cash": "=size(vars.cashes) > 0 ? first(vars.cashes).id : null",
+            "bank": "=size(vars.banks) > 0 ? first(vars.banks).id : (size(vars.prefs) > 0 ? first(vars.prefs).defaultAccount : null)"
+          },
+          "max": 500
+        },
+        {
+          "type": "forEach",
+          "query": "receiptsBefore",
+          "do": "markReceipt",
+          "args": {
+            "entry": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "receiptsBefore",
+          "do": "markReceipt",
+          "args": {
+            "entry": "=item.id"
+          },
+          "max": 1000
+        },
+        {
+          "type": "forEach",
+          "query": "receiptsBefore",
+          "do": "markReceipt",
+          "args": {
+            "entry": "=item.id"
+          },
+          "max": 1000
+        }
+      ]
+    },
+    "placePayment": {
+      "args": {
+        "entry": {
+          "type": "ref",
+          "to": "expense"
+        },
+        "cash": {
+          "type": "ref",
+          "to": "account"
+        },
+        "bank": {
+          "type": "ref",
+          "to": "account"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.entry",
+          "set": {
+            "account": "=args.entry.payment == 'cash' ? coalesce(args.cash, args.bank) : args.bank"
+          }
+        }
+      ]
+    },
+    "placeRulePayment": {
+      "args": {
+        "rule": {
+          "type": "ref",
+          "to": "recurring"
+        },
+        "cash": {
+          "type": "ref",
+          "to": "account"
+        },
+        "bank": {
+          "type": "ref",
+          "to": "account"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.rule",
+          "set": {
+            "account": "=args.rule.payment == 'cash' ? coalesce(args.cash, args.bank) : args.bank"
+          }
+        }
+      ]
+    },
+    "markReceipt": {
+      "args": {
+        "entry": {
+          "type": "ref",
+          "to": "expense"
+        }
+      },
+      "steps": [
+        {
+          "type": "updateRecord",
+          "record": "=args.entry",
+          "set": {
+            "oldReceipt": true
+          }
+        }
+      ]
+    },
+    "saveOldReceipt": {
+      "args": {
+        "entry": {
+          "type": "ref",
+          "to": "expense",
+          "required": true
+        }
+      },
+      "steps": [
+        {
+          "type": "capability",
+          "capability": "files.io",
+          "action": "saveFile",
+          "args": {
+            "name": "='receipt-' + string(args.entry.date) + '.jpg'",
+            "type": "image/jpeg",
+            "file": "=args.entry.receipt"
+          },
+          "as": "saved"
+        },
+        {
+          "type": "toast",
+          "when": "=vars.saved.saved",
+          "text": "@receiptSaved"
         }
       ]
     },
@@ -2169,7 +2667,8 @@
             "note": "=args.rule.name",
             "payee": "=args.rule.payee",
             "date": "=args.rule.nextDue",
-            "recurring": "=args.rule"
+            "recurring": "=args.rule",
+            "payment": "=args.rule.payment"
           },
           "as": "added"
         },
@@ -3557,6 +4056,22 @@
       "caption": "=t('nExpenses', {'n': coalesce(q.monthSpent.n, 0)})",
       "icon": "receipt_long",
       "open": "home"
+    },
+    "addWidget": {
+      "template": "button",
+      "title": "@addExpense",
+      "sizes": ["small"],
+      "label": "@addExpense",
+      "icon": "add",
+      "action": {
+        "event": {
+          "name": "navigate",
+          "context": {
+            "screen": "add"
+          }
+        }
+      },
+      "open": "add"
     }
   },
   "migrations": [
@@ -3584,21 +4099,6 @@
           "entity": "expense",
           "field": "baseAmount",
           "value": "=item.amount"
-        },
-        {
-          "op": "deleteField",
-          "entity": "expense",
-          "field": "payment"
-        },
-        {
-          "op": "deleteField",
-          "entity": "expense",
-          "field": "receipt"
-        },
-        {
-          "op": "deleteField",
-          "entity": "recurring",
-          "field": "payment"
         },
         {
           "op": "backfill",

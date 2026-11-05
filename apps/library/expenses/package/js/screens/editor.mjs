@@ -834,8 +834,9 @@ function receiptRegion() {
   const canPhoto = Boolean(zapli && zapli.supports && zapli.supports("camera.photo"));
   const canPick = Boolean(zapli && zapli.supports && zapli.supports("media.pick"));
   const browser = !ctx.store.live;
-  if (!canPhoto && !canPick && !browser) return null;
-  if (draft.kind === "transfer" && !state.receipt) return null;
+  const old = hasOldReceipt(draft);
+  if (!canPhoto && !canPick && !browser && !old) return null;
+  if (draft.kind === "transfer" && !state.receipt && !old) return null;
   if (state.receipt) {
     const src = "data:" + state.receipt.type + ";base64," + state.receipt.b64;
     return h(
@@ -884,14 +885,34 @@ function receiptRegion() {
     "div",
     { class: "picker" },
     h("h2", { class: "picker-label", text: t("receipt") }),
+    old ? h("p", { class: "muted", text: t("oldReceiptText") }) : null,
     h(
       "div",
       { class: "chips" },
+      old ? button(t("saveOldReceipt"), saveOldReceipt, "tonal", { icon: "exportFile" }) : null,
       canPhoto ? button(t("takePhoto"), () => take("photo"), "tonal", { icon: "camera" }) : null,
       canPick ? button(t("pickPicture"), () => take("pick"), "tonal", { icon: "image" }) : null,
       browser ? button(t("pickPicture"), () => take("browser"), "tonal", { icon: "image" }) : null,
     ),
   );
+}
+
+/**
+ * Whether the saved entry has a receipt photo from an earlier version of the app. That photo is kept in the entry's
+ * record, which the page cannot read pictures from, so the app's setUp marks such entries (`oldReceipt`).
+ */
+function hasOldReceipt(draft) {
+  const entry = draft.id ? ctx.store.entries.get(draft.id) : null;
+  return Boolean(entry && entry.oldReceipt);
+}
+
+/** Saves the earlier version's receipt photo where the user picks (the app's saveOldReceipt action), from a tap. */
+async function saveOldReceipt() {
+  try {
+    await ctx.store.run("saveOldReceipt", { entry: state.draft.id });
+  } catch (error) {
+    if (!error || error.code !== "CANCELLED") failed(error);
+  }
 }
 
 function pickInBrowser() {

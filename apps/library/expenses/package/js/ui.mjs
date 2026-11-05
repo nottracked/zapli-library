@@ -205,7 +205,9 @@ export function entryRow(entry, { showDate = false, balance = null } = {}) {
           ? h("span", { class: "row-sub", text: "≈ " + money(entry.kind === "expense" ? -entry.base : entry.base) })
           : null,
         balance !== null ? h("span", { class: "row-sub", text: t("balanceAfter", { amount: money(balance) }) }) : null,
-        store.receipts.has(entry.id) ? h("span", { class: "row-flag" }, icon("receipt", t("hasReceipt"))) : null,
+        store.receipts.has(entry.id) || entry.oldReceipt
+          ? h("span", { class: "row-flag" }, icon("receipt", t("hasReceipt")))
+          : null,
         entry.recurring ? h("span", { class: "row-flag" }, icon("repeat", t("fromRecurring"))) : null,
       ),
     ),
