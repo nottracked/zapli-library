@@ -156,6 +156,7 @@ export const STRINGS = {
     themeLight: "Light",
     themeDark: "Dark",
     storageNote: "Your games, statistics and settings are saved after every guess and stay on this phone.",
+    versionLine: "Hidden Word, version {version}",
     done: "Done",
     // help
     tldrTitle: "In 15 seconds",
@@ -389,6 +390,7 @@ export const STRINGS = {
     themeLight: "Svetlý",
     themeDark: "Tmavý",
     storageNote: "Hry, štatistiky a nastavenia sa ukladajú po každom pokuse a zostávajú v tomto telefóne.",
+    versionLine: "Hidden Word, verzia {version}",
     done: "Hotovo",
     tldrTitle: "Za 15 sekúnd",
     tldr1: "Nájdite skryté slovo. Napíšte pokus a klepnite na Skúsiť.",

@@ -2259,7 +2259,6 @@ spite
 splash
 split
 spoil
-spoken
 sponsor
 spoon
 sport
@@ -2446,7 +2445,6 @@ then
 theory
 therapy
 there
-these
 thesis
 they
 thick
@@ -2459,7 +2457,6 @@ third
 thirsty
 thirty
 this
-those
 though
 thought
 thread
@@ -2755,9 +2752,7 @@ world
 worm
 worried
 worry
-worse
 worship
-worst
 worth
 would
 wound
@@ -2768,7 +2763,6 @@ wrist
 write
 writer
 writing
-written
 wrong
 wrongly
 yacht
@@ -42341,6 +42335,7 @@ spoils
 spoilt
 spoke
 spoked
+spoken
 spokes
 spoking
 spondee
@@ -44928,6 +44923,7 @@ thermic
 thermos
 therms
 theroid
+these
 theses
 theta
 thetas
@@ -45007,6 +45003,7 @@ thorp
 thorpe
 thorpes
 thorps
+those
 thou
 thoued
 thouing
@@ -49966,12 +49963,14 @@ worrier
 worries
 worrit
 worrits
+worse
 worsen
 worsens
 worser
 worses
 worset
 worsets
+worst
 worsted
 worsts
 wort
@@ -50061,6 +50060,7 @@ writhen
 writher
 writhes
 writs
+written
 wronged
 wronger
 wrongs

@@ -143,6 +143,7 @@ export const STRINGS = {
     language: "Language of the game",
     langAuto: "Automatic",
     storageNote: "Your progress, collection and settings are saved as you play and stay on this phone.",
+    versionLine: "Word Search, version {version}",
     // how to play
     tldrTitle: "In 15 seconds",
     goalLabel: "Goal:",
@@ -321,6 +322,7 @@ export const STRINGS = {
     language: "Jazyk hry",
     langAuto: "Automaticky",
     storageNote: "Váš postup, zbierka a nastavenia sa ukladajú počas hry a zostávajú v tomto telefóne.",
+    versionLine: "Word Search, verzia {version}",
     tldrTitle: "Za 15 sekúnd",
     goalLabel: "Cieľ:",
     tldrGoal: "Nájdite v mriežke písmen všetky slová zo zoznamu.",

@@ -75,6 +75,7 @@ let retry = () => {};
 let canBuzz = false;
 let nextTimer = 0;
 let lastWordLength = 0;
+let appVersion = ""; // the version Zapli says this app has; none in a plain browser
 const fx = createFx(document.getElementById("fx"));
 
 const today = () => {
@@ -1216,6 +1217,8 @@ function syncSettingsForm() {
   $("opt-vibration").checked = settings.vibration;
   $("opt-meanings").checked = settings.meanings;
   $("opt-timer").checked = settings.timer;
+  $("app-version").hidden = !appVersion;
+  $("app-version").textContent = appVersion ? t("versionLine", { version: appVersion }) : "";
 }
 
 function onSetting(e) {
@@ -1411,6 +1414,17 @@ async function start() {
       canBuzz = Boolean(host.haptics && typeof host.supports === "function" && host.supports("haptics.impact"));
     } catch (e) {
       canBuzz = false;
+    }
+    // The version for Settings, asked for in the background so the game never waits for it.
+    try {
+      host.app
+        .info()
+        .then((info) => {
+          appVersion = info && typeof info.version === "string" ? info.version : "";
+        })
+        .catch(() => {});
+    } catch (e) {
+      appVersion = "";
     }
   }
   $("opt-vibration-row").hidden = !canBuzz;

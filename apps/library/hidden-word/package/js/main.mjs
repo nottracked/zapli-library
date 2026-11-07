@@ -48,6 +48,7 @@ const tn = (key, n, args) => i18n.tn(key, n, args);
 const store = createStore("hidden-word", ["settings", ...LANGS.flatMap((l) => [`games-${l}`, `stats-${l}`])]);
 
 let settings = null;
+let appVersion = ""; // the version Zapli says this app has; none in a plain browser
 let lang = "sk"; // the language of the words in play
 let game = null; // the word on screen (see newGame)
 let draft = createDraft(DEFAULT_LENGTH, "sk");
@@ -1197,6 +1198,8 @@ function syncSettingsForm() {
   syncRadios("theme", settings.theme);
   syncRadios("ui", settings.ui);
   $("opt-hard").checked = settings.hard;
+  $("app-version").hidden = !appVersion;
+  $("app-version").textContent = appVersion ? t("versionLine", { version: appVersion }) : "";
   $("opt-hint").checked = settings.hint;
   $("opt-contrast").checked = settings.contrast;
   $("opt-vibration").checked = settings.vibration;
@@ -1423,6 +1426,17 @@ async function start() {
   if (await hostReady()) {
     canBuzz = Boolean(host.haptics) && supports("haptics.impact");
     canShare = typeof host.share === "function" && supports("share");
+    // The version for Settings, asked for in the background so the game never waits for it.
+    try {
+      host.app
+        .info()
+        .then((info) => {
+          appVersion = info && typeof info.version === "string" ? info.version : "";
+        })
+        .catch(() => {});
+    } catch (e) {
+      appVersion = "";
+    }
   }
   $("opt-vibration-row").hidden = !canBuzz;
   measureTextScale();
