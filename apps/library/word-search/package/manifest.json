@@ -4,7 +4,7 @@
     "id": "library/word-search",
     "kind": "web",
     "name": "Word Search",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "icon": "search",
     "category": "game_word",
     "ageRating": "everyone",
@@ -24,7 +24,7 @@
     "orientation": "any",
     "files": {
       "css/app.css": { "sha256": "e2cf03d31ff35dc4df639607cafe478444f535fec3a08e34623f2d996847b0c2", "size": 37851 },
-      "index.html": { "sha256": "3bee3651bf23f5d4a6b474b4e93f377cb220c32c2f8dd24050360915b5884113", "size": 21878 },
+      "index.html": { "sha256": "e41031dd4e1efdcc778acd6a675b9e88dc88f475a627af2eea9baaf2f28f3c9d", "size": 21940 },
       "js/core/dates.mjs": {
         "sha256": "738fac189c229c43f61b84e331d289bdc3eb0bcce43ed34b16edeb7454061358",
         "size": 2516
@@ -50,7 +50,7 @@
         "sha256": "211174a5adef127ea3bcfa50ff3e53cc4bb332b2768afa7ee3010b205f21f0e5",
         "size": 20522
       },
-      "js/main.mjs": { "sha256": "dea651b9dde40d6e732cd03441b9a3a85b616db571c8e83d1b01b25f7f4cf54c", "size": 47406 },
+      "js/main.mjs": { "sha256": "9262e03c0eb9a302e24028e8437a16545661c3d05f0719a09a841a3e48ce896b", "size": 47955 },
       "js/search/filler.mjs": {
         "sha256": "0ec4103cea5c24d39c43330e78f582409de627ec6ce6e11649837263d8aed1ad",
         "size": 2053
@@ -68,8 +68,8 @@
         "size": 4571
       },
       "js/search/strings.mjs": {
-        "sha256": "6662990a381140ad09a01875b5fa1a3b27976811af21c6238cf5a22962d5a089",
-        "size": 19956
+        "sha256": "febf6d1e96eb780abdc3e132e33d40afac837401feb832da7e52ccabb5be0c6f",
+        "size": 20057
       },
       "js/search/themes.mjs": {
         "sha256": "f22dfe27ab2171be094bafc685ed69ea02a452eba4b345618031d694dfb35086",

@@ -50,6 +50,7 @@ const store = createStore("word-search", [
 ]);
 
 let settings = null;
+let appVersion = ""; // the version Zapli says this app has; none in a plain browser
 let game = null; // { lang, kind: "endless" | "daily", day, puzzle, state }
 let pendingWord = null; // the word chosen in the list for a hint
 let freshHint = null; // the word whose hint was just given: its mark pulses once
@@ -1253,6 +1254,8 @@ function syncSettingsForm() {
   };
   check("words", game ? game.lang : wordsLang());
   check("difficulty", settings.difficulty);
+  $("app-version").hidden = !appVersion;
+  $("app-version").textContent = appVersion ? t("versionLine", { version: appVersion }) : "";
   check("letters", lettersChoice());
   check("theme", settings.theme);
   check("ui", settings.ui);
@@ -1424,6 +1427,17 @@ async function start() {
       canBuzz = Boolean(host.haptics && typeof host.supports === "function" && host.supports("haptics.impact"));
     } catch (e) {
       canBuzz = false;
+    }
+    // The version for Settings, asked for in the background so the game never waits for it.
+    try {
+      host.app
+        .info()
+        .then((info) => {
+          appVersion = info && typeof info.version === "string" ? info.version : "";
+        })
+        .catch(() => {});
+    } catch (e) {
+      appVersion = "";
     }
   }
   $("opt-vibration-row").hidden = !canBuzz;

@@ -53,8 +53,9 @@ The same downloads as Word Wheel's, checked by their SHA-256:
   <https://raw.githubusercontent.com/dolph/dictionary/master/enable1.txt>, SHA-256
   `3f16130220645692ed49c7134e24a18504c2ca55b3c012f7290e3e77c63b1a89`.
 - **Left out:** the build reads Word Wheel's `dev/en/blocked-sha256.txt` (slurs and swear words, left out of both
-  tiers) and `dev/en/not-answers-sha256.txt` (crude, sexual and grim words, which may be guessed but are never the
-  hidden word). Both list the SHA-256 of each word, so they do not spell the words out.
+  tiers) and `dev/en/not-answers-sha256.txt` (words that may be guessed but are never the hidden word: crude, sexual
+  and grim words, abbreviations, odd, archaic and rare words, and forms of another word such as past tenses, so the
+  hidden words are base forms). Both list the SHA-256 of each word, so they do not spell the words out.
 
 Neither download is kept here.
 

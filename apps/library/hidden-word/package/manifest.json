@@ -4,7 +4,7 @@
     "id": "library/hidden-word",
     "kind": "web",
     "name": "Hidden Word",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "icon": "lock",
     "category": "game_word",
     "ageRating": "everyone",
@@ -40,14 +40,14 @@
     "files": {
       "css/app.css": { "sha256": "95abd5ac50b200822bdab22fe385eb3e0fdd4dc23ee510325e10dfe847aaee9a", "size": 43740 },
       "data/words-en.txt": {
-        "sha256": "516a06d3a7cf82684d932c294052c6d97d9d219d2912d8a6f2cba64d77b193d1",
+        "sha256": "492448639b7b5893c1b088a674c8fa16c32147c24a2c7fbb730ae64dc7755f80",
         "size": 362549
       },
       "data/words-sk.txt": {
-        "sha256": "62a1a27623680c005e9dad885fab4cd1e239c54e6b42fb764ef7f371654b3fb5",
-        "size": 55786
+        "sha256": "034c5d053ea13ba216c57b4f421a07e12e71deef3cc32190add3e49aa6b55cad",
+        "size": 55784
       },
-      "index.html": { "sha256": "aec07eeadb79caaf3061cb9f2cd94f5315e00e407cc10e93ca5cdad78c7b3138", "size": 25484 },
+      "index.html": { "sha256": "6914412003c6219745acd73880cfcd5b1932cf763593fe53f3951346a921150c", "size": 25546 },
       "js/core/dates.mjs": {
         "sha256": "738fac189c229c43f61b84e331d289bdc3eb0bcce43ed34b16edeb7454061358",
         "size": 2516
@@ -78,14 +78,14 @@
         "size": 4302
       },
       "js/game/strings.mjs": {
-        "sha256": "34faf10c7d6afa49e520c145020454382759234c8d6d37a76172ffa10366626d",
-        "size": 22680
+        "sha256": "46a0289b53c049c5a2f074fa2692b22540df5861e7c23972415d6f16a4f1d5c9",
+        "size": 22781
       },
       "js/game/words.mjs": {
         "sha256": "8384bdb494e3ab2f17360286ca126211f2106ab6a2e077c32eb00ca8139c82a7",
         "size": 6814
       },
-      "js/main.mjs": { "sha256": "f6564e5cbfcc1f3aead41ba685555090ddea9c4a4e45c9eb9aa4c74808735bc3", "size": 48887 },
+      "js/main.mjs": { "sha256": "0e8ce98fe965f59db21ab91b05471869da7dcbb83251ff08cc4550876e1c1d1b", "size": 49436 },
       "js/ui/board.mjs": { "sha256": "b058c67d247acafd60da380e547a1ea098d461da22989e1c082fbe948049f411", "size": 6272 },
       "js/ui/calendar-view.mjs": {
         "sha256": "160d5fa50bbbd731cbc6d7594cd89b801fe39c94c7da125885fd4b6eee5b7db9",
