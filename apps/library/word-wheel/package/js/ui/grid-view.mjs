@@ -1,5 +1,6 @@
 // The crossword of a wheel: one square per letter of the grid words. A hidden square is a button (a tap asks to show
-// it with a hint); a shown square holds its letter. The squares grow to fill the space the grid has, up to a limit.
+// it with a hint); a shown square holds its letter, and a square of a found word is a button too (a tap shows the
+// word's meaning). The squares grow to fill the space the grid has, up to a limit.
 
 import { display } from "../core/letters.mjs";
 import { cellsOf } from "../wheel/puzzle.mjs";
@@ -7,7 +8,7 @@ import { cellsOf } from "../wheel/puzzle.mjs";
 const MAX_CELL = 64;
 const GAP = 3; // px between squares, as .board's gap in css/app.css
 
-export function createGrid(root, { onCellTap, t }) {
+export function createGrid(root, { onCellTap, onWordTap, t }) {
   const board = root.querySelector(".board");
   const list = root.querySelector(".grid-words");
   let puzzle = null;
@@ -56,20 +57,26 @@ export function createGrid(root, { onCellTap, t }) {
   /** Shows the squares in `visible` and lists the words for screen readers. */
   function update(state, visible) {
     if (!puzzle) return;
+    const found = new Set(state.found);
+    const ofFound = new Set(puzzle.words.filter((w) => found.has(w.w)).flatMap((w) => cellsOf(w)));
     for (const [key, el] of cells) {
       const shown = visible.has(key);
+      const explains = ofFound.has(key);
       const was = el.classList.contains("shown");
       el.classList.toggle("shown", shown);
       el.textContent = shown ? el.dataset.letter : "";
-      el.disabled = shown || state.done;
-      el.setAttribute("aria-label", shown ? t("shownCell", { letter: el.dataset.letter }) : t("hiddenCell"));
+      el.disabled = shown ? !explains : state.done;
+      const letter = el.dataset.letter;
+      el.setAttribute(
+        "aria-label",
+        !shown ? t("hiddenCell") : explains ? t("foundCell", { letter }) : t("shownCell", { letter }),
+      );
       if (shown && !was) el.classList.remove("hinted");
     }
     for (const key of state.shown) {
       const el = cells.get(key);
       if (el) el.classList.add("hinted");
     }
-    const found = new Set(state.found);
     list.textContent = "";
     for (const w of puzzle.words) {
       const li = document.createElement("li");
@@ -128,8 +135,9 @@ export function createGrid(root, { onCellTap, t }) {
 
   board.addEventListener("click", (e) => {
     const el = e.target.closest(".cell");
-    if (!el || el.disabled || el.classList.contains("shown")) return;
-    onCellTap(el.dataset.key, el);
+    if (!el || el.disabled) return;
+    if (el.classList.contains("shown")) onWordTap(el.dataset.key, el);
+    else onCellTap(el.dataset.key, el);
   });
 
   board.addEventListener("animationend", (e) => {

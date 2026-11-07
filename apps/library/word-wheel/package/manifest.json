@@ -4,7 +4,7 @@
     "id": "library/word-wheel",
     "kind": "web",
     "name": "Word Wheel",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "icon": "menu_book",
     "category": "game_word",
     "ageRating": "everyone",
@@ -23,16 +23,24 @@
     "entry": "index.html",
     "orientation": "any",
     "files": {
-      "css/app.css": { "sha256": "7d2a4f40051543537714a9bde1a2d48c7c3c5e1eab68a190e654856d1a00d6e8", "size": 36830 },
+      "css/app.css": { "sha256": "1fb3011e419e4405aee858449a079e1915cbce25273264480d4dbcfe3f0a02fb", "size": 37941 },
+      "data/meanings-en.txt": {
+        "sha256": "ba5f33d186cad591ddac456aa586b55c5af302054184307c36f701d4feb6796d",
+        "size": 552134
+      },
+      "data/meanings-sk.txt": {
+        "sha256": "dbd150996f578d58e8319016770ca5d99bf42df5014ed704fa46f0aa334431be",
+        "size": 217280
+      },
       "data/words-en.txt": {
-        "sha256": "7f9f60887a9cf010ead752bd3ba1b16377ff646dc1f8f0c44b3c51d8de5009e0",
-        "size": 385540
+        "sha256": "30771559509939bcb51d9612f285d7b36e22631cb94530ebed1cf74cc9adbc59",
+        "size": 385501
       },
       "data/words-sk.txt": {
-        "sha256": "934bbde7a44c69d193bd072ec03178ad46656af383bef8304bbb188d6812065d",
-        "size": 43203
+        "sha256": "9a097554e3e4f1e65a125d125ec4a3b185823b9208f8f52e01c0e20f2d08dae1",
+        "size": 43201
       },
-      "index.html": { "sha256": "ae75cefa9aa91520bdc6081f9b0109508add9625f1ecaf1774554e9691222a0f", "size": 21200 },
+      "index.html": { "sha256": "3b1178e611b5a978833771c254ef6ed38aaa2cfb83f489dadb7d0a8ee49aa663", "size": 21978 },
       "js/core/dates.mjs": {
         "sha256": "738fac189c229c43f61b84e331d289bdc3eb0bcce43ed34b16edeb7454061358",
         "size": 2516
@@ -45,6 +53,10 @@
         "sha256": "2b0486a91aea4372e4ae32a4c243e47838ff33d7ccc7f41a02f3f35f27f55849",
         "size": 2867
       },
+      "js/core/meanings.mjs": {
+        "sha256": "44e98df21c2ec1b6e7db3faea3dfbd3784b24c133ea6355e17d3582e0d1464db",
+        "size": 1766
+      },
       "js/core/rng.mjs": { "sha256": "c631ef30c1bd84f2e1110a696d796a045c9ac3f17132a1590f543a3c69643f18", "size": 1446 },
       "js/core/store.mjs": {
         "sha256": "1e20c6c858fb13268623f2183a4cf991f406a7253cd112ec9dd724b85b280b44",
@@ -54,23 +66,23 @@
         "sha256": "f221e9f90ffdd35172306acdbc6fdcf0a1026aa622f3abb711fab488da0c0892",
         "size": 1673
       },
-      "js/main.mjs": { "sha256": "24c679c68c3e7fe18b84e1689307331d00c40aa0590bba6d69a95b17ad43ddb5", "size": 42646 },
+      "js/main.mjs": { "sha256": "722298f4b02e0970b9860a305ac3aa6efb0d17a7037e55fe7ff1e9c72fe1b12b", "size": 49861 },
       "js/ui/calendar-view.mjs": {
         "sha256": "bacdc7ebc30f1e8574bb26aa47e873f26fe638e969ce8c115b2dd37589bc73d3",
         "size": 2535
       },
       "js/ui/fx.mjs": { "sha256": "75747282a4ad956a5590e83f74513cd6686bb7e41f09cbe8bfdd5fecf1fd8440", "size": 3684 },
       "js/ui/grid-view.mjs": {
-        "sha256": "0d03f29cb2f88521088ce985b282458a0afb41072ea6465d167dd25a06b71b2a",
-        "size": 5303
+        "sha256": "b95713857d49bb8c4fc7f26545fb3e063bcf3e63f3b80f68f213cb00af54471f",
+        "size": 5677
       },
       "js/ui/wheel-view.mjs": {
         "sha256": "30d1f176bde928231399a58f12ab74447767ee9e9d84692ef8361d0bf393a367",
         "size": 10925
       },
       "js/wheel/generator.mjs": {
-        "sha256": "fbf6705f091efb6381848a16affa718a28bb8a44b69327b13f4aeae119bb8372",
-        "size": 9507
+        "sha256": "c36ba64fad8502c06ee9f7e608f207c087d8213a0c6df5dbdc337cae599b6607",
+        "size": 10282
       },
       "js/wheel/layout.mjs": {
         "sha256": "72f1b575688013a8bcb5436580de552e1bae7a8890d11686737e55627040f31d",
@@ -85,8 +97,8 @@
         "size": 3080
       },
       "js/wheel/strings.mjs": {
-        "sha256": "bfcff6a795d9829f8b880d848e2524cb4bafa4dfd21edf5c23e3533360b7d4df",
-        "size": 17982
+        "sha256": "5c220ad68a81e0aca5dedce7906dbc3d578baa9cc1c45bc3fb38406dee54ca42",
+        "size": 19048
       },
       "js/wheel/taps.mjs": {
         "sha256": "af205e6221ffc2345bc28f8a8263ccb65d4c22090249bdcbc26ba7ee18fe79d5",

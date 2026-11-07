@@ -258,8 +258,35 @@ export function dailyPuzzle(index, day) {
   });
 }
 
+/**
+ * The first endless wheels of a list that marks common words ask only for those, everyday words a learner knows;
+ * later wheels ask for any answer word. Every real word still counts as an extra word.
+ */
+export const EASY_LEVELS = 500;
+
+function easyIndex(index) {
+  if (!index.common) return null;
+  if (!index.easy) {
+    index.easy = {
+      ...index,
+      answers: index.answers.filter((e) => index.common.has(e.word)),
+      seeds: {},
+      orders: {},
+    };
+  }
+  return index.easy;
+}
+
 /** Endless puzzle number `level` (from 0) with a wheel of `size` letters. */
 export function endlessPuzzle(index, size, level) {
+  const easy = level < EASY_LEVELS ? easyIndex(index) : null;
+  if (easy) {
+    return fromOrder(easy, orderOf(easy, "easy", size), level, `easy|${index.lang}|${size}|${level}`, {
+      id: `e:${index.lang}:${size}:${level}`,
+      kind: "endless",
+      level,
+    });
+  }
   const order = orderOf(index, "endless", size);
   return fromOrder(index, order, level, `endless|${index.lang}|${size}|${level}`, {
     id: `e:${index.lang}:${size}:${level}`,

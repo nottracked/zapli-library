@@ -8,7 +8,7 @@ stolový záhradný triedny učebný písomný ústny knižný
 
 # places, travel, money, the state
 cestný uličný zemný podzemný nadzemný hodinový minútový cestovný letecký lodný vlakový
-kolesový pešší peňažný bankový obchodný trhový cenový daňový mzdový platový úverový
+kolesový peší peňažný bankový obchodný trhový cenový daňový mzdový platový úverový
 vojenský policajný súdny štátny krajský okresný obecný vládny zákonný právny
 
 # culture and sport

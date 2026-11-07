@@ -12,6 +12,7 @@ import {
   buildIndex,
   dailyPuzzle,
   endlessPuzzle,
+  EASY_LEVELS,
   seedsOf,
   SIZES,
   RULES,
@@ -183,6 +184,13 @@ function solve(p, what) {
   eq(jarLevel(s), s.extras.length % EXTRAS_PER_HINT, `${what}: the jar's level`);
 }
 
+// The first endless wheels of a list with common words ask only for those.
+function checkEasy(lists, p, level, what) {
+  if (!p || !lists.common.length || level >= EASY_LEVELS) return;
+  const common = new Set(lists.common);
+  for (const w of p.words) if (!common.has(w.w)) fail(`${what}: ${w.w} is not a common word on an easy wheel`);
+}
+
 const report = [];
 for (const lang of ["sk", "en"]) {
   const lists = readList(lang);
@@ -218,7 +226,14 @@ for (const lang of ["sk", "en"]) {
       const p = endlessPuzzle(index, size, level);
       checkPuzzle(index, lists, p, `${lang} endless ${size}/${level}`);
       if (p && level < 15) solve(p, `${lang} endless ${size}/${level}`);
+      checkEasy(lists, p, level, `${lang} endless ${size}/${level}`);
     }
+  }
+  // The last easy wheels and the first ones after them.
+  for (let level = EASY_LEVELS - 3; level < EASY_LEVELS + 3; level++) {
+    const p = endlessPuzzle(index, 7, level);
+    checkPuzzle(index, lists, p, `${lang} endless 7/${level}`);
+    checkEasy(lists, p, level, `${lang} endless 7/${level}`);
   }
   const avg = (a) => (a.reduce((x, y) => x + y, 0) / Math.max(1, a.length)).toFixed(1);
   report.push(
