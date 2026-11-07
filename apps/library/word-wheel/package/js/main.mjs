@@ -11,6 +11,7 @@ import { createStore } from "./core/store.mjs";
 import { createI18n, pickLang } from "./core/i18n.mjs";
 import { isoDay, isDay, FIRST_DAY, daysBetween, streaks } from "./core/dates.mjs";
 import { collator, normalise, tiles as tilesOf } from "./core/letters.mjs";
+import { createMeanings } from "./core/meanings.mjs";
 import { STRINGS } from "./wheel/strings.mjs";
 import { createSource } from "./wheel/source.mjs";
 import {
@@ -56,9 +57,17 @@ const store = createStore("word-wheel", [
   ...LANGS.flatMap((l) => [`progress-${l}`, `book-${l}`, `stats-${l}`, `daily-${l}`]),
 ]);
 const source = createSource();
+// The words' short meanings, from the app's own files (relative to the page, like the word lists).
+const meanings = createMeanings((lang) =>
+  fetch(lang === "sk" ? "data/meanings-sk.txt" : "data/meanings-en.txt").then((r) =>
+    r.ok ? r.text() : Promise.reject(new Error(`meanings: ${r.status}`)),
+  ),
+);
 
 let settings = null;
-let game = null; // { lang, kind: "endless" | "daily", day, puzzle, state }
+// { lang, kind: "endless" | "daily", day, puzzle, state, ms }; ms is the time played on the wheel, or null for a wheel
+// started before the game kept time.
+let game = null;
 let pendingCell = null;
 let textScale = 1;
 let loadToken = 0;
@@ -86,6 +95,8 @@ function normSettings(raw) {
     theme: ["device", "light", "dark"].includes(s.theme) ? s.theme : "device",
     taught: Boolean(s.taught),
     vibration: s.vibration !== false,
+    meanings: s.meanings !== false,
+    timer: s.timer === true,
   };
 }
 
@@ -115,7 +126,14 @@ function bookOf(lang) {
 function statsOf(lang) {
   const s = store.get(`stats-${lang}`) || {};
   const n = (v) => (Number.isInteger(v) && v >= 0 ? v : 0);
-  return { solved: n(s.solved), words: n(s.words), hints: n(s.hints), perfect: n(s.perfect) };
+  // fastDaily: the fastest daily wheel in ms, 0 while there is none.
+  return {
+    solved: n(s.solved),
+    words: n(s.words),
+    hints: n(s.hints),
+    perfect: n(s.perfect),
+    fastDaily: n(s.fastDaily),
+  };
 }
 
 function dailyOf(lang) {
@@ -256,7 +274,7 @@ function openAnswers() {
   };
 }
 
-const grid = createGrid($("grid"), { onCellTap: askCell, t });
+const grid = createGrid($("grid"), { onCellTap: askCell, onWordTap: explainCell, t });
 
 const calendar = createCalendar($("cal"), {
   onPick: (day) => {
@@ -320,15 +338,68 @@ function showField() {
   fitField();
 }
 
-function setNotice(text, tone) {
+let noticeCount = 0;
+
+function setNotice(text, tone, meaning) {
+  noticeCount++;
   const el = $("notice");
   el.textContent = text;
+  if (meaning) {
+    const line = document.createElement("span");
+    line.className = "meaning";
+    line.textContent = meaning;
+    el.append(" ", line);
+  }
   el.className = `notice ${tone || ""}`;
 }
 
-function notice(text, tone) {
+/**
+ * Shows a message in the field. With a `word`, the word's short meaning follows on a smaller line when it has one;
+ * a language's meanings are read the first time, and when the message has changed by then, nothing is added.
+ */
+function notice(text, tone, word) {
   setNotice(text, tone);
   showField();
+  if (!word || !game) return;
+  const lang = game.lang;
+  const now = meanings.peek(lang, word);
+  if (now !== undefined) {
+    if (now) {
+      setNotice(text, tone, meaningText(now));
+      showField();
+    }
+    return;
+  }
+  const count = noticeCount;
+  meanings.get(lang, word).then((entry) => {
+    if (!entry || count !== noticeCount) return;
+    setNotice(text, tone, meaningText(entry));
+    showField();
+  });
+}
+
+// An English word's Slovak translation shows where the game speaks Slovak.
+function meaningText(entry) {
+  return entry.sk && i18n.lang === "sk" ? `${entry.meaning} · ${entry.sk}` : entry.meaning;
+}
+
+// The word a find's message explains: the found word while meanings are on.
+const explain = (word) => (settings.meanings ? word : null);
+
+// A tap on a square of a found word shows the word's meaning; where two found words cross, the next tap on the same
+// square shows the other.
+let lastExplained = { key: null, i: 0 };
+
+function explainCell(key) {
+  if (!game) return;
+  const found = new Set(game.state.found);
+  const words = game.puzzle.words.filter((w) => found.has(w.w) && cellsOf(w).includes(key));
+  if (!words.length) return;
+  const i = lastExplained.key === key ? (lastExplained.i + 1) % words.length : 0;
+  lastExplained = { key, i };
+  const word = words[i];
+  grid.flash(word, "again");
+  notice(word.w.toUpperCase(), "soft", word.w);
 }
 
 // A long message (or the first-start line) at a large text size gets a little smaller rather than spill out of the
@@ -446,6 +517,7 @@ async function load(lang, request) {
 
 function show(g) {
   window.clearTimeout(nextTimer);
+  clockFrom = 0;
   game = g;
   setLoading(false);
   setNotice("", "");
@@ -453,8 +525,10 @@ function show(g) {
   grid.set(g.puzzle);
   pendingCell = null;
   refresh();
+  syncClock();
   window.requestAnimationFrame(sizeWheel);
   if (!Array.isArray(g.puzzle.hidden)) addHiddenWords(g);
+  if (settings.meanings) meanings.load(g.lang);
 }
 
 // A wheel saved by an earlier version has no list of hidden words: make the same wheel again and take its list
@@ -480,7 +554,7 @@ async function openActive(lang) {
   const p = progressOf(lang);
   if (p.active !== "endless" && p.open[p.active]) {
     const g = p.open[p.active];
-    show({ lang, kind: "daily", day: p.active, puzzle: g.puzzle, state: g.state });
+    show({ lang, kind: "daily", day: p.active, puzzle: g.puzzle, state: g.state, ms: msOf(g) });
     return;
   }
   await openEndless(lang);
@@ -496,20 +570,22 @@ async function openEndless(lang) {
   if (p.endless) {
     p.active = "endless";
     saveProgress(lang, p);
-    show({ lang, kind: "endless", puzzle: p.endless.puzzle, state: p.endless.state });
+    show({ lang, kind: "endless", puzzle: p.endless.puzzle, state: p.endless.state, ms: msOf(p.endless) });
     return;
   }
   const size = settings.size === "grow" ? growingSize(p.level) : settings.size;
   const puzzle = await load(lang, () => source.endless(lang, size, p.level));
   if (!puzzle) return;
   const fresh = progressOf(lang);
-  fresh.endless = { puzzle, state: newState(puzzle) };
+  fresh.endless = { puzzle, state: newState(puzzle), ms: 0 };
   fresh.active = "endless";
   saveProgress(lang, fresh, true);
-  show({ lang, kind: "endless", puzzle, state: fresh.endless.state });
+  show({ lang, kind: "endless", puzzle, state: fresh.endless.state, ms: 0 });
 }
 
 async function openDaily(day) {
+  // The wheel on the screen keeps the time played on it.
+  saveGame(true);
   const lang = game ? game.lang : wordsLang();
   const p = progressOf(lang);
   let g = p.open[day];
@@ -518,15 +594,16 @@ async function openDaily(day) {
     if (!puzzle) return;
     const state = newState(puzzle);
     // A day solved before shows its solution again, and its extra words can still be found.
-    if (dailyOf(lang)[day]) Object.assign(state, { found: puzzle.words.map((w) => w.w), done: true });
-    g = { puzzle, state };
+    const solved = dailyOf(lang)[day];
+    if (solved) Object.assign(state, { found: puzzle.words.map((w) => w.w), done: true });
+    g = { puzzle, state, ms: solved ? (Number.isFinite(solved.t) ? solved.t : null) : 0 };
   }
   const fresh = progressOf(lang);
   fresh.open[day] = g;
   fresh.active = day;
   pruneOpen(lang, fresh);
   saveProgress(lang, fresh, true);
-  show({ lang, kind: "daily", day, puzzle: g.puzzle, state: g.state });
+  show({ lang, kind: "daily", day, puzzle: g.puzzle, state: g.state, ms: msOf(g) });
 }
 
 // Keeps the daily wheels in play and the latest unfinished ones; a solved one is dropped once it is left.
@@ -544,6 +621,7 @@ function pruneOpen(lang, p) {
 async function nextWheel() {
   if (!game) return;
   window.clearTimeout(nextTimer);
+  saveGame(true);
   const lang = game.lang;
   const fromDaily = game.kind === "daily";
   const p = progressOf(lang);
@@ -577,12 +655,69 @@ async function switchLang(lang) {
 function saveGame(now) {
   if (!game) return;
   const p = progressOf(game.lang);
-  if (game.kind === "endless") p.endless = { puzzle: game.puzzle, state: game.state };
+  const ms = played();
+  const saved = { puzzle: game.puzzle, state: game.state, ms: ms === null ? null : Math.round(ms) };
+  if (game.kind === "endless") p.endless = saved;
   else {
-    p.open[game.day] = { puzzle: game.puzzle, state: game.state };
+    p.open[game.day] = saved;
     p.active = game.day;
   }
   saveProgress(game.lang, p, now);
+}
+
+// ---- the timer: the time played on a wheel, counted while it is on the screen, unsolved, with no panel open. It
+// counts whether the timer shows or not, so turning it on shows the real time.
+
+let clockFrom = 0; // performance.now() when the count last started, 0 while it stands
+let clockTick = 0;
+
+function played() {
+  if (!game || game.ms === null) return null;
+  return game.ms + (clockFrom ? performance.now() - clockFrom : 0);
+}
+
+/** Starts or stops the count to match what is on the screen, and shows the time. */
+function syncClock() {
+  const run = Boolean(
+    game && game.ms !== null && !game.state.done && !document.hidden && !document.querySelector("dialog[open]"),
+  );
+  if (clockFrom && !run) {
+    game.ms = played();
+    clockFrom = 0;
+  } else if (!clockFrom && run) clockFrom = performance.now();
+  window.clearInterval(clockTick);
+  clockTick = run && settings.timer ? window.setInterval(showClock, 1000) : 0;
+  showClock();
+}
+
+function showClock() {
+  if (!settings) return;
+  const el = $("clock");
+  const ms = played();
+  el.hidden = !settings.timer || ms === null;
+  if (el.hidden) return;
+  const text = clockText(ms);
+  if (el.textContent !== text) {
+    el.textContent = text;
+    el.setAttribute("aria-label", t("clockLabel", { time: text }));
+  }
+}
+
+function clockText(ms) {
+  const all = Math.floor(ms / 1000);
+  const h = Math.floor(all / 3600);
+  const m = Math.floor((all % 3600) / 60);
+  const pad = (n) => String(n).padStart(2, "0");
+  return h ? `${h}:${pad(m)}:${pad(all % 60)}` : `${m}:${pad(all % 60)}`;
+}
+
+// The time played on a saved wheel. A wheel saved before the game kept time has none, unless nothing was played yet.
+function msOf(saved) {
+  if (Number.isFinite(saved.ms) && saved.ms >= 0) return saved.ms;
+  if (saved.ms === null) return null;
+  const s = saved.state;
+  const touched = s.found.length > 0 || (s.extras && s.extras.length > 0) || (s.shown && s.shown.length > 0);
+  return touched ? null : 0;
 }
 
 function bumpStats(lang, change) {
@@ -613,7 +748,7 @@ function submitWord(tiles, how) {
   if (auto) fx.flash($("btn-enter"), "took", 700);
   if (r.result === "found") {
     const word = game.puzzle.words.find((w) => w.w === r.word);
-    notice(t("found", { word: shown }), "good");
+    notice(t("found", { word: shown }), "good", explain(r.word));
     buzz("success");
     afterChange(before, () => flyToGrid(word, letters, from, shownBefore));
     return;
@@ -626,19 +761,19 @@ function submitWord(tiles, how) {
     }
     const hidden = r.kind === "hidden";
     const text = t(hidden ? "foundHidden" : "foundBonus", { word: shown });
-    notice(r.earnedHint ? `${text} ${t("earnedHint")}` : text, hidden ? "good hidden" : "good");
+    notice(r.earnedHint ? `${text} ${t("earnedHint")}` : text, hidden ? "good hidden" : "good", explain(r.word));
     buzz("heavy");
     afterChange(before, () => flyToJar(letters, from, !hidden, r.earnedHint));
     return;
   }
   if (r.result === "again") {
-    notice(t("alreadyFound", { word: shown }), "soft");
+    notice(t("alreadyFound", { word: shown }), "soft", explain(r.word));
     grid.flash(
       game.puzzle.words.find((w) => w.w === r.word),
       "again",
     );
   } else if (r.result === "extraAgain") {
-    notice(t("alreadyFound", { word: shown }), "soft");
+    notice(t("alreadyFound", { word: shown }), "soft", explain(r.word));
     fx.flash($("jar"), "nudge");
   } else if (r.result === "short") notice(t("short"), "bad");
   else {
@@ -726,10 +861,12 @@ function baseFormsHint() {
  * word) or completed it (every hidden word too, which then brings the next wheel).
  */
 function afterChange(before, effect) {
+  syncClock();
   saveGame();
   const g = game;
   const solvedNow = g.state.done && !before.done;
   const completeNow = isComplete(g.puzzle, g.state) && !isComplete(g.puzzle, before);
+  const ms = g.ms === null ? null : Math.round(g.ms);
   if (solvedNow) {
     const lang = g.lang;
     bumpStats(lang, {
@@ -740,10 +877,15 @@ function afterChange(before, effect) {
     if (g.kind === "daily") {
       const days = dailyOf(lang);
       days[g.day] = { w: g.puzzle.words.length, x: g.state.extras.length, h: g.state.hints };
+      if (ms !== null) days[g.day].t = ms;
       store.set(`daily-${lang}`, { days }, true);
+      const s = statsOf(lang);
+      if (ms !== null && (!s.fastDaily || ms < s.fastDaily)) store.set(`stats-${lang}`, { ...s, fastDaily: ms });
     }
     store.flush();
   }
+  // The time it took, after the message that says the crossword is solved.
+  const took = solvedNow && settings.timer && ms !== null ? ` ${t("solvedIn", { time: clockText(ms) })}` : "";
   refresh();
   // The effect says how long its letters fly; the celebration waits until the last one has landed.
   const flight = (effect && effect()) || 0;
@@ -754,12 +896,12 @@ function afterChange(before, effect) {
         grid.setSolved(true, true);
         if (completeNow) {
           buzzPattern(["heavy", "success", "heavy"], 130);
-          finishWheel(g);
+          finishWheel(g, took);
           return;
         }
         buzzPattern(["heavy", "success"], 120);
         const left = hiddenOf(g.puzzle).length - hiddenFound(g.puzzle, g.state);
-        notice(t("solvedNote", { left: tn("hiddenLeft", left) }), "good big");
+        notice(`${t("solvedNote", { left: tn("hiddenLeft", left) })}${took}`, "good big");
       },
       fx.still() ? 0 : flight + 120,
     );
@@ -767,8 +909,8 @@ function afterChange(before, effect) {
 }
 
 // Every word found: say so, light the jar, and bring the next wheel after a moment (not while a panel is open).
-function finishWheel(g) {
-  notice(t(g.kind === "daily" ? "completeDaily" : "completeNote"), "good big");
+function finishWheel(g, took) {
+  notice(`${t(g.kind === "daily" ? "completeDaily" : "completeNote")}${took}`, "good big");
   fx.flash($("jar"), "glow", 1800);
   window.clearTimeout(nextTimer);
   const go = () => {
@@ -833,6 +975,7 @@ function openDialog(dlg) {
   returnFocus.set(dlg, document.activeElement);
   if (typeof dlg.showModal === "function") dlg.showModal();
   else dlg.setAttribute("open", "");
+  syncClock();
 }
 
 function closeDialog(dlg) {
@@ -879,6 +1022,7 @@ window.addEventListener("resize", () => popAnchors.forEach((_, dlg) => placePop(
 
 document.querySelectorAll("dialog").forEach((dlg) => {
   dlg.addEventListener("close", () => {
+    syncClock();
     popAnchors.delete(dlg);
     const el = returnFocus.get(dlg);
     returnFocus.delete(dlg);
@@ -976,16 +1120,51 @@ function renderBook() {
   document.querySelector(".book-tools").hidden = entries.length === 0;
 }
 
+// A word with a meaning is a button that opens its meaning under it.
 function fillWords(ul, words) {
   ul.textContent = "";
+  const lang = game ? game.lang : wordsLang();
   const frag = document.createDocumentFragment();
   for (const w of words) {
     const li = document.createElement("li");
-    li.textContent = w.toUpperCase();
-    li.lang = game ? game.lang : wordsLang();
+    li.lang = lang;
+    if (meanings.peek(lang, w)) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "word";
+      b.dataset.word = w;
+      b.setAttribute("aria-expanded", "false");
+      b.textContent = w.toUpperCase();
+      li.appendChild(b);
+    } else li.textContent = w.toUpperCase();
     frag.appendChild(li);
   }
   ul.appendChild(frag);
+}
+
+function openBook() {
+  renderBook();
+  openDialog($("dlg-book"));
+  // The first time, the language's meanings are read first; the book then shows again which words have one.
+  meanings.load(game ? game.lang : wordsLang()).then((read) => {
+    if (read.size && $("dlg-book").open && !$("dlg-book").querySelector(".word")) renderBook();
+  });
+}
+
+function toggleMeaning(b) {
+  const li = b.parentElement;
+  const open = b.getAttribute("aria-expanded") !== "true";
+  const old = li.querySelector(".m");
+  if (old) old.remove();
+  b.setAttribute("aria-expanded", String(open));
+  li.classList.toggle("open", open);
+  if (!open) return;
+  const entry = meanings.peek(li.lang, b.dataset.word);
+  if (!entry) return;
+  const line = document.createElement("span");
+  line.className = "m";
+  line.textContent = meaningText(entry);
+  li.appendChild(line);
 }
 
 // statistics
@@ -1001,6 +1180,7 @@ function renderStats() {
     ["stBook", (l) => Object.keys(bookOf(l)).length],
     ["stPerfect", (l) => statsOf(l).perfect],
     ["stHints", (l) => statsOf(l).hints],
+    ["stFastDaily", (l) => (statsOf(l).fastDaily ? clockText(statsOf(l).fastDaily) : "–")],
   ];
   const body = $("stats-body");
   body.textContent = "";
@@ -1013,7 +1193,8 @@ function renderStats() {
     tr.appendChild(th);
     for (const lang of LANGS) {
       const td = document.createElement("td");
-      td.textContent = fmt.format(value(lang));
+      const v = value(lang);
+      td.textContent = typeof v === "number" ? fmt.format(v) : v;
       tr.appendChild(td);
     }
     body.appendChild(tr);
@@ -1033,12 +1214,22 @@ function syncSettingsForm() {
   check("ui", settings.ui);
   $("opt-contrast").checked = settings.contrast;
   $("opt-vibration").checked = settings.vibration;
+  $("opt-meanings").checked = settings.meanings;
+  $("opt-timer").checked = settings.timer;
 }
 
 function onSetting(e) {
   const input = e.target;
-  if (!input.name && input.id !== "opt-contrast" && input.id !== "opt-vibration") return;
+  const switches = ["opt-contrast", "opt-vibration", "opt-meanings", "opt-timer"];
+  if (!input.name && !switches.includes(input.id)) return;
   if (input.id === "opt-contrast") settings.contrast = input.checked;
+  else if (input.id === "opt-meanings") {
+    settings.meanings = input.checked;
+    if (game && settings.meanings) meanings.load(game.lang);
+  } else if (input.id === "opt-timer") {
+    settings.timer = input.checked;
+    syncClock();
+  }
   else if (input.id === "opt-vibration") {
     settings.vibration = input.checked;
     buzz("success");
@@ -1084,13 +1275,11 @@ $("dlg-ask").addEventListener("close", () => {
   document.querySelectorAll(".cell.pick").forEach((c) => c.classList.remove("pick"));
 });
 on("btn-daily", openCalendar);
-on("btn-book", () => {
-  renderBook();
-  openDialog($("dlg-book"));
-});
-on("btn-jar", () => {
-  renderBook();
-  openDialog($("dlg-book"));
+on("btn-book", openBook);
+on("btn-jar", openBook);
+$("dlg-book").addEventListener("click", (e) => {
+  const b = e.target.closest("button.word");
+  if (b) toggleMeaning(b);
 });
 on("btn-stats", () => {
   renderStats();
@@ -1190,6 +1379,7 @@ function persist() {
   store.flush();
 }
 document.addEventListener("visibilitychange", () => {
+  syncClock();
   if (document.hidden) persist();
 });
 window.addEventListener("pagehide", persist);

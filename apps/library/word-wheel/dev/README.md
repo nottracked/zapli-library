@@ -84,8 +84,29 @@ of the first 30 daily wheels and a random sample of 300 accepted words, numbered
   the rest of ENABLE. Neither download is kept here: the build script checks their SHA-256 and builds the shipped
   file from them.
 - **Left out:** `dev/en/blocked-sha256.txt` drops slurs and swear words from both tiers; `dev/en/not-answers-sha256.txt`
-  keeps crude, sexual and grim words and some body parts as extra words but never asks for them. Both list the
-  SHA-256 of each word (lower case, UTF-8), so the files do not spell the words out.
+  keeps crude, sexual and grim words, some body parts, abbreviations and short forms, names, rare or odd words a learner
+  would not know, and forms of another word that 3esl lists as words of their own (past tenses, plurals, comparatives:
+  `had`, `went`, `men`) as extra words but never asks for them, so the answers are base forms, as in Slovak. Both list
+  the SHA-256 of each word (lower case, UTF-8), so the files do not spell the words out.
+- **Easy start:** the first 500 endless wheels in English ask only for the common words, the core vocabulary of
+  learners' dictionaries (`EASY_LEVELS` in `package/js/wheel/generator.mjs`); every real word still counts as an extra
+  word. Later endless wheels and the daily wheels ask for any answer word.
+
+### Word meanings: CC0 1.0
+
+After a find, the game can show the word's short meaning, and a tap on a found word in the crossword or the word book
+shows it at any time. The meanings were written for this game:
+
+- `package/data/meanings-en.txt`: every English answer word (and some words that were answer words before), with a
+  short meaning in simple English and its everyday Slovak translation, which shows where the game speaks Slovak.
+- `package/data/meanings-sk.txt`: every Slovak word of both tiers, with a short meaning in Slovak.
+
+Format: one word a line, a TAB and the meaning, and for English a second TAB and the Slovak translation; lines starting
+with `#` are comments. A meaning has at most 80 characters, a translation at most 40. The game reads a language's file
+the first time it needs a meaning (`package/js/core/meanings.mjs`). Both files are dedicated to the public domain under
+[CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/), like the Slovak word list.
+`node dev/check-meanings.mjs` checks that every word that needs a meaning has one, that every word with a meaning is in
+its list, and the format. A native speaker reads them along with the word list before a release.
 
 ### Building and checking
 
@@ -99,6 +120,7 @@ node dev/check-game.mjs                         # letters, dates, a year of dail
 node dev/check-i18n.mjs                         # English and Slovak texts complete and alike
 node dev/check-page.mjs                         # ids the code looks up, and the wheel's swipe and taps
 node dev/check-taps.mjs                         # when a tapped word counts by itself, and what the next tap does
+node dev/check-meanings.mjs                     # every word that needs a meaning has one, in the right format
 node dev/review-sheet.mjs <file.md>             # the review sheet for a native speaker
 ```
 

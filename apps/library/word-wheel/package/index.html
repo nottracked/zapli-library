@@ -87,6 +87,7 @@
                 <div class="status">
                     <span id="mode-label" class="mode"></span>
                     <span id="progress" class="progress"></span>
+                    <span id="clock" class="clock" role="timer" hidden></span>
                     <span id="solved-badge" class="solved-badge" hidden
                         ><svg class="ico" aria-hidden="true"><use href="#i-enter" /></svg
                         ><span data-t="solvedBadge">Solved</span></span
@@ -357,6 +358,20 @@
                         ><span class="note" data-t="vibrationNote"></span
                     ></span>
                     <input type="checkbox" class="switch" id="opt-vibration" />
+                </label>
+                <label class="opt"
+                    ><span
+                        ><span class="opt-title" data-t="meaningsOpt">Word meanings</span
+                        ><span class="note" data-t="meaningsNote"></span
+                    ></span>
+                    <input type="checkbox" class="switch" id="opt-meanings" />
+                </label>
+                <label class="opt"
+                    ><span
+                        ><span class="opt-title" data-t="timerOpt">Timer</span
+                        ><span class="note" data-t="timerNote"></span
+                    ></span>
+                    <input type="checkbox" class="switch" id="opt-timer" />
                 </label>
                 <label class="opt"
                     ><span
