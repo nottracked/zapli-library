@@ -142,7 +142,9 @@ Mines' head, shortened:
 - The manifest is strict JSON, exactly once, with `app.kind: "web"` and a `permissions` entry (with a `purpose`) for
   every phone feature the code uses.
 - **Everything inline.** CSS and JavaScript in the file, images as inline SVG or `data:` URIs. No CDN, no Google
-  Fonts, no remote CSS; use `system-ui, sans-serif` or the `--zapli-font-family` token.
+  Fonts, no remote CSS; use `system-ui, sans-serif` or the `--zapli-font-family` token. The one exception: a file of
+  Zapli's built-in library shelf, named by its exact pinned address, which Zapli serves from the phone, offline (see
+  Render Lab's `<script src>` lines for three.js, matter.js and d3).
 - **No code from strings or frames:** no `eval`, `new Function`, string `setTimeout`, handlers set as strings,
   `javascript:` URLs, `<iframe>`, `<object>` or `<embed>`. Inline `<script>` blocks and static `onclick="…"`
   attributes are fine.

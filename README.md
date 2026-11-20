@@ -128,6 +128,8 @@ apps/library/<name>/
    addresses only at `example.com` (or another reserved example domain), and phone numbers, if any, only from
    555-0100 to 555-0199.
 4. **Works offline.** Everything an app needs is in its own file: no code, fonts or styles loaded from the network.
+   The one exception is a file of Zapli's built-in library shelf, named by its exact pinned address: Zapli serves it
+   from the phone, offline, and only to the apps that name it (Render Lab uses three.js, matter.js and d3 this way).
 5. **No ads, no tracking, no analytics**, and no accounts.
 6. **No network unless declared and reviewed.** An app can reach the internet only through hosts it declares in its
    manifest, and only after the maintainers' security review of that host. Today no app in `apps/library/` declares

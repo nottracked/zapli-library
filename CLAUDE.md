@@ -22,7 +22,10 @@ check flags any other. `README.md` has the rules for people; this file is the sh
 ## Hard rules
 
 - **No remote code at runtime.** Every script, style, font and image an app uses is inside its own file (or, for a
-  package app, its own `package/` folder). No CDN links, no `eval` or `new Function`, no frames.
+  package app, its own `package/` folder). No CDN links, no `eval` or `new Function`, no frames. The one exception: a
+  file of Zapli's built-in library shelf, named by its exact pinned address (Render Lab names three.js, matter.js and
+  d3 this way). Zapli serves those files from the phone, offline, and only to the apps that name them; a plain
+  browser loads them from that address.
 - **No ads, analytics, trackers or accounts**, and no SDK that brings them.
 - **No network hosts without review.** Never add a host to `permissions["net.http"]` or a `fetch` to a new place;
   a maintainer's security review comes first. Today no app in `apps/library/` declares a host.
