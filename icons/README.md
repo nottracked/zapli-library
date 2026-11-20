@@ -56,6 +56,7 @@ One set, so the library reads as a sticker sheet:
 | Mines          | the game's red flag on a raised square of the field                                    | `#4C7A54` → `#375E3F`     |
 | Music Player   | two beamed notes in white with a yellow spark                                          | `#B2367A` → `#8F2560`     |
 | Pocket Scan    | a page inside the camera's four corners, a yellow scan line                            | `#3563E6` → `#2447B8`     |
+| Render Lab     | a lit white sphere on a checkerboard floor, with a yellow spark                        | `#5B4CDB` → `#3B2EA6`     |
 | Solitaire      | two playing cards fanned out: a big red heart and a spade                              | `#467762` → `#2E5747`     |
 | To-do          | a list with two items ticked off and one to go                                         | `#5065CA` → `#3B4EB2`     |
 | Water          | a glass of water with a wave on top                                                    | `#0475B8` → `#005590`     |

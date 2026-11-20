@@ -1,0 +1,11 @@
+{
+  "id": "library/render-lab",
+  "category": "tools",
+  "replaces": "graphics benchmark and demo",
+  "title": "Render Lab",
+  "summary": "Eight live scenes that test your phone's graphics, sound and touch screen",
+  "description": "**Render Lab** shows what your phone's graphics chip can do, with eight live scenes that render on the device, without ads, accounts or tracking.\n\n**What it does**\n\n- **Raymarched worlds.** Every pixel traces its own ray through distance fields: metaballs, a gyroid and a live Mandelbulb.\n- **Million particles.** Up to two million points simulated on the graphics chip: a strange attractor, a flow field, or a photo you pick or take.\n- **Ink fluid.** Stir a real-time fluid with several fingers at once.\n- **PBR city.** Thousands of metal blocks under image-based light, with a glass orb. Tap to send ripples.\n- **Physics pile.** Hundreds of rigid bodies: tap to spawn, drag to throw, swipe for wind, flip gravity.\n- **Living graph.** A force-directed network drawn as vectors. Drag the nodes around.\n- **Sound sculpture.** Play the pads or let it improvise, with a tempo slider; the live spectrum drives the picture.\n- **Benchmark.** Two tests: how many particles this phone holds at 60 frames a second, and how fast it shades pixels. Run one or both, stop at any time, and read what the numbers mean.\n- **Options for every scene** in one sheet: shapes, palettes and quality, with sliders for the values in between. A frame-rate graph shows in a corner when you want it.\n- **Snapshots.** Save a scene as an image file or share it, or share your benchmark score, with the app you pick.\n\n**What it never does**\n\n- No ads, no pop-ups, no paid unlocks.\n- No account and no sign-in.\n- No internet access: everything renders on the phone, offline.\n- No analytics or tracking of any kind. Your settings and benchmark results stay on your phone.",
+  "license": "GPL-3.0-or-later",
+  "tags": ["graphics", "benchmark", "webgl", "particles", "fluid", "physics", "sound", "demo", "offline", "no ads"],
+  "screenshots": []
+}
